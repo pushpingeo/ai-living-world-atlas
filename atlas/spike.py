@@ -213,7 +213,11 @@ async def run(args):
         r["check_status"], r["check_detail"] = st, detail
         r["service_layer_count"] = svc_n[L.service_url]
         if not r["publisher"]:
-            r["publisher"] = urlsplit(L.service_url).netloc  # better an honest host name than a borrowed owner
+            host = urlsplit(L.service_url).netloc.lower()
+            words = [w for w in re.findall(r"[a-z]{4,}", (L.listed_by or "").lower())
+                     if w not in {"city", "council", "county", "borough", "district", "government", "national", "authority", "agency", "metropolitan", "trust"}]
+            # the lister's own server (e.g. Bristol City Council's Hub linking maps2.bristol.gov.uk) is fair to attribute
+            r["publisher"] = L.listed_by if words and any(w in host for w in words) else host
         themes, how = declared_iso_themes(r["declared_themes"], r["keywords"])
         r["iso_themes_declared"], r["iso_themes_how"] = themes, how
         r.update(score(r))

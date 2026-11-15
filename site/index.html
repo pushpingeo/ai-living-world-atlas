@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Living World Atlas · viewer</title>
+<meta name="description" content="Browse an open index of public map services. Pan the map, filter by theme, add layers.">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside id="panel">
+  <header>
+    <h1>AI Living World Atlas</h1>
+    <p class="sub">Public map services from UK government and agencies. Pan the map to see what covers it.
+      <a href="https://github.com/pushpingeo/ai-living-world-atlas" target="_blank" rel="noopener">About</a></p>
+  </header>
+  <div id="controls">
+    <input id="q" type="search" placeholder="Search titles and publishers" autocomplete="off">
+    <div class="toggles">
+      <label><input type="checkbox" id="f-pass" checked> Passes quality bar</label>
+      <label title="The server allows web pages on other sites to use it, so it can be drawn here"><input type="checkbox" id="f-cors"> Works in a browser</label>
+    </div>
+    <details open><summary>Role</summary><div class="chips" data-facet="role"></div></details>
+    <details><summary>Theme</summary><div class="chips" data-facet="themes"></div></details>
+    <details><summary>Concept</summary><div class="chips" data-facet="concepts"></div></details>
+    <details><summary>Service type</summary><div class="chips" data-facet="protocols"></div></details>
+    <details><summary>Can do</summary><div class="chips" data-facet="caps"></div></details>
+  </div>
+  <div id="status">Loading the index…</div>
+  <ol id="list"></ol>
+</aside>
+<main id="map"></main>
+<section id="added" hidden>
+  <h2>On the map</h2>
+  <ul id="added-list"></ul>
+</section>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
