@@ -68,5 +68,6 @@ button:disabled { border-color: var(--line); color: var(--muted); cursor: defaul
   #panel { grid-row: 2; border-right: none; border-top: 1px solid var(--line); }
   #controls { max-height: 30vh; }
   header .sub { display: none; }
-  #added { top: 8px; bottom: auto; left: 8px; right: auto; width: 220px; max-height: 30vh; }
+  #added { top: 8px; bottom: auto; left: 8px; right: auto; width: 200px; max-height: 22vh; padding: 4px 8px; font-size: 12px; }
+  #added h2 { display: none; }
 }

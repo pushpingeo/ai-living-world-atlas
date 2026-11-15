@@ -41,6 +41,8 @@ const map = new maplibregl.Map({
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 map.addControl(new maplibregl.ScaleControl(), "bottom-left");
+// the page can start in a hidden or half-sized panel; keep the canvas matched to its box
+new ResizeObserver(() => map.resize()).observe(document.getElementById("map"));
 
 function hoverBox(bbox) {
   const src = map.getSource("hover");
@@ -189,7 +191,7 @@ function addMethod(e) {
   const inf = info(e);
   switch (e.protocol) {
     case "arcgis-featureserver": return caps.includes("query") ? "features" : null;
-    case "wfs": return "features";
+    case "wfs": return wfsJson(e) ? "features" : null;  // GML-only servers can't be drawn here yet
     case "wms": return "image";
     case "arcgis-imageserver": return caps.includes("render") ? "image" : null;
     case "arcgis-mapserver":
@@ -199,6 +201,11 @@ function addMethod(e) {
     case "wmts": return inf.tile_template && inf.web_mercator_standard ? "tiles" : null;
     default: return null;
   }
+}
+
+function wfsJson(e) {
+  const f = (info(e).output_formats || []);
+  return f.find((x) => /json/i.test(x)) || null;
 }
 
 function rasterUrl(e) {
@@ -225,7 +232,7 @@ function featureUrl(e, v) {
   const [x0, y0, x1, y1] = v.map((n) => n.toFixed(6));
   if (e.protocol === "wfs") {
     const s = e.service_url;
-    return `${s}${sep(s)}service=WFS&request=GetFeature&version=1.0.0&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=application/json&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1}&maxFeatures=${MAX_FEATURES}`;
+    return `${s}${sep(s)}service=WFS&request=GetFeature&version=1.0.0&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(wfsJson(e))}&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1}&maxFeatures=${MAX_FEATURES}`;
   }
   // ask the server to simplify to about one screen pixel, so a national layer doesn't arrive at survey precision
   const tol = ((v[2] - v[0]) / map.getCanvas().clientWidth).toPrecision(2);
