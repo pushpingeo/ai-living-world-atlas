@@ -10,7 +10,7 @@ on:
     types: [completed]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write  # only to publish the smoke-test result to results/mcp-deploy
 concurrency:
   group: deploy-mcp
   cancel-in-progress: true
@@ -64,9 +64,18 @@ jobs:
           sleep 5
           SUB=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | python3 -c "import json,sys; print(json.load(sys.stdin)['result']['subdomain'])")
           EP="https://atlas-mcp.$SUB.workers.dev/mcp"
-          echo "MCP endpoint: $EP"
+          echo "MCP endpoint: $EP" | tee /tmp/smoke.txt
           code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$EP" -d '{}')
           [ "$code" = "401" ] || { echo "expected 401 without key, got $code"; exit 1; }
           curl -sf "$EP" -H "Authorization: Bearer $ATLAS_MCP_KEY" -H 'content-type: application/json' \
             -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"find_datasets","arguments":{"lon":-3.19,"lat":55.95,"limit":3}}}' \
-            | python3 -c "import json,sys; r=json.load(sys.stdin)['result']['structuredContent']; print('matches', r['matches']); [print(' -', x['title']) for x in r['results']]"
+            | python3 -c "import json,sys; r=json.load(sys.stdin)['result']['structuredContent']; print('matches', r['matches']); [print(' -', x['title']) for x in r['results']]" | tee -a /tmp/smoke.txt
+          echo "no-key request: $code" >> /tmp/smoke.txt
+      - name: Publish result (never the key)
+        if: always() && steps.have.outputs.ok == '1'
+        run: |
+          mkdir -p /tmp/r && cp /tmp/smoke.txt /tmp/r/ 2>/dev/null || echo "smoke test did not run" > /tmp/r/smoke.txt
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ) status ${{ job.status }}" > /tmp/r/RUN.txt
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp /tmp/r/* . && git add -A && git commit -qm "MCP deploy result" && git push -qf origin HEAD:refs/heads/results/mcp-deploy
