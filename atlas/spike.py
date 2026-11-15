@@ -19,6 +19,7 @@ from .crawl_portals import harvest_ckan, harvest_hub, service_targets
 from .net import Client
 from .quality import codelike, declared_iso_themes, score
 from .record import norm_url
+from .resolution import derive
 from .seeds import load_targets
 
 
@@ -191,6 +192,7 @@ async def run(args):
         themes, how = declared_iso_themes(r["declared_themes"], r["keywords"])
         r["iso_themes_declared"], r["iso_themes_how"] = themes, how
         r.update(score(r))
+        r.update(derive(r))
         rows.append(r)
     dedup = {}
     for r in rows:  # first row wins; same uid can appear via two discovery routes
@@ -248,6 +250,10 @@ def summarise(df, svc_status, root_status, portal_status, http_stats, secs, out)
         "declared_iso_theme": int(df["iso_themes_declared"].apply(len).gt(0).sum()),
         "declared_theme_how": df["iso_themes_how"].replace("", "none").value_counts().to_dict(),
         "publisher_type": df["publisher_type_resolved"].value_counts().to_dict(),
+        "detail_source": df["detail_source"].replace("", "none").value_counts().to_dict(),
+        "detail_level": df["detail_level"].replace("", "unknown").value_counts().to_dict(),
+        "coverage_level": df["coverage_level"].replace("", "unknown").value_counts().to_dict(),
+        "detail_level_passing": df.loc[df["q_pass"], "detail_level"].replace("", "unknown").value_counts().to_dict(),
     }
     s["checks"] = {"by_status": chk, "live_rate_of_checked": round(chk.get("ok", 0) / checked, 3) if checked else None,
                    "returns_data_or_empty_rate": round((chk.get("ok", 0) + chk.get("empty", 0)) / checked, 3) if checked else None}
@@ -297,6 +303,12 @@ def report_md(s, args):
         f"- Code-like layer titles (before using catalogue names): {pct(L.get('codelike_titles', 0), n)}; junk-flagged: {pct(L.get('junk_flagged', 0), n)}",
         f"- **Declares an ISO theme (directly or via INSPIRE/DGU crosswalk): {pct(L.get('declared_iso_theme', 0), n)}** {L.get('declared_theme_how')}",
         f"- Publisher type: {L.get('publisher_type')}",
+        "",
+        "## Coverage and detail",
+        f"- Coverage level (from extent): {L.get('coverage_level')}",
+        f"- Detail estimate source: {L.get('detail_source')}",
+        f"- Detail level, all layers: {L.get('detail_level')}",
+        f"- Detail level, passing layers: {L.get('detail_level_passing')}",
         "",
         "## Liveness (sample, up to 2 layers per service)",
         f"- {ck.get('by_status')}",

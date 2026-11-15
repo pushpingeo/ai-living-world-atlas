@@ -88,8 +88,23 @@ def parse_wms(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out: list[Layer] = []
 
-    def walk(el, inherited_bbox, inherited_crs, parent_title):
+    def walk(el, inherited_bbox, inherited_crs, parent_title, inh_scale=(None, None)):
         name = _text(el, "Name")
+        fin, coa = inh_scale
+        try:
+            if _text(el, "MinScaleDenominator"):
+                fin = float(_text(el, "MinScaleDenominator"))
+            if _text(el, "MaxScaleDenominator"):
+                coa = float(_text(el, "MaxScaleDenominator"))
+            sh = _child(el, "ScaleHint")  # WMS 1.1.1: ground size of a pixel diagonal, in metres
+            if sh is not None:
+                k = 0.00028 * 2 ** 0.5
+                fin = float(sh.get("min")) / k if float(sh.get("min") or 0) > 0 else fin
+                coa = float(sh.get("max")) / k if float(sh.get("max") or 0) > 0 else coa
+        except (TypeError, ValueError):
+            pass
+        if coa and coa > 1e12:
+            coa = None  # "infinity" in practice
         title = _text(el, "Title")
         bbox = inherited_bbox
         g = _child(el, "EX_GeographicBoundingBox")
@@ -115,10 +130,11 @@ def parse_wms(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
                 bbox=bbox, native_crs=",".join(crs[:5]), metadata_url=md_url,
                 has_time=any((d.get("name") or "").lower() == "time" for d in _children(el, "Dimension")),
                 geometry_type="map-image", crawled_at=now, service_ms=ms,
+                scale_finest=fin, scale_coarsest=coa,
                 **ctx,
             ))
         for k in kids:
-            walk(k, bbox, crs, title or parent_title)
+            walk(k, bbox, crs, title or parent_title, (fin, coa))
 
     if cap is not None:
         for top in _children(cap, "Layer"):

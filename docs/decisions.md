@@ -33,3 +33,22 @@ A layer **passes** at 60 or more, with no junk flags, a failed check not recorde
 **Country is the seed catalogue's country for now.** Some UK catalogues publish data for other countries (WorldPop, for example). Deriving coverage from the extent comes later.
 
 **Crawl etiquette.** A named user agent, 2 concurrent requests per host, robots.txt respected, one retry with backoff on 429/5xx.
+
+## 2026-11-15: Coverage and detail (for global-to-local drill-down)
+
+**Two axes, kept separate.** *Coverage* is how much of the world a layer spans. *Detail* is how fine the data is. They vary independently: ESA WorldCover is global at 10 m, and a council layer can be local but crude. Detail levels are named by map scale (`1:5k`, `1:25k`, `1:100k`, `1:500k`, `1:2M`, `coarser`), never by geography, so the two can't be confused.
+
+**Coverage v1** comes from the size of the WGS84 extent: local, regional, national, continental or global. v2 will place each layer in an admin hierarchy (country > region > district, from geoBoundaries), so an agent can ask for "everything covering West Lothian, from global down to local".
+
+**Detail** is an approximate ground resolution in metres, taken from the strongest signal available. The source is recorded in `detail_source`:
+1. `pixel-size`: the raster cell size reported by the service.
+2. `stated`: a scale or resolution written by the publisher ("1:10,000", "25 m grid", "10K").
+3. `tile-cache`: only when the cache stops early (1:20,000 or coarser). Caches routinely go down to about 1:1,000 whatever the data, so a deep cache tells us nothing.
+4. `display`: only when the publisher hides the layer until you zoom in past 1:1,000,000 or closer. "Visible at all scales" is a styling default and tells us nothing.
+
+Scale denominators become metres by the usual rule, resolution ≈ denominator / 2000 (0.5 mm on the map).
+
+Early local test: about 14% of layers get an estimate from these signals. Next sources to add, in order:
+- ISO/INSPIRE metadata records (spatial resolution is mandatory in INSPIRE metadata, so UK and EU data should do well).
+- Feature density from the counts the health checks already return.
+- An AI reading of the description, recorded as `detail_source: ai`.

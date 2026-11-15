@@ -100,7 +100,18 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
     svc_abs = _txt(sj.get("serviceDescription")) or _txt(sj.get("description"))
     svc_lic = _txt(sj.get("copyrightText"))
     svc_kw = [k.strip() for k in re.split(r"[,;]", doc.get("Keywords") or "") if k.strip()]
+    lods = ((sj.get("tileInfo") or {}).get("lods") or [])
+    cache_finest = min((l.get("scale") for l in lods if l.get("scale")), default=None)
+    px = None
+    if stype == "ImageServer" and sj.get("pixelSizeX"):
+        px = float(sj["pixelSizeX"])
+        sr = (sj.get("spatialReference") or sj.get("extent", {}).get("spatialReference") or {})
+        if (sr.get("latestWkid") or sr.get("wkid")) in (4326, 4258, 4269):
+            ext = _bbox(sj.get("extent")) or [0, 0, 0, 0]
+            import math
+            px = px * 111_320 * math.cos(math.radians((ext[1] + ext[3]) / 2))
     base = dict(
+        cache_finest_scale=cache_finest,
         service_url=surl, service_type=status["service_type"], service_title=svc_title,
         service_abstract=svc_abs, crawled_at=now, service_ms=r.ms, **ctx,
     )
@@ -111,7 +122,8 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
             layer_url=surl, layer_name="0", title=svc_title, abstract=svc_abs, keywords=svc_kw,
             licence_text=svc_lic, bbox=_bbox(sj.get("fullExtent") or sj.get("extent") or sj.get("initialExtent")),
             geometry_type="raster" if stype == "ImageServer" else "vector-tiles",
-            has_time=bool(sj.get("timeInfo")), **base,
+            has_time=bool(sj.get("timeInfo")), pixel_size_m=round(px, 3) if px else None,
+            scale_finest=(sj.get("maxScale") or None), scale_coarsest=(sj.get("minScale") or None), **base,
         ))
     else:
         lr = await c.get(surl + "/layers?f=json")
@@ -135,6 +147,8 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
                 licence_text=_txt(L.get("copyrightText")) or svc_lic,
                 bbox=_bbox(L.get("extent")) or _bbox(sj.get("fullExtent") or sj.get("initialExtent")),
                 geometry_type=gt, fields=flds, has_time=bool(L.get("timeInfo")),
+                # ArcGIS: minScale is the coarsest scale shown, maxScale the finest; 0 means no limit
+                scale_finest=(L.get("maxScale") or None), scale_coarsest=(L.get("minScale") or None),
                 native_crs=str(((L.get("extent") or {}).get("spatialReference") or {}).get("latestWkid") or ((L.get("extent") or {}).get("spatialReference") or {}).get("wkid") or ""),
                 **base,
             ))

@@ -66,6 +66,11 @@ class Layer:
     portal_licence: str = ""
     metadata_url: str = ""
     has_time: bool = False
+    # resolution signals, stored raw; see atlas/resolution.py for how they become a detail level
+    scale_finest: float | None = None      # smallest scale denominator the publisher shows it at
+    scale_coarsest: float | None = None    # largest scale denominator it is shown at
+    cache_finest_scale: float | None = None  # finest tile-cache level, as a scale denominator
+    pixel_size_m: float | None = None      # raster cell size
     crawled_at: str = ""
     service_ms: int = 0
 
