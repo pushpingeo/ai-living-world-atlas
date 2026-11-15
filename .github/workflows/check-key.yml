@@ -1,0 +1,30 @@
+name: check-key
+on:
+  push:
+    branches: [main]
+    paths: ['runs/check-key.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the API key without printing it
+        env:
+          KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p /tmp/out
+          if [ -z "$KEY" ]; then echo "present=no" > /tmp/out/key.txt; else
+            echo "present=yes" > /tmp/out/key.txt
+            code=$(curl -s -o /tmp/resp.json -w '%{http_code}' https://api.anthropic.com/v1/messages \
+              -H "x-api-key: $KEY" -H "anthropic-version: 2023-06-01" -H "content-type: application/json" \
+              -d '{"model":"claude-haiku-5-5","max_tokens":5,"messages":[{"role":"user","content":"Say ok"}]}')
+            echo "test_call_http=$code" >> /tmp/out/key.txt
+            python3 -c "import json;d=json.load(open('/tmp/resp.json'));print('model='+str(d.get('model','')));print('error='+str((d.get('error') or {}).get('type','')))" >> /tmp/out/key.txt || true
+          fi
+          date -u >> /tmp/out/key.txt
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp /tmp/out/key.txt . && git add key.txt && git commit -qm "key check" && git push -qf origin HEAD:refs/heads/results/key-check
