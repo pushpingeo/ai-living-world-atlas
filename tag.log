@@ -1,0 +1,23 @@
+submitted batch msgbatch_01SY32hM75adFALb8bBnuydt with 10857 requests
+[0s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[180s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[240s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[300s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[361s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[421s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[481s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[541s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[601s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[662s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[722s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[783s] in_progress {'processing': 10857, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[843s] ended {'processing': 0, 'succeeded': 10857, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch msgbatch_01SY32hM75adFALb8bBnuydt
+
+- Requests: 10857; succeeded: 10857
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 6044164, "output_tokens": 2176432, "cache_read_input_tokens": 33588464, "cache_creation_input_tokens": 3094}
+- **Cost: $1.01** (estimated from token counts and published batch prices)
+
