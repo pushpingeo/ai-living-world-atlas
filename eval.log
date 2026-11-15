@@ -1,0 +1,20 @@
+# AI tagging agreement: Haiku 5.5 vs Opus 5.5
+
+200 passing UK datasets (68 with publisher-declared themes); 0 errors.
+
+## Themes (ISO 19115)
+- First theme identical: **86%**; any theme shared: 99%; mean overlap 0.75
+- Against publisher-declared themes (68 datasets): Haiku matches 85%, Opus matches 85%
+
+## Concepts
+- First concept identical: **84%**; any concept shared (or both none): 90%; mean overlap 0.76
+- No concept fits: Haiku 2%, Opus 4%
+- Out-of-vocabulary answers (dropped): Haiku 2, Opus 0
+
+## Proposed new concepts (both models)
+- hydrogeology: 5
+- garden-plant-collection: 4
+- garden-landscape-feature: 4
+- airborne-geophysics: 2
+- historic-map: 2
+- plant-collection-locations: 2

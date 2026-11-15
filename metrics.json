@@ -1,0 +1,28 @@
+{
+ "haiku_usage": {
+  "input_tokens": 722516,
+  "output_tokens": 39766,
+  "calls": 200,
+  "errors": 0
+ },
+ "opus_usage": {
+  "input_tokens": 697316,
+  "output_tokens": 43538,
+  "calls": 200,
+  "errors": 0
+ },
+ "summary": {
+  "error": 0.0,
+  "theme1_agree": 0.855,
+  "theme_any": 0.99,
+  "theme_jaccard": 0.7491666666666668,
+  "concept1_agree": 0.84,
+  "concept_any": 0.9,
+  "concept_jaccard": 0.7575,
+  "haiku_no_concept": 0.015,
+  "opus_no_concept": 0.04,
+  "has_declared": 0.34,
+  "haiku_invalid": 0.01,
+  "opus_invalid": 0.0
+ }
+}
