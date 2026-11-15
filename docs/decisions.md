@@ -84,3 +84,16 @@ Weak rule: `title-extent`, meaning same title and publisher with extents overlap
 **Hubs list other people's services.** A Rivers Trust Hub linking EEA image services made the Rivers Trust look like the publisher. Now, when a Hub links a service on a non-ArcGIS-Online host, the Hub's owner goes in `listed_by`, not `publisher`. The publisher then comes from the service itself, or failing that the host name. Hubs linking another organisation's ArcGIS Online services are still attributed to the Hub owner; that needs an organisation-ID check later.
 
 **GeoServer sample data is flagged** (`demo-data`): the `topp:`, `sf:`, `tiger:` and `nurc:` namespaces, plus layers such as Spearfish and the North America sample imagery. Several council and university GeoServers still publish the install defaults.
+
+## 2026-11-15: AI tagging test, and a catalogue-join bug it exposed
+
+**Tagging test** (`docs/evals/tagging-gb-2026-11-15.md`): Haiku 5.5 and Opus 5.5 each tagged the same 200 passing UK datasets, constrained to the fixed vocabularies.
+- They chose the same first ISO theme 86% of the time and the same first concept 84% of the time.
+- Both matched the publisher's own declared theme 85% of the time.
+- Most disagreements are ordering (land-cover vs agriculture first) or genuinely ambiguous layers.
+- **Decision: Haiku does the tagging at scale.** Batch cost is about $23 per 100k datasets. Opus is used only for evaluation.
+- Opus 5.5 refuses a forced tool call, so for Opus the tool is requested in the prompt instead.
+
+**Bug found by the test.** A catalogue record linking one layer of an ArcGIS service (e.g. Bristol's recycling points) was lending its description to every layer in that service. Haiku spotted the contradiction and lowered its confidence; we were the ones in the wrong. Records now attach only if they link that exact layer, or they link the whole service and either the titles match or the service has 3 layers or fewer. This will lower the "usable description" and pass figures somewhat, and make them honest.
+
+**Proposed concepts to review:** the models suggested hydrogeology, historic-map, airborne-geophysics, seismic-survey, nitrate-vulnerable-zone, traffic-count, compulsory-purchase-order and fly-tipping, among others. They go into the vocabulary when they recur across countries, not on one UK run.

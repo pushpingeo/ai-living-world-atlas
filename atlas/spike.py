@@ -143,20 +143,33 @@ async def run(args):
             note(f"services crawled {done}/{len(work)}; layers so far {len(layers)}")
 
         # ---- 5. attach catalogue metadata -----------------------------------
-        by_url = defaultdict(list)
+        # Only attach a catalogue record where it clearly describes this layer:
+        #   - it links this exact layer, or
+        #   - it links the whole service and the service is small (<= 3 layers) or the titles match.
+        # A record linking one layer of a big service must not lend its description to the others.
+        exact, whole = defaultdict(list), defaultdict(list)
         for rec in records:
             for kind, u in rec.links:
-                by_url[norm_url(u)].append(rec)
-                if kind == "arcgis":
-                    s = crawl_arcgis.service_url_of(u)
-                    if s:
-                        by_url[norm_url(s)].append(rec)
+                nu = norm_url(u)
+                if kind == "arcgis" and crawl_arcgis.service_url_of(u) and norm_url(crawl_arcgis.service_url_of(u)) != nu:
+                    exact[nu].append(rec)          # .../MapServer/12: one layer
+                elif kind == "arcgis":
+                    whole[nu].append(rec)          # .../MapServer: the whole service
+                else:
+                    whole[nu].append(rec)          # OGC endpoint: the whole service
+        svc_size = Counter(L.service_url for L in layers)
+
+        def same_title(r, L):
+            a, b = (r.title or "").lower().strip(), (L.title or "").lower().strip()
+            return bool(a and b and (a == b or a.replace("_", " ") == b.replace("_", " ")))
+
         joined = 0
         for L in layers:
-            recs = by_url.get(norm_url(L.layer_url)) or by_url.get(norm_url(L.service_url)) or []
-            if L.service_type in ("wms", "wfs", "wmts", "wcs") and len(recs) > 1:
-                # many datasets share one OGC endpoint: only keep a record whose title matches the layer
-                recs = [r for r in recs if r.title and L.title and r.title.lower() == L.title.lower()]
+            recs = exact.get(norm_url(L.layer_url), [])
+            if not recs:
+                cands = whole.get(norm_url(L.service_url), [])
+                titled = [r for r in cands if same_title(r, L)]
+                recs = titled or (cands if svc_size[L.service_url] <= 3 and len(cands) == 1 else [])
             if recs:
                 r = recs[0]
                 L.portal_title, L.portal_abstract, L.portal_licence = r.title, r.abstract, r.licence
