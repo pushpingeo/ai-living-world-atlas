@@ -1,0 +1,5 @@
+# Host -> publisher type, where the seed registry's owner type is wrong or missing.
+# Matches the host and its subdomains.
+europa.eu: international
+eea.europa.eu: international
+bgs.ac.uk: public-body

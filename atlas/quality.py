@@ -74,6 +74,20 @@ def host_type(url: str) -> str | None:
     return None
 
 
+@lru_cache
+def _overrides():
+    p = Path(__file__).resolve().parent.parent / "vocab" / "publisher_overrides.yaml"
+    return yaml.safe_load(p.read_text()) or {} if p.exists() else {}
+
+
+def publisher_override(url: str) -> str | None:
+    h = urlsplit(url).netloc.lower()
+    for dom, t in _overrides().items():
+        if h == dom or h.endswith("." + dom):
+            return t
+    return None
+
+
 def codelike(title: str) -> bool:
     t = (title or "").strip()
     return (not t) or (" " not in t and ("_" in t or t.isupper() or len(t) <= 3))
@@ -81,7 +95,7 @@ def codelike(title: str) -> bool:
 
 def score(row: dict) -> dict:
     """row: a layer dict with crawl + check info. Returns score components and flags."""
-    ptype = row.get("publisher_type") or "unknown"
+    ptype = publisher_override(row.get("service_url", "")) or row.get("publisher_type") or "unknown"
     if ptype in ("unknown", "", None):
         ptype = host_type(row.get("service_url", "")) or ("public-body" if (row.get("discovered_via") or "").startswith("ckan:") else "unknown")
     authority = AUTHORITY.get(ptype, 5)
@@ -89,11 +103,14 @@ def score(row: dict) -> dict:
     title = row.get("title") or ""
     if codelike(title) and row.get("portal_title"):
         title = row["portal_title"]  # the catalogue record usually has the human name
-    abstract = max((row.get("abstract") or "", row.get("portal_abstract") or "", row.get("service_abstract") or ""), key=len)
+    # A service description shared by dozens of layers says nothing about any one of them,
+    # so it only counts for small services.
+    svc_abs = row.get("service_abstract") or "" if (row.get("service_layer_count") or 1) <= 3 else ""
+    abstract = max((row.get("abstract") or "", row.get("portal_abstract") or "", svc_abs), key=len)
     lic = " ".join(x for x in (row.get("licence_text") or "", row.get("portal_licence") or "") if x)
     m_title = 3 if codelike(title) else 8
     m_abs = 12 if len(abstract) >= 200 else 8 if len(abstract) >= 50 else 2 if abstract else 0
-    m_kw = 5 if (row.get("keywords") or []) else 0
+    m_kw = 5 if len(row.get("keywords") if row.get("keywords") is not None else []) else 0
     m_lic = 10 if lic.strip() else 0
     m_bbox = 5 if row.get("bbox") else 0
     metadata = m_title + m_abs + m_kw + m_lic + m_bbox
@@ -105,7 +122,7 @@ def score(row: dict) -> dict:
 
     flags = [name for rx, name in JUNK_TITLE if rx.search(title)]
     total = authority + metadata + liveness + licence
-    passes = total >= 60 and not flags and chk != "fail" and m_abs >= 8
+    passes = total >= 60 and not flags and chk != "fail" and m_abs >= 8 and not codelike(title)
     return {
         "q_authority": authority, "q_metadata": metadata, "q_liveness": liveness, "q_licence": licence,
         "q_total": total, "q_flags": flags, "q_pass": passes, "publisher_type_resolved": ptype,

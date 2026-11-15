@@ -184,11 +184,13 @@ async def run(args):
         http_stats = dict(c.stats)
 
     # ---- 7. score + write --------------------------------------------------
+    svc_n = Counter(L.service_url for L in layers)
     rows = []
     for L in layers:
         r = L.to_row()
         st, detail = checks.get(L.uid, ("unchecked", ""))
         r["check_status"], r["check_detail"] = st, detail
+        r["service_layer_count"] = svc_n[L.service_url]
         themes, how = declared_iso_themes(r["declared_themes"], r["keywords"])
         r["iso_themes_declared"], r["iso_themes_how"] = themes, how
         r.update(score(r))
