@@ -39,7 +39,8 @@ Pick a concept only when the data clearly is that thing. An empty list is better
 3. proposed_concept: if the data is a clear, reusable kind of thing that no concept covers, a short kebab-case id; otherwise "".
 
 Judge from the evidence: title, description, field names, publisher, service type. Ignore boilerplate
-(contact details, disclaimers, licence text). Do not guess from the publisher alone."""
+(contact details, disclaimers, licence text). Do not guess from the publisher alone.
+Always answer by calling the record_tags tool, once."""
 
 
 TOOL = {
@@ -83,7 +84,7 @@ def clean(out: dict) -> dict:
         "iso_themes": [t for t in out.get("iso_themes", []) if t in themes][:3],
         "concepts": [c for c in out.get("concepts", []) if c in concepts][:4],
         "invalid": [x for x in out.get("iso_themes", []) + out.get("concepts", []) if x not in themes and x not in concepts],
-        "proposed_concept": (out.get("proposed_concept") or "").strip(),
+        "proposed_concept": (out.get("proposed_concept") or "").strip().strip('"').strip(),
         "confidence": out.get("confidence"),
         "reason": (out.get("reason") or "")[:300],
     }
@@ -99,7 +100,9 @@ class Tagger:
     async def tag(self, session: aiohttp.ClientSession, text: str) -> dict:
         body = {
             "model": self.model, "max_tokens": 600, "system": system_prompt(),
-            "tools": [TOOL], "tool_choice": {"type": "tool", "name": "record_tags"},
+            "tools": [TOOL],
+            # some models refuse a forced tool call; there we ask for it in the prompt instead
+            "tool_choice": {"type": "tool", "name": "record_tags"} if "haiku" in self.model else {"type": "auto"},
             "messages": [{"role": "user", "content": text}],
         }
         headers = {"x-api-key": self.key, "anthropic-version": "2023-06-01", "content-type": "application/json"}
