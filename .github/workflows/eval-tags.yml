@@ -1,0 +1,44 @@
+name: eval-tags
+on:
+  push:
+    branches: [main]
+    paths: ['runs/eval-tags.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: eval-tags
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Get latest UK datasets
+        run: |
+          git fetch -q origin results/spike-gb
+          git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
+          git show FETCH_HEAD:layers.parquet > /tmp/layers.parquet
+          git show FETCH_HEAD:RUN.txt
+      - name: Run agreement test
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -a; . runs/eval-tags.env; set +a
+          set -o pipefail
+          python -m atlas.eval_tags --datasets /tmp/datasets.parquet --layers /tmp/layers.parquet --n "$N" --out out 2>&1 | tee eval.log
+      - name: Publish results
+        if: always()
+        run: |
+          mkdir -p out && cp eval.log out/ 2>/dev/null || true
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          cp -r out /tmp/results
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp -r /tmp/results/. . && git add -A && git commit -qm "Tagging eval (run ${GITHUB_RUN_ID})"
+          git push -qf origin HEAD:refs/heads/results/eval-tags

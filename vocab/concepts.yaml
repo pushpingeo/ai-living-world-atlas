@@ -1,0 +1,74 @@
+# Concept vocabulary v0: what a dataset actually is. Each concept sits under one ISO topic category.
+# Kept consistent with geoanalyst.ai's concepts. GEMET / Wikidata links get added by a script later,
+# not typed from memory. New concepts come in by pull request.
+
+protected-area: {theme: environment, def: "Areas designated for nature or landscape protection (SSSI, SAC, SPA, national park, nature reserve)"}
+habitat: {theme: biota, def: "Mapped habitats, vegetation communities, biotopes, priority habitat inventories"}
+species-occurrence: {theme: biota, def: "Records or ranges of species, species richness, biodiversity indicators"}
+woodland: {theme: biota, def: "Woodland, forest and tree cover inventories, ancient woodland"}
+tree: {theme: environment, def: "Individual trees, street trees, tree preservation orders"}
+wetland: {theme: inlandWaters, def: "Wetlands, peatland, bogs, Ramsar sites"}
+soil: {theme: geoscientificInformation, def: "Soil types, soil properties, soil carbon"}
+geology: {theme: geoscientificInformation, def: "Bedrock and superficial geology, boreholes, faults, mineral resources"}
+land-cover: {theme: imageryBaseMapsEarthCover, def: "Land cover or land use classifications from imagery"}
+land-use-plan: {theme: planningCadastre, def: "Development plans, zoning, allocations, policy areas, green belt"}
+planning-application: {theme: planningCadastre, def: "Planning applications, permissions, building control"}
+land-ownership: {theme: planningCadastre, def: "Land and property ownership, cadastral parcels, council-owned land, assets"}
+brownfield: {theme: planningCadastre, def: "Brownfield and contaminated land, derelict land registers"}
+heritage-site: {theme: society, def: "Listed buildings, scheduled monuments, conservation areas, historic environment records, World Heritage"}
+admin-boundary: {theme: boundaries, def: "Administrative and electoral boundaries, wards, parishes, local authority areas"}
+statistical-area: {theme: boundaries, def: "Census and statistical geographies (output areas, LSOAs, data zones) and the statistics on them"}
+maritime-boundary: {theme: boundaries, def: "Territorial sea, EEZ, marine planning regions, offshore licensing boundaries"}
+settlement: {theme: society, def: "Towns, villages, built-up areas, settlement boundaries"}
+population: {theme: society, def: "Population counts, density, demographics"}
+deprivation: {theme: society, def: "Deprivation, poverty, inequality and wellbeing indices"}
+address: {theme: location, def: "Addresses, postcodes, property gazetteers"}
+building: {theme: structure, def: "Building footprints, building attributes, energy performance"}
+place-name: {theme: location, def: "Gazetteers and named places"}
+road: {theme: transportation, def: "Road network, classifications, speed limits, road works, gritting routes"}
+rail: {theme: transportation, def: "Railways, stations, tram and metro"}
+public-transport: {theme: transportation, def: "Bus routes and stops, public transport access"}
+active-travel: {theme: transportation, def: "Cycle routes, footpaths, public rights of way, walking routes"}
+parking: {theme: transportation, def: "Car parks, parking zones, permits, EV charging"}
+traffic-collision: {theme: transportation, def: "Road traffic collisions and casualties"}
+port-airport: {theme: transportation, def: "Ports, harbours, airports and their limits"}
+shipping: {theme: oceans, def: "Shipping lanes, vessel density, navigation features"}
+river: {theme: inlandWaters, def: "Rivers, streams, canals, lakes, catchments, water body status"}
+flood-risk: {theme: inlandWaters, def: "Flood zones, flood risk, flood defences, historic flooding"}
+water-quality: {theme: environment, def: "Water quality, bathing waters, pollution incidents, discharges"}
+coastline: {theme: oceans, def: "Coastline, coastal change, erosion, shoreline management"}
+bathymetry: {theme: elevation, def: "Seabed depth and seabed morphology"}
+seabed-habitat: {theme: oceans, def: "Seabed sediments and marine habitats"}
+marine-activity: {theme: oceans, def: "Fishing areas, aquaculture, marine licences, marine protected areas use"}
+elevation: {theme: elevation, def: "Terrain and surface models, LiDAR, contours, hillshade"}
+imagery: {theme: imageryBaseMapsEarthCover, def: "Aerial photography, satellite imagery, orthophotos"}
+basemap: {theme: imageryBaseMapsEarthCover, def: "General-purpose background or reference maps"}
+climate: {theme: climatologyMeteorologyAtmosphere, def: "Climate observations, projections, temperature, rainfall"}
+air-quality: {theme: environment, def: "Air quality measurements, management areas, emissions"}
+noise: {theme: environment, def: "Noise mapping and noise action areas"}
+natural-hazard: {theme: geoscientificInformation, def: "Landslides, subsidence, earthquakes, radon, other natural hazards"}
+agriculture: {theme: farming, def: "Crops, agricultural land classification, farm schemes, livestock"}
+fishing: {theme: farming, def: "Commercial fishing activity and restrictions"}
+power-plant: {theme: utilitiesCommunication, def: "Electricity generation sites, renewable installations"}
+power-line: {theme: utilitiesCommunication, def: "Electricity transmission and distribution lines, substations"}
+pipeline: {theme: utilitiesCommunication, def: "Oil, gas, water or CO2 pipelines"}
+oil-gas: {theme: economy, def: "Oil and gas licences, fields, wells, platforms"}
+offshore-wind-site: {theme: economy, def: "Offshore wind leases, sites and cable routes"}
+mineral-extraction: {theme: economy, def: "Quarries, mines, mineral safeguarding areas"}
+renewable-potential: {theme: economy, def: "Wind, solar, heat or other renewable resource and opportunity areas"}
+telecoms: {theme: utilitiesCommunication, def: "Broadband, mobile coverage, telecoms infrastructure"}
+waste: {theme: utilitiesCommunication, def: "Waste sites, recycling points, bin collection"}
+water-utility: {theme: utilitiesCommunication, def: "Water supply and sewerage networks"}
+school: {theme: society, def: "Schools, catchments, education facilities"}
+health-facility: {theme: health, def: "Hospitals, GP surgeries, pharmacies, care homes"}
+health-indicator: {theme: health, def: "Health outcomes and indicators by area"}
+community-facility: {theme: society, def: "Libraries, community centres, public toilets, council offices"}
+greenspace: {theme: environment, def: "Parks, open space, allotments, playgrounds, sports pitches"}
+tourism-recreation: {theme: society, def: "Visitor attractions, recreation sites, trails"}
+crime-safety: {theme: society, def: "Crime, policing areas, fire and rescue, emergency planning"}
+business-economy: {theme: economy, def: "Businesses, employment, economic activity, retail centres"}
+housing: {theme: society, def: "Housing stock, tenure, housing need, HMOs"}
+licensing: {theme: society, def: "Premises licences, taxis, street trading and other local licences"}
+conflict-event: {theme: society, def: "Armed conflict and political violence events"}
+indigenous-land: {theme: society, def: "Indigenous and community lands"}
+military: {theme: intelligenceMilitary, def: "Military training areas, danger areas, defence estate"}
