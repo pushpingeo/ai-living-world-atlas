@@ -97,3 +97,17 @@ Weak rule: `title-extent`, meaning same title and publisher with extents overlap
 **Bug found by the test.** A catalogue record linking one layer of an ArcGIS service (e.g. Bristol's recycling points) was lending its description to every layer in that service. Haiku spotted the contradiction and lowered its confidence; we were the ones in the wrong. Records now attach only if they link that exact layer, or they link the whole service and either the titles match or the service has 3 layers or fewer. This will lower the "usable description" and pass figures somewhat, and make them honest.
 
 **Proposed concepts to review:** the models suggested hydrogeology, historic-map, airborne-geophysics, seismic-survey, nitrate-vulnerable-zone, traffic-count, compulsory-purchase-order and fly-tipping, among others. They go into the vocabulary when they recur across countries, not on one UK run.
+
+## 2026-11-15: False extents
+
+Extents are often much bigger than the data. In the UK run:
+- 6% of layers in services with 3+ layers just copy the service extent.
+- 8% of council layers claim a national-or-larger extent; 183 of those are exactly the whole-GB grid.
+- 1,400 layers claim the whole world.
+
+**Now:** every layer is checked against four rules (`shared-default`, `world`, `grid-default`, `too-big-local`). Suspect ArcGIS feature and map layers are measured with `query?returnExtentOnly=true`: one request each, capped at 15k a run. The declared extent is kept in `declared_bbox`, and `extent_source` says `measured` or `declared`. In a local test, 1 in 5 measured layers turned out less than half the size they claimed. The viewer halves the ranking of suspect extents it couldn't measure, and says so in the details.
+
+**Later:**
+- WMS/ImageServer: render one small image over the claimed extent and take the bounds of the non-empty pixels.
+- Real footprints: a coarse grid of where features actually are, so a "UK" layer covering three counties shows as three counties.
+- Comparing council layers with the council's own boundary, once the admin hierarchy exists.

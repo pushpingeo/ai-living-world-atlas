@@ -64,7 +64,7 @@ async function loadIndex() {
     role: META.roles[a[ix.role]], bbox: a[ix.bbox], pass: !!a[ix.pass], score: a[ix.score],
     themes: a[ix.themes].map((i) => META.themes[i]), concepts: a[ix.concepts].map((i) => META.concepts[i]),
     protocols: a[ix.protocols].map((i) => META.protocols[i]), caps: a[ix.caps].map((i) => META.caps[i]),
-    detail: a[ix.detail], cors: !!a[ix.cors],
+    detail: a[ix.detail], cors: !!a[ix.cors], xsus: ix.xsus !== undefined && !!a[ix.xsus],
     text: (a[ix.title] + " " + a[ix.publisher]).toLowerCase(),
   }));
 }
@@ -115,7 +115,7 @@ function update() {
     if (q && !r.text.includes(q)) continue;
     const f = fit(r.bbox, v, av);
     if (f < 0) continue;
-    r._fit = f;
+    r._fit = r.xsus ? f * 0.5 : f;  // an extent we suspect is overstated shouldn't win the ranking
     inView.push(r);
   }
   // facet counts: each facet counted with every other filter applied
@@ -172,6 +172,7 @@ async function showDetail(li, r) {
     ${d.abstract ? `<p class="abs">${esc(d.abstract)}</p>` : '<p class="k">No description from the publisher.</p>'}
     <p><span class="k">Licence:</span> ${esc(d.licence || "not stated")}${d.landing_page ? ` · <a href="${esc(d.landing_page)}" target="_blank" rel="noopener">catalogue page</a>` : ""}</p>
     ${r.themes.length ? `<p><span class="k">Themes${d.themes_source === "ai" ? " (AI-assigned)" : d.themes_source === "declared" ? " (publisher)" : ""}:</span> ${r.themes.map((t) => esc(label("themes", t))).join(", ")}${r.concepts.length ? ` · <span class="k">Concepts:</span> ${r.concepts.map((c) => esc(label("concepts", c))).join(", ")}` : ""}</p>` : ""}
+    ${d.extent_flags && d.extent_flags.length ? `<p class="no">${d.extent_source === "measured" ? "Extent measured from the data (the service's own extent looked wrong)." : "The stated extent looks overstated (" + esc(d.extent_flags.join(", ")) + "); the data may cover much less."}</p>` : ""}
     <p><span class="k">Coverage:</span> ${esc(d.coverage || "?")}${d.detail_m ? ` · <span class="k">Detail:</span> ~${Math.round(d.detail_m)} m (${esc(d.detail_source)})` : ""} · <span class="k">Score:</span> ${r.score}</p>
     <table class="eps">${eps}</table>`;
   box.onclick = (ev) => ev.stopPropagation();

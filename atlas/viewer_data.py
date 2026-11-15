@@ -75,6 +75,7 @@ def main():
             [code(themes, x) for x in th], [code(concepts, x) for x in co],
             [code(protocols, x) for x in lst(r["protocols"])], [code(caps, x) for x in lst(r["capabilities"])],
             r.get("detail_level") or "", 1 if cors_any else 0,
+            1 if (lst(r.get("extent_flags")) and r.get("extent_source", "declared") != "measured") else 0,
         ])
         shards[r["dataset_id"][:2]][r["dataset_id"]] = {
             "abstract": (r.get("abstract") or "")[:2000], "licence": (r.get("licence") or "")[:400],
@@ -84,13 +85,14 @@ def main():
             "themes_source": th_src, "tag_reason": (tg.get("reason") if tg is not None else "") or "",
             "tag_confidence": (tg.get("confidence") if tg is not None else None),
             "match_rules": lst(r.get("match_rules")),
+            "extent_source": r.get("extent_source") or "declared", "extent_flags": lst(r.get("extent_flags")),
             "endpoints": [{k: e.get(k) for k in ("protocol", "url", "service_url", "layer_name", "capabilities", "check", "cors", "info")} for e in eps],
         }
 
     inv = lambda t: [k for k, _ in sorted(t.items(), key=lambda kv: kv[1])]
     meta = {
         "fields": ["id", "title", "publisher", "ptype", "role", "bbox", "pass", "score", "themes", "concepts",
-                   "protocols", "caps", "detail", "cors"],
+                   "protocols", "caps", "detail", "cors", "xsus"],
         "ptypes": inv(ptypes), "roles": inv(roles), "themes": inv(themes), "concepts": inv(concepts),
         "protocols": inv(protocols), "caps": inv(caps), "count": len(rows), "tagged": len(tags),
         **json.loads(args.meta),

@@ -12,9 +12,11 @@ import re
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
+
+import pandas as pd
 from urllib.parse import urlsplit
 
-from . import crawl_arcgis, crawl_ogc, endpoints
+from . import crawl_arcgis, crawl_ogc, endpoints, extents
 from .datasets import build as build_datasets
 from .crawl_portals import harvest_ckan, harvest_hub, service_targets
 from .net import Client
@@ -142,6 +144,11 @@ async def run(args):
             done += len(work[chunk_start:chunk_start + 500])
             note(f"services crawled {done}/{len(work)}; layers so far {len(layers)}")
 
+        # ---- 4b. false extents: flag, then measure what we can -------------
+        extents.flag(layers)
+        ext_stats = await extents.measure(c, layers, args.max_extent_checks, lambda: time.monotonic() < deadline - reserve / 2)
+        note(f"extents: {ext_stats}")
+
         # ---- 5. attach catalogue metadata -----------------------------------
         # Only attach a catalogue record where it clearly describes this layer:
         #   - it links this exact layer, or
@@ -246,7 +253,7 @@ def write_outputs(out: Path, rows, svc_status, root_status, portal_status, http_
     df = pd.DataFrame(rows)
     ds = pd.DataFrame()
     if len(df):
-        for col in ("keywords", "fields", "declared_themes", "iso_themes_declared", "q_flags", "capabilities"):
+        for col in ("keywords", "fields", "declared_themes", "iso_themes_declared", "q_flags", "capabilities", "extent_flags"):
             df[col] = df[col].apply(lambda v: list(v) if isinstance(v, (list, tuple)) else [])
         df["_bbox"] = df["bbox"]
         t = time.monotonic()
@@ -303,6 +310,9 @@ def summarise(df, svc_status, root_status, portal_status, http_stats, secs, out)
         "declared_theme_how": df["iso_themes_how"].replace("", "none").value_counts().to_dict(),
         "publisher_type": df["publisher_type_resolved"].value_counts().to_dict(),
         "detail_source": df["detail_source"].replace("", "none").value_counts().to_dict(),
+        "extent_source": df["extent_source"].value_counts().to_dict(),
+        "extent_flags": pd.Series([f for fs in df["extent_flags"] for f in fs]).value_counts().to_dict(),
+        "cors_ok": int(df["cors"].fillna(False).astype(bool).sum()),
         "detail_level": df["detail_level"].replace("", "unknown").value_counts().to_dict(),
         "coverage_level": df["coverage_level"].replace("", "unknown").value_counts().to_dict(),
         "detail_level_passing": df.loc[df["q_pass"], "detail_level"].replace("", "unknown").value_counts().to_dict(),
@@ -366,6 +376,8 @@ def report_md(s, args):
         "",
         "## Coverage and detail",
         f"- Coverage level (from extent): {L.get('coverage_level')}",
+        f"- Extent source: {L.get('extent_source')}; suspect-extent flags: {L.get('extent_flags')}",
+        f"- Endpoints that allow browser access (CORS): {L.get('cors_ok')}",
         f"- Detail estimate source: {L.get('detail_source')}",
         f"- Detail level, all layers: {L.get('detail_level')}",
         f"- Detail level, passing layers: {L.get('detail_level_passing')}",
@@ -400,6 +412,7 @@ def main():
     ap.add_argument("--max-services", type=int, default=0)
     ap.add_argument("--max-services-per-root", type=int, default=1500)
     ap.add_argument("--max-checks", type=int, default=4000)
+    ap.add_argument("--max-extent-checks", type=int, default=15000)
     ap.add_argument("--host-filter", default="")
     ap.add_argument("--expand-roots", action="store_true", default=True)
     args = ap.parse_args()

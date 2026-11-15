@@ -183,6 +183,8 @@ def build(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
             "landing_page": next((x for x in g["landing_page"] if x), ""),
             "role": next(rl for rl in ROLE_PREF if rl in roles),
             "coverage_level": best["coverage_level"],
+            "extent_source": best.get("extent_source", "declared"),
+            "extent_flags": list(best.get("extent_flags") if best.get("extent_flags") is not None else []),
             "detail_m": float(details.iloc[0]["detail_m"]) if len(details) else None,
             "detail_level": details.iloc[0]["detail_level"] if len(details) else "",
             "detail_source": details.iloc[0]["detail_source"] if len(details) else "",
