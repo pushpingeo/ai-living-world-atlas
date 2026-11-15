@@ -27,7 +27,7 @@ def load_targets(parquet: str, countries: list[str]) -> dict:
         WHERE list_has_any(list_transform(coverage, lambda x: x.location.country.id), [{cc}])
           AND coalesce(status, 'active') = 'active'
     """).fetchall()
-    t = {"arcgis_roots": {}, "wms": {}, "wfs": {}, "hub": {}, "ckan": {}, "catalogues": len(rows)}
+    t = {"arcgis_roots": {}, "wms": {}, "wfs": {}, "wmts": {}, "wcs": {}, "hub": {}, "ckan": {}, "catalogues": len(rows)}
     by_sw = defaultdict(int)
     for cid, name, link, owner, otype, sw, ccs, endpoints, status in rows:
         ctx = {
@@ -50,6 +50,14 @@ def load_targets(parquet: str, countries: list[str]) -> dict:
         for key in ("wfs200", "wfs110", "wfs100", "ogc:wfs"):
             if key in eps:
                 t["wfs"].setdefault(base_url(eps[key]), ctx)
+                used = True
+                break
+        if "wmts100" in eps:
+            t["wmts"].setdefault(base_url(eps["wmts100"]), ctx)
+            used = True
+        for key in ("wcs201", "wcs111", "wcs110", "wcs11", "wcs100"):
+            if key in eps:
+                t["wcs"].setdefault(base_url(eps[key]), ctx)
                 used = True
                 break
         if sw == "arcgishub" and ("dcatus11" in eps or link):

@@ -14,7 +14,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from . import crawl_arcgis, crawl_ogc
+from . import crawl_arcgis, crawl_ogc, endpoints
+from .datasets import build as build_datasets
 from .crawl_portals import harvest_ckan, harvest_hub, service_targets
 from .net import Client
 from .quality import codelike, declared_iso_themes, score
@@ -43,7 +44,7 @@ async def run(args):
     targets = load_targets(args.registry, args.countries)
     if args.host_filter:  # for local testing: keep only targets on matching hosts
         rx = re.compile(args.host_filter)
-        for k in ("arcgis_roots", "wms", "wfs", "hub", "ckan"):
+        for k in ("arcgis_roots", "wms", "wfs", "wmts", "wcs", "hub", "ckan"):
             targets[k] = {u: v for u, v in targets[k].items() if rx.search(urlsplit(u).netloc)}
     note(f"seeds: { {k: (len(v) if isinstance(v, dict) else v) for k, v in targets.items() if k != 'used_by_software'} }")
 
@@ -70,6 +71,8 @@ async def run(args):
         arc_services: dict[str, dict] = {}
         ogc: dict[tuple[str, str], dict] = {(u, "WMS"): ctx for u, ctx in targets["wms"].items()}
         ogc.update({(u, "WFS"): ctx for u, ctx in targets["wfs"].items()})
+        ogc.update({(u, "WMTS"): ctx for u, ctx in targets["wmts"].items()})
+        ogc.update({(u, "WCS"): ctx for u, ctx in targets["wcs"].items()})
         for rec in records:
             pkey = rec.portal.split(":", 1)[1] if rec.portal.startswith("hub:") else rec.portal
             pctx = portal_ctx.get(pkey, {})
@@ -90,7 +93,7 @@ async def run(args):
                 elif kind == "arcgis-root":
                     if not is_agol(u):
                         arc_roots.setdefault(u, ctx)
-                elif kind in ("wms", "wfs"):
+                elif kind in ("wms", "wfs", "wmts", "wcs"):
                     ogc.setdefault((u, kind.upper()), ctx)
         note(f"targets: {len(arc_roots)} ArcGIS roots, {len(arc_services)} ArcGIS services from portals, {len(ogc)} OGC endpoints")
 
@@ -147,7 +150,7 @@ async def run(args):
         joined = 0
         for L in layers:
             recs = by_url.get(norm_url(L.layer_url)) or by_url.get(norm_url(L.service_url)) or []
-            if L.service_type in ("wms", "wfs") and len(recs) > 1:
+            if L.service_type in ("wms", "wfs", "wmts", "wcs") and len(recs) > 1:
                 # many datasets share one OGC endpoint: only keep a record whose title matches the layer
                 recs = [r for r in recs if r.title and L.title and r.title.lower() == L.title.lower()]
             if recs:
@@ -174,7 +177,7 @@ async def run(args):
         async def chk(L):
             if time.monotonic() > deadline - reserve / 4:
                 return
-            fn = crawl_ogc.check_layer if L.service_type in ("wms", "wfs") else crawl_arcgis.check_layer
+            fn = crawl_ogc.check_layer if L.service_type in ("wms", "wfs", "wmts", "wcs") else crawl_arcgis.check_layer
             try:
                 checks[L.uid] = await fn(c, L)
             except Exception as e:
@@ -195,6 +198,7 @@ async def run(args):
         r["iso_themes_declared"], r["iso_themes_how"] = themes, how
         r.update(score(r))
         r.update(derive(r))
+        r["role"] = endpoints.role({**r, "_info": json.loads(r["endpoint_info"] or "{}")})
         rows.append(r)
     dedup = {}
     for r in rows:  # first row wins; same uid can appear via two discovery routes
@@ -204,23 +208,45 @@ async def run(args):
     write_outputs(out, rows, svc_status, root_status, portal_status, http_stats, log, args, time.monotonic() - t0)
 
 
-def write_outputs(out: Path, rows, svc_status, root_status, portal_status, http_stats, log, args, secs):
+def _to_geo(df, bbox_col):
     import geopandas as gpd
-    import pandas as pd
     from shapely.geometry import box
 
+    geom = [box(*b) if isinstance(b, (list, tuple)) and len(b) == 4 else None for b in df[bbox_col]]
+    return gpd.GeoDataFrame(df.drop(columns=[bbox_col]), geometry=geom, crs="EPSG:4326")
+
+
+def write_outputs(out: Path, rows, svc_status, root_status, portal_status, http_stats, log, args, secs):
+    import pandas as pd
+
     df = pd.DataFrame(rows)
+    ds = pd.DataFrame()
     if len(df):
-        geom = [box(*b) if isinstance(b, list) and len(b) == 4 else None for b in df["bbox"]]
-        gdf = gpd.GeoDataFrame(df.drop(columns=["bbox"]), geometry=geom, crs="EPSG:4326")
-        for col in ("keywords", "fields", "declared_themes", "iso_themes_declared", "q_flags"):
-            gdf[col] = gdf[col].apply(lambda v: list(v) if isinstance(v, (list, tuple)) else [])
-        gdf.to_parquet(out / "layers.parquet", write_covering_bbox=True, compression="zstd")
+        for col in ("keywords", "fields", "declared_themes", "iso_themes_declared", "q_flags", "capabilities"):
+            df[col] = df[col].apply(lambda v: list(v) if isinstance(v, (list, tuple)) else [])
+        df["_bbox"] = df["bbox"]
+        t = time.monotonic()
+        df, ds = build_datasets(df)
+        log.append(f"datasets built in {time.monotonic() - t:.0f}s: {len(ds)} from {len(df)} endpoints")
+        _to_geo(df.drop(columns=["_bbox"]), "bbox").to_parquet(out / "layers.parquet", write_covering_bbox=True, compression="zstd")
+        _to_geo(ds, "_bbox").to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     pd.DataFrame(svc_status).to_parquet(out / "services.parquet")
     (out / "portals.json").write_text(json.dumps(portal_status, indent=1, default=str))
     (out / "roots.json").write_text(json.dumps(root_status, indent=1, default=str))
     (out / "run.log").write_text("\n".join(log))
     stats = summarise(df, svc_status, root_status, portal_status, http_stats, secs, out)
+    if len(ds):
+        stats["datasets"] = {
+            "total": len(ds), "passing": int(ds["q_pass"].sum()),
+            "endpoints_per_dataset": ds["n_endpoints"].value_counts().sort_index().head(10).to_dict(),
+            "multi_protocol": int((ds["protocols"].apply(len) > 1).sum()),
+            "match_rules": pd.Series([r for rs in ds["match_rules"] for r in rs]).value_counts().to_dict(),
+            "role": ds["role"].value_counts().to_dict(),
+            "role_passing": ds.loc[ds["q_pass"], "role"].value_counts().to_dict(),
+            "capabilities": pd.Series([c for cs in ds["capabilities"] for c in cs]).value_counts().to_dict(),
+            "detail_known_passing": int(ds.loc[ds["q_pass"], "detail_m"].notna().sum()),
+        }
+        (out / "stats.json").write_text(json.dumps(stats, indent=1, default=str))
     (out / "stats.json").write_text(json.dumps(stats, indent=1, default=str))
     (out / "REPORT.md").write_text(report_md(stats, args))
 
@@ -305,6 +331,14 @@ def report_md(s, args):
         f"- Code-like layer titles (before using catalogue names): {pct(L.get('codelike_titles', 0), n)}; junk-flagged: {pct(L.get('junk_flagged', 0), n)}",
         f"- **Declares an ISO theme (directly or via INSPIRE/DGU crosswalk): {pct(L.get('declared_iso_theme', 0), n)}** {L.get('declared_theme_how')}",
         f"- Publisher type: {L.get('publisher_type')}",
+        "",
+        "## Datasets (endpoints grouped)",
+        f"- **Datasets: {s.get('datasets', {}).get('total')}** from {n} endpoints; passing: {s.get('datasets', {}).get('passing')}",
+        f"- Reachable by more than one protocol: {s.get('datasets', {}).get('multi_protocol')}",
+        f"- Endpoints per dataset: {s.get('datasets', {}).get('endpoints_per_dataset')}",
+        f"- Grouping rules used: {s.get('datasets', {}).get('match_rules')}",
+        f"- Role (all / passing): {s.get('datasets', {}).get('role')} / {s.get('datasets', {}).get('role_passing')}",
+        f"- Capabilities offered: {s.get('datasets', {}).get('capabilities')}",
         "",
         "## Coverage and detail",
         f"- Coverage level (from extent): {L.get('coverage_level')}",

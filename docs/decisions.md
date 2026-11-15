@@ -52,3 +52,29 @@ Early local test: about 14% of layers get an estimate from these signals. Next s
 - ISO/INSPIRE metadata records (spatial resolution is mandatory in INSPIRE metadata, so UK and EU data should do well).
 - Feature density from the counts the health checks already return.
 - An AI reading of the description, recorded as `detail_source: ai`.
+
+## 2026-11-15: Datasets, endpoints, imagery and tiles
+
+**Record model: DCAT-style.** A *dataset* is listed once, with a list of *endpoints* (DCAT's distributions). This is the most machine-readable common ground: Esri's item fields, CKAN and Hub feeds all map onto it, and imagery will also be exported as STAC. INSPIRE metadata is used where it exists, but only as one signal, because implementations are often poor.
+
+**Each endpoint states what it can do**, in verbs that mean the same across ArcGIS and OGC:
+- `query`: filter features.
+- `download`: bulk export.
+- `render`: draw a map image.
+- `tiles`: pre-cut tiles.
+- `feature-info`: click to identify on a WMS.
+- `pixels`: raster values.
+- `catalog`: a mosaic of many images.
+- `raster-functions`, `time`, `multidimensional`.
+
+Protocol specifics go in `endpoint_info`: max records, paging, output formats, image formats, bands, pixel type, tiling scheme, zoom range and tile URL template.
+
+**Grouping endpoints into datasets.** Strong rules:
+- `arcgis-pair`: MapServer/N + FeatureServer/N of the same service.
+- `arcgis-ogc`: an ArcGIS service's own WMS/WFS, matched on title. ArcGIS WMS numbers its layers differently from REST, so matching by id was wrong and produced a 54-layer blob.
+- `ogc-name`: the same layer name on one OGC server.
+- `catalogue`: one catalogue record, same layer title.
+
+Weak rule: `title-extent`, meaning same title and publisher with extents overlapping by 80% or more. Title-based rules ignore numeric or one-word titles and stop at 8 endpoints, because past that they snowball. The rule that joined each endpoint is recorded.
+
+**Imagery and tiles in scope.** ImageServer captures bands, pixel type, data type, mosaic, raster functions, download rights and multidimensional support. WMTS and WCS are now crawled. Each dataset gets a role (`data`, `imagery`, `elevation` or `basemap`) from the service shape plus words in the title. Basemaps keep what you need to use one: whether the tiles are Web Mercator standard, the zoom range, the format and a tile URL template. WMTS and WCS liveness checks aren't written yet; those layers show as "unchecked".

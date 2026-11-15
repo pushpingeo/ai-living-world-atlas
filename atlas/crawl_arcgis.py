@@ -5,6 +5,7 @@ import asyncio
 import re
 from datetime import datetime, timezone
 
+from . import endpoints
 from .net import Client
 from .record import Layer, clean_text, to_wgs84
 
@@ -118,7 +119,9 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
 
     layers: list[Layer] = []
     if stype in ("ImageServer", "VectorTileServer"):
+        caps, info = endpoints.arcgis(stype, sj)
         layers.append(Layer(
+            capabilities=caps, endpoint_info=endpoints.dumps(info),
             layer_url=surl, layer_name="0", title=svc_title, abstract=svc_abs, keywords=svc_kw,
             licence_text=svc_lic, bbox=_bbox(sj.get("fullExtent") or sj.get("extent") or sj.get("initialExtent")),
             geometry_type="raster" if stype == "ImageServer" else "vector-tiles",
@@ -141,7 +144,9 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
                 continue
             flds = [f"{f.get('name')}|{f.get('alias') or ''}|{(f.get('type') or '').replace('esriFieldType', '')}" for f in (L.get("fields") or [])][:200]
             gt = (L.get("geometryType") or "").replace("esriGeometry", "").lower() or ("raster" if L.get("type") == "Raster Layer" else "")
+            caps, info = endpoints.arcgis(stype, sj, L)
             layers.append(Layer(
+                capabilities=caps, endpoint_info=endpoints.dumps(info),
                 layer_url=f"{surl}/{L.get('id')}", layer_name=str(L.get("id")), title=_txt(L.get("name")),
                 abstract=_txt(L.get("description")), keywords=svc_kw,
                 licence_text=_txt(L.get("copyrightText")) or svc_lic,

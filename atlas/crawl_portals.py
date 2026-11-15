@@ -46,6 +46,10 @@ def _classify(url: str, fmt: str) -> tuple[str, str] | None:
         return ("arcgis", u.split("?")[0].rstrip("/"))
     q = {k.lower(): v.lower() for k, v in parse_qsl(urlsplit(u).query)}
     svc = q.get("service", "")
+    if svc == "wmts" or f in ("wmts", "ogc wmts") or re.search(r"/wmts/?$|/wmts/1\.0\.0/", urlsplit(low).path):
+        return ("wmts", base_url(u.split("/1.0.0/")[0]) if "/1.0.0/" in u else base_url(u))
+    if svc == "wcs" or f in ("wcs", "ogc wcs") or re.search(r"/wcs/?$", urlsplit(low).path):
+        return ("wcs", base_url(u))
     if svc == "wms" or f in ("wms", "ogc wms") or re.search(r"/wms(server)?/?$", urlsplit(low).path):
         return ("wms", base_url(u))
     if svc == "wfs" or f in ("wfs", "ogc wfs") or re.search(r"/wfs(server)?/?$", urlsplit(low).path):

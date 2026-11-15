@@ -71,6 +71,11 @@ class Layer:
     scale_coarsest: float | None = None    # largest scale denominator it is shown at
     cache_finest_scale: float | None = None  # finest tile-cache level, as a scale denominator
     pixel_size_m: float | None = None      # raster cell size
+    # what this endpoint can do, in plain verbs an agent can filter on:
+    # query, download, render, tiles, feature-info, pixels, catalog, raster-functions, time, multidimensional
+    capabilities: list[str] = field(default_factory=list)
+    endpoint_info: str = ""                # JSON: protocol specifics (max records, formats, bands, tiling scheme...)
+    role: str = "data"                     # data | imagery | elevation | basemap
     crawled_at: str = ""
     service_ms: int = 0
 

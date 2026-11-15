@@ -1,4 +1,4 @@
-"""Parse OGC WMS and WFS GetCapabilities into Layer records."""
+"""Parse OGC WMS, WFS, WMTS and WCS GetCapabilities into Layer records."""
 from __future__ import annotations
 
 import re
@@ -7,6 +7,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from defusedxml import ElementTree as ET
 
+from . import endpoints
 from .net import Client
 from .record import Layer, clean_text, to_wgs84
 
@@ -21,7 +22,7 @@ def base_url(u: str) -> str:
 
 def caps_url(base: str, service: str) -> str:
     sep = "&" if "?" in base else "?"
-    version = "1.3.0" if service == "WMS" else "2.0.0"
+    version = {"WMS": "1.3.0", "WFS": "2.0.0", "WMTS": "1.0.0", "WCS": "2.0.1"}[service]
     return f"{base}{sep}service={service}&request=GetCapabilities&version={version}"
 
 
@@ -79,12 +80,40 @@ def _publisher(root) -> str:
     return ""
 
 
+def _all(el, name):
+    """All descendants with this local name."""
+    return [e for e in el.iter() if _strip(e.tag) == name]
+
+
+def _op_formats(root, op: str, param: str = "outputFormat") -> list[str]:
+    """Formats from WMS Request/<op>/Format or OWS OperationsMetadata parameters."""
+    out = []
+    for e in _all(root, op):
+        out += [f.text.strip() for f in _children(e, "Format") if f.text]
+    for o in _all(root, "Operation"):
+        if o.get("name") == op:
+            for prm in _all(o, "Parameter"):
+                if (prm.get("name") or "").lower() == param.lower():
+                    out += [v.text.strip() for v in _all(prm, "Value") if v.text]
+    return list(dict.fromkeys(out))[:20]
+
+
+def _constraint(root, name: str) -> str:
+    for c in _all(root, "Constraint"):
+        if c.get("name") == name:
+            v = _all(c, "DefaultValue")
+            return (v[0].text or "").strip() if v else ""
+    return ""
+
+
 def parse_wms(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], dict]:
     root = ET.fromstring(xml)
     if _strip(root.tag) in ("ServiceExceptionReport", "ExceptionReport"):
         raise ValueError("exception report")
     s_title, s_abs, s_lic = _service_block(root)
     cap = _child(root, "Capability")
+    getmap_formats = _op_formats(root, "GetMap")
+    has_gfi = bool(_all(root, "GetFeatureInfo"))
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out: list[Layer] = []
 
@@ -130,6 +159,10 @@ def parse_wms(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
                 bbox=bbox, native_crs=",".join(crs[:5]), metadata_url=md_url,
                 has_time=any((d.get("name") or "").lower() == "time" for d in _children(el, "Dimension")),
                 geometry_type="map-image", crawled_at=now, service_ms=ms,
+                capabilities=["render"] + (["feature-info"] if has_gfi and el.get("queryable") in ("1", "true") else [])
+                + (["time"] if any((d.get("name") or "").lower() == "time" for d in _children(el, "Dimension")) else []),
+                endpoint_info=endpoints.dumps({"protocol": "wms", "version": root.get("version"), "image_formats": getmap_formats[:8],
+                                               "crs": crs[:8], "opaque": el.get("opaque") in ("1", "true")}),
                 scale_finest=fin, scale_coarsest=coa,
                 **ctx,
             ))
@@ -153,6 +186,8 @@ def parse_wfs(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
     s_title, s_abs, s_lic = _service_block(root)
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out: list[Layer] = []
+    wfs_formats = _op_formats(root, "GetFeature")
+    paging = _constraint(root, "ImplementsResultPaging").upper() == "TRUE"
     ftl = _child(root, "FeatureTypeList")
     for ft in _children(ftl, "FeatureType") if ftl is not None else []:
         name = _text(ft, "Name")
@@ -178,12 +213,107 @@ def parse_wfs(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
             title=_text(ft, "Title"), abstract=_text(ft, "Abstract"), keywords=_keywords(ft),
             service_title=s_title, service_abstract=s_abs, licence_text=s_lic, bbox=bbox,
             native_crs=crs, metadata_url=md_url, geometry_type="features", crawled_at=now,
+            capabilities=["query", "download"],
+            endpoint_info=endpoints.dumps({"protocol": "wfs", "version": root.get("version"), "paging": paging,
+                                           "output_formats": ([f.text.strip() for f in _all(ft, "Format") if f.text] or wfs_formats)[:12]}),
             service_ms=ms, **ctx,
         ))
     pub = _publisher(root)
     if pub:
         for L in out:
             L.publisher = L.publisher or pub
+    return out, {"service_title": s_title}
+
+
+def _ows_bbox(el):
+    w = _child(el, "WGS84BoundingBox")
+    if w is None:
+        return None
+    lc, uc = _text(w, "LowerCorner").split(), _text(w, "UpperCorner").split()
+    if len(lc) == 2 and len(uc) == 2:
+        return to_wgs84(lc[0], lc[1], uc[0], uc[1])
+    return None
+
+
+def parse_wmts(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], dict]:
+    root = ET.fromstring(xml)
+    if _strip(root.tag) in ("ServiceExceptionReport", "ExceptionReport"):
+        raise ValueError("exception report")
+    s_title, s_abs, s_lic = _service_block(root)
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    contents = _child(root, "Contents")
+    if contents is None:
+        return [], {}
+    sets = {}
+    for tms in _children(contents, "TileMatrixSet"):
+        ident = _text(tms, "Identifier")
+        scales = []
+        for tm in _children(tms, "TileMatrix"):
+            try:
+                scales.append(float(_text(tm, "ScaleDenominator")))
+            except ValueError:
+                pass
+        crs = _text(tms, "SupportedCRS")
+        wk = _text(tms, "WellKnownScaleSet")
+        sets[ident] = {"crs": crs, "levels": len(scales), "finest": min(scales) if scales else None,
+                       "web_mercator": bool(re.search(r"3857|900913|GoogleMapsCompatible", crs + wk + ident, re.I))}
+    out = []
+    for el in _children(contents, "Layer"):
+        ident = _text(el, "Identifier")
+        if not ident:
+            continue
+        links = [_text(l, "TileMatrixSet") for l in _children(el, "TileMatrixSetLink")]
+        used = [sets[k] for k in links if k in sets]
+        finest = min((u["finest"] for u in used if u["finest"]), default=None)
+        templates = [r.get("template") for r in _children(el, "ResourceURL") if r.get("resourceType") == "tile"]
+        out.append(Layer(
+            layer_url=f"{base}#{ident}", service_url=base, service_type="wmts", layer_name=ident,
+            title=_text(el, "Title"), abstract=_text(el, "Abstract"), keywords=_keywords(el),
+            service_title=s_title, service_abstract=s_abs, licence_text=s_lic, bbox=_ows_bbox(el),
+            geometry_type="tiles", crawled_at=now, service_ms=ms, cache_finest_scale=finest,
+            capabilities=["tiles"],
+            endpoint_info=endpoints.dumps({
+                "protocol": "wmts", "tile_matrix_sets": links[:6], "formats": [f.text for f in _children(el, "Format") if f.text][:6],
+                "web_mercator_standard": any(u["web_mercator"] for u in used), "zoom_levels": max((u["levels"] for u in used), default=None),
+                "tile_template": templates[0] if templates else None,
+            }),
+            **ctx,
+        ))
+    pub = _publisher(root)
+    for L in out:
+        L.publisher = L.publisher or pub
+    return out, {"service_title": s_title}
+
+
+def parse_wcs(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], dict]:
+    root = ET.fromstring(xml)
+    if _strip(root.tag) in ("ServiceExceptionReport", "ExceptionReport"):
+        raise ValueError("exception report")
+    s_title, s_abs, s_lic = _service_block(root)
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    formats = [f.text.strip() for f in _all(root, "formatSupported") if f.text][:10]
+    out = []
+    for el in _all(root, "CoverageSummary") + _all(root, "CoverageOfferingBrief"):
+        ident = _text(el, "CoverageId") or _text(el, "Identifier") or _text(el, "name")
+        if not ident:
+            continue
+        bbox = _ows_bbox(el)
+        env = _child(el, "lonLatEnvelope")
+        if bbox is None and env is not None:
+            pos = [p.text.split() for p in _children(env, "pos") if p.text]
+            if len(pos) == 2:
+                bbox = to_wgs84(pos[0][0], pos[0][1], pos[1][0], pos[1][1])
+        out.append(Layer(
+            layer_url=f"{base}#{ident}", service_url=base, service_type="wcs", layer_name=ident,
+            title=_text(el, "Title") or _text(el, "label") or ident, abstract=_text(el, "Abstract") or _text(el, "description"),
+            keywords=_keywords(el), service_title=s_title, service_abstract=s_abs, licence_text=s_lic, bbox=bbox,
+            geometry_type="raster", crawled_at=now, service_ms=ms, capabilities=["download", "pixels"],
+            endpoint_info=endpoints.dumps({"protocol": "wcs", "version": root.get("version"), "formats": formats}),
+            **ctx,
+        ))
+    pub = _publisher(root)
+    for L in out:
+        L.publisher = L.publisher or pub
     return out, {"service_title": s_title}
 
 
@@ -195,7 +325,7 @@ async def crawl_ogc(c: Client, base: str, service: str, ctx: dict, max_layers: i
         status["error"] = r.error or f"HTTP {r.status}"
         return [], status
     try:
-        fn = parse_wms if service == "WMS" else parse_wfs
+        fn = {"WMS": parse_wms, "WFS": parse_wfs, "WMTS": parse_wmts, "WCS": parse_wcs}[service]
         layers, _ = fn(r.body, base, ctx, r.ms)
     except Exception as e:
         status["error"] = f"parse: {type(e).__name__}: {e}"[:200]
@@ -206,6 +336,8 @@ async def crawl_ogc(c: Client, base: str, service: str, ctx: dict, max_layers: i
 
 
 async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
+    if layer.service_type in ("wmts", "wcs"):
+        return "unchecked", "check not implemented for this protocol yet"
     if not layer.bbox:
         return "unchecked", "no bbox"
     x0, y0, x1, y1 = layer.bbox
