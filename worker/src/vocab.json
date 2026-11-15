@@ -1,0 +1,330 @@
+{
+ "themes": {
+  "farming": "Farming",
+  "biota": "Biota",
+  "boundaries": "Boundaries",
+  "climatologyMeteorologyAtmosphere": "Climate, meteorology, atmosphere",
+  "economy": "Economy",
+  "elevation": "Elevation",
+  "environment": "Environment",
+  "geoscientificInformation": "Geoscience",
+  "health": "Health",
+  "imageryBaseMapsEarthCover": "Imagery, base maps, land cover",
+  "intelligenceMilitary": "Intelligence, military",
+  "inlandWaters": "Inland waters",
+  "location": "Location",
+  "oceans": "Oceans",
+  "planningCadastre": "Planning, cadastre",
+  "society": "Society",
+  "structure": "Structure",
+  "transportation": "Transportation",
+  "utilitiesCommunication": "Utilities, communication"
+ },
+ "concepts": {
+  "protected-area": {
+   "theme": "environment",
+   "definition": "Areas designated for nature or landscape protection (SSSI, SAC, SPA, national park, nature reserve)"
+  },
+  "habitat": {
+   "theme": "biota",
+   "definition": "Mapped habitats, vegetation communities, biotopes, priority habitat inventories"
+  },
+  "species-occurrence": {
+   "theme": "biota",
+   "definition": "Records or ranges of species, species richness, biodiversity indicators"
+  },
+  "woodland": {
+   "theme": "biota",
+   "definition": "Woodland, forest and tree cover inventories, ancient woodland"
+  },
+  "tree": {
+   "theme": "environment",
+   "definition": "Individual trees, street trees, tree preservation orders"
+  },
+  "wetland": {
+   "theme": "inlandWaters",
+   "definition": "Wetlands, peatland, bogs, Ramsar sites"
+  },
+  "soil": {
+   "theme": "geoscientificInformation",
+   "definition": "Soil types, soil properties, soil carbon"
+  },
+  "geology": {
+   "theme": "geoscientificInformation",
+   "definition": "Bedrock and superficial geology, boreholes, faults, mineral resources"
+  },
+  "land-cover": {
+   "theme": "imageryBaseMapsEarthCover",
+   "definition": "Land cover or land use classifications from imagery"
+  },
+  "land-use-plan": {
+   "theme": "planningCadastre",
+   "definition": "Development plans, zoning, allocations, policy areas, green belt"
+  },
+  "planning-application": {
+   "theme": "planningCadastre",
+   "definition": "Planning applications, permissions, building control"
+  },
+  "land-ownership": {
+   "theme": "planningCadastre",
+   "definition": "Land and property ownership, cadastral parcels, council-owned land, assets"
+  },
+  "brownfield": {
+   "theme": "planningCadastre",
+   "definition": "Brownfield and contaminated land, derelict land registers"
+  },
+  "heritage-site": {
+   "theme": "society",
+   "definition": "Listed buildings, scheduled monuments, conservation areas, historic environment records, World Heritage"
+  },
+  "admin-boundary": {
+   "theme": "boundaries",
+   "definition": "Administrative and electoral boundaries, wards, parishes, local authority areas"
+  },
+  "statistical-area": {
+   "theme": "boundaries",
+   "definition": "Census and statistical geographies (output areas, LSOAs, data zones) and the statistics on them"
+  },
+  "maritime-boundary": {
+   "theme": "boundaries",
+   "definition": "Territorial sea, EEZ, marine planning regions, offshore licensing boundaries"
+  },
+  "settlement": {
+   "theme": "society",
+   "definition": "Towns, villages, built-up areas, settlement boundaries"
+  },
+  "population": {
+   "theme": "society",
+   "definition": "Population counts, density, demographics"
+  },
+  "deprivation": {
+   "theme": "society",
+   "definition": "Deprivation, poverty, inequality and wellbeing indices"
+  },
+  "address": {
+   "theme": "location",
+   "definition": "Addresses, postcodes, property gazetteers"
+  },
+  "building": {
+   "theme": "structure",
+   "definition": "Building footprints, building attributes, energy performance"
+  },
+  "place-name": {
+   "theme": "location",
+   "definition": "Gazetteers and named places"
+  },
+  "road": {
+   "theme": "transportation",
+   "definition": "Road network, classifications, speed limits, road works, gritting routes"
+  },
+  "rail": {
+   "theme": "transportation",
+   "definition": "Railways, stations, tram and metro"
+  },
+  "public-transport": {
+   "theme": "transportation",
+   "definition": "Bus routes and stops, public transport access"
+  },
+  "active-travel": {
+   "theme": "transportation",
+   "definition": "Cycle routes, footpaths, public rights of way, walking routes"
+  },
+  "parking": {
+   "theme": "transportation",
+   "definition": "Car parks, parking zones, permits, EV charging"
+  },
+  "traffic-collision": {
+   "theme": "transportation",
+   "definition": "Road traffic collisions and casualties"
+  },
+  "port-airport": {
+   "theme": "transportation",
+   "definition": "Ports, harbours, airports and their limits"
+  },
+  "shipping": {
+   "theme": "oceans",
+   "definition": "Shipping lanes, vessel density, navigation features"
+  },
+  "river": {
+   "theme": "inlandWaters",
+   "definition": "Rivers, streams, canals, lakes, catchments, water body status"
+  },
+  "flood-risk": {
+   "theme": "inlandWaters",
+   "definition": "Flood zones, flood risk, flood defences, historic flooding"
+  },
+  "water-quality": {
+   "theme": "environment",
+   "definition": "Water quality, bathing waters, pollution incidents, discharges"
+  },
+  "coastline": {
+   "theme": "oceans",
+   "definition": "Coastline, coastal change, erosion, shoreline management"
+  },
+  "bathymetry": {
+   "theme": "elevation",
+   "definition": "Seabed depth and seabed morphology"
+  },
+  "seabed-habitat": {
+   "theme": "oceans",
+   "definition": "Seabed sediments and marine habitats"
+  },
+  "marine-activity": {
+   "theme": "oceans",
+   "definition": "Fishing areas, aquaculture, marine licences, marine protected areas use"
+  },
+  "elevation": {
+   "theme": "elevation",
+   "definition": "Terrain and surface models, LiDAR, contours, hillshade"
+  },
+  "imagery": {
+   "theme": "imageryBaseMapsEarthCover",
+   "definition": "Aerial photography, satellite imagery, orthophotos"
+  },
+  "basemap": {
+   "theme": "imageryBaseMapsEarthCover",
+   "definition": "General-purpose background or reference maps"
+  },
+  "climate": {
+   "theme": "climatologyMeteorologyAtmosphere",
+   "definition": "Climate observations, projections, temperature, rainfall"
+  },
+  "air-quality": {
+   "theme": "environment",
+   "definition": "Air quality measurements, management areas, emissions"
+  },
+  "noise": {
+   "theme": "environment",
+   "definition": "Noise mapping and noise action areas"
+  },
+  "natural-hazard": {
+   "theme": "geoscientificInformation",
+   "definition": "Landslides, subsidence, earthquakes, radon, other natural hazards"
+  },
+  "agriculture": {
+   "theme": "farming",
+   "definition": "Crops, agricultural land classification, farm schemes, livestock"
+  },
+  "fishing": {
+   "theme": "farming",
+   "definition": "Commercial fishing activity and restrictions"
+  },
+  "power-plant": {
+   "theme": "utilitiesCommunication",
+   "definition": "Electricity generation sites, renewable installations"
+  },
+  "power-line": {
+   "theme": "utilitiesCommunication",
+   "definition": "Electricity transmission and distribution lines, substations"
+  },
+  "pipeline": {
+   "theme": "utilitiesCommunication",
+   "definition": "Oil, gas, water or CO2 pipelines"
+  },
+  "oil-gas": {
+   "theme": "economy",
+   "definition": "Oil and gas licences, fields, wells, platforms"
+  },
+  "offshore-wind-site": {
+   "theme": "economy",
+   "definition": "Offshore wind leases, sites and cable routes"
+  },
+  "mineral-extraction": {
+   "theme": "economy",
+   "definition": "Quarries, mines, mineral safeguarding areas"
+  },
+  "renewable-potential": {
+   "theme": "economy",
+   "definition": "Wind, solar, heat or other renewable resource and opportunity areas"
+  },
+  "telecoms": {
+   "theme": "utilitiesCommunication",
+   "definition": "Broadband, mobile coverage, telecoms infrastructure"
+  },
+  "waste": {
+   "theme": "utilitiesCommunication",
+   "definition": "Waste sites, recycling points, bin collection"
+  },
+  "water-utility": {
+   "theme": "utilitiesCommunication",
+   "definition": "Water supply and sewerage networks"
+  },
+  "school": {
+   "theme": "society",
+   "definition": "Schools, catchments, education facilities"
+  },
+  "health-facility": {
+   "theme": "health",
+   "definition": "Hospitals, GP surgeries, pharmacies, care homes"
+  },
+  "health-indicator": {
+   "theme": "health",
+   "definition": "Health outcomes and indicators by area"
+  },
+  "community-facility": {
+   "theme": "society",
+   "definition": "Libraries, community centres, public toilets, council offices"
+  },
+  "greenspace": {
+   "theme": "environment",
+   "definition": "Parks, open space, allotments, playgrounds, sports pitches"
+  },
+  "tourism-recreation": {
+   "theme": "society",
+   "definition": "Visitor attractions, recreation sites, trails"
+  },
+  "crime-safety": {
+   "theme": "society",
+   "definition": "Crime, policing areas, fire and rescue, emergency planning"
+  },
+  "business-economy": {
+   "theme": "economy",
+   "definition": "Businesses, employment, economic activity, retail centres"
+  },
+  "housing": {
+   "theme": "society",
+   "definition": "Housing stock, tenure, housing need, HMOs"
+  },
+  "licensing": {
+   "theme": "society",
+   "definition": "Premises licences, taxis, street trading and other local licences"
+  },
+  "conflict-event": {
+   "theme": "society",
+   "definition": "Armed conflict and political violence events"
+  },
+  "indigenous-land": {
+   "theme": "society",
+   "definition": "Indigenous and community lands"
+  },
+  "military": {
+   "theme": "intelligenceMilitary",
+   "definition": "Military training areas, danger areas, defence estate"
+  }
+ },
+ "detail_levels": {
+  "1:5k": 2.5,
+  "1:25k": 12.5,
+  "1:100k": 50,
+  "1:500k": 250,
+  "1:2M": 1000
+ },
+ "roles": [
+  "data",
+  "imagery",
+  "elevation",
+  "basemap"
+ ],
+ "capabilities": [
+  "query",
+  "download",
+  "render",
+  "tiles",
+  "feature-info",
+  "pixels",
+  "catalog",
+  "raster-functions",
+  "time",
+  "multidimensional"
+ ]
+}

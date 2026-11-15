@@ -1,0 +1,72 @@
+name: deploy-mcp
+# Deploys the private MCP server (Cloudflare Worker + D1) and reloads its database.
+# Needs repo secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, ATLAS_MCP_KEY. Skips cleanly without them.
+on:
+  push:
+    branches: [main]
+    paths: ['worker/**', 'atlas/api_data.py', '.github/workflows/deploy-mcp.yml']
+  workflow_run:
+    workflows: [pages]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-mcp
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      ATLAS_MCP_KEY: ${{ secrets.ATLAS_MCP_KEY }}
+    steps:
+      - name: Check secrets
+        id: have
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ] && [ -n "$ATLAS_MCP_KEY" ]; then echo "ok=1" >> $GITHUB_OUTPUT;
+          else echo "ok=0" >> $GITHUB_OUTPUT; echo "::notice::Cloudflare secrets not set; skipping MCP deploy"; fi
+      - uses: actions/checkout@v4
+        if: steps.have.outputs.ok == '1'
+      - uses: actions/setup-python@v5
+        if: steps.have.outputs.ok == '1'
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/setup-node@v4
+        if: steps.have.outputs.ok == '1'
+        with:
+          node-version: '22'
+      - name: Build database load
+        if: steps.have.outputs.ok == '1'
+        run: |
+          pip install -q -r requirements.txt
+          git fetch -q origin results/spike-gb && git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
+          TAGS=""
+          if git fetch -q origin results/tags-gb 2>/dev/null && git show FETCH_HEAD:tags.parquet > /tmp/tags.parquet 2>/dev/null; then TAGS=/tmp/tags.parquet; fi
+          python -m atlas.api_data --datasets /tmp/datasets.parquet ${TAGS:+--tags $TAGS} --out /tmp/api.sql --built "$(date -u +%F)"
+      - name: Deploy Worker and load D1
+        if: steps.have.outputs.ok == '1'
+        working-directory: worker
+        run: |
+          npm i -g wrangler@4 >/dev/null
+          ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='atlas'),''))")
+          if [ -z "$ID" ]; then wrangler d1 create atlas >/dev/null; ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next(d['uuid'] for d in json.load(sys.stdin) if d['name']=='atlas'))"); fi
+          sed -i "s/REPLACED_BY_DEPLOY/$ID/" wrangler.toml
+          wrangler d1 execute atlas --remote --file /tmp/api.sql -y
+          wrangler deploy
+          printf '%s' "$ATLAS_MCP_KEY" | wrangler secret put ATLAS_KEY
+      - name: Smoke test
+        if: steps.have.outputs.ok == '1'
+        working-directory: worker
+        run: |
+          sleep 5
+          SUB=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | python3 -c "import json,sys; print(json.load(sys.stdin)['result']['subdomain'])")
+          EP="https://atlas-mcp.$SUB.workers.dev/mcp"
+          echo "MCP endpoint: $EP"
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$EP" -d '{}')
+          [ "$code" = "401" ] || { echo "expected 401 without key, got $code"; exit 1; }
+          curl -sf "$EP" -H "Authorization: Bearer $ATLAS_MCP_KEY" -H 'content-type: application/json' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"find_datasets","arguments":{"lon":-3.19,"lat":55.95,"limit":3}}}' \
+            | python3 -c "import json,sys; r=json.load(sys.stdin)['result']['structuredContent']; print('matches', r['matches']); [print(' -', x['title']) for x in r['results']]"

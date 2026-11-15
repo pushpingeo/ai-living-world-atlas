@@ -1,0 +1,12 @@
+name = "atlas-mcp"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Detail shards and the viewer live on GitHub Pages
+DATA_BASE = "https://pushpingeo.github.io/ai-living-world-atlas/data/"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "atlas"
+database_id = "REPLACED_BY_DEPLOY"
