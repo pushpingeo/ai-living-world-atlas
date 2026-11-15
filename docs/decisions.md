@@ -78,3 +78,9 @@ Protocol specifics go in `endpoint_info`: max records, paging, output formats, i
 Weak rule: `title-extent`, meaning same title and publisher with extents overlapping by 80% or more. Title-based rules ignore numeric or one-word titles and stop at 8 endpoints, because past that they snowball. The rule that joined each endpoint is recorded.
 
 **Imagery and tiles in scope.** ImageServer captures bands, pixel type, data type, mosaic, raster functions, download rights and multidimensional support. WMTS and WCS are now crawled. Each dataset gets a role (`data`, `imagery`, `elevation` or `basemap`) from the service shape plus words in the title. Basemaps keep what you need to use one: whether the tiles are Web Mercator standard, the zoom range, the format and a tile URL template. WMTS and WCS liveness checks aren't written yet; those layers show as "unchecked".
+
+## 2026-11-15: Publisher attribution and demo data (after UK run 4)
+
+**Hubs list other people's services.** A Rivers Trust Hub linking EEA image services made the Rivers Trust look like the publisher. Now, when a Hub links a service on a non-ArcGIS-Online host, the Hub's owner goes in `listed_by`, not `publisher`. The publisher then comes from the service itself, or failing that the host name. Hubs linking another organisation's ArcGIS Online services are still attributed to the Hub owner; that needs an organisation-ID check later.
+
+**GeoServer sample data is flagged** (`demo-data`): the `topp:`, `sf:`, `tiger:` and `nurc:` namespaces, plus layers such as Spearfish and the North America sample imagery. Several council and university GeoServers still publish the install defaults.

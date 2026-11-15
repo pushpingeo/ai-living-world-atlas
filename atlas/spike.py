@@ -84,17 +84,21 @@ async def run(args):
                 "discovered_via": rec.portal if rec.portal.startswith("hub:") else f"ckan:{rec.portal}",
             }
             for kind, u in service_targets(rec):
+                ctx_u = ctx
+                if rec.portal.startswith("hub:") and not is_agol(u):
+                    # a Hub listing a service on someone else's server: the Hub's owner isn't the publisher
+                    ctx_u = {**ctx, "publisher": "", "publisher_type": "unknown", "listed_by": ctx["publisher"]}
                 if kind == "arcgis-service":
-                    arc_services.setdefault(u, ctx)
+                    arc_services.setdefault(u, ctx_u)
                     if not is_agol(u) and args.expand_roots:
                         root = crawl_arcgis.services_root(u)
                         if root:
-                            arc_roots.setdefault(root, ctx)
+                            arc_roots.setdefault(root, ctx_u)
                 elif kind == "arcgis-root":
                     if not is_agol(u):
-                        arc_roots.setdefault(u, ctx)
+                        arc_roots.setdefault(u, ctx_u)
                 elif kind in ("wms", "wfs", "wmts", "wcs"):
-                    ogc.setdefault((u, kind.upper()), ctx)
+                    ogc.setdefault((u, kind.upper()), ctx_u)
         note(f"targets: {len(arc_roots)} ArcGIS roots, {len(arc_services)} ArcGIS services from portals, {len(ogc)} OGC endpoints")
 
         # ---- 3. list services under ArcGIS roots ----------------------------
@@ -158,7 +162,8 @@ async def run(args):
                 L.portal_title, L.portal_abstract, L.portal_licence = r.title, r.abstract, r.licence
                 L.landing_page = r.landing_page
                 L.declared_themes = r.themes
-                L.publisher = L.publisher or r.publisher
+                if not L.listed_by:
+                    L.publisher = L.publisher or r.publisher
                 joined += 1
         note(f"layers joined to a catalogue record: {joined}/{len(layers)}")
 
@@ -194,6 +199,8 @@ async def run(args):
         st, detail = checks.get(L.uid, ("unchecked", ""))
         r["check_status"], r["check_detail"] = st, detail
         r["service_layer_count"] = svc_n[L.service_url]
+        if not r["publisher"]:
+            r["publisher"] = urlsplit(L.service_url).netloc  # better an honest host name than a borrowed owner
         themes, how = declared_iso_themes(r["declared_themes"], r["keywords"])
         r["iso_themes_declared"], r["iso_themes_how"] = themes, how
         r.update(score(r))

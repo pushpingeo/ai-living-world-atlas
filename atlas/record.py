@@ -55,6 +55,7 @@ class Layer:
     country: str = ""
     seed_catalog: str = ""         # Dateno registry id or portal we found it through
     discovered_via: str = ""       # registry | ckan:<portal> | hub:<site>
+    listed_by: str = ""            # who listed it, when that isn't the publisher (a Hub linking someone else's service)
     geometry_type: str = ""
     fields: list[str] = field(default_factory=list)   # "name|alias|type"
     native_crs: str = ""

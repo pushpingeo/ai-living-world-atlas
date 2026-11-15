@@ -30,6 +30,9 @@ JUNK_TITLE = [
     (re.compile(r"[0-9a-f]{20,}", re.I), "hex-id"),
     (re.compile(r"^(layer|sheet|export_output|default)[ _]?\d*$", re.I), "default-name"),
     (re.compile(r"^\d+$"), "numeric-name"),
+    # sample data that ships with GeoServer and MapServer installs
+    (re.compile(r"^(spearfish\b|tasmania\b|north america sample imagery|manhattan \(ny\)|usa population|world rectangle|"
+                r"a sample arcgrid|pk50095|states_provinces_shp|tiger_roads|poly_landmarks|giant_polygon)", re.I), "demo-data"),
 ]
 
 
@@ -121,6 +124,8 @@ def score(row: dict) -> dict:
     licence = 10 if OPEN_LICENCES.search(lic) else 5 if lic.strip() else 0
 
     flags = [name for rx, name in JUNK_TITLE if rx.search(title)]
+    if re.match(r"^(topp|sf|tiger|nurc|cite|it\.geosolutions):", str(row.get("layer_name") or ""), re.I) and "demo-data" not in flags:
+        flags.append("demo-data")
     total = authority + metadata + liveness + licence
     passes = total >= 60 and not flags and chk != "fail" and m_abs >= 8 and not codelike(title)
     return {
