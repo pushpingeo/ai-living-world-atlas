@@ -1,0 +1,45 @@
+name: tag
+on:
+  push:
+    branches: [main]
+    paths: ['runs/tag-*.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tag
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Get datasets
+        run: |
+          git fetch -q origin results/spike-gb
+          git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
+          git show FETCH_HEAD:layers.parquet > /tmp/layers.parquet
+          git show FETCH_HEAD:RUN.txt | tee /tmp/source-run.txt
+      - name: Tag with Haiku (Batch API)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -a; . runs/tag-gb.env; set +a
+          set -o pipefail
+          python -m atlas.tag_batch --datasets /tmp/datasets.parquet --layers /tmp/layers.parquet --out out \
+            ${ONLY_PASSING:+--only-passing} ${BATCH_ID:+--batch-id $BATCH_ID} 2>&1 | tee tag.log
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p out && cp tag.log /tmp/source-run.txt out/ 2>/dev/null || true
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          cp -r out /tmp/results
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp -r /tmp/results/. . && git add -A && git commit -qm "Tags (run ${GITHUB_RUN_ID})"
+          git push -qf origin HEAD:refs/heads/results/tags-gb

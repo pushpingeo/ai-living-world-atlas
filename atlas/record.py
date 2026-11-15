@@ -77,6 +77,7 @@ class Layer:
     capabilities: list[str] = field(default_factory=list)
     endpoint_info: str = ""                # JSON: protocol specifics (max records, formats, bands, tiling scheme...)
     role: str = "data"                     # data | imagery | elevation | basemap
+    cors: bool | None = None               # can a web page on another site use it directly
     crawled_at: str = ""
     service_ms: int = 0
 

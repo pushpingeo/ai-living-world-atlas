@@ -9,6 +9,7 @@ from urllib.parse import urlsplit
 
 import aiohttp
 
+VIEWER_ORIGIN = "https://pushpingeo.github.io"  # sent so servers reveal whether a browser app may use them
 USER_AGENT = (
     "AI-Living-World-Atlas/0.1 (+https://github.com/pushpingeo/ai-living-world-atlas; "
     "open index of public map services)"
@@ -23,6 +24,7 @@ class Resp:
     body: bytes = b""
     content_type: str = ""
     error: str = ""
+    cors: bool | None = None  # did the server allow a browser page on another site to read this?
 
     @property
     def ok(self) -> bool:
@@ -48,7 +50,7 @@ class Client:
 
     async def __aenter__(self):
         self.session = aiohttp.ClientSession(
-            headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate"},
+            headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate", "Origin": VIEWER_ORIGIN},
             connector=aiohttp.TCPConnector(limit=0, ttl_dns_cache=600),
         )
         return self
@@ -100,7 +102,9 @@ class Client:
                                 break
                         body = b"".join(chunks)
                         ms = int((time.monotonic() - t0) * 1000)
-                        last = Resp(str(r.url), r.status, ms, body, r.headers.get("Content-Type", ""))
+                        acao = r.headers.get("Access-Control-Allow-Origin", "")
+                        last = Resp(str(r.url), r.status, ms, body, r.headers.get("Content-Type", ""),
+                                    cors=acao.strip() in ("*", VIEWER_ORIGIN))
                 except Exception as e:  # network error, timeout, TLS
                     ms = int((time.monotonic() - t0) * 1000)
                     last = Resp(url, 0, ms, error=f"{type(e).__name__}: {e}"[:200])

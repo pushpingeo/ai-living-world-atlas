@@ -112,6 +112,7 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
             import math
             px = px * 111_320 * math.cos(math.radians((ext[1] + ext[3]) / 2))
     base = dict(
+        cors=r.cors,
         cache_finest_scale=cache_finest,
         service_url=surl, service_type=status["service_type"], service_title=svc_title,
         service_abstract=svc_abs, crawled_at=now, service_ms=r.ms, **ctx,

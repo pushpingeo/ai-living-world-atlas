@@ -170,7 +170,7 @@ def build(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         eps = [{
             "uid": e.uid, "protocol": e.service_type, "url": e.layer_url, "service_url": e.service_url,
             "layer_name": str(e.layer_name), "capabilities": list(e.capabilities), "check": e.check_status,
-            "info": e.endpoint_info or "",
+            "info": e.endpoint_info or "", "cors": None if pd.isna(getattr(e, "cors", None)) else bool(e.cors),
         } for e in g.sort_values("_p").itertuples()]
         details = g.dropna(subset=["detail_m"]).sort_values("detail_m")
         out.append({

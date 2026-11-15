@@ -332,6 +332,8 @@ async def crawl_ogc(c: Client, base: str, service: str, ctx: dict, max_layers: i
         return [], status
     status["ok"] = True
     status["n_layers"] = len(layers)
+    for L in layers:
+        L.cors = r.cors
     return layers[:max_layers], status
 
 
