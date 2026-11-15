@@ -1,0 +1,24 @@
+name: ping
+on:
+  push:
+    paths: ['.github/workflows/ping.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe network and write result to data branch
+        run: |
+          mkdir -p /tmp/out
+          for u in https://data.gov.uk/api/action/package_search?rows=0 https://geo.powys.gov.uk/geoserver/ows?service=WMS\&request=GetCapabilities https://services.spatialni.gov.uk/opendata/rest/services?f=json; do
+            echo "$u $(curl -s -o /dev/null -m 30 -w '%{http_code} %{time_total}' "$u")" >> /tmp/out/ping.txt
+          done
+          date -u >> /tmp/out/ping.txt
+          git config user.name "atlas-bot"; git config user.email "atlas-bot@users.noreply.github.com"
+          git checkout --orphan results-ping
+          git rm -rfq .
+          cp /tmp/out/ping.txt .
+          git add ping.txt && git commit -qm "ping result" && git push -f origin results-ping
