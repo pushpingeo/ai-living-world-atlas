@@ -1,0 +1,59 @@
+name: spike
+on:
+  push:
+    branches: [main]
+    paths: ['runs/spike-*.env']
+  workflow_dispatch:
+    inputs:
+      run_file:
+        description: run file under runs/
+        default: runs/spike-gb.env
+permissions:
+  contents: write
+concurrency:
+  group: spike
+  cancel-in-progress: false
+jobs:
+  spike:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Pick run file
+        id: pick
+        run: |
+          f="${{ github.event.inputs.run_file }}"
+          if [ -z "$f" ]; then f=$(git diff --name-only HEAD~1 HEAD -- 'runs/spike-*.env' | head -1); fi
+          [ -z "$f" ] && f=runs/spike-gb.env
+          set -a; . "$f"; set +a
+          echo "countries=$COUNTRIES" >> $GITHUB_OUTPUT
+          echo "minutes=$MINUTES" >> $GITHUB_OUTPUT
+          echo "branch=results/spike-$(echo $COUNTRIES | tr 'A-Z,' 'a-z-')" >> $GITHUB_OUTPUT
+      - name: Fetch seed registry (Dateno, CC BY 4.0)
+        run: curl -sSfL -o /tmp/registry.parquet https://raw.githubusercontent.com/commondataio/dataportals-registry/main/data/datasets/full.parquet
+      - name: Crawl
+        run: |
+          set -o pipefail
+          python -m atlas.spike --registry /tmp/registry.parquet --countries "${{ steps.pick.outputs.countries }}" --out out --minutes "${{ steps.pick.outputs.minutes }}" 2>&1 | tee crawl.log
+      - name: Publish results to branch
+        if: always()
+        run: |
+          mkdir -p out && cp crawl.log out/ 2>/dev/null || true
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          cp -r out /tmp/results
+          git config user.name "atlas-bot"
+          git config user.email "atlas-bot@users.noreply.github.com"
+          git checkout -q --orphan tmp-results
+          git rm -rfq .
+          cp -r /tmp/results/. .
+          git add -A
+          git commit -qm "Spike results ${{ steps.pick.outputs.countries }} (run ${GITHUB_RUN_ID})"
+          git push -f origin HEAD:refs/heads/${{ steps.pick.outputs.branch }}

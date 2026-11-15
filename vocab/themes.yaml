@@ -1,0 +1,72 @@
+# Theme vocabulary: the 19 ISO 19115 topic categories, plus crosswalks from other schemes.
+# Crosswalk choices are ours; see docs/decisions.md. Matching is case-insensitive on whole labels.
+
+iso_topic_categories:
+  farming: Farming
+  biota: Biota
+  boundaries: Boundaries
+  climatologyMeteorologyAtmosphere: Climate, meteorology, atmosphere
+  economy: Economy
+  elevation: Elevation
+  environment: Environment
+  geoscientificInformation: Geoscience
+  health: Health
+  imageryBaseMapsEarthCover: Imagery, base maps, land cover
+  intelligenceMilitary: Intelligence, military
+  inlandWaters: Inland waters
+  location: Location
+  oceans: Oceans
+  planningCadastre: Planning, cadastre
+  society: Society
+  structure: Structure
+  transportation: Transportation
+  utilitiesCommunication: Utilities, communication
+
+# INSPIRE spatial data themes (Annex I-III, 34 themes) -> ISO topic category
+inspire:
+  Coordinate reference systems: location
+  Geographical grid systems: location
+  Geographical names: location
+  Administrative units: boundaries
+  Addresses: location
+  Cadastral parcels: planningCadastre
+  Transport networks: transportation
+  Hydrography: inlandWaters
+  Protected sites: environment
+  Elevation: elevation
+  Land cover: imageryBaseMapsEarthCover
+  Orthoimagery: imageryBaseMapsEarthCover
+  Geology: geoscientificInformation
+  Statistical units: boundaries
+  Buildings: structure
+  Soil: geoscientificInformation
+  Land use: planningCadastre
+  Human health and safety: health
+  Utility and governmental services: utilitiesCommunication
+  Environmental monitoring facilities: environment
+  Production and industrial facilities: economy
+  Agricultural and aquacultural facilities: farming
+  Population distribution (demography): society
+  Population distribution - demography: society
+  Area management/restriction/regulation zones and reporting units: planningCadastre
+  Natural risk zones: geoscientificInformation
+  Atmospheric conditions: climatologyMeteorologyAtmosphere
+  Meteorological geographical features: climatologyMeteorologyAtmosphere
+  Oceanographic geographical features: oceans
+  Sea regions: oceans
+  Bio-geographical regions: biota
+  Habitats and biotopes: biota
+  Species distribution: biota
+  Energy resources: economy
+  Mineral resources: economy
+
+# data.gov.uk theme-primary values -> ISO (only where the mapping is clear)
+datagovuk:
+  environment: environment
+  mapping: location
+  transport: transportation
+  health: health
+  society: society
+  business-and-economy: economy
+  defence: intelligenceMilitary
+  towns-and-cities: planningCadastre
