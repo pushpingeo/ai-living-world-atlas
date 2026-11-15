@@ -30,6 +30,13 @@ class PortalRecord:
 
 def classify_link(url: str, fmt: str = "") -> tuple[str, str] | None:
     """Return (kind, canonical service/layer url) for a link that points at a map service."""
+    try:
+        return _classify(url, fmt)
+    except ValueError:  # malformed URLs are common in catalogue records
+        return None
+
+
+def _classify(url: str, fmt: str) -> tuple[str, str] | None:
     if not url or not url.startswith("http"):
         return None
     u = url.strip()

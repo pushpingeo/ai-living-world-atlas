@@ -49,8 +49,13 @@ async def run(args):
     async with Client(total=args.concurrency, per_host=2) as c:
         # ---- 1. portals ---------------------------------------------------
         portal_status, records = [], []
-        jobs = [harvest_hub(c, u, ctx["discovered_via"]) for u, ctx in targets["hub"].items()]
-        jobs += [harvest_ckan(c, u, ctx["portal"], max_records=args.ckan_max) for u, ctx in targets["ckan"].items()]
+        async def safe(coro, portal, kind):
+            try:
+                return await coro
+            except Exception as e:
+                return [], {"portal": portal, "kind": kind, "ok": False, "error": f"crash: {type(e).__name__}: {e}"[:200], "records": 0}
+        jobs = [safe(harvest_hub(c, u, ctx["discovered_via"]), ctx["discovered_via"], "hub") for u, ctx in targets["hub"].items()]
+        jobs += [safe(harvest_ckan(c, u, ctx["portal"], max_records=args.ckan_max), ctx["portal"], "ckan") for u, ctx in targets["ckan"].items()]
         portal_ctx = {ctx["discovered_via"].split(":", 1)[1] if ctx["discovered_via"].startswith("hub:") else ctx["portal"]: ctx
                       for ctx in list(targets["hub"].values()) + list(targets["ckan"].values())}
         for coro in asyncio.as_completed(jobs):
@@ -91,7 +96,10 @@ async def run(args):
         # ---- 3. list services under ArcGIS roots ----------------------------
         root_status = []
         async def list_root(root, ctx):
-            svcs, info = await crawl_arcgis.list_services(c, root, max_services=args.max_services_per_root)
+            try:
+                svcs, info = await crawl_arcgis.list_services(c, root, max_services=args.max_services_per_root)
+            except Exception as e:
+                svcs, info = [], {"root": root, "status": None, "error": f"crash: {type(e).__name__}: {e}"[:200]}
             info["n_services"] = len(svcs)
             root_status.append(info)
             for s in svcs:
@@ -110,10 +118,13 @@ async def run(args):
             if time.monotonic() > deadline - reserve:  # keep time for checks + writing
                 svc_status.append({"service_url": u, "service_type": s or "arcgis", "ok": False, "error": "skipped: time budget", "n_layers": 0, "ms": 0})
                 return
-            if kind == "arc":
-                ls, st = await crawl_arcgis.crawl_service(c, u, ctx)
-            else:
-                ls, st = await crawl_ogc.crawl_ogc(c, u, s, ctx)
+            try:
+                if kind == "arc":
+                    ls, st = await crawl_arcgis.crawl_service(c, u, ctx)
+                else:
+                    ls, st = await crawl_ogc.crawl_ogc(c, u, s, ctx)
+            except Exception as e:
+                ls, st = [], {"service_url": u, "service_type": s or "arcgis", "ok": False, "error": f"crash: {type(e).__name__}: {e}"[:200], "n_layers": 0, "ms": 0}
             layers.extend(ls)
             svc_status.append(st)
 

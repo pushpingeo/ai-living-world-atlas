@@ -52,7 +52,7 @@ jobs:
           git config user.name "atlas-bot"
           git config user.email "atlas-bot@users.noreply.github.com"
           git checkout -q --orphan tmp-results
-          git rm -rfq .
+          git rm -rfq . && git clean -fdxq
           cp -r /tmp/results/. .
           git add -A
           git commit -qm "Spike results ${{ steps.pick.outputs.countries }} (run ${GITHUB_RUN_ID})"
