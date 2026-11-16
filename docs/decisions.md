@@ -163,3 +163,37 @@ results/spike-europe (built by the collections workflow from results/spike-inspi
 **Tool description says what the atlas actually covers** (it still said "United Kingdom (test index)"), so an agent elsewhere doesn't give up before trying.
 
 **Known, not fixed:** some ArcGIS servers advertise Query but refuse it (e.g. Western Michigan's Global Mines MapServer, including the Maus et al. mining polygons). The crawler can't tell without trying a query; the planned liveness sweep should test one query per layer and drop the capability when it fails. The "Global Power Plants Aug24" layers are a third-party summary of GEM's tracker (operating plants only, about 59k), not GEM's full release; newer plants such as Nachtigal (2024) aren't in it.
+
+## 2026-11-17: Rolling liveness sweep
+The published index (passing datasets only: 512k endpoints on 181k services, 2,233 hosts) is rechecked nightly by
+the `sweep` workflow (atlas/sweep.py). Until now only 6% of published endpoints had ever had a data check, because
+the crawl samples two layers per service.
+- **Unit of work is a service.** One visit costs what a crawl of it costs: the service JSON and /layers, or one
+  GetCapabilities, plus one small data request for one layer, rotating week by week. From that we learn, for
+  every published endpoint on it, whether the service resolves, whether the layer is still listed, and whether its
+  title or description changed.
+- **Schedule.** Resolving services every 7 days, failing ones every 3, retired ones every 28. Up to 45k services a
+  night, so the first full pass takes about four nights and then settles at ~26k a night.
+- **Retiring.** An endpoint is retired after failing on 3 checks spanning 14+ days. When 80%+ of 20+ services on one
+  host fail on the same night, the host is "down" and the window is 30 days, because that can be a block on the
+  GitHub runner rather than a dead server. Robots.txt refusals don't count. A retired endpoint that answers again
+  comes back. If a service answers but none of its known layer ids match (a parser difference or a restructure),
+  it counts as resolving ("unmatched"), not as missing layers.
+- **Applied at publish time, not in the wave files.** The wave files stay as crawl snapshots. combine.py drops
+  retired endpoints (and datasets left with none), marks endpoints failing but not yet retired with
+  `"status":"failing"`, and puts the latest data check in the endpoint's `check`. Check dates are left out of the
+  published rows on purpose, so the MCP database only gets writes when something actually changes.
+- **Publisher text edits.** When a layer's title or description changes, the dataset's text is replaced only where
+  it was that layer's text (a catalogue record's wording is left alone), and that dataset is re-tagged in the same
+  run through the Batch API into `results/tags-sweep`. Over 50k changed datasets in one night is treated as a
+  parser problem: not re-tagged, flagged in the report.
+- **Outputs** on `results/liveness`: state.parquet (one row per endpoint), changes.parquet, REPORT.md, history.csv
+  (one line per night, including the resolving rate against the 98% target).
+
+## 2026-11-17: Europe harvest rerun
+data.europa.eu's scroll is a server-side cursor, so a bad page can't be asked for again; run 3 lost over half the
+WMS and WFS records that way. The harvester now restarts a broken scroll from the top and skips records it already
+has, and also restarts when a scroll "finishes" short of the reported total (asking again for a page can move the
+cursor past it silently). Page size cap raised to 300 MB so large pages aren't cut. Run 4 uses 20 shards for about
+2.4x the records. When a source wave merges, the spike workflow starts the derived collections build; tagging is
+still started by hand, and tag_batch refuses to submit more than MAX_DATASETS (default 200k, about $18).
