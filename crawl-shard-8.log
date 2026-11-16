@@ -1,0 +1,24 @@
+[    0s] shard 8/16
+[    0s] seeds: {'arcgis_roots': 150, 'arcgis_services': 0, 'wms': 5, 'wfs': 7, 'wmts': 2, 'wcs': 4, 'hub': 128, 'ckan': 2, 'agol': 0, 'gn': 0, 'records': [], 'catalogues': 7998}
+[   80s] portals: 20/130 ok, 167 records with service links
+[   80s] targets: 151 ArcGIS roots, 123 ArcGIS services from portals, 18 OGC endpoints
+[  145s] ArcGIS roots listed: 92/151 reachable; 6816 ArcGIS services total
+[  225s] services crawled 500/6834; layers so far 2501
+[  279s] services crawled 1000/6834; layers so far 5274
+[  334s] services crawled 1500/6834; layers so far 8276
+[  388s] services crawled 2000/6834; layers so far 10514
+[  468s] services crawled 2500/6834; layers so far 13446
+[  523s] services crawled 3000/6834; layers so far 16892
+[  588s] services crawled 3500/6834; layers so far 19051
+[  804s] services crawled 4000/6834; layers so far 21687
+[  869s] services crawled 4500/6834; layers so far 24169
+[  924s] services crawled 5000/6834; layers so far 26773
+[ 1028s] services crawled 5500/6834; layers so far 30030
+[ 1108s] services crawled 6000/6834; layers so far 32284
+[ 1212s] services crawled 6500/6834; layers so far 35156
+[ 1292s] services crawled 6834/6834; layers so far 37694
+[ 1292s] curated records: 0 endpoints
+[ 1956s] extents: {'suspect': 2959, 'attempted': 2708, 'measured': 2352, 'shrunk': 1006, 'empty': 0}
+[ 1956s] layers joined to a catalogue record: 129/37694
+[ 3451s] checks run: 4000 (sampled 4000)
+[ 3454s] unique layers: 37688

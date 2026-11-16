@@ -1,0 +1,222 @@
+{
+ "minutes": 299.0,
+ "http": {
+  "requests": 382766,
+  "errors": 10455,
+  "robots_blocked": 181
+ },
+ "portals": {
+  "total": 2076,
+  "ok": 158,
+  "records_with_service_links": 2441
+ },
+ "arcgis_roots": {
+  "total": 2516,
+  "reachable": 1561
+ },
+ "services": {
+  "attempted": 125994,
+  "ok": 120240,
+  "skipped_time": 889,
+  "by_type": {
+   "arcgis-imageserver": 8022,
+   "arcgis-vectortileserver": 2029,
+   "arcgis-mapserver": 76444,
+   "arcgis-featureserver": 33662,
+   "wms": 38,
+   "wcs": 15,
+   "wfs": 25,
+   "wmts": 5
+  },
+  "top_errors": [
+   [
+    "TimeoutError: ",
+    1861
+   ],
+   [
+    "{'code': N, 'message': 'Token Required', 'details': []}",
+    994
+   ],
+   [
+    "skipped: time budget",
+    889
+   ],
+   [
+    "{'code': N, 'details': 'error', 'message': 'HTTP N Not F",
+    408
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :Co",
+    204
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :GI",
+    202
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :0x",
+    195
+   ],
+   [
+    "HTTP N",
+    138
+   ]
+  ]
+ },
+ "layers": {
+  "total": 678876,
+  "by_service_type": {
+   "arcgis-mapserver": 554849,
+   "arcgis-featureserver": 90928,
+   "wms": 12690,
+   "arcgis-imageserver": 8006,
+   "wcs": 7577,
+   "wfs": 2344,
+   "arcgis-vectortileserver": 2020,
+   "wmts": 462
+  },
+  "with_bbox": 674496,
+  "with_abstract_50": 138719,
+  "with_licence_text": 257566,
+  "with_open_licence": 527,
+  "with_keywords": 459189,
+  "joined_to_catalogue": 1814,
+  "codelike_titles": 172049,
+  "junk_flagged": 4868,
+  "declared_iso_theme": 30107,
+  "declared_theme_how": {
+   "none": 648769,
+   "keyword": 30107
+  },
+  "publisher_type": {
+   "local-gov": 330516,
+   "regional-gov": 187337,
+   "academic": 74721,
+   "central-gov": 45031,
+   "business": 15899,
+   "public-body": 10738,
+   "civil-society": 9724,
+   "unknown": 4845,
+   "international": 65
+  },
+  "detail_source": {
+   "none": 525521,
+   "display": 125977,
+   "stated": 19093,
+   "pixel-size": 7990,
+   "tile-cache": 295
+  },
+  "extent_source": {
+   "declared": 632513,
+   "measured": 46363
+  },
+  "extent_flags": {
+   "shared-default": 38301,
+   "world": 24836,
+   "too-big-local": 21506,
+   "grid-default": 2
+  },
+  "cors_ok": 663435,
+  "detail_level": {
+   "unknown": 525521,
+   "1:25k": 49976,
+   "1:100k": 34967,
+   "1:5k": 26749,
+   "1:500k": 26137,
+   "1:2M": 11271,
+   "coarser": 4255
+  },
+  "coverage_level": {
+   "local": 291011,
+   "regional": 235244,
+   "national": 84481,
+   "global": 42377,
+   "continental": 21383,
+   "unknown": 4380
+  },
+  "detail_level_passing": {
+   "unknown": 75667,
+   "1:25k": 9316,
+   "1:100k": 5875,
+   "1:500k": 5490,
+   "1:2M": 3238,
+   "1:5k": 3228,
+   "coarser": 847
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 621725,
+   "ok": 55362,
+   "empty": 981,
+   "fail": 808
+  },
+  "live_rate_of_checked": 0.969,
+  "returns_data_or_empty_rate": 0.986
+ },
+ "quality": {
+  "pass": 103661,
+  "pass_rate": 0.153,
+  "score_median": 60.0,
+  "score_bands": {
+   "[0, 40)": 8657,
+   "[40, 50)": 44008,
+   "[50, 60)": 187507,
+   "[60, 70)": 191628,
+   "[70, 80)": 150788,
+   "[80, 101)": 96288
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 376946,
+  "distinct_among_passing": 63169
+ },
+ "file_mb": 135.71,
+ "datasets": {
+  "total": 453204,
+  "passing": 70831,
+  "endpoints_per_dataset": {
+   "1": 322962,
+   "2": 93412,
+   "3": 13403,
+   "4": 10226,
+   "5": 3607,
+   "6": 2918,
+   "7": 974,
+   "8": 5702
+  },
+  "multi_protocol": 68261,
+  "match_rules": {
+   "title-extent": 75854,
+   "arcgis-pair": 60310,
+   "ogc-name": 986,
+   "arcgis-ogc": 8,
+   "catalogue": 1
+  },
+  "role": {
+   "data": 439373,
+   "imagery": 9431,
+   "basemap": 2643,
+   "elevation": 1757
+  },
+  "role_passing": {
+   "data": 69584,
+   "imagery": 598,
+   "basemap": 342,
+   "elevation": 307
+  },
+  "capabilities": {
+   "render": 429393,
+   "query": 340264,
+   "tiles": 73468,
+   "download": 29450,
+   "feature-info": 11199,
+   "pixels": 7799,
+   "time": 4068,
+   "catalog": 4056,
+   "raster-functions": 1976,
+   "multidimensional": 41
+  },
+  "detail_known_passing": 19386
+ }
+}
