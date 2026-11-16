@@ -53,21 +53,52 @@ function hoverBox(bbox) {
 }
 
 /* ---------- data ---------- */
-async function loadIndex() {
-  const r = await fetch(DATA + "index.json");
-  const j = await r.json();
-  META = j.meta;
+const BY_ID = new Map();
+const loadedTiles = new Set();
+const MAX_TILES = { a: 36, b: 36 };  // don't fetch local tiles for a continent-wide view
+
+function addRows(raw) {
   const f = META.fields;
   const ix = Object.fromEntries(f.map((k, i) => [k, i]));
-  ROWS = j.rows.map((a) => ({
-    id: a[ix.id], title: a[ix.title], publisher: a[ix.publisher], ptype: META.ptypes[a[ix.ptype]],
-    role: META.roles[a[ix.role]], bbox: a[ix.bbox], pass: !!a[ix.pass], score: a[ix.score],
-    themes: a[ix.themes].map((i) => META.themes[i]), concepts: a[ix.concepts].map((i) => META.concepts[i]),
-    protocols: a[ix.protocols].map((i) => META.protocols[i]), caps: a[ix.caps].map((i) => META.caps[i]),
-    detail: a[ix.detail], cors: !!a[ix.cors], xsus: ix.xsus !== undefined && !!a[ix.xsus],
-    text: (a[ix.title] + " " + a[ix.publisher]).toLowerCase(),
-  }));
+  for (const a of raw) {
+    if (BY_ID.has(a[ix.id])) continue;
+    BY_ID.set(a[ix.id], {
+      id: a[ix.id], title: a[ix.title], publisher: a[ix.publisher], ptype: META.ptypes[a[ix.ptype]],
+      role: META.roles[a[ix.role]], bbox: a[ix.bbox], pass: !!a[ix.pass], score: a[ix.score],
+      themes: a[ix.themes].map((i) => META.themes[i]), concepts: a[ix.concepts].map((i) => META.concepts[i]),
+      protocols: a[ix.protocols].map((i) => META.protocols[i]), caps: a[ix.caps].map((i) => META.caps[i]),
+      detail: a[ix.detail], cors: !!a[ix.cors], xsus: ix.xsus !== undefined && !!a[ix.xsus],
+      text: (a[ix.title] + " " + a[ix.publisher]).toLowerCase(),
+    });
+  }
+  ROWS = [...BY_ID.values()];
 }
+
+async function loadIndex() {
+  META = await (await fetch(DATA + "meta.json")).json();
+  addRows(await (await fetch(DATA + "big.json")).json());
+}
+
+/* fetch the tiles covering the view (finest level only when zoomed in enough); true if anything new arrived */
+async function loadTiles(v) {
+  const wanted = [];
+  let tooWide = false;
+  for (const { deg, name } of META.levels) {
+    const cells = [];
+    for (let tx = Math.floor((Math.max(v[0], -180) + 180) / deg); tx <= Math.floor((Math.min(v[2], 179.999) + 180) / deg); tx++)
+      for (let ty = Math.floor((Math.max(v[1], -90) + 90) / deg); ty <= Math.floor((Math.min(v[3], 89.999) + 90) / deg); ty++)
+        cells.push(`${name}_${tx}_${ty}`);
+    if (cells.length > MAX_TILES[name]) { tooWide = true; continue; }
+    for (const c of cells) if (META.tiles[c] && !loadedTiles.has(c)) wanted.push(c);
+  }
+  zoomHint = tooWide;
+  if (!wanted.length) return false;
+  wanted.forEach((c) => loadedTiles.add(c));
+  const parts = await Promise.all(wanted.map((c) => fetch(`${DATA}t/${c}.json`).then((r) => r.json()).catch(() => [])));
+  parts.forEach(addRows);
+  return true;
+}
+let zoomHint = false;
 
 async function details(id) {
   const k = id.slice(0, 2);
@@ -100,9 +131,10 @@ function matches(r, skip) {
 }
 
 function update() {
-  if (!ROWS.length) return;
+  if (!META) return;
   const b = map.getBounds();
   const v = [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()];
+  loadTiles(v).then((fresh) => { if (fresh) update(); });
   const av = area(v);
   const q = document.getElementById("q").value.trim().toLowerCase();
   const onlyPass = document.getElementById("f-pass").checked;
@@ -136,7 +168,8 @@ function update() {
   const hits = inView.filter((r) => matches(r, null));
   hits.sort((a, c) => c._fit - a._fit || c.score - a.score);
   document.getElementById("status").textContent =
-    `${hits.length.toLocaleString()} datasets cover this view` + (hits.length > MAX_LIST ? `, best ${MAX_LIST} fits shown` : "");
+    `${hits.length.toLocaleString()} datasets cover this view` + (hits.length > MAX_LIST ? `, best ${MAX_LIST} fits shown` : "") +
+    (zoomHint ? ". Zoom in to see local datasets too." : "");
   renderList(hits.slice(0, MAX_LIST));
 }
 
@@ -152,7 +185,7 @@ function renderList(items) {
     </li>`).join("");
   if (openId) {
     const li = ol.querySelector(`li[data-id="${openId}"]`);
-    if (li) showDetail(li, ROWS.find((r) => r.id === openId));
+    if (li) showDetail(li, BY_ID.get(openId));
   }
 }
 
@@ -374,7 +407,7 @@ list.addEventListener("click", (ev) => {
 });
 list.addEventListener("mouseover", (ev) => {
   const li = ev.target.closest("li");
-  hoverBox(li ? ROWS.find((r) => r.id === li.dataset.id)?.bbox : null);
+  hoverBox(li ? BY_ID.get(li.dataset.id)?.bbox : null);
 });
 list.addEventListener("mouseleave", () => hoverBox(null));
 

@@ -13,6 +13,10 @@ from pathlib import Path
 import pandas as pd
 
 
+LEVELS = [(5, "a"), (20, "b")]   # (cell size in degrees, level name), finest first
+MAX_CELLS = 4                     # a dataset is copied into at most this many cells of a level
+
+
 def nn(v):
     """JSON has no NaN: turn pandas missing values into null."""
     if isinstance(v, float) and v != v:
@@ -95,12 +99,37 @@ def main():
                    "protocols", "caps", "detail", "cors", "xsus"],
         "ptypes": inv(ptypes), "roles": inv(roles), "themes": inv(themes), "concepts": inv(concepts),
         "protocols": inv(protocols), "caps": inv(caps), "count": len(rows), "tagged": len(tags),
+        "levels": [{"deg": d, "name": n} for d, n in LEVELS],
         **json.loads(args.meta),
     }
-    (out / "index.json").write_text(json.dumps(nn({"meta": meta, "rows": rows}), separators=(",", ":"), default=str, allow_nan=False))
+    # Two levels of spatial tiles. A dataset goes in every cell its extent touches at the finest level where it
+    # touches at most MAX_CELLS cells: 5-degree cells for local data, 20-degree cells for regional and national
+    # data, and big.json (always loaded) for anything larger.
+    big, tiles = [], defaultdict(list)
+    for row in rows:
+        x0, y0, x1, y1 = row[5]
+        for deg, lvl in LEVELS:
+            tx0, tx1 = int((x0 + 180) // deg), int((min(x1, 179.999) + 180) // deg)
+            ty0, ty1 = int((y0 + 90) // deg), int((min(y1, 89.999) + 90) // deg)
+            if (tx1 - tx0 + 1) * (ty1 - ty0 + 1) <= MAX_CELLS:
+                for tx in range(tx0, tx1 + 1):
+                    for ty in range(ty0, ty1 + 1):
+                        tiles[f"{lvl}_{tx}_{ty}"].append(row)
+                break
+        else:
+            big.append(row)
+    meta["tiles"] = {k: len(v) for k, v in tiles.items()}
+    (out / "t").mkdir(parents=True, exist_ok=True)
+    dump = lambda o: json.dumps(nn(o), separators=(",", ":"), default=str, allow_nan=False)
+    (out / "meta.json").write_text(dump(meta))
+    (out / "big.json").write_text(dump(big))
+    for k, v in tiles.items():
+        (out / "t" / f"{k}.json").write_text(dump(v))
     for k, v in shards.items():
-        (out / "d" / f"{k}.json").write_text(json.dumps(nn(v), separators=(",", ":"), default=str, allow_nan=False))
-    print(f"{len(rows)} datasets, {len(tags)} tagged; index {(out / 'index.json').stat().st_size / 1e6:.1f} MB, {len(shards)} detail shards")
+        (out / "d" / f"{k}.json").write_text(dump(v))
+    print(f"{len(rows)} datasets, {len(tags)} tagged; big.json {len(big)} rows "
+          f"({(out / 'big.json').stat().st_size / 1e6:.1f} MB), {len(tiles)} tiles (largest {max(map(len, tiles.values()), default=0)} rows), "
+          f"{len(shards)} detail shards")
 
 
 if __name__ == "__main__":
