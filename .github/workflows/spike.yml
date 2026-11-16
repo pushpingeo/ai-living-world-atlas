@@ -134,6 +134,7 @@ jobs:
           python -m atlas.merge --name "${{ needs.plan.outputs.name }}" --out out shards/*
           for d in shards/*; do cp "$d/crawl.log" "out/crawl-$(basename $d).log" 2>/dev/null || true; done
           cp shards/shard-0/harvest.log out/ 2>/dev/null || true
+          python -m atlas.parts split out   # GitHub rejects files over 100 MB
       - name: Publish results to branch
         if: always()
         run: |

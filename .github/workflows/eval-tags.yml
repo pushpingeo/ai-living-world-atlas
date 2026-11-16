@@ -22,8 +22,8 @@ jobs:
       - name: Get latest UK datasets
         run: |
           git fetch -q origin results/spike-gb
-          git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
-          git show FETCH_HEAD:layers.parquet > /tmp/layers.parquet
+          python -m atlas.parts get FETCH_HEAD datasets /tmp/datasets.parquet
+          python -m atlas.parts get FETCH_HEAD layers /tmp/layers.parquet
           git show FETCH_HEAD:RUN.txt
       - name: Run agreement test
         env:

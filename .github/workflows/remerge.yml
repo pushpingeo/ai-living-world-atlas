@@ -1,0 +1,55 @@
+name: remerge
+# Redo only the merge of an earlier spike run from its shard artifacts (kept 7 days), e.g. after a publish failure.
+# runs/remerge.env:  NAME=us  SOURCE_RUN=<run id>  SHARDS=16
+on:
+  push:
+    branches: [main]
+    paths: ['runs/remerge.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - id: p
+        run: |
+          set -a; . runs/remerge.env; set +a
+          echo "name=$NAME" >> $GITHUB_OUTPUT; echo "run=$SOURCE_RUN" >> $GITHUB_OUTPUT; echo "shards=$SHARDS" >> $GITHUB_OUTPUT
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          path: shards
+          run-id: ${{ steps.p.outputs.run }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: portal-cache
+          path: cache
+          run-id: ${{ steps.p.outputs.run }}
+          github-token: ${{ github.token }}
+      - name: Merge shards
+        run: |
+          ls shards
+          python -m atlas.merge --name "${{ steps.p.outputs.name }}" --out out shards/*
+          for d in shards/*; do cp "$d/crawl.log" "out/crawl-$(basename $d).log" 2>/dev/null || true; done
+          cp cache/harvest.log out/ 2>/dev/null || true
+          python -m atlas.parts split out
+      - name: Publish results to branch
+        run: |
+          echo "commit ${GITHUB_SHA} run ${{ steps.p.outputs.run }} (remerged in ${GITHUB_RUN_ID}) $(date -u +%FT%TZ) shards ${{ steps.p.outputs.shards }}" > out/RUN.txt
+          cp -r out /tmp/results
+          git config user.name "atlas-bot"; git config user.email "atlas-bot@users.noreply.github.com"
+          git checkout -q --orphan tmp-results && git rm -rfq . && git clean -fdxq
+          cp -r /tmp/results/. . && git add -A
+          git commit -qm "Crawl results ${{ steps.p.outputs.name }} (run ${{ steps.p.outputs.run }}, remerged)"
+          git push -f origin HEAD:refs/heads/results/spike-${{ steps.p.outputs.name }}

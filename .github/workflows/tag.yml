@@ -40,8 +40,8 @@ jobs:
       - name: Get the wave and what is already tagged
         run: |
           git fetch -q origin results/spike-${{ steps.p.outputs.source }}
-          git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
-          git show FETCH_HEAD:layers.parquet > /tmp/layers.parquet
+          python -m atlas.parts get FETCH_HEAD datasets /tmp/datasets.parquet
+          python -m atlas.parts get FETCH_HEAD layers /tmp/layers.parquet
           git show FETCH_HEAD:RUN.txt | tee /tmp/source-run.txt
           TG=()
           for b in $(git ls-remote --heads origin 'results/tags-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
