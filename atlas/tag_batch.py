@@ -123,7 +123,10 @@ def main():
                 usage[k] += (msg.get("usage") or {}).get(k) or 0
             block = next((b for b in msg["content"] if b.get("type") == "tool_use"), None)
             if block:
-                row.update(clean(block["input"]))
+                try:
+                    row.update(clean(block["input"]))
+                except Exception as e:  # one odd answer must not lose the whole batch
+                    row["status"] = f"unparsed: {e}"[:200]
         rows.append(row)
     df = pd.DataFrame(rows)
     df["tag_model"] = MODEL

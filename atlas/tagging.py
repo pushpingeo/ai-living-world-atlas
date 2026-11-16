@@ -77,14 +77,31 @@ def describe(ds: dict, fields: list[str] | None = None) -> str:
     ] if x)
 
 
+def _as_list(v) -> list[str]:
+    """The model occasionally sends a list as a string ('["a","b"]' or 'a, b')."""
+    if isinstance(v, list):
+        return [str(x).strip() for x in v]
+    if isinstance(v, str):
+        try:
+            j = json.loads(v)
+            if isinstance(j, list):
+                return [str(x).strip() for x in j]
+        except ValueError:
+            pass
+        return [x.strip().strip('"') for x in v.split(",") if x.strip()]
+    return []
+
+
 def clean(out: dict) -> dict:
     """Drop anything outside the vocabularies; the model is told not to, but we don't trust it blindly."""
     themes, concepts = vocab()
+    it, cs = _as_list(out.get("iso_themes")), _as_list(out.get("concepts"))
+    pc = out.get("proposed_concept") or ""
     return {
-        "iso_themes": [t for t in out.get("iso_themes", []) if t in themes][:3],
-        "concepts": [c for c in out.get("concepts", []) if c in concepts][:4],
-        "invalid": [x for x in out.get("iso_themes", []) + out.get("concepts", []) if x not in themes and x not in concepts],
-        "proposed_concept": (out.get("proposed_concept") or "").strip().strip('"').strip(),
+        "iso_themes": [t for t in it if t in themes][:3],
+        "concepts": [c for c in cs if c in concepts][:4],
+        "invalid": [x for x in it + cs if x not in themes and x not in concepts],
+        "proposed_concept": (pc if isinstance(pc, str) else ",".join(map(str, pc))).strip().strip('"').strip(),
         "confidence": out.get("confidence"),
         "reason": (out.get("reason") or "")[:300],
     }
