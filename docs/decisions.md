@@ -111,3 +111,7 @@ Extents are often much bigger than the data. In the UK run:
 - WMS/ImageServer: render one small image over the claimed extent and take the bounds of the non-empty pixels.
 - Real footprints: a coarse grid of where features actually are, so a "UK" layer covering three counties shows as three counties.
 - Comparing council layers with the council's own boundary, once the admin hierarchy exists.
+
+## 2026-11-16: D1 write limit
+
+Cloudflare's free tier allows 100k row writes a day in D1, and index updates count too. Each full reload of the ~40k-row database cost more than that, and three reloads on 15–16 Nov hit the limit. Reads were unaffected. The deploy now keeps a hash of every row it loaded (`rows.json` on `results/mcp-deploy`) and writes only the difference. An unchanged rebuild writes nothing; a normal recrawl should write a few thousand rows. A crawl that changes every row (a schema change, say) still needs a full day's allowance, so those should be spaced out, or moved to the $5/month Workers plan if they become routine.
