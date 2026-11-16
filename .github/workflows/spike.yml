@@ -1,6 +1,8 @@
 name: spike
 # A crawl "wave". Edit a file in runs/ (spike-<name>.env) and push to start one:
 #   NAME=us  COUNTRIES=US  SEEDS=""  MINUTES=300  SHARDS=16
+# PREHARVEST=1 harvests the big catalogues (GeoNetwork, data.europa.eu) once, before the shards, and hands
+# the records to every shard (HARVEST_MINUTES, default 300).
 # Shards run in parallel; a final job merges them and publishes results/spike-<name>.
 on:
   push:
@@ -23,6 +25,7 @@ jobs:
       file: ${{ steps.p.outputs.file }}
       name: ${{ steps.p.outputs.name }}
       shards: ${{ steps.p.outputs.shards }}
+      preharvest: ${{ steps.p.outputs.preharvest }}
       matrix: ${{ steps.p.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
@@ -39,9 +42,37 @@ jobs:
           echo "file=$f" >> $GITHUB_OUTPUT
           echo "name=$NAME" >> $GITHUB_OUTPUT
           echo "shards=$SHARDS" >> $GITHUB_OUTPUT
+          echo "preharvest=${PREHARVEST:-0}" >> $GITHUB_OUTPUT
           echo "matrix=$(python3 -c "import json;print(json.dumps(list(range($SHARDS))))")" >> $GITHUB_OUTPUT
-  crawl:
+  harvest:
     needs: plan
+    if: needs.plan.outputs.preharvest == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Harvest catalogues once
+        run: |
+          set -a; . "${{ needs.plan.outputs.file }}"; set +a
+          SEED_ARGS=""; for s in $SEEDS; do SEED_ARGS="$SEED_ARGS --seeds $s"; done
+          touch /tmp/empty.parquet; mkdir -p cache
+          set -o pipefail
+          python -m atlas.spike --registry /tmp/empty.parquet --countries "" $SEED_ARGS --out cache \
+            --minutes "${HARVEST_MINUTES:-300}" --harvest-only cache/portals.pkl 2>&1 | tee cache/harvest.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: portal-cache
+          path: cache
+          retention-days: 3
+  crawl:
+    needs: [plan, harvest]
+    if: always() && needs.plan.result == 'success' && needs.harvest.result != 'failure' && needs.harvest.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 355
     strategy:
@@ -57,16 +88,24 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Fetch seed registry (Dateno, CC BY 4.0)
         run: curl -sSfL -o /tmp/registry.parquet https://raw.githubusercontent.com/commondataio/dataportals-registry/main/data/datasets/full.parquet
+      - uses: actions/download-artifact@v4
+        if: needs.plan.outputs.preharvest == '1'
+        with:
+          name: portal-cache
+          path: cache
       - name: Crawl
         run: |
           set -a; . "${{ needs.plan.outputs.file }}"; set +a
           SEED_ARGS=""; for s in $SEEDS; do SEED_ARGS="$SEED_ARGS --seeds $s"; done
           set -o pipefail
           python -m atlas.spike --registry /tmp/registry.parquet --countries "${COUNTRIES:-}" $SEED_ARGS \
-            --shard "${{ matrix.shard }}/${{ needs.plan.outputs.shards }}" --out out --minutes "${MINUTES:-150}" 2>&1 | tee out-crawl.log
+            --shard "${{ matrix.shard }}/${{ needs.plan.outputs.shards }}" --out out --minutes "${MINUTES:-150}" \
+            --portal-cache cache/portals.pkl 2>&1 | tee out-crawl.log
       - name: Keep shard output
         if: always()
-        run: mkdir -p out && cp out-crawl.log out/crawl.log 2>/dev/null || true
+        run: |
+          mkdir -p out && cp out-crawl.log out/crawl.log 2>/dev/null || true
+          cp cache/harvest.log out/ 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -94,6 +133,7 @@ jobs:
           ls shards
           python -m atlas.merge --name "${{ needs.plan.outputs.name }}" --out out shards/*
           for d in shards/*; do cp "$d/crawl.log" "out/crawl-$(basename $d).log" 2>/dev/null || true; done
+          cp shards/shard-0/harvest.log out/ 2>/dev/null || true
       - name: Publish results to branch
         if: always()
         run: |

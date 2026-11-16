@@ -44,8 +44,8 @@ def theme_vocab():
     for code, label in v["iso_topic_categories"].items():
         lookup[code.lower()] = code
         lookup[label.lower()] = code
-    for scheme in ("inspire", "datagovuk"):
-        for k, code in v[scheme].items():
+    for scheme in ("inspire", "datagovuk", "eu_data_theme"):
+        for k, code in (v.get(scheme) or {}).items():
             lookup[k.lower()] = code
     return lookup
 

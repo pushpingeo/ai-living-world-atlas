@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import pickle
 import random
 import re
 import time
@@ -18,7 +19,7 @@ from urllib.parse import urlsplit
 
 from . import crawl_arcgis, crawl_ogc, endpoints, extents
 from .datasets import build as build_datasets
-from .crawl_portals import harvest_arcgis_online, harvest_ckan, harvest_geonetwork, harvest_hub, service_targets
+from .crawl_portals import harvest_arcgis_online, harvest_ckan, harvest_data_europa, harvest_geonetwork, harvest_hub, service_targets
 from . import records as curated_records
 from .net import Client
 from .quality import codelike, declared_iso_themes, score
@@ -78,7 +79,16 @@ async def run(args):
         jobs = [safe(harvest_hub(c, u, ctx["discovered_via"]), ctx["discovered_via"], "hub") for u, ctx in targets["hub"].items()]
         jobs += [safe(harvest_ckan(c, u, ctx["portal"], max_records=args.ckan_max), ctx["portal"], "ckan") for u, ctx in targets["ckan"].items()]
         jobs += [safe(harvest_arcgis_online(c, q, ctx["discovered_via"]), ctx["discovered_via"], "arcgis-online") for q, ctx in targets["agol"].items()]
-        jobs += [safe(harvest_geonetwork(c, u, ctx["discovered_via"]), ctx["discovered_via"], "geonetwork") for u, ctx in targets["gn"].items()]
+        def gn_job(u, ctx):
+            if ctx.get("api") == "data-europa":
+                return harvest_data_europa(c, u, ctx["discovered_via"], deadline=t0 + args.minutes * 60 * (0.95 if args.harvest_only else 0.6))
+            return harvest_geonetwork(c, u, ctx["discovered_via"])
+        cached = None
+        if args.portal_cache and Path(args.portal_cache).exists():
+            cached = pickle.loads(Path(args.portal_cache).read_bytes())  # written by --harvest-only in the same workflow run
+            note(f"portal cache: {len(cached['records'])} records from {len(cached['status'])} catalogues")
+        if cached is None:
+            jobs += [safe(gn_job(u, ctx), ctx["discovered_via"], ctx.get("api", "geonetwork")) for u, ctx in targets["gn"].items()]
         portal_ctx = {ctx["discovered_via"].split(":", 1)[1] if ctx["discovered_via"].startswith("hub:") else ctx["portal"]: ctx
                       for ctx in list(targets["hub"].values()) + list(targets["ckan"].values())}
         portal_ctx.update({ctx["discovered_via"]: ctx for ctx in list(targets["agol"].values()) + list(targets["gn"].values())})
@@ -86,6 +96,17 @@ async def run(args):
             recs, st = await coro
             portal_status.append(st)
             records += recs
+        if cached is not None:
+            portal_status += cached["status"]
+            records += cached["records"]
+        if args.harvest_only:
+            Path(args.harvest_only).parent.mkdir(parents=True, exist_ok=True)
+            gn = [r for r in records if r.portal.startswith("gn:")]
+            Path(args.harvest_only).write_bytes(pickle.dumps({"records": gn, "status": [s for s in portal_status if s.get("kind") in ("geonetwork", "data-europa")]}))
+            note(f"harvest-only: wrote {len(gn)} catalogue records to {args.harvest_only}")
+            for s_ in portal_status:
+                note(f"  {s_.get('portal')}: ok={s_.get('ok')} records={s_.get('records')} scanned={s_.get('scanned')} {s_.get('error','')}")
+            return
         note(f"portals: {sum(s['ok'] for s in portal_status)}/{len(portal_status)} ok, {len(records)} records with service links")
 
         # ---- 2. work out which services to crawl ----------------------------
@@ -103,7 +124,7 @@ async def run(args):
                 "publisher": rec.publisher or pctx.get("publisher", ""),
                 # a CKAN aggregator's owner is not the data publisher; leave type to domain rules
                 "publisher_type": pctx.get("publisher_type", "unknown") if (rec.portal.startswith("hub:") or agol) else "unknown",
-                "country": pctx.get("country", args.countries[0] if args.countries else ""), "seed_catalog": pctx.get("seed_catalog", ""),
+                "country": getattr(rec, "country", "") or pctx.get("country", args.countries[0] if args.countries else ""), "seed_catalog": pctx.get("seed_catalog", ""),
                 "discovered_via": rec.portal if (rec.portal.startswith("hub:") or agol) else f"ckan:{rec.portal}",
             }
             for kind, u in service_targets(rec):
@@ -445,6 +466,8 @@ def main():
     ap.add_argument("--max-checks", type=int, default=4000)
     ap.add_argument("--max-extent-checks", type=int, default=15000)
     ap.add_argument("--host-filter", default="")
+    ap.add_argument("--portal-cache", default="", help="pickle of catalogue records from a --harvest-only run")
+    ap.add_argument("--harvest-only", default="", help="harvest the big catalogues (GeoNetwork, data.europa.eu), write a pickle here, stop")
     ap.add_argument("--shard", default="", help="i/n: crawl only the i-th of n slices of the seed targets")
     ap.add_argument("--expand-roots", action="store_true", default=True)
     args = ap.parse_args()

@@ -70,3 +70,14 @@ datagovuk:
   business-and-economy: economy
   defence: intelligenceMilitary
   towns-and-cities: planningCadastre
+
+# EU data themes (data.europa.eu / DCAT-AP), as emitted by the data.europa.eu harvester ("eu-theme:CODE").
+# Only the clear ones; government, regions, justice, science and international are too broad to map.
+eu_data_theme:
+  eu-theme:AGRI: farming
+  eu-theme:ECON: economy
+  eu-theme:ENER: utilitiesCommunication
+  eu-theme:ENVI: environment
+  eu-theme:HEAL: health
+  eu-theme:SOCI: society
+  eu-theme:TRAN: transportation

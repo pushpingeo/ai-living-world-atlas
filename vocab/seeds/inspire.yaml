@@ -1,9 +1,11 @@
-# The EU's INSPIRE geoportal: metadata harvested from every member state's national catalogue.
-# One GeoNetwork search API; we keep records that link a map or feature service.
+# Europe's INSPIRE and open-data geo catalogues. The INSPIRE geoportal (inspire-geoportal.ec.europa.eu) stopped
+# resolving in November 2026 and redirects to data.europa.eu, which harvests the national INSPIRE catalogues
+# (gdi-de, rndt, ngr-nl, idee, geocatalogue-fr, csw-sk, ...). We use its search API and keep datasets that
+# have a WMS, WFS, WMTS, OGC API Features or REST service distribution.
 defaults:
-  publisher_type: public-body   # INSPIRE data is published by public authorities
-  country: EU
+  publisher_type: public-body   # these catalogues list data from public authorities
+  country: EU                   # replaced by each record's own country where given
 sources:
-  - kind: geonetwork
-    url: https://inspire-geoportal.ec.europa.eu
-    publisher: ""               # taken from each record's responsible organisation
+  - kind: data-europa
+    url: https://data.europa.eu
+    publisher: ""               # taken from each record's publisher

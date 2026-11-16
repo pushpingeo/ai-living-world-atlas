@@ -27,6 +27,7 @@ class PortalRecord:
     landing_page: str
     links: list[tuple[str, str]] = field(default_factory=list)  # (kind, url) kind in arcgis|wms|wfs
     scale: float | None = None  # scale denominator stated in the metadata (ISO/INSPIRE)
+    country: str = ""  # ISO2, when the catalogue states it per record
 
 
 def classify_link(url: str, fmt: str = "") -> tuple[str, str] | None:
@@ -275,5 +276,96 @@ async def harvest_geonetwork(c: Client, base: str, portal: str, max_records: int
         after = hits[-1].get("sort")
         if not after:
             break
+    st.update(ok=st["scanned"] > 0, records=len(out))
+    return out, st
+
+
+# ---------------- data.europa.eu (piveau hub-search) ----------------
+# Since late 2026 the INSPIRE geoportal redirects here; data.europa.eu harvests the national INSPIRE
+# catalogues (gdi-de, rndt, ngr-nl, idee, ...) and exposes them through one search API.
+DEU_FORMATS = ["WMS_SRVC", "WFS_SRVC", "WMTS_SRVC", "OGCFEAT", "REST"]
+DEU_FIELDS = "id,title,description,publisher,distributions,keywords,categories,landing_page,catalog.id,country.id"
+
+
+def _ml(v) -> str:
+    """Pick English from a multilingual field, else the first language given."""
+    if isinstance(v, dict):
+        return v.get("en") or next((x for x in v.values() if x), "")
+    if isinstance(v, list):
+        return _ml(v[0]) if v else ""
+    return v or ""
+
+
+def _deu_record(d: dict, portal: str) -> PortalRecord | None:
+    links, lic = [], ""
+    for dist in d.get("distributions") or []:
+        fmt = ((dist.get("format") or {}).get("id") or "").replace("_SRVC", "")
+        for u in (dist.get("access_url") or []) if isinstance(dist.get("access_url"), list) else [dist.get("access_url") or ""]:
+            k = classify_link(u or "", fmt)
+            if k:
+                links.append(k)
+                l = dist.get("license") or {}
+                lic = lic or (l.get("label") or l.get("id") or "") if isinstance(l, dict) else lic
+    if not links:
+        return None
+    pub = d.get("publisher") or {}
+    lp = d.get("landing_page") or []
+    lp = (lp[0].get("resource") if lp and isinstance(lp[0], dict) else "") or f"https://data.europa.eu/data/datasets/{d.get('id')}"
+    return PortalRecord(
+        portal=portal, title=clean_text(_ml(d.get("title"))), abstract=clean_text(_ml(d.get("description"))),
+        licence=clean_text(lic)[:600],
+        keywords=[k.get("label") for k in (d.get("keywords") or []) if isinstance(k, dict) and k.get("label")][:30],
+        themes=["eu-theme:" + c["id"] for c in (d.get("categories") or []) if isinstance(c, dict) and c.get("id")][:10],
+        publisher=clean_text(pub.get("name") if isinstance(pub, dict) else "")[:150],
+        landing_page=lp, links=list(dict.fromkeys(links)),
+        country=((d.get("country") or {}).get("id") or "").upper() if isinstance(d.get("country"), dict) else "",
+    )
+
+
+async def harvest_data_europa(c: Client, base: str, portal: str, max_records: int = 1_200_000, page: int = 500,
+                              deadline: float | None = None) -> tuple[list[PortalRecord], dict]:
+    """Scroll through data.europa.eu datasets that have a map/feature service distribution, one format at a time."""
+    import json as _json
+    import time as _time
+    from urllib.parse import quote
+
+    api = base.rstrip("/") + "/api/hub/search"
+    st = {"portal": portal, "kind": "data-europa", "ok": False, "error": "", "records": 0, "scanned": 0, "by_format": {}}
+    seen: dict[str, PortalRecord] = {}
+    for fmt in DEU_FORMATS:
+        facets = quote(_json.dumps({"format": [fmt]}))
+        url = f"{api}/search?filter=dataset&limit={page}&scroll=true&facets={facets}&includes={DEU_FIELDS}"
+        n = 0
+        while url and st["scanned"] < max_records:
+            if deadline and _time.monotonic() > deadline:
+                st["error"] = (st["error"] + f" time budget hit in {fmt};").strip()
+                url = None
+                break
+            r = await c.get(url, retries=3, timeout=120)
+            if not r.ok:
+                st["error"] += f" {fmt}: {r.error or 'HTTP ' + str(r.status)} after {n};"
+                break
+            try:
+                res = r.json()["result"]
+            except Exception:
+                st["error"] += f" {fmt}: bad json after {n};"
+                break
+            rows = res.get("results") or []
+            st.setdefault("totals", {})[fmt] = res.get("count")
+            for d in rows:
+                st["scanned"] += 1
+                n += 1
+                rec = _deu_record(d, portal)
+                if rec is None:
+                    continue
+                prev = seen.get(d.get("id"))
+                if prev:
+                    prev.links = list(dict.fromkeys(prev.links + rec.links))
+                else:
+                    seen[d.get("id")] = rec
+            sid = res.get("scrollId")
+            url = f"{api}/scroll?scrollId={quote(sid)}" if (rows and sid) else None
+        st["by_format"][fmt] = n
+    out = list(seen.values())
     st.update(ok=st["scanned"] > 0, records=len(out))
     return out, st

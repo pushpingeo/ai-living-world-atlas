@@ -103,8 +103,8 @@ def load_curated(path: str) -> dict:
             t["arcgis_services"][service_url_of(s["url"]) or s["url"]] = ctx
         elif kind in ("wms", "wfs", "wmts", "wcs"):
             t[kind][base_url(s["url"])] = {**ctx, "curated_licence": s.get("licence", "")}
-        elif kind == "geonetwork":
-            t["gn"][s["url"]] = {**ctx, "discovered_via": f"gn:{s['url']}", "portal": s["url"]}
+        elif kind in ("geonetwork", "data-europa"):
+            t["gn"][s["url"]] = {**ctx, "discovered_via": f"gn:{s['url']}", "portal": s["url"], "api": kind}
         elif kind == "arcgis-online-search":
             t["agol"][s["query"]] = {**ctx, "publisher_type": "curated-collection", "discovered_via": f"agol:{s['query']}"}
         elif kind == "record":

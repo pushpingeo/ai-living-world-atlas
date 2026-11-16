@@ -127,3 +127,12 @@ Cloudflare's free tier allows 100k row writes a day in D1, and index updates cou
 **Waves** are run files in `runs/` (name, countries, seed files, shards). Shards run in parallel in Actions and merge into one `results/spike-<name>` branch: US 16 shards, INSPIRE 8, global 4, Canada/Australia/NZ 4. `runs/published.txt` lists which waves the viewer and MCP server use. The US and INSPIRE join once the viewer loads its index in tiles, because one file for every dataset won't hold at that size.
 
 **Tagging** runs per wave and skips anything already tagged. Costs are reported per wave.
+
+## 2026-11-16 — Europe via data.europa.eu, not the INSPIRE geoportal
+The INSPIRE geoportal stopped resolving (DNS failure from GitHub runners; its record URLs 302 to data.europa.eu).
+data.europa.eu harvests the national INSPIRE catalogues and exposes one search API: about 516k datasets with a
+WMS distribution and 366k with WFS (Nov 2026; gdi-de alone is ~300k). We scroll it once per wave in a separate
+harvest job and hand the records to every shard, rather than each shard re-harvesting. Each record's own country
+is kept. EU data themes are crosswalked to ISO only where clear (agri, econ, energy, environment, health,
+society, transport). Not yet used: the distribution title often carries the WMS/WFS layer name, which would
+make the catalogue-to-layer join exact.
