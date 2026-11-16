@@ -66,7 +66,7 @@ jobs:
         if: steps.have.outputs.ok == '1'
         working-directory: worker
         run: |
-          sleep 5
+          sleep 30  # let the new version propagate
           SUB=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | python3 -c "import json,sys; print(json.load(sys.stdin)['result']['subdomain'])")
           EP="https://atlas-mcp.$SUB.workers.dev/mcp"
           echo "MCP endpoint: $EP" | tee /tmp/smoke.txt
