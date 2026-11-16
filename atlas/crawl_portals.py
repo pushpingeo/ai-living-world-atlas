@@ -5,6 +5,7 @@ and they tell us which services a public body actually stands behind.
 """
 from __future__ import annotations
 
+import asyncio
 import re
 from dataclasses import dataclass, field
 from urllib.parse import parse_qsl, urlsplit
@@ -341,14 +342,19 @@ async def harvest_data_europa(c: Client, base: str, portal: str, max_records: in
                 st["error"] = (st["error"] + f" time budget hit in {fmt};").strip()
                 url = None
                 break
-            r = await c.get(url, retries=3, timeout=120)
-            if not r.ok:
-                st["error"] += f" {fmt}: {r.error or 'HTTP ' + str(r.status)} after {n};"
-                break
-            try:
-                res = r.json()["result"]
-            except Exception:
-                st["error"] += f" {fmt}: bad json after {n};"
+            res = None
+            for attempt in range(4):  # a scroll page occasionally comes back cut off or as an error page; ask again
+                r = await c.get(url, retries=3, timeout=180)
+                try:
+                    res = r.json()["result"] if r.ok else None
+                except Exception:
+                    res = None
+                if res is not None:
+                    break
+                await asyncio.sleep(10 * (attempt + 1))
+            if res is None:
+                body = (r.body or b"")[:160].decode("utf-8", "replace").replace("\n", " ")
+                st["error"] += f" {fmt}: {r.error or 'HTTP ' + str(r.status)} after {n} [{len(r.body or b'')} bytes: {body}];"
                 break
             rows = res.get("results") or []
             st.setdefault("totals", {})[fmt] = res.get("count")
