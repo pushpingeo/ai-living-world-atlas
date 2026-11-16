@@ -45,7 +45,7 @@ jobs:
           git show FETCH_HEAD:RUN.txt | tee /tmp/source-run.txt
           TG=()
           for b in $(git ls-remote --heads origin 'results/tags-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
-            git fetch -q origin "$b" && git show FETCH_HEAD:tags.parquet > "/tmp/$(basename $b).parquet" 2>/dev/null && TG+=("/tmp/$(basename $b).parquet") || true
+            git fetch -q origin "$b" && git show FETCH_HEAD:tags.parquet > "/tmp/$(basename $b).parquet" 2>/dev/null && [ -s "/tmp/$(basename $b).parquet" ] && TG+=("/tmp/$(basename $b).parquet") || rm -f "/tmp/$(basename $b).parquet"
           done
           python - "${TG[@]}" <<'PY'
           import sys, pandas as pd
@@ -64,9 +64,10 @@ jobs:
         if: always()
         run: |
           OLD=/tmp/tags-${{ steps.p.outputs.source }}.parquet
-          if [ -f "$OLD" ] && [ -f out/tags.parquet ]; then
+          mkdir -p out
+          if [ -s "$OLD" ] && [ -s out/tags.parquet ]; then
             python -c "import pandas as pd; pd.concat([pd.read_parquet('$OLD'), pd.read_parquet('out/tags.parquet')]).drop_duplicates('dataset_id', keep='last').to_parquet('out/tags.parquet')"
-          elif [ -f "$OLD" ]; then cp "$OLD" out/tags.parquet; fi
+          elif [ -s "$OLD" ]; then cp "$OLD" out/tags.parquet; fi
       - name: Publish
         if: always()
         run: |
