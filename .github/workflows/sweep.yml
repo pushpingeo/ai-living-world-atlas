@@ -1,0 +1,94 @@
+name: sweep
+# Rolling liveness sweep (atlas/sweep.py). Runs every night: rechecks the published services that are due
+# (resolving every 7 days, failing every 3, retired every 28), retires endpoints that stay dead, and re-tags
+# datasets whose publisher changed the title or description. Results go to results/liveness; the viewer and MCP
+# rebuild after it (pages runs on sweep completion) and drop retired endpoints.
+# Settings in runs/sweep.env; editing that file and pushing runs it straight away.
+on:
+  schedule:
+    - cron: '23 3 * * *'
+  push:
+    branches: [main]
+    paths: ['runs/sweep.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: sweep
+  cancel-in-progress: false
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Published index (before liveness is applied) and the previous sweep state
+        run: |
+          SKIP_LIVENESS=1 bash .github/actions-fetch.sh
+          mkdir -p /tmp/prev
+          if git fetch -q origin results/liveness 2>/dev/null; then
+            for f in state.parquet history.csv PENDING_BATCH; do git show FETCH_HEAD:$f > /tmp/prev/$f 2>/dev/null || rm -f /tmp/prev/$f; done
+          fi
+          ls -la /tmp/prev
+      - name: Check services that are due
+        run: |
+          set -a; . runs/sweep.env; set +a
+          set -o pipefail
+          python -m atlas.sweep --datasets /tmp/pub/datasets.parquet --layers /tmp/pub/layers.parquet \
+            --state /tmp/prev/state.parquet --history /tmp/prev/history.csv --out out \
+            --minutes "${MINUTES:-240}" --max-services "${MAX_SERVICES:-45000}" --retag-cap "${RETAG_CAP:-50000}" \
+            ${ONLY_HOST:+--only-host "$ONLY_HOST"} 2>&1 | tee out-sweep.log
+      - name: Re-tag datasets whose text changed (Haiku, Batch API)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p tagout
+          if [ -s /tmp/prev/PENDING_BATCH ]; then
+            echo "resuming batch $(cat /tmp/prev/PENDING_BATCH)"
+            python -m atlas.tag_batch --datasets x --layers x --out tagout --batch-id "$(cat /tmp/prev/PENDING_BATCH)" --max-wait-min 60 || true
+          elif [ -s out/retag.parquet ] && [ -n "$ANTHROPIC_API_KEY" ]; then
+            python -m atlas.tag_batch --datasets out/retag.parquet --layers /tmp/pub/layers.parquet --out tagout --max-wait-min 90 || true
+          else echo "nothing to re-tag"; fi
+          if [ -s tagout/STATUS.txt ]; then cp tagout/BATCH_ID out/PENDING_BATCH; fi
+          [ -s tagout/COST.md ] && { echo; echo "## Re-tagging"; echo; sed 1d tagout/COST.md; } >> out/REPORT.md || true
+          cp -r tagout /tmp/tagout   # the publish steps below switch branches, which clears the work tree
+      - name: Publish results/liveness
+        if: always()
+        run: |
+          mkdir -p out && cp out-sweep.log out/sweep.log 2>/dev/null || true
+          [ -s out/state.parquet ] || { echo "no state written; keeping the previous branch"; exit 1; }
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          cp -r out /tmp/results
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp-results && git rm -rfq . && git clean -fdxq
+          cp -r /tmp/results/. . && git add -A && git commit -qm "Liveness sweep (run ${GITHUB_RUN_ID})"
+          git push -f origin HEAD:refs/heads/results/liveness
+      - name: Publish re-tags to results/tags-sweep
+        if: always()
+        run: |
+          [ -s /tmp/tagout/tags.parquet ] || { echo "no new tags"; exit 0; }
+          OLD=/tmp/waves/tags-sweep.tags.parquet
+          python - "$OLD" <<'PY'
+          import sys, time, pandas as pd
+          from pathlib import Path
+          new = pd.read_parquet("/tmp/tagout/tags.parquet")
+          new["tagged_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())  # sorts after same-day wave tags
+          old = Path(sys.argv[1])
+          if old.exists() and old.stat().st_size:
+              new = pd.concat([pd.read_parquet(old), new]).drop_duplicates("dataset_id", keep="last")
+          new.to_parquet("/tmp/tagout/tags.parquet")
+          print(len(new), "re-tagged datasets in results/tags-sweep")
+          PY
+          echo "run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > /tmp/tagout/RUN.txt
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp-tags && git rm -rfq . && git clean -fdxq
+          cp /tmp/tagout/tags.parquet /tmp/tagout/COST.md /tmp/tagout/RUN.txt . 2>/dev/null || true
+          git add -A && git commit -qm "Re-tags from liveness sweep (run ${GITHUB_RUN_ID})" && git push -qf origin HEAD:refs/heads/results/tags-sweep
+      - name: Summary
+        if: always()
+        run: cat /tmp/results/REPORT.md >> $GITHUB_STEP_SUMMARY 2>/dev/null || true

@@ -18,4 +18,12 @@ done < runs/published.txt
 for b in $(git ls-remote --heads origin 'results/tags-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
   git fetch -q origin "$b" && git show FETCH_HEAD:tags.parquet > "/tmp/waves/$(basename $b).tags.parquet" 2>/dev/null && TG+=("/tmp/waves/$(basename $b).tags.parquet") || true
 done
-python -m atlas.combine "${DS[@]}" --layers "${LY[@]}" ${TG[@]:+--tags "${TG[@]}"} --out /tmp/pub --only-passing  # the viewer and MCP carry passing datasets only; the full index stays in the wave files
+# the rolling liveness sweep (results/liveness): retired endpoints come out, publisher text edits go in.
+# The sweep itself sets SKIP_LIVENESS=1, because it needs the index as published, retired endpoints included.
+LV=""
+if [ "${SKIP_LIVENESS:-0}" != "1" ] && git fetch -q origin results/liveness 2>/dev/null; then
+  mkdir -p /tmp/liveness
+  git show FETCH_HEAD:state.parquet > /tmp/liveness/state.parquet 2>/dev/null && LV=/tmp/liveness
+  git show FETCH_HEAD:changes.parquet > /tmp/liveness/changes.parquet 2>/dev/null || rm -f /tmp/liveness/changes.parquet
+fi
+python -m atlas.combine "${DS[@]}" --layers "${LY[@]}" ${TG[@]:+--tags "${TG[@]}"} --out /tmp/pub --only-passing ${LV:+--liveness $LV}  # the viewer and MCP carry passing datasets only; the full index stays in the wave files

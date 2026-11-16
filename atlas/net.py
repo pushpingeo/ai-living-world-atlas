@@ -105,7 +105,7 @@ class Client:
             self.stats["errors"] += 1
         return last
 
-    async def get(self, url: str, retries: int = 1, timeout: float | None = None) -> Resp:
+    async def get(self, url: str, retries: int = 1, timeout: float | None = None, max_bytes: int | None = None) -> Resp:
         host = urlsplit(url).netloc
         if not await self._allowed(url):
             self.stats["robots_blocked"] += 1
@@ -117,11 +117,11 @@ class Client:
                 self.stats["requests"] += 1
                 try:
                     async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout) if timeout else self.timeout, allow_redirects=True) as r:
-                        chunks, size = [], 0
+                        chunks, size, cap = [], 0, max_bytes or self.max_bytes
                         async for chunk in r.content.iter_chunked(1 << 16):
                             chunks.append(chunk)
                             size += len(chunk)
-                            if size >= self.max_bytes:
+                            if size >= cap:
                                 break
                         body = b"".join(chunks)
                         ms = int((time.monotonic() - t0) * 1000)

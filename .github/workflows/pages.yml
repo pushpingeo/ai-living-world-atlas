@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths: ['site/**', 'atlas/viewer_data.py', 'atlas/combine.py', 'runs/published.txt', '.github/workflows/pages.yml']
   workflow_run:
-    workflows: [spike, tag]
+    workflows: [spike, tag, sweep]
     types: [completed]
   workflow_dispatch:
 permissions:

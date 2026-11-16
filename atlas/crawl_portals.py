@@ -323,7 +323,7 @@ def _deu_record(d: dict, portal: str) -> PortalRecord | None:
     )
 
 
-async def harvest_data_europa(c: Client, base: str, portal: str, max_records: int = 1_200_000, page: int = 500,
+async def harvest_data_europa(c: Client, base: str, portal: str, max_records: int = 2_000_000, page: int = 500,
                               deadline: float | None = None) -> tuple[list[PortalRecord], dict]:
     """Scroll through data.europa.eu datasets that have a map/feature service distribution, one format at a time."""
     import json as _json
@@ -333,45 +333,68 @@ async def harvest_data_europa(c: Client, base: str, portal: str, max_records: in
     api = base.rstrip("/") + "/api/hub/search"
     st = {"portal": portal, "kind": "data-europa", "ok": False, "error": "", "records": 0, "scanned": 0, "by_format": {}}
     seen: dict[str, PortalRecord] = {}
+    # A scroll is a server-side cursor: a bad page can't be asked for again (the cursor has moved on), and the
+    # Nov 2026 run lost over half the WMS/WFS records that way. So when a scroll breaks, start that format again
+    # from the top and skip what we already have; re-reading 150k ids costs a few minutes.
+    restarts_max = 6
     for fmt in DEU_FORMATS:
         facets = quote(_json.dumps({"format": [fmt]}))
-        url = f"{api}/search?filter=dataset&limit={page}&scroll=true&facets={facets}&includes={DEU_FIELDS}"
-        n = 0
-        while url and st["scanned"] < max_records:
-            if deadline and _time.monotonic() > deadline:
-                st["error"] = (st["error"] + f" time budget hit in {fmt};").strip()
-                url = None
-                break
-            res = None
-            for attempt in range(4):  # a scroll page occasionally comes back cut off or as an error page; ask again
-                r = await c.get(url, retries=3, timeout=180)
-                try:
-                    res = r.json()["result"] if r.ok else None
-                except Exception:
-                    res = None
-                if res is not None:
+        first = f"{api}/search?filter=dataset&limit={page}&scroll=true&facets={facets}&includes={DEU_FIELDS}"
+        ids_fmt: set = set()
+        total = None
+        for restart in range(restarts_max + 1):
+            url, n, broke = first, 0, False
+            while url and st["scanned"] < max_records:
+                if deadline and _time.monotonic() > deadline:
+                    st["error"] = (st["error"] + f" time budget hit in {fmt};").strip()
+                    url = None
                     break
-                await asyncio.sleep(10 * (attempt + 1))
-            if res is None:
-                body = (r.body or b"")[:160].decode("utf-8", "replace").replace("\n", " ")
-                st["error"] += f" {fmt}: {r.error or 'HTTP ' + str(r.status)} after {n} [{len(r.body or b'')} bytes: {body}];"
+                res = None
+                for attempt in range(3):
+                    # pages can be big (records with hundreds of distributions): don't let the size cap cut them
+                    r = await c.get(url, retries=3, timeout=180, max_bytes=300_000_000)
+                    try:
+                        res = r.json()["result"] if r.ok else None
+                    except Exception:
+                        res = None
+                    if res is not None:
+                        break
+                    await asyncio.sleep(10 * (attempt + 1))
+                if res is None:
+                    body = (r.body or b"")[:120].decode("utf-8", "replace").replace("\n", " ")
+                    st["error"] += f" {fmt}: {r.error or 'HTTP ' + str(r.status)} after {n} [{len(r.body or b'')} bytes: {body}];"
+                    broke = True
+                    break
+                rows = res.get("results") or []
+                total = res.get("count", total)
+                for d in rows:
+                    n += 1
+                    did = d.get("id")
+                    if did in ids_fmt:
+                        continue
+                    ids_fmt.add(did)
+                    st["scanned"] += 1
+                    rec = _deu_record(d, portal)
+                    if rec is None:
+                        continue
+                    prev = seen.get(did)
+                    if prev:
+                        prev.links = list(dict.fromkeys(prev.links + rec.links))
+                    else:
+                        seen[did] = rec
+                sid = res.get("scrollId")
+                url = f"{api}/scroll?scrollId={quote(sid)}" if (rows and sid) else None
+            if deadline and _time.monotonic() > deadline:
                 break
-            rows = res.get("results") or []
-            st.setdefault("totals", {})[fmt] = res.get("count")
-            for d in rows:
-                st["scanned"] += 1
-                n += 1
-                rec = _deu_record(d, portal)
-                if rec is None:
-                    continue
-                prev = seen.get(d.get("id"))
-                if prev:
-                    prev.links = list(dict.fromkeys(prev.links + rec.links))
-                else:
-                    seen[d.get("id")] = rec
-            sid = res.get("scrollId")
-            url = f"{api}/scroll?scrollId={quote(sid)}" if (rows and sid) else None
-        st["by_format"][fmt] = n
+            # asking again for a page may have moved the cursor past it, so a scroll that "finished" can still
+            # have holes: check the count against the total the API reported
+            short = bool(total) and len(ids_fmt) < 0.995 * total and st["scanned"] < max_records
+            if not broke and not short:
+                break
+            st["error"] += f" {fmt}: restart {restart + 1} with {len(ids_fmt)} of {total} kept;"
+            await asyncio.sleep(30)
+        st.setdefault("totals", {})[fmt] = total
+        st["by_format"][fmt] = len(ids_fmt)
     out = list(seen.values())
     st.update(ok=st["scanned"] > 0, records=len(out))
     return out, st
