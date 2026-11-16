@@ -2,4 +2,4 @@ spike-gb
 spike-global
 spike-canz
 spike-us
-# spike-inspire  (held back 2026-11-16: 620k passing, mostly German development plans; waiting on a decision)
+spike-europe
