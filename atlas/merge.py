@@ -36,13 +36,15 @@ def main():
 
     frames, svc, roots, portals, http, logs, minutes = [], [], [], [], {}, [], 0.0
     for d in map(Path, args.dirs):
-        if not (d / "layers.parquet").exists():
+        if (d / "layers.parquet").exists():
+            g = gpd.read_parquet(d / "layers.parquet")
+            df = pd.DataFrame(g.drop(columns="geometry"))
+            df["bbox"] = [list(x.bounds) if x is not None and not x.is_empty else None for x in g.geometry]
+            frames.append(_lists(df.drop(columns=[c for c in ("dataset_id", "dataset_match") if c in df.columns])))
+        else:
             logs.append(f"{d.name}: no layers.parquet (shard failed or found nothing)")
-            continue
-        g = gpd.read_parquet(d / "layers.parquet")
-        df = pd.DataFrame(g.drop(columns="geometry"))
-        df["bbox"] = [list(x.bounds) if x is not None and not x.is_empty else None for x in g.geometry]
-        frames.append(_lists(df.drop(columns=[c for c in ("dataset_id", "dataset_match") if c in df.columns])))
+            if (d / "crawl.log").exists():
+                logs.append((d / "crawl.log").read_text()[-4000:])
         if (d / "services.parquet").exists():
             svc += pd.read_parquet(d / "services.parquet").to_dict("records")
         for f, acc in (("roots.json", roots), ("portals.json", portals)):
