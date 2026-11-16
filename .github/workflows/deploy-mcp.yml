@@ -48,7 +48,7 @@ jobs:
           # previous load's row hashes, so only changed rows are written (D1 free tier: 100k row writes a day)
           PREV=""
           if git fetch -q origin results/mcp-deploy 2>/dev/null && git show FETCH_HEAD:rows.json > /tmp/prev_rows.json 2>/dev/null; then PREV=/tmp/prev_rows.json; fi
-          python -m atlas.api_data --datasets /tmp/datasets.parquet ${TAGS:+--tags $TAGS} --out /tmp/api.sql \
+          python -m atlas.api_data --datasets /tmp/datasets.parquet ${TAGS:+--tags $TAGS} --out /tmp/api.sql --only-passing \
             --built "$(date -u +%F)" ${PREV:+--previous $PREV} --hashes-out /tmp/rows.json | tee /tmp/load-plan.txt
       - name: Deploy Worker and load D1
         if: steps.have.outputs.ok == '1'

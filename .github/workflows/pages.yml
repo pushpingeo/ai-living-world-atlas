@@ -29,8 +29,8 @@ jobs:
           bash .github/actions-fetch.sh
           mkdir -p _site && cp -r site/. _site/
           TAGS=""; [ -f /tmp/pub/tags.parquet ] && TAGS=/tmp/pub/tags.parquet
-          python -m atlas.viewer_data --datasets /tmp/pub/datasets.parquet ${TAGS:+--tags $TAGS} --out _site/data \
-            --meta "{\"built\":\"$(date -u +%F)\"}"
+          python -m atlas.viewer_data --datasets /tmp/pub/datasets.parquet ${TAGS:+--tags $TAGS} --out _site/data --only-passing \
+            --meta "{\"built\":\"$(date -u +%F)\",\"only_passing\":true}"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

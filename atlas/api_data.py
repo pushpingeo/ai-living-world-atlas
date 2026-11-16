@@ -92,6 +92,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--datasets", required=True)
     ap.add_argument("--tags", default="")
+    ap.add_argument("--only-passing", action="store_true", help="carry only datasets that pass the quality bar")
     ap.add_argument("--out", default="out/api.sql")
     ap.add_argument("--built", default="")
     ap.add_argument("--previous", default="", help="rows.json from the last load: only changed rows are written")
@@ -99,6 +100,8 @@ def main():
     args = ap.parse_args()
 
     ds = gpd.read_parquet(args.datasets)
+    if args.only_passing:
+        ds = ds[ds["q_pass"].astype(bool)].reset_index(drop=True)
     tags = {}
     if args.tags and Path(args.tags).exists():
         t = pd.read_parquet(args.tags)

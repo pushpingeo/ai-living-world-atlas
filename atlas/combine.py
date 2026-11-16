@@ -18,15 +18,19 @@ def main():
     ap.add_argument("--tags", nargs="*", default=[])
     ap.add_argument("--layers", nargs="*", default=[])
     ap.add_argument("--out", required=True)
+    ap.add_argument("--only-passing", action="store_true", help="keep only datasets that pass the quality bar (and their layers)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    ds = pd.concat([gpd.read_parquet(p) for p in a.datasets if Path(p).exists()], ignore_index=True)
+    flt = [("q_pass", "==", True)] if a.only_passing else None  # filter while reading: Europe alone is millions of rows
+    ds = pd.concat([gpd.read_parquet(p, filters=flt) for p in a.datasets if Path(p).exists()], ignore_index=True)
     ds = gpd.GeoDataFrame(ds.drop_duplicates("dataset_id"), geometry="geometry", crs="EPSG:4326")
     ds.to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     if a.layers:
         cols = ["uid", "dataset_id", "fields"]
-        ly = pd.concat([pd.read_parquet(p, columns=cols) for p in a.layers if Path(p).exists()], ignore_index=True)
+        keep = set(ds["dataset_id"]) if a.only_passing else None
+        lf = [("dataset_id", "in", keep)] if keep is not None else None
+        ly = pd.concat([pd.read_parquet(p, columns=cols, filters=lf) for p in a.layers if Path(p).exists()], ignore_index=True)
         ly.drop_duplicates("uid").to_parquet(out / "layers.parquet")
     if a.tags:
         tg = pd.concat([pd.read_parquet(p) for p in a.tags if Path(p).exists() and Path(p).stat().st_size > 0], ignore_index=True)

@@ -1,6 +1,7 @@
 name: spike
 # A crawl "wave". Edit a file in runs/ (spike-<name>.env) and push to start one:
 #   NAME=us  COUNTRIES=US  SEEDS=""  MINUTES=300  SHARDS=16
+# CONCAT=1 merges shards by streaming them together (no cross-shard regrouping) for waves too big for memory.
 # PREHARVEST=1 harvests the big catalogues (GeoNetwork, data.europa.eu) once, before the shards, and hands
 # the records to every shard (HARVEST_MINUTES, default 300).
 # Shards run in parallel; a final job merges them and publishes results/spike-<name>.
@@ -131,7 +132,8 @@ jobs:
       - name: Merge shards
         run: |
           ls shards
-          python -m atlas.merge --name "${{ needs.plan.outputs.name }}" --out out shards/*
+          set -a; . "${{ needs.plan.outputs.file }}"; set +a
+          python -m atlas.merge --name "${{ needs.plan.outputs.name }}" --out out ${CONCAT:+--concat} shards/*
           for d in shards/*; do cp "$d/crawl.log" "out/crawl-$(basename $d).log" 2>/dev/null || true; done
           cp shards/shard-0/harvest.log out/ 2>/dev/null || true
           python -m atlas.parts split out   # GitHub rejects files over 100 MB

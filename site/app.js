@@ -76,6 +76,7 @@ function addRows(raw) {
 
 async function loadIndex() {
   META = await (await fetch(DATA + "meta.json")).json();
+  if (META.only_passing) document.getElementById("f-pass").closest("label").hidden = true;  // nothing else is published
   addRows(await (await fetch(DATA + "big.json")).json());
 }
 

@@ -30,7 +30,6 @@ const TOOLS = [
         min_detail: { type: "string", enum: Object.keys(VOCAB.detail_levels), description: "At least this detailed (datasets with unknown detail are kept unless known_detail_only)" },
         known_detail_only: { type: "boolean" },
         text: { type: "string", description: "Words that must appear in the title or publisher" },
-        include_low_quality: { type: "boolean", description: "Also return datasets that fail the quality bar (default false)" },
         browser_ready: { type: "boolean", description: "Only datasets a web page can load directly (CORS)" },
         limit: { type: "integer", minimum: 1, maximum: 100, description: "Default 20" },
       },

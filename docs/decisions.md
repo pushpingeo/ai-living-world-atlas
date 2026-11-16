@@ -136,3 +136,12 @@ harvest job and hand the records to every shard, rather than each shard re-harve
 is kept. EU data themes are crosswalked to ISO only where clear (agri, econ, energy, environment, health,
 society, transport). Not yet used: the distribution title often carries the WMS/WFS layer name, which would
 make the catalogue-to-layer join exact.
+
+## 2026-11-16 — Viewer and MCP carry passing datasets only; big waves merge without regrouping
+With the US wave the viewer data reached 974 MB, against GitHub Pages' 1 GB site limit, and Europe will be bigger
+than everything else together. The viewer and the MCP server now carry only datasets that pass the quality bar
+(141k across UK, global, CANZ, US); the full index, failures included, stays in the wave files on the results
+branches. The "passes quality bar" toggle is hidden and the MCP's include_low_quality option removed.
+The Europe merge ran the runner out of memory. Very large waves (CONCAT=1) now merge by streaming each shard's
+files together without regrouping datasets across shards; the cost is that the same data published on two hosts
+that landed in different shards shows up twice.

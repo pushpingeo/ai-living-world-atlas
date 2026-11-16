@@ -36,6 +36,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--datasets", required=True)
     ap.add_argument("--tags", default="")
+    ap.add_argument("--only-passing", action="store_true", help="carry only datasets that pass the quality bar")
     ap.add_argument("--out", default="site/data")
     ap.add_argument("--meta", default="{}", help="JSON merged into meta (run ids, dates)")
     args = ap.parse_args()
@@ -45,6 +46,8 @@ def main():
     import geopandas as gpd
 
     ds = gpd.read_parquet(args.datasets)
+    if args.only_passing:
+        ds = ds[ds["q_pass"].astype(bool)].reset_index(drop=True)
     ds["_bbox"] = [list(g.bounds) if g is not None and not g.is_empty else None for g in ds.geometry]
     ds = pd.DataFrame(ds.drop(columns="geometry"))
     tags = {}

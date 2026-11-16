@@ -18,4 +18,4 @@ done < runs/published.txt
 for b in $(git ls-remote --heads origin 'results/tags-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
   git fetch -q origin "$b" && git show FETCH_HEAD:tags.parquet > "/tmp/waves/$(basename $b).tags.parquet" 2>/dev/null && TG+=("/tmp/waves/$(basename $b).tags.parquet") || true
 done
-python -m atlas.combine "${DS[@]}" --layers "${LY[@]}" ${TG[@]:+--tags "${TG[@]}"} --out /tmp/pub
+python -m atlas.combine "${DS[@]}" --layers "${LY[@]}" ${TG[@]:+--tags "${TG[@]}"} --out /tmp/pub --only-passing  # the viewer and MCP carry passing datasets only; the full index stays in the wave files
