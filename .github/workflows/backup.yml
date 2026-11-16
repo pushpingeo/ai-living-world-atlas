@@ -61,7 +61,8 @@ jobs:
           if ! wrangler r2 bucket list >/dev/null 2>&1; then echo "r2: not available with this token (needs Workers R2 Storage: Edit)" >> /tmp/report.txt; exit 0; fi
           wrangler r2 bucket list | grep -q atlas-backup || wrangler r2 bucket create atlas-backup
           for f in /tmp/bk/*; do
-            wrangler r2 object put "atlas-backup/tags/$(basename $f)" --file "$f" --remote >/dev/null && echo "r2: $(basename $f)" >> /tmp/report.txt
+            k=$(basename "$f" | sed -E 's/-[0-9]{8}T[0-9]{4}Z-/-/')   # name by content hash: same content, same key
+            wrangler r2 object put "atlas-backup/tags/$k" --file "$f" --remote >/dev/null && echo "r2: $k" >> /tmp/report.txt
           done
       - name: Publish report
         if: always()
