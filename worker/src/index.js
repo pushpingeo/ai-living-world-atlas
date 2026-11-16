@@ -148,6 +148,8 @@ function usage(e) {
 }
 
 /* ---------------- tools ---------------- */
+const CAND = 3000;
+
 async function findDatasets(env, a) {
   const v = queryArea(a, 5);
   const where = ["xmin <= ?", "xmax >= ?", "ymin <= ?", "ymax >= ?"];
@@ -165,15 +167,21 @@ async function findDatasets(env, a) {
     where.push(a.known_detail_only ? "detail_m <= ?" : "(detail_m <= ? OR detail_m IS NULL)");
     params.push(m);
   }
-  const sql = `SELECT * FROM datasets WHERE ${where.join(" AND ")} LIMIT 5000`;
-  const { results } = await env.DB.prepare(sql).bind(...params).all();
+  // Candidates nearest in size to the area come first, so the cap drops the far-too-big and far-too-small ones.
+  const va = Math.max((v[2] - v[0]) * (v[3] - v[1]), 1e-9);
+  const cond = where.join(" AND ");
+  const sql = `SELECT * FROM datasets WHERE ${cond} ORDER BY CASE WHEN area > 0 THEN MAX(area / ?, ? / area) ELSE 1e18 END LIMIT ${CAND}`;
+  const [{ results }, cnt] = await Promise.all([
+    env.DB.prepare(sql).bind(...params, va, va).all(),
+    env.DB.prepare(`SELECT COUNT(*) AS n FROM datasets WHERE ${cond}`).bind(...params).first(),
+  ]);
   const ranked = results
     .map((r) => ({ r, f: fit([r.xmin, r.ymin, r.xmax, r.ymax], v) * (r.xsus ? 0.5 : 1) }))
     .sort((x, y) => y.f - x.f || y.r.score - x.r.score)
     .slice(0, Math.min(a.limit || 20, 100));
   return {
     area: v.map((n) => +n.toFixed(5)),
-    matches: results.length + (results.length === 5000 ? "+" : ""),
+    matches: cnt ? cnt.n : results.length,
     results: ranked.map(({ r, f }) => ({
       id: r.id, title: r.title, publisher: r.publisher, publisher_type: r.ptype, role: r.role,
       fit: +f.toFixed(3), coverage: r.coverage, detail: r.detail || null,
@@ -268,7 +276,7 @@ async function rpc(env, msg) {
       const v = PROTOCOLS.includes(params.protocolVersion) ? params.protocolVersion : PROTOCOLS[0];
       return ok({
         protocolVersion: v, capabilities: { tools: {} }, serverInfo: SERVER,
-        instructions: "An index of public map services (UK for now), ranked by how well each dataset's extent fits your area. " +
+        instructions: "An index of public map services (UK, Canada, Australia, NZ, US, plus global sources so far), ranked by how well each dataset's extent fits your area. " +
           "Typical flow: find_datasets for a place and concept, get_dataset for licence and endpoints, fetch_features for data. " +
           "Publisher text is quoted as published; themes and concepts marked 'ai' were assigned by a model from fixed lists.",
       });
