@@ -45,7 +45,11 @@ jobs:
           git fetch -q origin results/spike-gb && git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
           TAGS=""
           if git fetch -q origin results/tags-gb 2>/dev/null && git show FETCH_HEAD:tags.parquet > /tmp/tags.parquet 2>/dev/null; then TAGS=/tmp/tags.parquet; fi
-          python -m atlas.api_data --datasets /tmp/datasets.parquet ${TAGS:+--tags $TAGS} --out /tmp/api.sql --built "$(date -u +%F)"
+          # previous load's row hashes, so only changed rows are written (D1 free tier: 100k row writes a day)
+          PREV=""
+          if git fetch -q origin results/mcp-deploy 2>/dev/null && git show FETCH_HEAD:rows.json > /tmp/prev_rows.json 2>/dev/null; then PREV=/tmp/prev_rows.json; fi
+          python -m atlas.api_data --datasets /tmp/datasets.parquet ${TAGS:+--tags $TAGS} --out /tmp/api.sql \
+            --built "$(date -u +%F)" ${PREV:+--previous $PREV} --hashes-out /tmp/rows.json | tee /tmp/load-plan.txt
       - name: Deploy Worker and load D1
         if: steps.have.outputs.ok == '1'
         working-directory: worker
@@ -54,7 +58,8 @@ jobs:
           ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='atlas'),''))")
           if [ -z "$ID" ]; then wrangler d1 create atlas >/dev/null; ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next(d['uuid'] for d in json.load(sys.stdin) if d['name']=='atlas'))"); fi
           sed -i "s/REPLACED_BY_DEPLOY/$ID/" wrangler.toml
-          wrangler d1 execute atlas --remote --file /tmp/api.sql -y
+          if [ -s /tmp/api.sql ]; then wrangler d1 execute atlas --remote --file /tmp/api.sql -y; else echo "No data changes; database left as is"; fi
+          cp /tmp/rows.json /tmp/rows.loaded.json  # only reached if the load succeeded
           wrangler deploy
           printf '%s' "$ATLAS_MCP_KEY" | wrangler secret put ATLAS_KEY
       - name: Smoke test
@@ -75,6 +80,9 @@ jobs:
         if: always() && steps.have.outputs.ok == '1'
         run: |
           mkdir -p /tmp/r && cp /tmp/smoke.txt /tmp/r/ 2>/dev/null || echo "smoke test did not run" > /tmp/r/smoke.txt
+          cp /tmp/load-plan.txt /tmp/r/ 2>/dev/null || true
+          # keep the hashes of what is actually in the database: new ones if the load worked, else the previous ones
+          if [ -f /tmp/rows.loaded.json ]; then cp /tmp/rows.loaded.json /tmp/r/rows.json; elif [ -f /tmp/prev_rows.json ]; then cp /tmp/prev_rows.json /tmp/r/rows.json; fi
           echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ) status ${{ job.status }}" > /tmp/r/RUN.txt
           git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
           git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
