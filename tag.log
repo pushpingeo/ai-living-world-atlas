@@ -1,0 +1,8 @@
+[1s] GSbB7Q ended {'processing': 0, 'succeeded': 9737, 'errored': 0, 'canceled': 0, 'expired': 0}; AfUgos ended {'processing': 0, 'succeeded': 9706, 'errored': 0, 'canceled': 0, 'expired': 0}; 2nS7jX ended {'processing': 0, 'succeeded': 9621, 'errored': 0, 'canceled': 0, 'expired': 0}; EB1ST8 ended {'processing': 0, 'succeeded': 9598, 'errored': 0, 'canceled': 0, 'expired': 0}; NstmBL ended {'processing': 0, 'succeeded': 9661, 'errored': 0, 'canceled': 0, 'expired': 0}; ZjsKL9 ended {'processing': 0, 'succeeded': 3866, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch(es) msgbatch_01FgbgwEnU1TfKUokdGSbB7Q,msgbatch_014KogNUD6LsqkH7TkAfUgos,msgbatch_01SjrxRxGjom5kFU132nS7jX,msgbatch_0166zWLBdGfuz92FFyEB1ST8,msgbatch_01RE33ijbKgD2kbJhANstmBL,msgbatch_0115GJimiqRX7Nn9wrZjsKL9
+
+- Requests: 52189; succeeded: 52189
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 31835939, "output_tokens": 10707274, "cache_read_input_tokens": 161472766, "cache_creation_input_tokens": 0}
+- **Cost: $5.08** (estimated from token counts and published batch prices)
+
