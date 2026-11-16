@@ -155,3 +155,11 @@ Detection: plan wording in title/abstract/licence, plus any service where at lea
 (the half rule stops national services with one zoning layer, e.g. swisstopo, being swept in). XPlanung's demo
 council "Testhausen" is excluded as demo data. Result: 1,672 collections; Europe passing 71.9k. The derived wave is
 results/spike-europe (built by the collections workflow from results/spike-inspire).
+
+## 2026-11-16 (night): Search ranking for small areas, from Tobler's place-finding tests
+
+**Size match on a log scale.** `find_datasets` scored every regional or global layer at 0 for a site-sized search, because the plain ratio of search area to layer extent is tiny. Ranking then fell back to quality score, so local layers with inflated extents (Pennsylvania mines, Spanish power plants) came first for sites in Congo and Argentina. Fit is now coverage × the better of the area ratio and a log-scale size match, so a provincial layer beats a continental one, which beats a global one, and none scores 0. Layers flagged with a possibly overstated extent are now multiplied by 0.2 (was 0.5).
+
+**Tool description says what the atlas actually covers** (it still said "United Kingdom (test index)"), so an agent elsewhere doesn't give up before trying.
+
+**Known, not fixed:** some ArcGIS servers advertise Query but refuse it (e.g. Western Michigan's Global Mines MapServer, including the Maus et al. mining polygons). The crawler can't tell without trying a query; the planned liveness sweep should test one query per layer and drop the capability when it fails. The "Global Power Plants Aug24" layers are a third-party summary of GEM's tracker (operating plants only, about 59k), not GEM's full release; newer plants such as Nachtigal (2024) aren't in it.

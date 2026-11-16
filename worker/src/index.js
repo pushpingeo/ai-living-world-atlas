@@ -15,7 +15,7 @@ const TOOLS = [
       "Find public map datasets covering a place, ranked so the ones whose extent best matches the area come first " +
       "(zoom out for national/global layers, in for local ones). Filter by concept (what the data is, e.g. protected-area), " +
       "ISO theme, role, service capability and minimum detail. Use `vocabulary` for valid concept and theme ids. " +
-      "Returns dataset ids for get_dataset and fetch_features. Coverage today: United Kingdom (test index).",
+      "Returns dataset ids for get_dataset and fetch_features. Coverage: the UK, Europe, the US, Canada, Australia and New Zealand in depth, plus global datasets (protected areas, power plants, mines, terrain, water, settlements). Elsewhere, expect mainly global layers.",
     inputSchema: {
       type: "object",
       properties: {
@@ -110,7 +110,11 @@ function fit(b, v) {
   const ai = geoArea(i);
   const ab = Math.max(geoArea(b), av * 1e-4);
   const cov = ai / av, spec = ai / ab;
-  return cov + spec > 0 ? (2 * cov * spec) / (cov + spec) : 0;
+  // Size match on a log scale: a global layer for a 10 km site isn't a perfect fit, but it isn't zero either
+  // (with a plain ratio every regional or global layer scored 0 for a small area, so ranking fell back to
+  // quality score and local layers with inflated extents came first).
+  const sizeMatch = 1 / (1 + Math.abs(Math.log10(Math.max(ab, 1e-12) / Math.max(av, 1e-12))) / 2);
+  return cov * Math.min(1, Math.max(spec, sizeMatch));
 }
 
 const unwrap = (s) => (s ? s.split(",").filter(Boolean) : []);
@@ -175,7 +179,7 @@ async function findDatasets(env, a) {
     env.DB.prepare(`SELECT COUNT(*) AS n FROM datasets WHERE ${cond}`).bind(...params).first(),
   ]);
   const ranked = results
-    .map((r) => ({ r, f: fit([r.xmin, r.ymin, r.xmax, r.ymax], v) * (r.xsus ? 0.5 : 1) }))
+    .map((r) => ({ r, f: fit([r.xmin, r.ymin, r.xmax, r.ymax], v) * (r.xsus ? 0.2 : 1) }))
     .sort((x, y) => y.f - x.f || y.r.score - x.r.score)
     .slice(0, Math.min(a.limit || 20, 100));
   return {
