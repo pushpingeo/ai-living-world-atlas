@@ -58,7 +58,19 @@ jobs:
           ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='atlas'),''))")
           if [ -z "$ID" ]; then wrangler d1 create atlas >/dev/null; ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next(d['uuid'] for d in json.load(sys.stdin) if d['name']=='atlas'))"); fi
           sed -i "s/REPLACED_BY_DEPLOY/$ID/" wrangler.toml
-          if [ -s /tmp/api.sql ]; then wrangler d1 execute atlas --remote --file /tmp/api.sql -y; else echo "No data changes; database left as is"; fi
+          if [ -s /tmp/api.sql ]; then
+            # one big file can exceed what D1 does in one go (D1_RESET_DO on a 315k-row delete), so load in ~4 MB pieces;
+            # every statement is safe to repeat, so a failed piece just means rerunning the deploy
+            python3 -c "
+          import pathlib; out = pathlib.Path('/tmp/sql'); out.mkdir(exist_ok=True); buf, n, i = [], 0, 0
+          for line in open('/tmp/api.sql', encoding='utf-8'):
+              buf.append(line); n += len(line)
+              if n > 4_000_000 and line.rstrip().endswith(';'):
+                  (out / f'{i:04d}.sql').write_text(''.join(buf), encoding='utf-8'); buf, n, i = [], 0, i + 1
+          if buf: (out / f'{i:04d}.sql').write_text(''.join(buf), encoding='utf-8')
+          "
+            for f in /tmp/sql/*.sql; do echo "loading $f"; wrangler d1 execute atlas --remote --file "$f" -y > /dev/null; done
+          else echo "No data changes; database left as is"; fi
           cp /tmp/rows.json /tmp/rows.loaded.json  # only reached if the load succeeded
           wrangler deploy
           printf '%s' "$ATLAS_MCP_KEY" | wrangler secret put ATLAS_KEY
