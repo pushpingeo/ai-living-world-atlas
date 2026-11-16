@@ -47,6 +47,7 @@ def main():
     ap.add_argument("--out", default="out/tags")
     ap.add_argument("--only-passing", action="store_true")
     ap.add_argument("--batch-id", default="")
+    ap.add_argument("--skip-tagged", default="", help="tags.parquet of datasets already tagged; those are skipped")
     ap.add_argument("--max-wait-min", type=float, default=320)
     args = ap.parse_args()
     out = Path(args.out)
@@ -57,6 +58,15 @@ def main():
         ds = pd.read_parquet(args.datasets)
         if args.only_passing:
             ds = ds[ds["q_pass"]]
+        if args.skip_tagged and Path(args.skip_tagged).exists():
+            done = set(pd.read_parquet(args.skip_tagged, columns=["dataset_id"])["dataset_id"])
+            before = len(ds)
+            ds = ds[~ds["dataset_id"].isin(done)]
+            print(f"skipping {before - len(ds)} already tagged", flush=True)
+        if not len(ds):
+            (out / "COST.md").write_text("# Nothing new to tag\n\n- **Cost: $0.00**\n")
+            print("nothing to tag")
+            return
         layers = pd.read_parquet(args.layers, columns=["dataset_id", "fields"])
         fields = layers.groupby("dataset_id")["fields"].apply(lambda s: max((list(x) for x in s), key=len, default=[])).to_dict()
         reqs = build_requests(ds, fields)

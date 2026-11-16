@@ -115,3 +115,15 @@ Extents are often much bigger than the data. In the UK run:
 ## 2026-11-16: D1 write limit
 
 Cloudflare's free tier allows 100k row writes a day in D1, and index updates count too. Each full reload of the ~40k-row database cost more than that, and three reloads on 15–16 Nov hit the limit. Reads were unaffected. The deploy now keeps a hash of every row it loaded (`rows.json` on `results/mcp-deploy`) and writes only the difference. An unchanged rebuild writes nothing; a normal recrawl should write a few thousand rows. A crawl that changes every row (a schema change, say) still needs a full day's allowance, so those should be spaced out, or moved to the $5/month Workers plan if they become routine.
+
+## 2026-11-16: Going global in waves
+
+**Global backbones** are hand-picked in `vocab/seeds/global.yaml`: UNEP-WCMC, GEBCO, ESA WorldCover (Terrascope), JRC/GHSL, FAO, SoilGrids, Marine Regions, Global Forest Watch, NASA GIBS, the EEA servers, and public Living Atlas items. Living Atlas items needing a subscription or credits are skipped; each item's credits become its publisher.
+
+**Download-only sources are in.** GHSL, Copernicus DEM, Overture, HydroSHEDS, GEM, geoBoundaries, Natural Earth, the UNESCO list, the USGS earthquake feed and Overpass have no map service to crawl. They are listed as records (`download`, `cloud`, `api` or `landing` endpoints) with their own metadata, checked with a plain GET. Leaving them out would leave holes exactly where national data is thin.
+
+**INSPIRE** comes through the geoportal's GeoNetwork search API, not CSW XML. It is easier to page and returns ISO topic categories, INSPIRE themes and the stated scale. A stated scale becomes `detail_source: metadata`, which should lift detail coverage a lot for EU data. Every shard harvests the catalogue, then crawls only its share of the services.
+
+**Waves** are run files in `runs/` (name, countries, seed files, shards). Shards run in parallel in Actions and merge into one `results/spike-<name>` branch: US 16 shards, INSPIRE 8, global 4, Canada/Australia/NZ 4. `runs/published.txt` lists which waves the viewer and MCP server use. The US and INSPIRE join once the viewer loads its index in tiles, because one file for every dataset won't hold at that size.
+
+**Tagging** runs per wave and skips anything already tagged. Costs are reported per wave.

@@ -318,6 +318,8 @@ def parse_wcs(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
 
 
 async def crawl_ogc(c: Client, base: str, service: str, ctx: dict, max_layers: int = 3000) -> tuple[list[Layer], dict]:
+    ctx = dict(ctx)
+    curated_licence = ctx.pop("curated_licence", "")
     status = {"service_url": base, "service_type": service.lower(), "ok": False, "ms": 0, "error": "", "n_layers": 0}
     r = await c.get(caps_url(base, service))
     status["ms"] = r.ms
@@ -334,6 +336,8 @@ async def crawl_ogc(c: Client, base: str, service: str, ctx: dict, max_layers: i
     status["n_layers"] = len(layers)
     for L in layers:
         L.cors = r.cors
+        if curated_licence and not L.licence_text:
+            L.licence_text = curated_licence
     return layers[:max_layers], status
 
 

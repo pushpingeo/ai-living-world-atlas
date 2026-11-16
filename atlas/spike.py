@@ -18,12 +18,13 @@ from urllib.parse import urlsplit
 
 from . import crawl_arcgis, crawl_ogc, endpoints, extents
 from .datasets import build as build_datasets
-from .crawl_portals import harvest_ckan, harvest_hub, service_targets
+from .crawl_portals import harvest_arcgis_online, harvest_ckan, harvest_geonetwork, harvest_hub, service_targets
+from . import records as curated_records
 from .net import Client
 from .quality import codelike, declared_iso_themes, score
 from .record import norm_url
 from .resolution import derive
-from .seeds import load_targets
+from .seeds import empty_targets, load_curated, load_targets, merge_targets
 
 
 def is_agol(url: str) -> bool:
@@ -43,7 +44,23 @@ async def run(args):
         print(line, flush=True)
         log.append(line)
 
-    targets = load_targets(args.registry, args.countries)
+    targets = load_targets(args.registry, args.countries) if args.countries else empty_targets()
+    for path in args.seeds:
+        targets = merge_targets(targets, load_curated(path))
+    if args.shard:  # split work across parallel jobs by a stable hash of each target's URL
+        import zlib
+
+        i, n = (int(x) for x in args.shard.split("/"))
+        keep = lambda u: zlib.crc32(u.encode()) % n == i
+        # GeoNetwork catalogues are harvested by every shard; the services they list are split later
+        for k in ("arcgis_roots", "arcgis_services", "wms", "wfs", "wmts", "wcs", "hub", "ckan", "agol"):
+            targets[k] = {u: v for u, v in targets[k].items() if keep(u)}
+        if i != 0:
+            targets["records"] = []
+        note(f"shard {i}/{n}")
+    shard_keep = (lambda u: True)
+    if args.shard:
+        shard_keep = keep
     if args.host_filter:  # for local testing: keep only targets on matching hosts
         rx = re.compile(args.host_filter)
         for k in ("arcgis_roots", "wms", "wfs", "wmts", "wcs", "hub", "ckan"):
@@ -60,8 +77,11 @@ async def run(args):
                 return [], {"portal": portal, "kind": kind, "ok": False, "error": f"crash: {type(e).__name__}: {e}"[:200], "records": 0}
         jobs = [safe(harvest_hub(c, u, ctx["discovered_via"]), ctx["discovered_via"], "hub") for u, ctx in targets["hub"].items()]
         jobs += [safe(harvest_ckan(c, u, ctx["portal"], max_records=args.ckan_max), ctx["portal"], "ckan") for u, ctx in targets["ckan"].items()]
+        jobs += [safe(harvest_arcgis_online(c, q, ctx["discovered_via"]), ctx["discovered_via"], "arcgis-online") for q, ctx in targets["agol"].items()]
+        jobs += [safe(harvest_geonetwork(c, u, ctx["discovered_via"]), ctx["discovered_via"], "geonetwork") for u, ctx in targets["gn"].items()]
         portal_ctx = {ctx["discovered_via"].split(":", 1)[1] if ctx["discovered_via"].startswith("hub:") else ctx["portal"]: ctx
                       for ctx in list(targets["hub"].values()) + list(targets["ckan"].values())}
+        portal_ctx.update({ctx["discovered_via"]: ctx for ctx in list(targets["agol"].values()) + list(targets["gn"].values())})
         for coro in asyncio.as_completed(jobs):
             recs, st = await coro
             portal_status.append(st)
@@ -70,7 +90,7 @@ async def run(args):
 
         # ---- 2. work out which services to crawl ----------------------------
         arc_roots = dict(targets["arcgis_roots"])
-        arc_services: dict[str, dict] = {}
+        arc_services: dict[str, dict] = dict(targets["arcgis_services"])
         ogc: dict[tuple[str, str], dict] = {(u, "WMS"): ctx for u, ctx in targets["wms"].items()}
         ogc.update({(u, "WFS"): ctx for u, ctx in targets["wfs"].items()})
         ogc.update({(u, "WMTS"): ctx for u, ctx in targets["wmts"].items()})
@@ -78,14 +98,17 @@ async def run(args):
         for rec in records:
             pkey = rec.portal.split(":", 1)[1] if rec.portal.startswith("hub:") else rec.portal
             pctx = portal_ctx.get(pkey, {})
+            agol = rec.portal.startswith(("agol:", "gn:"))
             ctx = {
                 "publisher": rec.publisher or pctx.get("publisher", ""),
                 # a CKAN aggregator's owner is not the data publisher; leave type to domain rules
-                "publisher_type": pctx.get("publisher_type", "unknown") if rec.portal.startswith("hub:") else "unknown",
-                "country": pctx.get("country", args.countries[0]), "seed_catalog": pctx.get("seed_catalog", ""),
-                "discovered_via": rec.portal if rec.portal.startswith("hub:") else f"ckan:{rec.portal}",
+                "publisher_type": pctx.get("publisher_type", "unknown") if (rec.portal.startswith("hub:") or agol) else "unknown",
+                "country": pctx.get("country", args.countries[0] if args.countries else ""), "seed_catalog": pctx.get("seed_catalog", ""),
+                "discovered_via": rec.portal if (rec.portal.startswith("hub:") or agol) else f"ckan:{rec.portal}",
             }
             for kind, u in service_targets(rec):
+                if rec.portal.startswith("gn:") and not shard_keep(u):
+                    continue  # another shard crawls this one
                 ctx_u = ctx
                 if rec.portal.startswith("hub:") and not is_agol(u):
                     # a Hub listing a service on someone else's server: the Hub's owner isn't the publisher
@@ -144,6 +167,11 @@ async def run(args):
             done += len(work[chunk_start:chunk_start + 500])
             note(f"services crawled {done}/{len(work)}; layers so far {len(layers)}")
 
+        # ---- 4a. curated download-only records -----------------------------
+        rec_layers = curated_records.to_layers(targets["records"])
+        layers.extend(rec_layers)
+        note(f"curated records: {len(rec_layers)} endpoints")
+
         # ---- 4b. false extents: flag, then measure what we can -------------
         extents.flag(layers)
         ext_stats = await extents.measure(c, layers, args.max_extent_checks, lambda: time.monotonic() < deadline - reserve / 2)
@@ -180,6 +208,7 @@ async def run(args):
             if recs:
                 r = recs[0]
                 L.portal_title, L.portal_abstract, L.portal_licence = r.title, r.abstract, r.licence
+                L.stated_scale = getattr(r, "scale", None)
                 L.landing_page = r.landing_page
                 L.declared_themes = r.themes
                 if not L.listed_by:
@@ -202,7 +231,8 @@ async def run(args):
         async def chk(L):
             if time.monotonic() > deadline - reserve / 4:
                 return
-            fn = crawl_ogc.check_layer if L.service_type in ("wms", "wfs", "wmts", "wcs") else crawl_arcgis.check_layer
+            fn = (crawl_ogc.check_layer if L.service_type in ("wms", "wfs", "wmts", "wcs")
+                  else curated_records.check if L.service_type in curated_records.CAPS else crawl_arcgis.check_layer)
             try:
                 checks[L.uid] = await fn(c, L)
             except Exception as e:
@@ -346,7 +376,7 @@ def report_md(s, args):
 
     n = L.get("total", 0)
     lines = [
-        f"# Spike report: {','.join(args.countries)}",
+        f"# Spike report: {','.join(args.countries) or 'curated seeds'}{' + ' + ', '.join(args.seeds) if args.seeds else ''}",
         "",
         f"Run time {s['minutes']} min; {s['http']['requests']} HTTP requests; {s['http'].get('robots_blocked', 0)} blocked by robots.txt.",
         "",
@@ -404,7 +434,8 @@ def report_md(s, args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--registry", required=True)
-    ap.add_argument("--countries", default="GB")
+    ap.add_argument("--countries", default="GB", help="comma list of ISO2 codes from the registry; empty for none")
+    ap.add_argument("--seeds", action="append", default=[], help="curated seed file(s), e.g. vocab/seeds/global.yaml")
     ap.add_argument("--out", default="out/gb")
     ap.add_argument("--minutes", type=float, default=150)
     ap.add_argument("--concurrency", type=int, default=48)
@@ -414,9 +445,10 @@ def main():
     ap.add_argument("--max-checks", type=int, default=4000)
     ap.add_argument("--max-extent-checks", type=int, default=15000)
     ap.add_argument("--host-filter", default="")
+    ap.add_argument("--shard", default="", help="i/n: crawl only the i-th of n slices of the seed targets")
     ap.add_argument("--expand-roots", action="store_true", default=True)
     args = ap.parse_args()
-    args.countries = [c.strip().upper() for c in args.countries.split(",")]
+    args.countries = [c.strip().upper() for c in args.countries.split(",") if c.strip()]
     asyncio.run(run(args))
 
 

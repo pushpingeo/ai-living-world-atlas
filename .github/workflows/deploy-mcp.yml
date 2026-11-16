@@ -42,9 +42,9 @@ jobs:
         if: steps.have.outputs.ok == '1'
         run: |
           pip install -q -r requirements.txt
-          git fetch -q origin results/spike-gb && git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
-          TAGS=""
-          if git fetch -q origin results/tags-gb 2>/dev/null && git show FETCH_HEAD:tags.parquet > /tmp/tags.parquet 2>/dev/null; then TAGS=/tmp/tags.parquet; fi
+          bash .github/actions-fetch.sh
+          cp /tmp/pub/datasets.parquet /tmp/datasets.parquet
+          TAGS=""; [ -f /tmp/pub/tags.parquet ] && TAGS=/tmp/pub/tags.parquet
           # previous load's row hashes, so only changed rows are written (D1 free tier: 100k row writes a day)
           PREV=""
           if git fetch -q origin results/mcp-deploy 2>/dev/null && git show FETCH_HEAD:rows.json > /tmp/prev_rows.json 2>/dev/null; then PREV=/tmp/prev_rows.json; fi

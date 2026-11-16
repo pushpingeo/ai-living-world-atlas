@@ -82,6 +82,29 @@ class Client:
         rp = self.robots[key]
         return True if rp is None else rp.can_fetch(USER_AGENT, url)
 
+    async def post_json(self, url: str, body: dict, retries: int = 2) -> Resp:
+        """POST a JSON body (for search APIs). Same politeness rules as get()."""
+        host = urlsplit(url).netloc
+        last = None
+        for attempt in range(retries + 1):
+            async with self.total, self._host_sem(host):
+                t0 = time.monotonic()
+                self.stats["requests"] += 1
+                try:
+                    async with self.session.post(url, json=body, timeout=aiohttp.ClientTimeout(total=120),
+                                                 headers={"Accept": "application/json"}) as r:
+                        data = await r.read()
+                        last = Resp(str(r.url), r.status, int((time.monotonic() - t0) * 1000), data, r.headers.get("Content-Type", ""))
+                except Exception as e:
+                    last = Resp(url, 0, int((time.monotonic() - t0) * 1000), error=f"{type(e).__name__}: {e}"[:200])
+            if last.status in (0, 429, 502, 503, 504) and attempt < retries:
+                await asyncio.sleep(3 * (attempt + 1))
+                continue
+            break
+        if not last.ok:
+            self.stats["errors"] += 1
+        return last
+
     async def get(self, url: str, retries: int = 1) -> Resp:
         host = urlsplit(url).netloc
         if not await self._allowed(url):

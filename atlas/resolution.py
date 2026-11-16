@@ -101,6 +101,8 @@ def derive(row: dict) -> dict:
     detail, src, evidence = None, "", ""
     if row.get("pixel_size_m"):
         detail, src, evidence = float(row["pixel_size_m"]), "pixel-size", f"{row['pixel_size_m']} m cells"
+    if detail is None and row.get("stated_scale"):
+        detail, src, evidence = row["stated_scale"] / 2000, "metadata", f"metadata says 1:{row['stated_scale']:,.0f}"
     if detail is None:
         m, hit = stated_resolution_m(row.get("title", ""), row.get("portal_title", ""), row.get("abstract", ""),
                                      row.get("portal_abstract", ""), row.get("service_abstract", ""))

@@ -1,4 +1,7 @@
 name: spike
+# A crawl "wave". Edit a file in runs/ (spike-<name>.env) and push to start one:
+#   NAME=us  COUNTRIES=US  SEEDS=""  MINUTES=300  SHARDS=16
+# Shards run in parallel; a final job merges them and publishes results/spike-<name>.
 on:
   push:
     branches: [main]
@@ -11,43 +14,91 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: spike
+  group: spike-${{ github.sha }}
   cancel-in-progress: false
 jobs:
-  spike:
+  plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 200
+    outputs:
+      file: ${{ steps.p.outputs.file }}
+      name: ${{ steps.p.outputs.name }}
+      shards: ${{ steps.p.outputs.shards }}
+      matrix: ${{ steps.p.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pip
-      - name: Install
-        run: pip install -r requirements.txt
-      - name: Pick run file
-        id: pick
+      - id: p
         run: |
           f="${{ github.event.inputs.run_file }}"
           if [ -z "$f" ]; then f=$(git diff --name-only HEAD~1 HEAD -- 'runs/spike-*.env' | head -1); fi
           [ -z "$f" ] && f=runs/spike-gb.env
           set -a; . "$f"; set +a
-          echo "countries=$COUNTRIES" >> $GITHUB_OUTPUT
-          echo "minutes=$MINUTES" >> $GITHUB_OUTPUT
-          echo "branch=results/spike-$(echo $COUNTRIES | tr 'A-Z,' 'a-z-')" >> $GITHUB_OUTPUT
+          NAME=${NAME:-$(basename "$f" .env | sed 's/^spike-//')}
+          SHARDS=${SHARDS:-1}
+          echo "file=$f" >> $GITHUB_OUTPUT
+          echo "name=$NAME" >> $GITHUB_OUTPUT
+          echo "shards=$SHARDS" >> $GITHUB_OUTPUT
+          echo "matrix=$(python3 -c "import json;print(json.dumps(list(range($SHARDS))))")" >> $GITHUB_OUTPUT
+  crawl:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
       - name: Fetch seed registry (Dateno, CC BY 4.0)
         run: curl -sSfL -o /tmp/registry.parquet https://raw.githubusercontent.com/commondataio/dataportals-registry/main/data/datasets/full.parquet
       - name: Crawl
         run: |
+          set -a; . "${{ needs.plan.outputs.file }}"; set +a
+          SEED_ARGS=""; for s in $SEEDS; do SEED_ARGS="$SEED_ARGS --seeds $s"; done
           set -o pipefail
-          python -m atlas.spike --registry /tmp/registry.parquet --countries "${{ steps.pick.outputs.countries }}" --out out --minutes "${{ steps.pick.outputs.minutes }}" 2>&1 | tee crawl.log
+          python -m atlas.spike --registry /tmp/registry.parquet --countries "${COUNTRIES:-}" $SEED_ARGS \
+            --shard "${{ matrix.shard }}/${{ needs.plan.outputs.shards }}" --out out --minutes "${MINUTES:-150}" 2>&1 | tee out-crawl.log
+      - name: Keep shard output
+        if: always()
+        run: mkdir -p out && cp out-crawl.log out/crawl.log 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shard-${{ matrix.shard }}
+          path: out
+          retention-days: 7
+  merge:
+    needs: [plan, crawl]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          path: shards
+      - name: Merge shards
+        run: |
+          ls shards
+          python -m atlas.merge --name "${{ needs.plan.outputs.name }}" --out out shards/*
+          for d in shards/*; do cp "$d/crawl.log" "out/crawl-$(basename $d).log" 2>/dev/null || true; done
       - name: Publish results to branch
         if: always()
         run: |
-          mkdir -p out && cp crawl.log out/ 2>/dev/null || true
-          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          mkdir -p out
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ) shards ${{ needs.plan.outputs.shards }}" > out/RUN.txt
           cp -r out /tmp/results
           git config user.name "atlas-bot"
           git config user.email "atlas-bot@users.noreply.github.com"
@@ -55,5 +106,5 @@ jobs:
           git rm -rfq . && git clean -fdxq
           cp -r /tmp/results/. .
           git add -A
-          git commit -qm "Spike results ${{ steps.pick.outputs.countries }} (run ${GITHUB_RUN_ID})"
-          git push -f origin HEAD:refs/heads/${{ steps.pick.outputs.branch }}
+          git commit -qm "Crawl results ${{ needs.plan.outputs.name }} (run ${GITHUB_RUN_ID})"
+          git push -f origin HEAD:refs/heads/results/spike-${{ needs.plan.outputs.name }}

@@ -1,38 +1,72 @@
 name: tag
+# Tag one wave's passing datasets with Haiku (Batch API). Edit runs/tag-<name>.env:
+#   SOURCE=us  ONLY_PASSING=1  BATCH_ID=   (BATCH_ID resumes a batch that outlived the job)
+# Datasets already tagged in any results/tags-* branch are skipped.
 on:
   push:
     branches: [main]
     paths: ['runs/tag-*.env']
   workflow_dispatch:
+    inputs:
+      run_file:
+        description: run file under runs/
+        default: runs/tag-gb.env
 permissions:
   contents: write
 concurrency:
-  group: spike  # queue behind any running crawl, so tags use its fresh output
+  group: tag-${{ github.sha }}
 jobs:
   tag:
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Get datasets
+      - name: Pick run file
+        id: p
         run: |
-          git fetch -q origin results/spike-gb
+          f="${{ github.event.inputs.run_file }}"
+          if [ -z "$f" ]; then f=$(git diff --name-only HEAD~1 HEAD -- 'runs/tag-*.env' | head -1); fi
+          set -a; . "$f"; set +a
+          SOURCE=${SOURCE:-$(basename "$f" .env | sed 's/^tag-//')}
+          echo "file=$f" >> $GITHUB_OUTPUT
+          echo "source=$SOURCE" >> $GITHUB_OUTPUT
+      - name: Get the wave and what is already tagged
+        run: |
+          git fetch -q origin results/spike-${{ steps.p.outputs.source }}
           git show FETCH_HEAD:datasets.parquet > /tmp/datasets.parquet
           git show FETCH_HEAD:layers.parquet > /tmp/layers.parquet
           git show FETCH_HEAD:RUN.txt | tee /tmp/source-run.txt
+          TG=()
+          for b in $(git ls-remote --heads origin 'results/tags-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
+            git fetch -q origin "$b" && git show FETCH_HEAD:tags.parquet > "/tmp/$(basename $b).parquet" 2>/dev/null && TG+=("/tmp/$(basename $b).parquet") || true
+          done
+          python - "${TG[@]}" <<'PY'
+          import sys, pandas as pd
+          fs = sys.argv[1:]
+          (pd.concat([pd.read_parquet(f, columns=["dataset_id"]) for f in fs]) if fs else pd.DataFrame({"dataset_id": []})).to_parquet("/tmp/already.parquet")
+          PY
       - name: Tag with Haiku (Batch API)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          set -a; . runs/tag-gb.env; set +a
+          set -a; . "${{ steps.p.outputs.file }}"; set +a
           set -o pipefail
           python -m atlas.tag_batch --datasets /tmp/datasets.parquet --layers /tmp/layers.parquet --out out \
-            ${ONLY_PASSING:+--only-passing} ${BATCH_ID:+--batch-id $BATCH_ID} 2>&1 | tee tag.log
+            --skip-tagged /tmp/already.parquet ${ONLY_PASSING:+--only-passing} ${BATCH_ID:+--batch-id $BATCH_ID} 2>&1 | tee tag.log
+      - name: Keep earlier tags for this wave
+        if: always()
+        run: |
+          OLD=/tmp/tags-${{ steps.p.outputs.source }}.parquet
+          if [ -f "$OLD" ] && [ -f out/tags.parquet ]; then
+            python -c "import pandas as pd; pd.concat([pd.read_parquet('$OLD'), pd.read_parquet('out/tags.parquet')]).drop_duplicates('dataset_id', keep='last').to_parquet('out/tags.parquet')"
+          elif [ -f "$OLD" ]; then cp "$OLD" out/tags.parquet; fi
       - name: Publish
         if: always()
         run: |
@@ -41,5 +75,5 @@ jobs:
           cp -r out /tmp/results
           git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
           git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
-          cp -r /tmp/results/. . && git add -A && git commit -qm "Tags (run ${GITHUB_RUN_ID})"
-          git push -qf origin HEAD:refs/heads/results/tags-gb
+          cp -r /tmp/results/. . && git add -A && git commit -qm "Tags ${{ steps.p.outputs.source }} (run ${GITHUB_RUN_ID})"
+          git push -qf origin HEAD:refs/heads/results/tags-${{ steps.p.outputs.source }}

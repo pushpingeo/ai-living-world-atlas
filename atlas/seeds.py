@@ -27,7 +27,8 @@ def load_targets(parquet: str, countries: list[str]) -> dict:
         WHERE list_has_any(list_transform(coverage, lambda x: x.location.country.id), [{cc}])
           AND coalesce(status, 'active') = 'active'
     """).fetchall()
-    t = {"arcgis_roots": {}, "wms": {}, "wfs": {}, "wmts": {}, "wcs": {}, "hub": {}, "ckan": {}, "catalogues": len(rows)}
+    t = empty_targets()
+    t["catalogues"] = len(rows)
     by_sw = defaultdict(int)
     for cid, name, link, owner, otype, sw, ccs, endpoints, status in rows:
         ctx = {
@@ -73,3 +74,54 @@ def load_targets(parquet: str, countries: list[str]) -> dict:
             by_sw[sw or "?"] += 1
     t["used_by_software"] = dict(by_sw)
     return t
+
+
+def empty_targets() -> dict:
+    return {"arcgis_roots": {}, "arcgis_services": {}, "wms": {}, "wfs": {}, "wmts": {}, "wcs": {}, "hub": {}, "ckan": {},
+            "agol": {}, "gn": {}, "records": [], "catalogues": 0, "used_by_software": {}}
+
+
+def load_curated(path: str) -> dict:
+    """A hand-made seed file (vocab/seeds/*.yaml): services to crawl plus download-only records."""
+    import yaml
+
+    from .crawl_arcgis import service_url_of
+
+    doc = yaml.safe_load(open(path))
+    d = doc.get("defaults") or {}
+    t = empty_targets()
+    for s in doc.get("sources") or []:
+        ctx = {
+            "publisher": s.get("publisher", ""), "publisher_type": s.get("publisher_type", d.get("publisher_type", "unknown")),
+            "country": s.get("country", d.get("country", "")), "seed_catalog": f"curated:{path.rsplit('/', 1)[-1]}",
+            "discovered_via": "curated",
+        }
+        kind = s["kind"]
+        if kind == "arcgis-root":
+            t["arcgis_roots"][services_root(s["url"]) or s["url"]] = ctx
+        elif kind == "arcgis-service":
+            t["arcgis_services"][service_url_of(s["url"]) or s["url"]] = ctx
+        elif kind in ("wms", "wfs", "wmts", "wcs"):
+            t[kind][base_url(s["url"])] = {**ctx, "curated_licence": s.get("licence", "")}
+        elif kind == "geonetwork":
+            t["gn"][s["url"]] = {**ctx, "discovered_via": f"gn:{s['url']}", "portal": s["url"]}
+        elif kind == "arcgis-online-search":
+            t["agol"][s["query"]] = {**ctx, "publisher_type": "curated-collection", "discovered_via": f"agol:{s['query']}"}
+        elif kind == "record":
+            t["records"].append({**s, "_ctx": ctx})
+        else:
+            raise ValueError(f"unknown seed kind {kind}")
+    t["catalogues"] = len(doc.get("sources") or [])
+    return t
+
+
+def merge_targets(a: dict, b: dict) -> dict:
+    out = empty_targets()
+    for k, v in out.items():
+        if isinstance(v, dict):
+            out[k] = {**b.get(k, {}), **a.get(k, {})}  # a wins on clashes
+        elif isinstance(v, list):
+            out[k] = list(a.get(k, [])) + list(b.get(k, []))
+    out["catalogues"] = a.get("catalogues", 0) + b.get("catalogues", 0)
+    out["used_by_software"] = {**b.get("used_by_software", {}), **a.get("used_by_software", {})}
+    return out

@@ -1,0 +1,9 @@
+# The EU's INSPIRE geoportal: metadata harvested from every member state's national catalogue.
+# One GeoNetwork search API; we keep records that link a map or feature service.
+defaults:
+  publisher_type: public-body   # INSPIRE data is published by public authorities
+  country: EU
+sources:
+  - kind: geonetwork
+    url: https://inspire-geoportal.ec.europa.eu
+    publisher: ""               # taken from each record's responsible organisation

@@ -16,7 +16,7 @@ ACADEMIC_DOMAINS = (".ac.uk", ".edu", ".ac.nz", ".edu.au")
 
 AUTHORITY = {
     "central-gov": 30, "regional-gov": 30, "local-gov": 27, "international": 27,
-    "public-body": 25, "academic": 20, "civil-society": 12, "business": 8, "unknown": 5,
+    "public-body": 25, "curated-collection": 24, "academic": 20, "civil-society": 12, "business": 8, "unknown": 5,
 }
 
 OPEN_LICENCES = re.compile(
