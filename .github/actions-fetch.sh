@@ -7,8 +7,11 @@ while read -r b; do
   [ -z "$b" ] && continue
   case "$b" in \#*) continue;; esac
   if git fetch -q origin "results/$b" 2>/dev/null; then
-    git show FETCH_HEAD:datasets.parquet > "/tmp/waves/$b.datasets.parquet" && DS+=("/tmp/waves/$b.datasets.parquet")
-    git show FETCH_HEAD:layers.parquet > "/tmp/waves/$b.layers.parquet" && LY+=("/tmp/waves/$b.layers.parquet")
+    # a wave that produced nothing (e.g. a diagnostic run) has no parquet files; skip it rather than fail
+    if git show FETCH_HEAD:datasets.parquet > "/tmp/waves/$b.datasets.parquet" 2>/dev/null \
+       && git show FETCH_HEAD:layers.parquet > "/tmp/waves/$b.layers.parquet" 2>/dev/null; then
+      DS+=("/tmp/waves/$b.datasets.parquet"); LY+=("/tmp/waves/$b.layers.parquet")
+    else echo "$b: no data yet, skipped" >&2; continue; fi
     echo "$b: $(git show FETCH_HEAD:RUN.txt)" >> /tmp/pub/SOURCES.txt
   fi
 done < runs/published.txt

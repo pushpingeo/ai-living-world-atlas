@@ -29,7 +29,7 @@ def main():
         ly = pd.concat([pd.read_parquet(p, columns=cols) for p in a.layers if Path(p).exists()], ignore_index=True)
         ly.drop_duplicates("uid").to_parquet(out / "layers.parquet")
     if a.tags:
-        tg = pd.concat([pd.read_parquet(p) for p in a.tags if Path(p).exists()], ignore_index=True)
+        tg = pd.concat([pd.read_parquet(p) for p in a.tags if Path(p).exists() and Path(p).stat().st_size > 0], ignore_index=True)
         # newest tagging wins
         tg = tg.sort_values("tagged_at").drop_duplicates("dataset_id", keep="last")
         tg.to_parquet(out / "tags.parquet")

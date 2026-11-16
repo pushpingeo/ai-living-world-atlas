@@ -82,7 +82,8 @@ jobs:
           mkdir -p /tmp/r && cp /tmp/smoke.txt /tmp/r/ 2>/dev/null || echo "smoke test did not run" > /tmp/r/smoke.txt
           cp /tmp/load-plan.txt /tmp/r/ 2>/dev/null || true
           # keep the hashes of what is actually in the database: new ones if the load worked, else the previous ones
-          if [ -f /tmp/rows.loaded.json ]; then cp /tmp/rows.loaded.json /tmp/r/rows.json; elif [ -f /tmp/prev_rows.json ]; then cp /tmp/prev_rows.json /tmp/r/rows.json; fi
+          if [ -f /tmp/rows.loaded.json ]; then cp /tmp/rows.loaded.json /tmp/r/rows.json; elif [ -f /tmp/prev_rows.json ]; then cp /tmp/prev_rows.json /tmp/r/rows.json;
+          elif git fetch -q origin results/mcp-deploy 2>/dev/null; then git show FETCH_HEAD:rows.json > /tmp/r/rows.json 2>/dev/null || rm -f /tmp/r/rows.json; fi
           echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ) status ${{ job.status }}" > /tmp/r/RUN.txt
           git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
           git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
