@@ -1,0 +1,6 @@
+https://data.europa.eu/api/hub/search/search?filter=dataset&limit=2&facets=%7B%22format%22%3A%5B%22WMS_SRVC%22%5D%7D
+https://data.europa.eu/api/hub/search/search?filter=dataset&limit=1&facets=%7B%22format%22%3A%5B%22WFS_SRVC%22%5D%7D
+https://data.europa.eu/api/hub/search/search?filter=dataset&limit=0&facetOperator=AND&includes=id
+https://data.europa.eu/api/hub/search/catalogues?limit=5
+https://inspire-geoportal.ec.europa.eu/
+https://data.europa.eu/api/hub/search/search?filter=dataset&limit=1&q=inspire&facets=%7B%22format%22%3A%5B%22WMS_SRVC%22%5D%7D&scroll=true
