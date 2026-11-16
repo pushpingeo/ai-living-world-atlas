@@ -1,0 +1,26 @@
+skipping 562 already tagged
+submitted batch msgbatch_01GfaqTnGvCJvm9VbMGNH7YA with 10881 requests
+[0s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[181s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[241s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[302s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[362s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[422s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[482s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[542s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[603s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[663s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[723s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[783s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[844s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[904s] in_progress {'processing': 10881, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[964s] ended {'processing': 0, 'succeeded': 10881, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch msgbatch_01GfaqTnGvCJvm9VbMGNH7YA
+
+- Requests: 10881; succeeded: 10881
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 8153977, "output_tokens": 2248285, "cache_read_input_tokens": 33662720, "cache_creation_input_tokens": 3094}
+- **Cost: $1.14** (estimated from token counts and published batch prices)
+
