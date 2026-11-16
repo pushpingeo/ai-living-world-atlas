@@ -49,7 +49,7 @@ def get(ref: str, name: str, out: Path) -> bool:
     if not tables:
         return False
     t = pa.concat_tables(tables, promote_options="default")
-    pq.write_table(t.replace_schema_metadata(tables[0].schema.metadata), out, compression="zstd")
+    pq.write_table(t.replace_schema_metadata(tables[0].schema.metadata), out, compression="zstd", row_group_size=100_000)
     return True
 
 

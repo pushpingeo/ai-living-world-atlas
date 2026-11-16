@@ -209,6 +209,7 @@ async function getDataset(env, a) {
     quality_score: row.score, passes_quality_bar: !!row.pass,
     endpoints: (d.endpoints || []).map((e, i) => ({
       index: i, protocol: e.protocol, url: e.url.split("#")[0], layer: e.layer_name, capabilities: e.capabilities,
+      ...(e.plan ? { plan: e.plan } : {}),
       browser_ready: e.cors, last_check: e.check, details: info(e), use: usage(e),
     })),
   };

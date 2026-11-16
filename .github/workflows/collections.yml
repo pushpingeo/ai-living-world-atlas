@@ -1,0 +1,43 @@
+name: collections
+# Group local development plans into one collection per council, producing a derived wave.
+# runs/collections.env:  SOURCE=inspire  TARGET=europe   -> reads results/spike-SOURCE, writes results/spike-TARGET
+on:
+  push:
+    branches: [main]
+    paths: ['runs/collections.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  collections:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build collections
+        run: |
+          set -a; . runs/collections.env; set +a
+          git fetch -q origin "results/spike-$SOURCE"
+          SRC=$(git rev-parse FETCH_HEAD)
+          python -m atlas.parts get $SRC datasets /tmp/ds.parquet
+          python -m atlas.collections --datasets /tmp/ds.parquet --out out
+          # layers and logs are carried over unchanged
+          for f in $(git ls-tree --name-only $SRC); do
+            case "$f" in datasets*.parquet|RUN.txt) ;; *) git show "$SRC:$f" > "out/$f";; esac
+          done
+          { cat out/COLLECTIONS.md; echo; cat out/REPORT.md; } > out/R && mv out/R out/REPORT.md
+          python -m atlas.parts split out
+          echo "derived from results/spike-$SOURCE ($(git show $SRC:RUN.txt | head -1)); collections run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          echo "TARGET=$TARGET" >> $GITHUB_ENV
+      - name: Publish
+        run: |
+          cp -r out /tmp/results
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp -r /tmp/results/. . && git add -A && git commit -qm "Collections for $TARGET (run ${GITHUB_RUN_ID})"
+          git push -qf origin HEAD:refs/heads/results/spike-$TARGET

@@ -145,3 +145,13 @@ branches. The "passes quality bar" toggle is hidden and the MCP's include_low_qu
 The Europe merge ran the runner out of memory. Very large waves (CONCAT=1) now merge by streaming each shard's
 files together without regrouping datasets across shards; the cost is that the same data published on two hosts
 that landed in different shards shows up twice.
+
+## 2026-11-16 — Local development plans grouped into one collection per council (Rob's choice)
+Of Europe's ~560k passing datasets, ~490k were individual local plans (mostly German Bebauungspläne via
+XPlanung/INSPIRE PLU, also Croatian UPU/PPUO and others), each its own service. atlas/collections.py groups each
+council's plans (3+) into one dataset, "Development plans – <council>", listing the first 300 plan services as
+endpoints (each labelled with the plan name). Members stay in the files with q_pass false and flag in-collection.
+Detection: plan wording in title/abstract/licence, plus any service where at least half the datasets read as plans
+(the half rule stops national services with one zoning layer, e.g. swisstopo, being swept in). XPlanung's demo
+council "Testhausen" is excluded as demo data. Result: 1,672 collections; Europe passing 71.9k. The derived wave is
+results/spike-europe (built by the collections workflow from results/spike-inspire).

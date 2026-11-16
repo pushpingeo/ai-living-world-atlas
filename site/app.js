@@ -197,7 +197,7 @@ async function showDetail(li, r) {
   if (!box || !d) return;
   const eps = d.endpoints.map((e, i) => {
     const how = addMethod(e);
-    return `<tr><td class="p">${esc(label("protocols", e.protocol))}</td>
+    return `<tr><td class="p">${esc(label("protocols", e.protocol))}${e.plan ? `<div class="k">${esc(e.plan)}</div>` : ""}</td>
       <td class="c">${esc((e.capabilities || []).join(", "))}${e.cors === false ? ' <span class="no" title="The server did not allow browser access from other sites">· may not draw here</span>' : ""}</td>
       <td>${how ? `<button data-add="${i}">Add</button>` : `<button disabled title="This kind of endpoint can't be drawn in the viewer yet">—</button>`}
         <button data-copy="${i}" title="Copy the address">URL</button></td></tr>`;

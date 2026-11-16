@@ -71,9 +71,8 @@ def main():
 
     bid = args.batch_id
     if not bid:
-        ds = pd.read_parquet(args.datasets)
-        if args.only_passing:
-            ds = ds[ds["q_pass"]]
+        # filter while reading: Europe's wave alone is 1.6M datasets and 2.3M layers
+        ds = pd.read_parquet(args.datasets, filters=[("q_pass", "==", True)] if args.only_passing else None)
         if args.skip_tagged and Path(args.skip_tagged).exists():
             done = set(pd.read_parquet(args.skip_tagged, columns=["dataset_id"])["dataset_id"])
             before = len(ds)
@@ -83,7 +82,7 @@ def main():
             (out / "COST.md").write_text("# Nothing new to tag\n\n- **Cost: $0.00**\n")
             print("nothing to tag")
             return
-        layers = pd.read_parquet(args.layers, columns=["dataset_id", "fields"])
+        layers = pd.read_parquet(args.layers, columns=["dataset_id", "fields"], filters=[("dataset_id", "in", list(ds["dataset_id"]))])
         fields = layers.groupby("dataset_id")["fields"].apply(lambda s: max((list(x) for x in s), key=len, default=[])).to_dict()
         reqs = build_requests(ds, fields)
         ids = []
