@@ -1,0 +1,513 @@
+[
+ {
+  "root": "https://egisp.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/server_serveur/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/egs_sgu/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 24,
+  "n_services": 0
+ },
+ {
+  "root": "https://data.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 24,
+  "n_services": 0
+ },
+ {
+  "root": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 32,
+  "n_services": 35
+ },
+ {
+  "root": "https://services.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 27,
+  "n_services": 0
+ },
+ {
+  "root": "https://ags.esri.co/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 24,
+  "n_services": 194
+ },
+ {
+  "root": "https://geoappext.nrcan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 38,
+  "n_services": 91
+ },
+ {
+  "root": "https://maps.data.gov.scot/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 100,
+  "n_services": 0
+ },
+ {
+  "root": "https://basisregistraties.arcgisonline.nl/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.ec.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 63,
+  "n_services": 110
+ },
+ {
+  "root": "https://services.arcgisonline.nl/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.transmilenio.gov.co/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 40,
+  "n_services": 72
+ },
+ {
+  "root": "https://gis.nature.cz/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://geodata.epa.gov/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://luchtfoto.prorail.nl/erdas-iws/esri/Luchtfoto/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 107,
+  "n_services": 5
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 55,
+  "n_services": 32
+ },
+ {
+  "root": "https://apps.fs.usda.gov/arcx/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 154,
+  "n_services": 147
+ },
+ {
+  "root": "https://services.arcgisonline.com/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 61,
+  "n_services": 27
+ },
+ {
+  "root": "https://server.esrimx.com.mx/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 103,
+  "n_services": 80
+ },
+ {
+  "root": "https://server7.tplgis.org/arcgis7/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 53,
+  "n_services": 18
+ },
+ {
+  "root": "https://services.arcgisonline.com/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 52,
+  "n_services": 27
+ },
+ {
+  "root": "https://basemap.nationalmap.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 214,
+  "n_services": 5
+ },
+ {
+  "root": "https://ahn.arcgisonline.nl/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/8a8d4e24683a46e6b039aea78c8af20f/rest/services",
+  "status": 200,
+  "error": "{'code': 400, 'message': 'No proxy information found', 'details': []}",
+  "ms": 104,
+  "n_services": 0
+ },
+ {
+  "root": "https://asis-esri.fao.org/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 146,
+  "n_services": 13
+ },
+ {
+  "root": "https://image.arcgisonline.nl/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://portal.esrikr.com/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 260,
+  "n_services": 277
+ },
+ {
+  "root": "https://coast.noaa.gov/arcgisimg/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 65,
+  "n_services": 19
+ },
+ {
+  "root": "https://gis.geoportals.lv/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 111,
+  "n_services": 5
+ },
+ {
+  "root": "https://ags.cuzk.gov.cz/arcgis1/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 149,
+  "n_services": 14
+ },
+ {
+  "root": "https://ags.cuzk.cz/arcgis1/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 141,
+  "n_services": 14
+ },
+ {
+  "root": "https://agriculture.canada.ca/imagery-images/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 58,
+  "n_services": 130
+ },
+ {
+  "root": "https://kyraster.ky.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 41,
+  "n_services": 174
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/374a99fc76574f72bb8c71af7b428d0a/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Unable to generate token with the credentials provided with username: osgur.mcdermott.long_UNEP_WCMC and sou",
+  "ms": 433,
+  "n_services": 0
+ },
+ {
+  "root": "https://geodata.csu.gov.cz/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 523,
+  "n_services": 167
+ },
+ {
+  "root": "https://services.ga.gov.au/gis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 191,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.fema.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 84,
+  "n_services": 70
+ },
+ {
+  "root": "https://www.maps.lt/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://ags.cuzk.cz/arcgis2/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 393,
+  "n_services": 13
+ },
+ {
+  "root": "https://services1.arcgisonline.co.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 188,
+  "n_services": 8
+ },
+ {
+  "root": "https://gis.ngdc.noaa.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 94,
+  "n_services": 168
+ },
+ {
+  "root": "https://giscenter.rdc.isu.edu/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 90,
+  "n_services": 32
+ },
+ {
+  "root": "https://landclandata01.landclan.com/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 176,
+  "n_services": 1
+ },
+ {
+  "root": "https://content.esrij.com/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 152,
+  "n_services": 35
+ },
+ {
+  "root": "https://www.chsegura.es/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 964,
+  "n_services": 0
+ },
+ {
+  "root": "https://agsserver.sigsa.info/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 147,
+  "n_services": 554
+ },
+ {
+  "root": "https://imagery.geoplatform.gov/iipp/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 646,
+  "n_services": 488
+ },
+ {
+  "root": "https://climate.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 115,
+  "n_services": 273
+ },
+ {
+  "root": "https://gis.nnvl.noaa.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 51,
+  "n_services": 211
+ },
+ {
+  "root": "https://sig.heredia.go.cr/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 177,
+  "n_services": 91
+ },
+ {
+  "root": "https://gisserver.ine.pt/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 114,
+  "n_services": 96
+ },
+ {
+  "root": "https://gsi.geodata.gov.ie/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 179,
+  "n_services": 192
+ },
+ {
+  "root": "https://copernicus.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 118,
+  "n_services": 291
+ },
+ {
+  "root": "https://image.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 123,
+  "n_services": 291
+ },
+ {
+  "root": "https://www.chsegura.es/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 574,
+  "n_services": 78
+ },
+ {
+  "root": "https://mapy.geology.cz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 178,
+  "n_services": 205
+ },
+ {
+  "root": "https://ags.geology.sk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 162,
+  "n_services": 279
+ },
+ {
+  "root": "https://osp-sdg.stat.gov.lt/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 287,
+  "n_services": 1046
+ },
+ {
+  "root": "https://map.bgs.ac.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 121,
+  "n_services": 144
+ },
+ {
+  "root": "https://maps.prorail.nl/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 175,
+  "n_services": 231
+ },
+ {
+  "root": "https://livingatlas.esri.in/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1001,
+  "n_services": 500
+ },
+ {
+  "root": "https://livingatlas.esri.in/server1/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 563,
+  "n_services": 368
+ },
+ {
+  "root": "https://gis.earthdata.nasa.gov/portal/rest/services",
+  "status": 200,
+  "error": "{'code': 403, 'message': 'You do not have permissions to use this resource.', 'details': None}",
+  "ms": 628,
+  "n_services": 600
+ },
+ {
+  "root": "https://arcgis.esri.co/image/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://zbgis.skgeodesy.sk/zbgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.esri.co/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis-gfw.wri.org/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://bio.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 165,
+  "n_services": 151
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 171,
+  "n_services": 307
+ },
+ {
+  "root": "https://image.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 160,
+  "n_services": 291
+ },
+ {
+  "root": "https://water.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 126,
+  "n_services": 230
+ }
+]

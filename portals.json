@@ -1,0 +1,11 @@
+[
+ {
+  "portal": "agol:group:47dd57c9a59d458c86d3d6b978560088",
+  "kind": "arcgis-online",
+  "ok": true,
+  "error": "",
+  "records": 6254,
+  "scanned": 7290,
+  "skipped_paid": 1036
+ }
+]

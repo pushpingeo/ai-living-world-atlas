@@ -1,0 +1,216 @@
+{
+ "minutes": 96.7,
+ "http": {
+  "requests": 36990,
+  "errors": 991,
+  "robots_blocked": 402
+ },
+ "portals": {
+  "total": 1,
+  "ok": 1,
+  "records_with_service_links": 6254
+ },
+ "arcgis_roots": {
+  "total": 73,
+  "reachable": 56
+ },
+ "services": {
+  "attempted": 13638,
+  "ok": 11984,
+  "skipped_time": 0,
+  "by_type": {
+   "arcgis-imageserver": 1323,
+   "arcgis-vectortileserver": 105,
+   "arcgis-mapserver": 4741,
+   "arcgis-featureserver": 5804,
+   "wms": 9,
+   "wmts": 1,
+   "wfs": 1
+  },
+  "top_errors": [
+   [
+    "{'code': N, 'details': 'error', 'message': 'HTTP N Not F",
+    908
+   ],
+   [
+    "robots.txt disallows",
+    390
+   ],
+   [
+    "{'code': N, 'details': [], 'message': 'Service not found'}",
+    149
+   ],
+   [
+    "TimeoutError: ",
+    67
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :Il",
+    66
+   ],
+   [
+    "{'code': N, 'details': [], 'message': 'Service not found.'",
+    28
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :0x",
+    14
+   ],
+   [
+    "HTTP N",
+    7
+   ]
+  ]
+ },
+ "layers": {
+  "total": 61719,
+  "by_service_type": {
+   "arcgis-mapserver": 44517,
+   "arcgis-featureserver": 12169,
+   "wms": 2277,
+   "wmts": 1330,
+   "arcgis-imageserver": 1255,
+   "arcgis-vectortileserver": 105,
+   "wfs": 54,
+   "landing": 4,
+   "cloud": 3,
+   "api": 3,
+   "download": 2
+  },
+  "with_bbox": 61060,
+  "with_abstract_50": 14816,
+  "with_licence_text": 43179,
+  "with_open_licence": 1509,
+  "with_keywords": 41004,
+  "joined_to_catalogue": 5355,
+  "codelike_titles": 17406,
+  "junk_flagged": 80,
+  "declared_iso_theme": 14574,
+  "declared_theme_how": {
+   "none": 47145,
+   "keyword": 14574
+  },
+  "publisher_type": {
+   "curated-collection": 44506,
+   "international": 15712,
+   "public-body": 1501
+  },
+  "detail_source": {
+   "none": 50200,
+   "stated": 5247,
+   "display": 3237,
+   "tile-cache": 1779,
+   "pixel-size": 1256
+  },
+  "extent_source": {
+   "declared": 56180,
+   "measured": 5539
+  },
+  "extent_flags": {
+   "world": 6210,
+   "shared-default": 5107,
+   "grid-default": 210
+  },
+  "cors_ok": 61707,
+  "detail_level": {
+   "unknown": 50200,
+   "1:500k": 2807,
+   "1:100k": 2229,
+   "coarser": 2224,
+   "1:25k": 2165,
+   "1:2M": 1316,
+   "1:5k": 778
+  },
+  "coverage_level": {
+   "national": 25573,
+   "global": 13898,
+   "local": 9948,
+   "regional": 7148,
+   "continental": 4493,
+   "unknown": 659
+  },
+  "detail_level_passing": {
+   "unknown": 9705,
+   "1:500k": 1029,
+   "1:2M": 630,
+   "1:100k": 481,
+   "1:5k": 247,
+   "1:25k": 239,
+   "coarser": 225
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 56991,
+   "ok": 4641,
+   "fail": 64,
+   "empty": 23
+  },
+  "live_rate_of_checked": 0.982,
+  "returns_data_or_empty_rate": 0.986
+ },
+ "quality": {
+  "pass": 12556,
+  "pass_rate": 0.203,
+  "score_median": 72.0,
+  "score_bands": {
+   "[40, 50)": 4258,
+   "[50, 60)": 12217,
+   "[60, 70)": 8065,
+   "[70, 80)": 28204,
+   "[80, 101)": 8975
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 33190,
+  "distinct_among_passing": 10445
+ },
+ "file_mb": 14.64,
+ "datasets": {
+  "total": 46483,
+  "passing": 11443,
+  "endpoints_per_dataset": {
+   "1": 38436,
+   "2": 5910,
+   "3": 257,
+   "4": 733,
+   "5": 100,
+   "6": 537,
+   "7": 42,
+   "8": 468
+  },
+  "multi_protocol": 3121,
+  "match_rules": {
+   "title-extent": 5201,
+   "arcgis-pair": 2925,
+   "ogc-name": 54,
+   "catalogue": 1
+  },
+  "role": {
+   "data": 44608,
+   "imagery": 1703,
+   "elevation": 161,
+   "basemap": 11
+  },
+  "role_passing": {
+   "data": 11301,
+   "elevation": 106,
+   "imagery": 32,
+   "basemap": 4
+  },
+  "capabilities": {
+   "render": 36779,
+   "query": 25091,
+   "tiles": 13066,
+   "time": 4859,
+   "download": 3879,
+   "feature-info": 2188,
+   "catalog": 658,
+   "raster-functions": 382,
+   "multidimensional": 97,
+   "pixels": 16,
+   "cloud": 3
+  },
+  "detail_known_passing": 2599
+ }
+}

@@ -1,0 +1,79 @@
+--- shard-0
+[    0s] shard 0/4
+[    0s] seeds: {'arcgis_roots': 1, 'arcgis_services': 0, 'wms': 3, 'wfs': 0, 'wmts': 0, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 1, 'gn': 0, 'records': [{'kind': 'record', 'id': 'unesco-world-heritage-list', 'title': 'UNESCO World Heritage List (sites with coordinates)', 'publisher': 'UNESCO World Heritage Centre', 'abstract': 'The official list of World Heritage properties, with location, category, state party and date of inscription, published by the World Heritage Centre as XML.', 'endpoints': [{'protocol': 'download', 'url': 'https://whc.unesco.org/en/list/xml/', 'format': 'XML'}], 'landing_page': 'https://whc.unesco.org/en/list/', 'bbox': [-180, -90, 180, 90], 'concepts_hint': ['heritage-site'], '_ctx': {'publisher': 'UNESCO World Heritage Centre', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'landmark-indigenous-community-lands', 'title': 'LandMark - Indigenous and Community Lands', 'publisher': 'LandMark (Global Platform of Indigenous and Community Lands)', 'abstract': 'Global maps of lands held or used by Indigenous Peoples and local communities, compiled from national and community sources. Absence of mapped land does not mean absence of customary tenure.', 'endpoints': [{'protocol': 'landing', 'url': 'https://www.landmarkmap.org/data'}], 'landing_page': 'https://www.landmarkmap.org/', 'licence': 'CC BY 4.0 (per LandMark data page)', 'bbox': [-180, -60, 180, 84], 'concepts_hint': ['indigenous-land'], '_ctx': {'publisher': 'LandMark (Global Platform of Indigenous and Community Lands)', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'gem-global-energy-trackers', 'title': 'Global Energy Monitor trackers (plants, pipelines, oil and gas extraction, LNG)', 'publisher': 'Global Energy Monitor', 'abstract': 'Project-level global trackers of energy infrastructure - coal, gas and oil plants, pipelines, LNG terminals, oil and gas extraction sites - with owners, status and capacity. Downloads are by request form.', 'endpoints': [{'protocol': 'landing', 'url': 'https://globalenergymonitor.org/projects/'}], 'landing_page': 'https://globalenergymonitor.org/', 'licence': 'CC BY 4.0 unless noted (per GEM)', 'bbox': [-180, -60, 180, 84], 'concepts_hint': ['power-plant', 'pipeline', 'oil-gas'], '_ctx': {'publisher': 'Global Energy Monitor', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'copernicus-dem-glo30', 'title': 'Copernicus DEM GLO-30 (30 m global digital surface model)', 'publisher': 'European Space Agency / Copernicus', 'abstract': 'Global 30 m digital surface model as Cloud Optimized GeoTIFF tiles, mirrored on the AWS Registry of Open Data.', 'endpoints': [{'protocol': 'cloud', 'url': 'https://copernicus-dem-30m.s3.amazonaws.com/', 'format': 'COG'}], 'landing_page': 'https://registry.opendata.aws/copernicus-dem/', 'bbox': [-180, -90, 180, 90], 'detail_m': 30, 'concepts_hint': ['elevation'], '_ctx': {'publisher': 'European Space Agency / Copernicus', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'hydrosheds-hydrorivers', 'title': 'HydroRIVERS (global river network)', 'publisher': 'WWF / HydroSHEDS', 'abstract': '8.5 million river reaches derived from HydroSHEDS at 15 arc-seconds, with length, river order and an estimate of long-term discharge.', 'endpoints': [{'protocol': 'landing', 'url': 'https://www.hydrosheds.org/products/hydrorivers'}], 'landing_page': 'https://www.hydrosheds.org/products/hydrorivers', 'licence': 'Free for scientific, educational and commercial use under the HydroSHEDS licence (per hydrosheds.org)', 'bbox': [-180, -56, 180, 84], 'detail_m': 450, 'concepts_hint': ['river', 'watershed'], '_ctx': {'publisher': 'WWF / HydroSHEDS', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'hydrosheds-v2-core', 'title': 'HydroSHEDS v2 core data (flow direction, accumulation, basins)', 'publisher': 'WWF / HydroSHEDS', 'abstract': 'Second-generation HydroSHEDS rasters and vectors in 10x10 degree tiles and continental composites. The Americas are also in ArcGIS Living Atlas as feature layers.', 'endpoints': [{'protocol': 'landing', 'url': 'https://www.hydrosheds.org/downloads-core-data-v2'}], 'landing_page': 'https://www.hydrosheds.org/', 'bbox': [-180, -56, 180, 84], 'concepts_hint': ['river', 'watershed'], '_ctx': {'publisher': 'WWF / HydroSHEDS', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'ghsl-cloud', 'title': 'Global Human Settlement Layer (GHS-BUILT-S, GHS-POP and related) - cloud copies', 'publisher': 'European Commission Joint Research Centre (JRC)', 'abstract': 'Built-up surface, built-up volume, population and settlement model grids 1975-2030 at 10 m to 1 km, as Cloud Optimized GeoTIFFs on the AWS Registry of Open Data.', 'endpoints': [{'protocol': 'cloud', 'url': 'https://jrc-ghsl.s3.eu-central-1.amazonaws.com/', 'format': 'COG'}], 'landing_page': 'https://registry.opendata.aws/ghs-built-s/', 'licence': 'CC BY 4.0 (per the AWS registry entry)', 'bbox': [-180, -90, 180, 90], 'concepts_hint': ['settlement', 'population', 'building'], '_ctx': {'publisher': 'European Commission Joint Research Centre (JRC)', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'overture-maps', 'title': 'Overture Maps (places, buildings, transportation, divisions, base)', 'publisher': 'Overture Maps Foundation', 'abstract': 'Global open map data released monthly as GeoParquet in cloud storage, combining OpenStreetMap and other open sources.', 'endpoints': [{'protocol': 'cloud', 'url': 'https://overturemaps-us-west-2.s3.amazonaws.com/release/', 'format': 'GeoParquet'}], 'landing_page': 'https://docs.overturemaps.org/', 'bbox': [-180, -90, 180, 90], 'concepts_hint': ['building', 'road', 'place-name', 'admin-boundary'], '_ctx': {'publisher': 'Overture Maps Foundation', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'geoboundaries', 'title': 'geoBoundaries (administrative boundaries, all countries, ADM0-ADM5)', 'publisher': 'William & Mary geoLab', 'abstract': 'Open administrative boundaries for every country, with an API listing download links per country and level.', 'endpoints': [{'protocol': 'api', 'url': 'https://www.geoboundaries.org/api/current/gbOpen/ALL/ALL/', 'format': 'JSON'}], 'landing_page': 'https://www.geoboundaries.org/', 'bbox': [-180, -90, 180, 90], 'concepts_hint': ['admin-boundary'], '_ctx': {'publisher': 'William & Mary geoLab', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'natural-earth-admin0', 'title': 'Natural Earth 1:10m admin 0 countries', 'publisher': 'Natural Earth', 'abstract': 'Country boundaries at 1:10 million scale, public domain.', 'endpoints': [{'protocol': 'download', 'url': 'https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip', 'format': 'Shapefile'}], 'landing_page': 'https://www.naturalearthdata.com/', 'licence': 'Public domain (per Natural Earth)', 'bbox': [-180, -90, 180, 90], 'detail_m': 5000, 'concepts_hint': ['admin-boundary'], '_ctx': {'publisher': 'Natural Earth', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'usgs-earthquakes-month', 'title': 'USGS earthquakes, past 30 days (all magnitudes)', 'publisher': 'U.S. Geological Survey', 'abstract': 'Real-time GeoJSON feed of earthquakes worldwide, updated every minute.', 'endpoints': [{'protocol': 'api', 'url': 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson', 'format': 'GeoJSON'}], 'landing_page': 'https://earthquake.usgs.gov/earthquakes/feed/', 'licence': 'Public domain (U.S. Government work)', 'bbox': [-180, -90, 180, 90], 'concepts_hint': ['earthquake', 'natural-hazard'], '_ctx': {'publisher': 'U.S. Geological Survey', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}, {'kind': 'record', 'id': 'osm-overpass', 'title': 'OpenStreetMap via the Overpass API', 'publisher': 'OpenStreetMap contributors (Overpass API)', 'abstract': 'Query any OpenStreetMap feature by tag within an area - power lines, protected areas, places of worship, roads. Keep queries site-sized; it is a shared public service.', 'endpoints': [{'protocol': 'api', 'url': 'https://overpass-api.de/api/interpreter', 'format': 'Overpass QL / JSON'}], 'landing_page': 'https://wiki.openstreetmap.org/wiki/Overpass_API', 'licence': 'ODbL 1.0 (OpenStreetMap)', 'bbox': [-180, -90, 180, 90], 'concepts_hint': ['power-line', 'power-plant', 'pipeline', 'settlement', 'road', 'protected-area'], '_ctx': {'publisher': 'OpenStreetMap contributors (Overpass API)', 'publisher_type': 'international', 'country': '', 'seed_catalog': 'curated:global.yaml', 'discovered_via': 'curated'}}], 'catalogues': 31}
+[   10s] portals: 1/1 ok, 6254 records with service links
+[   10s] targets: 68 ArcGIS roots, 5661 ArcGIS services from portals, 6 OGC endpoints
+[   74s] ArcGIS roots listed: 52/68 reachable; 12644 ArcGIS services total
+[   91s] services crawled 500/12650; layers so far 2799
+[  103s] services crawled 1000/12650; layers so far 4397
+[  113s] services crawled 1500/12650; layers so far 6938
+[  145s] services crawled 2000/12650; layers so far 8881
+[  167s] services crawled 2500/12650; layers so far 10605
+[  194s] services crawled 3000/12650; layers so far 14254
+[  219s] services crawled 3500/12650; layers so far 16761
+[  245s] services crawled 4000/12650; layers so far 19402
+[  255s] services crawled 4500/12650; layers so far 21207
+[  274s] services crawled 5000/12650; layers so far 22958
+[  302s] services crawled 5500/12650; layers so far 24650
+[  359s] services crawled 6000/12650; layers so far 27038
+[  489s] services crawled 6500/12650; layers so far 29243
+[  543s] services crawled 7000/12650; layers so far 31286
+[  648s] services crawled 7500/12650; layers so far 33204
+[  753s] services crawled 8000/12650; layers so far 35239
+[  909s] services crawled 8500/12650; layers so far 38806
+[ 1014s] services crawled 9000/12650; layers so far 40800
+[ 1094s] services crawled 9500/12650; layers so far 42699
+[ 1200s] services crawled 10000/12650; layers so far 44212
+[ 1280s] services crawled 10500/12650; layers so far 46201
+[ 1488s] services crawled 11000/12650; layers so far 47808
+[ 1619s] services crawled 11500/12650; layers so far 49773
+[ 1641s] services crawled 12000/12650; layers so far 54148
+[ 1848s] services crawled 12500/12650; layers so far 56842
+[ 1902s] services crawled 12650/12650; layers so far 57312
+[ 1902s] curated records: 12 endpoints
+[ 3481s] extents: {'suspect': 7167, 'attempted': 5552, 'measured': 5037, 'shrunk': 1665, 'empty': 0}
+[ 3482s] layers joined to a catalogue record: 5360/57324
+[ 5786s] checks run: 3995 (sampled 4000)
+[ 5800s] unique layers: 57279
+datasets built in 363s: 42688 from 57279 endpoints
+--- shard-1
+[    0s] shard 1/4
+[    0s] seeds: {'arcgis_roots': 0, 'arcgis_services': 0, 'wms': 1, 'wfs': 0, 'wmts': 0, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 0, 'gn': 0, 'records': [], 'catalogues': 31}
+[    0s] portals: 0/0 ok, 0 records with service links
+[    0s] targets: 0 ArcGIS roots, 0 ArcGIS services from portals, 1 OGC endpoints
+[    0s] ArcGIS roots listed: 0/0 reachable; 0 ArcGIS services total
+[    1s] services crawled 1/1; layers so far 1124
+[    1s] curated records: 0 endpoints
+[    1s] extents: {'suspect': 289, 'attempted': 0, 'measured': 0, 'shrunk': 0, 'empty': 0}
+[    1s] layers joined to a catalogue record: 0/1124
+[    1s] checks run: 2 (sampled 2)
+[    1s] unique layers: 1124
+datasets built in 9s: 1122 from 1124 endpoints
+--- shard-2
+[    0s] shard 2/4
+[    0s] seeds: {'arcgis_roots': 4, 'arcgis_services': 0, 'wms': 4, 'wfs': 0, 'wmts': 2, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 0, 'gn': 0, 'records': [], 'catalogues': 31}
+[    0s] portals: 0/0 ok, 0 records with service links
+[    0s] targets: 4 ArcGIS roots, 0 ArcGIS services from portals, 6 OGC endpoints
+[    6s] ArcGIS roots listed: 3/4 reachable; 749 ArcGIS services total
+[   35s] services crawled 500/755; layers so far 6280
+[   50s] services crawled 755/755; layers so far 7368
+[   50s] curated records: 0 endpoints
+[  587s] extents: {'suspect': 2180, 'attempted': 551, 'measured': 527, 'shrunk': 45, 'empty': 0}
+[  587s] layers joined to a catalogue record: 0/7368
+[  994s] checks run: 1049 (sampled 1049)
+[  996s] unique layers: 7364
+datasets built in 40s: 4801 from 7364 endpoints
+--- shard-3
+[    0s] shard 3/4
+[    0s] seeds: {'arcgis_roots': 1, 'arcgis_services': 0, 'wms': 1, 'wfs': 1, 'wmts': 0, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 0, 'gn': 0, 'records': [], 'catalogues': 31}
+[    0s] portals: 0/0 ok, 0 records with service links
+[    0s] targets: 1 ArcGIS roots, 0 ArcGIS services from portals, 2 OGC endpoints
+[    4s] ArcGIS roots listed: 1/1 reachable; 230 ArcGIS services total
+[   30s] services crawled 232/232; layers so far 815
+[   30s] curated records: 0 endpoints
+[  129s] extents: {'suspect': 186, 'attempted': 119, 'measured': 116, 'shrunk': 16, 'empty': 0}
+[  129s] layers joined to a catalogue record: 0/815
+[  305s] checks run: 335 (sampled 335)
+[  305s] unique layers: 815
+datasets built in 5s: 577 from 815 endpoints
+datasets built in 251s: 46483 from 61719 endpoints
