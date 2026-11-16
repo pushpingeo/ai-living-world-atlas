@@ -59,7 +59,8 @@ jobs:
           set -a; . "${{ steps.p.outputs.file }}"; set +a
           set -o pipefail
           python -m atlas.tag_batch --datasets /tmp/datasets.parquet --layers /tmp/layers.parquet --out out \
-            --skip-tagged /tmp/already.parquet ${ONLY_PASSING:+--only-passing} ${BATCH_ID:+--batch-id $BATCH_ID} 2>&1 | tee tag.log
+            --skip-tagged /tmp/already.parquet ${ONLY_PASSING:+--only-passing} ${BATCH_ID:+--batch-id $BATCH_ID} \
+            --max-datasets "${MAX_DATASETS:-200000}" 2>&1 | tee tag.log
       - name: Keep earlier tags for this wave
         if: always()
         run: |

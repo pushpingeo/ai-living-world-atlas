@@ -16,6 +16,7 @@ on:
         default: runs/spike-gb.env
 permissions:
   contents: write
+  actions: write  # to start the collections build after the Europe source wave
 concurrency:
   group: spike-${{ github.sha }}
   cancel-in-progress: false
@@ -151,3 +152,13 @@ jobs:
           git add -A
           git commit -qm "Crawl results ${{ needs.plan.outputs.name }} (run ${GITHUB_RUN_ID})"
           git push -f origin HEAD:refs/heads/results/spike-${{ needs.plan.outputs.name }}
+      - name: Start the derived wave (collections), if this wave feeds one
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git checkout -q "$GITHUB_SHA"
+          set -a; . runs/collections.env; set +a
+          if [ "${{ needs.plan.outputs.name }}" = "$SOURCE" ]; then
+            gh workflow run collections.yml --ref main && echo "started collections for $TARGET"
+          fi

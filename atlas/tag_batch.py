@@ -65,6 +65,8 @@ def main():
     ap.add_argument("--batch-id", default="")
     ap.add_argument("--skip-tagged", default="", help="tags.parquet of datasets already tagged; those are skipped")
     ap.add_argument("--max-wait-min", type=float, default=320)
+    ap.add_argument("--max-datasets", type=int, default=0,
+                    help="refuse to submit more than this many (Rob's rule: ask before a run over ~$20, about 220k datasets)")
     args = ap.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -78,6 +80,12 @@ def main():
             before = len(ds)
             ds = ds[~ds["dataset_id"].isin(done)]
             print(f"skipping {before - len(ds)} already tagged", flush=True)
+        if args.max_datasets and len(ds) > args.max_datasets:
+            msg = (f"# Not submitted\n\n{len(ds):,} datasets to tag is over the cap of {args.max_datasets:,} "
+                   f"(about ${len(ds) * 0.09 / 1000:.2f} at batch rates). Raise MAX_DATASETS in the run file to go ahead.\n")
+            (out / "COST.md").write_text(msg)
+            print(msg)
+            return
         if not len(ds):
             (out / "COST.md").write_text("# Nothing new to tag\n\n- **Cost: $0.00**\n")
             print("nothing to tag")
