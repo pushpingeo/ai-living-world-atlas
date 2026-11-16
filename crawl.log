@@ -1,0 +1,43 @@
+[    0s] seeds: {'arcgis_roots': 72, 'wms': 83, 'wfs': 79, 'wmts': 26, 'wcs': 37, 'hub': 98, 'ckan': 44, 'catalogues': 1147}
+[  244s] portals: 85/142 ok, 18899 records with service links
+[  244s] targets: 91 ArcGIS roots, 7800 ArcGIS services from portals, 4206 OGC endpoints
+[  309s] ArcGIS roots listed: 42/91 reachable; 13219 ArcGIS services total
+[  468s] services crawled 500/17425; layers so far 2211
+[  586s] services crawled 1000/17425; layers so far 5159
+[  667s] services crawled 1500/17425; layers so far 7874
+[  827s] services crawled 2000/17425; layers so far 10121
+[  896s] services crawled 2500/17425; layers so far 11685
+[ 1002s] services crawled 3000/17425; layers so far 14375
+[ 1086s] services crawled 3500/17425; layers so far 19193
+[ 1196s] services crawled 4000/17425; layers so far 22008
+[ 1333s] services crawled 4500/17425; layers so far 23952
+[ 1439s] services crawled 5000/17425; layers so far 26695
+[ 1597s] services crawled 5500/17425; layers so far 29085
+[ 1731s] services crawled 6000/17425; layers so far 32000
+[ 1841s] services crawled 6500/17425; layers so far 34448
+[ 1997s] services crawled 7000/17425; layers so far 36147
+[ 2105s] services crawled 7500/17425; layers so far 39101
+[ 2246s] services crawled 8000/17425; layers so far 41541
+[ 2381s] services crawled 8500/17425; layers so far 44669
+[ 2568s] services crawled 9000/17425; layers so far 47021
+[ 2678s] services crawled 9500/17425; layers so far 49892
+[ 2745s] services crawled 10000/17425; layers so far 52974
+[ 2876s] services crawled 10500/17425; layers so far 54850
+[ 2941s] services crawled 11000/17425; layers so far 56931
+[ 3053s] services crawled 11500/17425; layers so far 59703
+[ 3157s] services crawled 12000/17425; layers so far 62127
+[ 3313s] services crawled 12500/17425; layers so far 63671
+[ 3469s] services crawled 13000/17425; layers so far 65356
+[ 3529s] services crawled 13500/17425; layers so far 67808
+[ 3615s] services crawled 14000/17425; layers so far 70118
+[ 3724s] services crawled 14500/17425; layers so far 72219
+[ 3803s] services crawled 15000/17425; layers so far 74336
+[ 3885s] services crawled 15500/17425; layers so far 76288
+[ 4044s] services crawled 16000/17425; layers so far 79555
+[ 4201s] services crawled 16500/17425; layers so far 81432
+[ 4312s] services crawled 17000/17425; layers so far 85070
+[ 4395s] services crawled 17425/17425; layers so far 87365
+[ 5586s] extents: {'suspect': 10668, 'attempted': 4074, 'measured': 2925, 'shrunk': 756, 'empty': 0}
+[ 5588s] layers joined to a catalogue record: 16460/87365
+[ 6409s] checks run: 3903 (sampled 4000)
+[ 6417s] unique layers: 61520

@@ -1,0 +1,639 @@
+[
+ {
+  "root": "https://environment.data.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 400, 'message': 'Invalid URL', 'details': ['Invalid URL']}",
+  "ms": 158,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.broxtowe.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.aberdeencity.gov.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 493,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.bristol.gov.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 102,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.mapping.glasgow.gov.uk/arcgis_web/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 126,
+  "n_services": 48
+ },
+ {
+  "root": "https://map.sepa.org.uk/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 109,
+  "n_services": 69
+ },
+ {
+  "root": "https://spatial.durham.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 171,
+  "n_services": 40
+ },
+ {
+  "root": "https://maps.northlanarkshire.gov.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 485,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.gov.scot/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 119,
+  "n_services": 22
+ },
+ {
+  "root": "https://www.mapping.cityoflondon.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 131,
+  "n_services": 60
+ },
+ {
+  "root": "https://inspire.hes.scot/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 281,
+  "n_services": 11
+ },
+ {
+  "root": "https://map.cornwall.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.ukogl.org.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 120,
+  "n_services": 49
+ },
+ {
+  "root": "https://sheffieldcitycouncil.cloud.esriuk.com/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisdata.landmarkcloud.co.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 240,
+  "n_services": 0
+ },
+ {
+  "root": "http://gis.lichfielddc.gov.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 112,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapping.moray.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 125,
+  "n_services": 4
+ },
+ {
+  "root": "https://maps1webserver2.croppermap.com/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 44,
+  "n_services": 35
+ },
+ {
+  "root": "https://lbbdgis.lbbd.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 117,
+  "n_services": 58
+ },
+ {
+  "root": "https://gedlingmaps.gedling.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 172,
+  "n_services": 106
+ },
+ {
+  "root": "https://services.tunbridgewells.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://glasgowenterprise.cloud.esriuk.com/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "http://edinburghcouncilmaps.info/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 111,
+  "n_services": 54
+ },
+ {
+  "root": "https://gis.lambeth.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 209,
+  "n_services": 733
+ },
+ {
+  "root": "https://www.landis.org.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis-2.uoa.abdn.ac.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 147,
+  "n_services": 10
+ },
+ {
+  "root": "https://maps.fareham.gov.uk/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 130,
+  "n_services": 55
+ },
+ {
+  "root": "https://gis.lambeth.gov.uk/arcgis/rest/Services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 442,
+  "n_services": 733
+ },
+ {
+  "root": "https://gisext.south-ayrshire.gov.uk/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 160,
+  "n_services": 11
+ },
+ {
+  "root": "http://maps.hants.gov.uk/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 59,
+  "n_services": 0
+ },
+ {
+  "root": "https://webapps.kent.gov.uk/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 142,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.lichfielddc.gov.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 106,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.york.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 119,
+  "n_services": 22
+ },
+ {
+  "root": "https://maps.eastdunbarton.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host maps.eastdunbarton.gov.uk:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate h",
+  "ms": 241,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.data.gov.scot/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 108,
+  "n_services": 0
+ },
+ {
+  "root": "https://webapps.kent.gov.uk/arcgis2/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 351,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps2.bristol.gov.uk/server2/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 454,
+  "n_services": 171
+ },
+ {
+  "root": "http://gis.lambeth.gov.uk:6080/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 211,
+  "n_services": 733
+ },
+ {
+  "root": "https://mapservices.leeds.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 598,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.argyll-bute.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 200,
+  "n_services": 84
+ },
+ {
+  "root": "https://maps.york.gov.uk/ArcGIS/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 451,
+  "n_services": 22
+ },
+ {
+  "root": "https://datahub.admiralty.co.uk/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1110,
+  "n_services": 28
+ },
+ {
+  "root": "https://gis.bradford.gov.uk/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 118,
+  "n_services": 23
+ },
+ {
+  "root": "https://gis.worldpop.org/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host gis.worldpop.org:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, cer",
+  "ms": 222,
+  "n_services": 0
+ },
+ {
+  "root": "http://mapapps2.bgs.ac.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 227,
+  "n_services": 0
+ },
+ {
+  "root": "http://app.newark-sherwooddc.gov.uk/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 224,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.wiltshire.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 145,
+  "n_services": 77
+ },
+ {
+  "root": "http://gis.northumberland.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorError: Cannot connect to host gis.northumberland.gov.uk:80 ssl:default [Connect call failed ('193.201.64.125', 80)]",
+  "ms": 117,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.maps.north-ayrshire.gov.uk/arcgis/rest/services",
+  "status": 503,
+  "error": "HTTP 503",
+  "ms": 490,
+  "n_services": 0
+ },
+ {
+  "root": "https://r.chelmsford.gov.uk/ccc/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host r.chelmsford.gov.uk:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local",
+  "ms": 208,
+  "n_services": 0
+ },
+ {
+  "root": "https://edinburghcouncilmaps.info/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 106,
+  "n_services": 54
+ },
+ {
+  "root": "https://ukair.maps.rcdo.co.uk/ukairserver/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 146,
+  "n_services": 655
+ },
+ {
+  "root": "https://cagmap.snh.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host cagmap.snh.gov.uk:443 ssl:default [Name or service not known]",
+  "ms": 35,
+  "n_services": 0
+ },
+ {
+  "root": "https://e-pims.cabinetoffice.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host e-pims.cabinetoffice.gov.uk:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mi",
+  "ms": 310,
+  "n_services": 0
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 136,
+  "n_services": 307
+ },
+ {
+  "root": "http://webservices.spatialni.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host webservices.spatialni.gov.uk:80 ssl:default [No address associated with hostname]",
+  "ms": 160,
+  "n_services": 0
+ },
+ {
+  "root": "https://itportal.ogauthority.co.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host itportal.ogauthority.co.uk:443 ssl:default [No address associated with hostname]",
+  "ms": 80,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.towerhamlets.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gis.towerhamlets.gov.uk:443 ssl:default [Name or service not known]",
+  "ms": 43,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.cheshire.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host maps.cheshire.gov.uk:80 ssl:default [No address associated with hostname]",
+  "ms": 54,
+  "n_services": 0
+ },
+ {
+  "root": "https://tdcmaps.tandridge.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 1760,
+  "n_services": 91
+ },
+ {
+  "root": "https://navgisapp04.north-ayrshire.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host navgisapp04.north-ayrshire.gov.uk:443 ssl:default [Name or service not known]",
+  "ms": 152,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisservices.spatialni.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gisservices.spatialni.gov.uk:443 ssl:default [Name or service not known]",
+  "ms": 288,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.middlesbrough.gov.uk/server/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host maps.middlesbrough.gov.uk:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate h",
+  "ms": 315,
+  "n_services": 0
+ },
+ {
+  "root": "http://public-online.hmrc.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 395,
+  "n_services": 0
+ },
+ {
+  "root": "http://GIS.Rushmoor.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gis.rushmoor.gov.uk:80 ssl:default [Name or service not known]",
+  "ms": 141,
+  "n_services": 0
+ },
+ {
+  "root": "https://ons-inspire.esriuk.com/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host ons-inspire.esriuk.com:443 ssl:default [Name or service not known]",
+  "ms": 283,
+  "n_services": 0
+ },
+ {
+  "root": "http://druid.hutton.ac.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 250,
+  "n_services": 159
+ },
+ {
+  "root": "http://inspire.gwynedd.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host inspire.gwynedd.gov.uk:80 ssl:default [Name or service not known]",
+  "ms": 655,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.daera-ni.gov.uk/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 507,
+  "n_services": 107
+ },
+ {
+  "root": "https://maps.wigan.gov.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 121,
+  "n_services": 129
+ },
+ {
+  "root": "https://climate.discomap.eea.europa.eu/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 127,
+  "n_services": 273
+ },
+ {
+  "root": "https://land.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 127,
+  "n_services": 237
+ },
+ {
+  "root": "https://preproduction.spatialni.gov.uk/opendata/rest/services",
+  "status": 0,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "ms": 1104,
+  "n_services": 0
+ },
+ {
+  "root": "https://services.spatialni.gov.uk/opendata/rest/services",
+  "status": 0,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "ms": 1104,
+  "n_services": 0
+ },
+ {
+  "root": "https://image.discomap.eea.europa.eu/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 128,
+  "n_services": 291
+ },
+ {
+  "root": "https://map.bgs.ac.uk/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 131,
+  "n_services": 144
+ },
+ {
+  "root": "https://wwfke-giscoe.wwfkenya.org/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 274,
+  "n_services": 485
+ },
+ {
+  "root": "https://maps.birmingham.gov.uk/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 19086,
+  "n_services": 46
+ },
+ {
+  "root": "https://itportal.decc.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.unep-wcmc.org/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.wolverhampton.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.southoxon.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "http://sedsh127.sedsh.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisrest.defra.gov.uk/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "http://newmaps.ashford.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.cheshiresharedservices.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.renfrewshire.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps2.eastdevon.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "http://gis.worcestershire.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.whitehorsedc.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "http://gis1.westberks.gov.uk/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ }
+]

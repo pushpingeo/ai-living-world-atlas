@@ -1,0 +1,1133 @@
+[
+ {
+  "portal": "hub:https://opendata-nstauthority.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://national-forest-inventory-forestry.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "https://data.dundeecity.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.hounslow.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-falkirk.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://maps.mapaction.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://catalogue.eidf.ac.uk/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.ubdc.ac.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://maps-north-ayrshire.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 107,
+  "total": 122
+ },
+ {
+  "portal": "hub:https://maps-south-ayrshire.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://mario-lancashirecc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://opendatanew-adca7-feeb9-92dad-tunbridgewells.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 37,
+  "total": 38
+ },
+ {
+  "portal": "hub:https://www.smartsouthend.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 47
+ },
+ {
+  "portal": "hub:https://commonwealth-games-data-hub-tfwm.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-ren.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "https://www.resourcedata.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.england.nhs.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://plymouth.thedata.place",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://lcrdigitalcommons.com",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://cornwall-coastal-data-hub-cwtrust.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 79,
+  "total": 84
+ },
+ {
+  "portal": "hub:https://data-norfolk.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 24,
+  "total": 25
+ },
+ {
+  "portal": "https://connecteddata.nationalgrid.co.uk/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://air-pollution-data-hub-urbanhealth.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://ckan.grassroots.tools",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://www.neso.energy/data-portal",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://www.lowcarboncontracts.uk/data-portal",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://map-highland.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 11
+ },
+ {
+  "portal": "https://ckan.mba.ac.uk/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-argyll-bute.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 39,
+  "total": 47
+ },
+ {
+  "portal": "https://statistics.ukdataservice.ac.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.spatialhub.scot",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://opendata.nhsbsa.net",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://covid19.esriuk.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 46,
+  "total": 51
+ },
+ {
+  "portal": "hub:https://opendata-sunderlandcc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://health-and-social-care-map-of-england-project-hsc-map-england.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "https://data.kdl.kcl.ac.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://www.surreyi.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 296
+ },
+ {
+  "portal": "https://admin.opendatani.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://gis-sevenoaks.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 26
+ },
+ {
+  "portal": "hub:https://gis-tfl.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 42,
+  "total": 46
+ },
+ {
+  "portal": "https://www.opendata.nhs.scot",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.ssen.co.uk",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 36,
+  "count": 36
+ },
+ {
+  "portal": "https://data.yorkopendata.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-hambletondc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3,
+  "total": 9
+ },
+ {
+  "portal": "hub:https://waterwatchcollectivehub.wwt.org.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 21
+ },
+ {
+  "portal": "hub:https://data-broxtowebc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 21,
+  "total": 23
+ },
+ {
+  "portal": "hub:https://spatialdata-abdnshire.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 34,
+  "total": 34
+ },
+ {
+  "portal": "hub:https://spatial-data-tunbridgewells.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 31,
+  "total": 33
+ },
+ {
+  "portal": "hub:https://open-data-scottishforestry.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 82,
+  "total": 82
+ },
+ {
+  "portal": "https://open.barnet.gov.uk/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 395
+ },
+ {
+  "portal": "hub:https://data.castco.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 107,
+  "total": 130
+ },
+ {
+  "portal": "hub:https://opendata.bristol.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 204,
+  "total": 223
+ },
+ {
+  "portal": "https://data.essex.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 279
+ },
+ {
+  "portal": "http://dataplay.org.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-canalrivertrust.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 30
+ },
+ {
+  "portal": "hub:https://local-development-plan-caerphillycbc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 29,
+  "total": 30
+ },
+ {
+  "portal": "hub:https://strategic-planning-leedscc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 55,
+  "total": 68
+ },
+ {
+  "portal": "hub:https://nottingham-city-council-open-data-geoportal-nottmcitycouncil.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 86,
+  "total": 90
+ },
+ {
+  "portal": "hub:https://open-data-design-glasgowgis.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 111,
+  "total": 137
+ },
+ {
+  "portal": "hub:https://monitoring.arc-trust.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 27
+ },
+ {
+  "portal": "hub:https://eryri-national-park-authority-geoportal-eryri.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 20
+ },
+ {
+  "portal": "hub:https://amphibian-survey.arc-trust.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 6
+ },
+ {
+  "portal": "hub:https://data.edinburghcouncilmaps.info",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 63,
+  "total": 64
+ },
+ {
+  "portal": "hub:https://www.victorianpoor.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 31
+ },
+ {
+  "portal": "hub:https://opendata-cheshireeast.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 81,
+  "total": 180
+ },
+ {
+  "portal": "hub:https://maps-broxtowe.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://opendata.nationalhighways.co.uk/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 52,
+  "total": 52
+ },
+ {
+  "portal": "hub:https://open-data-perth-kinross.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 52,
+  "total": 74
+ },
+ {
+  "portal": "hub:https://citizen-problem-reporter-1-brentwoodboro.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 34,
+  "total": 49
+ },
+ {
+  "portal": "hub:https://geoportal.dft.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 45,
+  "total": 45
+ },
+ {
+  "portal": "hub:https://spatialdata-cbmdc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 53,
+  "total": 62
+ },
+ {
+  "portal": "hub:https://data-cyc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 134,
+  "total": 135
+ },
+ {
+  "portal": "hub:https://aechub.esriuk.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 24
+ },
+ {
+  "portal": "https://ckan.earlham.ac.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://hub.datanorthyorkshire.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-midulster.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 25,
+  "total": 27
+ },
+ {
+  "portal": "hub:https://planning-stirling-council.hub.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "https://publications.aberdeenshire.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data.stirling.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 311,
+  "total": 616
+ },
+ {
+  "portal": "https://data.nhm.ac.uk",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 300,
+  "count": 300
+ },
+ {
+  "portal": "hub:https://gisdata-nlcmaps.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data.lichfielddc.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 222
+ },
+ {
+  "portal": "https://data.brent.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 313
+ },
+ {
+  "portal": "hub:https://opendata.canterbury.gov.uk/",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host opendata.canterbury.gov.uk:443 ssl:default [Name or service not known]",
+  "records": 0
+ },
+ {
+  "portal": "https://data.pkc.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://pldr.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 126
+ },
+ {
+  "portal": "hub:https://middlesbrough-council-middlesbrough.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 9,
+  "total": 1713
+ },
+ {
+  "portal": "hub:https://sheffield-health-and-wellbeing-shefuni.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 6
+ },
+ {
+  "portal": "hub:https://lambethopenmappingdata-lambethcouncil.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 159,
+  "total": 162
+ },
+ {
+  "portal": "hub:https://cleanair.wmca.org.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://cotswold-district-council-datasets-cotswold.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 13,
+  "total": 13
+ },
+ {
+  "portal": "https://dataworks.calderdale.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 256
+ },
+ {
+  "portal": "hub:https://resources-kenwildtrust.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 30
+ },
+ {
+  "portal": "hub:https://open-data-portal-gedling.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 54,
+  "total": 54
+ },
+ {
+  "portal": "hub:https://data-forestry.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 162,
+  "total": 226
+ },
+ {
+  "portal": "hub:https://osni.spatial-ni.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host osni.spatial-ni.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hos",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://opendata-thecrownestate.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 34
+ },
+ {
+  "portal": "hub:https://ccgbcodni-cbcni.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 29
+ },
+ {
+  "portal": "hub:https://monitoring.catchmentbasedapproach.org/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 13
+ },
+ {
+  "portal": "hub:https://sheffield-city-council-open-data-sheffieldcc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 157,
+  "total": 214
+ },
+ {
+  "portal": "https://data.london.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 1310
+ },
+ {
+  "portal": "hub:https://naturalengland-defra.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 244,
+  "total": 252
+ },
+ {
+  "portal": "hub:https://southdowns-sdnpa.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 346,
+  "total": 395
+ },
+ {
+  "portal": "hub:https://portal.landis.org.uk/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://aghub.catchmentbasedapproach.org/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 4,
+  "total": 15
+ },
+ {
+  "portal": "hub:https://opendata.wigan.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 92,
+  "total": 95
+ },
+ {
+  "portal": "hub:https://opendata.tunbridgewells.gov.uk/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 81,
+  "total": 140
+ },
+ {
+  "portal": "hub:https://open-data-mcr-council.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 26
+ },
+ {
+  "portal": "hub:https://space-geoportal-queensub.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 349,
+  "total": 359
+ },
+ {
+  "portal": "https://leedsdatamill.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "",
+  "records": 0,
+  "scanned": 0,
+  "count": 641
+ },
+ {
+  "portal": "https://opendata.datahub.io",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 2854,
+  "count": 2854
+ },
+ {
+  "portal": "hub:https://spatial.falkirk.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 57,
+  "total": 69
+ },
+ {
+  "portal": "hub:https://jlp.southandvale.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 136
+ },
+ {
+  "portal": "hub:https://opendata-dundeecity.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 107,
+  "total": 133
+ },
+ {
+  "portal": "hub:https://hub-worldpop.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 205,
+  "total": 222
+ },
+ {
+  "portal": "hub:https://opendata-daerani.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 332,
+  "total": 336
+ },
+ {
+  "portal": "hub:https://data-moray.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 79,
+  "total": 79
+ },
+ {
+  "portal": "hub:https://opendata-historicengland.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 33,
+  "total": 42
+ },
+ {
+  "portal": "hub:https://compliance-data.defra.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 449,
+  "total": 449
+ },
+ {
+  "portal": "hub:https://www.streamwaterdata.co.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 326,
+  "total": 437
+ },
+ {
+  "portal": "hub:https://smnr-nrw.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 345,
+  "total": 453
+ },
+ {
+  "portal": "hub:https://open-data-ukcs-transition.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 377,
+  "total": 733
+ },
+ {
+  "portal": "hub:https://open-data-national-trust.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1218,
+  "total": 1222
+ },
+ {
+  "portal": "hub:https://data.catchmentbasedapproach.org/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 546,
+  "total": 582
+ },
+ {
+  "portal": "https://mdep.smdh.uk/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host mdep.smdh.uk:443 ssl:default [Name or service not known]",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://manage.test.standards.nhs.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host manage.test.standards.nhs.uk:443 ssl:default [Name or service not known]",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://opendata.angus.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host opendata.angus.gov.uk:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get loc",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://opendata.hullcc.gov.uk",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host opendata.hullcc.gov.uk:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get lo",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://treehub.catchmentbasedapproach.org/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-communities.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://crown-estate-scotland-spatial-hub-coregis.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 29
+ },
+ {
+  "portal": "hub:https://champhibians.arc-trust.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 11
+ },
+ {
+  "portal": "hub:https://spatialdata-accabdn.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 56,
+  "total": 56
+ },
+ {
+  "portal": "hub:https://opendata.nature.scot/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 180,
+  "total": 186
+ },
+ {
+  "portal": "https://data.bris.ac.uk/data/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://www.cymruhanesyddol.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://historical-boundaries-of-wales-rcahmw.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 37,
+  "total": 37
+ },
+ {
+  "portal": "hub:https://wiltshire-council-open-data-hub-wiltscouncil.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 33,
+  "total": 33
+ },
+ {
+  "portal": "hub:https://climatedataportal.metoffice.gov.uk/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 90,
+  "total": 99
+ },
+ {
+  "portal": "hub:https://geoportal.statistics.gov.uk",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2347,
+  "total": 3465
+ },
+ {
+  "portal": "https://openscience.hutton.ac.uk/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "TimeoutError: ",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.gov.uk",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 8246,
+  "scanned": 60370,
+  "count": 60370
+ }
+]
