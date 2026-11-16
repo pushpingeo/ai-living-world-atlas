@@ -1,0 +1,72 @@
+name: backup
+# Tags cost money to rebuild; crawls only cost time. After every tagging run, keep a dated, never-overwritten copy of
+# every results/tags-* set (plus its COST.md) as files on the "tags-backup" GitHub release, and a second copy in
+# Cloudflare R2 (bucket atlas-backup) when the Cloudflare token allows it.
+on:
+  workflow_run:
+    workflows: [tag]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ['.github/workflows/backup.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: backup
+  cancel-in-progress: false
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect tag sets
+        run: |
+          mkdir -p /tmp/bk; STAMP=$(date -u +%Y%m%dT%H%MZ)
+          for b in $(git ls-remote --heads origin 'results/tags-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
+            n=$(basename "$b")
+            git fetch -q origin "$b" || continue
+            git show FETCH_HEAD:tags.parquet > /tmp/t.parquet 2>/dev/null || continue
+            [ -s /tmp/t.parquet ] || continue
+            h=$(sha256sum /tmp/t.parquet | cut -c1-12)
+            cp /tmp/t.parquet "/tmp/bk/$n-$STAMP-$h.parquet"
+            git show FETCH_HEAD:COST.md > "/tmp/bk/$n-$STAMP-$h.COST.md" 2>/dev/null || true
+          done
+          ls -la /tmp/bk
+      - name: Copy to the GitHub release (only sets not already there)
+        run: |
+          gh release view tags-backup >/dev/null 2>&1 || gh release create tags-backup --prerelease --title "Tag backups" \
+            --notes "Dated copies of the Haiku tag sets (results/tags-*). Added after each tagging run; never overwritten. File names end with a content hash."
+          have=$(gh release view tags-backup --json assets -q '.assets[].name')
+          : > /tmp/report.txt
+          for f in /tmp/bk/*.parquet; do
+            h=$(basename "$f" .parquet | rev | cut -d- -f1 | rev); n=$(basename "$f" | cut -d- -f1-2)
+            if echo "$have" | grep -q -- "^$n-.*-$h.parquet$"; then echo "github: $n unchanged ($h)" >> /tmp/report.txt; continue; fi
+            gh release upload tags-backup "$f" "${f%.parquet}.COST.md" 2>/dev/null || gh release upload tags-backup "$f"
+            echo "github: $n saved as $(basename $f)" >> /tmp/report.txt
+          done
+      - name: Copy to Cloudflare R2
+        continue-on-error: true
+        run: |
+          npm i -g wrangler@4 >/dev/null
+          if ! wrangler r2 bucket list >/dev/null 2>&1; then echo "r2: not available with this token (needs Workers R2 Storage: Edit)" >> /tmp/report.txt; exit 0; fi
+          wrangler r2 bucket list | grep -q atlas-backup || wrangler r2 bucket create atlas-backup
+          for f in /tmp/bk/*; do
+            wrangler r2 object put "atlas-backup/tags/$(basename $f)" --file "$f" --remote >/dev/null && echo "r2: $(basename $f)" >> /tmp/report.txt
+          done
+      - name: Publish report
+        if: always()
+        run: |
+          echo "run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > /tmp/RUN.txt; cat /tmp/report.txt
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp /tmp/RUN.txt /tmp/report.txt . 2>/dev/null; git add -A && git commit -qm "Backup report" && git push -qf origin HEAD:refs/heads/results/backup
