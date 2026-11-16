@@ -1,0 +1,4405 @@
+[
+ {
+  "root": "https://maps.poriruacity.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.tauranga.govt.nz/server/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 148,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.waikatoregion.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://cityworks.leduc.ca/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 57,
+  "n_services": 0
+ },
+ {
+  "root": "https://ajaxmaps.ajax.ca/gisernie/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 116,
+  "n_services": 11
+ },
+ {
+  "root": "https://gis.woolwich.ca:6443/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 76,
+  "n_services": 4
+ },
+ {
+  "root": "https://topofthesouthmaps.co.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.williamslake.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 66,
+  "n_services": 5
+ },
+ {
+  "root": "https://api.cityofkingston.ca/gis_unfed/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 442,
+  "n_services": 14
+ },
+ {
+  "root": "https://maps.bccdc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 87,
+  "n_services": 2
+ },
+ {
+  "root": "https://www5.agr.gc.ca/atlas/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 75,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.cambridge.ca/arcgispub03/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 88,
+  "n_services": 140
+ },
+ {
+  "root": "https://gisdata.elginmapping.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 208,
+  "n_services": 23
+ },
+ {
+  "root": "https://mapping.morinville.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 96,
+  "n_services": 129
+ },
+ {
+  "root": "http://geo.kelowna.ca/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 47,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.rmwb.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 77,
+  "n_services": 0
+ },
+ {
+  "root": "https://ww8.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 151,
+  "n_services": 54
+ },
+ {
+  "root": "https://geoportal.kelowna.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.kelowna.ca/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 57,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.herengaanuku.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 189,
+  "n_services": 7
+ },
+ {
+  "root": "https://gis.metrovancouver.org/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 94,
+  "n_services": 23
+ },
+ {
+  "root": "https://maps.georgina.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 75,
+  "n_services": 186
+ },
+ {
+  "root": "https://www.imagetest.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 135,
+  "n_services": 10
+ },
+ {
+  "root": "https://maps.gov.yk.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 104,
+  "n_services": 1
+ },
+ {
+  "root": "https://mapping.rdkb.com/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 80,
+  "n_services": 50
+ },
+ {
+  "root": "https://gis.birdscanada.org/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 99,
+  "n_services": 54
+ },
+ {
+  "root": "https://gis.energy.gov.ab.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 74,
+  "n_services": 60
+ },
+ {
+  "root": "https://maps.leduc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 59,
+  "n_services": 35
+ },
+ {
+  "root": "https://maps.newmarket.ca/tonext/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 81,
+  "n_services": 37
+ },
+ {
+  "root": "https://maps.six.nsw.gov.au/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 165,
+  "n_services": 0
+ },
+ {
+  "root": "https://esriprod.scenicrim.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 157,
+  "n_services": 12
+ },
+ {
+  "root": "https://www.apps.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 130,
+  "n_services": 33
+ },
+ {
+  "root": "https://mapping.burlington.ca/arcgisweb/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 74,
+  "n_services": 101
+ },
+ {
+  "root": "https://gis.planview.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 215,
+  "n_services": 3
+ },
+ {
+  "root": "https://gisext.saskatoon.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 90,
+  "n_services": 43
+ },
+ {
+  "root": "https://gis.thebluemountains.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 103,
+  "n_services": 37
+ },
+ {
+  "root": "http://geonb.snb.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 313,
+  "n_services": 69
+ },
+ {
+  "root": "https://gis.toronto.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 91,
+  "n_services": 80
+ },
+ {
+  "root": "https://data4.actmapi.act.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 157,
+  "n_services": 24
+ },
+ {
+  "root": "https://gisapps.barrie.ca/image/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 97,
+  "n_services": 20
+ },
+ {
+  "root": "https://maps.ottawa.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 100,
+  "n_services": 78
+ },
+ {
+  "root": "https://agrimaps.gov.mb.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 1669,
+  "n_services": 0
+ },
+ {
+  "root": "https://api.milton.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 82,
+  "n_services": 43
+ },
+ {
+  "root": "https://mapping.gw.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 146,
+  "n_services": 55
+ },
+ {
+  "root": "https://gis.edmonton.ca/site1/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 152,
+  "n_services": 59
+ },
+ {
+  "root": "https://gishub.princegeorge.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 66,
+  "n_services": 68
+ },
+ {
+  "root": "https://ww2.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 95,
+  "n_services": 45
+ },
+ {
+  "root": "https://exwai.maps.mississauga.ca/img/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 148,
+  "n_services": 32
+ },
+ {
+  "root": "https://geo.rdffg.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 88,
+  "n_services": 83
+ },
+ {
+  "root": "http://maps.six.nsw.gov.au/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 320,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps1.brampton.ca/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 258,
+  "n_services": 47
+ },
+ {
+  "root": "https://data.aadnc-aandc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 308,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisservices.surrey.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1120,
+  "n_services": 92
+ },
+ {
+  "root": "https://services.ga.gov.au/gis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 155,
+  "n_services": 0
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/portal/sharing/servers/e88d459ed82645729f6df153c187297c/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Error generating token']}",
+  "ms": 582,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.medicinehat.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 66,
+  "n_services": 97
+ },
+ {
+  "root": "https://geodata.coquitlam.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 272,
+  "n_services": 54
+ },
+ {
+  "root": "https://maps.upperhutt.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 179,
+  "n_services": 54
+ },
+ {
+  "root": "https://corportal1.richmond.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 69,
+  "n_services": 88
+ },
+ {
+  "root": "https://mapspublic.aklc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 183,
+  "n_services": 115
+ },
+ {
+  "root": "https://gisdata.coquitlam.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 393,
+  "n_services": 16
+ },
+ {
+  "root": "https://ww3.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 96,
+  "n_services": 17
+ },
+ {
+  "root": "https://maps-cartes.ec.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 116,
+  "n_services": 110
+ },
+ {
+  "root": "https://geoappext.nrcan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 95,
+  "n_services": 91
+ },
+ {
+  "root": "https://maps.alberta.ca/genesis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host maps.alberta.ca:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired",
+  "ms": 106,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.lcc.wspdigital.com/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 157,
+  "n_services": 63
+ },
+ {
+  "root": "https://gis1.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 148,
+  "n_services": 133
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/portal/sharing/servers/3a1f3ef12f6241a3bf5b8ccddc3ca757/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Error generating token']}",
+  "ms": 233,
+  "n_services": 0
+ },
+ {
+  "root": "https://dreags.aamgeocloud.com/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 166,
+  "n_services": 1
+ },
+ {
+  "root": "https://maps.muskoka.on.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 111,
+  "n_services": 2
+ },
+ {
+  "root": "https://arcgis.nopta.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 174,
+  "n_services": 28
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/portal/sharing/servers/c2880538b70e4fb7a55e3bbe2a2ccb28/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Error generating token']}",
+  "ms": 502,
+  "n_services": 0
+ },
+ {
+  "root": "https://gispublic.barrie.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 87,
+  "n_services": 46
+ },
+ {
+  "root": "http://maps.perthcounty.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 221,
+  "n_services": 51
+ },
+ {
+  "root": "https://cssl.lib.uwo.ca/cssl/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 87,
+  "n_services": 152
+ },
+ {
+  "root": "https://geonb.snb.ca/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 379,
+  "n_services": 36
+ },
+ {
+  "root": "https://roomfinder.sfu.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 2350,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis4.waimatedc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 235,
+  "n_services": 98
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/portal/sharing/servers/a2e210bdaa2f43d485d472e5a87d65ba/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Error generating token']}",
+  "ms": 205,
+  "n_services": 0
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/i3s/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.wpsgn.ca/s22/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 89,
+  "n_services": 21
+ },
+ {
+  "root": "https://elements1.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 163,
+  "n_services": 9
+ },
+ {
+  "root": "https://mappmycity.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 88,
+  "n_services": 52
+ },
+ {
+  "root": "https://www.lmbc.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 164,
+  "n_services": 22
+ },
+ {
+  "root": "https://maps.nhvr.gov.au/agsm1/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 150,
+  "n_services": 17
+ },
+ {
+  "root": "https://sampleserver6.arcgisonline.com/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 63,
+  "n_services": 121
+ },
+ {
+  "root": "https://gisportal.campbellriver.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 103,
+  "n_services": 67
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/portal/sharing/servers/40efbc97f7664ae0b3f104bf5ec19964/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Error generating token']}",
+  "ms": 553,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.haldimandcounty.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 80,
+  "n_services": 467
+ },
+ {
+  "root": "https://hosting.spatial.nsw.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 638,
+  "n_services": 44
+ },
+ {
+  "root": "https://data.vicroads.vic.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host data.vicroads.vic.gov.au:443 ssl:default [No address associated with hostname]",
+  "ms": 26,
+  "n_services": 0
+ },
+ {
+  "root": "https://amgis.yellowknife.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 130,
+  "n_services": 71
+ },
+ {
+  "root": "https://vicdata.vicroads.vic.gov.au/server/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host vicdata.vicroads.vic.gov.au:443 ssl:default [No address associated with hostname]",
+  "ms": 36,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.dieppe.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 448,
+  "n_services": 43
+ },
+ {
+  "root": "https://donneesgeomatique.dev.montreal.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 405,
+  "n_services": 2
+ },
+ {
+  "root": "https://maps.orc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 214,
+  "n_services": 56
+ },
+ {
+  "root": "https://arcgis.lib.uwo.ca:6443/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host arcgis.lib.uwo.ca:6443 ssl:default [Name or service not known]",
+  "ms": 110,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.orangeville.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 281,
+  "n_services": 152
+ },
+ {
+  "root": "https://maps.kapiticoast.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 168,
+  "n_services": 68
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/aid/tile/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 784,
+  "n_services": 2
+ },
+ {
+  "root": "https://gis.wsask.ca/arcgiswa/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 97,
+  "n_services": 75
+ },
+ {
+  "root": "https://giswebservices.countygp.ab.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ServerDisconnectedError: Server disconnected",
+  "ms": 539,
+  "n_services": 0
+ },
+ {
+  "root": "https://terra.library.brocku.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 401,
+  "n_services": 523
+ },
+ {
+  "root": "https://gis.huroncounty.ca/hurongis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 153,
+  "n_services": 39
+ },
+ {
+  "root": "https://mapping1.gw.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 146,
+  "n_services": 55
+ },
+ {
+  "root": "https://portailgis.gatineau.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 77,
+  "n_services": 68
+ },
+ {
+  "root": "https://maps.kamloops.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 108,
+  "n_services": 117
+ },
+ {
+  "root": "https://maps.mpi.govt.nz/wss/service/ags-relay/arcgis1/guest/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "ms": 838,
+  "n_services": 0
+ },
+ {
+  "root": "https://wslgis.water.co.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 153,
+  "n_services": 25
+ },
+ {
+  "root": "https://gisimagery.tweed.nsw.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 206,
+  "n_services": 15
+ },
+ {
+  "root": "https://maps.victoria.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 114,
+  "n_services": 93
+ },
+ {
+  "root": "https://arcgis.reddeer.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 88,
+  "n_services": 258
+ },
+ {
+  "root": "https://geomatique.drummondville.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 410,
+  "n_services": 64
+ },
+ {
+  "root": "https://serviceswebcarto.mern.gouv.qc.ca/pes/rest/services",
+  "status": 0,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "ms": 682,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.durham.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 253,
+  "n_services": 37
+ },
+ {
+  "root": "https://gisservices.waimakariri.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 150,
+  "n_services": 56
+ },
+ {
+  "root": "https://corp-gis.mapshare.vic.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 169,
+  "n_services": 86
+ },
+ {
+  "root": "https://gisservices.information.qld.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "ms": 988,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapprod.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 177,
+  "n_services": 61
+ },
+ {
+  "root": "https://gis.ccc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 998,
+  "n_services": 162
+ },
+ {
+  "root": "https://mapsuat.brampton.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 111,
+  "n_services": 63
+ },
+ {
+  "root": "https://gismaps.guelph.ca/hosting/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 113,
+  "n_services": 107
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 750,
+  "n_services": 136
+ },
+ {
+  "root": "https://maps1.brampton.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 95,
+  "n_services": 51
+ },
+ {
+  "root": "https://gisserver.marion.sa.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 269,
+  "n_services": 16
+ },
+ {
+  "root": "https://gis.transport.wa.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 179,
+  "n_services": 19
+ },
+ {
+  "root": "https://data.stategrowth.tas.gov.au/ags/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 198,
+  "n_services": 190
+ },
+ {
+  "root": "https://spatial.industry.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 169,
+  "n_services": 147
+ },
+ {
+  "root": "https://carto2.mrc-maskinonge.qc.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 183,
+  "n_services": 115
+ },
+ {
+  "root": "http://services.thelist.tas.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 402,
+  "n_services": 73
+ },
+ {
+  "root": "https://gis.gns.cri.nz/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 164,
+  "n_services": 172
+ },
+ {
+  "root": "https://spatialportalarcgis.dpie.nsw.gov.au/sarcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 204,
+  "n_services": 80
+ },
+ {
+  "root": "https://gis.qldc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 157,
+  "n_services": 69
+ },
+ {
+  "root": "https://mapprod1.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 162,
+  "n_services": 73
+ },
+ {
+  "root": "https://gis.wcc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 165,
+  "n_services": 117
+ },
+ {
+  "root": "https://geomatique.longueuil.quebec/public/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 192,
+  "n_services": 136
+ },
+ {
+  "root": "https://maps.bathurst.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 117,
+  "n_services": 67
+ },
+ {
+  "root": "https://mapprod3.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 154,
+  "n_services": 183
+ },
+ {
+  "root": "https://mapprod2.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 165,
+  "n_services": 132
+ },
+ {
+  "root": "https://cogggis.geelongcity.vic.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 772,
+  "n_services": 183
+ },
+ {
+  "root": "https://portal.data.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 608,
+  "n_services": 249
+ },
+ {
+  "root": "https://webmap.whistler.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 52,
+  "n_services": 61
+ },
+ {
+  "root": "https://spatialportalarcgistst.dpie.nsw.gov.au/sarcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 255,
+  "n_services": 68
+ },
+ {
+  "root": "http://mapprod3.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 295,
+  "n_services": 183
+ },
+ {
+  "root": "https://gis.ccc.govt.nz/server/rest/services",
+  "status": 500,
+  "error": "HTTP 500",
+  "ms": 18363,
+  "n_services": 0
+ },
+ {
+  "root": "https://enterprise.mapshare.vic.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 288,
+  "n_services": 339
+ },
+ {
+  "root": "https://afc-fr.cfsnet.nfis.org/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25998,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.wetaskiwin.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://geospatial.boprc.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://cartes.rouyn-noranda.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "http://gis.sooke.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://image.wsapi.cloud.bom.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapservices.gov.yk.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapping.burlington.ca/arcgisweb/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 30,
+  "n_services": 101
+ },
+ {
+  "root": "https://ww2.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 40,
+  "n_services": 45
+ },
+ {
+  "root": "https://maps.trc.govt.nz/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 178,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.collingwood.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 57,
+  "n_services": 6
+ },
+ {
+  "root": "https://gis.rvca.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 51,
+  "n_services": 35
+ },
+ {
+  "root": "http://gislive18.lakeshore.ca/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 20,
+  "n_services": 0
+ },
+ {
+  "root": "https://ws.geoservices.lrc.gov.on.ca/arcgis5/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 100,
+  "n_services": 40
+ },
+ {
+  "root": "https://gis-erd-der.gnb.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 52,
+  "n_services": 18
+ },
+ {
+  "root": "https://ags.gis.ubc.ca/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 36,
+  "n_services": 0
+ },
+ {
+  "root": "http://public.oxfordcounty.ca/gis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 35,
+  "n_services": 76
+ },
+ {
+  "root": "https://maps.waterloo.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 88,
+  "n_services": 25
+ },
+ {
+  "root": "https://maps.upperhutt.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 213,
+  "n_services": 54
+ },
+ {
+  "root": "https://spatial.orc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 224,
+  "n_services": 17
+ },
+ {
+  "root": "https://gis.westkelownacity.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 59,
+  "n_services": 40
+ },
+ {
+  "root": "https://servicescarto.mffp.gouv.qc.ca/pes/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 101,
+  "n_services": 47
+ },
+ {
+  "root": "https://servicescarto.mern.gouv.qc.ca/pes/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 100,
+  "n_services": 47
+ },
+ {
+  "root": "https://gis.burnaby.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 67,
+  "n_services": 56
+ },
+ {
+  "root": "https://gis.cluthadc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 178,
+  "n_services": 68
+ },
+ {
+  "root": "https://maps.pickering.ca/arcgisinter/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 178,
+  "n_services": 38
+ },
+ {
+  "root": "https://proxyinternet.nrcan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 36,
+  "n_services": 35
+ },
+ {
+  "root": "https://opendataservices.countygp.ab.ca/public/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 75,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisbasemap.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 184,
+  "n_services": 52
+ },
+ {
+  "root": "https://map.stjohns.ca/mapsrv/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 79,
+  "n_services": 46
+ },
+ {
+  "root": "https://www.image.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 111,
+  "n_services": 13
+ },
+ {
+  "root": "https://portal.tnrd.ca/ags/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 98,
+  "n_services": 76
+ },
+ {
+  "root": "https://opendataservices.countygp.ab.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 83,
+  "n_services": 23
+ },
+ {
+  "root": "https://citymaps.peterborough.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 427,
+  "n_services": 64
+ },
+ {
+  "root": "https://opendataservices.countygp.ab.ca/arcgisadmin/rest/services",
+  "status": 500,
+  "error": "HTTP 500",
+  "ms": 303,
+  "n_services": 0
+ },
+ {
+  "root": "https://portal.niagarafalls.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 109,
+  "n_services": 105
+ },
+ {
+  "root": "https://maps.kimberley.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 119,
+  "n_services": 15
+ },
+ {
+  "root": "https://geo.statcan.gc.ca/geo_wa/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 73,
+  "n_services": 40
+ },
+ {
+  "root": "https://maps.cambridge.ca/arcgispub03/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 40,
+  "n_services": 140
+ },
+ {
+  "root": "https://gis.toronto.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 42,
+  "n_services": 80
+ },
+ {
+  "root": "https://map.oshawa.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 164,
+  "n_services": 25
+ },
+ {
+  "root": "https://maps.london.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 121,
+  "n_services": 145
+ },
+ {
+  "root": "https://geoweb.dnv.org/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 156,
+  "n_services": 70
+ },
+ {
+  "root": "https://maps.langleycity.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 61,
+  "n_services": 6
+ },
+ {
+  "root": "https://gis.mapleridge.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.sdgcounties.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 83,
+  "n_services": 12
+ },
+ {
+  "root": "https://gis.calgary.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 98,
+  "n_services": 23
+ },
+ {
+  "root": "https://geoservices.mapleridge.ca/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 171,
+  "n_services": 49
+ },
+ {
+  "root": "https://cartes.ville.sherbrooke.qc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 77,
+  "n_services": 31
+ },
+ {
+  "root": "https://geo.cloca.com/swa/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 58,
+  "n_services": 33
+ },
+ {
+  "root": "https://maps.huttcity.govt.nz/server02/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 234,
+  "n_services": 27
+ },
+ {
+  "root": "https://delivery.maps.gov.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 66,
+  "n_services": 30
+ },
+ {
+  "root": "https://gis.wollongong.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 255,
+  "n_services": 42
+ },
+ {
+  "root": "https://gis.penticton.ca/external/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 50,
+  "n_services": 0
+ },
+ {
+  "root": "https://gispublic.tasman.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.ec.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 58,
+  "n_services": 110
+ },
+ {
+  "root": "https://geo.lloydminster.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 163,
+  "n_services": 68
+ },
+ {
+  "root": "https://cartographie.ville.terrebonne.qc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 52,
+  "n_services": 22
+ },
+ {
+  "root": "https://ww3.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 40,
+  "n_services": 17
+ },
+ {
+  "root": "https://ww8.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 93,
+  "n_services": 54
+ },
+ {
+  "root": "https://maps.scrd.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 85,
+  "n_services": 77
+ },
+ {
+  "root": "https://apps.dunedin.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 194,
+  "n_services": 113
+ },
+ {
+  "root": "https://maps.timaru.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 649,
+  "n_services": 58
+ },
+ {
+  "root": "http://www.agr.gc.ca/atlas/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 38,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.penticton.ca/utility/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 65,
+  "n_services": 24
+ },
+ {
+  "root": "https://geonb.snb.ca/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 214,
+  "n_services": 36
+ },
+ {
+  "root": "https://sands.ucalgary.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 76,
+  "n_services": 38
+ },
+ {
+  "root": "https://mapsvr.tol.ca/arcgisext02/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 54,
+  "n_services": 42
+ },
+ {
+  "root": "https://geo.abs.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.abbotsford.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 71,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.vaughan.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host maps.vaughan.ca:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local iss",
+  "ms": 54,
+  "n_services": 0
+ },
+ {
+  "root": "https://data.aadnc-aandc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 136,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.selwyn.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 189,
+  "n_services": 91
+ },
+ {
+  "root": "https://services.ga.gov.au/gis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 181,
+  "n_services": 0
+ },
+ {
+  "root": "https://data.gns.cri.nz/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://geoservices.mapleridge.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 50,
+  "n_services": 56
+ },
+ {
+  "root": "http://carte.ville.quebec.qc.ca/arcgis/rest/services",
+  "status": 503,
+  "error": "HTTP 503",
+  "ms": 74,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.sandbox.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 118,
+  "n_services": 100
+ },
+ {
+  "root": "https://services.kelowna.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorSSLError: Cannot connect to host services.kelowna.ca:443 ssl:default [[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1011)]",
+  "ms": 33,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.boprc.govt.nz/server2/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 187,
+  "n_services": 27
+ },
+ {
+  "root": "https://gss-webserv.regina.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 90,
+  "n_services": 124
+ },
+ {
+  "root": "https://maps.oakville.ca/oakgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 56,
+  "n_services": 1016
+ },
+ {
+  "root": "https://maps.durham.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 206,
+  "n_services": 37
+ },
+ {
+  "root": "https://mapprod4.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 325,
+  "n_services": 19
+ },
+ {
+  "root": "https://gis.wellingtonwater.co.nz/server1/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 191,
+  "n_services": 58
+ },
+ {
+  "root": "https://ws.dev.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 158,
+  "n_services": 36
+ },
+ {
+  "root": "https://gismaps.guelph.ca/hosting/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 58,
+  "n_services": 107
+ },
+ {
+  "root": "https://token.slip.wa.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 439,
+  "n_services": 1
+ },
+ {
+  "root": "https://gis.saskatchewan.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 179,
+  "n_services": 100
+ },
+ {
+  "root": "http://maps.gdc.govt.nz/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 356,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.summerland.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 79,
+  "n_services": 43
+ },
+ {
+  "root": "https://maps.mapleridge.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 77,
+  "n_services": 44
+ },
+ {
+  "root": "https://gis3.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 184,
+  "n_services": 133
+ },
+ {
+  "root": "https://services.hydro.gov.au/site1/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 193,
+  "n_services": 11
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1061a/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 62,
+  "n_services": 9
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 188,
+  "n_services": 32
+ },
+ {
+  "root": "https://gisimagery.tweed.nsw.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 231,
+  "n_services": 15
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 144,
+  "n_services": 32
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 97,
+  "n_services": 9
+ },
+ {
+  "root": "http://barchetta.ad.umanitoba.ca:6080/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host barchetta.ad.umanitoba.ca:6080 ssl:default [Name or service not known]",
+  "ms": 109,
+  "n_services": 0
+ },
+ {
+  "root": "https://gist.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gist.dfo-mpo.gc.ca:443 ssl:default [Name or service not known]",
+  "ms": 46,
+  "n_services": 0
+ },
+ {
+  "root": "http://orientisweb.golder.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host orientisweb.golder.ca:80 ssl:default [Name or service not known]",
+  "ms": 40,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gisp.dfo-mpo.gc.ca:443 ssl:default [Name or service not known]",
+  "ms": 48,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.norfolk.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 201,
+  "n_services": 130
+ },
+ {
+  "root": "https://spatial-server.industry.nsw.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host spatial-server.industry.nsw.gov.au:443 ssl:default [Name or service not known]",
+  "ms": 81,
+  "n_services": 0
+ },
+ {
+  "root": "https://intra.ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host intra.ws.lioservices.lrc.gov.on.ca:443 ssl:default [Name or service not known]",
+  "ms": 47,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.nhvr.gov.au/agsm1/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 183,
+  "n_services": 17
+ },
+ {
+  "root": "https://gis.marlborough.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 195,
+  "n_services": 87
+ },
+ {
+  "root": "https://gis.qualicumbeach.com/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 351,
+  "n_services": 78
+ },
+ {
+  "root": "https://gis.westcoast.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gis.westcoast.govt.nz:443 ssl:default [Name or service not known]",
+  "ms": 579,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.environment.gov.au/gispubim/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 201,
+  "n_services": 6
+ },
+ {
+  "root": "https://www.asris.csiro.au/ArcGIS/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host www.asris.csiro.au:443 ssl:default [Name or service not known]",
+  "ms": 774,
+  "n_services": 0
+ },
+ {
+  "root": "https://datat.stategrowth.tas.gov.au/ags/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 214,
+  "n_services": 54
+ },
+ {
+  "root": "https://maps.huntsville.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host maps.huntsville.ca:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local ",
+  "ms": 990,
+  "n_services": 0
+ },
+ {
+  "root": "https://spatial.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 239,
+  "n_services": 23
+ },
+ {
+  "root": "https://spatial.infrastructure.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 251,
+  "n_services": 146
+ },
+ {
+  "root": "https://arcgis.nopta.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 204,
+  "n_services": 28
+ },
+ {
+  "root": "https://spatial-img.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 206,
+  "n_services": 13
+ },
+ {
+  "root": "https://gis.environment.gov.au/gispubmap/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 955,
+  "n_services": 58
+ },
+ {
+  "root": "https://maps.taupodc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 175,
+  "n_services": 157
+ },
+ {
+  "root": "https://gis.environment.gov.au/gispub/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 193,
+  "n_services": 21
+ },
+ {
+  "root": "https://gis.saskatchewan.ca/egis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 160,
+  "n_services": 66
+ },
+ {
+  "root": "https://arcgis.curtin.edu.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 226,
+  "n_services": 119
+ },
+ {
+  "root": "https://maps.vancouver.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 396,
+  "n_services": 192
+ },
+ {
+  "root": "https://spatial-app.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 225,
+  "n_services": 10
+ },
+ {
+  "root": "https://gis.niwa.co.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 713,
+  "n_services": 99
+ },
+ {
+  "root": "http://mapit.islandstrust.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 3273,
+  "n_services": 0
+ },
+ {
+  "root": "https://spatial-gis.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 209,
+  "n_services": 157
+ },
+ {
+  "root": "https://eos.oakville.ca/oakgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorError: Cannot connect to host eos.oakville.ca:443 ssl:default [Connect call failed ('99.209.156.45', 443)]",
+  "ms": 8024,
+  "n_services": 0
+ },
+ {
+  "root": "https://pecmaps.pecounty.on.ca/pubimg/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.fvrd.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://rdkb.sgrc.selkirk.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "http://geoprodsvr.kamloops.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://map.langleycity.ca/ags/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis7.nsgc.gov.ns.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://hosting.wsapi.cloud.bom.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://geoportail.laval.ca/server/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 17,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.kelowna.ca/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 15,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.owensound.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 39,
+  "n_services": 48
+ },
+ {
+  "root": "https://www.lambtongis.ca/arcgis_adaptor/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 54,
+  "n_services": 21
+ },
+ {
+  "root": "http://geoportal.gc.ca/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 39,
+  "n_services": 0
+ },
+ {
+  "root": "https://map.haltonhills.ca/awse/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 40,
+  "n_services": 7
+ },
+ {
+  "root": "https://gis.rrpd.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 149,
+  "n_services": 12
+ },
+ {
+  "root": "http://mapamherstburg.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 79,
+  "n_services": 31
+ },
+ {
+  "root": "https://maps.chilliwack.com/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.strathmore.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 324,
+  "n_services": 100
+ },
+ {
+  "root": "https://data.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 113,
+  "n_services": 0
+ },
+ {
+  "root": "https://proxyinternet.nrcan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 31,
+  "n_services": 35
+ },
+ {
+  "root": "https://novarocmaps.novascotia.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 45,
+  "n_services": 5
+ },
+ {
+  "root": "https://maps.forterie.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 49,
+  "n_services": 64
+ },
+ {
+  "root": "https://ags1.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 54,
+  "n_services": 10
+ },
+ {
+  "root": "https://carte.rouyn-noranda.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 65,
+  "n_services": 12
+ },
+ {
+  "root": "https://opendataservices.countygp.ab.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 70,
+  "n_services": 23
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/server_serveur/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/hosted_heberge/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/egs_sgu/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/server2_serveur2/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/imagery_images/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.ottawa.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 52,
+  "n_services": 78
+ },
+ {
+  "root": "https://atlas.npdc.govt.nz/server/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 234,
+  "n_services": 0
+ },
+ {
+  "root": "https://services7.arcgis.com/LVb4XgP0A6XUnzep/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 171,
+  "n_services": 12
+ },
+ {
+  "root": "https://data.sac-isc.gc.ca/geoimages/rest/services",
+  "status": 200,
+  "error": "HTTP 401",
+  "ms": 52,
+  "n_services": 22
+ },
+ {
+  "root": "https://egisp.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.pncc.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisext.saskatoon.ca/arcgisod/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 58,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.rdos.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 89,
+  "n_services": 33
+ },
+ {
+  "root": "https://egist.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.hamilton.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 217,
+  "n_services": 1
+ },
+ {
+  "root": "https://asis-esri.fao.org/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 120,
+  "n_services": 13
+ },
+ {
+  "root": "https://maps.pickering.ca/arcgisinter/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 66,
+  "n_services": 38
+ },
+ {
+  "root": "https://nsgiwa.novascotia.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://map.westernbay.govt.nz/arcgisext/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 251,
+  "n_services": 47
+ },
+ {
+  "root": "https://arcgis.myontc.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 61,
+  "n_services": 7
+ },
+ {
+  "root": "https://cwserver.countyofessex.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 62,
+  "n_services": 7
+ },
+ {
+  "root": "https://geo.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 27,
+  "n_services": 0
+ },
+ {
+  "root": "https://services.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 27,
+  "n_services": 0
+ },
+ {
+  "root": "https://ec.gc.ca/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 32,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapsvr.tol.ca/arcgisext02/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 72,
+  "n_services": 42
+ },
+ {
+  "root": "https://mapservices.gov.yk.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapservices.gov.yk.ca/imagery/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.brucecounty.on.ca/arcgisserver/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 49,
+  "n_services": 40
+ },
+ {
+  "root": "https://gis.lakecountry.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 78,
+  "n_services": 24
+ },
+ {
+  "root": "https://gisext2.cnv.org/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 85,
+  "n_services": 57
+ },
+ {
+  "root": "https://ws.geoservices.lrc.gov.on.ca/arcgis5/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 30,
+  "n_services": 40
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/374a99fc76574f72bb8c71af7b428d0a/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Unable to generate token with the credentials provided with username: osgur.mcdermott.long_UNEP_WCMC and sou",
+  "ms": 208,
+  "n_services": 0
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/8a8d4e24683a46e6b039aea78c8af20f/rest/services",
+  "status": 200,
+  "error": "{'code': 400, 'message': 'No proxy information found', 'details': []}",
+  "ms": 227,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.stalbert.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 141,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.quinteconservation.ca/qcagispub/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 42,
+  "n_services": 5
+ },
+ {
+  "root": "https://maps.abbotsford.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 71,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.cambridge.ca/arcgispub03/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 34,
+  "n_services": 140
+ },
+ {
+  "root": "https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 104,
+  "n_services": 12
+ },
+ {
+  "root": "https://www.servicesgeo.enviroweb.gouv.qc.ca/donneesimg/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 169,
+  "n_services": 14
+ },
+ {
+  "root": "https://maps.haldimandcounty.on.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 178,
+  "n_services": 0
+ },
+ {
+  "root": "https://geonb.snb.ca/image/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 168,
+  "n_services": 36
+ },
+ {
+  "root": "https://maps.sa.gov.au/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 216,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.northumberlandcounty.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 172,
+  "n_services": 47
+ },
+ {
+  "root": "https://services.aadnc-aandc.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 183,
+  "n_services": 2
+ },
+ {
+  "root": "https://portal.squamish.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 126,
+  "n_services": 85
+ },
+ {
+  "root": "https://gis.nzpam.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 230,
+  "n_services": 13
+ },
+ {
+  "root": "https://mappingdata.bundaberg.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 211,
+  "n_services": 50
+ },
+ {
+  "root": "https://geo.environnement.gouv.qc.ca/serveur/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 101,
+  "n_services": 45
+ },
+ {
+  "root": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 31,
+  "n_services": 35
+ },
+ {
+  "root": "https://gis.burnaby.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 97,
+  "n_services": 56
+ },
+ {
+  "root": "https://maps1.brampton.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 31,
+  "n_services": 51
+ },
+ {
+  "root": "https://services.slip.wa.gov.au/arcgis/rest/services",
+  "status": 401,
+  "error": "HTTP 401",
+  "ms": 655,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.image.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 101,
+  "n_services": 13
+ },
+ {
+  "root": "https://servicescarto.mern.gouv.qc.ca/pes/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 113,
+  "n_services": 47
+ },
+ {
+  "root": "https://apps.csrd.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 70,
+  "n_services": 63
+ },
+ {
+  "root": "https://geo.cloca.com/swa/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 61,
+  "n_services": 33
+ },
+ {
+  "root": "https://gis.boplass.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host gis.boplass.govt.nz:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, ",
+  "ms": 72,
+  "n_services": 0
+ },
+ {
+  "root": "https://servicescarto.mrnf.gouv.qc.ca/pes/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 88,
+  "n_services": 47
+ },
+ {
+  "root": "https://maps.victoria.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 63,
+  "n_services": 93
+ },
+ {
+  "root": "https://geohub.cvc.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 70,
+  "n_services": 80
+ },
+ {
+  "root": "https://www.image.geomatics.gov.nt.ca/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 266,
+  "n_services": 13
+ },
+ {
+  "root": "https://maps.scrd.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 92,
+  "n_services": 77
+ },
+ {
+  "root": "https://tstgissrvcs.surrey.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 364,
+  "n_services": 51
+ },
+ {
+  "root": "https://mapservices.crd.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 208,
+  "n_services": 195
+ },
+ {
+  "root": "https://geo.environnement.gouv.qc.ca/donnees/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 64,
+  "n_services": 29
+ },
+ {
+  "root": "https://gis.esquimalt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 76,
+  "n_services": 161
+ },
+ {
+  "root": "https://geo.statcan.gc.ca/geo_wa/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 50,
+  "n_services": 40
+ },
+ {
+  "root": "https://www.apps.geomatics.gov.nt.ca/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 121,
+  "n_services": 33
+ },
+ {
+  "root": "https://opengis.regina.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 72,
+  "n_services": 240
+ },
+ {
+  "root": "https://elements1.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 250,
+  "n_services": 9
+ },
+ {
+  "root": "https://www.apps.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 280,
+  "n_services": 33
+ },
+ {
+  "root": "https://stggisext.saskatoon.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 145,
+  "n_services": 49
+ },
+ {
+  "root": "https://geoappext.nrcan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 40,
+  "n_services": 91
+ },
+ {
+  "root": "https://gisweb.tecumseh.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 45,
+  "n_services": 15
+ },
+ {
+  "root": "https://maps-cartes.ec.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 52,
+  "n_services": 110
+ },
+ {
+  "root": "https://agriculture.canada.ca/imagery-images/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 53,
+  "n_services": 130
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1061a/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 74,
+  "n_services": 9
+ },
+ {
+  "root": "https://gis.saskatchewan.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 104,
+  "n_services": 100
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 57,
+  "n_services": 32
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 48,
+  "n_services": 9
+ },
+ {
+  "root": "https://arcex.langford.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 103,
+  "n_services": 37
+ },
+ {
+  "root": "https://maps.brant.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 44,
+  "n_services": 191
+ },
+ {
+  "root": "https://gis.poriruacity.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gis.poriruacity.govt.nz:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://mpi_nes.cloud.eaglegis.co.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host mpi_nes.cloud.eaglegis.co.nz:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "http://services.geocirrus.co.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host services.geocirrus.co.nz:80 ssl:default [Name or service not known]",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://intranet.ec.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host intranet.ec.gc.ca:443 ssl:default [Name or service not known]",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.whiterockcity.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 79,
+  "n_services": 153
+ },
+ {
+  "root": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gisp.dfo-mpo.gc.ca:443 ssl:default [Name or service not known]",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.appstest.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 111,
+  "n_services": 64
+ },
+ {
+  "root": "https://intra.ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host intra.ws.lioservices.lrc.gov.on.ca:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://gist.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gist.dfo-mpo.gc.ca:443 ssl:default [Name or service not known]",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://web.csrd.bc.ca/gis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host web.csrd.bc.ca:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://services.arcgisonline.com/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 75,
+  "n_services": 27
+ },
+ {
+  "root": "https://gisext.saskatoon.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 270,
+  "n_services": 43
+ },
+ {
+  "root": "https://portal.niagarafalls.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 95,
+  "n_services": 105
+ },
+ {
+  "root": "https://donneesgeomatique.montreal.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 152,
+  "n_services": 3
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 109,
+  "n_services": 32
+ },
+ {
+  "root": "https://gis.unsw.edu.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 306,
+  "n_services": 63
+ },
+ {
+  "root": "https://geo.wdc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 1367,
+  "n_services": 51
+ },
+ {
+  "root": "https://geodata.coquitlam.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 134,
+  "n_services": 54
+ },
+ {
+  "root": "https://maps.horizons.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 214,
+  "n_services": 14
+ },
+ {
+  "root": "https://geo.sylvanlake.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 167,
+  "n_services": 106
+ },
+ {
+  "root": "https://mapping.launceston.tas.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host mapping.launceston.tas.gov.au:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.muskoka.on.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 69,
+  "n_services": 2
+ },
+ {
+  "root": "https://maps.icc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 238,
+  "n_services": 35
+ },
+ {
+  "root": "https://gis.nelson.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host gis.nelson.govt.nz:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, c",
+  "ms": 424,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapping1.gw.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 225,
+  "n_services": 55
+ },
+ {
+  "root": "https://gisservices.mainroads.wa.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 209,
+  "n_services": 27
+ },
+ {
+  "root": "https://ws.dev.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 88,
+  "n_services": 36
+ },
+ {
+  "root": "https://token.slip.wa.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 446,
+  "n_services": 1
+ },
+ {
+  "root": "https://arcgis.maps.transport.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 224,
+  "n_services": 16
+ },
+ {
+  "root": "https://gociteweb.longueuil.quebec/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 112,
+  "n_services": 84
+ },
+ {
+  "root": "https://arcgis.oceannetworks.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 75,
+  "n_services": 139
+ },
+ {
+  "root": "https://plan-gis.mapshare.vic.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 249,
+  "n_services": 85
+ },
+ {
+  "root": "https://www.rdcogis.com/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 172,
+  "n_services": 70
+ },
+ {
+  "root": "https://arcgisweb.welland.ca/serverprodpub/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 53,
+  "n_services": 192
+ },
+ {
+  "root": "https://maps.firstgas.co.nz/server1/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 830,
+  "n_services": 4
+ },
+ {
+  "root": "https://arcgisweb.welland.ca/serverprod/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 132,
+  "n_services": 192
+ },
+ {
+  "root": "https://services.slip.wa.gov.au/public/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 715,
+  "n_services": 62
+ },
+ {
+  "root": "https://gislegacy.scc.qld.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host gislegacy.scc.qld.gov.au:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get ",
+  "ms": 477,
+  "n_services": 0
+ },
+ {
+  "root": "https://gistest.saskatchewan.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 161,
+  "n_services": 111
+ },
+ {
+  "root": "https://maps2.simcoe.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 89,
+  "n_services": 310
+ },
+ {
+  "root": "https://mapserver.doc.govt.nz/arcgis/rest/services",
+  "status": 503,
+  "error": "HTTP 503",
+  "ms": 228,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.tr.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 236,
+  "n_services": 23
+ },
+ {
+  "root": "https://geospatial.mpi.govt.nz/portal/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 373,
+  "n_services": 81
+ },
+ {
+  "root": "https://public-services.slip.wa.gov.au/public/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 273,
+  "n_services": 62
+ },
+ {
+  "root": "https://geodata.nwrc.carleton.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 73,
+  "n_services": 21
+ },
+ {
+  "root": "https://maps.quesnel.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 242,
+  "n_services": 6
+ },
+ {
+  "root": "https://www.ocean-ops.org/arcgisserver/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 201,
+  "n_services": 39
+ },
+ {
+  "root": "https://gis.environment.gov.au/gispubmap/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 221,
+  "n_services": 58
+ },
+ {
+  "root": "https://gis.boprc.govt.nz/server2/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 221,
+  "n_services": 27
+ },
+ {
+  "root": "https://geospatial.alberta.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 88,
+  "n_services": 226
+ },
+ {
+  "root": "https://geo.victoriaville.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 74,
+  "n_services": 314
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 102,
+  "n_services": 307
+ },
+ {
+  "root": "https://portal.spatial.nsw.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 933,
+  "n_services": 136
+ },
+ {
+  "root": "https://enterprise.ssmic.com/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 227,
+  "n_services": 16
+ },
+ {
+  "root": "https://core-gis.mapshare.vic.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 237,
+  "n_services": 17
+ },
+ {
+  "root": "https://gisent.cloca.com/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 108,
+  "n_services": 23
+ },
+ {
+  "root": "https://gis.mstn.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 246,
+  "n_services": 72
+ },
+ {
+  "root": "https://geomatique.longueuil.quebec/public/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 115,
+  "n_services": 136
+ },
+ {
+  "root": "https://geospatial.alberta.ca/mimas/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 289,
+  "n_services": 126
+ },
+ {
+  "root": "https://mcgisportal.co.middlesex.nj.us/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 464,
+  "n_services": 41
+ },
+ {
+  "root": "https://spatial.industry.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 231,
+  "n_services": 147
+ },
+ {
+  "root": "https://services.gpgis.com/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 121,
+  "n_services": 176
+ },
+ {
+  "root": "https://maps.taupodc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 225,
+  "n_services": 157
+ },
+ {
+  "root": "https://hbmaps.hbrc.govt.nz/arcgis/rest/services",
+  "status": 523,
+  "error": "HTTP 523",
+  "ms": 3116,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.marlborough.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 224,
+  "n_services": 87
+ },
+ {
+  "root": "https://gis.saskatchewan.ca/egis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 227,
+  "n_services": 66
+ },
+ {
+  "root": "https://maps.es.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 242,
+  "n_services": 32
+ },
+ {
+  "root": "https://geospatial.alberta.ca/titan/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 72,
+  "n_services": 277
+ },
+ {
+  "root": "https://gisservices.waimakariri.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 226,
+  "n_services": 56
+ },
+ {
+  "root": "https://geospatial.alberta.ca/phobos/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 86,
+  "n_services": 35
+ },
+ {
+  "root": "https://mapprod1.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 253,
+  "n_services": 73
+ },
+ {
+  "root": "https://spatial-gis.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 251,
+  "n_services": 157
+ },
+ {
+  "root": "https://gis.cityofadelaide.com.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 473,
+  "n_services": 138
+ },
+ {
+  "root": "https://gis.earthdata.nasa.gov/portal/rest/services",
+  "status": 200,
+  "error": "{'code': 403, 'message': 'You do not have permissions to use this resource.', 'details': None}",
+  "ms": 1350,
+  "n_services": 600
+ },
+ {
+  "root": "https://afc-fr.cfsnet.nfis.org/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26008,
+  "n_services": 0
+ },
+ {
+  "root": "https://geoweb.shawinigan.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://www97.statcan.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25999,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.squamish.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25999,
+  "n_services": 0
+ },
+ {
+  "root": "https://sedac.ciesin.columbia.edu/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.hbrc.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.st-hyacinthe.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26001,
+  "n_services": 0
+ },
+ {
+  "root": "http://gisweb.tecumseh.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps2.camaps.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisapp.brandon.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://cartes.shawinigan.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.lakeshore.ca/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 63,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.npdc.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.gov.bc.ca/arcserver/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.lasalle.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 175,
+  "n_services": 4
+ },
+ {
+  "root": "https://gis.kincardine.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 125,
+  "n_services": 22
+ },
+ {
+  "root": "http://arcgis.creegeoportal.ca/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 132,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.kelowna.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 237,
+  "n_services": 28
+ },
+ {
+  "root": "https://ww7.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 75,
+  "n_services": 1
+ },
+ {
+  "root": "http://lacps.ca:6080/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 43,
+  "n_services": 6
+ },
+ {
+  "root": "https://mapviewer.imaptoo.ca/imap87320977492837458/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 41,
+  "n_services": 47
+ },
+ {
+  "root": "https://ww3.yorkmaps.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 88,
+  "n_services": 17
+ },
+ {
+  "root": "https://gis.esquimalt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 34,
+  "n_services": 161
+ },
+ {
+  "root": "https://maps.terrace.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 93,
+  "n_services": 19
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/hosted_heberge/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/server_serveur/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/egs_sgu/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/server2_serveur2/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps-cartes.services.geo.ca/imagery_images/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://geosite.pncc.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.lethbridge.ca/lethwebgisarcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 80,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.penticton.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 54,
+  "n_services": 15
+ },
+ {
+  "root": "https://map.kitimat.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 66,
+  "n_services": 20
+ },
+ {
+  "root": "https://maps.cvrd.ca/mapservices/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 78,
+  "n_services": 37
+ },
+ {
+  "root": "https://gis.belleville.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 171,
+  "n_services": 2
+ },
+ {
+  "root": "https://nsgiwa.novascotia.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://dit-cms-prod.geohub.sa.gov.au/arcgis/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 3,
+  "n_services": 0
+ },
+ {
+  "root": "https://agriculture.canada.ca/atlas/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 75,
+  "n_services": 0
+ },
+ {
+  "root": "https://map.cariboord.bc.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 119,
+  "n_services": 50
+ },
+ {
+  "root": "https://gis.sechelt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 73,
+  "n_services": 64
+ },
+ {
+  "root": "https://ec.gc.ca/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 88,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.abs.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.haliburtoncounty.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 80,
+  "n_services": 37
+ },
+ {
+  "root": "https://mapservices.gov.yk.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapservices.gov.yk.ca/imagery/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.london.ca/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 164,
+  "n_services": 145
+ },
+ {
+  "root": "https://egisp.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 165,
+  "n_services": 12
+ },
+ {
+  "root": "https://gisext.saskatoon.ca/arcgisod/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 46,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.brucecounty.on.ca/arcgisimageserver/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 90,
+  "n_services": 16
+ },
+ {
+  "root": "https://gispublic.barrie.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 74,
+  "n_services": 46
+ },
+ {
+  "root": "http://cosmos.surrey.ca/COSREST/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 883,
+  "n_services": 0
+ },
+ {
+  "root": "https://infogeo.education.gouv.qc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 103,
+  "n_services": 10
+ },
+ {
+  "root": "https://portal.squamish.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 74,
+  "n_services": 85
+ },
+ {
+  "root": "https://egist.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.mrcbhs.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 151,
+  "n_services": 36
+ },
+ {
+  "root": "https://maps.whiterockcity.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 45,
+  "n_services": 153
+ },
+ {
+  "root": "https://map.oshawa.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 297,
+  "n_services": 25
+ },
+ {
+  "root": "https://maps.poriruacity.govt.nz/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.lethbridge.ca/gisopendata/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 317,
+  "n_services": 57
+ },
+ {
+  "root": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 74,
+  "n_services": 35
+ },
+ {
+  "root": "https://gis.rdc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 148,
+  "n_services": 25
+ },
+ {
+  "root": "https://www.servicesgeo.enviroweb.gouv.qc.ca/donneesimg/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 352,
+  "n_services": 14
+ },
+ {
+  "root": "https://gisservices.countyofessex.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 85,
+  "n_services": 55
+ },
+ {
+  "root": "https://maps.pncc.govt.nz/hosting/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.scrd.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 60,
+  "n_services": 77
+ },
+ {
+  "root": "https://gisapps.barrie.ca/image/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 117,
+  "n_services": 20
+ },
+ {
+  "root": "https://data.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 70,
+  "n_services": 0
+ },
+ {
+  "root": "https://geo.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 70,
+  "n_services": 0
+ },
+ {
+  "root": "https://services.sac-isc.gc.ca/geomatics/rest/services",
+  "status": 200,
+  "error": "not json",
+  "ms": 69,
+  "n_services": 0
+ },
+ {
+  "root": "https://ajaxmaps.ajax.ca/gisernie/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 102,
+  "n_services": 11
+ },
+ {
+  "root": "https://maps.rdos.bc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 67,
+  "n_services": 33
+ },
+ {
+  "root": "https://maps.sa.gov.au/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 419,
+  "n_services": 0
+ },
+ {
+  "root": "http://locator.ycdsb.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 99,
+  "n_services": 24
+ },
+ {
+  "root": "https://maps.brucecounty.on.ca/arcgisserver/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 266,
+  "n_services": 40
+ },
+ {
+  "root": "https://maps.cambridge.ca/arcgispub03/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 79,
+  "n_services": 140
+ },
+ {
+  "root": "https://maps.pickering.ca/arcgisinter/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 392,
+  "n_services": 38
+ },
+ {
+  "root": "https://arcgis.mfe.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 162,
+  "n_services": 2
+ },
+ {
+  "root": "https://maps.orc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 204,
+  "n_services": 56
+ },
+ {
+  "root": "https://gis.haldimandcounty.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 75,
+  "n_services": 467
+ },
+ {
+  "root": "https://maps1.goldcoast.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 172,
+  "n_services": 40
+ },
+ {
+  "root": "https://www.image.geomatics.gov.nt.ca/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 215,
+  "n_services": 13
+ },
+ {
+  "root": "https://www.image.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 227,
+  "n_services": 13
+ },
+ {
+  "root": "https://gisimagery.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 155,
+  "n_services": 46
+ },
+ {
+  "root": "https://gis.regionofwaterloo.ca/wamap/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 404,
+  "n_services": 4
+ },
+ {
+  "root": "https://arcgis.mfe.govt.nz/server1/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 163,
+  "n_services": 4
+ },
+ {
+  "root": "https://gisbasemap.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 154,
+  "n_services": 52
+ },
+ {
+  "root": "http://maps.oakbay.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 207,
+  "n_services": 45
+ },
+ {
+  "root": "https://maps.kapiticoast.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 217,
+  "n_services": 68
+ },
+ {
+  "root": "https://www.apps.geomatics.gov.nt.ca/ArcGIS/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 105,
+  "n_services": 33
+ },
+ {
+  "root": "https://edumaps.esri.ca/ArcGIS/rest/services",
+  "status": 0,
+  "error": "ClientConnectorError: Cannot connect to host edumaps.esri.ca:443 ssl:default [Connection reset by peer]",
+  "ms": 140,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.esa.act.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 202,
+  "n_services": 4
+ },
+ {
+  "root": "https://www.apps.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 216,
+  "n_services": 33
+ },
+ {
+  "root": "https://geo.environnement.gouv.qc.ca/serveur/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 260,
+  "n_services": 45
+ },
+ {
+  "root": "https://data.sac-isc.gc.ca/geoimages/rest/services",
+  "status": 200,
+  "error": "HTTP 401",
+  "ms": 297,
+  "n_services": 22
+ },
+ {
+  "root": "https://gis.grey.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 283,
+  "n_services": 78
+ },
+ {
+  "root": "https://servicescarto.mrnf.gouv.qc.ca/pes/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 133,
+  "n_services": 47
+ },
+ {
+  "root": "https://servicescarto.mern.gouv.qc.ca/pes/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 132,
+  "n_services": 47
+ },
+ {
+  "root": "https://gisservices.surrey.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1079,
+  "n_services": 92
+ },
+ {
+  "root": "https://gis.summerland.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 64,
+  "n_services": 43
+ },
+ {
+  "root": "https://gisweb.greenstone.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 2383,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapserver.doc.govt.nz/arcgis/rest/services",
+  "status": 503,
+  "error": "HTTP 503",
+  "ms": 147,
+  "n_services": 0
+ },
+ {
+  "root": "https://carte.rouyn-noranda.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 116,
+  "n_services": 12
+ },
+ {
+  "root": "https://geo.cloca.com/swa/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 97,
+  "n_services": 33
+ },
+ {
+  "root": "https://fletcher.novascotia.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 126,
+  "n_services": 40
+ },
+ {
+  "root": "https://www.appstest.geomatics.gov.nt.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 118,
+  "n_services": 64
+ },
+ {
+  "root": "https://gisext.saskatoon.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 222,
+  "n_services": 43
+ },
+ {
+  "root": "https://arcgis.wgcma.vic.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 797,
+  "n_services": 30
+ },
+ {
+  "root": "https://geo.statcan.gc.ca/geo_wa/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 89,
+  "n_services": 40
+ },
+ {
+  "root": "https://geo.environnement.gouv.qc.ca/donnees/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 118,
+  "n_services": 29
+ },
+ {
+  "root": "https://agriculture.canada.ca/imagery-images/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 230,
+  "n_services": 130
+ },
+ {
+  "root": "https://arcgis.mfe.govt.nz/image/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 597,
+  "n_services": 37
+ },
+ {
+  "root": "https://maps.numeris.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host maps.numeris.ca:443 ssl:default [Name or service not known]",
+  "ms": 8,
+  "n_services": 0
+ },
+ {
+  "root": "http://wams.org.nz/ArcGIS/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host wams.org.nz:80 ssl:default [Name or service not known]",
+  "ms": 17,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.policereporting.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host maps.policereporting.ca:80 ssl:default [Name or service not known]",
+  "ms": 20,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapping.launceston.tas.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host mapping.launceston.tas.gov.au:443 ssl:default [Name or service not known]",
+  "ms": 14,
+  "n_services": 0
+ },
+ {
+  "root": "https://gist.dfo-mpo.gc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gist.dfo-mpo.gc.ca:443 ssl:default [Name or service not known]",
+  "ms": 5,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.ducks.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 621,
+  "n_services": 128
+ },
+ {
+  "root": "https://gis2.cbrm.ns.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 106,
+  "n_services": 12
+ },
+ {
+  "root": "https://maps.durham.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 249,
+  "n_services": 37
+ },
+ {
+  "root": "https://gisweb.tecumseh.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 88,
+  "n_services": 15
+ },
+ {
+  "root": "https://maps-cartes.ec.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 106,
+  "n_services": 110
+ },
+ {
+  "root": "https://gis.princeedwardisland.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 186,
+  "n_services": 115
+ },
+ {
+  "root": "https://public.oxfordcounty.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 74,
+  "n_services": 76
+ },
+ {
+  "root": "https://geoappext.nrcan.gc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 94,
+  "n_services": 91
+ },
+ {
+  "root": "https://www.rdcogis.com/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 135,
+  "n_services": 70
+ },
+ {
+  "root": "https://view.portmoody.ca/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1958,
+  "n_services": 30
+ },
+ {
+  "root": "https://public.oxfordcounty.ca/gis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 203,
+  "n_services": 76
+ },
+ {
+  "root": "https://extranet.trc.govt.nz/getgis_ssl/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 777,
+  "n_services": 31
+ },
+ {
+  "root": "https://geospatial.alberta.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 70,
+  "n_services": 226
+ },
+ {
+  "root": "https://gis.selwyn.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 167,
+  "n_services": 91
+ },
+ {
+  "root": "https://arcgisweb.welland.ca/serverprod/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 98,
+  "n_services": 192
+ },
+ {
+  "root": "https://gis.saskatchewan.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 290,
+  "n_services": 100
+ },
+ {
+  "root": "https://mapping.gw.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 151,
+  "n_services": 55
+ },
+ {
+  "root": "https://spatial.infrastructure.gov.au/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 230,
+  "n_services": 146
+ },
+ {
+  "root": "https://geospatial.alberta.ca/mimas/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 215,
+  "n_services": 126
+ },
+ {
+  "root": "https://gis3.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 156,
+  "n_services": 133
+ },
+ {
+  "root": "https://gis.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 154,
+  "n_services": 133
+ },
+ {
+  "root": "https://spatial-img.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 181,
+  "n_services": 13
+ },
+ {
+  "root": "https://gis1.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 155,
+  "n_services": 133
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 268,
+  "n_services": 9
+ },
+ {
+  "root": "https://gis.niwa.co.nz/raster/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 534,
+  "n_services": 47
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis1061a/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 90,
+  "n_services": 9
+ },
+ {
+  "root": "https://public.arcgis.msss.rtss.qc.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 130,
+  "n_services": 224
+ },
+ {
+  "root": "https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services",
+  "status": 200,
+  "error": "HTTP 403",
+  "ms": 156,
+  "n_services": 32
+ },
+ {
+  "root": "https://deptweb.gov.yk.ca/prod/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 146,
+  "n_services": 43
+ },
+ {
+  "root": "https://maps.simcoe.ca/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 133,
+  "n_services": 310
+ },
+ {
+  "root": "https://gisservices3.information.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 640,
+  "n_services": 22
+ },
+ {
+  "root": "https://maps.es.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 176,
+  "n_services": 32
+ },
+ {
+  "root": "https://gis.qldc.govt.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 166,
+  "n_services": 69
+ },
+ {
+  "root": "https://gis.wcc.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 150,
+  "n_services": 117
+ },
+ {
+  "root": "https://geopublic.scc.qld.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 195,
+  "n_services": 28
+ },
+ {
+  "root": "https://maps.huntsville.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host maps.huntsville.ca:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local ",
+  "ms": 1065,
+  "n_services": 0
+ },
+ {
+  "root": "https://geospatial.alberta.ca/titan/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 60,
+  "n_services": 277
+ },
+ {
+  "root": "http://gis.ecan.govt.nz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 305,
+  "n_services": 133
+ },
+ {
+  "root": "https://geospatial.alberta.ca/phobos/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 67,
+  "n_services": 35
+ },
+ {
+  "root": "https://gis.niwa.co.nz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 499,
+  "n_services": 99
+ },
+ {
+  "root": "https://mrgis.mainroads.wa.gov.au/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientOSError: [Errno 104] Connection reset by peer",
+  "ms": 1517,
+  "n_services": 0
+ },
+ {
+  "root": "https://mapprod3.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 146,
+  "n_services": 183
+ },
+ {
+  "root": "https://portal.data.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 634,
+  "n_services": 249
+ },
+ {
+  "root": "https://mapprod2.environment.nsw.gov.au/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 159,
+  "n_services": 132
+ },
+ {
+  "root": "https://gis.saskatchewan.ca/egis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 200,
+  "n_services": 66
+ },
+ {
+  "root": "https://afc-fr.cfsnet.nfis.org/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://cartes.ville.levis.qc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25993,
+  "n_services": 0
+ },
+ {
+  "root": "http://mappmycity.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.squamish.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.cobourg.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "http://maps.islandstrust.bc.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.villerdl.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://arcgis.st-hyacinthe.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://sig.mascouche.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.taupodc.govt.nz/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://cartes.shawinigan.ca/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.frontenacmaps.ca/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ }
+]

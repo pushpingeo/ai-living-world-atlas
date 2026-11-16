@@ -1,0 +1,3985 @@
+[
+ {
+  "portal": "https://catalogue.data.infrastructure.gov.au/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://open-sipp.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://county-hastings-gis.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://byron-shire-council-map-and-data-portal-1-byron-council.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://hastings-county-gis-hastings-gis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://maps.vancouver.ca/portal/apps/sites/#/vanmap/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://kingtownship.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://mapgallery-citypa.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://southerngrampians-sservices.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://interactive-truro-townoftruro.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 6
+ },
+ {
+  "portal": "hub:https://opendata.yellowknife.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 6,
+  "total": 10
+ },
+ {
+  "portal": "https://donnees.iriu.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://cwt.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://meaford.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://flooddata.ses.nsw.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://geoweb-mrcargenteuil.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 23
+ },
+ {
+  "portal": "https://catalogue.hakai.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-kiwirail.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 22
+ },
+ {
+  "portal": "hub:https://schoolboard-esrica-k12admin.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 225
+ },
+ {
+  "portal": "hub:https://hvgb-geohub-townhvgb.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://data-fcnsw.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 37,
+  "total": 39
+ },
+ {
+  "portal": "https://data.ontario.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://opendata.gov.nt.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://moh-geohub-saskatchewan.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 40
+ },
+ {
+  "portal": "hub:https://data-walkingaccess.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 12
+ },
+ {
+  "portal": "hub:https://data-brantford.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-cochranegis.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://opendata.grey.ca",
+  "kind": "hub",
+  "ok": false,
+  "error": "not json",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://geohub-wsask.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 25,
+  "total": 60
+ },
+ {
+  "portal": "hub:https://opendata-whakatane.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 60,
+  "total": 60
+ },
+ {
+  "portal": "hub:https://data-firstgas.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "https://data.winnipegmetroregion.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://eastgwill.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://data.brisbane.qld.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://northumberland.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://nzeuc.eagle.co.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 124
+ },
+ {
+  "portal": "hub:https://www.natureagents.co.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 6,
+  "total": 73
+ },
+ {
+  "portal": "hub:https://geohub.elgin.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://no-poverty-hub-fredericton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 69,
+  "total": 86
+ },
+ {
+  "portal": "hub:https://data-strathconard.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 19,
+  "total": 19
+ },
+ {
+  "portal": "hub:https://testbris-brisbane.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://navburl-burlington.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 105,
+  "total": 174
+ },
+ {
+  "portal": "hub:https://geohub-rangitikeidc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 48,
+  "total": 49
+ },
+ {
+  "portal": "hub:https://loyalisttownship.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://parsc-csrpa.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://opendata.kelowna.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 132,
+  "total": 281
+ },
+ {
+  "portal": "hub:https://share-open-data-Bathurst.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 3
+ },
+ {
+  "portal": "hub:https://open-data-parracity.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 23,
+  "total": 56
+ },
+ {
+  "portal": "hub:https://opendata-nzta.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 19,
+  "total": 36
+ },
+ {
+  "portal": "hub:https://lrh.kfn.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 7
+ },
+ {
+  "portal": "hub:https://metalearth.geohub.laurentian.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 222,
+  "total": 485
+ },
+ {
+  "portal": "hub:https://sidneymap-sidney.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://data-fortstjohn.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 55,
+  "total": 56
+ },
+ {
+  "portal": "hub:https://clever-cartophers-toronto-heat-response-utoronto.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 12,
+  "total": 24
+ },
+ {
+  "portal": "hub:https://discover-milton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 30,
+  "total": 31
+ },
+ {
+  "portal": "https://desq.quescren.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://spatialhub.townsville.qld.gov.au/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 17
+ },
+ {
+  "portal": "hub:https://open.nbse.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 36
+ },
+ {
+  "portal": "hub:https://opendata.thunderbay.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 58,
+  "total": 104
+ },
+ {
+  "portal": "hub:https://icorridor-fr-mto-on-ca.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 76
+ },
+ {
+  "portal": "hub:https://content.eagle.co.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://opendata.parklandcounty.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 24
+ },
+ {
+  "portal": "hub:https://geohub-perth.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 49,
+  "total": 67
+ },
+ {
+  "portal": "hub:https://opendata.barrie.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 128,
+  "total": 134
+ },
+ {
+  "portal": "hub:https://portal-rmow.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 66,
+  "total": 70
+ },
+ {
+  "portal": "hub:https://emrgis.emrb.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 84,
+  "total": 86
+ },
+ {
+  "portal": "hub:https://data-huron.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 43,
+  "total": 43
+ },
+ {
+  "portal": "hub:https://mapgallery.calgary.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 94
+ },
+ {
+  "portal": "hub:https://opendata-torontops.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 71,
+  "total": 100
+ },
+ {
+  "portal": "hub:https://communitysafetydataportal.edmontonpolice.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 3
+ },
+ {
+  "portal": "hub:https://fed.dcceew.gov.au",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 400",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://greater-sudbury-information-hub-sudbury.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://data.portmoody.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 109,
+  "total": 160
+ },
+ {
+  "portal": "hub:https://data-aucklandcouncil.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 203,
+  "total": 235
+ },
+ {
+  "portal": "hub:https://data-cityofpg.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 166,
+  "total": 176
+ },
+ {
+  "portal": "hub:https://mydata-kamloops.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 155,
+  "total": 225
+ },
+ {
+  "portal": "hub:https://st-catharines-open-data-2-stcatharines.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 15,
+  "total": 16
+ },
+ {
+  "portal": "hub:https://geohub-kawartha.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://opendata-saanich.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 52,
+  "total": 54
+ },
+ {
+  "portal": "hub:https://data-ptbo.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 83,
+  "total": 252
+ },
+ {
+  "portal": "hub:https://data-fr-fredericton.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 86,
+  "total": 120
+ },
+ {
+  "portal": "hub:https://data-tweed.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 44,
+  "total": 85
+ },
+ {
+  "portal": "hub:https://www.eo-geohub.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host www.eo-geohub.com:443 ssl:default [Name or service not known]",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-wpsgn.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 17
+ },
+ {
+  "portal": "hub:https://datahub.foodfuture.ca/",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host datahub.foodfuture.ca:443 ssl:default [Name or service not known]",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://elgin-county-open-data-Elgin-County.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 14,
+  "total": 14
+ },
+ {
+  "portal": "https://data.sustain.ubc.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://opendata.alburywodonga.gov.au/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 123,
+  "total": 156
+ },
+ {
+  "portal": "hub:https://donnees.shawinigan.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host donnees.shawinigan.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: ",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data.planvic.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data.planvic.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostna",
+  "records": 0
+ },
+ {
+  "portal": "https://data.aurin.org.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "bad json at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://ouverte.ottawa.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 294,
+  "total": 725
+ },
+ {
+  "portal": "hub:https://geohub.longueuil.quebec",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 40,
+  "total": 68
+ },
+ {
+  "portal": "hub:https://data-kcdc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 80,
+  "total": 90
+ },
+ {
+  "portal": "hub:https://www.halifact.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 8,
+  "total": 146
+ },
+ {
+  "portal": "hub:https://open-data-uhcc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 210,
+  "total": 211
+ },
+ {
+  "portal": "hub:https://indicators.squamish.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 6
+ },
+ {
+  "portal": "hub:https://data.vector.co.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 23,
+  "total": 36
+ },
+ {
+  "portal": "hub:https://gis-npca-camaps.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 52,
+  "total": 60
+ },
+ {
+  "portal": "hub:https://data-wcc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 445,
+  "total": 481
+ },
+ {
+  "portal": "hub:https://highriver-hrmdf.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 1
+ },
+ {
+  "portal": "hub:https://data-watercare.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 13,
+  "total": 13
+ },
+ {
+  "portal": "hub:https://data.nrcgis.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data.nrcgis.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostnam",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://www.acs.gov.au",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 403",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://od-dev2-ottawa.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 296,
+  "total": 711
+ },
+ {
+  "portal": "hub:https://orc-spatial-data-portal-orcnz.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 124,
+  "total": 127
+ },
+ {
+  "portal": "hub:https://open-kitchenergis.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 375,
+  "total": 586
+ },
+ {
+  "portal": "hub:https://opendata.city-of-waterloo.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host opendata.city-of-waterloo.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify f",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://opendata.cranbrook.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 42,
+  "total": 59
+ },
+ {
+  "portal": "hub:https://data-cumberlandns.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 60
+ },
+ {
+  "portal": "hub:https://data-logancity.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 468,
+  "total": 503
+ },
+ {
+  "portal": "hub:https://maps-cityofkingston.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 362,
+  "total": 418
+ },
+ {
+  "portal": "hub:https://catalogue.hrm.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host catalogue.hrm.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostn",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://county-frontenac.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 127,
+  "total": 132
+ },
+ {
+  "portal": "hub:https://jazzyhubs-ontarioregion.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 908,
+  "total": 975
+ },
+ {
+  "portal": "hub:https://opendata-christchurchcity.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 472,
+  "total": 486
+ },
+ {
+  "portal": "hub:https://thamesriver-camaps.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 19
+ },
+ {
+  "portal": "https://catalogue.ogsl.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "bad json at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://geohub.npdc.govt.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 167,
+  "total": 168
+ },
+ {
+  "portal": "hub:https://opendata.victoria.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 228,
+  "total": 504
+ },
+ {
+  "portal": "https://bdp.dma.gifs.ca/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host bdp.dma.gifs.ca:443 ssl:default [Name or service not known]",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data2.cerdi.edu.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://catalogue.cioospacific.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 502 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://open-data-portal-citywindsor.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 356,
+  "total": 424
+ },
+ {
+  "portal": "hub:https://opendata.gw.govt.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 212,
+  "total": 238
+ },
+ {
+  "portal": "hub:https://data-markham.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 320,
+  "total": 538
+ },
+ {
+  "portal": "hub:https://catalogue-saintjohn.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 262,
+  "total": 528
+ },
+ {
+  "portal": "hub:https://geohub.brampton.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 461,
+  "total": 616
+ },
+ {
+  "portal": "hub:https://ntpopendata-westernu.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1025,
+  "total": 1791
+ },
+ {
+  "portal": "hub:https://data-crcc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 19,
+  "total": 24
+ },
+ {
+  "portal": "https://publications.qld.gov.au",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 3075,
+  "count": 3075
+ },
+ {
+  "portal": "hub:https://ckcounts-chatham-kent.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 102,
+  "total": 115
+ },
+ {
+  "portal": "hub:https://gis-qldc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 196,
+  "total": 205
+ },
+ {
+  "portal": "hub:https://data.mississauga.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 235,
+  "total": 320
+ },
+ {
+  "portal": "hub:https://avliu-open-data-avliu.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 13,
+  "total": 15
+ },
+ {
+  "portal": "https://data.nsw.gov.au/data",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 760,
+  "scanned": 17247,
+  "count": 17247
+ },
+ {
+  "portal": "hub:https://cloncurry-sservices.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://kenora.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://mitcham.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://onkaparinga.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://victorharbor.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://whyallacc.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://openhub-esrica-apps.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://repentigny.hub.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://the-town-of-cochrane-dev-open-data-cochranegis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://lost-rivers-utoronto.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://city-of-corner-brook-gis-hub-ccbrook.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://home-cnlopb.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://geodata-quintewest.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 400",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data.ottawapolice.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 13,
+  "total": 98
+ },
+ {
+  "portal": "hub:https://smartcity-bc5d2-domi.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-atgis.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 45,
+  "total": 45
+ },
+ {
+  "portal": "hub:https://town-of-aurora-data-hub-aurora.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 22
+ },
+ {
+  "portal": "hub:https://opendata.grandforks.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 15,
+  "total": 19
+ },
+ {
+  "portal": "hub:https://opendata.countygp.ab.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 22,
+  "total": 25
+ },
+ {
+  "portal": "hub:https://geomatique-mrchr.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 9,
+  "total": 11
+ },
+ {
+  "portal": "https://open.alberta.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://gisportal.redlake.ca/arcgis/home",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://map-elkford.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 32,
+  "total": 41
+ },
+ {
+  "portal": "hub:https://gisportal.simcoe.ca/arcgis/apps/sites/#/springwatersite",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://test-hub-site-harvesting-esrica-pacific.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://cov-open-data-vernon.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 81,
+  "total": 89
+ },
+ {
+  "portal": "hub:https://opendata-burnaby.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 65,
+  "total": 73
+ },
+ {
+  "portal": "hub:https://agriculture-saskatchewan.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 18,
+  "total": 56
+ },
+ {
+  "portal": "https://osmdatacatalog.alberta.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://arnprior.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://open.toronto.ca",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "scanned": 556,
+  "count": 556
+ },
+ {
+  "portal": "hub:https://navigategeorgina-georgina.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "https://data.surrey.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "bad json at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://mapportal.pickering.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 27,
+  "total": 46
+ },
+ {
+  "portal": "https://data.nt.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://catalogue.data.govt.nz",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://citydata.ada.unsw.edu.au/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.bioplatforms.com",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-nftwp.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://data.researchdatafinder.qut.edu.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://central-highlands-water-data-hub-chw.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 12
+ },
+ {
+  "portal": "hub:https://mce-geohub-mce-scarto.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://hrtc-oc-cerf.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-chestermere.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 4,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://geohub-gnl.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 97,
+  "total": 119
+ },
+ {
+  "portal": "hub:https://data-with-cpaws-nl.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 296,
+  "total": 368
+ },
+ {
+  "portal": "hub:https://mce-geohub-test-version-mce-scarto.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://www.clg.place",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 8
+ },
+ {
+  "portal": "https://donnees.montreal.ca",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "scanned": 405,
+  "count": 405
+ },
+ {
+  "portal": "hub:https://newdata-easthants.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 32,
+  "total": 40
+ },
+ {
+  "portal": "hub:https://ottawa-riverkeeper-open-data-ork-so.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 4,
+  "total": 139
+ },
+ {
+  "portal": "hub:https://data-sturgeoncounty.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 64,
+  "total": 95
+ },
+ {
+  "portal": "hub:https://opendata.london.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 127,
+  "total": 236
+ },
+ {
+  "portal": "hub:https://data.peelregion.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 141,
+  "total": 154
+ },
+ {
+  "portal": "hub:https://data-gwrc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://zero-hunger-fredericton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 61,
+  "total": 70
+ },
+ {
+  "portal": "hub:https://gis-capitalregion.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 84,
+  "total": 86
+ },
+ {
+  "portal": "hub:https://open-data-revelstoke.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 54,
+  "total": 68
+ },
+ {
+  "portal": "hub:https://bcogc-data-bc-er.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://open.hamilton.ca",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://tmp.reporting.kelowna.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 27,
+  "total": 58
+ },
+ {
+  "portal": "hub:https://cloca-camaps.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 27,
+  "total": 38
+ },
+ {
+  "portal": "hub:https://opendata-trcnz.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 72,
+  "total": 72
+ },
+ {
+  "portal": "hub:https://www.erwp.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 346
+ },
+ {
+  "portal": "hub:https://data-airdrie.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 38,
+  "total": 84
+ },
+ {
+  "portal": "hub:https://open-darwin.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://geoportal.gov.mb.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 165,
+  "total": 272
+ },
+ {
+  "portal": "hub:https://amsis-geoscience-au.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 469,
+  "total": 472
+ },
+ {
+  "portal": "hub:https://data3-ca5c0-RDEK.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 5,
+  "total": 16
+ },
+ {
+  "portal": "hub:https://open-orangeville.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 79
+ },
+ {
+  "portal": "hub:https://rowopendata-rmw.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 375,
+  "total": 581
+ },
+ {
+  "portal": "hub:https://city-oshawa.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 457,
+  "total": 512
+ },
+ {
+  "portal": "hub:https://data.melbournewater.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data.melbournewater.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed:",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://tsunami.prepareyourself.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://city-of-sarnia.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 21,
+  "total": 21
+ },
+ {
+  "portal": "hub:https://corporate.reporting.kelowna.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 13
+ },
+ {
+  "portal": "hub:https://data-courtenay.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 70,
+  "total": 73
+ },
+ {
+  "portal": "hub:https://geoportal-gizzy.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 177,
+  "total": 179
+ },
+ {
+  "portal": "hub:https://opendata.greatersudbury.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 114,
+  "total": 178
+ },
+ {
+  "portal": "hub:https://opendata-deltabc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 18
+ },
+ {
+  "portal": "hub:https://maps.sogdatacentre.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 31
+ },
+ {
+  "portal": "hub:https://www.piccahub.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 9,
+  "total": 83
+ },
+ {
+  "portal": "hub:https://navigate-newmarket.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 64
+ },
+ {
+  "portal": "hub:https://open-data-kawartha.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 22,
+  "total": 22
+ },
+ {
+  "portal": "hub:https://opengov.mapleridge.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 61,
+  "total": 67
+ },
+ {
+  "portal": "hub:https://icorridor-mto-on-ca.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 159,
+  "total": 262
+ },
+ {
+  "portal": "hub:https://town-of-gibsons-open-data-portal-myscrd.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 21,
+  "total": 24
+ },
+ {
+  "portal": "hub:https://interactive-stewiacke-townoftruro.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 26
+ },
+ {
+  "portal": "hub:https://geohub.tasman.govt.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 110,
+  "total": 116
+ },
+ {
+  "portal": "hub:https://data-langleycity.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 49,
+  "total": 65
+ },
+ {
+  "portal": "hub:https://portal-exploreoakville.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 164,
+  "total": 170
+ },
+ {
+  "portal": "hub:https://environment-saskatchewan.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 51,
+  "total": 129
+ },
+ {
+  "portal": "hub:https://opendata-abbotsford.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 181,
+  "total": 192
+ },
+ {
+  "portal": "hub:https://ontariogeohub-fr-lio.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 274,
+  "total": 440
+ },
+ {
+  "portal": "hub:https://resources-gisinschools-nz.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 61,
+  "total": 374
+ },
+ {
+  "portal": "hub:https://hastings-dc-open-data-hdcgis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 17
+ },
+ {
+  "portal": "hub:https://trca-camaps.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 298,
+  "total": 310
+ },
+ {
+  "portal": "hub:https://catalogue-fr-saintjohn.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 263,
+  "total": 519
+ },
+ {
+  "portal": "hub:https://data-1.hobartcc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data-1.hobartcc.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hos",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://gfa-v3-ags-aer.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 372,
+  "total": 835
+ },
+ {
+  "portal": "hub:https://opendata.durham.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 379,
+  "total": 385
+ },
+ {
+  "portal": "hub:https://opengov2-mapleridge.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 91,
+  "total": 143
+ },
+ {
+  "portal": "hub:https://data-wellingtonwater.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 129,
+  "total": 129
+ },
+ {
+  "portal": "hub:https://geohub.saskatchewan.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 385,
+  "total": 455
+ },
+ {
+  "portal": "hub:https://data-waikatolass.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 669,
+  "total": 699
+ },
+ {
+  "portal": "hub:https://maps-gsbcouncil.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://opendata-sudbury.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 114,
+  "total": 178
+ },
+ {
+  "portal": "hub:https://open.penticton.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 136,
+  "total": 148
+ },
+ {
+  "portal": "hub:https://data-goldcoast.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 600,
+  "total": 603
+ },
+ {
+  "portal": "hub:https://explore.guelph.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 40,
+  "total": 78
+ },
+ {
+  "portal": "hub:https://open-data-summerland.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 55,
+  "total": 90
+ },
+ {
+  "portal": "hub:https://data-hrm.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 261,
+  "total": 355
+ },
+ {
+  "portal": "hub:https://data.cityofsydney.nsw.gov.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 135,
+  "total": 193
+ },
+ {
+  "portal": "hub:https://insights-york.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 325,
+  "total": 544
+ },
+ {
+  "portal": "hub:https://ontariogeohub-lio.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 288,
+  "total": 479
+ },
+ {
+  "portal": "hub:https://datahub.moretonbay.qld.gov.au/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 367,
+  "total": 405
+ },
+ {
+  "portal": "hub:https://digital.atlas.gov.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 733,
+  "total": 814
+ },
+ {
+  "portal": "https://data.visualisingballarat.org.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://gis-kaikouradc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 10
+ },
+ {
+  "portal": "hub:https://datahub-ntgs.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 144,
+  "total": 145
+ },
+ {
+  "portal": "https://datastore.landcareresearch.co.nz",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 570,
+  "count": 570
+ },
+ {
+  "portal": "hub:https://maps.wodonga.vic.gov.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 152,
+  "total": 188
+ },
+ {
+  "portal": "https://data.maintenance.org.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 522 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-tol.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 212,
+  "total": 5726
+ },
+ {
+  "portal": "https://data.qld.gov.au",
+  "kind": "ckan",
+  "ok": true,
+  "error": "HTTP 429 at start=46000",
+  "records": 86,
+  "scanned": 46000,
+  "count": 188901
+ },
+ {
+  "portal": "hub:https://cityofsalisbury.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://cityofnpsp.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://berribarmera.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://renmarkparinga.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://yukon.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://scugog.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://adelaidehills.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://rimouski.hub.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://marion.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://camrose.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://atlas-acsqhc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "https://niagaraopendata.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://datahub.bvcentre.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://psr-wcc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://donnees.onicse.uqat.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.cbwaterhub.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://townofws.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://datasets.seed.nsw.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "bad json at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://catalogue.data.gov.bc.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data.burnaby.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 65,
+  "total": 73
+ },
+ {
+  "portal": "hub:https://data-cscgis.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 24,
+  "total": 40
+ },
+ {
+  "portal": "hub:https://public-map-gallery-clarington.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 10
+ },
+ {
+  "portal": "https://dmc.datacentral.org.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://opendata.esquimalt.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 21,
+  "total": 34
+ },
+ {
+  "portal": "hub:https://hub-mississauga.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://opendata.redland.qld.gov.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 40,
+  "total": 43
+ },
+ {
+  "portal": "https://national-cycling-data-exchange.ncdap.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://housing-data-exchange.ahdap.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.bioheritage.nz",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://hub.efbcollaborative.net",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://county-lambton.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3,
+  "total": 7
+ },
+ {
+  "portal": "hub:https://lidar.gov.bc.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 6
+ },
+ {
+  "portal": "hub:https://water-barwon.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 23,
+  "total": 23
+ },
+ {
+  "portal": "hub:https://opendata.chatham-kent.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 40
+ },
+ {
+  "portal": "hub:https://data-edmundston.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 31,
+  "total": 44
+ },
+ {
+  "portal": "hub:https://geohub-uclg.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 13,
+  "total": 96
+ },
+ {
+  "portal": "hub:https://opendata.countyofessex.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 116,
+  "total": 121
+ },
+ {
+  "portal": "hub:https://ouvert.nbse.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 7,
+  "total": 18
+ },
+ {
+  "portal": "hub:https://donneesouvertes-sherbrooke.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 34,
+  "total": 34
+ },
+ {
+  "portal": "hub:https://gis-csrchaleurrsc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 5
+ },
+ {
+  "portal": "hub:https://ressouces-fr-covid19canada.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-esgis.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 33,
+  "total": 33
+ },
+ {
+  "portal": "https://data-portal.hpc.swin.edu.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data.thebluemountains.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 32
+ },
+ {
+  "portal": "hub:https://hub.planyukon.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 8
+ },
+ {
+  "portal": "hub:https://data-citysaskatoon.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 19
+ },
+ {
+  "portal": "hub:https://data-cornwallcity.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 51,
+  "total": 52
+ },
+ {
+  "portal": "hub:https://open.welland.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 70,
+  "total": 72
+ },
+ {
+  "portal": "hub:https://ocp.reporting.kelowna.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3,
+  "total": 31
+ },
+ {
+  "portal": "hub:https://gis.brucecounty.on.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 7,
+  "total": 23
+ },
+ {
+  "portal": "hub:https://horowhenua-council-public-opendata-portal-horowhenua.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 35,
+  "total": 35
+ },
+ {
+  "portal": "hub:https://data.squamish.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 107,
+  "total": 124
+ },
+ {
+  "portal": "hub:https://city-dashboard-spatialsolutions.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 196
+ },
+ {
+  "portal": "hub:https://openbudget-cityofgp.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 29,
+  "total": 81
+ },
+ {
+  "portal": "hub:https://spatialdata-city-fremantle.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 11
+ },
+ {
+  "portal": "hub:https://conservationhalton-camaps.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 37,
+  "total": 37
+ },
+ {
+  "portal": "hub:https://geohub.lio.gov.on.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 288,
+  "total": 479
+ },
+ {
+  "portal": "hub:https://open-vicmap.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 228,
+  "total": 504
+ },
+ {
+  "portal": "hub:https://opendata-canmore.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 29
+ },
+ {
+  "portal": "hub:https://www.fourrivershub.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 10
+ },
+ {
+  "portal": "hub:https://kincardine-brucecounty.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 5
+ },
+ {
+  "portal": "hub:https://open-data.cloca.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 27,
+  "total": 38
+ },
+ {
+  "portal": "hub:https://maps-cityofpickering.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 27,
+  "total": 46
+ },
+ {
+  "portal": "hub:https://ghgtargets.mapleridge.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://mapping.morinville.ca/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://arcgis.lbpevaluateurs.ca/portal/apps/sites/#/mrc-rdn",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://map.muskoka.on.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 44,
+  "total": 59
+ },
+ {
+  "portal": "hub:https://opendata-bellevillegis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 43,
+  "total": 70
+ },
+ {
+  "portal": "hub:https://data.leduc.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 9,
+  "total": 10
+ },
+ {
+  "portal": "hub:https://climate.esri.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 148,
+  "total": 263
+ },
+ {
+  "portal": "hub:https://sustainable-cities-and-communities-fredericton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 38
+ },
+ {
+  "portal": "hub:https://data.stalbert.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 39,
+  "total": 50
+ },
+ {
+  "portal": "hub:https://data-dufferincounty.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 12,
+  "total": 55
+ },
+ {
+  "portal": "hub:https://opendata.medicinehat.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 40,
+  "total": 40
+ },
+ {
+  "portal": "hub:https://national-grassland-inventory-for-the-cfga-cfga.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 31,
+  "total": 49
+ },
+ {
+  "portal": "hub:https://hamiltondatacatalog-mcmaster.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 369,
+  "total": 369
+ },
+ {
+  "portal": "hub:https://ntgs-open-data-ntgs.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 262,
+  "total": 277
+ },
+ {
+  "portal": "hub:https://gis.strathmore.ca/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://rdcodatadownload.rdco.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host rdcodatadownload.rdco.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify faile",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://vicroadsopendata.vicroadsmaps.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host vicroadsopendata.vicroadsmaps.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate veri",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://dlc.rdco.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host dlc.rdco.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname m",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://open.ottawa.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 296,
+  "total": 711
+ },
+ {
+  "portal": "hub:https://doc-deptconservation.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 155,
+  "total": 740
+ },
+ {
+  "portal": "hub:https://climat.esri.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 148,
+  "total": 269
+ },
+ {
+  "portal": "hub:https://otakarolivinglaboratory-gicnz.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 22,
+  "total": 25
+ },
+ {
+  "portal": "hub:https://gis-hdc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 27,
+  "total": 33
+ },
+ {
+  "portal": "hub:https://co-opendata-camaps.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 471,
+  "total": 524
+ },
+ {
+  "portal": "hub:https://predator-free-dunedin-gicnz.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 1
+ },
+ {
+  "portal": "hub:https://data-apca.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 25,
+  "total": 88
+ },
+ {
+  "portal": "https://donnees.ville.montreal.qc.ca",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "scanned": 405,
+  "count": 405
+ },
+ {
+  "portal": "hub:https://atlas.murray.wa.gov.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://loyalistmigrations-westernu.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 7
+ },
+ {
+  "portal": "hub:https://droughtportal.gov.bc.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 18,
+  "total": 20
+ },
+ {
+  "portal": "hub:https://l-a-mapping-services-lennoxaddington.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 38
+ },
+ {
+  "portal": "hub:https://data-fredericton.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 88,
+  "total": 132
+ },
+ {
+  "portal": "hub:https://site-web-ville-de-saint-eustache-vse.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://hub.gema.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 281
+ },
+ {
+  "portal": "hub:https://cid-trial-vrac.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 6,
+  "total": 13
+ },
+ {
+  "portal": "hub:https://open.moncton.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 66,
+  "total": 3039
+ },
+ {
+  "portal": "hub:https://ncc-hub-ncc-ccn.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 19,
+  "total": 21
+ },
+ {
+  "portal": "hub:https://water.princeedwardisland.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 63
+ },
+ {
+  "portal": "hub:https://middlesex-county-gis-open-data-portal-middlesexcounty.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 39,
+  "total": 66
+ },
+ {
+  "portal": "hub:https://data-poco.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 68,
+  "total": 86
+ },
+ {
+  "portal": "hub:https://opendata.newwestcity.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 95,
+  "total": 165
+ },
+ {
+  "portal": "hub:https://data.coquitlam.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 184,
+  "total": 257
+ },
+ {
+  "portal": "https://catalogue.slgo.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host catalogue.slgo.ca:443 ssl:default [Name or service not known]",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://portal-mainroads.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 726,
+  "total": 748
+ },
+ {
+  "portal": "hub:https://ouvert.moncton.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 63,
+  "total": 3016
+ },
+ {
+  "portal": "hub:https://opendata-strathconacounty.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 127,
+  "total": 331
+ },
+ {
+  "portal": "hub:https://opendata-squamish.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 107,
+  "total": 124
+ },
+ {
+  "portal": "hub:https://manawatu-district-council-open-data-portal-manawatudc.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 67,
+  "total": 67
+ },
+ {
+  "portal": "hub:https://wfn-open-data-rdco.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 15,
+  "total": 31
+ },
+ {
+  "portal": "hub:https://clean-water-fredericton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 22,
+  "total": 35
+ },
+ {
+  "portal": "hub:https://corridor-management-hamilton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 13,
+  "total": 32
+ },
+ {
+  "portal": "https://catalogue.cioos.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "bad json at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-mpi.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1452,
+  "total": 1464
+ },
+ {
+  "portal": "hub:https://geohub-mundaring.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 1
+ },
+ {
+  "portal": "hub:https://hbrcopendata-hbrc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 154,
+  "total": 158
+ },
+ {
+  "portal": "hub:https://gisdata.nanaimo.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 86,
+  "total": 97
+ },
+ {
+  "portal": "hub:https://data-marlborough.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 111,
+  "total": 139
+ },
+ {
+  "portal": "hub:https://openmaps-waimakariri.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 167,
+  "total": 188
+ },
+ {
+  "portal": "hub:https://my-tnrd.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 230,
+  "total": 295
+ },
+ {
+  "portal": "hub:https://data.whiterockcity.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 305,
+  "total": 335
+ },
+ {
+  "portal": "hub:https://maps.boprc.govt.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 204,
+  "total": 267
+ },
+ {
+  "portal": "hub:https://open.niagarafalls.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 317,
+  "total": 362
+ },
+ {
+  "portal": "hub:https://geohub.cambridge.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 375,
+  "total": 625
+ },
+ {
+  "portal": "hub:https://www.esriaustraliahub.com.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1067,
+  "total": 1205
+ },
+ {
+  "portal": "hub:https://spatial-brisbane.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3397,
+  "total": 3397
+ },
+ {
+  "portal": "hub:https://communautaire-esrica-apps.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "not json",
+  "records": 0
+ },
+ {
+  "portal": "https://catalogue.data.wa.gov.au",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 1751,
+  "scanned": 2917,
+  "count": 2917
+ },
+ {
+  "portal": "hub:https://gis.wetaskiwin.ca/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "TimeoutError: ",
+  "records": 0
+ },
+ {
+  "portal": "https://open.canada.ca",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 3499,
+  "scanned": 48310,
+  "count": 48310
+ },
+ {
+  "portal": "https://nwgpdataportal.ca",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 10,
+  "count": 10
+ },
+ {
+  "portal": "https://gis-hub.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://open.yukon.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.gmob.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "bad json at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://opendata.citywindsor.ca/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://donnees.cmm.qc.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://barcaldine-racas-sservices.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://centrewellington.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://catalogue.cioosatlantic.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://gisdata-portenf.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://portail-csrno.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 403",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://codem-eaglelabs.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://geoscience.data.qld.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 403 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://resources-covid19canada.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://donneesquebec.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.trca.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://geomatique-mrcdecoaticook.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://wildfires.service.yukon.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 10
+ },
+ {
+  "portal": "hub:https://gawler.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://alexandrina.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://brockville.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://coppercoast.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://wattlerange.maps.arcgis.com/home/index.html",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://public-oxfordcounty.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 21
+ },
+ {
+  "portal": "hub:https://bruce-county-open-spatial-data-brucecounty.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 22,
+  "total": 23
+ },
+ {
+  "portal": "hub:https://huntsville-muskoka.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 14
+ },
+ {
+  "portal": "hub:https://amherstburg-open-data-essexcounty.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 1
+ },
+ {
+  "portal": "hub:https://opendata.norfolkcounty.ca",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://cartes-interactives-nbeauce.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://data-bellingen.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 4,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://healthgishub-esricanada.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 4,
+  "total": 11
+ },
+ {
+  "portal": "https://ballaratopendata.org.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data-horizonsrc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 74,
+  "total": 76
+ },
+ {
+  "portal": "https://opendata.transport.nsw.gov.au",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "scanned": 230,
+  "count": 230
+ },
+ {
+  "portal": "hub:https://data-northbaygis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://maps-maitlandcc.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 9
+ },
+ {
+  "portal": "https://data.npafc.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://discover.data.vic.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://opendata-haldimand.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 11
+ },
+ {
+  "portal": "hub:https://snowcentre.moosejaw.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3,
+  "total": 9
+ },
+ {
+  "portal": "hub:https://gis-haliburtoncounty-ca-halcty.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 9,
+  "total": 9
+ },
+ {
+  "portal": "hub:https://data-caledon.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 5,
+  "total": 5
+ },
+ {
+  "portal": "hub:https://data-csrd.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 82,
+  "total": 92
+ },
+ {
+  "portal": "hub:https://aquatera-utilities-1-aquautilities.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 24,
+  "total": 26
+ },
+ {
+  "portal": "hub:https://open-data-mfe.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 41,
+  "total": 41
+ },
+ {
+  "portal": "hub:https://ccn-hub-ncc-ccn.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 19,
+  "total": 21
+ },
+ {
+  "portal": "hub:https://opendata-bundabergrc.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 18
+ },
+ {
+  "portal": "hub:https://discover.barrie.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 128,
+  "total": 165
+ },
+ {
+  "portal": "hub:https://open-data-ls-osp-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://data-myscrd.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 25,
+  "total": 28
+ },
+ {
+  "portal": "hub:https://opendataarchive-squamish.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 107,
+  "total": 123
+ },
+ {
+  "portal": "hub:https://southwaikatodc-open-data-portal-southwaikatodc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 43,
+  "total": 66
+ },
+ {
+  "portal": "hub:https://community-statistics.service.yukon.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 86,
+  "total": 86
+ },
+ {
+  "portal": "hub:https://opendata.launceston.tas.gov.au",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 102,
+  "total": 102
+ },
+ {
+  "portal": "hub:https://city-of-parksville-city-parksville.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 45,
+  "total": 46
+ },
+ {
+  "portal": "hub:https://spatialdata-uom.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 26,
+  "total": 30
+ },
+ {
+  "portal": "hub:https://digital-zoning-bylaw-9990-citysaskatoon.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 205
+ },
+ {
+  "portal": "hub:https://maps.grey.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 72,
+  "total": 83
+ },
+ {
+  "portal": "hub:https://opendata-fndc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 144,
+  "total": 148
+ },
+ {
+  "portal": "hub:https://donnees-ouvertes-vrn.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 19,
+  "total": 19
+ },
+ {
+  "portal": "hub:https://hub.mobilizingjustice.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 5,
+  "total": 100
+ },
+ {
+  "portal": "hub:https://opendata-surrey.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 190,
+  "total": 225
+ },
+ {
+  "portal": "hub:https://data-middlesex.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 3,
+  "total": 3
+ },
+ {
+  "portal": "hub:https://london-newcomers-guide-westernu.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 43
+ },
+ {
+  "portal": "hub:https://geology-ags-aer.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 41,
+  "total": 41
+ },
+ {
+  "portal": "hub:https://datahub.newacre.org/",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host datahub.newacre.org:443 ssl:default [Name or service not known]",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://geohub-whitby.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 65
+ },
+ {
+  "portal": "hub:https://geohub.pncc.govt.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 56,
+  "total": 61
+ },
+ {
+  "portal": "hub:https://regional-district-of-north-okanagan-gis-open-data-site-rdnogis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 53,
+  "total": 71
+ },
+ {
+  "portal": "hub:https://data-pcc.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 51,
+  "total": 59
+ },
+ {
+  "portal": "hub:https://peachland2017-01-16t194902237z-rdco.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 34
+ },
+ {
+  "portal": "hub:https://portailcarto.cieq.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 175,
+  "total": 178
+ },
+ {
+  "portal": "hub:https://er-saskatchewan.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 337,
+  "total": 348
+ },
+ {
+  "portal": "hub:https://municipal-consent-permits-hamilton.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 14,
+  "total": 33
+ },
+ {
+  "portal": "hub:https://data-transpower.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 8,
+  "total": 10
+ },
+ {
+  "portal": "hub:https://mopc-pictoucounty.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 1
+ },
+ {
+  "portal": "hub:https://data.waterloo.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 375,
+  "total": 581
+ },
+ {
+  "portal": "hub:https://open.niagararegion.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 44,
+  "total": 45
+ },
+ {
+  "portal": "hub:https://tecumseh-essexcounty.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 157,
+  "total": 157
+ },
+ {
+  "portal": "hub:https://open-data-portal-metrovancouver.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 39,
+  "total": 91
+ },
+ {
+  "portal": "https://opendata.transport.vic.gov.au/",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 40,
+  "count": 40
+ },
+ {
+  "portal": "https://data.sa.gov.au",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 9,
+  "scanned": 1942,
+  "count": 1942
+ },
+ {
+  "portal": "https://landuseopportunities.nz",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 102,
+  "count": 102
+ },
+ {
+  "portal": "hub:https://map.okotoks.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 58,
+  "total": 60
+ },
+ {
+  "portal": "hub:https://alex-info-hub-ontarioregion.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 380,
+  "total": 386
+ },
+ {
+  "portal": "https://data.vic.gov.au",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data.pncc.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data.pncc.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname ",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://climatereadybc.gov.bc.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 8,
+  "total": 8
+ },
+ {
+  "portal": "hub:https://opendata.canterburymaps.govt.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 479,
+  "total": 480
+ },
+ {
+  "portal": "hub:https://public-townofcobourg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 30,
+  "total": 52
+ },
+ {
+  "portal": "hub:https://opendata.pickering.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 433,
+  "total": 458
+ },
+ {
+  "portal": "hub:https://opendata.ajax.ca/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 45,
+  "total": 49
+ },
+ {
+  "portal": "hub:https://data-maribyrnong.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 24
+ },
+ {
+  "portal": "hub:https://opendata.unley.sa.gov.au/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 23,
+  "total": 33
+ },
+ {
+  "portal": "hub:https://data-niwa.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 63,
+  "total": 95
+ },
+ {
+  "portal": "hub:https://geohub.cochrane.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 35,
+  "total": 84
+ },
+ {
+  "portal": "hub:https://opendata.lethbridge.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 56,
+  "total": 123
+ },
+ {
+  "portal": "hub:https://open-data-tararuadc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 32,
+  "total": 32
+ },
+ {
+  "portal": "hub:https://metadata-yukon.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 409,
+  "total": 411
+ },
+ {
+  "portal": "hub:https://opendata-cityofgp.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 111,
+  "total": 177
+ },
+ {
+  "portal": "hub:https://data-cityofpickering.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 433,
+  "total": 458
+ },
+ {
+  "portal": "hub:https://actmapi-actgov.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 338,
+  "total": 351
+ },
+ {
+  "portal": "hub:https://gisinschools.eagle.co.nz",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 45,
+  "total": 357
+ },
+ {
+  "portal": "hub:https://data.cityofcambridge.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data.cityofcambridge.opendata.arcgis.com:443 ssl:True [SSLCertVerificationError: (1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed",
+  "records": 0
+ },
+ {
+  "portal": "https://open.regina.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorDNSError: Cannot connect to host open.regina.ca:443 ssl:default [Name or service not known]",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.asc-csa.gc.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host data.asc-csa.gc.ca:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local ",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://donnees-data.asc-csa.gc.ca",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host donnees-data.asc-csa.gc.ca:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to ge",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://data.sunshinecoast.qld.gov.au/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 723,
+  "total": 773
+ },
+ {
+  "portal": "hub:https://opendata.saskatoon.ca",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 10,
+  "total": 19
+ },
+ {
+  "portal": "hub:https://gos-initiative-saskatchewan.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 385,
+  "total": 455
+ },
+ {
+  "portal": "hub:https://city-of-palmerston-open-data-cityofpalmerston.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 27
+ },
+ {
+  "portal": "hub:https://hub-rdos.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 15,
+  "total": 15
+ },
+ {
+  "portal": "https://canwin-datahub.ad.umanitoba.ca/data",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 3476,
+  "scanned": 49108,
+  "count": 49108
+ }
+]
