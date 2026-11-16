@@ -36,7 +36,7 @@ def split(d: Path, limit: int = LIMIT) -> None:
 
 def get(ref: str, name: str, out: Path) -> bool:
     files = subprocess.run(["git", "ls-tree", "--name-only", ref], capture_output=True, text=True, check=True).stdout.split()
-    parts = sorted(f for f in files if f == f"{name}.parquet" or re.fullmatch(rf"{re.escape(name)}-\d{{3}}\.parquet", f))
+    parts = sorted(f for f in files if f == f"{name}.parquet" or re.fullmatch(rf"{re.escape(name)}(-\d{{3}})+\.parquet", f))
     if not parts:
         return False
     tables = []
