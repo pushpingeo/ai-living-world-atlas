@@ -1,0 +1,3 @@
+[    0s] seeds: {'arcgis_roots': 0, 'arcgis_services': 0, 'wms': 0, 'wfs': 0, 'wmts': 0, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 0, 'gn': 1, 'records': [], 'catalogues': 1}
+[ 1826s] harvest-only: wrote 681441 catalogue records to cache/portals.pkl
+[ 1826s]   gn:https://data.europa.eu: ok=True records=681441 scanned=890727 

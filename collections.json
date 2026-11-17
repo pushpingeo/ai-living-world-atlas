@@ -1,0 +1,9 @@
+{
+ "datasets_in": 1766113,
+ "plans_detected": 1225385,
+ "plans_passing": 466865,
+ "collections": 1849,
+ "members_grouped": 466089,
+ "passing_after": 118735,
+ "passing_before": 582975
+}
