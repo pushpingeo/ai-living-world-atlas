@@ -33,6 +33,21 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (17 Nov, night) **Tobler request: trusted global services, key-gated services, Esri copies. Design written, not
+  built:** `docs/trusted-services-design.md`. Proposes, all additive: `licence_class` (open, open-inferred, esri-mla,
+  restricted, stated, unknown) with `exclude_licence_class`; `trusted` and `trusted_only`; `source` and `copy_of` for
+  Living Atlas copies, ranked after the publisher's own service; key-gated services (`access: "key"`, key held by the
+  atlas Worker) starting with NASA FIRMS. Suggested order: licence class first. Waiting on Rob for the FIRMS key, the
+  trusted list and the non-commercial question.
+- (17 Nov, night) **Tobler request: EMODnet as feature services, with licences. In progress.** New wave
+  `spike-emodnet` (`vocab/seeds/emodnet.yaml`): WFS and WMS of every EMODnet portal (Human Activities, Bathymetry,
+  Seabed Habitats, Geology, Physics, Biology, Chemistry) plus EMODnet's GeoNetwork catalogue. A layer's WFS and WMS on
+  one server become one dataset (`fetch_features` uses the WFS). Catalogue records now join layers by server and
+  layer name (e.g. `emodnet:heritageshipwrecks`), so CC-BY 4.0 and descriptions reach them. *Contract effect when
+  published:* the wave goes first in `runs/published.txt`, and datasets that an earlier wave already holds are dropped
+  at publish (`drop_covered` in combine.py), so **the ids of the current WMS-only EMODnet records will change** to the
+  grouped records' ids. Fields are unchanged.
+
 - (17 Nov, night) **Tobler request: mislabelled NSTA record (`bdb5d0a70436343e`). Done.** It wasn't only a title:
   the crawl had grouped NSTA's live service and its `_removed_` twin under one dataset, because they share a title
   and extent, and the removed one came first. Nine NSTA datasets were like this, including `29a134d61746d7dc`
