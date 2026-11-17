@@ -23,7 +23,7 @@ jobs:
           KEY = os.environ["ATLAS_MCP_KEY"]
           def call(name, args):
               body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": name, "arguments": args}}).encode()
-              req = urllib.request.Request(EP, body, {"Authorization": f"Bearer {KEY}", "content-type": "application/json"})
+              req = urllib.request.Request(EP, body, {"Authorization": f"Bearer {KEY}", "content-type": "application/json", "User-Agent": "atlas-mcp-check (+https://github.com/pushpingeo/ai-living-world-atlas)"})
               t = time.time()
               try:
                   with urllib.request.urlopen(req, timeout=60) as r:
