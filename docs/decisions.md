@@ -245,3 +245,10 @@ characters of the dataset id (`data/dz/xxx.json.gz`, 4,096 files) and unzipped i
 DecompressionStream; a file that arrives already unzipped is read as it is. `meta.json` carries `detail_dir`,
 `detail_key` and `detail_gz`, so the code follows whatever layout the data was built with. The pages build now
 version-stamps `app.js` and `style.css`. Site: 702 MB to 203 MB; a detail click fetches ~30 KB instead of ~2.5 MB.
+
+## 2026-11-17 (night): MCP broke for an hour after the viewer change
+The MCP Worker reads dataset details from the viewer's detail shards on GitHub Pages. Moving them to gzipped
+`dz/` files at ~20:13 broke `get_dataset` and `fetch_features` ("No dataset with id") while `find_datasets` (D1) kept
+working; Tobler noticed first. Fixed ~21:15: the Worker reads the new files, with the old layout as a fallback. The
+deploy-mcp smoke test now also opens a dataset, and `mcp-check` (runs/mcp-check.env) tests all three tools Tobler
+uses. Lesson: a viewer data change is an MCP change and goes through docs/mcp-tools.md first.

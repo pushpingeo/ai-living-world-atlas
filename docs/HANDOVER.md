@@ -78,6 +78,13 @@ Workspace notes:
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
+## Watch out
+
+- **The MCP Worker reads dataset details from the viewer's detail files on GitHub Pages** (`data/dz/xxx.json.gz`).
+  Changing the viewer's data layout changes the MCP server: treat it as a contract change (`docs/mcp-tools.md`).
+  This broke `get_dataset`/`fetch_features` for an hour on 17 Nov. `mcp-check` (push `runs/mcp-check.env`) tests the
+  three tools Tobler uses live; the deploy smoke test now opens a dataset too.
+
 ## Rules Rob set
 
 - Keep the MCP server key-protected.
