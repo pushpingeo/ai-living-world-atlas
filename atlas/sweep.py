@@ -24,6 +24,7 @@ import argparse
 import asyncio
 import hashlib
 import json
+import os
 import random
 import time
 from collections import Counter, defaultdict
@@ -39,6 +40,9 @@ from .net import Client
 DUE_OK, DUE_FAIL, DUE_RETIRED = 7, 3, 28
 RETIRE_CHECKS, RETIRE_DAYS, RETIRE_DAYS_HOST = 3, 14, 30
 HOST_DOWN_MIN, HOST_DOWN_SHARE = 20, 0.8   # a host is "down" when 80%+ of 20+ services checked on it failed
+# second look at the end of a run: up to 3,000 failed services (40 per host), one at a time per host, 90 s timeout,
+# with the last 20 minutes of the run kept for it
+SECOND_LOOK_MAX, SECOND_LOOK_PER_HOST, SECOND_LOOK_TIMEOUT, SECOND_LOOK_RESERVE = 3000, 40, 90, 20
 HOST_GIVE_UP = 10                          # stop knocking on a host after this many network failures in a row
 OGC = {"wms": "WMS", "wfs": "WFS", "wmts": "WMTS", "wcs": "WCS"}
 PLAIN = {"download", "cloud", "api", "landing"}
@@ -115,7 +119,15 @@ async def check_service(c: Client, svc: str, proto: str):
     elif proto in OGC:
         layers, s = await crawl_ogc.crawl_ogc(c, svc, OGC[proto], {})
     elif proto in PLAIN:
-        r = await c.get(svc, retries=1)
+        u = urlsplit(svc)
+        if u.netloc.endswith(".amazonaws.com") and u.path.endswith("/") and "s3" in u.netloc and not u.query:
+            # an S3 "folder" (e.g. Overture's /release/) has no object behind it and answers 404: list it instead
+            prefix = u.path.lstrip("/")
+            r = await c.get(f"{u.scheme}://{u.netloc}/?list-type=2&max-keys=1&delimiter=/&prefix={prefix}", retries=1)
+            if r.ok and b"<Contents>" not in r.body and b"<CommonPrefixes>" not in r.body:
+                r = type(r)(r.url, 404, r.ms, error="S3 prefix is empty")
+        else:
+            r = await c.get(svc, retries=1)
         s = {"ok": r.ok, "error": r.error or ("" if r.ok else f"HTTP {r.status}")}
         layers = []
     else:
@@ -132,12 +144,13 @@ async def check_service(c: Client, svc: str, proto: str):
 async def run_checks(services, deadline: float, week: int, data_checks: bool = True):
     results = {}
     host_net_fails: Counter = Counter()
-    async with Client(total=64, per_host=2, timeout=30) as c:
-        async def one(svc, proto):
+    stats = Counter()
+
+    async def one(c, svc, proto, until, second=False):
             host = urlsplit(svc).netloc
-            if time.monotonic() > deadline:
+            if time.monotonic() > until:
                 return
-            if host_net_fails[host] >= HOST_GIVE_UP:
+            if not second and host_net_fails[host] >= HOST_GIVE_UP:
                 results[(svc, proto)] = ("fail", "host unreachable (stopped after repeated network failures)", [], True, None)
                 return
             try:
@@ -146,19 +159,42 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
                 status, detail, layers, net = "fail", f"{type(e).__name__}: {e}"[:160], [], False
             host_net_fails[host] = host_net_fails[host] + 1 if net else 0
             data = None
-            if status == "ok" and layers and data_checks and time.monotonic() < deadline:
+            if status == "ok" and layers and data_checks and time.monotonic() < until:
                 L = layers[week % len(layers)]
                 fn = crawl_ogc.check_layer if L.service_type in OGC else crawl_arcgis.check_layer
                 try:
                     data = (L.uid, *(await fn(c, L)))
                 except Exception as e:
                     data = (L.uid, "fail", type(e).__name__)
+            if second and status != "ok":
+                return  # keep the first pass's result and detail
             results[(svc, proto)] = (status, detail, layers, net, data)
 
+    async with Client(total=64, per_host=2, timeout=30) as c:
         # spread hosts out so a slow host with thousands of services doesn't hold the queue
-        await asyncio.gather(*[one(s, p) for s, p in services])
-        stats = dict(c.stats)
-    return results, stats
+        # leave the last few minutes for the second look; services not reached are first in line tomorrow
+        first_until = deadline - min(SECOND_LOOK_RESERVE * 60, (deadline - time.monotonic()) / 6)
+        await asyncio.gather(*[one(c, s, p, first_until) for s, p in services])
+        stats.update(c.stats)
+    # Second look at failures, one at a time per host and with a long timeout. Some live services are just slow
+    # (a 3.7 MB WFS GetCapabilities taking 47 s; dados.gov.pt redirects taking 40-60 s) and would otherwise fail
+    # every visit and be retired; others refuse or time out only when we arrive alongside other requests.
+    per_host: Counter = Counter()
+    again = []
+    for k, v in results.items():
+        h = urlsplit(k[0]).netloc
+        if v[0] == "fail" and per_host[h] < SECOND_LOOK_PER_HOST and len(again) < SECOND_LOOK_MAX:
+            per_host[h] += 1
+            again.append(k)
+    if again and time.monotonic() < deadline:
+        async with Client(total=16, per_host=1, timeout=SECOND_LOOK_TIMEOUT) as c:
+            before = sum(results[k][0] == "ok" for k in again)
+            await asyncio.gather(*[one(c, s, p, deadline, second=True) for s, p in again])
+            stats.update(c.stats)
+            stats["second_look"] = len(again)
+            stats["second_look_ok"] = sum(results[k][0] == "ok" for k in again) - before
+        print(f"second look: {stats['second_look_ok']:,} of {len(again):,} failed services answered", flush=True)
+    return results, dict(stats)
 
 
 def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
@@ -302,6 +338,7 @@ def report(st: pd.DataFrame, outcomes, results, down, retag_n, retag_note, today
         "endpoints_ever_checked": len(checked), "resolving_rate": res_rate(live),
         "retired_total": int(st["retired"].sum()), "retired_today": newly, "revived_today": revived,
         "text_changes_today": retag_n, "requests": stats.get("requests", 0), "minutes": round(secs / 60, 1),
+        "second_look": stats.get("second_look", 0), "second_look_ok": stats.get("second_look_ok", 0),
     }
     fails = live[live["status"].isin(FAILING)]
     top = fails["service_url"].map(lambda u: urlsplit(u).netloc).value_counts().head(15)
@@ -310,6 +347,7 @@ def report(st: pd.DataFrame, outcomes, results, down, retag_n, retag_note, today
         f"- Services checked today: {h['services_checked']:,} of {n_due:,} due ({h['minutes']} min, {h['requests']:,} requests)",
         f"- Service results today: " + ", ".join(f"{k} {v:,}" for k, v in svc_today.most_common()),
         f"- Endpoints checked today: {len(outcomes):,}: " + ", ".join(f"{k} {v:,}" for k, v in oc.most_common()),
+        f"- Second look (slow retry of failed services): {h['second_look_ok']:,} of {h['second_look']:,} answered",
         "",
         f"- Published endpoints: {len(st):,}; checked at least once: {len(checked):,} ({len(checked) / max(len(st), 1):.0%})",
         f"- **Resolving at last check: {h['resolving_rate']:.1%}** of checked endpoints that aren't retired (target 98%)" if h["resolving_rate"] is not None else "- Resolving: nothing checked yet",
@@ -338,6 +376,7 @@ def main():
     ap.add_argument("--max-services", type=int, default=45_000)
     ap.add_argument("--retag-cap", type=int, default=50_000, help="above this many changed datasets, don't re-tag (ask first)")
     ap.add_argument("--today", default="")
+    ap.add_argument("--started", default="", help="run start time for history.csv (default: when this script started)")
     ap.add_argument("--only-host", default="", help="testing: only services on hosts containing this text")
     a = ap.parse_args()
     t0 = time.monotonic()
@@ -371,8 +410,11 @@ def main():
     md, h = report(st, outcomes, results, down, len(rt) if rt is not None else 0, note, today,
                    time.monotonic() - t0, stats, len(services))
     (out / "REPORT.md").write_text(md)
+    # one line per run, not per date: a delayed scheduled run can land on the same UTC day as a manual one, and both
+    # are worth keeping. "started" (UTC) tells them apart; it also shows how late GitHub started a scheduled run.
+    h = {**h, "trigger": os.environ.get("GITHUB_EVENT_NAME", ""), "started": a.started or time.strftime("%Y-%m-%dT%H:%MZ", time.gmtime(time.time() - (time.monotonic() - t0)))}
     hist = pd.read_csv(a.history) if a.history and Path(a.history).exists() else pd.DataFrame()
-    hist = pd.concat([hist[hist.get("date", pd.Series(dtype=str)) != h["date"]] if len(hist) else hist, pd.DataFrame([h])])
+    hist = pd.concat([hist, pd.DataFrame([h])])
     hist.to_csv(out / "history.csv", index=False)
     print(md)
 

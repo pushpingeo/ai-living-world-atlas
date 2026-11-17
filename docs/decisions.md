@@ -209,3 +209,25 @@ still started by hand, and tag_batch refuses to submit more than MAX_DATASETS (d
 - **Geometry type in search.** D1 gains `gtypes` (point, line, polygon across a dataset's layers, from the ArcGIS crawl; WFS layers say only "features", so they stay unknown). `find_datasets` returns `geometry` and takes `geometry` to filter (unknowns are kept). Tobler's road search had been spending its budget on junction-point layers.
 - **Home country in search.** D1 gains `home`: the publisher's country, blank for international bodies, publishers with no country and the datasets listed in `vocab/extent_overrides.yaml` (USGS MRDS). `find_datasets` leaves out datasets whose home country doesn't touch the area (countries with 3° of waters, from Natural Earth: `vocab/country_areas.geojson`; any European country in the area admits "EUROPE" datasets). `include_other_countries` widens it. A rule that flagged extents lying mostly outside the publisher's country was tried first and dropped: it flagged 27k datasets, many of them small layers inside their own country.
 - The new columns change the table layout, so `api_data` now forces a full reload when the layout changes (stored as `__schema__` in rows.json). A full load is about 256k rows plus index writes, well inside Workers Paid.
+
+## 2026-11-17 (evening): liveness sweep, first-week fixes
+Two full runs landed on 17 Nov: the push-triggered one at 00:22 UTC and the scheduled one, which GitHub started at
+12:07 instead of 03:23. The midday run failed 1,014 endpoints against 162 at night (different services, so not a
+clean comparison, but a hint that busy hours matter). A probe of the failures from a runner (round 3 in
+`runs/probe.urls`, now with time and size) sorted them into three kinds:
+- **Alive but slow.** datamap.gov.wales's WFS GetCapabilities is 3.7 MB and took 47 s; dados.gov.pt's redirects to
+  DGT's WFS took 38-56 s. With a 30 s timeout these fail every visit and would be retired from 1 Dec.
+- **Busy at the time.** gisweb.cosb.us, EA newt and habitat WMS, gis.olympiawa.gov, Brecon Beacons and Brock
+  University (403s, flagged as host down) all answered the probe within 2 s.
+- **Really failing.** Rutgers ocean data (60 s, nothing back), gis1.mgipu.hr (Croatia's plan rasters: 502),
+  Cook County (404).
+
+Changes:
+- **Second look.** At the end of each run, failed services get one more try: one at a time per host, 90 s timeout, up
+  to 3,000 services and 40 per host, with the last 20 minutes of the run kept for it (a sixth of the run when it is
+  short). Only a success replaces the first result. REPORT.md and history.csv show how many answered.
+- **S3 folders.** A "cloud" endpoint that is an S3 prefix (Overture's `/release/`) has no object behind it and
+  answers 404, so it would have been retired. It is now checked by listing the prefix.
+- **history.csv keeps every run**, with `trigger` (schedule/push) and `started` (UTC), so late scheduled runs show up.
+  The first full night's line was overwritten by the midday run before this; its figures are in the handover
+  (45k services, 196.6 min, 107,377 requests, 99.6% resolving, 539 failing).
