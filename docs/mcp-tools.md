@@ -33,5 +33,12 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (17 Nov, atlas change, approved by Rob) **Inferred licence for US federal works.** For about 5-6k US datasets
+  from federal agencies (NOAA, USFS, Census, BLM, USGS, BOEM…) that state no open licence, `licence` becomes
+  "US federal government work: public domain in the US (inferred, 17 U.S.C. §105; not stated by the publisher)",
+  followed by the publisher's credit line, and `open_licence` becomes true. Skipped when the credit names a
+  non-federal party (a university, company, state or county). Field names and types don't change, so nothing
+  in Tobler should break. Tobler may want to show "inferred" when it reports a licence: the word is always in the text.
+
 - (17 Nov, parked by Rob) A nightly name index of named features (licence blocks, fields, protected areas,
   wind leases) so a named search is one query. Needs a licence check before any building.
