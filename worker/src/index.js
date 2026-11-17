@@ -52,6 +52,7 @@ const TOOLS = [
         lon: { type: "number" }, lat: { type: "number" }, radius_km: { type: "number", description: "Default 2" },
         bbox: { type: "array", items: { type: "number" }, minItems: 4, maxItems: 4 },
         where: { type: "string", description: "Optional ArcGIS SQL filter, e.g. \"STATUS='Designated'\" (ArcGIS endpoints only)" },
+        text: { type: "string", description: "Only features with this text in a name-like field (name, title, road number…), e.g. 'M9' or 'Kipoi'. ArcGIS endpoints: searched on the server; others: filtered after fetching." },
         limit: { type: "integer", minimum: 1, maximum: 500, description: "Default 100" },
         include_geometry: { type: "boolean", description: "Default true; false returns attributes only" },
       },
@@ -219,6 +220,17 @@ async function getDataset(env, a) {
   };
 }
 
+// Name-like text fields of an ArcGIS layer, read from its description (cached by Cloudflare for a day).
+const NAMEY = /name|title|label|number|ref|road|route|site|project|plant|mine|facility|nom|nombre|naam/i;
+async function textFields(url) {
+  try {
+    const r = await fetch(`${url}?f=json`, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, cf: { cacheTtl: 86400 }, signal: AbortSignal.timeout(10000) });
+    const j = await r.json();
+    return (j.fields || []).filter((f) => f.type === "esriFieldTypeString" && NAMEY.test(`${f.name} ${f.alias || ""}`)).map((f) => f.name).slice(0, 8);
+  } catch { return []; }
+}
+const sqlText = (s) => String(s).replace(/'/g, "''").toUpperCase().slice(0, 80);
+
 async function fetchFeatures(env, a) {
   const d = await details(env, a.id);
   if (!d) throw new Error(`No dataset with id ${a.id}`);
@@ -237,14 +249,32 @@ async function fetchFeatures(env, a) {
       url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.0.0&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(fmt)}&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1}&maxFeatures=${limit}`;
     } else {
       const tol = ((v[2] - v[0]) / 1000).toPrecision(2);
-      url = `${e.url}/query?where=${encodeURIComponent(a.where || "1=1")}&geometry=${x0},${y0},${x1},${y1}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&f=geojson&resultRecordCount=${limit}&maxAllowableOffset=${tol}&geometryPrecision=6&returnGeometry=${a.include_geometry === false ? "false" : "true"}`;
+      let where = a.where || "1=1";
+      if (a.text) {
+        const fields = await textFields(e.url);
+        if (fields.length) where = `(${where}) AND (${fields.map((f) => `UPPER(${f}) LIKE '%${sqlText(a.text)}%'`).join(" OR ")})`;
+        else e._filterAfter = true;
+      }
+      url = `${e.url}/query?where=${encodeURIComponent(where)}&geometry=${x0},${y0},${x1},${y1}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&f=geojson&resultRecordCount=${limit}&maxAllowableOffset=${tol}&geometryPrecision=6&returnGeometry=${a.include_geometry === false ? "false" : "true"}`;
     }
     try {
       const r = await fetch(url, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
       if (!r.ok) { errors.push(`${e.protocol}: HTTP ${r.status}`); continue; }
-      const gj = await r.json();
+      let gj = await r.json();
+      if (!Array.isArray(gj.features) && a.text && !e._filterAfter && e.protocol !== "wfs") {
+        // The server refused the text filter (some don't allow UPPER or LIKE): fetch without it and filter here.
+        e._filterAfter = true;
+        const plain = url.replace(/where=[^&]*/, `where=${encodeURIComponent(a.where || "1=1")}`).replace(/resultRecordCount=\d+/, "resultRecordCount=2000");
+        const r2 = await fetch(plain, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
+        gj = r2.ok ? await r2.json() : {};
+      }
       if (!Array.isArray(gj.features)) { errors.push(`${e.protocol}: ${gj.error?.message || "not GeoJSON"}`); continue; }
-      const feats = gj.features.slice(0, limit).map((f) => ({
+      let raw = gj.features;
+      if (a.text && (e.protocol === "wfs" || e._filterAfter)) {
+        const t = String(a.text).toLowerCase();
+        raw = raw.filter((f) => Object.values(f.properties || {}).some((x) => typeof x === "string" && x.toLowerCase().includes(t)));
+      }
+      const feats = raw.slice(0, limit).map((f) => ({
         type: "Feature",
         geometry: a.include_geometry === false ? null : f.geometry,
         properties: Object.fromEntries(Object.entries(f.properties || {}).slice(0, 40)

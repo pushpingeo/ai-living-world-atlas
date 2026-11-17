@@ -197,3 +197,5 @@ has, and also restarts when a scroll "finishes" short of the reported total (ask
 cursor past it silently). Page size cap raised to 300 MB so large pages aren't cut. Run 4 uses 20 shards for about
 2.4x the records. When a source wave merges, the spike workflow starts the derived collections build; tagging is
 still started by hand, and tag_batch refuses to submit more than MAX_DATASETS (default 200k, about $18).
+
+**Text search inside a layer (`fetch_features` `text`).** Tobler needs "the M9" or "Kipoi" from a layer with thousands of features, where the 100-feature cap returns a random handful. For ArcGIS endpoints the worker reads the layer's name-like string fields (cached a day) and adds `UPPER(field) LIKE '%TEXT%'` across them; if the server refuses that, it fetches up to 2,000 features and filters them itself. WFS is filtered after fetching. No new cost beyond one cached layer-description request.
