@@ -12,6 +12,8 @@ import geopandas as gpd
 import pandas as pd
 import pyarrow.parquet as pq
 
+from .licences import infer as infer_licences
+
 
 def apply_liveness(ds, d: Path):
     """Fold the rolling liveness sweep into the published datasets.
@@ -99,6 +101,7 @@ def main():
     ds = gpd.GeoDataFrame(ds.drop_duplicates("dataset_id"), geometry="geometry", crs="EPSG:4326")
     if a.liveness and (Path(a.liveness) / "state.parquet").exists():
         ds = apply_liveness(ds, Path(a.liveness))
+    ds = infer_licences(ds)  # e.g. US federal works; the wave files keep what was crawled
     ds.to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     if a.layers:
         cols = ["uid", "dataset_id", "fields", "title", "abstract", "geometry_type"]  # title/abstract: the liveness sweep compares against them; geometry_type: the MCP search

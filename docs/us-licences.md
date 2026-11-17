@@ -49,3 +49,11 @@ counted as an open licence until a publisher statement or catalogue record confi
 
 Do route 1 first (gap 2b). Add the "no restrictions" and "freely distributed" wording as a small tweak. Decide on
 route 2 once we see how far route 1 gets.
+
+## Decision (17 Nov, Rob): route 2 approved
+
+`atlas/licences.py`, applied at publish time in combine.py. US datasets from federal publishers that state no open
+licence get `open_licence` true and the licence text "US federal government work: public domain in the US (inferred,
+17 U.S.C. §105; not stated by the publisher). Credits: …". Datasets whose credit names a non-federal party (a
+university, company, state, county, foundation…) are skipped. On the US wave: 5,420 marked, 686 skipped. US open
+licences go from 49 to 5,469. Route 1 (catalogue joins) is still the way to cover state and local data.

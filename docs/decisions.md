@@ -231,3 +231,10 @@ Changes:
 - **history.csv keeps every run**, with `trigger` (schedule/push) and `started` (UTC), so late scheduled runs show up.
   The first full night's line was overwritten by the midday run before this; its figures are in the handover
   (45k services, 196.6 min, 107,377 requests, 99.6% resolving, 539 failing).
+
+## 2026-11-17 (evening): US federal works counted as open (Rob's call)
+US services rarely state a licence (22% have no text, most of the rest are credits), so better wording rules don't
+help. Rob approved inferring public domain for US federal agencies' work (17 U.S.C. §105), labelled as inferred in
+the licence text and skipped when the credit names a non-federal party. Applied at publish time (`atlas/licences.py`
+from combine.py), so the wave files keep what was crawled. 5,420 datasets marked, 686 skipped. Noted in
+`docs/mcp-tools.md` first; field names and types are unchanged. Details: `docs/us-licences.md`.
