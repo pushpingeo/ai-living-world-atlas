@@ -102,6 +102,14 @@ Workspace notes:
   check (2.0.0 first; advertised GetMap/GetFeature address; upper-case parameters) took WFS sample failures from
   86% to under 2%.
 
+## Search changes for Tobler (17 Nov, from the Tobler chat)
+
+- `find_datasets` returns each dataset's `geometry` (point/line/polygon from the ArcGIS crawl; known for 128k of 256k, most WFS say only "features") and takes `geometry` to filter (unknowns kept).
+- It also leaves out national publishers' datasets whose country doesn't touch the area (`home` column; country areas with 3° of waters in `vocab/country_areas.geojson`; any European country admits "EUROPE" datasets; international publishers and `vocab/extent_overrides.yaml` entries are always kept). `include_other_countries` widens it. This stopped Kentucky wells and US census blocks coming up for Nigeria.
+- New D1 columns `gtypes` and `home`: a change in table layout now forces a full reload (`__schema__` in rows.json). Every SQL statement is on one line, because the deploy cuts load files at lines ending in ";".
+- `parts get` streams part by part and takes a column list, so a small machine can read Europe's layers.
+- Tobler now uses the MCP server live, through a service binding from its Worker (`north-sea-geo-demo`, route `/atlas`).
+
 ## Known gaps and next steps (rough priority)
 
 1. **Watch the sweep's first week.** history.csv on `results/liveness` has one line a night. Check the resolving
@@ -122,11 +130,11 @@ Workspace notes:
 4. **Smaller items.**
    - Trim long credit strings used as publisher names.
    - Add WMTS/WCS data checks (the sweep checks they resolve, not that they return tiles/coverages).
-   - Work out true footprints for false extents (they are currently only flagged and ranked down).
+   - Work out true footprints for false extents (they are flagged and ranked down; national ones are now also filtered by home country, see above).
    - Add an admin-area hierarchy.
    - Proposed new concepts: landscape-character-area, habitat-network, great-crested-newt-risk-zones.
    - The viewer's header still says "Public map services from UK government and agencies" (public text: Rob's call).
-5. **Tobler integration.** Wire the MCP server into Tobler as a data source.
+5. **Tobler integration.** Done 17 Nov (see above). Next on Tobler's side: a nightly name index of named features (licence blocks, fields, protected areas) so a named search is one query; needs a licence check first.
 6. **Size limits.** GitHub Pages is capped at 1 GB, and the viewer data is about 560 MB. If more waves push it over,
    move the viewer data to R2. The bigger Europe wave will add to this.
 7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
