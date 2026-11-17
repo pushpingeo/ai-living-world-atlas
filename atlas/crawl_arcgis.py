@@ -164,6 +164,7 @@ async def crawl_service(c: Client, surl: str, ctx: dict) -> tuple[list[Layer], d
 
 async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
     """Tiny 'does it return data' check. Returns (status, detail)."""
+    query_refused = False
     if layer.service_type in ("arcgis-featureserver", "arcgis-mapserver") and layer.geometry_type not in ("raster", ""):
         r = await c.get(layer.layer_url + "/query?where=1%3D1&returnCountOnly=true&f=json", retries=0)
         j = {}
@@ -176,6 +177,7 @@ async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
             return ("ok" if j["count"] > 0 else "empty"), f"count={j['count']}"
         if layer.service_type == "arcgis-featureserver":
             return "fail", r.error or (f"HTTP {r.status}" if not r.ok else str(j.get("error", "no count"))[:120])
+        query_refused = True  # some servers advertise Query and refuse it; the sweep drops the capability
         # MapServers (especially cached tile services) often refuse query: try an image instead
     if layer.service_type in ("arcgis-imageserver", "arcgis-mapserver") or layer.geometry_type == "raster":
         if not layer.bbox:
@@ -188,7 +190,7 @@ async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
         extra = "" if op == "exportImage" else f"&layers=show:{layer.layer_name}"
         r = await c.get(f"{target}/{op}?bbox={cx-dx},{cy-dy},{cx+dx},{cy+dy}&bboxSR=4326&size=64,64&format=png&f=image{extra}", retries=0)
         if r.ok and "image" in r.content_type:
-            return "ok", "image"
+            return "ok", "image; query refused" if query_refused else "image"
         if layer.service_type == "arcgis-mapserver":
             # cache-only (tile) services: ask for one Web Mercator tile at the layer's centre
             import math
@@ -200,7 +202,7 @@ async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
             ty = int((1 - math.log(math.tan(lat) + 1 / math.cos(lat)) / math.pi) / 2 * n)
             t = await c.get(f"{layer.service_url}/tile/{z}/{ty}/{tx}", retries=0)
             if t.ok and "image" in t.content_type:
-                return "ok", f"tile z{z}"
+                return "ok", f"tile z{z}" + ("; query refused" if query_refused else "")
             if t.status in (404, 400):
                 return "unchecked", "tile cache; sample tile missing"
         return "fail", r.error or f"HTTP {r.status} {r.content_type[:30]}"

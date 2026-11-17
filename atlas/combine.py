@@ -23,30 +23,38 @@ def apply_liveness(ds, d: Path):
 
     from .sweep import FAILING, patched_datasets
 
-    st = pd.read_parquet(d / "state.parquet", columns=["uid", "status", "retired", "data_check"])
+    st = pd.read_parquet(d / "state.parquet")
+    if "data_detail" not in st.columns:
+        st["data_detail"] = None
     retired = set(st.loc[st["retired"].astype(bool), "uid"])
     failing = set(st.loc[~st["retired"].astype(bool) & st["status"].isin(FAILING), "uid"])
     has = st["data_check"].notna() & (st["data_check"] != "")
     data = dict(zip(st.loc[has, "uid"], st.loc[has, "data_check"]))
+    # ArcGIS layers that advertise Query but refused it when the sweep tried: drop "query" from that endpoint
+    no_query = set(st.loc[st["data_detail"].astype(str).str.contains("query refused", regex=False), "uid"])
     new_eps, n_eps, protos, caps, keep = [], [], [], [], []
     dropped_eps = 0
     for eps_json, p0, c0, n0 in zip(ds["endpoints"], ds["protocols"], ds["capabilities"], ds["n_endpoints"]):
         eps = json.loads(eps_json)
         kept = [e for e in eps if e["uid"] not in retired]
         dropped_eps += len(eps) - len(kept)
-        if len(kept) == len(eps) and not any(e["uid"] in failing or e.get("status") or data.get(e["uid"], e.get("check")) != e.get("check") for e in eps):
+        if len(kept) == len(eps) and not any(e["uid"] in failing or e.get("status") or data.get(e["uid"], e.get("check")) != e.get("check")
+                                             or (e["uid"] in no_query and "query" in (e.get("capabilities") or [])) for e in eps):
             new_eps.append(eps_json); n_eps.append(n0); protos.append(p0); caps.append(c0); keep.append(True)
             continue
         for e in kept:
             if data.get(e["uid"]):
                 e["check"] = data[e["uid"]]
+            if e["uid"] in no_query and "query" in (e.get("capabilities") or []):
+                e["capabilities"] = [x for x in e["capabilities"] if x != "query"]
+                e["query_refused"] = True
             if e["uid"] in failing:
                 e["status"] = "failing"
             else:
                 e.pop("status", None)
         new_eps.append(json.dumps(kept, separators=(",", ":")))
         n_eps.append(int(n0) - (len(eps) - len(kept)))  # collections list 300 endpoints but count every plan
-        if len(kept) == len(eps):
+        if len(kept) == len(eps) and not any(e.get("query_refused") for e in kept):
             protos.append(p0); caps.append(c0)
         else:
             protos.append(list(dict.fromkeys(e["protocol"] for e in kept)))

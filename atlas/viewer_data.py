@@ -93,7 +93,7 @@ def main():
             "tag_confidence": (tg.get("confidence") if tg is not None else None),
             "match_rules": lst(r.get("match_rules")),
             "extent_source": r.get("extent_source") or "declared", "extent_flags": lst(r.get("extent_flags")),
-            "endpoints": [{k: e.get(k) for k in ("protocol", "url", "service_url", "layer_name", "capabilities", "check", "cors", "info", "plan")} for e in eps],
+            "endpoints": [{k: e.get(k) for k in ("protocol", "url", "service_url", "layer_name", "capabilities", "check", "cors", "info", "plan", "status")} for e in eps],
         }
 
     inv = lambda t: [k for k, _ in sorted(t.items(), key=lambda kv: kv[1])]

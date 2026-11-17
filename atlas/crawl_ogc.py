@@ -385,35 +385,47 @@ async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
         return "unchecked", "check not implemented for this protocol yet"
     if not layer.bbox:
         return "unchecked", "no bbox"
+    adv = _req_base(layer)
+    # the advertised address first; if that can't be reached (some servers advertise localhost or an internal
+    # name), the address we found the service at
+    bases = [adv] + ([layer.service_url] if adv != layer.service_url else [])
+    res = ("fail", "no request made")
+    for b in bases:
+        res = await _check_at(c, layer, b)
+        if res[0] in ("ok", "unchecked") or not res[1].startswith("net:"):
+            break
+    st, detail = res
+    return st, detail.removeprefix("net:")
+
+
+async def _check_at(c: Client, layer: Layer, b: str) -> tuple[str, str]:
     x0, y0, x1, y1 = layer.bbox
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     dx, dy = max((x1 - x0) / 10, 1e-4), max((y1 - y0) / 10, 1e-4)
-    b = _req_base(layer)
     sep = "&" if "?" in b else "?"
     if layer.service_type == "wms":
-        url = (f"{b}{sep}SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS={layer.layer_name}&STYLES="
-               f"&SRS=EPSG:4326&BBOX={cx-dx},{cy-dy},{cx+dx},{cy+dy}&WIDTH=64&HEIGHT=64&FORMAT=image/png&TRANSPARENT=true")
-        r = await c.get(url, retries=0)
-        if r.ok and "image" in r.content_type:
-            return "ok", "image"
-        if r.ok and _is_exception(r.body):
-            return "fail", _exception_text(r.body)
-        return "fail", r.error or f"HTTP {r.status} {r.content_type[:30]}"
-    # WFS: 2.0.0 first (some servers refuse 1.1.0 without an outputFormat), then 1.1.0
-    tries = [f"VERSION=2.0.0&TYPENAMES={layer.layer_name}&COUNT=1", f"VERSION=1.1.0&TYPENAME={layer.layer_name}&MAXFEATURES=1"]
+        tries = [(f"{b}{sep}SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS={layer.layer_name}&STYLES="
+                  f"&SRS=EPSG:4326&BBOX={cx-dx},{cy-dy},{cx+dx},{cy+dy}&WIDTH=64&HEIGHT=64&FORMAT=image/png&TRANSPARENT=true")]
+    else:  # WFS: 2.0.0 first (some servers refuse 1.1.0 without an outputFormat), then 1.1.0
+        tries = [f"{b}{sep}SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES={layer.layer_name}&COUNT=1",
+                 f"{b}{sep}SERVICE=WFS&REQUEST=GetFeature&VERSION=1.1.0&TYPENAME={layer.layer_name}&MAXFEATURES=1"]
     r = None
-    for t in tries:
-        r = await c.get(f"{b}{sep}SERVICE=WFS&REQUEST=GetFeature&{t}", retries=0)
-        if r.ok and not _is_exception(r.body):
-            return "ok", "feature"
-    if r is not None and r.ok:
+    for url in tries:
+        r = await c.get(url, retries=0)
+        if "robots.txt" in (r.error or ""):
+            return "unchecked", "robots.txt disallows the data request"
+        if r.ok and not _is_exception(r.body) and (layer.service_type == "wfs" or "image" in r.content_type):
+            return "ok", "image" if layer.service_type == "wms" else "feature"
+    if r.ok and _is_exception(r.body):
         return "fail", _exception_text(r.body)
-    return "fail", (r.error if r is not None else "") or f"HTTP {r.status if r is not None else 0}"
+    if r.status == 0:
+        return "fail", "net:" + (r.error or "network error")
+    return "fail", f"HTTP {r.status} {r.content_type[:30]}"
 
 
 def _exception_text(body: bytes) -> str:
     import re as _re
 
-    m = _re.search(rb"<(?:\w+:)?(?:ServiceException|ExceptionText)[^>]*>(.*?)</", body[:5000], _re.S)
+    m = _re.search(rb"<(?:\w+:)?(?:ServiceException|ExceptionText)(?=[\s>])[^>]*>(.*?)</", body[:5000], _re.S)
     t = (m.group(1) if m else body[:120]).decode("utf-8", "replace")
     return ("exception: " + " ".join(t.split()))[:120]
