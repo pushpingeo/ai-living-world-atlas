@@ -1,0 +1,62 @@
+# Africa: services not in the Dateno registry, found by searching ArcGIS Online (17 Nov 2026).
+# The run also uses the registry for every African country (runs/spike-africa.env), which brings in ~1,200
+# catalogues: national mining cadastres, the Petroleum Authority of Uganda, MIREME and INAMI (Mozambique), RCMRD...
+# Scoping notes and the full candidate list: docs/spikes/africa-scoping.md, docs/spikes/africa-agol-candidates.csv.
+#
+# kind: arcgis-root | arcgis-service | wms | wfs | wmts | wcs | arcgis-online-search | record
+# licence: only what the publisher states; blank means "read it from the service".
+
+defaults:
+  publisher_type: central-gov
+
+sources:
+  # --- national petroleum and mining bodies -----------------------------------------------------
+  - kind: arcgis-root
+    url: https://services3.arcgis.com/P11fCRq9Db4CjHMS/arcgis/rest/services
+    publisher: Ghana National Petroleum Corporation (GNPC)
+    publisher_type: public-body
+    country: GH
+    note: Onshore and offshore blocks, licences, open licences, 2D/3D seismic, wells, fields, FPSOs.
+  - kind: arcgis-root
+    url: https://services6.arcgis.com/AiFYNnCB5tR7Kcz5/arcgis/rest/services
+    publisher: ANPG, Agência Nacional de Petróleo, Gás e Biocombustíveis (Angola)
+    country: AO
+    note: Blocks, maritime zones, bathymetry and environmental layers.
+  - kind: arcgis-root
+    url: https://gis.anpg.co.ao/hosting/rest/services
+    publisher: ANPG, Agência Nacional de Petróleo, Gás e Biocombustíveis (Angola)
+    country: AO
+  - kind: arcgis-root
+    url: https://services8.arcgis.com/B5sOc6ZFqt8DX44r/arcgis/rest/services
+    publisher: State Department for Petroleum, Kenya
+    country: KE
+    note: Account under petroleum.go.ke. Petroleum blocks, seismic, gravity, wells.
+  - kind: arcgis-root
+    url: https://services8.arcgis.com/0E8nlQLKk6G1m6rG/arcgis/rest/services
+    publisher: ONHYM, Office National des Hydrocarbures et des Mines (Morocco)
+    publisher_type: public-body
+    country: MA
+  - kind: arcgis-root
+    url: https://services8.arcgis.com/Yb7xytb4Ff2eEN6Y/arcgis/rest/services
+    publisher: FNDS, Fundo Nacional de Desenvolvimento Sustentável (Mozambique)
+    country: MZ
+    note: Mostly forestry and land; includes active oil and gas concessions.
+
+  # --- Forest Atlas (WRI with the ministries): oil and mining permits, forest concessions -------
+  - kind: arcgis-root
+    url: https://gis.forest-atlas.org/server/rest/services
+    publisher: Forest Atlas (World Resources Institute with national ministries)
+    publisher_type: international
+    country: ""
+  - kind: arcgis-root
+    url: https://gis.forest-atlas.org/arcgis/rest/services
+    publisher: Forest Atlas (World Resources Institute with national ministries)
+    publisher_type: international
+    country: ""
+
+  # --- consultancies' acreage maps (not government; labelled as business) -----------------------
+  - kind: arcgis-root
+    url: https://services1.arcgis.com/Vlw77QWOmRIp56YB/arcgis/rest/services
+    publisher: Licensing round maps (consultancy account; Somalia, Brazil, Argentina and others)
+    publisher_type: business
+    country: ""
