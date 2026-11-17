@@ -98,6 +98,21 @@ def _op_formats(root, op: str, param: str = "outputFormat") -> list[str]:
     return list(dict.fromkeys(out))[:20]
 
 
+def _op_url(root, op: str) -> str:
+    """The HTTP GET address a server gives for an operation (WMS Request/<op>/DCPType, or OWS OperationsMetadata).
+    Proxies such as Mapbender's wms.php answer GetCapabilities at one address and GetMap at another."""
+    els = list(_all(root, op)) + [o for o in _all(root, "Operation") if o.get("name") == op]
+    for e in els:
+        for g in _all(e, "Get"):
+            href = next((v for k, v in g.attrib.items() if k.endswith("href")), "")
+            if not href:
+                orr = _child(g, "OnlineResource")
+                href = next((v for k, v in (orr.attrib if orr is not None else {}).items() if k.endswith("href")), "")
+            if href.strip():
+                return href.strip()
+    return ""
+
+
 def _constraint(root, name: str) -> str:
     for c in _all(root, "Constraint"):
         if c.get("name") == name:
@@ -113,6 +128,7 @@ def parse_wms(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
     s_title, s_abs, s_lic = _service_block(root)
     cap = _child(root, "Capability")
     getmap_formats = _op_formats(root, "GetMap")
+    getmap_url = _op_url(root, "GetMap")
     has_gfi = bool(_all(root, "GetFeatureInfo"))
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out: list[Layer] = []
@@ -162,7 +178,8 @@ def parse_wms(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
                 capabilities=["render"] + (["feature-info"] if has_gfi and el.get("queryable") in ("1", "true") else [])
                 + (["time"] if any((d.get("name") or "").lower() == "time" for d in _children(el, "Dimension")) else []),
                 endpoint_info=endpoints.dumps({"protocol": "wms", "version": root.get("version"), "image_formats": getmap_formats[:8],
-                                               "crs": crs[:8], "opaque": el.get("opaque") in ("1", "true")}),
+                                               "crs": crs[:8], "opaque": el.get("opaque") in ("1", "true"),
+                                               **({"get_url": getmap_url} if getmap_url else {})}),
                 scale_finest=fin, scale_coarsest=coa,
                 **ctx,
             ))
@@ -187,6 +204,7 @@ def parse_wfs(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     out: list[Layer] = []
     wfs_formats = _op_formats(root, "GetFeature")
+    getfeature_url = _op_url(root, "GetFeature")
     paging = _constraint(root, "ImplementsResultPaging").upper() == "TRUE"
     ftl = _child(root, "FeatureTypeList")
     for ft in _children(ftl, "FeatureType") if ftl is not None else []:
@@ -215,7 +233,8 @@ def parse_wfs(xml: bytes, base: str, ctx: dict, ms: int) -> tuple[list[Layer], d
             native_crs=crs, metadata_url=md_url, geometry_type="features", crawled_at=now,
             capabilities=["query", "download"],
             endpoint_info=endpoints.dumps({"protocol": "wfs", "version": root.get("version"), "paging": paging,
-                                           "output_formats": ([f.text.strip() for f in _all(ft, "Format") if f.text] or wfs_formats)[:12]}),
+                                           "output_formats": ([f.text.strip() for f in _all(ft, "Format") if f.text] or wfs_formats)[:12],
+                                           **({"get_url": getfeature_url} if getfeature_url else {})}),
             service_ms=ms, **ctx,
         ))
     pub = _publisher(root)
@@ -341,6 +360,26 @@ async def crawl_ogc(c: Client, base: str, service: str, ctx: dict, max_layers: i
     return layers[:max_layers], status
 
 
+def _req_base(layer: Layer) -> str:
+    """Where to send GetMap/GetFeature: the address the capabilities named for it, else the service address."""
+    import json as _json
+
+    try:
+        u = (_json.loads(layer.endpoint_info or "{}") or {}).get("get_url") or ""
+    except Exception:
+        u = ""
+    u = u.strip()
+    if not u or not u.lower().startswith("http"):
+        return layer.service_url
+    u = base_url(u)
+    return u
+
+
+def _is_exception(body: bytes) -> bool:
+    head = body[:3000]
+    return b"ExceptionReport" in head or b"ServiceException" in head or b"<ows:Exception" in head
+
+
 async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
     if layer.service_type in ("wmts", "wcs"):
         return "unchecked", "check not implemented for this protocol yet"
@@ -349,17 +388,32 @@ async def check_layer(c: Client, layer: Layer) -> tuple[str, str]:
     x0, y0, x1, y1 = layer.bbox
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     dx, dy = max((x1 - x0) / 10, 1e-4), max((y1 - y0) / 10, 1e-4)
-    b = layer.service_url
+    b = _req_base(layer)
     sep = "&" if "?" in b else "?"
     if layer.service_type == "wms":
-        url = (f"{b}{sep}service=WMS&request=GetMap&version=1.1.1&layers={layer.layer_name}&styles="
-               f"&srs=EPSG:4326&bbox={cx-dx},{cy-dy},{cx+dx},{cy+dy}&width=64&height=64&format=image/png&transparent=true")
+        url = (f"{b}{sep}SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS={layer.layer_name}&STYLES="
+               f"&SRS=EPSG:4326&BBOX={cx-dx},{cy-dy},{cx+dx},{cy+dy}&WIDTH=64&HEIGHT=64&FORMAT=image/png&TRANSPARENT=true")
         r = await c.get(url, retries=0)
         if r.ok and "image" in r.content_type:
             return "ok", "image"
+        if r.ok and _is_exception(r.body):
+            return "fail", _exception_text(r.body)
         return "fail", r.error or f"HTTP {r.status} {r.content_type[:30]}"
-    url = f"{b}{sep}service=WFS&request=GetFeature&version=1.1.0&typeName={layer.layer_name}&maxFeatures=1"
-    r = await c.get(url, retries=0)
-    if r.ok and b"Exception" not in r.body[:2000]:
-        return "ok", "feature"
-    return "fail", r.error or f"HTTP {r.status}"
+    # WFS: 2.0.0 first (some servers refuse 1.1.0 without an outputFormat), then 1.1.0
+    tries = [f"VERSION=2.0.0&TYPENAMES={layer.layer_name}&COUNT=1", f"VERSION=1.1.0&TYPENAME={layer.layer_name}&MAXFEATURES=1"]
+    r = None
+    for t in tries:
+        r = await c.get(f"{b}{sep}SERVICE=WFS&REQUEST=GetFeature&{t}", retries=0)
+        if r.ok and not _is_exception(r.body):
+            return "ok", "feature"
+    if r is not None and r.ok:
+        return "fail", _exception_text(r.body)
+    return "fail", (r.error if r is not None else "") or f"HTTP {r.status if r is not None else 0}"
+
+
+def _exception_text(body: bytes) -> str:
+    import re as _re
+
+    m = _re.search(rb"<(?:\w+:)?(?:ServiceException|ExceptionText)[^>]*>(.*?)</", body[:5000], _re.S)
+    t = (m.group(1) if m else body[:120]).decode("utf-8", "replace")
+    return ("exception: " + " ".join(t.split()))[:120]

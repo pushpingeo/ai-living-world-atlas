@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import random
 import time
@@ -46,7 +47,8 @@ FAILING = {"fail", "missing", "host-down"}
 
 STATE_COLS = ["uid", "dataset_id", "service_url", "protocol", "status", "detail", "last_checked", "last_ok",
               "fails_in_row", "first_fail", "retired", "retired_at", "data_check", "data_checked",
-              "cur_title", "cur_abstract", "text_changed"]
+              "data_detail", "cur_title", "cur_abstract", "text_changed", "text_seen", "title_from_service",
+              "abstract_from_service"]
 
 
 def _norm(s) -> str:
@@ -70,6 +72,8 @@ def population(datasets: str, layers: str) -> pd.DataFrame:
 def load_state(path: str | None) -> pd.DataFrame:
     if path and Path(path).exists() and Path(path).stat().st_size:
         st = pd.read_parquet(path)
+        if "text_seen" not in st.columns:  # first-version state compared against crawl text: drop those changes
+            st["cur_title"], st["cur_abstract"] = None, None
         for c in STATE_COLS:
             if c not in st.columns:
                 st[c] = None
@@ -162,8 +166,9 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
     t = today.isoformat()
     st = pop[["uid", "dataset_id", "service_url", "protocol", "orig_title", "orig_abstract"]].merge(
         st.drop(columns=["dataset_id", "service_url", "protocol"]), on="uid", how="left")
-    for col in ("status", "detail", "last_checked", "last_ok", "first_fail", "retired_at", "data_check",
-                "data_checked", "cur_title", "cur_abstract", "text_changed", "orig_title", "orig_abstract"):
+    for col in ("status", "detail", "last_checked", "last_ok", "first_fail", "retired_at", "data_check", "data_detail",
+                "data_checked", "cur_title", "cur_abstract", "text_changed", "orig_title", "orig_abstract", "text_seen",
+                "title_from_service", "abstract_from_service"):
         st[col] = st[col].astype(object).where(st[col].notna(), None)  # NaN from the merge -> None
     st["retired"] = st["retired"].fillna(False).astype(bool)
     st["fails_in_row"] = st["fails_in_row"].fillna(0).astype(int)
@@ -228,19 +233,26 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
             if not r["retired"] and r["fails_in_row"] >= RETIRE_CHECKS and span >= need:
                 r["retired"], r["retired_at"] = True, t
         if r["uid"] in data_by_uid:
-            r["data_check"], r["data_checked"] = data_by_uid[r["uid"]][0], t
-        # publisher edits to the title or description
+            r["data_check"], r["data_detail"], r["data_checked"] = data_by_uid[r["uid"]][0], str(data_by_uid[r["uid"]][1])[:120], t
+        # publisher edits to the title or description. The first visit records a baseline of what the service
+        # says (the crawl's stored text can differ for reasons that aren't edits: a catalogue title used in its
+        # place, accents stripped by a server, parser changes). Later visits compare against that baseline.
+        # A change is carried only for the parts whose stored text came from the service, because those are the
+        # only ones it makes sense to replace.
         L = found.get(r["uid"])
-        if L is not None and isinstance(r.get("orig_title"), str):
-            new = (_norm(L.title), _norm(L.abstract))
-            orig = (_norm(r["orig_title"]), _norm(r["orig_abstract"]))
-            cur = (_norm(r.get("cur_title")), _norm(r.get("cur_abstract")))
-            if new == orig:
-                if r.get("cur_title") is not None or r.get("cur_abstract") is not None:
-                    r.update(cur_title=None, cur_abstract=None, text_changed=t)
-                    retag.add(r["dataset_id"])
-            elif new != cur or r.get("cur_title") is None:
-                r.update(cur_title=L.title, cur_abstract=L.abstract, text_changed=t)
+        if L is not None:
+            nt, na = _norm(L.title), _norm(L.abstract)
+            h = hashlib.sha1(f"{nt}\x1f{na}".encode()).hexdigest()[:16]
+            if r.get("text_seen") is None:
+                r["text_seen"] = h
+                r["title_from_service"] = nt == _norm(r.get("orig_title"))
+                r["abstract_from_service"] = na == _norm(r.get("orig_abstract"))
+                r.update(cur_title=None, cur_abstract=None)
+            elif h != r["text_seen"]:
+                r["text_seen"], r["text_changed"] = h, t
+                ct = L.title if r.get("title_from_service") and nt != _norm(r.get("orig_title")) else None
+                ca = L.abstract if r.get("abstract_from_service") and na != _norm(r.get("orig_abstract")) else None
+                r.update(cur_title=ct, cur_abstract=ca)
                 retag.add(r["dataset_id"])
         outcomes.append((r["uid"], r["status"]))
     st = pd.DataFrame(rec)
@@ -334,10 +346,10 @@ def main():
     today = date.fromisoformat(a.today) if a.today else date.today()
 
     pop = population(a.datasets, a.layers)
-    if a.only_host:
-        pop = pop[pop["service_url"].str.contains(a.only_host, regex=False)]
     st = load_state(a.state)
-    services = due_services(pop, st, today, a.max_services, seed=7)
+    # --only-host narrows what is checked, never the state: everything else is carried over untouched
+    sel = pop[pop["service_url"].str.contains(a.only_host, regex=False)] if a.only_host else pop
+    services = due_services(sel, st, today, a.max_services, seed=7)
     print(f"{len(pop):,} endpoints; {len(services):,} services due today", flush=True)
     week = (today - date(2026, 1, 5)).days // 7
     results, stats = asyncio.run(run_checks(services, t0 + a.minutes * 60, week))
