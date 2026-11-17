@@ -1,8 +1,15 @@
-# round 2: WMS 1.3.0 GetMap on the plan servers; upper-case parameters on Mapbender proxies; capabilities layer names
-https://geodienste.komm.one/ows/services/org.297.e9838d0b-9cd0-438e-a41e-7fbd1ba683fd_wms/org.297.cf462069-3348-48f6-aa62-2648bc97d354?service=WMS&request=GetMap&version=1.3.0&layers=bp_planRaster&styles=&crs=EPSG:4326&bbox=48.714911799999996,9.2692066,48.71524219999999,9.2699794&width=64&height=64&format=image/png&transparent=true
-https://geodienste.komm.one/ows/services/org.297.e9838d0b-9cd0-438e-a41e-7fbd1ba683fd_wms/org.297.cf462069-3348-48f6-aa62-2648bc97d354?service=WMS&request=GetCapabilities&version=1.3.0
-https://geodienste.komm.one/ows/services/org.297.e9838d0b-9cd0-438e-a41e-7fbd1ba683fd_wms/org.297.cf462069-3348-48f6-aa62-2648bc97d354?service=WMS&request=GetCapabilities&version=1.1.1
-https://www.geoportal.rlp.de/mapbender/php/wfs.php?FEATURETYPE_ID=3453&INSPIRE=1&SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=Stadtkataster_Trier_Archaeologie&COUNT=1
-https://www.geoportal.rlp.de/mapbender/php/wfs.php?FEATURETYPE_ID=3453&INSPIRE=1&SERVICE=WFS&REQUEST=GetFeature&VERSION=1.1.0&TYPENAME=Stadtkataster_Trier_Archaeologie&MAXFEATURES=1
-https://www.geoportal.rlp.de/mapbender/php/wms.php?inspire=1&layer_id=51358&withChilds=1&SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=BPlan.07131007.3001.11&STYLES=&SRS=EPSG:4326&BBOX=7.112955,50.54015,7.113155,50.540350000000004&WIDTH=64&HEIGHT=64&FORMAT=image/png&TRANSPARENT=true
-https://www.geoportal.hessen.de/mapbender/php/wms.php?inspire=1&layer_id=63279&withChilds=1&SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=org.1435.4c96bad4-8b45-4ddc-b411-08a43bbd67c4_bp_planRaster&STYLES=&SRS=EPSG:4326&BBOX=9.7662636,50.672779999999996,9.7664834,50.67298&WIDTH=64&HEIGHT=64&FORMAT=image/png&TRANSPARENT=true
+# round 3 (17 Nov): first-week liveness sweep failures. Are these dead, slow, or blocking us? (code, seconds, bytes)
+https://datamap.gov.wales/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://environment.data.gov.uk/spatialdata/great-crested-newt-risk-zones-swindon-and-wiltshire/wms?service=WMS&request=GetCapabilities&version=1.3.0
+https://gis1.mgipu.hr/srv1/PPRasterZ14_Public/wms?service=WMS&request=GetCapabilities&version=1.3.0
+https://oceandata.rad.rutgers.edu/arcgis/rest/services/Administrative/TribalHeadquartersMARCOArea/MapServer?f=json
+https://oceandata.rad.rutgers.edu/arcgis/rest/services/CAS_VTR_BTSmall/2001_2005/MapServer?f=json
+https://gisweb.cosb.us/arcgis/rest/services/SJB_Landuse/FeatureServer?f=json
+https://dados.gov.pt/api/1/datasets/r/d7932516-d5db-4240-bada-9ef6953014ab
+https://dados.gov.pt/api/1/datasets/r/01188898-9ce9-4412-a8e0-fc393a260973
+https://gis.olympiawa.gov/arcgis/rest/services/Public/Parking_Consolidation_Proposal/MapServer?f=json
+https://gis.beacons-npa.gov.uk/geoserver/inspire/landscape_character_assessment/ows?service=WMS&request=GetCapabilities
+https://terra.library.brocku.ca/arcgis/rest/services/EarlyNiagara/Grimsby1961/ImageServer?f=json
+https://gis12.cookcountyil.gov/arcgis/rest/services/BED_Expanded/MapServer?f=json
+https://overturemaps-us-west-2.s3.amazonaws.com/release/
+https://overturemaps-us-west-2.s3.amazonaws.com/?list-type=2&prefix=release/&delimiter=/&max-keys=5

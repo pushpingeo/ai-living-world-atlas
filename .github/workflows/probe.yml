@@ -17,7 +17,7 @@ jobs:
           grep -v '^#' runs/probe.urls | grep . | while read -r url; do
             i=$((i+1))
             code=$(curl -sSL -m 60 -A "ai-living-world-atlas probe (+https://github.com/pushpingeo/ai-living-world-atlas)" \
-              -o /tmp/body -w '%{http_code} %{url_effective}' "$url" || echo "ERR")
+              -o /tmp/body -w '%{http_code} %{time_total}s %{size_download}B %{url_effective}' "$url" || echo "ERR")
             { echo "URL: $url"; echo "RESULT: $code"; } > /tmp/out/$i.txt
             head -c 200000 /tmp/body >> /tmp/out/$i.txt 2>/dev/null || true
           done
