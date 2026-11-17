@@ -1,0 +1,11 @@
+[    0s] shard 0/2
+[    0s] seeds: {'arcgis_roots': 0, 'arcgis_services': 0, 'wms': 3, 'wfs': 5, 'wmts': 0, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 0, 'gn': 1, 'records': [], 'catalogues': 17}
+[    4s] portals: 1/1 ok, 2134 records with service links
+[    4s] targets: 0 ArcGIS roots, 0 ArcGIS services from portals, 138 OGC endpoints
+[    4s] ArcGIS roots listed: 0/0 reachable; 0 ArcGIS services total
+[   68s] services crawled 138/138; layers so far 5738
+[   68s] curated records: 0 endpoints
+[   68s] extents: {'suspect': 1671, 'attempted': 0, 'measured': 0, 'shrunk': 0, 'empty': 0}
+[   69s] layers joined to a catalogue record: 663/5738
+[   81s] checks run: 95 (sampled 138)
+[   81s] unique layers: 1183

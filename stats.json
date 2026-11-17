@@ -1,0 +1,179 @@
+{
+ "minutes": 5.8,
+ "http": {
+  "requests": 482,
+  "errors": 43,
+  "robots_blocked": 96
+ },
+ "portals": {
+  "total": 2,
+  "ok": 2,
+  "records_with_service_links": 4268
+ },
+ "arcgis_roots": {
+  "total": 0,
+  "reachable": 0
+ },
+ "services": {
+  "attempted": 272,
+  "ok": 162,
+  "skipped_time": 0,
+  "by_type": {
+   "wfs": 26,
+   "wms": 132,
+   "wcs": 4
+  },
+  "top_errors": [
+   [
+    "robots.txt disallows",
+    88
+   ],
+   [
+    "HTTP N",
+    15
+   ],
+   [
+    "TimeoutError: ",
+    5
+   ],
+   [
+    "ClientConnectorError: Cannot connect to host localhost:N ",
+    1
+   ],
+   [
+    "ClientConnectorCertificateError: Cannot connect to host www.",
+    1
+   ]
+  ]
+ },
+ "layers": {
+  "total": 7395,
+  "by_service_type": {
+   "wms": 6789,
+   "wfs": 339,
+   "wcs": 267
+  },
+  "with_bbox": 7390,
+  "with_abstract_50": 4766,
+  "with_licence_text": 6365,
+  "with_open_licence": 619,
+  "with_keywords": 1726,
+  "joined_to_catalogue": 804,
+  "codelike_titles": 37,
+  "junk_flagged": 3,
+  "declared_iso_theme": 734,
+  "declared_theme_how": {
+   "none": 6661,
+   "theme-field": 672,
+   "keyword": 62
+  },
+  "publisher_type": {
+   "international": 7395
+  },
+  "detail_source": {
+   "none": 6911,
+   "metadata": 357,
+   "stated": 109,
+   "display": 18
+  },
+  "extent_source": {
+   "declared": 7395
+  },
+  "extent_flags": {
+   "world": 278,
+   "shared-default": 107,
+   "grid-default": 4
+  },
+  "cors_ok": 7390,
+  "detail_level": {
+   "unknown": 6911,
+   "1:100k": 230,
+   "1:2M": 117,
+   "1:500k": 93,
+   "coarser": 23,
+   "1:25k": 20,
+   "1:5k": 1
+  },
+  "coverage_level": {
+   "continental": 3259,
+   "regional": 1403,
+   "global": 1348,
+   "national": 1128,
+   "local": 252,
+   "unknown": 5
+  },
+  "detail_level_passing": {
+   "unknown": 4274,
+   "1:100k": 230,
+   "1:2M": 117,
+   "1:500k": 92,
+   "coarser": 23,
+   "1:25k": 20,
+   "1:5k": 1
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 7283,
+   "ok": 108,
+   "fail": 4
+  },
+  "live_rate_of_checked": 0.964,
+  "returns_data_or_empty_rate": 0.964
+ },
+ "quality": {
+  "pass": 4757,
+  "pass_rate": 0.643,
+  "score_median": 78.0,
+  "score_bands": {
+   "[50, 60)": 21,
+   "[60, 70)": 446,
+   "[70, 80)": 5097,
+   "[80, 101)": 1831
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 2436,
+  "distinct_among_passing": 1638
+ },
+ "file_mb": 0.67,
+ "datasets": {
+  "total": 4221,
+  "passing": 2529,
+  "endpoints_per_dataset": {
+   "1": 2793,
+   "2": 730,
+   "3": 262,
+   "4": 184,
+   "5": 52,
+   "6": 116,
+   "7": 8,
+   "8": 76
+  },
+  "multi_protocol": 309,
+  "match_rules": {
+   "title-extent": 1053,
+   "ogc-name": 284,
+   "catalogue": 102
+  },
+  "role": {
+   "data": 4213,
+   "imagery": 6,
+   "basemap": 2
+  },
+  "role_passing": {
+   "data": 2521,
+   "imagery": 6,
+   "basemap": 2
+  },
+  "capabilities": {
+   "render": 3935,
+   "feature-info": 3864,
+   "time": 2332,
+   "download": 595,
+   "query": 328,
+   "pixels": 267
+  },
+  "detail_known_passing": 274
+ }
+}
