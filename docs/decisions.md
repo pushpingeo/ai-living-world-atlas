@@ -236,5 +236,5 @@ Changes:
 US services rarely state a licence (22% have no text, most of the rest are credits), so better wording rules don't
 help. Rob approved inferring public domain for US federal agencies' work (17 U.S.C. §105), labelled as inferred in
 the licence text and skipped when the credit names a non-federal party. Applied at publish time (`atlas/licences.py`
-from combine.py), so the wave files keep what was crawled. 5,420 datasets marked, 686 skipped. Noted in
+from combine.py), so the wave files keep what was crawled. 5,420 marked on the US wave; 3,228 in the published index (347 skipped), because datasets also found by an earlier wave keep that wave's publisher type. Noted in
 `docs/mcp-tools.md` first; field names and types are unchanged. Details: `docs/us-licences.md`.

@@ -134,7 +134,7 @@ Workspace notes:
 2. **US quality.**
    - Licences (17 Nov): the gap was missing licence statements, not wording. Rob approved inferring public domain
      for US federal works: `atlas/licences.py`, applied at publish time, labelled "inferred" in the licence text.
-     5,420 datasets marked open, 686 skipped where the credit names a non-federal party. See `docs/us-licences.md`.
+     3,228 published datasets marked open, 347 skipped where the credit names a non-federal party (5,420 on the US wave alone; the rest of those also appear in an earlier wave, which wins and carries its own publisher type). See `docs/us-licences.md`.
    - Still open: almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave
      records). That join is the way to real licences for state and local data, and better US descriptions.
 3. **Global source failures** (probed 17 Nov; all on their side, nothing to fix in our code):
