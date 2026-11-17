@@ -67,6 +67,14 @@ jobs:
               print(f"fetch_features [{did} at Rosebank]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
           r, status, s = call("get_dataset", {"id": "bdb5d0a70436343e"})
           print(f"get_dataset [bdb5d0a70436343e]: {status}, title {r.get('title') if r else '-'!r}, endpoint {r['endpoints'][0]['url'].split('/services/')[-1] if r and r.get('endpoints') else '-'}")
+          # EMODnet (Tobler request): wrecks as features, with a licence
+          r, status, s = call("get_dataset", {"id": "ee41a8d58f1fe201"})
+          print(f"get_dataset [EMODnet wrecks ee41a8d58f1fe201]: {status}, {r.get('title') if r else '-'!r}, protocols {[e['protocol'] for e in r['endpoints']] if r else '-'}, licence {str(r.get('licence'))[:70] if r else '-'!r}")
+          r, status, s = call("fetch_features", {"id": "ee41a8d58f1fe201", "bbox": [-2, 59, 2, 61.5], "limit": 50})
+          print(f"fetch_features [EMODnet wrecks, east of Shetland]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
+          r, status, s = call("find_datasets", {"bbox": [-4.6, 59.5, 1.5, 61.5], "concept": "pipeline", "capability": "query", "limit": 100})
+          em = [x for x in (r or {}).get("results", []) if "EMODnet" in (x.get("publisher") or "")]
+          print(f"find_datasets [Shetland, pipeline, query]: {status}, {len((r or {}).get('results', []))} results, EMODnet: {[x['title'] for x in em][:5]}")
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})
