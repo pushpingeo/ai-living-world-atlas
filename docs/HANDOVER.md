@@ -164,8 +164,14 @@ Workspace notes:
    (`docs/viewer-data-size.md`). Not yet tested in Safari or Firefox.
 7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
    sweep) until shards finish.
-8. **Africa.** Scoping in `docs/spikes/africa-scoping.md`: national petroleum bodies publishing openly on ArcGIS
-   Online (Ghana GNPC, Angola ANPG, Morocco ONHYM, a Kenya petroleum account, Mozambique FNDS) and WRI's Forest
-   Atlas servers for Central Africa. None are in the index yet. Proposed wave `spike-africa` waits for Rob.
-   Nigeria and Tanzania need domain discovery.
-
+8. **Africa.** Crawled 17 Nov (`results/spike-africa`: 17.6k datasets, 3,258 passing), **not published**.
+   - GNPC (Ghana), Kenya's State Department for Petroleum and ANPG's ArcGIS Online services show in public listings
+     but answer "Token Required": not open, can't be indexed without credentials.
+   - ONHYM (Morocco) and the Petroleum Authority of Uganda are open but fail the quality bar (no descriptions,
+     code-like titles), so the petroleum layers wouldn't appear.
+   - Needs Rob's call on letting authoritative national sources pass without a description (with a humanised title)
+     before publishing. Scoping: `docs/spikes/africa-scoping.md`.
+9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave crawled and being tagged, then published
+   first in `runs/published.txt`. NSTA status words done. Trusted services: design only, waiting on Rob.
+   Still open from Tobler's list: text search that holds up world-wide (D1 overload) and the name index (licence
+   question for Rob).

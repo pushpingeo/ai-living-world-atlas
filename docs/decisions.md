@@ -252,3 +252,18 @@ The MCP Worker reads dataset details from the viewer's detail shards on GitHub P
 working; Tobler noticed first. Fixed ~21:15: the Worker reads the new files, with the old layout as a fallback. The
 deploy-mcp smoke test now also opens a dataset, and `mcp-check` (runs/mcp-check.env) tests all three tools Tobler
 uses. Lesson: a viewer data change is an MCP change and goes through docs/mcp-tools.md first.
+
+## 2026-11-17 (night): Tobler's requests: EMODnet, NSTA status words, trusted services
+- **EMODnet wave** (`spike-emodnet`, `vocab/seeds/emodnet.yaml`): every EMODnet portal's WFS and WMS plus EMODnet's
+  GeoNetwork (2,134 records). A layer's WFS and WMS on one server group into one dataset (ogc-name). GeoNetwork
+  links now keep the layer name, and records join OGC layers by (server, layer name), so the record's licence and
+  description reach a layer on a 200-layer server. Human Activities: 251 passing, 156 fetchable as WFS, 178 with
+  CC-BY 4.0. The harvester also had to read GeoNetwork codelists returned as objects (it crashed on EMODnet's).
+  EMODnet Geology and Physics servers refuse crawlers in robots.txt; we respect that.
+- **Publishing order and duplicates:** the focused wave goes first in `runs/published.txt`, and combine drops a
+  dataset whose endpoints all belong to an earlier wave's dataset (`drop_covered`). On the existing waves that removed
+  2,159 cross-wave duplicates. EMODnet's old WMS-only ids give way to the grouped records' ids (noted in mcp-tools.md).
+- **Status words in service names** (`atlas/titles.py`, at publish): live and removed services grouped under one
+  title are split (444 across all waves; the original id keeps the live one); 172 titles gained a status word. Not
+  "historic", "former" or "draft": in service names those mostly mean heritage, old boundaries or a work folder.
+- **Trusted services, key-gated APIs, Esri copies:** design only, `docs/trusted-services-design.md`.
