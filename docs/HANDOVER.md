@@ -132,13 +132,17 @@ Workspace notes:
    - Known real failures to expect retired from ~1 Dec: oceandata.rad.rutgers.edu (timeouts), gis1.mgipu.hr (502,
      300 endpoints on one WMS), gis12.cookcountyil.gov (404).
 2. **US quality.**
-   - Licence detection doesn't recognise "public domain" wording, so no US licence is marked open.
-   - Almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave records).
-3. **Global source failures.**
-   - Terrascope: connection reset.
-   - FAO map server: 502.
+   - Licences (17 Nov): the gap was missing licence statements, not wording. Rob approved inferring public domain
+     for US federal works: `atlas/licences.py`, applied at publish time, labelled "inferred" in the licence text.
+     5,420 datasets marked open, 686 skipped where the credit names a non-federal party. See `docs/us-licences.md`.
+   - Still open: almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave
+     records). That join is the way to real licences for state and local data, and better US descriptions.
+3. **Global source failures** (probed 17 Nov; all on their side, nothing to fix in our code):
+   - Terrascope: resets the connection within half a second, from GitHub's runners. Looks like a block on cloud
+     addresses. Only fixable by asking VITO.
+   - FAO io.apps GeoServer: 502 on every path, down at their end.
+   - UNEP-WCMC proxied ImageServers: their proxy's stored credentials fail ("Unable to generate token").
    - GFW tiles: blocked by robots.txt.
-   - Some UNEP-WCMC proxied ImageServers.
 4. **Smaller items.**
    - Trim long credit strings used as publisher names.
    - Add WMTS/WCS data checks (the sweep checks they resolve, not that they return tiles/coverages).
@@ -148,7 +152,13 @@ Workspace notes:
    - The viewer's header still says "Public map services from UK government and agencies" (public text: Rob's call).
 5. **Tobler integration.** Done 17 Nov (see above). Tobler's requests live in `docs/mcp-tools.md`; the name index there is parked by Rob.
 6. **Size limits.** GitHub Pages is capped at 1 GB. Measured 17 Nov: the viewer site is **702 MB** (detail shards
-   `data/d` 628 MB, tiles 72 MB), up from ~560 MB before the Europe rerun. The pages build now prints the size and
-   warns at 800 MB. One more large wave would push it over: plan to move the detail shards to R2 before the next one.
+   `data/d` 628 MB, tiles 72 MB), up from ~560 MB before the Europe rerun. A separate `size-limit` job in pages.yml
+   fails at 800 MB so GitHub emails a failure; the deploy still runs. Plan in `docs/viewer-data-size.md`: gzip the
+   detail shards (about 5x smaller) and use more, smaller shards; R2 in reserve. Waiting for Rob's go-ahead.
 7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
    sweep) until shards finish.
+8. **Africa.** Scoping in `docs/spikes/africa-scoping.md`: national petroleum bodies publishing openly on ArcGIS
+   Online (Ghana GNPC, Angola ANPG, Morocco ONHYM, a Kenya petroleum account, Mozambique FNDS) and WRI's Forest
+   Atlas servers for Central Africa. None are in the index yet. Proposed wave `spike-africa` waits for Rob.
+   Nigeria and Tanzania need domain discovery.
+
