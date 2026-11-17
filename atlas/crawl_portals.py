@@ -224,12 +224,14 @@ GN_PROTOCOLS = ["OGC:WMS", "OGC:WFS", "OGC:WMTS", "OGC:WCS", "ESRI:REST", "ESRI:
                 "OGC:WMS-1.1.1-http-get-map", "OGC:WMS-1.3.0-http-get-map", "OGC:WFS-1.0.0-http-get-capabilities"]
 
 
-def _gn_text(v):
+def _gn_text(v) -> str:
+    """Text from a GeoNetwork field: a string, a {"default"/"langeng"/"key": ...} object, or a list of either.
+    Newer GeoNetwork (EMODnet, 2026) returns codelists such as cl_topic as objects, so always end with a string."""
     if isinstance(v, dict):
-        return v.get("langeng") or v.get("default") or next(iter(v.values()), "")
+        return _gn_text(v.get("langeng") or v.get("default") or v.get("key") or next(iter(v.values()), ""))
     if isinstance(v, list):
-        return "; ".join(_gn_text(x) for x in v if x)
-    return v or ""
+        return "; ".join(x for x in (_gn_text(x) for x in v if x) if x)
+    return v if isinstance(v, str) else (str(v) if v is not None else "")
 
 
 async def harvest_geonetwork(c: Client, base: str, portal: str, max_records: int = 400_000, page: int = 500) -> tuple[list[PortalRecord], dict]:
@@ -274,7 +276,7 @@ async def harvest_geonetwork(c: Client, base: str, portal: str, max_records: int
                         names.append((ogc_layer_key(k[1], nm)))
             if not links:
                 continue
-            themes = list(dict.fromkeys(list(s.get("cl_topic") or []) +
+            themes = list(dict.fromkeys([_gn_text(x) for x in (s.get("cl_topic") or [])] +
                                         [_gn_text(t) for t in (s.get("th_httpinspireeceuropaeutheme-theme") or [])]))
             scale = s.get("resolutionScaleDenominator")
             scale = scale[0] if isinstance(scale, list) and scale else scale
