@@ -1,14 +1,5 @@
-# round 6 (17 Nov): EMODnet endpoints and GeoNetwork records (Tobler request)
-https://emodnet.ec.europa.eu/geonetwork/srv/api/records/e965088b-a265-4517-84df-c49b156af8a7/formatters/json
-https://emodnet.ec.europa.eu/geonetwork/srv/api/records/e965088b-a265-4517-84df-c49b156af8a7
-https://ows.emodnet-humanactivities.eu/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://ows.emodnet-humanactivities.eu/wms?service=WMS&request=GetCapabilities&version=1.3.0
-https://ows.emodnet-bathymetry.eu/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open_maplibrary/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://drive.emodnet-geology.eu/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://geoserver.emodnet-physics.eu/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://geo.vliz.be/geoserver/Emodnetbio/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://geoserver.hcmr.gr/geoserver/EMODNET_SHARED/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://emodnet.ec.europa.eu/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://emodnet.ec.europa.eu/geonetwork/srv/api/search/records/_search
+# round 7 (17 Nov): EMODnet wrecks WFS by bbox (does the layer have features there, and does a CRS84 bbox work?)
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&request=GetFeature&version=1.1.0&typeName=emodnet:heritageshipwrecks&maxFeatures=3&outputFormat=application/json
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&request=GetFeature&version=1.1.0&typeName=emodnet:heritageshipwrecks&maxFeatures=3&outputFormat=application/json&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=-2,59,2,61.5,urn:ogc:def:crs:OGC:1.3:CRS84
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&request=GetFeature&version=1.1.0&typeName=emodnet:heritageshipwrecks&maxFeatures=3&outputFormat=application/json&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=-10,35,30,65,urn:ogc:def:crs:OGC:1.3:CRS84
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames=emodnet:heritageshipwrecks&count=1&outputFormat=application/json&resultType=hits
