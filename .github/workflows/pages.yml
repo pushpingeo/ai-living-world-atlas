@@ -31,6 +31,13 @@ jobs:
           TAGS=""; [ -f /tmp/pub/tags.parquet ] && TAGS=/tmp/pub/tags.parquet
           python -m atlas.viewer_data --datasets /tmp/pub/datasets.parquet ${TAGS:+--tags $TAGS} --out _site/data --only-passing \
             --meta "{\"built\":\"$(date -u +%F)\",\"only_passing\":true}"
+      - name: Site size (GitHub Pages limit is 1 GB)
+        run: |
+          MB=$(du -sm _site | cut -f1)
+          echo "site: ${MB} MB, $(find _site -type f | wc -l) files"
+          du -sm _site/data/* 2>/dev/null | sort -rn | head -5
+          echo "Site size: ${MB} MB of the 1 GB GitHub Pages limit" >> $GITHUB_STEP_SUMMARY
+          [ "$MB" -lt 800 ] || echo "::warning::Viewer site is ${MB} MB, close to the 1 GB GitHub Pages limit"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
