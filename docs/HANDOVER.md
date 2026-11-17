@@ -118,13 +118,19 @@ Workspace notes:
 
 ## Known gaps and next steps (rough priority)
 
-1. **Watch the sweep's first week.** history.csv on `results/liveness` has one line a night. Check the resolving
-   rate, which hosts go "down", and that nothing retires wrongly once the 14-day window opens (around 1 Dec).
-   - The first full night checked the index as it was before the Europe rerun; the new Europe endpoints are picked up
-     as never-checked from the next night.
-   - The scheduled run due 03:23 on 17 Nov didn't start until 12:07: GitHub delays scheduled runs under load. Harmless
-     for a rolling sweep, but check the timing over the week.
-   - A night takes ~200 of its 240 minutes at 45k services; the bigger index may need MINUTES raised.
+1. **Watch the sweep's first week.** history.csv on `results/liveness` now has one line per run, with `trigger`
+   and `started` (UTC). Check the resolving rate, which hosts go "down", the second-look count, and that nothing
+   retires wrongly once the 14-day window opens (around 1 Dec).
+   - 17 Nov had two full runs (00:22 push, 12:07 scheduled; GitHub started the 03:23 schedule nearly 9 hours late).
+     After both: 562k published endpoints on 195k services, 231k endpoints checked (41%), 99.3% resolving, 1,540
+     failing. 111k services are still unchecked, so the first full pass finishes around 20 Nov; after that a night
+     is ~28k services plus failing ones, well inside 45k and 240 minutes.
+   - Fixed 17 Nov evening (decisions.md): failed services get a slow second look at the end of a run (some live
+     servers take 40-60 s), S3 folder URLs are listed rather than fetched, and history no longer overwrites a
+     same-day run. The first real test of the second look is the 18 Nov night run: check REPORT.md says how many
+     answered and that the run still finishes inside its time.
+   - Known real failures to expect retired from ~1 Dec: oceandata.rad.rutgers.edu (timeouts), gis1.mgipu.hr (502,
+     300 endpoints on one WMS), gis12.cookcountyil.gov (404).
 2. **US quality.**
    - Licence detection doesn't recognise "public domain" wording, so no US licence is marked open.
    - Almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave records).
