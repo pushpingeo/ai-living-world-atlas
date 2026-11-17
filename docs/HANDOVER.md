@@ -114,7 +114,7 @@ Workspace notes:
 - It also leaves out national publishers' datasets whose country doesn't touch the area (`home` column; country areas with 3° of waters in `vocab/country_areas.geojson`; any European country admits "EUROPE" datasets; international publishers and `vocab/extent_overrides.yaml` entries are always kept). `include_other_countries` widens it. This stopped Kentucky wells and US census blocks coming up for Nigeria.
 - New D1 columns `gtypes` and `home`: a change in table layout now forces a full reload (`__schema__` in rows.json). Every SQL statement is on one line, because the deploy cuts load files at lines ending in ";".
 - `parts get` streams part by part and takes a column list, so a small machine can read Europe's layers.
-- Tobler now uses the MCP server live, through a service binding from its Worker (`north-sea-geo-demo`, route `/atlas`).
+- Tobler now uses the MCP server live, through a service binding from a Worker (today `north-sea-geo-demo`, route `/atlas`; moving to Tobler's own Worker in the Tobler chat). Keep the Worker name `atlas-mcp`: the binding points at it.
 
 ## Known gaps and next steps (rough priority)
 
