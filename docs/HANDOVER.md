@@ -67,9 +67,9 @@ Workspace notes:
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **256k passing datasets**. About 52k new Europe datasets are not tagged yet
-  (they show without themes); tagging them is waiting on Rob's go-ahead (~$4.70).
-- Tagging spend is **$23.86** in total: UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39, Europe $6.49.
+- The viewer and the MCP server hold about **256k passing datasets**, all tagged.
+- Tagging spend is **$28.46** in total: UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
+  Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
 ## Rules Rob set
@@ -104,34 +104,30 @@ Workspace notes:
 
 ## Known gaps and next steps (rough priority)
 
-1. **Tag the new Europe datasets.** The rerun finished cleanly on 17 Nov (20 shards, none hit the time budget,
-   merge 4 min, collections 6 min). 51,981 passing Europe datasets have no tags, about $4.70 at batch rates. To run
-   it: bump `RUN` in `runs/tag-europe.env` and push (already-tagged datasets are skipped). Not started: an
-   unattended push of a paid run was blocked, so it needs Rob's go-ahead or a run from an attended chat.
-2. **Watch the sweep's first week.** history.csv on `results/liveness` has one line a night. Check the resolving
+1. **Watch the sweep's first week.** history.csv on `results/liveness` has one line a night. Check the resolving
    rate, which hosts go "down", and that nothing retires wrongly once the 14-day window opens (around 1 Dec).
    - The first full night checked the index as it was before the Europe rerun; the new Europe endpoints are picked up
      as never-checked from the next night.
-   - The 03:23 cron run on 17 Nov didn't appear (a push-started run was queued behind the Europe shards at the time).
-     Check that the nightly schedule fires on 18 Nov.
+   - The scheduled run due 03:23 on 17 Nov didn't start until 12:07: GitHub delays scheduled runs under load. Harmless
+     for a rolling sweep, but check the timing over the week.
    - A night takes ~200 of its 240 minutes at 45k services; the bigger index may need MINUTES raised.
-3. **US quality.**
+2. **US quality.**
    - Licence detection doesn't recognise "public domain" wording, so no US licence is marked open.
    - Almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave records).
-4. **Global source failures.**
+3. **Global source failures.**
    - Terrascope: connection reset.
    - FAO map server: 502.
    - GFW tiles: blocked by robots.txt.
    - Some UNEP-WCMC proxied ImageServers.
-5. **Smaller items.**
+4. **Smaller items.**
    - Trim long credit strings used as publisher names.
    - Add WMTS/WCS data checks (the sweep checks they resolve, not that they return tiles/coverages).
    - Work out true footprints for false extents (they are currently only flagged and ranked down).
    - Add an admin-area hierarchy.
    - Proposed new concepts: landscape-character-area, habitat-network, great-crested-newt-risk-zones.
    - The viewer's header still says "Public map services from UK government and agencies" (public text: Rob's call).
-6. **Tobler integration.** Wire the MCP server into Tobler as a data source.
-7. **Size limits.** GitHub Pages is capped at 1 GB, and the viewer data is about 560 MB. If more waves push it over,
+5. **Tobler integration.** Wire the MCP server into Tobler as a data source.
+6. **Size limits.** GitHub Pages is capped at 1 GB, and the viewer data is about 560 MB. If more waves push it over,
    move the viewer data to R2. The bigger Europe wave will add to this.
-8. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
+7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
    sweep) until shards finish.
