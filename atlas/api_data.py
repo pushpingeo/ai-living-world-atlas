@@ -33,7 +33,9 @@ def q(v) -> str:
         return "1" if v else "0"
     if isinstance(v, (int, float)):
         return repr(round(v, 6)) if isinstance(v, float) else str(v)
-    return "'" + str(v).replace("'", "''") + "'"
+    # One statement per line: the deploy cuts the file into pieces at lines ending in ";", so a newline inside a
+    # value could leave a piece starting mid-string (17 Nov, "near Parametrix"). Search needs no line breaks.
+    return "'" + " ".join(str(v).split("\n")).replace("\r", " ").replace("'", "''") + "'"
 
 
 def wrap(vals) -> str:
