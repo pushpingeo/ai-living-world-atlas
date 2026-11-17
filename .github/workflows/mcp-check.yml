@@ -1,0 +1,78 @@
+name: mcp-check
+# Live check of the MCP tools Tobler relies on (docs/mcp-tools.md): find_datasets, get_dataset, fetch_features.
+# Edit runs/mcp-check.env and push to run it. Results (never the key) go to results/mcp-check.
+on:
+  push:
+    branches: [main]
+    paths: ['runs/mcp-check.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      ATLAS_MCP_KEY: ${{ secrets.ATLAS_MCP_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Call the tools
+        run: |
+          python3 - <<'PY' | tee /tmp/check.txt
+          import json, os, time, urllib.request
+          EP = "https://atlas-mcp.robdunfey.workers.dev/mcp"
+          KEY = os.environ["ATLAS_MCP_KEY"]
+          def call(name, args):
+              body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": name, "arguments": args}}).encode()
+              req = urllib.request.Request(EP, body, {"Authorization": f"Bearer {KEY}", "content-type": "application/json"})
+              t = time.time()
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as r:
+                      raw = r.read(); code = r.status
+              except urllib.error.HTTPError as e:
+                  raw = e.read(); code = e.code
+              except Exception as e:
+                  return None, f"{type(e).__name__}: {e}", time.time() - t
+              ms = time.time() - t
+              try:
+                  d = json.loads(raw)
+              except Exception:
+                  return None, f"HTTP {code}, not JSON: {raw[:200]!r}", ms
+              if "error" in d:
+                  return None, f"HTTP {code}, error: {json.dumps(d['error'])[:300]}", ms
+              res = d.get("result", {})
+              if res.get("isError"):
+                  return None, f"HTTP {code}, tool error: {json.dumps(res.get('content'))[:300]}", ms
+              return res.get("structuredContent"), f"HTTP {code}", ms
+          cases = [
+              ("Edinburgh, any", {"lon": -3.19, "lat": 55.95, "radius_km": 5, "limit": 100}),
+              ("Edinburgh, road, query", {"lon": -3.19, "lat": 55.95, "radius_km": 5, "concept": "road", "capability": "query", "geometry": "line", "limit": 100}),
+              ("Nigeria bbox, oil-gas", {"bbox": [2.7, 4.2, 14.7, 13.9], "concept": "oil-gas", "limit": 100}),
+              ("North Sea, protected-area", {"bbox": [-2, 56, 4, 61], "concept": "protected-area", "capability": "query", "limit": 100}),
+          ]
+          first_query = None
+          for label, args in cases:
+              r, status, s = call("find_datasets", args)
+              n = len(r["results"]) if r else 0
+              print(f"find_datasets [{label}]: {status}, {s:.1f}s, matches {r.get('matches') if r else '-'}, results {n}")
+              if r and n:
+                  x = r["results"][0]
+                  missing = [k for k in ("id", "title", "publisher", "publisher_type", "coverage", "licence", "extent_may_be_overstated", "geometry", "country") if k not in x]
+                  print(f"   first: {x['title'][:70]} | licence: {str(x.get('licence'))[:60]} | missing fields: {missing or 'none'}")
+                  if args.get("capability") == "query" and not first_query:
+                      first_query = (x["id"], args)
+          if first_query:
+              did, args = first_query
+              r, status, s = call("get_dataset", {"id": did})
+              print(f"get_dataset: {status}, {s:.1f}s, endpoints {len(r.get('endpoints', [])) if r else '-'}")
+              fa = {"id": did, "limit": 50, **{k: v for k, v in args.items() if k in ("lon", "lat", "radius_km", "bbox")}}
+              r, status, s = call("fetch_features", fa)
+              print(f"fetch_features: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
+          PY
+      - name: Publish result (never the key)
+        if: always()
+        run: |
+          mkdir -p /tmp/r && cp /tmp/check.txt /tmp/r/ 2>/dev/null || echo "check did not run" > /tmp/r/check.txt
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > /tmp/r/RUN.txt
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp /tmp/r/* . && git add -A && git commit -qm "MCP check" && git push -qf origin HEAD:refs/heads/results/mcp-check
