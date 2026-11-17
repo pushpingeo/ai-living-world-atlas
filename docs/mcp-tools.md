@@ -39,15 +39,21 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   Living Atlas copies, ranked after the publisher's own service; key-gated services (`access: "key"`, key held by the
   atlas Worker) starting with NASA FIRMS. Suggested order: licence class first. Waiting on Rob for the FIRMS key, the
   trusted list and the non-commercial question.
-- (17 Nov, night) **Tobler request: EMODnet as feature services, with licences. In progress.** New wave
-  `spike-emodnet` (`vocab/seeds/emodnet.yaml`): WFS and WMS of every EMODnet portal (Human Activities, Bathymetry,
-  Seabed Habitats, Geology, Physics, Biology, Chemistry) plus EMODnet's GeoNetwork catalogue. A layer's WFS and WMS on
-  one server become one dataset (`fetch_features` uses the WFS). Catalogue records now join layers by server and
-  layer name (e.g. `emodnet:heritageshipwrecks`), so CC-BY 4.0 and descriptions reach them. *Contract effect when
-  published:* the wave goes first in `runs/published.txt`, and datasets that an earlier wave already holds are dropped
-  at publish (`drop_covered` in combine.py), so **the ids of the current WMS-only EMODnet records will change** to the
-  grouped records' ids. Fields are unchanged.
-
+- (17 Nov, night) **Tobler request: EMODnet as feature services, with licences. Done, published ~22:45.** New wave
+  `spike-emodnet` (`vocab/seeds/emodnet.yaml`), first in `runs/published.txt`: WFS and WMS of the EMODnet portals plus
+  EMODnet's GeoNetwork (2,134 records). A layer's WFS and WMS on one server are one dataset, and `fetch_features`
+  uses the WFS. Catalogue records join layers by server and layer name, so CC-BY 4.0 and descriptions come through.
+  Human Activities: 251 passing, 156 fetchable as WFS, 178 with CC-BY 4.0. Examples: Heritage Ship Wrecks
+  `ee41a8d58f1fe201`, UKHO worldwide wrecks `d266bb32a493da90` (3 wrecks at Rosebank), Pipelines `bb42a4c5b1c1508f`,
+  Offshore Installations `a38e968b2ce8d36a`, Wind Farms (polygons) `f70f5adfc354d387`, Military Areas (polygons)
+  `ff292558d2076043`, Dumped Munitions (polygons) `821bb9c912e8e65c`. Heritage Ship Wrecks has nothing east of
+  Shetland; that's the data, not a fault.
+  - **Ids changed:** the old WMS-only EMODnet records are replaced by these (datasets an earlier wave fully holds are
+    dropped at publish). Fields unchanged.
+  - **Not covered:** EMODnet Geology's and Physics' own servers refuse crawlers in robots.txt, so we don't crawl them
+    directly (some Physics layers come in through catalogue links).
+  - **"Prefer WFS over a WMS sibling" in general:** done wherever both are crawled, by the same grouping. Next step:
+    probe `/wfs` beside known GeoServer WMS endpoints in future crawls, so siblings are found without seeding.
 - (17 Nov, night) **Tobler request: mislabelled NSTA record (`bdb5d0a70436343e`). Done.** It wasn't only a title:
   the crawl had grouped NSTA's live service and its `_removed_` twin under one dataset, because they share a title
   and extent, and the removed one came first. Nine NSTA datasets were like this, including `29a134d61746d7dc`
