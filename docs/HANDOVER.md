@@ -147,7 +147,8 @@ Workspace notes:
    - Proposed new concepts: landscape-character-area, habitat-network, great-crested-newt-risk-zones.
    - The viewer's header still says "Public map services from UK government and agencies" (public text: Rob's call).
 5. **Tobler integration.** Done 17 Nov (see above). Tobler's requests live in `docs/mcp-tools.md`; the name index there is parked by Rob.
-6. **Size limits.** GitHub Pages is capped at 1 GB, and the viewer data is about 560 MB. If more waves push it over,
-   move the viewer data to R2. The bigger Europe wave will add to this.
+6. **Size limits.** GitHub Pages is capped at 1 GB. Measured 17 Nov: the viewer site is **702 MB** (detail shards
+   `data/d` 628 MB, tiles 72 MB), up from ~560 MB before the Europe rerun. The pages build now prints the size and
+   warns at 800 MB. One more large wave would push it over: plan to move the detail shards to R2 before the next one.
 7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
    sweep) until shards finish.
