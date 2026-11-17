@@ -1,0 +1,84 @@
+[    0s] shard 8/20
+[    0s] seeds: {'arcgis_roots': 0, 'arcgis_services': 0, 'wms': 0, 'wfs': 0, 'wmts': 0, 'wcs': 0, 'hub': 0, 'ckan': 0, 'agol': 0, 'gn': 1, 'records': [], 'catalogues': 1}
+[    4s] portal cache: 681441 records from 1 catalogues
+[    4s] portals: 1/1 ok, 681441 records with service links
+[    9s] targets: 34 ArcGIS roots, 170 ArcGIS services from portals, 32094 OGC endpoints
+[   73s] ArcGIS roots listed: 23/34 reachable; 4384 ArcGIS services total
+[  158s] services crawled 500/36478; layers so far 18262
+[  226s] services crawled 1000/36478; layers so far 33755
+[  296s] services crawled 1500/36478; layers so far 53702
+[  367s] services crawled 2000/36478; layers so far 65122
+[  434s] services crawled 2500/36478; layers so far 77139
+[  492s] services crawled 3000/36478; layers so far 97704
+[  558s] services crawled 3500/36478; layers so far 110676
+[  619s] services crawled 4000/36478; layers so far 125479
+[  683s] services crawled 4500/36478; layers so far 144405
+[  742s] services crawled 5000/36478; layers so far 153214
+[  807s] services crawled 5500/36478; layers so far 166779
+[  872s] services crawled 6000/36478; layers so far 183796
+[  939s] services crawled 6500/36478; layers so far 196294
+[ 1004s] services crawled 7000/36478; layers so far 212999
+[ 1067s] services crawled 7500/36478; layers so far 226268
+[ 1135s] services crawled 8000/36478; layers so far 236828
+[ 1200s] services crawled 8500/36478; layers so far 247835
+[ 1256s] services crawled 9000/36478; layers so far 260914
+[ 1313s] services crawled 9500/36478; layers so far 273903
+[ 1379s] services crawled 10000/36478; layers so far 294235
+[ 1445s] services crawled 10500/36478; layers so far 312714
+[ 1501s] services crawled 11000/36478; layers so far 332891
+[ 1563s] services crawled 11500/36478; layers so far 343396
+[ 1629s] services crawled 12000/36478; layers so far 354973
+[ 1690s] services crawled 12500/36478; layers so far 368626
+[ 1751s] services crawled 13000/36478; layers so far 381199
+[ 1805s] services crawled 13500/36478; layers so far 396504
+[ 1870s] services crawled 14000/36478; layers so far 406931
+[ 1935s] services crawled 14500/36478; layers so far 420850
+[ 1989s] services crawled 15000/36478; layers so far 438842
+[ 2054s] services crawled 15500/36478; layers so far 457057
+[ 2112s] services crawled 16000/36478; layers so far 466745
+[ 2177s] services crawled 16500/36478; layers so far 485107
+[ 2242s] services crawled 17000/36478; layers so far 494042
+[ 2307s] services crawled 17500/36478; layers so far 504800
+[ 2372s] services crawled 18000/36478; layers so far 518533
+[ 2435s] services crawled 18500/36478; layers so far 532831
+[ 2503s] services crawled 19000/36478; layers so far 542877
+[ 2566s] services crawled 19500/36478; layers so far 554900
+[ 2631s] services crawled 20000/36478; layers so far 564925
+[ 2696s] services crawled 20500/36478; layers so far 579875
+[ 2761s] services crawled 21000/36478; layers so far 589077
+[ 2826s] services crawled 21500/36478; layers so far 603166
+[ 2884s] services crawled 22000/36478; layers so far 617321
+[ 2957s] services crawled 22500/36478; layers so far 637486
+[ 3019s] services crawled 23000/36478; layers so far 648485
+[ 3077s] services crawled 23500/36478; layers so far 660581
+[ 3142s] services crawled 24000/36478; layers so far 678654
+[ 3207s] services crawled 24500/36478; layers so far 688753
+[ 3271s] services crawled 25000/36478; layers so far 706129
+[ 3340s] services crawled 25500/36478; layers so far 717790
+[ 3403s] services crawled 26000/36478; layers so far 731516
+[ 3469s] services crawled 26500/36478; layers so far 744276
+[ 3832s] services crawled 27000/36478; layers so far 768330
+[ 3889s] services crawled 27500/36478; layers so far 784267
+[ 3954s] services crawled 28000/36478; layers so far 793455
+[ 4108s] services crawled 28500/36478; layers so far 808938
+[ 4172s] services crawled 29000/36478; layers so far 819409
+[ 4240s] services crawled 29500/36478; layers so far 832021
+[ 4301s] services crawled 30000/36478; layers so far 845735
+[ 4367s] services crawled 30500/36478; layers so far 857283
+[ 4434s] services crawled 31000/36478; layers so far 872474
+[ 4488s] services crawled 31500/36478; layers so far 886481
+[ 4553s] services crawled 32000/36478; layers so far 898209
+[ 4622s] services crawled 32500/36478; layers so far 911901
+[ 4676s] services crawled 33000/36478; layers so far 925298
+[ 4739s] services crawled 33500/36478; layers so far 941694
+[ 4802s] services crawled 34000/36478; layers so far 959258
+[ 4861s] services crawled 34500/36478; layers so far 979324
+[ 4930s] services crawled 35000/36478; layers so far 997671
+[ 4989s] services crawled 35500/36478; layers so far 1006515
+[ 5047s] services crawled 36000/36478; layers so far 1023653
+[ 5109s] services crawled 36478/36478; layers so far 1035424
+[ 5109s] curated records: 0 endpoints
+[ 6524s] extents: {'suspect': 120772, 'attempted': 2197, 'measured': 1831, 'shrunk': 861, 'empty': 0}
+[ 8253s] layers joined to a catalogue record: 582348/1035424
+[10270s] checks run: 3990 (sampled 4000)
+[10439s] unique layers: 173557

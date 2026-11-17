@@ -1,0 +1,1 @@
+[{"portal": "gn:https://data.europa.eu", "kind": "data-europa", "ok": true, "error": "", "records": 681441, "scanned": 890727, "by_format": {"WMS_SRVC": 515918, "WFS_SRVC": 365797, "WMTS_SRVC": 4320, "OGCFEAT": 2455, "REST": 2237}, "totals": {"WMS_SRVC": 515918, "WFS_SRVC": 365797, "WMTS_SRVC": 4320, "OGCFEAT": 2455, "REST": 2237}}]
