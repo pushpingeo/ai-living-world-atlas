@@ -1,0 +1,65 @@
+# EMODnet (European Marine Observation and Data Network): each thematic portal's WFS and WMS, plus EMODnet's
+# GeoNetwork catalogue for descriptions and licences. Asked for by Tobler (17 Nov 2026): the atlas had EMODnet Human
+# Activities as WMS only, with no licence, from data.europa.eu. A layer published by both WFS and WMS on one server is
+# grouped into one dataset ("ogc-name"), so fetch_features can use the WFS. Catalogue records are joined to layers by
+# server and layer name (e.g. emodnet:heritageshipwrecks). All endpoints answered a probe on 17 Nov (probe round 6).
+#
+# kind: arcgis-root | arcgis-service | wms | wfs | wmts | wcs | arcgis-online-search | geonetwork | record
+# licence: only what the publisher states; blank means "read it from the service or its catalogue record".
+
+defaults:
+  publisher_type: international
+  country: ""
+
+sources:
+  - kind: geonetwork
+    url: https://emodnet.ec.europa.eu/geonetwork
+    publisher: EMODnet
+  - kind: wfs
+    url: https://ows.emodnet-humanactivities.eu/wfs
+    publisher: EMODnet Human Activities
+  - kind: wms
+    url: https://ows.emodnet-humanactivities.eu/wms
+    publisher: EMODnet Human Activities
+  - kind: wfs
+    url: https://ows.emodnet-bathymetry.eu/wfs
+    publisher: EMODnet Bathymetry
+  - kind: wms
+    url: https://ows.emodnet-bathymetry.eu/wms
+    publisher: EMODnet Bathymetry
+  - kind: wfs
+    url: https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open/wfs
+    publisher: EMODnet Seabed Habitats
+  - kind: wms
+    url: https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open/wms
+    publisher: EMODnet Seabed Habitats
+  - kind: wfs
+    url: https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open_maplibrary/wfs
+    publisher: EMODnet Seabed Habitats
+  - kind: wms
+    url: https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open_maplibrary/wms
+    publisher: EMODnet Seabed Habitats
+  - kind: wfs
+    url: https://drive.emodnet-geology.eu/geoserver/wfs
+    publisher: EMODnet Geology
+  - kind: wms
+    url: https://drive.emodnet-geology.eu/geoserver/wms
+    publisher: EMODnet Geology
+  - kind: wfs
+    url: https://prod-geoserver.emodnet-physics.eu/geoserver/wfs
+    publisher: EMODnet Physics
+  - kind: wms
+    url: https://prod-geoserver.emodnet-physics.eu/geoserver/wms
+    publisher: EMODnet Physics
+  - kind: wfs
+    url: https://geo.vliz.be/geoserver/Emodnetbio/wfs
+    publisher: EMODnet Biology
+  - kind: wms
+    url: https://geo.vliz.be/geoserver/Emodnetbio/wms
+    publisher: EMODnet Biology
+  - kind: wfs
+    url: https://geoserver.hcmr.gr/geoserver/EMODNET_SHARED/wfs
+    publisher: EMODnet Chemistry
+  - kind: wms
+    url: https://geoserver.hcmr.gr/geoserver/EMODNET_SHARED/wms
+    publisher: EMODnet Chemistry

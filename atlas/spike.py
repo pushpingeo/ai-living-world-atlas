@@ -19,7 +19,7 @@ from urllib.parse import urlsplit
 
 from . import crawl_arcgis, crawl_ogc, endpoints, extents
 from .datasets import build as build_datasets
-from .crawl_portals import harvest_arcgis_online, harvest_ckan, harvest_data_europa, harvest_geonetwork, harvest_hub, service_targets
+from .crawl_portals import ogc_layer_key, harvest_arcgis_online, harvest_ckan, harvest_data_europa, harvest_geonetwork, harvest_hub, service_targets
 from . import records as curated_records
 from .net import Client
 from .quality import codelike, declared_iso_themes, score
@@ -213,6 +213,10 @@ async def run(args):
                     whole[nu].append(rec)          # .../MapServer: the whole service
                 else:
                     whole[nu].append(rec)          # OGC endpoint: the whole service
+        named = defaultdict(list)  # records that name an OGC layer: matched on server and layer name
+        for rec in records:
+            for key in getattr(rec, "layer_names", None) or []:
+                named[tuple(key)].append(rec)
         svc_size = Counter(L.service_url for L in layers)
 
         def same_title(r, L):
@@ -222,6 +226,8 @@ async def run(args):
         joined = 0
         for L in layers:
             recs = exact.get(norm_url(L.layer_url), [])
+            if not recs and L.service_type in ("wms", "wfs", "wmts", "wcs"):
+                recs = named.get(ogc_layer_key(L.service_url, L.layer_name), [])
             if not recs:
                 cands = whole.get(norm_url(L.service_url), [])
                 titled = [r for r in cands if same_title(r, L)]

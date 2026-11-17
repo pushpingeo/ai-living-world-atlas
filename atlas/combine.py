@@ -86,6 +86,26 @@ def apply_liveness(ds, d: Path):
     return ds
 
 
+def drop_covered(ds):
+    """Drop a dataset whose endpoints all belong to a dataset from an earlier wave in runs/published.txt.
+
+    A focused wave (e.g. spike-emodnet, which groups a layer's WFS and WMS) can find what a broad wave found as a
+    WMS-only record; the grouped record gets a different id. Listing the focused wave first makes it win.
+    """
+    import json as _json
+    seen, keep = set(), []
+    for eps in ds["endpoints"]:
+        try:
+            u = {e.get("uid") for e in _json.loads(eps or "[]")} - {None, ""}
+        except Exception:
+            u = set()
+        keep.append(not (u and u <= seen))
+        seen |= u
+    n = len(keep) - sum(keep)
+    print(f"combine: {n:,} datasets dropped because an earlier wave's dataset already holds all their endpoints", flush=True)
+    return ds[keep] if n else ds
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("datasets", nargs="+")
@@ -100,6 +120,7 @@ def main():
     flt = [("q_pass", "==", True)] if a.only_passing else None  # filter while reading: Europe alone is millions of rows
     ds = pd.concat([gpd.read_parquet(p, filters=flt) for p in a.datasets if Path(p).exists()], ignore_index=True)
     ds = gpd.GeoDataFrame(ds.drop_duplicates("dataset_id"), geometry="geometry", crs="EPSG:4326")
+    ds = drop_covered(ds)
     if a.liveness and (Path(a.liveness) / "state.parquet").exists():
         ds = apply_liveness(ds, Path(a.liveness))
     ds, splits = fix_titles(ds)  # status words from service names; live and removed services split apart

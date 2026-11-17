@@ -29,6 +29,14 @@ class PortalRecord:
     links: list[tuple[str, str]] = field(default_factory=list)  # (kind, url) kind in arcgis|wms|wfs
     scale: float | None = None  # scale denominator stated in the metadata (ISO/INSPIRE)
     country: str = ""  # ISO2, when the catalogue states it per record
+    layer_names: list[tuple[str, str]] = field(default_factory=list)  # (OGC server base, layer name) the record names
+
+
+def ogc_layer_key(url: str, name: str) -> tuple[str, str]:
+    """(server base, layer name) that a WMS, WFS, WMTS or WCS layer shares across protocols on one server."""
+    u = re.sub(r"^https?://", "", url.lower().split("?")[0].split("#")[0].rstrip("/"))
+    u = re.sub(r"/(wms|wfs|wmts|wcs|ows|gwc/service/wmts|gwc/service/wms)$", "", u)
+    return u, str(name).strip().split(":")[-1].lower()
 
 
 def classify_link(url: str, fmt: str = "") -> tuple[str, str] | None:
@@ -254,12 +262,16 @@ async def harvest_geonetwork(c: Client, base: str, portal: str, max_records: int
         for h in hits:
             st["scanned"] += 1
             s = h.get("_source") or {}
-            links = []
+            links, names = [], []
             for ln in s.get("link") or []:
                 u = _gn_text(ln.get("urlObject")) or ln.get("url") or ""
                 k = classify_link(u, (ln.get("protocol") or "").replace("OGC:", "").split("-")[0])
                 if k:
                     links.append(k)
+                    # the layer the record describes, e.g. emodnet:heritageshipwrecks on a 200-layer WMS/WFS server
+                    nm = _gn_text(ln.get("nameObject")) or ln.get("name") or ""
+                    if k[0] in ("wms", "wfs", "wmts", "wcs") and isinstance(nm, str) and nm.strip():
+                        names.append((ogc_layer_key(k[1], nm)))
             if not links:
                 continue
             themes = list(dict.fromkeys(list(s.get("cl_topic") or []) +
@@ -273,6 +285,7 @@ async def harvest_geonetwork(c: Client, base: str, portal: str, max_records: int
                 publisher=_gn_text(s.get("OrgForResourceObject"))[:150],
                 landing_page=f"{base.rstrip('/')}/srv/api/records/{s.get('uuid') or h.get('_id')}",
                 links=list(dict.fromkeys(links)), scale=float(scale) if scale else None,
+                layer_names=list(dict.fromkeys(names)),
             ))
         after = hits[-1].get("sort")
         if not after:
