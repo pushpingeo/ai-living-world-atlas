@@ -60,6 +60,13 @@ jobs:
                   print(f"   first: {x['title'][:70]} | licence: {str(x.get('licence'))[:60]} | missing fields: {missing or 'none'}")
                   if args.get("capability") == "query" and not first_query:
                       first_query = (x["id"], args)
+          # Tobler's NSTA pipeline case: the WGS84 record must fetch live pipelines at Rosebank
+          rb = {"bbox": [-4.6, 60.6, -3.0, 61.4], "limit": 50}
+          for did in ("bdb5d0a70436343e", "29a134d61746d7dc"):
+              r, status, s = call("fetch_features", {"id": did, **rb})
+              print(f"fetch_features [{did} at Rosebank]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
+          r, status, s = call("get_dataset", {"id": "bdb5d0a70436343e"})
+          print(f"get_dataset [bdb5d0a70436343e]: {status}, title {r.get('title') if r else '-'!r}, endpoint {r['endpoints'][0]['url'].split('/services/')[-1] if r and r.get('endpoints') else '-'}")
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})

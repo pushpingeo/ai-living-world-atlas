@@ -13,6 +13,7 @@ import pandas as pd
 import pyarrow.parquet as pq
 
 from .licences import infer as infer_licences
+from .titles import fix_titles
 
 
 def apply_liveness(ds, d: Path):
@@ -101,6 +102,7 @@ def main():
     ds = gpd.GeoDataFrame(ds.drop_duplicates("dataset_id"), geometry="geometry", crs="EPSG:4326")
     if a.liveness and (Path(a.liveness) / "state.parquet").exists():
         ds = apply_liveness(ds, Path(a.liveness))
+    ds, splits = fix_titles(ds)  # status words from service names; live and removed services split apart
     ds = infer_licences(ds)  # e.g. US federal works; the wave files keep what was crawled
     ds.to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     if a.layers:
@@ -108,11 +110,22 @@ def main():
         keep = set(ds["dataset_id"]) if a.only_passing else None
         lf = [("dataset_id", "in", keep)] if keep is not None else None
         ly = pd.concat([pd.read_parquet(p, columns=[c for c in cols if c in pq.read_schema(p).names], filters=lf) for p in a.layers if Path(p).exists()], ignore_index=True)
-        ly.drop_duplicates("uid").to_parquet(out / "layers.parquet")
+        ly = ly.drop_duplicates("uid")
+        if splits:  # layers that moved to a split-off dataset follow it
+            import json as _json
+            moved = {e["uid"]: did for did, eps in zip(ds["dataset_id"], ds["endpoints"]) if did in splits
+                     for e in _json.loads(eps) if e.get("uid")}
+            ly["dataset_id"] = [moved.get(u, d) for u, d in zip(ly["uid"], ly["dataset_id"])]
+        ly.to_parquet(out / "layers.parquet")
     if a.tags:
         tg = pd.concat([pd.read_parquet(p) for p in a.tags if Path(p).exists() and Path(p).stat().st_size > 0], ignore_index=True)
         # newest tagging wins
         tg = tg.sort_values("tagged_at", kind="stable").drop_duplicates("dataset_id", keep="last")
+        if splits:  # a split-off dataset shares its parent's tags
+            par = tg.set_index("dataset_id")
+            add = [par.loc[o].to_dict() | {"dataset_id": n} for n, o in splits.items() if o in par.index]
+            if add:
+                tg = pd.concat([tg, pd.DataFrame(add)], ignore_index=True)
         tg.to_parquet(out / "tags.parquet")
     print(f"{len(ds)} datasets from {len(a.datasets)} waves; tags: {len(tg) if a.tags else 0}")
 

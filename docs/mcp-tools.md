@@ -33,6 +33,21 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (17 Nov, night) **Tobler request: mislabelled NSTA record (`bdb5d0a70436343e`). Done.** It wasn't only a title:
+  the crawl had grouped NSTA's live service and its `_removed_` twin under one dataset, because they share a title
+  and extent, and the removed one came first. Nine NSTA datasets were like this, including `29a134d61746d7dc`
+  (pipeline linear, ED50). At publish time (`atlas/titles.py`), such datasets are now split: the original id keeps the
+  live service, and the removed service becomes its own dataset with " – removed" in its title (for example
+  `bdb5d0a70436343e` live, `16b89c1506aa0b84` removed; `29a134d61746d7dc` live, `d35c83cc47faa79b` removed). Where
+  every endpoint is in a status-named service, the word is added to the title. Words: removed, decommissioned,
+  abandoned, proposed, planned, superseded, obsolete, archived, expired, relinquished. **Not "historic"**: in
+  service names it mostly means heritage (Historic Environment Scotland, Historic England), so it would mislabel
+  live data. Also left out: "former" and "draft". *Contract effect:* new dataset ids appear for the split-off
+  parts; existing ids keep working and now point at live data; field names are unchanged.
+- (17 Nov, late evening) **Tobler request: `fetch_features` "No dataset with id". Done 21:15** (see the outage note
+  below). Guarantee: every id `find_datasets` returns can be opened with `get_dataset` and passed to
+  `fetch_features`. The deploy smoke test checks it after every MCP deploy, and `mcp-check` checks it on demand.
+
 - (17 Nov, ~20:13–21:15, atlas fault, fixed) **`get_dataset` and `fetch_features` failed** with "No dataset with id"
   while `find_datasets` kept working. The MCP Worker reads dataset details from the viewer's detail files on GitHub
   Pages, and the viewer's switch to gzipped files (`d/xx.json` to `dz/xxx.json.gz`) moved them. The Worker now reads
