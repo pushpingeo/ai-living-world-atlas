@@ -238,3 +238,10 @@ help. Rob approved inferring public domain for US federal agencies' work (17 U.S
 the licence text and skipped when the credit names a non-federal party. Applied at publish time (`atlas/licences.py`
 from combine.py), so the wave files keep what was crawled. 5,420 marked on the US wave; 3,228 in the published index (347 skipped), because datasets also found by an earlier wave keep that wave's publisher type. Noted in
 `docs/mcp-tools.md` first; field names and types are unchanged. Details: `docs/us-licences.md`.
+
+## 2026-11-17 (evening): gzipped detail shards in the viewer (Rob approved)
+The viewer's detail shards were 628 MB of GitHub Pages' 1 GB limit. They are now gzipped JSON keyed by the first 3
+characters of the dataset id (`data/dz/xxx.json.gz`, 4,096 files) and unzipped in the browser with
+DecompressionStream; a file that arrives already unzipped is read as it is. `meta.json` carries `detail_dir`,
+`detail_key` and `detail_gz`, so the code follows whatever layout the data was built with. The pages build now
+version-stamps `app.js` and `style.css`. Site: 702 MB to 203 MB; a detail click fetches ~30 KB instead of ~2.5 MB.

@@ -151,10 +151,10 @@ Workspace notes:
    - Proposed new concepts: landscape-character-area, habitat-network, great-crested-newt-risk-zones.
    - The viewer's header still says "Public map services from UK government and agencies" (public text: Rob's call).
 5. **Tobler integration.** Done 17 Nov (see above). Tobler's requests live in `docs/mcp-tools.md`; the name index there is parked by Rob.
-6. **Size limits.** GitHub Pages is capped at 1 GB. Measured 17 Nov: the viewer site is **702 MB** (detail shards
-   `data/d` 628 MB, tiles 72 MB), up from ~560 MB before the Europe rerun. A separate `size-limit` job in pages.yml
-   fails at 800 MB so GitHub emails a failure; the deploy still runs. Plan in `docs/viewer-data-size.md`: gzip the
-   detail shards (about 5x smaller) and use more, smaller shards; R2 in reserve. Waiting for Rob's go-ahead.
+6. **Size limits.** GitHub Pages is capped at 1 GB. Since 17 Nov the detail shards are gzipped and keyed by 3
+   characters (`data/dz/`), so the site is **203 MB** (was 702 MB). A separate `size-limit` job fails at 800 MB, so
+   GitHub emails a failure; the deploy still runs. R2 is the next step if it ever grows that far
+   (`docs/viewer-data-size.md`). Not yet tested in Safari or Firefox.
 7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
    sweep) until shards finish.
 8. **Africa.** Scoping in `docs/spikes/africa-scoping.md`: national petroleum bodies publishing openly on ArcGIS

@@ -1,6 +1,9 @@
 # Viewer data and the 1 GB GitHub Pages limit: plan (17 Nov 2026)
 
-Plan only, nothing built. Needs Rob's go-ahead because it changes how the viewer loads data.
+**Done 17 Nov (A and B, Rob approved).** The site went from 702 MB to 203 MB: detail shards are now `data/dz/<first 3
+characters>.json.gz` (4,096 files, 125 MB), unzipped in the browser, and a click fetches about 30 KB. `meta.json` names
+the layout, and `app.js`/`style.css` are version-stamped at build. Tested in Chrome (desktop and phone size) locally and
+checked on the live site; Safari and Firefox not tested. R2 (option C) stays in reserve.
 
 ## Where we are
 
