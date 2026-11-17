@@ -65,9 +65,10 @@ Workspace notes:
 | Global backbones (`spike-global`) | 46.5k | 11.4k | UNEP-WCMC, GEM, GEBCO, Copernicus/EEA, ESA, GHSL, HydroSHEDS, USGS, FAO, public Living Atlas |
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
-| Europe (`spike-europe`) | 1.64M | 73.7k | From data.europa.eu, since the INSPIRE geoportal has gone; 488k local plans grouped into 1,672 council collections |
+| Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **212k passing datasets**, all tagged.
+- The viewer and the MCP server hold about **256k passing datasets**. About 52k new Europe datasets are not tagged yet
+  (they show without themes); tagging them is waiting on Rob's go-ahead (~$4.70).
 - Tagging spend is **$23.86** in total: UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39, Europe $6.49.
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
@@ -94,17 +95,26 @@ Workspace notes:
 - combine.py applies it at publish time: retired endpoints out, `"status":"failing"` on failing ones, latest data
   check in `check`, refused ArcGIS Query removed from capabilities. The viewer shows "not answering" or
   "sample request failed" against an endpoint.
-- Tests so far (17 Nov, two runs of 3k and 4k services): 99.8% of checked endpoints resolve. Fixing our own WFS
+- First full night (17 Nov, 45k services, 197 min, 107k requests): **99.6% of checked endpoints resolve**; 142k of
+  508k endpoints checked so far; 539 failing, none retired yet. Hosts down that night: geoportal.kreis-lup.de,
+  gis.dot.nv.gov, vogis.cnv.at. Data checks on record: 41.3k ok, 1.7k fail, 1.2k unchecked, 159 empty.
+- Earlier test runs (3k and 4k services) gave 99.8%. Fixing our own WFS
   check (2.0.0 first; advertised GetMap/GetFeature address; upper-case parameters) took WFS sample failures from
   86% to under 2%.
 
 ## Known gaps and next steps (rough priority)
 
-1. **Europe rerun in progress (17 Nov).** The harvest now restarts broken scrolls: 681k catalogue records this time
-   (367k before). Then 20 crawl shards, merge, and `collections` starts by itself. Still to do by hand: tag the new
-   Europe datasets (`runs/tag-europe.env`, bump `RUN`), report the cost, and check the merge memory (`CONCAT=1`).
+1. **Tag the new Europe datasets.** The rerun finished cleanly on 17 Nov (20 shards, none hit the time budget,
+   merge 4 min, collections 6 min). 51,981 passing Europe datasets have no tags, about $4.70 at batch rates. To run
+   it: bump `RUN` in `runs/tag-europe.env` and push (already-tagged datasets are skipped). Not started: an
+   unattended push of a paid run was blocked, so it needs Rob's go-ahead or a run from an attended chat.
 2. **Watch the sweep's first week.** history.csv on `results/liveness` has one line a night. Check the resolving
    rate, which hosts go "down", and that nothing retires wrongly once the 14-day window opens (around 1 Dec).
+   - The first full night checked the index as it was before the Europe rerun; the new Europe endpoints are picked up
+     as never-checked from the next night.
+   - The 03:23 cron run on 17 Nov didn't appear (a push-started run was queued behind the Europe shards at the time).
+     Check that the nightly schedule fires on 18 Nov.
+   - A night takes ~200 of its 240 minutes at 45k services; the bigger index may need MINUTES raised.
 3. **US quality.**
    - Licence detection doesn't recognise "public domain" wording, so no US licence is marked open.
    - Almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave records).
