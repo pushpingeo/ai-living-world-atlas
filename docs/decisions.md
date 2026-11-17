@@ -199,3 +199,7 @@ cursor past it silently). Page size cap raised to 300 MB so large pages aren't c
 still started by hand, and tag_batch refuses to submit more than MAX_DATASETS (default 200k, about $18).
 
 **Text search inside a layer (`fetch_features` `text`).** Tobler needs "the M9" or "Kipoi" from a layer with thousands of features, where the 100-feature cap returns a random handful. For ArcGIS endpoints the worker reads the layer's name-like string fields (cached a day) and adds `UPPER(field) LIKE '%TEXT%'` across them; if the server refuses that, it fetches up to 2,000 features and filters them itself. WFS is filtered after fetching. No new cost beyond one cached layer-description request.
+
+## 2026-11-17: WFS bounding boxes must state their CRS
+
+`fetch_features` (and the viewer) asked WFS servers for `version=1.0.0&srsName=EPSG:4326&bbox=lon,lat,lon,lat`. `srsName` only sets the output; without a CRS on the bbox the server reads it in the layer's native CRS. For NatureScot's SSSI layer (British National Grid) the box landed near the grid origin and returned nothing, so Tobler missed Linlithgow Loch's neighbouring SSSIs. With the CRS stated, the same request returns 10 SSSIs. Now: WFS 1.1.0 with `srsName` and bbox in `urn:ogc:def:crs:OGC:1.3:CRS84` (lon/lat order), falling back to 1.0.0 with `,EPSG:4326` on the bbox; an XML exception report is named as such. Affects every WFS layer not published in WGS84, which is most national ones in Europe. Worth a spot check across a sample of WFS layers.

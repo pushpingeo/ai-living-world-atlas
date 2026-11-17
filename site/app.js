@@ -267,7 +267,9 @@ function featureUrl(e, v) {
   const [x0, y0, x1, y1] = v.map((n) => n.toFixed(6));
   if (e.protocol === "wfs") {
     const s = e.service_url;
-    return `${s}${sep(s)}service=WFS&request=GetFeature&version=1.0.0&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(wfsJson(e))}&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1}&maxFeatures=${MAX_FEATURES}`;
+    // The bbox must state its CRS, or WFS reads it in the layer's own CRS (e.g. British National Grid) and finds nothing.
+    const crs84 = "urn:ogc:def:crs:OGC:1.3:CRS84";
+    return `${s}${sep(s)}service=WFS&request=GetFeature&version=1.1.0&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(wfsJson(e))}&srsName=${crs84}&bbox=${x0},${y0},${x1},${y1},${crs84}&maxFeatures=${MAX_FEATURES}`;
   }
   // ask the server to simplify to about one screen pixel, so a national layer doesn't arrive at survey precision
   const tol = ((v[2] - v[0]) / map.getCanvas().clientWidth).toPrecision(2);

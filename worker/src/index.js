@@ -144,7 +144,7 @@ function usage(e) {
     out.image_url = `${e.service_url}${sep(e.service_url)}service=WMS&request=GetMap&version=1.1.1&layers=${encodeURIComponent(e.layer_name)}&styles=&srs=EPSG:3857&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&transparent=true`;
   if (e.protocol === "wfs") {
     const fmt = (inf.output_formats || []).find((x) => /json/i.test(x));
-    out.query_url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.0.0&typeName=${encodeURIComponent(e.layer_name)}&srsName=EPSG:4326&bbox={west},{south},{east},{north}` + (fmt ? `&outputFormat=${encodeURIComponent(fmt)}` : "");
+    out.query_url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.1.0&typeName=${encodeURIComponent(e.layer_name)}&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox={west},{south},{east},{north},urn:ogc:def:crs:OGC:1.3:CRS84` + (fmt ? `&outputFormat=${encodeURIComponent(fmt)}` : "");
     if (!fmt) out.note = "This WFS only offers GML.";
   }
   if (e.protocol === "wmts" && inf.tile_template) out.tile_template = inf.tile_template;
@@ -241,12 +241,17 @@ async function fetchFeatures(env, a) {
   if (!eps.length) throw new Error("This dataset has no endpoint that can return features. Use get_dataset for image or tile endpoints.");
   const errors = [];
   for (const e of eps) {
-    let url;
+    let url, alts = [];
     const [x0, y0, x1, y1] = v.map((n) => n.toFixed(6));
     if (e.protocol === "wfs") {
       const fmt = (info(e).output_formats || []).find((x) => /json/i.test(x));
       if (!fmt) { errors.push("WFS offers GML only"); continue; }
-      url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.0.0&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(fmt)}&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1}&maxFeatures=${limit}`;
+      // The bbox must say it's in degrees: without a CRS, WFS reads it in the layer's own CRS (e.g. British
+      // National Grid metres), so a lon/lat box lands off Cornwall and returns nothing. CRS84 keeps lon/lat order.
+      const head = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(fmt)}&maxFeatures=${limit}`;
+      const crs84 = "urn:ogc:def:crs:OGC:1.3:CRS84";
+      url = `${head}&version=1.1.0&srsName=${crs84}&bbox=${x0},${y0},${x1},${y1},${crs84}`;
+      alts = [`${head}&version=1.0.0&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1},EPSG:4326`];
     } else {
       const tol = ((v[2] - v[0]) / 1000).toPrecision(2);
       let where = a.where || "1=1";
@@ -258,9 +263,15 @@ async function fetchFeatures(env, a) {
       url = `${e.url}/query?where=${encodeURIComponent(where)}&geometry=${x0},${y0},${x1},${y1}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&f=geojson&resultRecordCount=${limit}&maxAllowableOffset=${tol}&geometryPrecision=6&returnGeometry=${a.include_geometry === false ? "false" : "true"}`;
     }
     try {
-      const r = await fetch(url, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
-      if (!r.ok) { errors.push(`${e.protocol}: HTTP ${r.status}`); continue; }
-      let gj = await r.json();
+      let r, gj;
+      for (const u of [url, ...alts]) {
+        r = await fetch(u, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
+        if (!r.ok) continue;
+        const t = await r.text();
+        try { gj = JSON.parse(t); } catch { gj = { error: { message: t.trimStart().startsWith("<") ? "the server answered in XML (an exception report)" : "not JSON" } }; }
+        if (Array.isArray(gj.features)) break;
+      }
+      if (!r.ok && !gj) { errors.push(`${e.protocol}: HTTP ${r.status}`); continue; }
       if (!Array.isArray(gj.features) && a.text && !e._filterAfter && e.protocol !== "wfs") {
         // The server refused the text filter (some don't allow UPPER or LIKE): fetch without it and filter here.
         e._filterAfter = true;
