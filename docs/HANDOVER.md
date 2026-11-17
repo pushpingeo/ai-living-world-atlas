@@ -171,7 +171,7 @@ Workspace notes:
      code-like titles), so the petroleum layers wouldn't appear.
    - Needs Rob's call on letting authoritative national sources pass without a description (with a humanised title)
      before publishing. Scoping: `docs/spikes/africa-scoping.md`.
-9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave crawled and being tagged, then published
-   first in `runs/published.txt`. NSTA status words done. Trusted services: design only, waiting on Rob.
+9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
+   `runs/published.txt`, tagged for $0.14). NSTA status words done. Trusted services: design only, waiting on Rob.
    Still open from Tobler's list: text search that holds up world-wide (D1 overload) and the name index (licence
    question for Rob).
