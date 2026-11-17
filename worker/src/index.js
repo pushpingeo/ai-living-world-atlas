@@ -123,11 +123,25 @@ function fit(b, v) {
 
 const unwrap = (s) => (s ? s.split(",").filter(Boolean) : []);
 
-async function details(env, id) {
-  const r = await fetch(`${env.DATA_BASE}d/${id.slice(0, 2)}.json`, { cf: { cacheTtl: 3600 } });
+// Dataset details come from the viewer's detail shards on GitHub Pages. Since 17 Nov they are gzipped and keyed by
+// 3 characters (dz/xxx.json.gz); the old layout (d/xx.json) is tried if the new one isn't there. A file that arrives
+// already unzipped is read as it is. (The viewer layout change on 17 Nov broke this for ~1 hour: keep them in step.)
+async function readShard(url) {
+  const r = await fetch(url, { cf: { cacheTtl: 3600 } });
   if (!r.ok) return null;
-  const shard = await r.json();
-  return shard[id] || null;
+  const buf = await r.arrayBuffer();
+  const b = new Uint8Array(buf);
+  if (b[0] === 0x1f && b[1] === 0x8b) {
+    const s = new Response(buf).body.pipeThrough(new DecompressionStream("gzip"));
+    return JSON.parse(await new Response(s).text());
+  }
+  return JSON.parse(new TextDecoder().decode(buf));
+}
+
+async function details(env, id) {
+  const shard = (await readShard(`${env.DATA_BASE}dz/${id.slice(0, 3)}.json.gz`))
+    || (await readShard(`${env.DATA_BASE}d/${id.slice(0, 2)}.json`));
+  return (shard && shard[id]) || null;
 }
 
 const info = (e) => { try { return JSON.parse(e.info || "{}"); } catch { return {}; } };

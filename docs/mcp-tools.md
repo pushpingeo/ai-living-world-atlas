@@ -33,6 +33,12 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (17 Nov, ~20:13–21:15, atlas fault, fixed) **`get_dataset` and `fetch_features` failed** with "No dataset with id"
+  while `find_datasets` kept working. The MCP Worker reads dataset details from the viewer's detail files on GitHub
+  Pages, and the viewer's switch to gzipped files (`d/xx.json` to `dz/xxx.json.gz`) moved them. The Worker now reads
+  the new files (and the old ones as a fallback). Lesson for the atlas chat: a viewer data layout change is an MCP
+  change. `mcp-check` (runs/mcp-check.env) now tests all three tools live.
+
 - (17 Nov, atlas change, approved by Rob) **Inferred licence for US federal works.** For about 5-6k US datasets
   from federal agencies (NOAA, USFS, Census, BLM, USGS, BOEM…) that state no open licence, `licence` becomes
   "US federal government work: public domain in the US (inferred, 17 U.S.C. §105; not stated by the publisher)",
