@@ -1,5 +1,14 @@
-# round 5 (17 Nov): live viewer after the gzipped detail shards
-https://pushpingeo.github.io/ai-living-world-atlas/index.html
-https://pushpingeo.github.io/ai-living-world-atlas/data/meta.json
-https://pushpingeo.github.io/ai-living-world-atlas/data/dz/5d3.json.gz
-https://pushpingeo.github.io/ai-living-world-atlas/data/d/5d.json
+# round 6 (17 Nov): EMODnet endpoints and GeoNetwork records (Tobler request)
+https://emodnet.ec.europa.eu/geonetwork/srv/api/records/e965088b-a265-4517-84df-c49b156af8a7/formatters/json
+https://emodnet.ec.europa.eu/geonetwork/srv/api/records/e965088b-a265-4517-84df-c49b156af8a7
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://ows.emodnet-humanactivities.eu/wms?service=WMS&request=GetCapabilities&version=1.3.0
+https://ows.emodnet-bathymetry.eu/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://ows.emodnet-seabedhabitats.eu/geoserver/emodnet_open_maplibrary/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://drive.emodnet-geology.eu/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://geoserver.emodnet-physics.eu/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://geo.vliz.be/geoserver/Emodnetbio/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://geoserver.hcmr.gr/geoserver/EMODNET_SHARED/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://emodnet.ec.europa.eu/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://emodnet.ec.europa.eu/geonetwork/srv/api/search/records/_search
