@@ -1,0 +1,321 @@
+host_or_org,org_name,hits,countries,sample_titles
+services1.arcgis.com/AhXvNWFdL7hH4TjJ,,138,Congo 10; Egypt 9; South Africa 8,Africa_French_Equatorial_100k; Africa_French_Equatorial_200k; Africa_Rwanda_Burundi_200k_Z522; Africa_West_250k_G501; Africa_West_250k_G503; Algeria_100k
+https://tiles.arcgis.com,,133,Tanzania 43; Mauritius 8; Kenya 7,"01_ForestZoning_Eng; 2002 Landcover for the Coastal Area in Ghana's Western Region; 2012 Landcover for the Amansule Wetland Area, Western Region, Ghana; AOI_MOGALAKWENA_MINE_1; ArabiaAndNileCountry_1835; Asmara_Buildings and monuments_Visitor map"
+services1.arcgis.com/SR1muQK0r6SVF2nb,,120,Algeria 3; Angola 3; Benin 3,Michigan Minerals; Minnesota Minerals; WI mines
+services2.arcgis.com/RPhrOu9XQzI31xTa,Michigan Tech University,109,Algeria 4; Angola 4; Benin 4,IronRangeMinesJoined; IronRangeMinesLocations; MTU_MIMineLocations_WGS84UTM16N; MinesUTM16n_500mbufferall
+services8.arcgis.com/7DJFMLstNUGRFz6m,Laudato Si Action Platform,92,South Sudan 46; Sudan 46,Catholic conference landscapes and migrant residents; Catholic conference landscapes and migrant residents - Country migration context; Catholic conference landscapes and migrant residents - Map layers; Catholic conference landscapes and migrant residents - Public LSAP participant locations; Communities in transit - Catholic jurisdictions - ecclesiastical and LSAP context; Communities in transit - Country context
+services6.arcgis.com/ONZht79c8QWuX759,Regional Municipality of Peel,89,Algeria 8; Egypt 8; Morocco 8,2016 Census CD CSD; 2016 Census CT; 2016 Census Service Delivery Area 2017; 2016 Census Ward Boundary 2018_2022; Census 2021 - CD CSD - Immigration Citizenship Mobility; Census 2021 - Census Tract - Labour Education Commute
+services2.arcgis.com/Zh40oETt5seUAu0e,Kew Science,83,Guinea 20; Mozambique 14; Cameroon 13,BOL_TIPAs_NETWORK; BOL_TIPAs_NETWORK_POINT; BOL_TIPAs_POLYGON_CORE; Bolivia_TIPAs_NETWORK_Core; Bowal Elevation FINAL; Bowal Substrate FINAL
+services1.arcgis.com/hVMNhMnY75fwfIFy,The University of Texas at San Antonio,80,Algeria 2; Angola 2; Benin 2,mineria_Bolivia_usgs; mrds_fPE
+services2.arcgis.com/gmEC1e2ecZnyynki,,79,Sudan 35; South Sudan 34; Kenya 6,Basement Complex; Dollo_Zone_arcmap; Fault from Geol Map; Geology_South Sudan_; HouseholdVulnerabilityIndex_Duk; HouseholdVulnerabilityIndex_Fashoda
+services1.arcgis.com/cc7nIINtrZ67dyVJ,National Geospatial-Intelligence Agency,78,Mozambique 16; Kenya 5; Guinea 4,Beira_20Mar_inundation (feature service); Buzi_20Mar_inundation (feature service); Buzi_25Mar_inundation (feature service); Chinde_20Mar_inundation (feature service); Chinde_26Mar_inundation (feature service); Communication Media Use
+services3.arcgis.com/BU6Aadhn6tbBEdyk,GRID3,62,Congo 3; Guinea 3; Niger 3,GRID3 AGO - Settlement Extents v3.0; GRID3 BDI - Settlement Extents v3.0; GRID3 BEN - Settlement Extents v3.0; GRID3 BFA - Settlement Extents v3.0; GRID3 BWA - Settlement Extents v3.0; GRID3 CAF - Settlement Extents v3.0
+services6.arcgis.com/C0HVLQJI37vYnazu,"UNEP, Office of Science",58,Nigeria 19; Guinea 13; Côte d'Ivoire 10,ARB_Coral Reefs_2018; ARB_Earthquakes; ARB_Geology; ARB_Landuse; ARB_Mangroves_2016; ARB_Seaports
+https://gis.forest-atlas.org,,58,Congo 50; Liberia 4; Cameroon 2,Affectation des terres; Agricultural expansion; Agro industrial plantations; Amenagement forestier Gabon; Aménagement forestier; Annual harvestable areas
+services6.arcgis.com/AiFYNnCB5tR7Kcz5,"ANPG, Agência Nacional de Petróleo, Gás",57,Angola 57,AGO_12NM; AGO_200NM; AGO_24NM; AGO_350NM; AGO_African_Elephant; AGO_Batimetry
+services.arcgis.com/gPAeJh41oYEgw9wR,,51,Algeria 1; Angola 1; Benin 1,World Development Indicators
+services9.arcgis.com/QlP0FhVX2H6jLsBR,,49,Central African Republic 4; Cameroon 3; Ghana 3,ZAHF_WFL1; caf_admbnda_adm0_200k_sigcaf_reach_itos_v2; huntting_WFL1; war_WFL1
+services5.arcgis.com/aQMqya7Haac8J82d,United Nations Population Fund,44,Burundi 2; Madagascar 2; Malawi 2,DHS Countries Boundaries poly_WFL1; Preparedness_Assessment_Results_20241120
+services1.arcgis.com/5GRYvurYYUwAecLQ,The City of Kingston,43,Algeria 3; Burundi 3; Cameroon 3,2021 Census: Immigration & Mobility (CMA CSD); 2021 Census: Immigration & Mobility (Electoral Districts); 2021 Census: Immigration & Mobility (Neighbourhoods); Census 2016: Electoral District Census Profiles: Language and Immigration; Census 2016: Neighbourhood Census Profiles: Language and Immigration
+services.arcgis.com/3xOwF6p0r7IHIjfn,,40,Algeria 1; Angola 1; Benin 1,Mines
+services8.arcgis.com/oTalEaSXAuyNT7xf,Africa GeoPortal,38,Kenya 15; Nigeria 7; Libya 4,Africa - Electricity Transmission And Distribution Grid; Autobeccs EVs Ecosystem Study 2026; COVID19_Datasets_GH; Energy Generation Sites of Uganda; Groundwater Resources of Libya _GWRL__WFL1; Ijebu Ode Tourist Attractions Web Map v2_WFL1
+services2.arcgis.com/7rtHjarZXSDfzbIf,,38,Nigeria 22; Niger 16,"ASSESSMENT OF THE USAGE OF INFORMATION AND COMMUNICATION TECHNOLOGY (ICT) AMONG VEGETABLE PRODUCERS IN OYO STATE, NIGERIA_form; Cummulative; DETERMINANTS OF ADOPTION OF IMPROVED COCOA CULTIVARS AMONG COCOA FARMERS IN OSUN STATE, NIGERIA_form; DETERMINANTS OF LABOUR MIGRATION AMONG COCOA PRODUCING COMMUNITIES IN OSUN STATE, NIGERIA_form; Depot Personnel_form; Effect of Natural Gas Initiative (CNG) on Agricultural Produce Transporters' Wellbeing in Oyo State Nigeria - Copy_form"
+services2.arcgis.com/F8POR271LxJO47bS,,37,Nigeria 8; Mali 4; Central African Republic 3,Abuja and Lagos Media Outlets; All Other Media Outlets; Bamako Educational Facilities ; Bamako Hospitals; CAR_Ethnicity1_shp; Cameroon Ethnicity
+services.arcgis.com/uHAHKfH1Z5ye1Oe0,Michigan State University Online ArcGIS,35,Malawi 4; Niger 3; South Africa 3,Africa_French_Equatorial_100k; BelgianCongo_100k; EarthFund_Malawi_FLR2; EaryFund_Malawi_FLR3; Libya_Cyrenaica_100k_P662; Malawi_50k_2
+services3.arcgis.com/tuNLpt6Wfhd22qmO,American University of Beirut,34,Senegal 33; South Africa 1,Date Block 6; Date Block 7; Date Block 8; Eviction Suit Block 6 Al Senegal; Eviction Suit Block 7 Al Senegal; Eviction Suit Block 8 Al Senegal
+https://demographics2.arcgis.com,,33,Niger 3; Algeria 2; Egypt 2,Algeria Purchasing Power Per Capita; Algeria Total Population; Angola Total Population; Botswana Average Household Size; Cameroon Total Population; Côte d'Ivoire Average Household Size
+services5.arcgis.com/cuQhNeNcUrgLmYGD,ArcGIS Instant Apps,32,Mali 12; Guinea 4; Burkina Faso 3,Border Crossings; Education; Ethinic Groups; Languages; Lodging; Mali Health Events
+services1.arcgis.com/9NvE8jKNWWlDGsUJ,,32,Egypt 4; Algeria 3; Morocco 3,Dundas BRT _ Transit Commuting Context_WFL1; Local Public Transit Accessibility and Neighborhood Population Distribution in Mississauga_ 2021; WARD_AGE_NO_DEC_WFL1; WARD_BIKE_DATA_WFL1
+services8.arcgis.com/22aEWILt579igsi8,Esri Indonesia Smart Community,32,Algeria 4; Burkina Faso 4; Côte d'Ivoire 4,Mali Language Group; Mali Language Group Map; Mali Language Group_3; test2
+https://gis-gfw.wri.org,,32,Cameroon 6; Congo 5; Guinea 5,Agro-Industrial Zones - With Description; Agro-industry; DRC Managed Forest Concessions by Global Forest Watch; Forestry; WRI - Managed Forest Concessions; Wetgeving t.a.v. sojateelt
+services6.arcgis.com/zFQIsexhHEeZxs8L,JOINT SPECIAL OPERATIONS UNIVERSITY,31,Benin 2; Burkina Faso 2; Cabo Verde 2,Economic; Military & Security Forces
+https://demographics1.arcgis.com,,31,Guinea 5; Benin 2; Cabo Verde 2,Benin Average Household Size; Benin Purchasing Power per Capita; Burkina Faso Total Population; Burundi Total Population; Cabo Verde Average Household Size; Cabo Verde Purchasing Power per Capita
+services3.arcgis.com/rl7ACuZkiFsmDA2g,City of Brampton,29,Algeria 3; Egypt 3; Ethiopia 3,Census 2021; Census2011; GeohubCensusProfile2011
+services3.arcgis.com/kfmqp6kwSeDnDKNY,,28,Guinea 7; Liberia 7; Mali 7,FIS_edu_WFL1; Percentage of Population Food Insecure; Regional Agricultural Locations_WFL1; Regional Educational Institutions_WFL1; Regional Food Insecurity_WFL1; Regional Road Coverage_WFL1
+services.arcgis.com/qovwaCdMoEzUUFzS,,27,Sudan 10; Ethiopia 4; Eritrea 3,Blocks_polygons_density_pop; ETH_Ura_blocks__density_poly; Ethiopia Ura camp map v2_WFL1; LOC_URA_LYR_Settlement_blocks; Loc_UNHCR_enriched; Protection risks Q2 2026
+services1.arcgis.com/RpVCghfSj7XHqAKQ,University of the South GIS,26,Chad 10; Guinea 7; Equatorial Guinea 6,Chad GDP By MAJ; Chad Oil LBS By MAJ; Convential crude oil total energy supply; Copy of Sub Saharan Oil Exports DM; Copy of Sub Saharan Oil Exports SHANE; EG_OilExp_2016
+services1.arcgis.com/LtV843tpmQ5z4u7r,Africa Geoscience Data,26,Nigeria 4; Angola 3; Ethiopia 3,AGD_Dev_Review_Map_Sept2025_WFL1; AGD_Dev_Review_Map_WFL1; AGD_Index_100K_WFL1; AGD_Index_250K_WFL1; AGD_NIGERIA_WFL1
+services1.arcgis.com/RTK5Unh1Z71JKIiR,World Wide Fund for Nature,26,Zambia 13; Kenya 3; Mozambique 2,DAM; Global PADDDtracker 1892-2021; Hoima Tanga Pipeline; KRRC; Kafue_Protected_Area; Kafue_Sugarcane_Plantation
+services4.arcgis.com/OKSIGaKozBbXs8yv,,26,Kenya 26,ke_coral_reefs; ke_district_boundaries; ke_dugong_dolphin_sites; ke_forests; ke_hotel_beds_coast; ke_hotels_lodges_campsites
+http://gis-gfw.wri.org,,25,Congo 7; Cameroon 4; Liberia 4,Cameroon Forest Management Units; Cameroon agro-industrial zones; Cameroon mining permits; Central African Republic logging permits; Democratic Republic of the Congo forest titles; Democratic Republic of the Congo mining permits
+https://gis.earthdata.nasa.gov,,25,South Africa 25,Annual Climatology (99th Percentile Cloud Top Height) (South Africa Convection Climatology); Annual Climatology (99th Percentile SEVIRI Infrared Minus Tropopause Difference) (South Africa Convection Climatology); Annual Climatology (Anvil Cloud Days/Month) (South Africa Convection Climatology); Annual Climatology (Overshooting Top Days/Month) (South Africa Convection Climatology); Annual Climatology With Hourly Timesteps (Anvil Cloud Days/Month) (South Africa Convection Climatology); Annual Climatology With Hourly Timesteps (Overshooting Top Days/Month) (South Africa Convection Climatology)
+services8.arcgis.com/P8e9VWKMOZOXB4PX,Perceptum Limited,24,Equatorial Guinea 12; Guinea 12,EG Blocks View (12072024); EG License Blocks 12072024; EG Oil and Gas Facilities; EG_Perceptum_2DSeismic; EG_Test; Web_Framework
+http://gis.forest-atlas.org,,23,Congo 17; Cameroon 2; Central African Republic 1,Administrative Division; Aires protégées; Concessions forestières de la Guinée Equatoriale; Concessions forestières de la République Centrafricaine; Concessions forestières de la République Démocratique du Congo; Concessions forestières de la République du Congo
+services7.arcgis.com/iEMmryaM5E3wkdnU,WorldMap @ Harvard Community,22,Ghana 7; Niger 4; Nigeria 4,AGIP; Akan People; Chevron; Ghana; GoldMines ; Hand Dug Well
+services.arcgis.com/o6oETlrWetREI1A2,URSpatial,22,Congo 11; Ghana 3; Mali 3,AfricaWorldWar_WFL1; Animal_Species_Cameroon; Belgian Congo_WFL1; Civilian Violence and permits_WFL1; CongoFinal_NoOutline; Hist251_Lab10_Meszaros_WFL1
+services3.arcgis.com/P11fCRq9Db4CjHMS,,21,Ghana 20; Benin 1,2DSEIS; 3DSEIS; DEMARCATION_ONSHORE BLOCKS; EXPLORCO_LICENSES; FIELDS_2022; GH_PROD_21
+services1.arcgis.com/7Csm4eKNP8xsiEc1,Georgia State University,21,Egypt 3; Eritrea 3; Ethiopia 3,DC_Age_profile_feature; DC_Language_profile_feature; DC_Race_profile_feature
+services1.arcgis.com/o90r8yeUBWgKSezU,House of Representatives,20,Algeria 2; Angola 2; Egypt 2,NaturalGasImports_2016; OilImports_2016
+services8.arcgis.com/l5y3Vt2v5EQrESk5,,19,Algeria 1; Angola 1; Benin 1,Donovia Far East PMESII Web Map _WFL1
+services.arcgis.com/F7DSX1DSNSiWmOqh,The Nature Conservancy,19,Gabon 5; Seychelles 3; Angola 2,Africa Layers (All); AfricaWaterFunds; Coastal Protection; GCTWF_Publish_WFL1; MacP_Watershed_S1_prj; MacP_ZoneProjet_prj
+services9.arcgis.com/F0CjV9xC6jjwGA9r,African Climate and Development Initiative,19,South Africa 19,AllMiningCommunitiesSep25; Former_Homelands; GSA_LTAy_classes; Gas Fired Power Plants; Ground_Water_Open_Cast; Main Places
+services6.arcgis.com/5JS8d7uQ2N3eIJUG,,18,Nigeria 10; Niger 8,Abia State; Akwa Ibom; Bayelsa; Cross River; Delta State; Edo State
+https://utility.arcgis.com,,17,Gabon 5; Angola 2; Botswana 2,Agriculture; Foret; Mines; Petrole; Southern Africa 3D Landcover; Wattled cranes
+services.arcgis.com/jDGuO8tYggdCCnUJ,,16,Niger 3; Nigeria 2; Algeria 1,Existing African Pipelines; Existing and Proposed Persian Gulf Gas and Oil Pipelines; Horn of Africa Existing and Proposed Oil and Gas Pipelines; Proposed African Pipelines; West African Existing and Proposed Pipelines
+services2.arcgis.com/y20RuA5nmE8htWdM,Esri Rwanda Ltd.,16,Rwanda 7; Congo 3; Burundi 2,Earthquakes Rwanda; Environment_WFL1; Nyabarongo; Nyabugogo; Rwanda Level 1 Catchments; Rwanda Level 3 Catchments
+services5.arcgis.com/sjP4Ugu5s0dZWLjd,Food and Agriculture Organization of the United Nations,15,Zimbabwe 9; Congo 1; Kenya 1,"Agro-ecological regions of Zambia; Forest Concessions Congo Basin (2020); Gasabo_WFL1; In-situ data, Summer 2024; Kenya Protected Areas; Physiographic regions of Tanzania"
+services.arcgis.com/HQ0xoN0EzDPBOEci,Hawaiʻi Statewide GIS Program,15,Mali 15,DOFAW Managed Areas 2018; DOFAW Managed Areas 2020; DOFAW Managed Lands; Forest Reserve; IIFS_Mandated_20241022; Makawao Storymap Webmap 2_WFL1
+services.arcgis.com/Sf0q24s0oDKgX14j,University of Salzburg - Geoinformatics,14,Niger 4; Nigeria 4; Ghana 3,User Experiment Survey - Nigeria_form; ethnicgroup_group; ethnicgroup_subgroup_unique; subgroup_unique_vectortile
+services.arcgis.com/BG6nSlhZSAWtExvp,Esri GIS Education,14,Guinea 2; Liberia 2; Cameroon 1,monrovia_cul_sec_infra; monrovia_econ_ed_govt_rel_adm
+services.arcgis.com/tKsJAIiLjd90D5q2,Indiana University ,14,Niger 4; Nigeria 4; Egypt 1,Egyptian Ecoregions SM; Nigeria ecoregions TA; Nigeria_50k_clearinghouse; Nigeria_50k_index; Post-Mining Landscapes: A Social Cartography of Lead Mines in  Southeastern Nigeria_form; Rhodesia_Nyasaland_250k_IUOwns
+services1.arcgis.com/Kw7jGaBPiN3WUAmT,Kenyatta University,14,Kenya 11; Niger 3,COVID19_Nairobi_Metropolitan_Area; Corona_prevalence; Gathirimu_Girls_T_High_School; Tour Guides Inventory - Kenya; Tour Guides Inventory - Kenya FN; Tour Guides Inventory - Kenya FN_results
+services8.arcgis.com/WjAwg84s4EayFLBd,Plantlife International,13,Algeria 1; Cabo Verde 1; Cameroon 1,Global Important Plant Areas
+services3.arcgis.com/eyU1lVcSnKSGItET,,12,Algeria 1; Cameroon 1; Chad 1,LWVFRA Service Area; Mining Gridcells; RecentEra_WFL1
+services4.arcgis.com/EFR1jLwu7PVluKhI,Edina Public Schools ISD273,12,Niger 7; Angola 2; Zambia 2,ARC GIS Map 2 location of mines in Zimbabwe _ Sheet1; Map 2 Angola Oil Drilling Locations _ Sheet1; Map 2_Angola Oil Refiniries _ Sheet1; Niger Oil Blocks; Niger Oil Field; Niger Oil v_2 _ ArcGis
+services7.arcgis.com/IyvyFk20mB7Wpc95,Sustainable Development Solutions Network,12,Benin 2; Mauritius 2; Egypt 1,2020 Africa SDG Index and Dashboards Report (with indicators); Benin Sustainable Development Report 2022 (with indicators); Benin Sustainable Development Report 2023 (with indicators); Schools in Mozambique; Sustainable Development Report 2024 (with indicators)
+services9.arcgis.com/N6bh3jZojHIhVEPX,Ministère de l’Environnement et Développement Durable,12,Congo 12,Assiettes Annuelles de Coupe; Blocs quinquennaux; Concession de Conservation; Concession_Exploitation; Concession_forestiere2025; Forest concession agreements
+services8.arcgis.com/32TQOipPYLOeSkYk,Forest Stewardship Council® · FSC®,12,Kenya 6; Congo 2; Democratic Republic of the Congo 1,Democratic_Republic_of_the_Congo_mining_permits; Equatorial_Guinea_logging_concessions; Gabon_mining_permits; Republic_of_the_Congo_logging_concessions; ke_forests; ke_hydropower_dams
+https://basemaps.arcgis.com,,12,Kenya 8; Ethiopia 2; South Sudan 1,Colored Pencil (Kenya Edition); Community (Kenya Edition); Gashamo Hawd Somali Ethiopia; Human Geography Dark Detail (Kenya Edition); Human Geography Detail (Kenya Edition); Mid-Century (Kenya Edition)
+services1.arcgis.com/VwarAUbcaX64Jhub, Digital-Earth.eu Centres of Excellence,12,South Sudan 6; Sudan 6,Energy Resources - copy; Global energy resources Coal; Global energy resources Nat. Gas; Global energy resources Petroleum; Global energy resources database
+tiledimageservices7.arcgis.com/iEMmryaM5E3wkdnU,WorldMap @ Harvard Community,11,Algeria 3; Congo 1; Egypt 1,Algeria Hydrocarbon; Ethnicity Felix 2001 Original; Kenya: Oil & Gas Sector Map; Map: Algeria Oil & Gas Fields; Map: Egypt Key Oil & Gas Infrastructure; Map: Libya Oil & Gas Infrastructure
+services1.arcgis.com/LwvKNS3IAgAsnCih,,11,Algeria 1; Cameroon 1; Côte d'Ivoire 1,Census_Map
+services5.arcgis.com/cMBqYE4wmbXNMvex,Esri Intelligence ArcGIS Online Portal,11,Libya 3; Algeria 1; Burkina Faso 1,Libya_Oil_and_Gas_Fields; Libya_Pipelines; Mali Language Groups Web Map_WFL1; Oil & gas en Libye
+services2.arcgis.com/NVedHJv6YhVCFBci,,11,Senegal 2; Angola 1; Benin 1,22156 _ ESIA Analysis_WFL1; Africa Mines Database_WFL1; Climate Change Vulnerability Study for the Senegal Energy Sector_WFL1
+services7.arcgis.com/iFGeGXTAJXnjq0YN,MapMaker,10,Angola 2; Egypt 2; Mozambique 2,BRICS Trade Bloc; Silk Road and Other Trade Routes; Slave Trade Trans Atlantic Ports; Slave Trade: Intra-Americas Ports
+services1.arcgis.com/0j6jtXe3aIxykrqF,,10,Cameroon 2; Senegal 2; Guinea 1,Cameroon Oil refinery; Cameroon Petrol Stations; Mali petrol stations; Oil refinery Guinea; Petrol Stations Tanzania; Senegal Oil Refinery
+http://beowulf.cares.missouri.edu,,10,Congo 6; Democratic Republic of the Congo 4,Concession Date  - Democratic Republic of the Congo; Concession Review - Democratic Republic of Congo; Forest Zoning - Democratic Republic of Congo; Management Status - Democratic Republic of the Congo; Mining - Democratic Republic of the Congo; Timber Production - Democratic Republic of the Congo
+services7.arcgis.com/HWz1XuiG9YcPvFV8,University of Arkansas for Medical Sciences,10,Congo 5; Democratic Republic of the Congo 5,DRC Malaria Incidence Rates 2000 to 2015 DL_WFL1; DRC Malaria Incidence Rates 2000 to 2015 SStahr_WFL1; DRC Malaria Incidence Rates 2000 to 2015 SW_WFL1; DRC Malaria Incidence Rates 2000 to 2015_WFL1; DRC Malaria Incidence Rates 2000_2015_WFL1
+services2.arcgis.com/eEZvYWeDAf8dVYvQ,TGIR HUMA-NUM,10,Egypt 10,KAB21_polygones_concession_210113_1; Mur_15_16_2; Tap19_emprises_concession_190524; Tap21_documentation_concession_armee_210113_1; Tap21_points_concession_armee_210112_1
+services1.arcgis.com/IB7Kf2F8K18M2LKr,Getech Group plc,10,Sierra Leone 8; Equatorial Guinea 1; Guinea 1,GeoexWeb_EGRound2016; PDSL_WebPortal; PDSL_WebPortal_2DSeismicData; PDSL_WebPortal_3DSeismicData; PDSL_WebPortal_4thRoundContractAreas1; PDSL_WebPortal_Held_ContractAreas1
+services8.arcgis.com/PCeCk32MjqBcahrl,,10,Ghana 2; Guinea 2; Liberia 2,GIN_cadastre_minier_GPDM_2020; GoSL_AllActiveLicences; LBR_cadastre_minier_permis_MME_2021; PalmOil Locations; Soguipah_Guinea; South Sudan Rapid Assessment 2023
+services3.arcgis.com/zJ7eFvf4lU4fttNe,,10,Kenya 10,KEN_Bare Areas; KEN_Coral_Reefs_update; KEN_District; KEN_Major Rivers; KEN_Mangrove_UNDP_Line; KEN_Mangrove_update
+services9.arcgis.com/IkktFdUAcY3WrH25,,10,Madagascar 10,Global Amphibian Rarity; Global Bird Rarity; Global Mammal Rarity; Global Reptile Rarity; Global Terrestrial Vertebrate Rarity
+services1.arcgis.com/HmwnYiJTBZ4UkySc,,10,Mozambique 3; Zambia 2; Zimbabwe 2,AdministrativeDistrictsMap_WFL; ElevationMap_WFL; Heath facility buffer; Mozambique_WFL1; Sudan Conflicts and Food Access _Anna Sene__WFL1
+services1.arcgis.com/BSnEnFfEn54YLVeq,,10,Niger 5; Nigeria 5,Nigeria Confirmed Oil Spills_2019; Nigeria Confirmed Oil Spills_2020; Nigeria Confirmed Oil Spills_2021; Nigeria Confirmed Oil Spills_2022; Nigeria Confirmed Oil Spills_2023
+services2.arcgis.com/rtefou6JFIxFvYTf,Aeres Hogeschool,9,Niger 2; Angola 1; Benin 1,AFR_NaturalFeatures_Rivers_shp; Niger Delta oil monitoring_WFL1
+services3.arcgis.com/iuNbZYJOrAYBrPyC,Tufts University,9,Sudan 5; Burundi 1; Ethiopia 1,Ethiopia Ethnic Territories and Resources; Iran_Türkiye_border; Iraq_Turkey_borderline; Iraq_Türkiye_border; Minerals and transport routes_WFL1; Syria_Türkiye_border
+services8.arcgis.com/NO2mqJqRjvPz7Kqb,Nairobi Convention Secretariat,9,Kenya 4; Comoros 1; Madagascar 1,Coral_cover_vulnerability; JKP Recreation Spaces; Taita Taveta Mining Sites; Water Points; World Ports Index
+services-eu1.arcgis.com/HApVBfqpU6uDawrd,International Cocoa Initiative,9,Côte d'Ivoire 8; Ghana 1,ADZOPE; CIV Administrative ; DALOA; DIVO; DUEKOUE; LIMITES_BR_ICI
+services1.arcgis.com/oHH89UxMvHCoKy6q, University of Amsterdam,9,Djibouti 9,Atlas1_Alienate_WFL1; Atlas1_Appeal_WFL1; Atlas1_Compensation_WFL1; Atlas1_DS_WFL1; Atlas1_Duration_WFL1; Atlas1_Object_WFL1
+services1.arcgis.com/m9p5y180BqMf6JT7,Sambus Geospatial Limited,9,Ghana 5; Niger 3; Nigeria 1,Concept Note Form for the Competitive Grant Facility Window; Concept Note Form for the Competitive Grant Facility Window_form; EUDR Traceability Demo; Ghana Mining Safety and Compliance Inspections; Ghana_Mining_Inspection_Operations; Ladma_Update2
+services9.arcgis.com/tbfijoSkyxIDafrP,,9,Kenya 9,Kenya  Human Population 1999; Kenya Database on Protected Areas; Kenya GINI Index; Kenya Human Population 1989; Kenya Hydropower Dams; Kenya Major Towns
+services5.arcgis.com/sJIDDP0Ub4m8ztJT,BGQS Consulting,9,South Africa 9,Biomes _ Finland; Biomes _ France; Biomes _ South Africa; Condition Rating _ Finland; Condition Rating _ France; Condition Rating _ South Africa
+services2.arcgis.com/wWw2DwJIyridXed7,Esri Paraguay,8,Algeria 1; Burkina Faso 1; Côte d'Ivoire 1,Grupos Linguisticos_WFL1
+services2.arcgis.com/wwKl7HyGwhVWeWyy,African Wildlife Foundation,8,Rwanda 3; Kenya 2; Uganda 2,Amboseli ecosystem licensed mining site status; Amboseli ecosystem mining cadastre; Cadastre Volcanoes NP expansion area; Forest Excisions1975_2023; HH Kidepo_conflict_sesntive_conservation_form; Mekin Dam Forest Loss 2010 to 2024
+services9.arcgis.com/Vw7F0TmRI5ku8alp,Ministère de l’Économie Forestière,8,Congo 8,Blocs_quinquenaux; Concession_forestière_update; Concessions forestières; Concessions forestières UFE; Forest concessions; Oil permits
+services.arcgis.com/iQ1dY19aHwbSDYIF,,8,Côte d'Ivoire 3; Zambia 3; Djibouti 1,Aquaculture annual growth rates yoy World Africa CdI; Aquaculture production by species CdI FAO 2025; Chart Zambia total fish production capture and farmed tons; Chart aquaculture production by species tons Zambia; Djibouti_Wells_Final; Fish production by source FAO 2025
+services1.arcgis.com/TQSFiGYN0xveoERF,Virginia Geographic Alliance,8,Ethiopia 4; Morocco 4,Pays des Nations Unies (UN); SCHENGEN; UN Countries; alliances_wh
+services2.arcgis.com/4WiMNWDUQZIvdL5U,UNIVERSITY OF GHANA,8,Ghana 8,CultureAndTourismInNorthernGhana; DWCTP_1 view; GIS BASED FLOOD VULNERABLITY ASSESSMENT IN ACCRA METROPOLITAN AREA_form; MscFirstYear1; Niiproject_work; SPRING BLK_ZIPPED
+https://gisportal.saeon.ac.za,,8,South Africa 7; Lesotho 1,Cold Spells; Extreme Heat Waves Per Year Maximum Temperature above 30C On 5 Or More Consecutive Days; Extreme Heat Waves Per Year Maximum Temperature above 35C On 3 Or More Consecutive Days; Extremes (1950 - 2000) Of Maximum Temperatures (C) All 12 Months; Extremes (1950 - 2000) Of Minimum Temperatures (C) All 12 Months_	(DOI:10.15493/SARVA.BEEH.10000349); Heat Waves Per Year Maximum Temperature above 30C On 3 Or More Consecutive Days
+services7.arcgis.com/KqrwX9h3roxmYnVj,,8,South Africa 7; Lesotho 1,Collins Chabane Agriculture_WFL1; Limpopo_ISDG; Makhado Agriculture_WFL1; Shad per Collins; Thula per; VHEMBE CRITICAL AREAS_WFL1
+services.arcgis.com/5T5nSi527N4F7luB,World Health Organization,8,Sudan 3; Mauritius 2; Malawi 1,3rd_Mauritius AEFI National training Evaluation; EMTs Sudan; EMTs Sudan_results; IDPs_Type_gdb; Malawi AEFI National training Evaluation; Mauritius AEFI National training Evaluation
+services9.arcgis.com/i90VY9rgP1HqaDBz,,8,Seychelles 8,Cadastre_14_12_2023; Enterprise_GIS_needs_assessment_survey; GIS Day 2023_GIS Trivia; GIS Day 250 Years Seychelles Mapping Competition; GIS Day Competition; Parcel boundary (Les Mamelles Redevelopment)
+services1.arcgis.com/7CPYy0u5Z9IAJ2OG,William & Mary,7,Guinea 2; Uganda 2; Algeria 1,Algeria_Oil; Full USGS REE Global Map_WFL1; Intersect_of_Summarize_buffers_100km_within_Uganda_Waterways_(Polygons)_and_buffers_100km; Libya_Oil; Tunisia_Oil; USGS REE Global Map Updated_WFL1
+services9.arcgis.com/6EuFgO4fLTqfNOhu,,7,Angola 1; Benin 1; Botswana 1,Angola_100k; Belgian_Congo_100k_02_ExportFeatures; Benin_50k; Botswana_125k; Burundi_50k; Cameroon Logging Percentages 2007
+services5.arcgis.com/5D8Egs0Nl9XDgLjy,PRCM,7,Cabo Verde 2; Senegal 2; Sierra Leone 2,PORTS CABO VERDE; PORTS SENEGAL; PORTS SL; REGIONAL  (Espace PRCM)
+services4.arcgis.com/bFQCiZqoe0LrqfWM,,7,Somalia 2; Chad 1; Congo 1,Acuerdos_comerciales_1958_1995; mapa_aranceles_2019; mapa_globalizacion_paises_exportaciones_1970_2019; mapa_globalizacion_paises_pib_1970_2019
+services-eu1.arcgis.com/de9awAHJGTPtVVLW,IR* HUMA-NUM,7,Egypt 7,KAB21_polygones_concession_210113_1; Mur_15_16_2; Puits-bir_160801; Sites_DO_160325; Tap19_emprises_concession_190524; Tap21_documentation_concession_armee_210113_1
+services3.arcgis.com/t6lYS2Pmd8iVx1fy,United Nations World Food Programme,7,Egypt 2; Zambia 2; Zimbabwe 2,Agiba_WFL1_1; All_Warehouses_Updated_March_2019; Prioritization_FDP_WFL1; Sorghum Out_Grower Scheme Irrigation Camps; TRS Food Security StoryMap_WFL1; TRS StoryMap_WFL1
+services4.arcgis.com/Wfu5Cd4RuY4BE2G2,,7,Ghana 2; Uganda 2; Egypt 1,Egypt ecoregions AD; Ghana Biomes; Ghana Ecoregions IBB; Liberia Biomes; Sierra Leone ANA; Uganda Biomes
+https://maps.rcmrd.org,,7,Ethiopia 5; Rwanda 1; Tanzania 1,Ethiopia Land Cover 2003 Scheme II; Ethiopia Land Cover 2008 Scheme I; Ethiopia Land Cover 2008 Scheme II; Ethiopia Land Cover 2013 Scheme I; Ethiopia Land Cover 2013 Scheme II; Rwanda DEM 90 meters
+services1.arcgis.com/IQkrFigagkCSClLX,,7,Kenya 5; Somalia 1; Tanzania 1,KENYA PETROLEUM EXPLORATION MAP 3_WFL1; Kenya Upstream Petroleum Exploration Map1_WFL1; Kenya Upstream Petroleum Exploration Map_WFL1; Kenya Upstream Petroleum Exploration_WFL1; Profitable Niobium Mining Zone Identification Map_WFL1; Smart Fuel management of Lake oil company limited_WFL1
+services8.arcgis.com/pAAZQwSFzOOuurmq,CORDIO East Africa,7,Kenya 7,Core_terrestial; Kenya NCRA Results (commuity); Mangrove; Mombasa_Marine_Park; buffer_marine; buffer_terrestial
+services.arcgis.com/HRPe58bUyBqyyiCt,University of Wisconsin-Madison,7,Mozambique 6; Uganda 1,Map_Extractive_Industry_Rev_WFL1; Map_Overlap_Moz_CAs_Vs_Extractive_Industry_Updated_WFL1; Map_Overlap_Moz_Forest_Reserve_Vs_Extractive_Industry_Updated_WFL1; Map_Overlap_Moz_KBAs_Vs_Extractive_Industry_Updated_WFL1; Map_Overlap_Moz_RLE_Vs_Extractive_Industry_final_WFL1; Map_Overlap_Moz_TIPAs_Vs_Extractive_Industry_Updated_WFL1
+services3.arcgis.com/G1i1zYJzp7NdX2OE,,7,Tanzania 7,MAP OF TANZANIA_WFL1; MAP OF UNITED REPUBLIC OF TANZANIA_WFL1; Map212_WFL1; Map21_WFL1; Map22_WFL1; TANZANIA EXPLORATION ACTIVITIES_WFL1
+services5.arcgis.com/A48S5yd2w1VVd846,,6,Angola 6,Chafarizes de Agua por Município; Chafarizes de Agua por Província; Chafarizes_de_Agua_15_19_comuna; Chafarizes_de_Agua_15_19_municipio; Chafarizes_de_Agua_2015_19_provincia; Chafarizes_de_Agua_2015_2019
+http://ec2-50-18-182-188.us-west-1.compute.amazonaws.com:6080,,6,Angola 3; Zambia 3,TreeCover2000; TreeCover2000 - copia
+https://wwfke-giscoe.wwfkenya.org,,6,Cameroon 1; Gabon 1; Kenya 1,Land Cover in Africa; Tridom_Non_Mining; Tridom_People
+services7.arcgis.com/3cAgdtxhliumMZHF,MAETGT,6,Congo 6,Autorisation de Prospection; Autorisation d’exploitation de type petite mine; Concessions forestieres; Departement; Permis de recherches minières; Permis pétroliers
+services6.arcgis.com/eMd5K6XXEvJETxfQ,,6,Mali 4; Eritrea 1; Niger 1,Asmara_Buildings and monuments_WFL1; Djenne_Broader urban context_3D_WFL1; Djenne_Monuments and buildings_Great Mosque; Djenne_Monuments and buildings_WFL1; Djenne_Urban elements_WFL1
+services3.arcgis.com/jQx3MSUVUlE1Xz9I,National Geographic Society - GenGeo,6,Ghana 2; Kenya 2; Niger 1,African Elephant Sightings near Livingstone (100 km); IMPACT OF ILLEGAL MINING ON FOREST RESERVES AND WATER BODIES IN GHANA - Copy_form; IMPACT OF ILLEGAL MINING ON FOREST RESERVES AND WATER BODIES IN GHANA - Copy_results; ke_eba; ke_mammals; nosdra_2025_04_04_20_35_37UTC_complete
+services6.arcgis.com/zOnyumh63cMmLBBH,Regional Centre for Mapping of Resource for Development,6,Kenya 3; Madagascar 3,Agricultural_areas; Kenya Soils Data; Madagascar_Protected_Areas_July2024; Post Training Feedback Survey - Madagascar; Post Training Feedback Survey - Madagascar_form; keprotected_areas
+services8.arcgis.com/0E8nlQLKk6G1m6rG,National Office of Hydrocarbons and Mines,6,Morocco 6,MINING_PROJECTS_2024; Map_WFL1; Mining_projects_2025; PROMOTION_MINING_2024; mining_project2023; mining_promotion2023
+services9.arcgis.com/vYmA5BYfaI6kS3IV,,6,Niger 3; Nigeria 3,Nigerian oil spills 2019; Oil spills; Oilspill2011
+services3.arcgis.com/WJPtuw3vpg1Ruyr9,Mpumalanga Tourism and Parks Agency,6,South Africa 6,"Drillsite Locations ICDP Operational; Mapping invasive alien plants in Mpumalanga, SA; Mpumalanga_VegMap; Red List of Ecosystems 2022; TroutMap_WFL; Wetland Buffer Zone Tool -  climatic factors for desktop assessment"
+services6.arcgis.com/4VKUUfImpyJbJJ8O,The State of America's Forest,6,South Sudan 3; Sudan 3,CO2_from_forest_WFL1; CO2_from_forest_and_forest_conversion_WFL1; CO2_from_forest_conversion_WFL1
+services3.arcgis.com/sdwJV7wiRdDkXgtU,,6,Tanzania 6,2018 Tz WASH Questionnaire; BENEFICIARY EXIT- TB/FP EVALUATION; FP BENEFICIARY- TB/FP; HEALTHCARE PROVIDER- TB/FP EVALUATION; HRH Survey; RCG
+services3.arcgis.com/HSIgSGl16Ey7eG5U,,5,Angola 1; Malawi 1; Mozambique 1,V1- Individuals - CP Database
+services1.arcgis.com/9H64STM3PyG3DqUs,,5,Burkina Faso 4; Ethiopia 1,Household by age - Burkina Faso; Housing characteristics - Burkina Faso; Literacy of women - Burkina Faso; Occupation_Burkina_Faso; Vaccinations by background characteristics
+services2.arcgis.com/toB6PLqYzd0BucvB,Foladare Geospatial Technologies,5,Niger 2; Nigeria 2; Cameroon 1,Agricultural Drought Vulnerability – Farmer Survey; Residential Real Estate Investment in Nigeria Last Volume; Residential Real Estate Investment in Nigeria Volume 3
+https://landscape5.arcgis.com,,5,Ghana 2; Chad 1; Senegal 1,Africa Crop Cassava - Harvested Area; Africa Crop Groundnut - Harvested Area
+services5.arcgis.com/FMvVojoqni7sergv,African Union Development Agency (AUDA-NEPAD),5,Sudan 2; Eritrea 1; Ethiopia 1,Locust Breeding Sites in Africa; Locust Distribution Areas in Africa
+services6.arcgis.com/0p6i4J6xhQas4Unf,ArcGIS Online for City Government,5,Kenya 3; Ethiopia 1; Somalia 1,Mammal Diversity Kenya 1998; ke_numbers_elephant; ke_rangeland
+services.arcgis.com/HwB9RoolJXJlKJ40,World Vision,5,Rwanda 3; Ethiopia 2,Cooperative Registration Tool: FMNR MCP - Ethiopia; Gasaka Kamegeri WP Buffer 500m; Gasaka_Kamegeri_Population_Density_Point; Gasaka_Sector_Boundary; Parner's Reporting Tool: FMNR MCP - Ethiopia
+services3.arcgis.com/GMycIhSIBQnnjV35,,5,South Africa 4; Lesotho 1,"Former Homelands; Mine Waste Atlas, Northern Cape, South Africa; Red List of Ecosystems terrestrial realm 2020; Strategic Water Sources CSIR 2018"
+services6.arcgis.com/bIipaUHHcz1GaAsv,Liberia Forestry Development Authority,5,Liberia 5,Agricultural concessions; Development Exploration License; Mineral Development Agreements; Mineral Exploration License; Private Use Permits
+services1.arcgis.com/3wpOgOChiWXPeFWB,City of Manassas GIS,5,Liberia 5,Liberia_Property_Breeden; Liberia_Property_CityOwned; Liberia_Property_EarlyHistory; Liberia_Property_Overview; Liberia_Property_Portner
+services3.arcgis.com/zoIqEsSot7rriO2t,,5,Uganda 2; Malawi 1; Niger 1,Health Facility Level 1 Form - Malawi; Health Facility Level 1 Form - Nigeria; Health Facility Level 1 Form - Uganda; Rugby Africa 2025 - Readiness Survey
+services1.arcgis.com/IqEe3YDHhqT8n4KU,Harrisburg Area Community College,5,Mauritius 5,August 10 2020 sensor capture; August 13 2020 sensor capture; August 15 2020 sensor capture; August 6 2020 sensor capture; Parks and Reservations Close to Oil Spill
+services-eu1.arcgis.com/8TctuHJAHDNbjUgI,SMEC Namibia Consulting Engineers (PTY)Ltd:,5,Namibia 5,N0123 Route plan layer; RA Road Maintenance Regions; Road Network; RoadMaintenanceRegions; Web map of bridges and culverts_WFL1
+services.arcgis.com/6cwZ3ahONdhhnVyL,World Wide Fund for Nature Hub Community,5,Namibia 5,Basemap_WFL4_trunk road; Basemap_WFL5_main road; Basemap_WFL6_district road; Tsaris topography satellite fieldmap_WFL1; Zambezi Contracts_WFL1
+services8.arcgis.com/DR1RUxqUdtYKheu2,,5,Nigeria 4; Niger 1,NGSA Field Data Collection; Nigeria Agriculture Crop Produce Sales; Oil Palm Plantation Farmers; Wuye Ultra Modern Market
+services7.arcgis.com/Rzt0iaiTpNUFy7xX,,5,Nigeria 4; Niger 1,"FY24 Annual Survey Aquaculture Producer Tool v2.3; FY24 Annual Survey Crop Producer Tool v2.2; FY24 Annual Survey Nutrition Messaging Tool; M2M Data Capture - Firms, Financial Institutions and CSOs; Nutrition Messaging Tool"
+services4.arcgis.com/Nqb1s4sMVdKWhMf4,Hippo Roller,5,Uganda 5,Beast Philanthropy - Wells of Life Wells; Uganda Subnational Administrative Boundaries; WOL MrBeast Schools Uganda 1; WOL MrBeast Schools Uganda Updated; uganda_kassanda_well973
+services-eu1.arcgis.com/lfBE2j3OwnIdkWFu,ZERA,5,Zimbabwe 5,(External_Stakeholders)__Petroleum_Sites; LSW dashboard; ZERA Petroleum Retail Site Inspection Checklist; ZERA Petroleum Retail Site Inspection Checklist_form; ZERA Petroleum Retail Site Inspection Checklist_results
+services3.arcgis.com/W1gaXmEpGR8h1K59,Institut Pasteur d'Algérie,4,Algeria 4,"Maghreb Layer (Morroco, Algeria, Tunisa, Lybia) Under Creative Commons Licence; Space time evolution of PM2_5 between 1998 to 2019_WFL1; Space time evolution of PM2_5 between 1998 to 2019_WSL1"
+services.arcgis.com/b3fMqPOmotX6SV4k,,4,Algeria 1; Morocco 1; Nigeria 1,Spain_Heatlh_Care_spending_Cataluna
+https://gis.anpg.co.ao,,4,Angola 4,AGO_Blocks_All; AGO_FPSO_FSO; AGO_Fields_and_DAs_New; AGO_Wells
+https://gis-treecover.wri.org,,4,Angola 2; Zambia 2,Tree Cover Loss (Hansen/UMD/Google/USGS/NASA); Tree cover loss with time slider (Hansen/UMD/Google/USGS/NASA)
+services6.arcgis.com/q8Y8Fx5vwMGC85lO,,4,Angola 1; Kenya 1; Senegal 1,AGO4k; Kenya 4k; Senegal 4k; TZ4k
+services7.arcgis.com/mbEujVpJG0aE29fS,University of Botswana,4,Botswana 4,Botswana_Ecosystem_Types_Protection_Levels_and_Threat_Status_MBP2_2021_WGS84; Ecological Condition MBP2 2021 WGS84; Protected Areas and Other Effective Conservation Measures; University of Botswana incampus population
+http://129.2.24.54:6080,,4,Botswana 4,finalprojectGEOG655_rsander1; finalprojectGEOG655_rsander1_2; finalprojectGEOG677_rsander1_final; finalprojectGEOG677_rsander1_final_v2
+services5.arcgis.com/33PZ8RasWNSHnkUG,,4,Cameroon 4,CMR_Blocks_in_bid_round; CMR_EDA_09_2025_BID_ROUND; CMR_EDA_3D_SEISMIC; CMR_EDA_WSM_jt
+services3.arcgis.com/oeMCUnVnU4LYYGKN,,4,Congo 2; Democratic Republic of the Congo 2,DRC Malaria Incidence 2000 – 2015_WFL1; DRC Malaria Incidence Rates 2000 to 2015_WFL1
+services-eu1.arcgis.com/ECMQbz63EEawWQtM,OBSERVATOIRE NATIONAL DU LITTORAL DE CÔTE D'IVOIRE,4,Côte d'Ivoire 4,Indice de sensibilité aux risques de pollution par hydrocarbures; Indice de sensibilité des ressources biologiques aux risques de pollution par hydrocarbures; Indice de sensibilité socio économique du littoral aux risques de pollution par hydrocarbures; Indice de vulnérabilité de la côte aux risques liés aux exploitations pétrolières
+services5.arcgis.com/qNcvjQOR7sijz0KE,,4,Côte d'Ivoire 4,Carte_SIGEOMINCI_2024_WFL1; Carte_SIGEOMINCI_2_1_4_1_WFL1; Indice_Buff_3; SIGEOMINCI_2_1_4_2_WFL1
+services6.arcgis.com/HWxP3uhYtUIaFpDD,,4,Djibouti 1; Guinea 1; Mauritania 1,DATE EURASIA Donovia Far East District_WFL1
+services.arcgis.com/Djjoop3BmZekEtDo,,4,Egypt 1; Ghana 1; Morocco 1,Egypt_Water_and_Sanitation; Geographic_Analysis_Additional_Layers; Roads_Under_Threat; USAID_Activites_Ghana
+https://gis.wri.org,,4,Ghana 2; Tanzania 2,"Community Lands - Not acknowledged by Government and Held or used under customary tenure; Community Lands: Not acknowledged by government, Held or used under customary tenure"
+services.arcgis.com/hBEMHCkbQdfV906F,World Resources Institute,4,Ghana 1; Morocco 1; Rwanda 1,Administrative boundaries extract for Freetown region (regional level); Administrative boundaries extract for Kigali (regional level); Administrative boundaries extract for Marrakech (regional level); Ghana Mining repo_2026
+services8.arcgis.com/rHYTNi7ks87KjDOl,,4,Ghana 4,Farm Inspection 2025 - Ashanti_form; Farm Inspection 2025 - BA_Bibiani_form; Farm Inspection 2025 - Ferrero_form; Farm Inspection 2026 - BA_Bibiani_form
+services8.arcgis.com/B5sOc6ZFqt8DX44r,,4,Kenya 4,Geological Field Mapping Data Sheet_form; KE_Blocks; Kenya Petroleum Exploration Blocks and Data_WFL1; Petroleum Blocks
+services3.arcgis.com/Idr5ghNdneUVaDiQ,Esri EA Solutions,4,Kenya 2; Uganda 2,Budondo Informal Businesses_WFL1; Mineral_occurence_WFL1; Total Energies ; national_oil
+services5.arcgis.com/cdBxbTWz2yE2cVD3,Esri Eastern Africa,4,Tanzania 2; Kenya 1; Uganda 1,Power Generating Stations in Kenya; Tanzania Power Generating Stations; Tanzania Power Generating Stations_1; Uganda Power Generating Plants
+services7.arcgis.com/1Cyg6S9yGgIqdFPO,,4,Kenya 4,major_towns_clip; rivers2; road_shp (2); town
+services.arcgis.com/LG9Yn2oFqZi5PnO5,Esri Aid & Development Team,4,Kenya 3; Zambia 1,"FarmParcel_Dashboard; Minimum amount of Kenyan Shillings needed per square kilometer per month; Population density, or the number of people per square kilometer; Poverty rate poverty gap poverty density and the percentage of poor housing at Location level"
+services8.arcgis.com/8tX9OH8doNBidChm,Cadasta Foundation,4,Kenya 2; Liberia 2,Infrastrucure data ; TF Test 20201214; Wells in counties; fsurvey FCI
+services1.arcgis.com/Vlw77QWOmRIp56YB,,4,Somalia 3; Liberia 1,Liberia 2020 License Round Information Request_fieldworker; Somalia License Grid; Somalia License Round 2020; Somalia Licensed Acreage
+services.arcgis.com/88mIwDZh83jRAEnx,,4,Libya 4,Africa Blocks Libya view; Africa Fields Libya view; Africa Prospects Libya View; Latest News Libya View
+services3.arcgis.com/NV3MDGrqZTuuyEqZ,You Turn Ministries Inc,4,Malawi 4,YTMI_Malawi_Well_Locations; YTMI_Malawi_Well_Locations_view; YTMI_Well_Daily_Activity_; YTMI_Well_Locations_xlsx _ Malawi
+services3.arcgis.com/j23k6iptiIkpZyy4,Geo Equity Tech,4,Mauritius 4,Local Businesses in Mauritius; Road Accidents among Young People in Mauritius_form; Road Accidents among Young People in Mauritius_results; Survey of Local Businesses in Mauritius
+services3.arcgis.com/rgcjfPh2Eb1rXtC7,,4,Niger 2; Nigeria 2,Illegal Mine Sites in Nigeria_WFL1; Mine Sites in Nigeria_WFL1
+services.arcgis.com/wjcPoefzjpzCgffS,Esri Canada,4,Niger 2; Rwanda 2,BA_2020_DA; BA_2020_DA_Toronto
+services3.arcgis.com/my04laB2eT3kS9Cn,,4,Rwanda 4,20181218_fuel_in_Rwanda_in_clusters; 2019_fuel_in_clusters; 20220120_fuel_in_Rwanda_in_clusters; Tracking Field Mapping Crue in Rwanda
+services8.arcgis.com/o9T71G0u62JNakLV,Dublin City University,4,Sierra Leone 4,Households by Dwelling Units; Population Distribution by District; Wells Sierra Leone; Wells_Sierra_Leone_DATA
+services.arcgis.com/7vyJMxlH6ODgjFtB,University College Cork,4,Sierra Leone 4,Focus Group Discussion _GOAL _form; National_BH_Numbeing; National_BH_Numbeing_results; SEMI-STRUCTURED_GOAL_form
+services1.arcgis.com/aiKiXGx10WNAcj2W,,4,Somalia 4,AVGEO 120MA; AVGEO_65MA; Dataroom1 SHP; REGIONAL
+services3.arcgis.com/ZAZowNJlyOQXdqaG,Thero Services,4,South Africa 4,Hermes–Mookodi 400 kV Transmission Line; LM_Hermes_Mookodi_Municipalities_Socioeconomic; Zulti South Pipeline Construction Layer; Zulti_South_Rio_Tinto_Service_Corridor_V2
+services9.arcgis.com/35noZiiZeSuYlpr5,,4,Sudan 4,All Data; Compartments; Gauges; Marshland Cities
+services7.arcgis.com/5pKbptIoe9eadvgQ,Universidade de Coimbra,3,Algeria 1; Morocco 1; Tunisia 1,Phocoena phocoena_WFL1
+services1.arcgis.com/PMShNXB1carltgVf,,3,Libya 2; Algeria 1,EuropeanEnergy_NaturalGasImports; EuropeanEnergy_OilImports
+services3.arcgis.com/PUlaSm4kMYdvsVw9,,3,Benin 1; Ghana 1; Mali 1,MS_USH_IM_T02_L03_004M_view
+https://gis.usgs.gov,,3,Congo 1; Democratic Republic of the Congo 1; Namibia 1,Germanium Deposits in the United States
+http://54.88.79.102,,3,Congo 3,Affectation des terres en RDC (Roger); Affectation des terres en République Démocratique du Congo; Land use allocation in the Democratic Republic of Congo
+services7.arcgis.com/xuAg12SDp2ow0Fb8,Teaching Atlas,3,Congo 1; Kenya 1; Morocco 1,Global Mangrove Watch; Ports Around the World; Rivers Around the World
+services6.arcgis.com/tuxY7TQIaDhLWARO,,3,Congo 1; Democratic Republic of the Congo 1; South Africa 1,Drc Mining Concessions_WFL1; SouthAfrica_AgGDPvsEmployment_2010to2014_WFL1
+services2.arcgis.com/g8WusZB13b9OegfU,Global Nature Watch,3,Congo 2; Liberia 1,Global Peatlands; Integrated deforestation alerts; Oil Palm Concessions Liberia
+services2.arcgis.com/xsh7pVZv42relbEf,Bucknell GIS & Spatial Thinking,3,Congo 1; Gabon 1; Mauritania 1,Africa_GIS_gdb; Artisinal Mining in Democratic Republic of Congo 2018
+services2.arcgis.com/wisx4R7rXMgxCJuV,,3,Egypt 3,Octobar; giza; ma3adi
+services9.arcgis.com/kcJI3dzlaStSfxjk,DEVELOPMENT RESPONSE TO DISPLACEMENT IMPACTS PROJECT,3,Ethiopia 2; Uganda 1,Component 2; SEM_sub_projects; Sustainable Environment Management interventions
+services1.arcgis.com/45BBL0CBuLJvmjvS,Society for Conservation GIS,3,Gabon 1; Guinea 1; South Africa 1,Law_Enforcement_Results; Map_WFL1; Red List of Ecosystems _2022_
+services3.arcgis.com/dNORT2AsqM0AjUST,,3,Ghana 3,Offshore_Blocks; PC_Seismic_2D
+services8.arcgis.com/5qrqFJCqgejVt7Lr,,3,Ghana 3,Gas Pipeline Hubs; Ghana Mines; West African Gas Pipeline
+vectortileservices.arcgis.com/Sf0q24s0oDKgX14j,University of Salzburg - Geoinformatics,3,Ghana 1; Niger 1; Nigeria 1,subgroup_unique_vectortile
+services5.arcgis.com/tlQOW98wQ9BhkZSm,,3,Ghana 3,Crop Production in MT_WFL1; VSLA and OB Network Location Map_WFL1; Yield of Farmers Applying Technology_WFL1
+services6.arcgis.com/n6XPijRjqy8GuTTL,Tree Crop Development Authority,3,Ghana 3,RawdataGrantentry; TCDP GRANT PORTAL; TCDP GRANT PORTAL_form
+services7.arcgis.com/uafdUvFoEqq0BFXp,,3,Guinea 3,Gas Fields; Gas and Oil Fields; Oil & Gas Fields
+services5.arcgis.com/wXYNaciObHUosEnt,Geospatial Analysis Lab (GsAL) at USF,3,Guinea 3,GN level 1 land cover statistics; National_Mining_Concession_GN; mining_polys_guinea
+services7.arcgis.com/lsxbLWF2l19Rmhqj,Infraestructura de Datos Espaciales Cundinamarca IDEC,3,Guinea 1; Liberia 1; Tanzania 1,Aptitud para la Producción de Pastos Guinea Común y Massai. Departamento de Cundinamarca. 1:100000. 2019. (Capa); Cartografía Básica 10K de Cundinamarca1
+services7.arcgis.com/gYHOe4V6gFqvbVJj,Commercial,3,Kenya 2; Sudan 1,DT_Global_WFL1; Mineral occurrences in Kenya_WFL1; Perceived Party Strongholds as per The Star
+services4.arcgis.com/lH26XmY8LZPGdZsq,,3,Kenya 3,2020 Dünyadaki başlıca doğal afetler ab 20_02_2022; 2020 Dünyadaki doğal afetler SD; 2020 Yılındaki Dünyadaki Başlıca Doğal Afetler FÖ 11 12 2021
+services7.arcgis.com/fNVuaETlEDvt1x1Y,,3,South Africa 2; Lesotho 1,Municipalities x; StrategicWater_SourceAreas2
+https://conservation3.arcgisonline.com,,3,South Africa 2; Lesotho 1,Mapped Forests in South Africa; NFEPA
+services6.arcgis.com/QvKFd0CyEVDCqPId,,3,Liberia 3,LBR Protected Areas 2016; Liberia Forestry Concessions; Liberia Oil Palm Concessions
+services5.arcgis.com/A70d8EokdlDVYe2u,Global Communities,3,Liberia 3,PACS_Wells; PACS_Wells_Demo; PACS_Wells_V2
+services.arcgis.com/bL1WyMoaiBW4etad,Conservation International,3,Liberia 1; Madagascar 1; South Africa 1,Biodiversity Hotspots; MiningConcessions; Namakwa Coastal Access
+services.arcgis.com/uZA6Fj7jhUdf9Bo8,Genereso Sarl,3,Madagascar 1; Malawi 1; Zambia 1,CRMA_Project_Sites_v9
+services6.arcgis.com/OO2s4OoyCZkYJ6oE,,3,Madagascar 1; Niger 1; Nigeria 1,Nigeria_Transmission_Lines
+services1.arcgis.com/tKMirJrirprCZbnf,Esri Sénégal,3,Senegal 2; Mauritania 1,CARTE_ELECTRIQUE; Facility
+services1.arcgis.com/9pLtiug18wgR3gBR,,3,Mozambique 2; Somalia 1,Mozambique Registration for Mine Risk Awareness Training for Humanitarian Workers; Mozambique Registration for Mine Risk Awareness Training for Humanitarian Workers_form; Programme Monitoring Review
+services2.arcgis.com/j80Jz20at6Bi0thr,ArcGIS Tutorials,3,Nigeria 2; Niger 1,Historic Lakes; Nigeria_Final_gdb
+services.arcgis.com/5AItCN7F9nr5jpcr,Georgetown Global Health Nigeria,3,Nigeria 2; Niger 1,Special Intervention_2_WFL1; Special intervention_WFL1
+services7.arcgis.com/FD2EnwdQZ5RYAmzY,FHI 360,3,Nigeria 2; Zambia 1,GRID3 Urban Areas; PLANE Schools_WFL1
+services5.arcgis.com/i4Uih2D1hi5IJ3C7,Mindset,3,Nigeria 3,Kaduna_settlements; Kano_settlements; Settlements
+services3.arcgis.com/ahwGFCNNx4JuPpVP,Ministry of Agriculture and Animal Resources,3,Rwanda 3,Private_parcels_1ha; PublicParcels; Sectors_sums_PSP
+services5.arcgis.com/8CmSuQoUmWaF7pX3,Rwanda Infrastructure Geoportal,3,Rwanda 3,GashoraMasterPlan2011; MV Transformers; MusanzeCityMasterPlan2014
+services2.arcgis.com/MAQ72X6xUGpBgr8j,Delmax Relocation,3,Rwanda 3,ECCE_Workforce_Rwanda
+services1.arcgis.com/aiigQkyAFLnUvOAp,,3,South Africa 3,Karoo RSDF Composite Map; Spaza_Shops_App; Transferred Land Parcels and Ownership Records
+services6.arcgis.com/51aQy023ujgDxMNx,Southern Africa Resource Watch,3,South Africa 3,Administrative Boundaries; Africa Regional Geology; Mine Impact_ Area of Influence
+https://arcgis.asdc.larc.nasa.gov,,3,South Africa 3,Full Climatology (99th Percentile Cloud Top Height) (South Africa Convection Climatology); Full Climatology (99th Percentile SEVIRI Infrared Minus Tropopause Difference) (South Africa Convection Climatology); Monthly With Daily Timesteps (Overshooting Top Days/Month) (South Africa Convection Climatology)
+services-eu1.arcgis.com/9Yft5eKoDgMU7vej,,3,Tunisia 3,Eolien_; MT_HT_gdb; PV_Concession
+services.arcgis.com/Xpv2nwwwvzUSJGCV,RCMRD Training,3,Zambia 2; Uganda 1,Protected and Conserved Areas of Zambia_10; RCoE_Protected_Areas_Polygons_Data_Mine; WDPA_WDOECM_Aug2025_Public_ZMB_gdb_1
+services5.arcgis.com/FlkzGbKYJaphjxlq,,3,Uganda 3,Performance Standards Session1; Performance Standards Session1_results; Performance Standards_ITN_MCM_IPTp
+services9.arcgis.com/ZNWWwa7zEkUIYLEA,,3,Zambia 3,Agricultural Camps; Total Number of Properties at MLNR; Zambia Operational POIs v1.0 Beta
+services3.arcgis.com/dimYHWG83xLFhxGG,,3,Zambia 3,Safari Hunting Monitoring_Hunting Result_JoinedView; Zambia Resident & Bonafide Hunting Monitoring Form_form; Zambia Safari Hunting Monitoring Form_form
+services7.arcgis.com/uIx4DcYtJ6IrYNdp,African Surveyors Connect,3,Zimbabwe 3,Geodetic Control Network; Gweru Land Parcels; Settlement Extents
+services6.arcgis.com/kOvusPqAUjVWKF9D,WorldPop,2,Angola 1; Sierra Leone 1,"GRID3 Angola Social Distancing Layers, Version 1.0"
+services.arcgis.com/04HiymDgLlsbhaV4,HDR ArcGIS Online,2,Angola 2,INDOT Mask; INDOT SubDistrict Boundary
+http://gis-treecover.wri.org,,2,Angola 1; Zambia 1,Tree cover loss with time slider (Hansen/UMD/Google/USGS/NASA) - copy
+http://globalforestwatch-624153201.us-west-1.elb.amazonaws.com,,2,Angola 1; Zambia 1,TreeCover2000
+services6.arcgis.com/HwQk19ysBarANM17,Local Government Demo Account,2,Angola 1; Uganda 1,Routes_to_tota__stations_uganda_4; Tilenga
+services-eu1.arcgis.com/XhTJezsKsoHsvbni,,2,Angola 2,Mapa_Fieldmaps_Elsewedy_20250408_WFL1; Project_Mavinga_WFL1
+services6.arcgis.com/AvO4UneJdt5gnv4B,,2,Angola 2,3D WG_Angola_Block16_Outer_Trend; 3D_WG_Angola_Block15_Brokered
+services1.arcgis.com/KUeKSLlMUcWvuPRM,Northeastern University,2,Benin 2,urbanblocksV2; urbanblocks_pnb
+services-eu1.arcgis.com/saCQQSjJBDUc1wGs,Sandfire,2,Botswana 2,BT_ProposedCollars_PT; Botswana Land Agreements 2
+services-eu1.arcgis.com/LfnT4EUZn20m3uGM,ToghinServices,2,Burkina Faso 1; Côte d'Ivoire 1,Exercice_korogo
+services5.arcgis.com/7vxqqNxnsIHE3EKt,,2,Cameroon 2,Cameroon Water Survey; Cameroon Water Survey_stakeholder
+http://gis-forest-atlas.wri.org,,2,Central African Republic 1; Gabon 1,Central African Republic Logging Concessions; Temporary Forest Concessions [CPAET] - Temporary Forest Concessions (CPAET)
+services6.arcgis.com/deAS8KeQ1ASFd1S2,City of Martinsburg Stormwater Management,2,Chad 2,AdjacentMS4s; Taxparcels_02142019_ClipCity
+services8.arcgis.com/TPPS8iZZnSW4fHXB,GIS,2,Chad 2,Chad Wells; Glencore_Blocks
+services.arcgis.com/rD2ylXRs80UroD90,HNTB GeoShare,2,Chad 2,Fire Stations Study Area; Hospitals Study Area
+services6.arcgis.com/evfpsq4DPUft8Uyf,Acadiana Planning Commission,2,Chad 2,oilgasChurchpoint; wellsChurchPoint
+services2.arcgis.com/nY5zvXHAje4LAUxE,,2,Chad 2,Chadds Ford Township Parcels; Chadds Ford Zoning Overlays
+services.arcgis.com/nzS0F0zdNLvs7nc8,ArcGIS StoryMaps,2,Congo 1; Democratic Republic of the Congo 1,CongoMiningPermits
+services3.arcgis.com/ZOm3lyRvRxR6535t,,2,Congo 1; Democratic Republic of the Congo 1,DRC Malaria Incidence Rates 2000 to 2015_WFL1
+services3.arcgis.com/vq5vGR4r1YX7ueLg,California State University Long Beach - Geography,2,Congo 1; Democratic Republic of the Congo 1,DRC Malaria Incidence Rates 2000 to 2015_WFL1
+services7.arcgis.com/R6hG8RKYiEPEC9fb,Ministère de l’Économie Forestière ,2,Congo 2,Concessions forestières UFE; Forest concessions
+services2.arcgis.com/967KncBtW7Zg8zV1,Université de Montpellier Paul-Valéry,2,Congo 1; Democratic Republic of the Congo 1,Democratic_Republic_of_the_Congo_mining_permits_RT
+services7.arcgis.com/yaiALyeg4arXTUCZ,,2,Congo 1; Democratic Republic of the Congo 1,DRC Malaria Incidence Rates 2000 to 2015 _ JW_WFL1
+services4.arcgis.com/9hSTcaT2vUglUGs4,Esri Deutschland - Schulen,2,Democratic Republic of the Congo 1; Namibia 1,CH_Final_iGeo_2026_form
+services7.arcgis.com/IwEo8ec1t2wAqoIz,Ministerio de Agricultura y Bosques,2,Equatorial Guinea 1; Guinea 1,Atlas Forestal Datos (2017)
+http://34.245.85.209:6080,,2,Eritrea 2,GashBarka_A_1997_Ref; GashBarka_B_1997_Ref
+services9.arcgis.com/wk24b4t7XDZ2kPU8,COSPE Onlus,2,Eswatini 2,Lubombo_Tinkhundla_2019; SWZ_Water_Bodies
+services1.arcgis.com/eGSDp8lpKe5izqVc,University of California San Diego,2,Ethiopia 2,Displacement Subregions; Tigray Vulnerability Index
+services3.arcgis.com/NaFf4UaPo3IgQXqn,,2,Ethiopia 2,JRoxas_Tutorial_1_WFL1; JRoxas_Tutorial_1_WSL1
+services1.arcgis.com/wQnFk5ouCfPzTlPw,Esri Professional Services,2,Ethiopia 2,Ethiopian Electric Utility (EEU) Geospatial Strategy; Ethiopian Electric Utility (EEU) Geospatial Strategy_form
+services.arcgis.com/70woC3KVTUhRhc5l,U.S. Chamber of Commerce Foundation,2,Gabon 1; Mauritania 1,Mineral Industries and Related Infrastructure of Africa
+services6.arcgis.com/IiRPcwUDglkGGiTu,,2,Gabon 1; Mozambique 1,Gabon Wells; Spectrum_Mozambique_Sea_Surface_Slicks_Study
+services1.arcgis.com/Qg4drwEpDNFFMZS3,The Gambia Red Cross Society,2,Gambia 2,GRCS Strategic Development KII Questionnaire_form; GRCS Strategy Development Individual Questionnaire_form
+services1.arcgis.com/k8WRSCmxGgCwZufI,SmartUJI,2,Ghana 1; Mozambique 1,Globbal Human Settlements _ Urban Centres Database _Clipped to Mozambique_; Minerals
+services6.arcgis.com/h29cAOqA0ir6EHIZ,,2,Ghana 2,Ghana Wells — Public Context Layers; Ghana Wells — Read-only Presentation View
+services1.arcgis.com/93Ieg4hfTR8LTwJ7,,2,Ghana 2,Credit Farms (2015-2016); Initial Response
+services1.arcgis.com/WzDt8HHn0ZJ3sTXJ,,2,Ghana 1; Togo 1,GIISDEC_WFL1
+services.arcgis.com/IvLxQjnSRH3VsVWa,ECOWAS Regional Geospatial Portal,2,Guinea 2,Guinea LEG 2026 – Closing & Counting / Clôture & Dépouillement / Encerramento & Contagem (C); Guinea LEG 2026 – Closing_Link
+https://api.geodesic.seerai.space,,2,Guinea 2,Predictive Ground Deformation - Job Info; SAR Amplitude Change Detection - Job Info
+services8.arcgis.com/6qtpDLQu81J6vMpF,National Water Resources Management Agency,2,Guinea 1; Liberia 1,SDG642_F5_Water_Resources_EFR_Permits_form
+services9.arcgis.com/0LnxuP6zb4iOrAan,,2,Guinea 2,NUT QN 2020; NUT_QN 
+services2.arcgis.com/7p8XMQ9sy7kJZN4K,International Crane Foundation,2,Kenya 1; Mozambique 1,1960 Zambezi Delta Land Cover; Kenya Wetlands
+services1.arcgis.com/KLFllOD0L2e7JxJV,,2,Kenya 2,Min Occurrences Kenya_WFL1; Proposed Mining License Application App No 5554_Land consents
+services9.arcgis.com/Bv0mZqqf8ld1rZ9l,,2,Kenya 2,Map; Taita Taveta Mining_WFL1
+services1.arcgis.com/9APRkIRKZGZIpPJP,Northern Virginia Community College,2,Kenya 2,Kenya Locations; Kenya Sub-Locations
+services.arcgis.com/CmINIEzurW7Tagtl,Esri Eastern Africa Mapping and Application Portal,2,Kenya 2,Old_Constituencies_99; census_blocks
+services7.arcgis.com/vcKbN1YXJ8PizkLK,Wild Bird Trust,2,Kenya 1; South Africa 1,Central_EC Node Exploration_2024_WFL1; YalaWetlands
+services9.arcgis.com/uCvm4yXzkb5sjYoU,,2,Kenya 2,ke_coral_reefs; ke_mangroves
+services1.arcgis.com/Hkc3bAqSR3WGz2YJ,,2,Kenya 1; Madagascar 1,Mining project locations Madagascar; SpringMapClipped_WFL1
+services9.arcgis.com/jeqQamd76dcsGMIQ,,2,Kenya 2,Mangrove Watch
+services8.arcgis.com/eWe4nYCq2rusSPIM,Maswana Group of Companies,2,Lesotho 1; South Africa 1,FA Spatial Proposal 2026_WFL1
+services6.arcgis.com/Ctf7KokwtVwTnOnh,NTG Solutions,2,Lesotho 1; South Africa 1,National_Environmental_Data
+services5.arcgis.com/jZglaQEhT4PwFJl0,Give Clean Water,2,Liberia 2,Assessment_Church_Map; Wells
+services5.arcgis.com/38mBw0YlhAwieWsM,,2,Libya 1; Morocco 1,Lybia Flood 2023_WFL1; Morocco EQ Mining Sites
+services9.arcgis.com/9wmL9ZWBCsfLqwTM,Faculté des Lettres Sorbonne Université,2,Libya 1; Mozambique 1,Carte_Libye_ingerence_WFL1; Moz_Gaz_CD_2016_WFL1
+services1.arcgis.com/4tydGcZBq4bIge0i,Esri South Africa Training,2,Malawi 2,ITU Post-Training Assessment (Malawi)_form; ITU Pre-Training Assessment (Malawi)_form
+services6.arcgis.com/ag7YdgtNirLwD7cQ,,2,Mali 2,3e trimestre accessibilite  ONG Nat; Access 4th trimester 2021
+services8.arcgis.com/cmZ0fPtuonyt7lcH,,2,Mali 2,Mali Mining Map 7 31 2026_WFL1; Mali Mining Map_WFL1
+services2.arcgis.com/iq8zYa0SRsvIFFKz,,2,Mali 2,Permit data LA County City of LA Malibu; malibu_rebuild_permits
+services6.arcgis.com/Uyf4mnDmJppUVuf1,cittamap,2,Mozambique 1; Somalia 1,Biodiversity Hotspots Revisited_ Conservation International_ 2011
+services7.arcgis.com/6gl5klIYqnaguy4z,,2,Namibia 1; South Africa 1,NAM_RSA_Concs
+services5.arcgis.com/ikw4JDq7f8dS6zRy,,2,Namibia 2,Namibia_Seismic_Events_Kaumbi_UN_WFL1; Seismic Map of Namibia_WFL1
+services3.arcgis.com/JpMWbwty02wMiNWh,,2,Niger 1; Zambia 1,Niger_ Settlement_; zmb_stlext_grid3_v02
+services7.arcgis.com/yG10pxnN7Wey5PFp,,2,Niger 1; Nigeria 1,OIL SPILL DENSITY AND TREND ANALYSIS ACROSS THE NIGER DELTA _ IEGS_WFL1
+services9.arcgis.com/954etAI5inhr1JKe,Vertical Aspects,2,Niger 1; Nigeria 1,Internally Displaced Person's Centers BAYELSA
+services.arcgis.com/RrAoj4evMH0l0rKP,hardcastlegis,2,Niger 1; Nigeria 1,Nigeria Mines
+services2.arcgis.com/aXTewkgzKIzzrF67,Cengage,2,Niger 1; Nigeria 1,HG1e-08 Religions in Nigeria
+services6.arcgis.com/HoXudDt8hJGJqWnp,,2,Niger 2,EVALUATION FORMATION; Evaluation de la Formation
+services2.arcgis.com/xqd7nDk0JoKbie2t,CEFO Premium Logistics Ltd,2,Nigeria 2,Recce Task Zamfara_WFL1; Zamfara_POIs
+services.arcgis.com/CbP1OSrPsO5TBdCd,,2,Nigeria 2,Roads_CMR; UNMAP_POPP_CMR
+services2.arcgis.com/RQcpPaCpMAXzUI5g,,2,Rwanda 2,PDA_Catchment_MASTER; Post Disaster Assessment view - Rwanda 2023
+services7.arcgis.com/htgaiKX6RV2DDGgK,,2,Rwanda 2,Ngoma Overlays; Nyanza Overlays
+services.arcgis.com/arbtfQEzQbMi4m0U,,2,Senegal 2,Chlorophyll 10Day2020 Table; Oil Spills _2016_2021_
+services-ap1.arcgis.com/VYsKlnnEhIQB3D0F,Mosaic Insights,2,Senegal 2,ISIA error fixed; Invasive Species Impact Assessment FINAL
+services8.arcgis.com/68JTBa9Pi1Ub1rvX,FHS Geospatial Analysis,2,Somalia 2,Somalia Water Sources; Somalia_States_w_Shallow_Wells_ha301
+services1.arcgis.com/DsJvq2yRfeROp2NK,,2,Somalia 2,IDPSiteMonitoringApril2023; NewArrivalsTracking
+services1.arcgis.com/bKDOijB8sneN5004,Esri South Africa - Technical Marketing,2,South Africa 2,Business Licence Application and Compliance; Veterinary Services and Pet Visit Records in South Africa
+services3.arcgis.com/nBuJ1DscbNAw71dh,,2,South Africa 2,Important Areas; Vegetation
+services7.arcgis.com/jbdCPRrwkIrZb0KZ,South African Environmental Observation Network (SAEON),2,South Africa 2,Conservation Agriculture Benefits; EMDatNaturalDisasterDeaths
+services-eu1.arcgis.com/F7ETZiFBB2drrVJZ,Rudarsko-geološko-naftni fakultet Sveučilišta u Zagrebu,2,South Africa 1; Zimbabwe 1,Map of NRE_suitable locations_WFL1
+services3.arcgis.com/QdLJLZBqzVAhCil8,Department of Water & Sanitation,2,South Africa 2,DWS Dams; DWS Rivers
+services8.arcgis.com/gWsFXBEAmsTZ7y9e,4 Degrees Consulting,2,South Africa 2,Environmental Impact Assessment and Atmospheric Emissions License Application  for the paint manufacturing facility for Bulldog Abrasives Southern Africa (Pty) Ltd._form; Form 5
+services3.arcgis.com/4JPLzzQZXvmHmPZR,,2,South Africa 2,GWM_ZA; Haval_ZA
+services5.arcgis.com/G8Pqo3DzH8fIDN8F,Garden Route District Municipality,2,South Africa 2,Oudtshoorn Valuation Spatial; SG Properties Oudt
+services7.arcgis.com/1VIB2KKteTyIpwkV,Stellenbosch Municipality,2,South Africa 2,Public Viewer Map_WFL1; PublicViewer
+services6.arcgis.com/JDWzamIuD1Wgrxfk,University of Johannesburg,2,South Africa 2,MbomelaMap_WFL1; Wetland Buffer 2
+services.arcgis.com/3wgo1qnFL7YLB8lT,,2,Sudan 2,"Census Profile 2021 - Immigration, Place of Birth and Citizenship for Hamilton CSD; Citizenship, Imm. status and period of immigration, Age at immigration for the Pop 15 Years and Over, Hamilton CSD, Census 2021"
+services8.arcgis.com/KnNqrNoLb6iqjfiy,,2,Sudan 2,KH_LULC; Khartoum LULC
+services6.arcgis.com/8RkuyaahJfr9evxe,,2,Tanzania 2,PETROLEUM ACTIVITY REFERENCE MAP_WFL1; Tanzania Petroleum Activity Reference Map_WFL1
+services6.arcgis.com/uEViOZnjj4wj8FP7,ESRI EA: Natural Resources,2,Tanzania 2,Gold Mines; Petroleum_Data_Management_JV_WFL1
+services.arcgis.com/hVnyNvwbpFFPDV5j,The Claremont Colleges Library,2,Tanzania 2,Gombe_Land_Use; Gombe_Land_Use1
+services9.arcgis.com/z1SJCwV0uraLyDNJ,Dar group,2,Tanzania 2,Tanzania Water Source Survey_form; Tanzania Water Source Survey_results
+services.arcgis.com/ycIuRaoIC4UuCDAS,,2,Togo 2,Web_Kara_GrantJ_WFL1; Web_Kara_Kennedy_WFL1
+services8.arcgis.com/AHz4PtNe2oRaMeyO,,2,Uganda 2,Generation_Sites_2017; Generation_Sites_2017_Time
+services6.arcgis.com/FsXvBaPMxdANs50s,Joseph Kerski,2,Uganda 2,uganda_wells; uganda_wells_CSV
+services-eu1.arcgis.com/Y4MjUQwIm7mLwGy9,Alinea,2,Zimbabwe 2,Zimbabwe Apprehension Form v2; Zimbabwe Apprehension Form v2_results
