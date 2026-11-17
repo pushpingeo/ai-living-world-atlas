@@ -30,6 +30,8 @@ jobs:
         run: |
           bash .github/actions-fetch.sh
           mkdir -p _site && cp -r site/. _site/
+          # version-stamp the script and styles so a deploy's code and data load together (Pages caches for 10 min)
+          sed -i "s#app.js\"#app.js?v=${GITHUB_SHA::8}\"#; s#style.css\"#style.css?v=${GITHUB_SHA::8}\"#" _site/index.html
           TAGS=""; [ -f /tmp/pub/tags.parquet ] && TAGS=/tmp/pub/tags.parquet
           python -m atlas.viewer_data --datasets /tmp/pub/datasets.parquet ${TAGS:+--tags $TAGS} --out _site/data --only-passing \
             --meta "{\"built\":\"$(date -u +%F)\",\"only_passing\":true}"

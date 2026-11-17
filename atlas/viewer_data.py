@@ -1,16 +1,22 @@
 """Build the viewer's data files from datasets.parquet (+ tags.parquet if present).
 
 site/data/index.json      one compact row per dataset: what the map and filters need
-site/data/d/<xx>.json     details (description, licence, endpoints) sharded by the first 2 hex chars of the id
+site/data/dz/<xxx>.json.gz details (description, licence, endpoints) sharded by the first 3 characters of the id,
+                          gzipped (the viewer unzips them in the browser). meta.json says which layout is in use.
 """
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
+
+# Detail shards: 3-character keys (about 4k files, ~150 KB of JSON each at 256k datasets), gzipped. Was 2-character
+# keys, plain JSON in d/ (628 MB of the 1 GB Pages limit on 17 Nov).
+DETAIL_DIR, DETAIL_KEY = "dz", 3
 
 
 LEVELS = [(5, "a"), (20, "b")]   # (cell size in degrees, level name), finest first
@@ -41,7 +47,7 @@ def main():
     ap.add_argument("--meta", default="{}", help="JSON merged into meta (run ids, dates)")
     args = ap.parse_args()
     out = Path(args.out)
-    (out / "d").mkdir(parents=True, exist_ok=True)
+    (out / DETAIL_DIR).mkdir(parents=True, exist_ok=True)
 
     import geopandas as gpd
 
@@ -84,7 +90,7 @@ def main():
             r.get("detail_level") or "", 1 if cors_any else 0,
             1 if (lst(r.get("extent_flags")) and r.get("extent_source", "declared") != "measured") else 0,
         ])
-        shards[r["dataset_id"][:2]][r["dataset_id"]] = {
+        shards[r["dataset_id"][:DETAIL_KEY]][r["dataset_id"]] = {
             "abstract": (r.get("abstract") or "")[:2000], "licence": (r.get("licence") or "")[:400],
             "open_licence": bool(r.get("open_licence")), "landing_page": r.get("landing_page") or "",
             "keywords": lst(r.get("keywords"))[:20], "coverage": r.get("coverage_level") or "",
@@ -102,6 +108,7 @@ def main():
                    "protocols", "caps", "detail", "cors", "xsus"],
         "ptypes": inv(ptypes), "roles": inv(roles), "themes": inv(themes), "concepts": inv(concepts),
         "protocols": inv(protocols), "caps": inv(caps), "count": len(rows), "tagged": len(tags),
+        "detail_dir": DETAIL_DIR, "detail_key": DETAIL_KEY, "detail_gz": True,
         "levels": [{"deg": d, "name": n} for d, n in LEVELS],
         **json.loads(args.meta),
     }
@@ -129,10 +136,12 @@ def main():
     for k, v in tiles.items():
         (out / "t" / f"{k}.json").write_text(dump(v))
     for k, v in shards.items():
-        (out / "d" / f"{k}.json").write_text(dump(v))
+        # mtime=0 so an unchanged shard gives identical bytes from run to run
+        (out / DETAIL_DIR / f"{k}.json.gz").write_bytes(gzip.compress(dump(v).encode(), compresslevel=9, mtime=0))
+    dsize = sum(f.stat().st_size for f in (out / DETAIL_DIR).iterdir())
     print(f"{len(rows)} datasets, {len(tags)} tagged; big.json {len(big)} rows "
           f"({(out / 'big.json').stat().st_size / 1e6:.1f} MB), {len(tiles)} tiles (largest {max(map(len, tiles.values()), default=0)} rows), "
-          f"{len(shards)} detail shards")
+          f"{len(shards)} detail shards ({dsize / 1e6:.0f} MB gzipped)")
 
 
 if __name__ == "__main__":

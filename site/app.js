@@ -101,9 +101,25 @@ async function loadTiles(v) {
 }
 let zoomHint = false;
 
+/* Detail shards: meta.json says where they are and how they're keyed. Current layout: dz/<first 3 chars>.json.gz,
+   unzipped here. A server that has already unzipped the file (or an older plain layout) is read as it comes. */
+async function readShard(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
+  const buf = await r.arrayBuffer();
+  const b = new Uint8Array(buf);
+  if (b[0] === 0x1f && b[1] === 0x8b) {
+    const s = new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return JSON.parse(await new Response(s).text());
+  }
+  return JSON.parse(new TextDecoder().decode(buf));
+}
+
 async function details(id) {
-  const k = id.slice(0, 2);
-  if (!shardCache[k]) shardCache[k] = fetch(`${DATA}d/${k}.json`).then((r) => r.json());
+  const n = META.detail_key || 2;
+  const k = id.slice(0, n);
+  const url = META.detail_dir ? `${DATA}${META.detail_dir}/${k}.json${META.detail_gz ? ".gz" : ""}` : `${DATA}d/${k}.json`;
+  if (!shardCache[k]) shardCache[k] = readShard(url).catch((e) => { delete shardCache[k]; throw e; });
   return (await shardCache[k])[id];
 }
 
@@ -192,8 +208,13 @@ function renderList(items) {
 
 /* ---------- details ---------- */
 async function showDetail(li, r) {
-  const d = await details(r.id);
   const box = li.querySelector(".detail");
+  let d;
+  try { d = await details(r.id); } catch (e) {
+    console.warn(e);
+    if (box) box.innerHTML = '<p class="no">Couldn\'t load the details for this dataset. Try again in a moment.</p>';
+    return;
+  }
   if (!box || !d) return;
   const eps = d.endpoints.map((e, i) => {
     const how = addMethod(e);
