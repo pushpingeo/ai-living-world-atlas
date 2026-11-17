@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      site_mb: ${{ steps.size.outputs.mb }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,8 +34,10 @@ jobs:
           python -m atlas.viewer_data --datasets /tmp/pub/datasets.parquet ${TAGS:+--tags $TAGS} --out _site/data --only-passing \
             --meta "{\"built\":\"$(date -u +%F)\",\"only_passing\":true}"
       - name: Site size (GitHub Pages limit is 1 GB)
+        id: size
         run: |
           MB=$(du -sm _site | cut -f1)
+          echo "mb=$MB" >> $GITHUB_OUTPUT
           echo "site: ${MB} MB, $(find _site -type f | wc -l) files"
           du -sm _site/data/* 2>/dev/null | sort -rn | head -5
           echo "Site size: ${MB} MB of the 1 GB GitHub Pages limit" >> $GITHUB_STEP_SUMMARY
@@ -50,3 +54,16 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+  # Fails on its own when the site nears the 1 GB limit, so GitHub's failed-run email goes out; deploy (and the MCP
+  # deploy that follows pages) carry on regardless.
+  size-limit:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          MB=${{ needs.build.outputs.site_mb }}
+          echo "Viewer site: ${MB} MB (alert at 800 MB; GitHub Pages limit 1 GB)"
+          if [ "${MB:-0}" -ge 800 ]; then
+            echo "::error::Viewer site is ${MB} MB, close to the 1 GB GitHub Pages limit. Move the detail shards to R2 (see docs/HANDOVER.md)."
+            exit 1
+          fi
