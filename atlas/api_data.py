@@ -16,7 +16,8 @@ CREATE TABLE datasets (
   id TEXT PRIMARY KEY, title TEXT, publisher TEXT, ptype TEXT, role TEXT, country TEXT,
   xmin REAL, ymin REAL, xmax REAL, ymax REAL, area REAL,
   pass INTEGER, score INTEGER, themes TEXT, themes_src TEXT, concepts TEXT, protocols TEXT, caps TEXT,
-  detail TEXT, detail_m REAL, coverage TEXT, cors INTEGER, xsus INTEGER, open_licence INTEGER, licence TEXT
+  detail TEXT, detail_m REAL, coverage TEXT, cors INTEGER, xsus INTEGER, open_licence INTEGER, licence TEXT,
+  gtypes TEXT, home TEXT
 );
 CREATE INDEX ix_x ON datasets (xmin, xmax);
 CREATE INDEX ix_y ON datasets (ymin, ymax);
@@ -49,9 +50,48 @@ CREATE_IF_MISSING = (
 )
 
 
-def build_rows(ds, tags) -> dict:
+# Layer geometry types from the crawl → what a search needs: point, line or polygon. WFS layers say only
+# "features" (the crawl doesn't read DescribeFeatureType), so their type stays unknown.
+GTYPE = {"point": "point", "multipoint": "point", "polyline": "line", "polygon": "polygon"}
+
+
+def dataset_gtypes(layers) -> dict:
+    """dataset_id -> sorted list of point/line/polygon across its layers."""
+    if layers is None or "geometry_type" not in layers.columns:
+        return {}
+    ly = layers[["dataset_id", "geometry_type"]].dropna()
+    ly = ly.assign(g=ly["geometry_type"].map(GTYPE)).dropna(subset=["g"])
+    return {k: sorted(set(v)) for k, v in ly.groupby("dataset_id")["g"]}
+
+
+# Which country a dataset is about, for search: a national publisher's layer is about its own country, whatever
+# extent it declares (Kentucky wells, US census blocks and NOAA's US demarcation lines all claimed the world and came
+# up for Nigeria, 17 Nov). The MCP server leaves out datasets whose home country doesn't touch the search area.
+# Blank for publishers with no country, international bodies, and datasets listed as genuinely wider.
+EXTENT_OVERRIDES = Path(__file__).resolve().parent.parent / "vocab" / "extent_overrides.yaml"
+
+
+def home_of():
+    import re
+
+    import yaml
+
+    keep = [re.compile(p, re.I) for p in (yaml.safe_load(EXTENT_OVERRIDES.read_text()) or {}).get("genuinely_wider", [])] if EXTENT_OVERRIDES.exists() else []
+
+    def home(r):
+        c = (r.get("country") or "").strip().upper()
+        if c == "EUROPE":
+            return "EU"
+        if not re.fullmatch(r"[A-Z]{2}", c) or re.search(r"international|intergov", r.get("publisher_type") or "", re.I):
+            return ""
+        return "" if any(k.search(f"{r['title']} | {r['publisher']}") for k in keep) else c
+    return home
+
+
+def build_rows(ds, tags, gtypes=None, home=None) -> dict:
     import json
 
+    gtypes = gtypes or {}
     rows = {}
     for r, g in zip(ds.drop(columns="geometry").to_dict("records"), ds.geometry):
         if g is None or g.is_empty:
@@ -69,6 +109,7 @@ def build_rows(ds, tags) -> dict:
             any(e.get("cors") for e in json.loads(r["endpoints"] or "[]")),
             bool(flags) and r.get("extent_source", "declared") != "measured",
             bool(r.get("open_licence")), (r.get("licence") or "")[:200],
+            wrap(gtypes.get(r["dataset_id"], [])), home(r) if home else "",
         ]
     return rows
 
@@ -92,6 +133,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--datasets", required=True)
     ap.add_argument("--tags", default="")
+    ap.add_argument("--layers", default="", help="layers.parquet, for each dataset's geometry types")
     ap.add_argument("--only-passing", action="store_true", help="carry only datasets that pass the quality bar")
     ap.add_argument("--out", default="out/api.sql")
     ap.add_argument("--built", default="")
@@ -106,19 +148,27 @@ def main():
     if args.tags and Path(args.tags).exists():
         t = pd.read_parquet(args.tags)
         tags = {r["dataset_id"]: r for r in t[t["status"] == "succeeded"].to_dict("records")}
-    rows = build_rows(ds, tags)
+    layers = pd.read_parquet(args.layers, columns=["dataset_id", "geometry_type"]) if args.layers and Path(args.layers).exists() and "geometry_type" in __import__("pyarrow.parquet", fromlist=["x"]).read_schema(args.layers).names else None
+    gt = dataset_gtypes(layers)
+    rows = build_rows(ds, tags, gt, home_of())
+    print(f"geometry types known for {sum(1 for v in rows.values() if v[-2])} datasets; home country set for {sum(1 for v in rows.values() if v[-1])}")
     sql_vals = {k: "(" + ",".join(q(v) for v in vals) + ")" for k, vals in rows.items()}
     hashes = {k: hashlib.sha1(v.encode()).hexdigest()[:12] for k, v in sql_vals.items()}
 
     # D1's free tier allows 100k row writes a day (index updates count too), so a full reload of 40k rows
     # is expensive. With the previous load's hashes we write only what changed.
     prev = json.loads(Path(args.previous).read_text()) if args.previous and Path(args.previous).exists() else None
+    # A changed table layout (new columns, 17 Nov: gtypes, home) can't be loaded row by row: reload in full.
+    hashes["__schema__"] = hashlib.sha1(SCHEMA.encode()).hexdigest()[:12]
+    if prev is not None and prev.get("__schema__") != hashes["__schema__"]:
+        print("table layout changed: full reload")
+        prev = None
     if prev is None:
         lines = [SCHEMA] + inserts(list(sql_vals.values()))
         mode, changed, removed = "full", len(rows), 0
     else:
-        changed_ids = [k for k, h in hashes.items() if prev.get(k) != h]
-        removed_ids = [k for k in prev if k not in hashes]
+        changed_ids = [k for k, h in hashes.items() if prev.get(k) != h and k != "__schema__"]
+        removed_ids = [k for k in prev if k not in hashes and k != "__schema__"]
         lines = [CREATE_IF_MISSING] if (changed_ids or removed_ids) else []
         for i in range(0, len(removed_ids), 200):
             lines.append("DELETE FROM datasets WHERE id IN (" + ",".join(q(x) for x in removed_ids[i:i + 200]) + ");")

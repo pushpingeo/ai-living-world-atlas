@@ -9,9 +9,9 @@ while read -r b; do
   if git fetch -q origin "results/$b" 2>/dev/null; then
     # a wave that produced nothing (e.g. a diagnostic run) has no parquet files; skip it rather than fail
     if python -m atlas.parts get FETCH_HEAD datasets "/tmp/waves/$b.datasets.parquet" \
-       && python -m atlas.parts get FETCH_HEAD layers "/tmp/waves/$b.layers.parquet"; then
+       && python -m atlas.parts get FETCH_HEAD layers "/tmp/waves/$b.layers.parquet" uid,dataset_id,fields,title,abstract,geometry_type,q_pass; then
       DS+=("/tmp/waves/$b.datasets.parquet"); LY+=("/tmp/waves/$b.layers.parquet")
-    else echo "$b: no data yet, skipped" >&2; continue; fi
+    else echo "::warning::$b: could not read its datasets or layers; skipped" >&2; echo "$b: SKIPPED (could not read)" >> /tmp/pub/SOURCES.txt; continue; fi
     echo "$b: $(git show FETCH_HEAD:RUN.txt)" >> /tmp/pub/SOURCES.txt
   fi
 done < runs/published.txt

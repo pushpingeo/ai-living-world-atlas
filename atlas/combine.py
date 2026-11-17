@@ -10,6 +10,7 @@ from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
+import pyarrow.parquet as pq
 
 
 def apply_liveness(ds, d: Path):
@@ -100,10 +101,10 @@ def main():
         ds = apply_liveness(ds, Path(a.liveness))
     ds.to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     if a.layers:
-        cols = ["uid", "dataset_id", "fields", "title", "abstract"]  # title/abstract: the liveness sweep compares against them
+        cols = ["uid", "dataset_id", "fields", "title", "abstract", "geometry_type"]  # title/abstract: the liveness sweep compares against them; geometry_type: the MCP search
         keep = set(ds["dataset_id"]) if a.only_passing else None
         lf = [("dataset_id", "in", keep)] if keep is not None else None
-        ly = pd.concat([pd.read_parquet(p, columns=cols, filters=lf) for p in a.layers if Path(p).exists()], ignore_index=True)
+        ly = pd.concat([pd.read_parquet(p, columns=[c for c in cols if c in pq.read_schema(p).names], filters=lf) for p in a.layers if Path(p).exists()], ignore_index=True)
         ly.drop_duplicates("uid").to_parquet(out / "layers.parquet")
     if a.tags:
         tg = pd.concat([pd.read_parquet(p) for p in a.tags if Path(p).exists() and Path(p).stat().st_size > 0], ignore_index=True)

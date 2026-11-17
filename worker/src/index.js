@@ -2,6 +2,7 @@
    Private for now: every request needs the key, as "Authorization: Bearer <key>", "X-Api-Key: <key>",
    or "?key=<key>" for clients that can't set headers. */
 import VOCAB from "./vocab.json";
+import AREAS from "./country_areas.json";
 
 const SERVER = { name: "ai-living-world-atlas", version: "0.1.0" };
 const PROTOCOLS = ["2025-06-18", "2025-03-26", "2024-11-05"];
@@ -31,6 +32,8 @@ const TOOLS = [
         known_detail_only: { type: "boolean" },
         text: { type: "string", description: "Words that must appear in the title or publisher" },
         browser_ready: { type: "boolean", description: "Only datasets a web page can load directly (CORS)" },
+        geometry: { type: "string", enum: ["point", "line", "polygon"], description: "Only datasets with layers of this geometry (datasets whose geometry isn't recorded, such as most WFS layers, are kept)" },
+        include_other_countries: { type: "boolean", description: "Also return datasets from national publishers whose country doesn't touch the area. Off by default: such layers usually claim a wider extent than they hold." },
         limit: { type: "integer", minimum: 1, maximum: 100, description: "Default 20" },
       },
     },
@@ -151,6 +154,38 @@ function usage(e) {
   return out;
 }
 
+/* ---------------- countries an area touches ---------------- */
+// Each country with its waters (3 degrees round it), from Natural Earth. A national publisher's layer is about its
+// own country whatever extent it declares, so search leaves out those whose country doesn't touch the area.
+const EUROPE = new Set("AD AL AT BA BE BG BY CH CY CZ DE DK EE ES FI FO FR GB GG GI GR HR HU IE IM IS IT JE LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS SE SI SK SM UA VA XK".split(" "));
+const ringsOf = (g) => (g.type === "Polygon" ? [g.coordinates[0]] : g.coordinates.map((p) => p[0]));
+const COUNTRIES = AREAS.features.map((f) => {
+  const rings = ringsOf(f.geometry);
+  const xs = rings.flat().map((p) => p[0]), ys = rings.flat().map((p) => p[1]);
+  return { iso: f.properties.iso2, rings, bbox: [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)] };
+});
+function inRing([x, y], ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+// Countries whose area meets the box: a vertex of the country inside the box, or a point of the box inside the
+// country. Edges crossing with no vertex either side are missed, which the 3-degree margin makes rare.
+function countriesTouching(v) {
+  const [w, s, e, n] = v;
+  const pts = [[(w + e) / 2, (s + n) / 2], [w, s], [w, n], [e, s], [e, n]];
+  const out = new Set();
+  for (const c of COUNTRIES) {
+    if (c.bbox[0] > e || c.bbox[2] < w || c.bbox[1] > n || c.bbox[3] < s) continue;
+    if (c.rings.some((r) => r.some(([x, y]) => x >= w && x <= e && y >= s && y <= n)) || pts.some((p) => c.rings.some((r) => inRing(p, r)))) out.add(c.iso);
+  }
+  if ([...out].some((c) => EUROPE.has(c))) out.add("EU");
+  return out;
+}
+
 /* ---------------- tools ---------------- */
 const CAND = 3000;
 
@@ -165,6 +200,15 @@ async function findDatasets(env, a) {
   if (a.theme) { where.push("themes LIKE ?"); params.push(`%,${a.theme},%`); }
   if (a.capability) { where.push("caps LIKE ?"); params.push(`%,${a.capability},%`); }
   if (a.text) { where.push("(title LIKE ? OR publisher LIKE ?)"); params.push(`%${a.text}%`, `%${a.text}%`); }
+  if (a.geometry) {
+    if (!["point", "line", "polygon"].includes(a.geometry)) throw new Error("geometry must be point, line or polygon");
+    where.push("(gtypes LIKE ? OR gtypes = '' OR gtypes IS NULL)"); params.push(`%,${a.geometry},%`);
+  }
+  let touched = null;
+  if (!a.include_other_countries) {
+    touched = [...countriesTouching(v)].filter((c) => /^[A-Z]{2}$/.test(c));
+    where.push(`(home = '' OR home IS NULL${touched.length ? ` OR home IN (${touched.map((c) => `'${c}'`).join(",")})` : ""})`);
+  }
   if (a.min_detail) {
     const m = VOCAB.detail_levels[a.min_detail];
     if (m === undefined) throw new Error(`min_detail must be one of ${Object.keys(VOCAB.detail_levels).join(", ")}`);
@@ -193,9 +237,12 @@ async function findDatasets(env, a) {
       protocols: unwrap(r.protocols), capabilities: unwrap(r.caps),
       licence: r.licence || "not stated", open_licence: !!r.open_licence, quality_score: r.score,
       extent_may_be_overstated: !!r.xsus, browser_ready: !!r.cors,
+      geometry: unwrap(r.gtypes), country: r.home || null,
       bbox: [r.xmin, r.ymin, r.xmax, r.ymax].map((n) => +n.toFixed(5)),
     })),
-    note: "fit = how well the dataset's extent matches the area (1 = same size and place).",
+    ...(touched ? { countries_in_area: touched } : {}),
+    note: "fit = how well the dataset's extent matches the area (1 = same size and place)." +
+      (touched ? " National publishers' datasets are included only for the countries in the area (include_other_countries to widen)." : ""),
   };
 }
 

@@ -1,0 +1,5 @@
+# Datasets from a national publisher that genuinely cover far more than their own country, so the
+# "extent mostly outside the publisher's country" check in atlas/api_data.py leaves them alone.
+# Regular expressions matched against "title | publisher". Add one only after checking the layer's features.
+genuinely_wider:
+  - '^Minerals Resource Data System \| U\.S\. Geological Survey'   # USGS MRDS: mineral sites worldwide
