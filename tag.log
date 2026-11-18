@@ -1,0 +1,23 @@
+skipping 51 already tagged
+submitted batch msgbatch_01MiQQdyH7tVT1kiy4v7xVyR with 8637 requests
+[0s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[180s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[241s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[301s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[361s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[422s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[482s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[542s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[602s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[663s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[723s] v7xVyR in_progress {'processing': 8637, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[783s] v7xVyR ended {'processing': 0, 'succeeded': 8637, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch(es) msgbatch_01MiQQdyH7tVT1kiy4v7xVyR
+
+- Requests: 8637; succeeded: 8637
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 3647024, "output_tokens": 1761690, "cache_read_input_tokens": 26719784, "cache_creation_input_tokens": 3094}
+- **Cost: $0.76** (estimated from token counts and published batch prices)
+
