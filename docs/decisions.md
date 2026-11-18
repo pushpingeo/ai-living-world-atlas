@@ -323,3 +323,13 @@ date; a push or manual run always goes ahead. Side effect: a skipped slot still 
 pages and deploy-mcp rebuild after it (harmless: nothing changes, the MCP load writes 0 rows). 18 Nov's sweep was
 started by hand at 09:02. If slots keep going missing, the next step is a Cloudflare cron trigger calling GitHub's
 workflow_dispatch (needs a GitHub token stored as a Worker secret, which Rob would set).
+
+## 2026-11-18 (afternoon): first sweep with the second look
+Started by hand 09:02 (GitHub dropped the 03:23 slot). 45,000 services, 244.5 min, 106,917 requests. Resolving
+99.5% (up from 99.3%); 1,723 failing, none retired; no hosts down. Second look: 24 of 106 failed services answered
+on the slow retry. Checked at least once: 367,633 of 577,273 endpoints (64%). The 09:23 slot (started 11:57) waited
+for the manual run, then skipped as designed.
+Fixed: the sweep didn't check atlas-hosted `geojson` endpoints, so GEM showed 0% resolving and would have retired
+from early December; it now fetches their index.json. Slow retries stop starting 3 minutes before the deadline
+(the run overran by 4.5 min). GEM endpoints keep "failing" status until their next recheck (every 3 days).
+Overture's S3 folder isn't due again until 20 Nov, so the listing fix is still unproven.
