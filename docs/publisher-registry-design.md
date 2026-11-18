@@ -1,6 +1,6 @@
 # Publisher registry: design (18 Nov 2026)
 
-Proposal for Rob to agree before building. It comes before the `trusted` field and licence classes
+Agreed by Rob on 18 Nov (decisions below); stage 1 is built. It comes before the `trusted` field and licence classes
 (`docs/trusted-services-design.md`), because both depend on knowing who a dataset really comes from.
 
 ## The problem in numbers
