@@ -1,12 +1,18 @@
-# round 8 (18 Nov): GEM oil and gas extraction tracker (GOGET) map files, March 2026 release
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/asia_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/europe_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/africa-energy_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/africa_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/latam_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/LATAM_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/GOIT_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/integrated_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/north-america_map_2026-03-02.geojson
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/GOGET/2026-03/
-https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/?prefix=GOGET/&max-keys=200
+# round 9 (18 Nov): GEM tracker landing pages, before writing them into catalogue records
+https://globalenergymonitor.org/projects/global-coal-plant-tracker/
+https://globalenergymonitor.org/projects/global-coal-mine-tracker/
+https://globalenergymonitor.org/projects/global-coal-terminals-tracker/
+https://globalenergymonitor.org/projects/global-oil-and-gas-plant-tracker/
+https://globalenergymonitor.org/projects/global-oil-gas-plant-tracker/
+https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+https://globalenergymonitor.org/projects/global-oil-infrastructure-tracker/
+https://globalenergymonitor.org/projects/global-wind-power-tracker/
+https://globalenergymonitor.org/projects/global-solar-power-tracker/
+https://globalenergymonitor.org/projects/global-hydropower-tracker/
+https://globalenergymonitor.org/projects/global-geothermal-power-tracker/
+https://globalenergymonitor.org/projects/global-bioenergy-power-tracker/
+https://globalenergymonitor.org/projects/global-nuclear-power-tracker/
+https://globalenergymonitor.org/projects/global-iron-and-steel-tracker/
+https://globalenergymonitor.org/projects/global-cement-and-concrete-tracker/
+https://globalenergymonitor.org/projects/global-chemicals-tracker/
+https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker/

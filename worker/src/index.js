@@ -448,17 +448,39 @@ function featBbox(g) {
   return [w, s, e, n];
 }
 
+// Hosted files (atlas/files.py): files/<id>/index.json lists gzipped GeoJSON tiles with their extents; only tiles
+// touching the area are read. A plain .geojson (the first layout) still works.
+const MAX_TILES = 40;
 async function fileFeatures(e, d, a, v, limit) {
-  const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(25000) });
-  if (!r.ok) throw new Error(`HTTP ${r.status}`);
-  const gj = await r.json();
-  if (!Array.isArray(gj.features)) throw new Error("not GeoJSON");
   const t = a.text ? String(a.text).toLowerCase() : "";
-  const hits = gj.features.filter((f) => {
+  const keep = (f) => {
     const b = featBbox(f.geometry);
     if (b[0] > v[2] || b[2] < v[0] || b[1] > v[3] || b[3] < v[1]) return false;
     return !t || Object.values(f.properties || {}).some((x) => typeof x === "string" && x.toLowerCase().includes(t));
-  });
+  };
+  let hits = [], source = null, partial = false;
+  if (/index\.json$/.test(e.url)) {
+    const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(15000) });
+    if (!r.ok) throw new Error(`index: HTTP ${r.status}`);
+    const idx = await r.json();
+    source = idx.atlas_source || null;
+    const base = e.url.replace(/index\.json$/, "");
+    const near = idx.tiles.filter((x) => !(x.bbox[0] > v[2] || x.bbox[2] < v[0] || x.bbox[1] > v[3] || x.bbox[3] < v[1]));
+    if (near.length > MAX_TILES) partial = true;
+    for (const tile of near.slice(0, MAX_TILES)) {
+      const gj = await readShard(`${base}${tile.key}.json.gz`);
+      if (!gj || !Array.isArray(gj.features)) throw new Error(`tile ${tile.key} unreadable`);
+      for (const f of gj.features) if (keep(f)) hits.push(f);
+      if (hits.length >= limit * 4 && !a.text) { partial = partial || tile !== near[near.length - 1]; break; }
+    }
+  } else {
+    const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(25000) });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const gj = await r.json();
+    if (!Array.isArray(gj.features)) throw new Error("not GeoJSON");
+    source = gj.atlas_source || null;
+    hits = gj.features.filter(keep);
+  }
   const feats = hits.slice(0, limit).map((f) => ({
     type: "Feature", geometry: a.include_geometry === false ? null : f.geometry,
     properties: Object.fromEntries(Object.entries(f.properties || {}).slice(0, 40)
@@ -466,8 +488,9 @@ async function fileFeatures(e, d, a, v, limit) {
   }));
   return {
     dataset: a.id, endpoint: { protocol: "geojson", url: e.url }, area: v.map((n) => +n.toFixed(5)),
-    returned: feats.length, matched: hits.length, may_be_more: hits.length > feats.length,
-    licence: d.licence || "not stated", ...(gj.atlas_source ? { source: gj.atlas_source } : {}),
+    returned: feats.length, matched: hits.length, ...(partial ? { matched_is_partial: true } : {}),
+    may_be_more: partial || hits.length > feats.length,
+    licence: d.licence || "not stated", ...(source ? { source } : {}),
     ...(a.where ? { note: "where isn't supported for hosted files; use text" } : {}),
     type: "FeatureCollection", features: feats,
   };
