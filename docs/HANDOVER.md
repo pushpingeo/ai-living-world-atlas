@@ -211,7 +211,8 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
    - **Trusted services / publisher registry** (`docs/publisher-registry-design.md`, Rob's decisions 18 Nov):
      stage 1 built: `vocab/publishers.yaml` (seeded: BGS, NSTA, Ordnance Survey hosted by Esri UK, Esri UK as a
      platform), `atlas/publishers.py`, and the `publishers` workflow (weekly candidate issue, Rob ticks and closes,
-     `apply` writes the registry). First issue: 250 candidates. **Stage 2 waits for Rob to close it**: registry
+     `apply` writes the registry). First list: 250 candidates in issues #2-#13, 25 each, ranked by services; Rob
+     approves an issue with one comment (`add all`, `add all except <codes>`). **Stage 2 waits for those**: registry
      applied at publish time and in D1 (`publisher_id`, `trusted`, `hosted_by`, `publisher_credit`,
      `trusted_only`), with the licence classes in the same full reload. No licence defaults from the registry.
 10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into gzipped GeoJSON tiles

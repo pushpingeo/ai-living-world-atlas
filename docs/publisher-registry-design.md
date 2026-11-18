@@ -116,9 +116,13 @@ workflow run.
   Esri UK as a platform.
 - `atlas/publishers.py`: the matcher, the candidate list (whole hostnames, not registered domains: wa.gov.au is dozens
   of agencies; the same body on several hosts is merged into one candidate) and `apply`.
-- The `publishers` workflow: a weekly issue (Mondays, top 20, only if the last one is closed) and `apply` when Rob
-  closes it. The first issue has 250 candidates, in sections: national agencies and international bodies,
-  other government, hosted on a platform, everyone else, platforms.
+- The `publishers` workflow: weekly issues (Mondays, top 20, only when the last ones are closed) and `apply`.
+  Changed the same evening after Rob tried the first 250-line issue: each tick took tens of seconds (GitHub saves the
+  whole body). Now **issues of up to 25**, and **one comment does a whole issue**: `add all`, `add all except
+  <codes>`, `add <codes>` or `decline all` (closing after ticking still works). Whatever isn't added from that issue
+  is declined. Candidates are **chosen and sorted by number of services** (Rob's suggestion), national agencies and
+  international bodies first; both services and layers are shown. First list: 250 candidates in issues #2-#13
+  (#1 retired, its 3 ticks carried over).
 - Tested locally: ticking 8 candidates added 8 entries (Met Office, Geoscience Australia, EEA, Environment Agency,
   Natural England...), declined the other 242, and took matched datasets from 545 to 3,441; the next list left them out.
 
