@@ -74,3 +74,11 @@ Work: half a day, computed at publish time (no recrawl), and one new D1 column, 
   Ordnance Survey, NSTA…) or stay global only.
 - (d) Whether `restricted` should cover non-commercial licences (CC-BY-NC, WDPA), so Tobler can exclude them for
   commercial use. This touches licences with commercial consequences.
+
+## Rob's answers (18 Nov)
+
+- **FIRMS:** yes in principle for Tobler to use through the atlas. Keys that users hold and enter themselves are
+  wanted longer term but not in scope now. The key goes in as a Worker secret (Rob sets it; it's never handled in chat).
+- **Trusted list:** much bigger than Tobler's first pass, perhaps a couple of hundred, including national agencies
+  (BGS, Ordnance Survey, NSTA…). It needs to be semi-maintainable: see the publisher registry proposal in the
+  handover and the chat of 18 Nov. Next step: agree that design, then build it before the `trusted` field.
