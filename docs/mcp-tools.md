@@ -33,6 +33,15 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (18 Nov) **Africa published, and national authorities pass without a description.** New wave `spike-africa`
+  (8,688 passing datasets) added to `runs/published.txt`. It includes petroleum layers from ONHYM (Morocco), the
+  Petroleum Authority of Uganda and ANPG (Angola), plus Mozambique's FNDS and WRI's Forest Atlas. Quality rule change
+  (Rob's call): central-government and national public-body layers that answer and aren't junk now pass even with no
+  description, and code-like or all-caps titles are tidied ("Petroleum agreements onshore"). Expect thinner
+  `abstract` text on these. The rule applies to other regions when they're next crawled or remerged.
+  *Not available:* GNPC (Ghana), Kenya's State Department for Petroleum and ANPG's ArcGIS Online services need a login
+  token. Additive only; no field changes.
+
 - (17 Nov, night) **Tobler request: trusted global services, key-gated services, Esri copies. Design written, not
   built:** `docs/trusted-services-design.md`. Proposes, all additive: `licence_class` (open, open-inferred, esri-mla,
   restricted, stated, unknown) with `exclude_licence_class`; `trusted` and `trusted_only`; `source` and `copy_of` for
