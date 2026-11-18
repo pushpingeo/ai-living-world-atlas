@@ -131,6 +131,16 @@ class Matcher:
         return out
 
 
+SERVICE = re.compile(r"(.*?/(?:MapServer|FeatureServer|ImageServer|VectorTileServer|SceneServer|GPServer))(/|$)", re.I)
+
+
+def service_of(url: str) -> str:
+    """The service a layer URL belongs to: ArcGIS .../MapServer/3 -> .../MapServer; OGC: the URL without its query."""
+    u = (url or "").split("?")[0]
+    m = SERVICE.match(u)
+    return (m.group(1) if m else u).lower()
+
+
 def urls_of(endpoints) -> list[str]:
     try:
         return [x.get("url", "") for x in json.loads(endpoints or "[]")]
@@ -163,7 +173,9 @@ def candidates(ds, entries: list[dict], declined: set[str], top: int) -> list[di
         if kind == "agol" and key in m.orgs and not m.orgs[key].get("hosting_only"):
             continue
         # A whole hostname, not its registered domain: wa.gov.au is dozens of agencies, each on its own host
-        rows.append({"kind": kind, "key": key, "host": key if kind == "host" else "",
+        if kind == "host" and key.endswith("github.io"):
+            continue  # our own hosted downloads (GEM): registered by hand
+        rows.append({"kind": kind, "key": key, "host": key if kind == "host" else "", "svc": service_of(us[0]),
                      "credit": (r.publisher or "").strip(), "ptype": r.publisher_type or "unknown",
                      "country": r.country or "", "lic": bool((r.licence or "").strip()), "desc": bool((r.abstract or "").strip())})
     df = pd.DataFrame(rows)
@@ -190,14 +202,19 @@ def candidates(ds, entries: list[dict], declined: set[str], top: int) -> list[di
             m0 = merged[k]
             for mk, mv in c["match"].items():
                 m0["match"].setdefault(mk, []).extend(x for x in mv if x not in m0["match"][mk])
-            m0["n"] += c["n"]; m0["rank"] = round(max(m0["rank"], c["rank"]) * 1.1, 1)
+            m0["n"] += c["n"]; m0["services"] += c["services"]; m0["rank"] = round(max(m0["rank"], c["rank"]) * 1.1, 1)
             m0["sources"].append(c["source"])
             m0["cid"] = hashlib.sha1((m0["cid"] + c["cid"]).encode()).hexdigest()[:10]
         else:
             merged[k] = {**c, "sources": [c["source"]]}
-    out = [c for c in merged.values() if c["cid"] not in declined and c["n"] >= 5]
-    out.sort(key=lambda c: -c["rank"])
-    return out[:top]
+    out = [c for c in merged.values() if c["cid"] not in declined and c["n"] >= 5 and c["services"] >= 2]
+    # Chosen by number of services (Rob, 18 Nov), not layers: a body with 300 services matters more than one service
+    # with 300 layers. National agencies and international bodies come first whatever their size; ties go to the
+    # signals in `rank`.
+    first = sorted([c for c in out if c["role"] in NATIONAL_ROLES or c["role"] == "international"],
+                   key=lambda c: (-c["services"], -c["rank"]))
+    rest = sorted([c for c in out if c not in first], key=lambda c: (-c["services"], -c["rank"]))
+    return (first + rest)[:top]
 
 
 def cand(kind, key, g, credit, hosting_only=False, via=None) -> dict:
@@ -219,7 +236,7 @@ def cand(kind, key, g, credit, hosting_only=False, via=None) -> dict:
         match["hosts"] = [key]
     variants = [c for c in g.credit.value_counts().index[:4]]
     return {"cid": cid, "kind": "platform" if hosting_only else ("hosted" if via else kind), "source": key, "via": via,
-            "name": credit[:120], "n": n, "country": country, "type": ptype, "role": role, "gov_domain": gov,
+            "name": credit[:120], "n": n, "services": int(g.svc.nunique()), "country": country, "type": ptype, "role": role, "gov_domain": gov,
             "licence_share": round(float(g.lic.mean()), 2), "hosts": hosts, "credits_seen": variants,
             "rank": round(rank, 1), "match": match, "hosting_only": hosting_only}
 
@@ -232,45 +249,78 @@ def slug(name: str, taken: set[str]) -> str:
     return s
 
 
-def issue_body(cands: list[dict], week: str) -> str:
-    lines = [f"Publisher candidates, week of {week}. Tick the ones to add to the registry (as trusted), then close the issue.",
-             "Unticked ones are recorded as declined and won't come back. To correct one (name, not trusted, a "
-             "different role), add a comment quoting its code; the atlas chat picks it up.", "",
-             "Platform = a host or ArcGIS Online organisation serving several publishers' data (never credited or "
-             "trusted itself). Hosted = one publisher's data on a platform, matched by platform AND credit.", ""]
-    sections = [("National agencies and international bodies", lambda c: c["role"] in NATIONAL_ROLES or c["role"] == "international"),
-                ("Other government and public bodies", lambda c: not c["hosting_only"] and c["kind"] != "hosted" and c["type"] in AUTH_TYPES),
-                ("Hosted on a platform (matched by platform and credit)", lambda c: c["kind"] == "hosted"),
-                ("Everyone else", lambda c: not c["hosting_only"]),
-                ("Platforms (serve several publishers' data; recorded so they're never credited, never trusted)", lambda c: True)]
-    done = set()
-    for title, keep in sections:
+HOWTO = """**Quickest:** reply with one comment and the whole issue is done in one go:
+- `add all` adds every candidate below; `add all except 1a2b3c4d5e 6f7a8b9c0d` leaves those out
+- `add 1a2b3c4d5e 6f7a8b9c0d` adds just those; `decline all` adds none
+Or tick boxes and close the issue. Either way, whatever isn't added is recorded as declined and won't come back.
+To correct one (name, not trusted, a different role), say so in a comment; the atlas chat picks it up.
+
+Counts are services, then layers. Platform = a host or ArcGIS Online organisation serving several publishers' data
+(recorded so it's never credited or trusted). Hosted = one publisher's data on a platform, matched by platform and credit.
+"""
+
+SECTIONS = [("national agencies and international bodies", lambda c: c["role"] in NATIONAL_ROLES or c["role"] == "international"),
+            ("other government and public bodies", lambda c: not c["hosting_only"] and c["kind"] != "hosted" and c["type"] in AUTH_TYPES),
+            ("hosted on a platform", lambda c: c["kind"] == "hosted"),
+            ("everyone else", lambda c: not c["hosting_only"]),
+            ("platforms", lambda c: True)]
+
+
+def line(c: dict, ticked: set[str]) -> str:
+    srcs = ", ".join(c.get("sources", [c["source"]])[:3]) + (f" +{len(c['sources']) - 3}" if len(c.get("sources", [])) > 3 else "")
+    flags = ", ".join(x for x in [c["country"] or "intl", c["type"], c["role"], "gov domain" if c["gov_domain"] else "",
+                                   f"licence {int(c['licence_share'] * 100)}%"] if x)
+    box = "x" if c["cid"] in ticked else " "
+    count = f"{c['services']} services, {c['n']} layers"
+    if c["hosting_only"]:
+        eg = "; ".join(x[:40] for x in c["credits_seen"][:3])
+        return f"- [{box}] **{c['source']}**: {count} ({flags}), e.g. {eg} `{c['cid']}`"
+    return f"- [{box}] **{c['name'][:80]}**: {count}, {srcs} ({flags}) `{c['cid']}`"
+
+
+def issue_bodies(cands: list[dict], per: int = 25, ticked: set[str] = frozenset()) -> list[tuple[str, str]]:
+    """(title suffix, body) per issue: sections in order, at most `per` candidates an issue, largest first. Ticking
+    in a long issue is slow (GitHub saves the whole body each time), hence small issues and the comment commands."""
+    done, chunks = set(), []
+    for title, keep in SECTIONS:
         part = [c for c in cands if c["cid"] not in done and keep(c)]
-        if not part:
-            continue
-        lines += [f"### {title}", ""]
-        for c in part:
-            done.add(c["cid"])
-            srcs = ", ".join(c.get("sources", [c["source"]])[:3]) + (f" +{len(c['sources']) - 3}" if len(c.get("sources", [])) > 3 else "")
-            flags = ", ".join(x for x in [c["country"] or "intl", c["type"], c["role"], "gov domain" if c["gov_domain"] else "",
-                                           f"licence {int(c['licence_share'] * 100)}%"] if x)
-            if c["hosting_only"]:
-                eg = "; ".join(x[:40] for x in c["credits_seen"][:3])
-                lines.append(f"- [ ] **{c['source']}**: {c['n']} datasets ({flags}), e.g. {eg} `{c['cid']}`")
-            else:
-                lines.append(f"- [ ] **{c['name'][:80]}**: {srcs}, {c['n']} datasets ({flags}) `{c['cid']}`")
-        lines.append("")
-    return "\n".join(lines)
+        done |= {c["cid"] for c in part}
+        for i in range(0, len(part), per):
+            chunk = part[i:i + per]
+            n = (len(part) + per - 1) // per
+            chunks.append((title + (f", part {i // per + 1} of {n}" if n > 1 else ""),
+                           HOWTO + "\n" + "\n".join(line(c, ticked) for c in chunk) + "\n"))
+    return chunks
 
 
-def apply(body: str, cands_path: Path, approver: str, day: str) -> tuple[int, int]:
-    """Ticked boxes -> publishers.yaml (trusted unless a platform); unticked -> publishers_declined.yaml."""
+def parse_command(text: str) -> tuple[str, set[str]] | None:
+    """A comment command: ("all", except-codes), ("some", codes) or ("none", {}); None if the comment isn't one."""
+    t = (text or "").strip().lower()
+    codes = set(re.findall(r"\b[0-9a-f]{10}\b", t))
+    if re.match(r"^add all\b", t):
+        return "all", codes
+    if re.match(r"^decline all\b", t):
+        return "none", set()
+    if re.match(r"^add\b", t) and codes:
+        return "some", codes
+    return None
+
+
+def apply(body: str, cands_path: Path, approver: str, day: str, command: str = "") -> tuple[int, int]:
+    """Ticked boxes (or a comment command) -> publishers.yaml (trusted unless a platform); the rest of the issue's
+    candidates -> publishers_declined.yaml."""
     cands = {c["cid"]: c for c in json.loads(cands_path.read_text())}
     ticked, unticked = set(), set()
-    for line in body.splitlines():
-        m = re.match(r"\s*- \[( |x|X)\] .*`([0-9a-f]{10})`\s*$", line)
+    for ln in body.splitlines():
+        m = re.match(r"\s*- \[( |x|X)\] .*`([0-9a-f]{10})`\s*$", ln)
         if m and m.group(2) in cands:
             (ticked if m.group(1).lower() == "x" else unticked).add(m.group(2))
+    cmd = parse_command(command) if command else None
+    if cmd:
+        everyone = ticked | unticked
+        kind, codes = cmd
+        ticked = (everyone - codes) if kind == "all" else (everyone & codes) if kind == "some" else set()
+        unticked = everyone - ticked
     doc = yaml.safe_load(REGISTRY.read_text()) if REGISTRY.exists() else None
     doc = doc or {"publishers": []}
     entries = doc["publishers"]
@@ -326,13 +376,15 @@ def main():
     c.add_argument("--datasets", required=True)
     c.add_argument("--top", type=int, default=20)
     c.add_argument("--out", required=True, help="candidates.json")
-    c.add_argument("--issue", required=True, help="issue body (markdown)")
+    c.add_argument("--issue", required=True, help="folder for the issues: NN.md body and NN.title")
+    c.add_argument("--ticked", default="", help="candidate codes to show already ticked (carried over)")
     c.add_argument("--week", required=True)
     a = sub.add_parser("apply")
     a.add_argument("--body", required=True)
     a.add_argument("--candidates", required=True)
     a.add_argument("--approver", required=True)
     a.add_argument("--day", required=True)
+    a.add_argument("--command", default="", help="a comment command: add all [except ...], add ..., decline all")
     s = sub.add_parser("stats")
     s.add_argument("--datasets", required=True)
     args = ap.parse_args()
@@ -343,10 +395,16 @@ def main():
         declined = {d["candidate"] for d in ((yaml.safe_load(DECLINED.read_text()) or {}).get("declined") or [])} if DECLINED.exists() else set()
         cs = candidates(ds, load(), declined, args.top)
         Path(args.out).write_text(json.dumps(cs, indent=1, ensure_ascii=False))
-        Path(args.issue).write_text(issue_body(cs, args.week))
-        print(f"{len(cs)} candidates")
+        out = Path(args.issue)
+        out.mkdir(parents=True, exist_ok=True)
+        pre = set(args.ticked.split(",")) if args.ticked else set()
+        chunks = issue_bodies(cs, ticked=pre)
+        for i, (suffix, body) in enumerate(chunks, 1):
+            (out / f"{i:02d}.md").write_text(body)
+            (out / f"{i:02d}.title").write_text(f"Publisher candidates, week of {args.week} ({i}/{len(chunks)}): {suffix}")
+        print(f"{len(cs)} candidates in {len(chunks)} issues")
     elif args.cmd == "apply":
-        t, u = apply(Path(args.body).read_text(), Path(args.candidates), args.approver, args.day)
+        t, u = apply(Path(args.body).read_text(), Path(args.candidates), args.approver, args.day, args.command)
         print(f"added {t}, declined {u}")
     else:
         import pandas as pd

@@ -1,10 +1,11 @@
 name: publishers
 # Publisher registry upkeep (atlas/publishers.py, docs/publisher-registry-design.md).
-# candidates: weekly (Monday, after the night's sweep) or on a push of runs/publishers.env, opens a GitHub issue with
-#   one checkbox per unregistered publisher worth a look, unless one is still open. The candidates' details go to
-#   results/publishers/candidates-<week>.json.
-# apply: when Rob closes that issue, ticked candidates are added to vocab/publishers.yaml and unticked ones to
-#   vocab/publishers_declined.yaml. Only acts on issues the workflow opened and Rob closed.
+# candidates: weekly (Monday, after the night's sweep) or on a push of runs/publishers.env, opens GitHub issues of up
+#   to 25 unregistered publishers each (ticking in a long issue is slow), unless any are still open. The candidates'
+#   details go to results/publishers/candidates-<week>.json.
+# apply: when Rob comments "add all", "add all except <codes>", "add <codes>" or "decline all" on one of those issues,
+#   or closes it after ticking boxes, the added ones go into vocab/publishers.yaml and the rest of that issue's
+#   candidates into vocab/publishers_declined.yaml. Only acts on issues the workflow opened, and only for Rob.
 on:
   schedule:
     - cron: '41 10 * * 1'
@@ -13,6 +14,8 @@ on:
     paths: ['runs/publishers.env']
   issues:
     types: [closed]
+  issue_comment:
+    types: [created]
   workflow_dispatch:
 permissions:
   contents: write
@@ -22,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   candidates:
-    if: github.event_name != 'issues'
+    if: github.event_name != 'issues' && github.event_name != 'issue_comment'
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
@@ -43,11 +46,15 @@ jobs:
           pip install -q -r requirements.txt
           bash .github/actions-fetch.sh
           top=20
-          if [ "${{ github.event_name }}" = "push" ]; then top=$(grep -E '^TOP=' runs/publishers.env | cut -d= -f2); fi
+          ticked=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            top=$(grep -E '^TOP=' runs/publishers.env | cut -d= -f2)
+            ticked=$(grep -E '^TICKED=' runs/publishers.env | cut -d= -f2 || true)
+          fi
           week=$(date -u +%F)
           echo "WEEK=$week" >> $GITHUB_ENV
           python -m atlas.publishers candidates --datasets /tmp/pub/datasets.parquet --top "$top" \
-            --out /tmp/candidates.json --issue /tmp/issue.md --week "$week"
+            --out /tmp/candidates.json --issue /tmp/issues --week "$week" --ticked "$ticked"
       - name: Save candidates and open the issue
         if: steps.open.outputs.n == '0'
         run: |
@@ -63,13 +70,21 @@ jobs:
           cd r && git add -A && git commit -qm "Publisher candidates, week of $WEEK" && git push -q origin HEAD:results/publishers
           gh label create publisher-candidates --repo ${{ github.repository }} --color 0e8a16 \
             --description "Weekly publisher registry candidates" 2>/dev/null || true
-          gh issue create --repo ${{ github.repository }} --label publisher-candidates \
-            --title "Publisher candidates, week of $WEEK" --body-file /tmp/issue.md
+          for b in /tmp/issues/*.md; do
+            gh issue create --repo ${{ github.repository }} --label publisher-candidates \
+              --title "$(cat "${b%.md}.title")" --body-file "$b"
+            sleep 2
+          done
   apply:
+    # closing (ticked boxes) or a command comment; GITHUB_TOKEN's own close after a command doesn't trigger a run
     if: >-
-      github.event_name == 'issues' && github.event.sender.login == 'pushpingeo' &&
+      github.event.sender.login == 'pushpingeo' &&
       github.event.issue.user.login == 'github-actions[bot]' &&
-      contains(github.event.issue.labels.*.name, 'publisher-candidates')
+      contains(github.event.issue.labels.*.name, 'publisher-candidates') &&
+      (github.event_name == 'issues' ||
+       (github.event_name == 'issue_comment' && github.event.issue.state == 'open' &&
+        (startsWith(github.event.comment.body, 'add') || startsWith(github.event.comment.body, 'Add') ||
+         startsWith(github.event.comment.body, 'decline') || startsWith(github.event.comment.body, 'Decline'))))
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
@@ -82,6 +97,7 @@ jobs:
           TITLE: ${{ github.event.issue.title }}
           BODY: ${{ github.event.issue.body }}
           NUM: ${{ github.event.issue.number }}
+          COMMAND: ${{ github.event.comment.body }}
         run: |
           pip install -q pyyaml
           week=$(echo "$TITLE" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
@@ -89,9 +105,11 @@ jobs:
           git show "FETCH_HEAD:candidates-$week.json" > /tmp/candidates.json
           printf '%s' "$BODY" > /tmp/body.md
           out=$(python -m atlas.publishers apply --body /tmp/body.md --candidates /tmp/candidates.json \
-                  --approver "rob (issue #$NUM)" --day "$(date -u +%F)")
+                  --approver "rob (issue #$NUM)" --day "$(date -u +%F)" --command "$COMMAND")
           echo "$out"
           git config user.name "atlas-bot"; git config user.email "actions@users.noreply.github.com"
           git add vocab/publishers.yaml vocab/publishers_declined.yaml
-          git commit -qm "Publisher registry: issue #$NUM ($out)" && git push -q origin HEAD:main
+          git commit -qm "Publisher registry: issue #$NUM ($out)" || true
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep 5; done
           gh issue comment "$NUM" --body "Done: $out. The registry is in vocab/publishers.yaml."
+          [ "${{ github.event_name }}" = "issue_comment" ] && gh issue close "$NUM" || true
