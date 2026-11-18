@@ -270,8 +270,8 @@ async function findDatasets(env, a) {
   if (q) {
     // Full-text: only rows matching the words are read, whatever the area.
     const fts = "SELECT id, rank FROM ds_fts WHERE ds_fts MATCH ? ORDER BY rank LIMIT 20000";
-    sql = `SELECT d.*, f.rank AS rel FROM (${fts}) f JOIN datasets d ON d.id = f.id WHERE ${cond} ORDER BY f.rank LIMIT ${CAND}`;
-    countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM (${fts}) f JOIN datasets d ON d.id = f.id WHERE ${cond} LIMIT ${COUNT_CAP})`;
+    sql = `SELECT d.*, f.rank AS rel FROM (${fts}) f CROSS JOIN datasets d ON d.id = f.id WHERE ${cond} ORDER BY f.rank LIMIT ${CAND}`;
+    countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM (${fts}) f CROSS JOIN datasets d ON d.id = f.id WHERE ${cond} LIMIT ${COUNT_CAP})`;
     binds = [q, ...params]; countBinds = [q, ...params]; how = "text";
   } else if (va > BIG_AREA) {
     sql = `SELECT d.* FROM datasets d WHERE ${cond} ORDER BY d.pass DESC, d.score DESC LIMIT ${CAND}`;
