@@ -134,6 +134,8 @@ Workspace notes:
      After both: 562k published endpoints on 195k services, 231k endpoints checked (41%), 99.3% resolving, 1,540
      failing. 111k services are still unchecked, so the first full pass finishes around 20 Nov; after that a night
      is ~28k services plus failing ones, well inside 45k and 240 minutes.
+   - 18 Nov: GitHub never started the 03:23 run; started by hand at 09:02. The sweep now has four daily slots
+     and skips once today's run is in history.csv (decisions.md). Check the 18 Nov results: second look, Overture.
    - Fixed 17 Nov evening (decisions.md): failed services get a slow second look at the end of a run (some live
      servers take 40-60 s), S3 folder URLs are listed rather than fetched, and history no longer overwrites a
      same-day run. The first real test of the second look is the 18 Nov night run: check REPORT.md says how many

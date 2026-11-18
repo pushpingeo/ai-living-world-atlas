@@ -314,3 +314,12 @@ tile extents; the Worker reads only the tiles that touch the area (up to 40 near
 a time, for text). Solar rows marked with a TransitionZero ID are excluded because that source is CC BY-NC; the
 rest of the solar tracker is CC BY. Not published: integrated power (repeats the trackers, carries the same NC
 part), methane (plumes NC-SA), coal mine boundaries (no licence stated), and the non-spatial tables.
+
+## 2026-11-18 09:00: GitHub dropped the nightly sweep
+No scheduled run of the sweep was created for 18 Nov at all (17 Nov's 03:23 slot started at 12:07). GitHub runs
+schedules on a best-effort basis, so one nightly slot can't be relied on. The sweep now has four slots (03:23,
+09:23, 15:23, 21:23 UTC) and a small `due` job: a scheduled run stops at once if history.csv already has today's
+date; a push or manual run always goes ahead. Side effect: a skipped slot still counts as a completed sweep, so
+pages and deploy-mcp rebuild after it (harmless: nothing changes, the MCP load writes 0 rows). 18 Nov's sweep was
+started by hand at 09:02. If slots keep going missing, the next step is a Cloudflare cron trigger calling GitHub's
+workflow_dispatch (needs a GitHub token stored as a Worker secret, which Rob would set).
