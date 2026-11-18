@@ -47,30 +47,86 @@ def clean(v):
 
 
 def convert(spec: dict, src: Path) -> dict:
+    """Rows -> features: the WKT outline column when the spec names one and the row has it (simplified to
+    spec['simplify_deg'], default ~50 m), otherwise a point from latitude and longitude."""
+    from shapely import wkt as _wkt
+    from shapely.geometry import mapping
+
     xl = pd.ExcelFile(src)
     sheet, df = find_sheet(xl, spec)
     lat = next(c for c in df.columns if LAT.match(c))
     lon = next(c for c in df.columns if LON.match(c))
-    keep = spec.get("columns") or [c for c in df.columns if c not in (lat, lon)]
-    df = df.dropna(subset=[lat, lon])
-    df = df[(df[lat].astype(float).abs() <= 90) & (df[lon].astype(float).abs() <= 180)]
-    feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(float(r[lon]), 6), round(float(r[lat]), 6)]},
-              "properties": {k: clean(r.get(k)) for k in keep if k in df.columns}} for _, r in df.iterrows()]
-    xs = [f["geometry"]["coordinates"][0] for f in feats]
-    ys = [f["geometry"]["coordinates"][1] for f in feats]
+    wcol = spec.get("wkt_column") or ""
+    tol = float(spec.get("simplify_deg", 0.0005))
+    keep = spec.get("columns") or [c for c in df.columns if c not in (lat, lon, wcol)]
+    feats, n_outline, n_bad, n_none = [], 0, 0, 0
+    for _, r in df.iterrows():
+        geom = None
+        w = r.get(wcol) if wcol else None
+        if isinstance(w, str) and w.strip():
+            try:
+                g = _wkt.loads(w)
+                b = g.bounds if not g.is_empty else None
+                ok = b and -180 <= b[0] <= b[2] <= 180 and -90 <= b[1] <= b[3] <= 90
+                try:  # and near the row's own point, when it has one (catches swapped axes)
+                    py, px = float(r[lat]), float(r[lon])
+                    if ok and not (math.isnan(px) or math.isnan(py)):
+                        ok = b[0] - 2 <= px <= b[2] + 2 and b[1] - 2 <= py <= b[3] + 2
+                except (TypeError, ValueError):
+                    pass
+                if ok:
+                    geom = mapping(g.simplify(tol, preserve_topology=True))
+                    n_outline += 1
+                elif b:
+                    n_bad += 1  # projected metres or misplaced: the point is used instead
+            except Exception:
+                n_bad += 1
+        if geom is None:
+            try:
+                y, x = float(r[lat]), float(r[lon])
+            except (TypeError, ValueError):
+                n_none += 1
+                continue
+            if math.isnan(x) or math.isnan(y) or abs(y) > 90 or abs(x) > 180:
+                n_none += 1
+                continue
+            geom = {"type": "Point", "coordinates": [x, y]}
+        props = {k: clean(r.get(k)) for k in keep if k in df.columns}
+        props["geometry_source"] = "outline" if geom["type"] != "Point" else "point"
+        feats.append({"type": "Feature", "geometry": _round(geom), "properties": props})
+    bb = [math.inf, math.inf, -math.inf, -math.inf]
+    for f in feats:
+        _grow(bb, f["geometry"]["coordinates"])
     about = ""
     for s in xl.sheet_names:  # GEM puts licence and citation notes on an "About" sheet
         if re.search(r"about|read ?me|licen", s, re.I):
             about = " ".join(str(x) for x in xl.parse(s, header=None).fillna("").values.ravel() if str(x).strip())[:4000]
             break
+    print(f"{sheet}: {len(df):,} rows -> {len(feats):,} features ({n_outline:,} outlines; {n_bad} outlines not in lon/lat "
+          f"or not near the row's point, so the point was used); {n_none:,} rows with no usable location left out")
     return {
         "type": "FeatureCollection",
         "atlas_source": {"publisher": spec["publisher"], "citation": spec.get("citation", ""), "licence": spec["licence"],
                          "release": spec.get("release", ""), "landing_page": spec.get("landing_page", ""),
-                         "converted": date.today().isoformat(), "source_file": src.name, "sheet": sheet},
-        "bbox": [min(xs), min(ys), max(xs), max(ys)] if feats else None,
+                         "converted": date.today().isoformat(), "source_file": src.name, "sheet": sheet,
+                         "rows": len(df), "rows_without_location": n_none},
+        "bbox": [round(x, 6) for x in bb] if feats else None,
         "features": feats,
     }, about
+
+
+def _round(g):
+    def r(c):
+        return [round(c[0], 5), round(c[1], 5)] if isinstance(c[0], (int, float)) else [r(x) for x in c]
+    return {"type": g["type"], "coordinates": r(g["coordinates"])}
+
+
+def _grow(bb, c):
+    if isinstance(c[0], (int, float)):
+        bb[0], bb[1], bb[2], bb[3] = min(bb[0], c[0]), min(bb[1], c[1]), max(bb[2], c[0]), max(bb[3], c[1])
+    else:
+        for x in c:
+            _grow(bb, x)
 
 
 def main():
@@ -95,7 +151,8 @@ def main():
         "abstract": spec["abstract"].strip() + (f" Release: {spec['release']}." if spec.get("release") else "")
                     + f" Hosted by the atlas as a copy of the publisher's download; cite as: {spec.get('citation', spec['publisher'])}.",
         "licence": spec["licence"], "landing_page": spec.get("landing_page", ""),
-        "bbox": [round(x, 4) for x in gj["bbox"]], "geometry_type": "point",
+        "bbox": [round(x, 4) for x in gj["bbox"]],
+        "geometry_type": "polygon" if any(f["geometry"]["type"] != "Point" for f in gj["features"]) else "point",
         "concepts_hint": spec.get("concepts_hint", []),
         "endpoints": [{"protocol": "geojson", "url": PAGES_BASE + f"{spec['id']}.geojson", "format": "GeoJSON"},
                       {"protocol": "landing", "url": spec.get("landing_page", "")}],

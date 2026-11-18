@@ -12,7 +12,10 @@ landing_page: https://globalenergymonitor.org/projects/global-oil-gas-extraction
 abstract: >
   Global Energy Monitor's project-level tracker of oil and gas extraction: operating extraction areas, areas under
   development and discoveries in about 95 countries, with operator, owners, status, discovery and production-start
-  years, and production and reserves where known. One point per extraction area (unit).
+  years, and production and reserves where known. One feature per field: its outline where GEM has mapped one, otherwise a point. Fields with production of
+  1 million boe/yr or more and/or reserves of 25 million boe.
 concepts_hint: [oil-gas]
-sheet: ""      # set once the file has arrived if the main sheet isn't the first with latitude/longitude
-columns: []    # empty: keep every column
+sheet: "Field-level main data"   # 7,673 fields; project-level and production/reserves sheets not included yet
+wkt_column: "Field outline (WKT)" # outline where GEM has one, otherwise the field's point
+simplify_deg: 0.0005              # ~50 m
+columns: []                       # empty: keep every column

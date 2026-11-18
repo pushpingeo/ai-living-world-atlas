@@ -1,0 +1,31 @@
+# Written by atlas/files.py from vocab/files/*.yaml: datasets the atlas hosts as files.
+defaults:
+  publisher_type: civil-society
+sources:
+- kind: record
+  id: gem-goget
+  title: Global Oil and Gas Extraction Tracker (extraction areas, development and discoveries)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s project-level tracker of oil and gas extraction: operating extraction areas, areas under
+    development and discoveries in about 95 countries, with operator, owners, status, discovery and production-start years,
+    and production and reserves where known. One feature per field: its outline where GEM has mapped one, otherwise a point.
+    Fields with production of 1 million boe/yr or more and/or reserves of 25 million boe. Release: March 2026. Hosted by the
+    atlas as a copy of the publisher''s download; cite as: Global Oil and Gas Extraction Tracker, Global Energy Monitor, March
+    2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor tracker data, unless noted in the file)
+  landing_page: https://globalenergymonitor.org/projects/global-oil-gas-extraction-tracker/
+  bbox:
+  - -152.129
+  - -53.9985
+  - 174.361
+  - 75.3661
+  geometry_type: polygon
+  concepts_hint:
+  - oil-gas
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-goget.geojson
+    format: GeoJSON
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-oil-gas-extraction-tracker/
