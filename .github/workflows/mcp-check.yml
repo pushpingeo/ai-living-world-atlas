@@ -96,6 +96,14 @@ jobs:
           if ug:
               r2, status, s = call("fetch_features", {"id": ug[0]["id"], "bbox": [29.5, -1.5, 35.0, 4.3], "limit": 20})
               print(f"fetch_features [PAU {ug[0]['title']}]: {status}, {s:.1f}s, returned {r2.get('returned') if r2 else '-'}")
+          # GEM extraction tracker (hosted file)
+          time.sleep(1.5)
+          r, status, s = call("find_datasets", {"bbox": [-4.6, 59.5, 1.5, 61.5], "text": "Global Energy Monitor extraction", "limit": 5})
+          gem = [x for x in (r or {}).get("results", []) if "Global Energy Monitor" in (x.get("publisher") or "")]
+          print(f"find_datasets [GEM extraction, Shetland]: {status}, {[x['title'][:50] for x in gem]}")
+          if gem:
+              r2, status, s = call("fetch_features", {"id": gem[0]["id"], "bbox": [-4.6, 59.5, 1.5, 61.5], "limit": 20})
+              print(f"fetch_features [GEM extraction, west of Shetland]: {status}, {s:.1f}s, returned {r2.get('returned') if r2 else '-'}, matched {r2.get('matched') if r2 else '-'}: {[f['properties'].get('Unit Name') for f in (r2 or {}).get('features', [])][:6]}")
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})
