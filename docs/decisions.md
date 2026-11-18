@@ -306,3 +306,11 @@ allows it with attribution. `atlas/files.py` converts per a spec in `vocab/files
 near the row's point, else the point), writes `files/<id>.geojson` and the record for the `spike-files` wave. New
 endpoint protocol `geojson` (query, download); the Worker filters the file by area and text and returns `matched`
 and `source`. Raw downloads stay out of git (size); refreshing is: new file, one command, push.
+
+## 2026-11-18 (morning): all of GEM's mappable trackers, as tiles
+Rob's download held 34 GEM files. 18 are maps under CC BY 4.0 and are now hosted and searchable. Large outputs (gas
+pipelines 68 MB as GeoJSON) can't be read whole per request, so files.py writes gzipped 10° tiles plus an index of
+tile extents; the Worker reads only the tiles that touch the area (up to 40 nearest without text; every tile, 12 at
+a time, for text). Solar rows marked with a TransitionZero ID are excluded because that source is CC BY-NC; the
+rest of the solar tracker is CC BY. Not published: integrated power (repeats the trackers, carries the same NC
+part), methane (plumes NC-SA), coal mine boundaries (no licence stated), and the non-spatial tables.

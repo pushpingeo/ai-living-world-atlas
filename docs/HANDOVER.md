@@ -177,11 +177,17 @@ Workspace notes:
    Text search done 18 Nov (FTS5; world-wide searches read tens to thousands of rows, not 265k). Still heavy:
    small-area searches (~270k rows read) and a concept over a large area; next fix is a spatial cell key plus a
    concept table. Name index: waiting on Rob's licence call; names only, no outlines.
-10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into `files/<id>.geojson`
-    (published at `data/f/`) plus a catalogue record in `vocab/seeds/files.yaml`; the `spike-files` wave (first in
-    `runs/published.txt`) lists it, and `fetch_features` filters the file. Live: **GEM Global Oil and Gas Extraction
-    Tracker, March 2026** (CC BY 4.0; 7,075 fields, 967 with outlines; 598 without a location left out).
-    Rob's `gem-data.zip` (Downloads, 271 MB) holds 34 GEM trackers: pipelines (with routes), LNG terminals, oil and
-    gas plants, coal, power, steel and more. Each needs a spec in `vocab/files/`; check each About sheet's licence
-    (some GEM data is non-commercial, e.g. methane plumes). Raw files are not kept in the repo (GitHub's 100 MB limit).
-
+10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into gzipped GeoJSON tiles
+    in `files/<id>/` (10° cells plus `index.json`, published at `data/f/<id>/`) and a catalogue record in
+    `vocab/seeds/files.yaml`; the `spike-files` wave (first in `runs/published.txt`) lists them, and `fetch_features`
+    reads only the tiles near the area (all tiles, 12 at a time, for a text search). Specs: `vocab/files/*.yaml`.
+    - **Live: 18 GEM trackers** from Rob's `gem-data.zip` (~192k features, 26 MB gzipped, all CC BY 4.0 per each
+      About sheet): extraction fields, gas and oil/NGL pipelines (routes), LNG terminals, oil and gas plants, coal
+      plants, mines and terminals, wind, solar, hydro, geothermal, bioenergy, nuclear, steel, cement, chemicals,
+      iron ore mines. Live checks 0.1-1.0 s each.
+    - **Left out on licence grounds:** TransitionZero-sourced solar rows (CC BY-NC, 18,732), the integrated power
+      tracker, the methane tracker (plumes CC BY-NC-SA), coal mine boundaries (no licence stated). Ownership,
+      finance and LNG-carrier tables aren't maps; they could become a "who owns this" lookup later.
+    - **To refresh** when GEM releases: put the new file in a folder, update `source`/`release`/`citation` in the
+      spec, run `python -m atlas.files --source-dir DIR vocab/files/<id>.yaml`, bump `runs/spike-files.env`, push.
+      Raw downloads stay out of git (size).
