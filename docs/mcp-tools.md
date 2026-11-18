@@ -39,7 +39,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     prefixes (`therm` finds thermal), and `"quoted phrases"` match exactly. AND, OR, NOT, NEAR and filler words
     (the, of, in, for) are ignored, and punctuation is dropped. Text that leaves no words is an error. Any area size
     works, up to the whole world.
-  - **Large areas without text** (over 400 square degrees, e.g. an ocean or a continent): candidates are the
+  - **Large areas without text** (over 25 square degrees, roughly 5° by 5°: a region, a country or bigger): candidates are the
     best-scored datasets in the area rather than every one, so results are a good sample, not exhaustive. Add
     `text` or a `concept` to narrow it.
   - **Ranking:** text searches rank by relevance, then publisher authority (government and international bodies

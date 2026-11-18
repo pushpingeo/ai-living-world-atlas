@@ -209,7 +209,7 @@ const AUTH = { "central-gov": 1, "regional-gov": 1, "international": 1, "public-
   "academic": 0.8, "curated-collection": 0.7, "civil-society": 0.7, "business": 0.6, "unknown": 0.5 };
 // Areas larger than this (square degrees) without text: the extent indexes don't narrow much, so candidates are read
 // best-score-first and the read stops at the cap, instead of sorting every row by fit (that overloaded D1, 17 Nov).
-const BIG_AREA = 400;
+const BIG_AREA = 25; // ~5° x 5°; 400 still let a Gulf of Mexico search (234) read most of the table (18 Nov)
 const COUNT_CAP = 10000;
 
 // User text -> FTS5 query: words ANDed, 4+ letter words as prefixes, "quoted phrases" kept. Never passes FTS syntax through.
@@ -324,6 +324,7 @@ async function findDatasets(env, a) {
     })),
     ...(touched ? { countries_in_area: touched } : {}),
     search: how,
+    ...(a.debug ? { rows_read: (res.meta?.rows_read ?? null), count_rows_read: null } : {}),
     note: "fit = how well the dataset's extent matches the area (1 = same size and place)." +
       (n >= COUNT_CAP ? ` matches counts up to ${COUNT_CAP}.` : "") +
       (how === "large-area" ? " Large area without text: candidates are the best-scored datasets, not every one; add text or a concept to narrow." : "") +
