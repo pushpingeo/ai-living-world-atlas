@@ -44,7 +44,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   - **Left out:** solar rows sourced from TransitionZero (CC BY-NC 4.0, 18,732 rows); the integrated power tracker
     (repeats the individual trackers and carries the same non-commercial part); the methane emitters tracker (plumes
     are CC BY-NC-SA); coal mine boundaries (no licence stated); ownership, finance and LNG-carrier tables (not maps).
-  - The extraction tracker's dataset id changes with this (its record is regenerated). Field names are unchanged.
+  - The extraction tracker keeps its id (11650fec8b9d8e5f). Field names are unchanged.
 
 - (18 Nov) **Hosted download datasets: new endpoint protocol `geojson`.** Some sources only offer a download (Global
   Energy Monitor's trackers come as an .xlsx by request form). The atlas converts them (`atlas/files.py`) and hosts
