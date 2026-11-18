@@ -282,3 +282,19 @@ at scoring and again at merge, so a remerge rescores an old crawl. Local governm
 remerged (3,258 to 8,688 passing), tagged ($0.76) and published. **Trial, Africa only** (Rob): where data is scarce,
 something beats nothing; for the US and Europe it may add noise. Gated by layer country (`AUTHORITY_PASS_COUNTRIES`),
 so other regions are unchanged when recrawled. Review Africa's results before extending it.
+
+## 2026-11-18 (early): full-text search, large-area path, safe full reloads
+Tobler's world-wide text searches overloaded D1: `LIKE '%x%'` plus a full `COUNT(*)` read every row, and once D1 is
+overloaded every query fails for the rest of its 10-second window (one heavy search takes everyone down).
+- `ds_fts` (SQLite FTS5) over title, publisher, tags and the first 300 characters of the description. Its rowid comes
+  from the dataset id, so incremental loads delete and reinsert entries directly. Query joined with `CROSS JOIN` so
+  SQLite reads the matches first (a plain JOIN read ~265k rows per search; now 24 for "VIIRS", 6k for "fire").
+- Areas over 25 square degrees without text read candidates best-score-first through `ix_rank` and stop at 3,000.
+  Counts stop at 10,000 (`matches_capped`).
+- Ranking: relevance, then publisher authority, then fit; duplicates (same title, extents overlapping by more than
+  half of the larger) folded into `also_available_from`.
+- Full reloads build `datasets_next` and `ds_fts_next` and swap them in at the end (index names carry a per-load
+  suffix), so search keeps working through a reload. First run: 264k datasets, 205 MB of SQL, 8 minutes.
+- Still heavy (not new): small-area searches read ~270k rows (the extent index narrows one axis only), and a concept
+  over a large area reads the whole rank index. Fix: a spatial cell key and a concept table (next).
+- `debug: true` on find_datasets adds `rows_read`, for checking these.

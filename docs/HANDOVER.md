@@ -174,5 +174,6 @@ Workspace notes:
    whether it helps or adds noise before extending it (`AUTHORITY_PASS_COUNTRIES` in quality.py).
 9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
    `runs/published.txt`, tagged for $0.14). NSTA status words done. Trusted services: design only, waiting on Rob.
-   Still open from Tobler's list: text search that holds up world-wide (D1 overload) and the name index (licence
-   question for Rob).
+   Text search done 18 Nov (FTS5; world-wide searches read tens to thousands of rows, not 265k). Still heavy:
+   small-area searches (~270k rows read) and a concept over a large area; next fix is a spatial cell key plus a
+   concept table. Name index: waiting on Rob's licence call; names only, no outlines.
