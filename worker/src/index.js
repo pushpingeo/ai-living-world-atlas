@@ -30,7 +30,8 @@ const TOOLS = [
         capability: { type: "string", enum: VOCAB.capabilities, description: "Only datasets with an endpoint that can do this" },
         min_detail: { type: "string", enum: Object.keys(VOCAB.detail_levels), description: "At least this detailed (datasets with unknown detail are kept unless known_detail_only)" },
         known_detail_only: { type: "boolean" },
-        text: { type: "string", description: "Words that must appear in the title or publisher" },
+        text: { type: "string", description: "Words to search for in the title, publisher, tags (concepts, themes, keywords) and the start of the description. All words must match; words of 4+ letters also match as prefixes (therm → thermal); \"quoted phrases\" match exactly. Works for any area size, up to the whole world." },
+        fold_duplicates: { type: "boolean", description: "Fold results with the same title and much the same extent into the best-ranked one, listed under also_available_from. Default true." },
         browser_ready: { type: "boolean", description: "Only datasets a web page can load directly (CORS)" },
         geometry: { type: "string", enum: ["point", "line", "polygon"], description: "Only datasets with layers of this geometry (datasets whose geometry isn't recorded, such as most WFS layers, are kept)" },
         include_other_countries: { type: "boolean", description: "Also return datasets from national publishers whose country doesn't touch the area. Off by default: such layers usually claim a wider extent than they hold." },
@@ -203,48 +204,114 @@ function countriesTouching(v) {
 /* ---------------- tools ---------------- */
 const CAND = 3000;
 
+// Publisher types in the order an agent should trust a copy: a government's own service before an aggregator's.
+const AUTH = { "central-gov": 1, "regional-gov": 1, "international": 1, "public-body": 0.95, "local-gov": 0.9,
+  "academic": 0.8, "curated-collection": 0.7, "civil-society": 0.7, "business": 0.6, "unknown": 0.5 };
+// Areas larger than this (square degrees) without text: the extent indexes don't narrow much, so candidates are read
+// best-score-first and the read stops at the cap, instead of sorting every row by fit (that overloaded D1, 17 Nov).
+const BIG_AREA = 400;
+const COUNT_CAP = 10000;
+
+// User text -> FTS5 query: words ANDed, 4+ letter words as prefixes, "quoted phrases" kept. Never passes FTS syntax through.
+function ftsQuery(text) {
+  const parts = [];
+  const s = String(text || "");
+  for (const m of s.matchAll(/"([^"]+)"|([^\s"]+)/g)) {
+    const words = (m[1] || m[2]).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").match(/[\p{L}\p{N}]+/gu) || [];
+    if (!words.length) continue;
+    if (m[1]) parts.push(`"${words.join(" ")}"`);
+    else for (const w of words) {
+      if (/^(and|or|not|near|the|of|in|for)$/i.test(w)) continue; // search operators and filler aren't search words
+      parts.push(w.length >= 4 ? `"${w}"*` : `"${w}"`);
+    }
+  }
+  return parts.join(" ");
+}
+
+const normTitle = (s) => String(s || "").toLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+function overlapShare(a, b) {
+  const w = Math.min(a[2], b[2]) - Math.max(a[0], b[0]), h = Math.min(a[3], b[3]) - Math.max(a[1], b[1]);
+  if (w <= 0 || h <= 0) return 0;
+  const area = (x) => Math.max((x[2] - x[0]) * (x[3] - x[1]), 1e-12);
+  return (w * h) / Math.max(area(a), area(b)); // share of the larger: both extents must be much the same
+}
+
 async function findDatasets(env, a) {
   const v = queryArea(a, 5);
-  const where = ["xmin <= ?", "xmax >= ?", "ymin <= ?", "ymax >= ?"];
+  const P = "d.";
+  const where = [`${P}xmin <= ?`, `${P}xmax >= ?`, `${P}ymin <= ?`, `${P}ymax >= ?`];
   const params = [v[2], v[0], v[3], v[1]];
-  if (!a.include_low_quality) where.push("pass = 1");
-  if (a.browser_ready) where.push("cors = 1");
-  if (a.role) { where.push("role = ?"); params.push(a.role); }
-  if (a.concept) { where.push("concepts LIKE ?"); params.push(`%,${a.concept},%`); }
-  if (a.theme) { where.push("themes LIKE ?"); params.push(`%,${a.theme},%`); }
-  if (a.capability) { where.push("caps LIKE ?"); params.push(`%,${a.capability},%`); }
-  if (a.text) { where.push("(title LIKE ? OR publisher LIKE ?)"); params.push(`%${a.text}%`, `%${a.text}%`); }
+  if (!a.include_low_quality) where.push(`${P}pass = 1`);
+  if (a.browser_ready) where.push(`${P}cors = 1`);
+  if (a.role) { where.push(`${P}role = ?`); params.push(a.role); }
+  if (a.concept) { where.push(`${P}concepts LIKE ?`); params.push(`%,${a.concept},%`); }
+  if (a.theme) { where.push(`${P}themes LIKE ?`); params.push(`%,${a.theme},%`); }
+  if (a.capability) { where.push(`${P}caps LIKE ?`); params.push(`%,${a.capability},%`); }
   if (a.geometry) {
     if (!["point", "line", "polygon"].includes(a.geometry)) throw new Error("geometry must be point, line or polygon");
-    where.push("(gtypes LIKE ? OR gtypes = '' OR gtypes IS NULL)"); params.push(`%,${a.geometry},%`);
+    where.push(`(${P}gtypes LIKE ? OR ${P}gtypes = '' OR ${P}gtypes IS NULL)`); params.push(`%,${a.geometry},%`);
   }
   let touched = null;
   if (!a.include_other_countries) {
     touched = [...countriesTouching(v)].filter((c) => /^[A-Z]{2}$/.test(c));
-    where.push(`(home = '' OR home IS NULL${touched.length ? ` OR home IN (${touched.map((c) => `'${c}'`).join(",")})` : ""})`);
+    where.push(`(${P}home = '' OR ${P}home IS NULL${touched.length ? ` OR ${P}home IN (${touched.map((c) => `'${c}'`).join(",")})` : ""})`);
   }
   if (a.min_detail) {
     const m = VOCAB.detail_levels[a.min_detail];
     if (m === undefined) throw new Error(`min_detail must be one of ${Object.keys(VOCAB.detail_levels).join(", ")}`);
-    where.push(a.known_detail_only ? "detail_m <= ?" : "(detail_m <= ? OR detail_m IS NULL)");
+    where.push(a.known_detail_only ? `${P}detail_m <= ?` : `(${P}detail_m <= ? OR ${P}detail_m IS NULL)`);
     params.push(m);
   }
-  // Candidates nearest in size to the area come first, so the cap drops the far-too-big and far-too-small ones.
   const va = Math.max((v[2] - v[0]) * (v[3] - v[1]), 1e-9);
   const cond = where.join(" AND ");
-  const sql = `SELECT * FROM datasets WHERE ${cond} ORDER BY CASE WHEN area > 0 THEN MAX(area / ?, ? / area) ELSE 1e18 END LIMIT ${CAND}`;
-  const [{ results }, cnt] = await Promise.all([
-    env.DB.prepare(sql).bind(...params, va, va).all(),
-    env.DB.prepare(`SELECT COUNT(*) AS n FROM datasets WHERE ${cond}`).bind(...params).first(),
-  ]);
+  const q = a.text ? ftsQuery(a.text) : "";
+  if (a.text && !q) throw new Error("text has no searchable words");
+  let sql, countSql, binds, countBinds, how;
+  if (q) {
+    // Full-text: only rows matching the words are read, whatever the area.
+    const fts = "SELECT id, rank FROM ds_fts WHERE ds_fts MATCH ? ORDER BY rank LIMIT 20000";
+    sql = `SELECT d.*, f.rank AS rel FROM (${fts}) f JOIN datasets d ON d.id = f.id WHERE ${cond} ORDER BY f.rank LIMIT ${CAND}`;
+    countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM (${fts}) f JOIN datasets d ON d.id = f.id WHERE ${cond} LIMIT ${COUNT_CAP})`;
+    binds = [q, ...params]; countBinds = [q, ...params]; how = "text";
+  } else if (va > BIG_AREA) {
+    sql = `SELECT d.* FROM datasets d WHERE ${cond} ORDER BY d.pass DESC, d.score DESC LIMIT ${CAND}`;
+    countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM datasets d WHERE ${cond} LIMIT ${COUNT_CAP})`;
+    binds = params; countBinds = params; how = "large-area";
+  } else {
+    // Candidates nearest in size to the area come first, so the cap drops the far-too-big and far-too-small ones.
+    sql = `SELECT d.* FROM datasets d WHERE ${cond} ORDER BY CASE WHEN d.area > 0 THEN MAX(d.area / ?, ? / d.area) ELSE 1e18 END LIMIT ${CAND}`;
+    countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM datasets d WHERE ${cond} LIMIT ${COUNT_CAP})`;
+    binds = [...params, va, va]; countBinds = params; how = "area";
+  }
+  const [res, cnt] = await Promise.all([env.DB.prepare(sql).bind(...binds).all(), env.DB.prepare(countSql).bind(...countBinds).first()]);
+  const results = res.results;
+  // Text matches: relevance (FTS rank, more negative is better) first, then publisher authority; fit matters less,
+  // since a world-wide search makes every extent look small. Area searches: fit, then authority, then score.
+  const best = results.length && q ? Math.min(...results.map((r) => r.rel)) : 0;
   const ranked = results
-    .map((r) => ({ r, f: fit([r.xmin, r.ymin, r.xmax, r.ymax], v) * (r.xsus ? 0.2 : 1) }))
-    .sort((x, y) => y.f - x.f || y.r.score - x.r.score)
-    .slice(0, Math.min(a.limit || 20, 100));
+    .map((r) => {
+      const f = fit([r.xmin, r.ymin, r.xmax, r.ymax], v) * (r.xsus ? 0.2 : 1);
+      const auth = AUTH[r.ptype] ?? 0.5;
+      const rel = q ? (best < 0 ? r.rel / best : 1) : 1; // 1 for the best match, smaller for weaker ones
+      return { r, f, s: q ? rel * auth * (0.8 + 0.2 * Math.sqrt(f)) : f * auth };
+    })
+    .sort((x, y) => y.s - x.s || y.r.score - x.r.score);
+  const limit = Math.min(a.limit || 20, 100);
+  const kept = [];
+  const fold = a.fold_duplicates !== false;
+  for (const x of ranked) {
+    if (kept.length >= limit && !fold) break;
+    const b = [x.r.xmin, x.r.ymin, x.r.xmax, x.r.ymax];
+    const twin = fold && kept.find((k) => k.t === normTitle(x.r.title) && overlapShare(k.b, b) > 0.5);
+    if (twin) { (twin.also = twin.also || []).push({ id: x.r.id, publisher: x.r.publisher, publisher_type: x.r.ptype }); continue; }
+    if (kept.length < limit) kept.push({ ...x, t: normTitle(x.r.title), b }); // when full, keep scanning only to fold twins
+  }
+  const n = cnt ? cnt.n : results.length;
   return {
     area: v.map((n) => +n.toFixed(5)),
-    matches: cnt ? cnt.n : results.length,
-    results: ranked.map(({ r, f }) => ({
+    matches: n,
+    ...(n >= COUNT_CAP ? { matches_capped: true } : {}),
+    results: kept.map(({ r, f, also }) => ({
       id: r.id, title: r.title, publisher: r.publisher, publisher_type: r.ptype, role: r.role,
       fit: +f.toFixed(3), coverage: r.coverage, detail: r.detail || null,
       themes: unwrap(r.themes), themes_source: r.themes_src || null, concepts: unwrap(r.concepts),
@@ -253,9 +320,13 @@ async function findDatasets(env, a) {
       extent_may_be_overstated: !!r.xsus, browser_ready: !!r.cors,
       geometry: unwrap(r.gtypes), country: r.home || null,
       bbox: [r.xmin, r.ymin, r.xmax, r.ymax].map((n) => +n.toFixed(5)),
+      ...(also && also.length ? { also_available_from: also.slice(0, 10) } : {}),
     })),
     ...(touched ? { countries_in_area: touched } : {}),
+    search: how,
     note: "fit = how well the dataset's extent matches the area (1 = same size and place)." +
+      (n >= COUNT_CAP ? ` matches counts up to ${COUNT_CAP}.` : "") +
+      (how === "large-area" ? " Large area without text: candidates are the best-scored datasets, not every one; add text or a concept to narrow." : "") +
       (touched ? " National publishers' datasets are included only for the countries in the area (include_other_countries to widen)." : ""),
   };
 }

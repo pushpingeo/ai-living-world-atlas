@@ -33,6 +33,24 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (18 Nov) **Tobler request: text search that holds up world-wide. Done** (deployed 18 Nov). `find_datasets`:
+  - **`text`** now uses a full-text index (SQLite FTS5) over the **title, publisher, tags (concepts, ISO themes,
+    keywords) and the first 300 characters of the description**. All words must match. Words of 4+ letters match as
+    prefixes (`therm` finds thermal), and `"quoted phrases"` match exactly. AND, OR, NOT, NEAR and filler words
+    (the, of, in, for) are ignored, and punctuation is dropped. Text that leaves no words is an error. Any area size
+    works, up to the whole world.
+  - **Large areas without text** (over 400 square degrees, e.g. an ocean or a continent): candidates are the
+    best-scored datasets in the area rather than every one, so results are a good sample, not exhaustive. Add
+    `text` or a `concept` to narrow it.
+  - **Ranking:** text searches rank by relevance, then publisher authority (government and international bodies
+    before local, academic, aggregators and businesses), then fit. Area searches rank by fit, then authority.
+  - **Duplicates folded (new, on by default):** results with the same title and much the same extent (over half of
+    the larger extent overlapping) are folded into the best-ranked one, listed in a new **`also_available_from`**
+    field (`[{id, publisher, publisher_type}]`, up to 10). `fold_duplicates: false` turns it off.
+  - **`matches`** now counts up to 10,000; above that, **`matches_capped: true`** is set. New field **`search`**
+    says which path ran: `text`, `area` or `large-area`.
+  - All field names Tobler uses are unchanged; the new ones are additive.
+
 - (18 Nov) **Africa published, and national authorities pass without a description.** New wave `spike-africa`
   (8,688 passing datasets) added to `runs/published.txt`. It includes petroleum layers from ONHYM (Morocco), the
   Petroleum Authority of Uganda and ANPG (Angola), plus Mozambique's FNDS and WRI's Forest Atlas. Quality rule change

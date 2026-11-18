@@ -49,6 +49,16 @@ jobs:
               ("Nigeria bbox, oil-gas", {"bbox": [2.7, 4.2, 14.7, 13.9], "concept": "oil-gas", "limit": 100}),
               ("North Sea, protected-area", {"bbox": [-2, 56, 4, 61], "concept": "protected-area", "capability": "query", "limit": 100}),
           ]
+          # World-wide and large-area searches (Tobler request: D1 overload, 17 Nov)
+          W = [-180, -85, 180, 85]
+          for label, args in [("VIIRS", {"bbox": W, "text": "VIIRS"}), ("fire", {"bbox": W, "text": "fire"}), ("thermal", {"bbox": W, "text": "thermal"}),
+                              ("hotspot", {"bbox": W, "text": "hotspot"}), ("MODIS", {"bbox": W, "text": "MODIS"}), ("essential fish habitat", {"bbox": W, "text": "essential fish habitat"}),
+                              ("Wildfire Response Points", {"bbox": W, "text": "Wildfire Response Points"}),
+                              ("Gulf of Mexico, no text", {"bbox": [-98, 18, -80, 31]}), ("Atlantic, no text", {"bbox": [-80, -60, 20, 70]}),
+                              ("world, no text", {"bbox": W}), ("Gulf of Mexico, oil-gas", {"bbox": [-98, 18, -80, 31], "concept": "oil-gas"})]:
+              r, status, s = call("find_datasets", {**args, "limit": 5})
+              top = [f"{x['title'][:40]} ({x['publisher_type']}{', +' + str(len(x['also_available_from'])) if x.get('also_available_from') else ''})" for x in r["results"][:3]] if r else []
+              print(f"find_datasets [world: {label}]: {status}, {s:.1f}s, {r.get('search') if r else '-'}, matches {r.get('matches') if r else '-'}{' capped' if r and r.get('matches_capped') else ''}: {top}")
           first_query = None
           for label, args in cases:
               r, status, s = call("find_datasets", args)
