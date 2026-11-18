@@ -33,6 +33,19 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (18 Nov, atlas change) **Spatial index for `find_datasets`.** Area and concept searches now read a quadtree cell
+  key table instead of scanning the extent indexes: a 5 km search reads ~25k rows rather than ~270k (plus a count of
+  as many again), and a concept search reads only that concept's datasets in the area (Gulf of Mexico oil-gas: ~1k
+  rather than 264k). Details and measurements in `docs/decisions.md`. No input or output field changes. What can differ:
+  - **Ranking sees every match** on area and concept searches, not only the 3,000 nearest in size, so the top results
+    can change where an area holds more than 3,000 datasets (a city centre, a country-wide concept).
+  - **`matches` is exact** on those searches (up to 20,000; above that `matches_capped`). On a large area without
+    text or a concept that holds many datasets (the UK, the US, an ocean), results come from the 60,000 best-scored
+    datasets world-wide, as before; `matches` then counts the ones in the area (typically a few thousand, not
+    "10,000 capped"), with `matches_capped: true`.
+  - `debug: true` reports `rows_read` for the whole search (all queries), plus `index`: `cells`, `rank` or `extent`.
+  - `include_other_countries: true` and `text` searches use the same paths as before.
+
 - (18 Nov) **Global Energy Monitor: 18 trackers as hosted datasets** (all CC BY 4.0, stated in each file; citation in
   every `fetch_features` `source`). Oil and gas extraction fields (outlines where mapped), gas pipelines and oil/NGL
   pipelines (routes, simplified to ~100 m), LNG terminals, oil and gas plants, coal plants, coal mines, coal

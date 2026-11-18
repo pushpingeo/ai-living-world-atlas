@@ -201,6 +201,64 @@ function countriesTouching(v) {
   return out;
 }
 
+
+/* ---------------- spatial index (18 Nov) ---------------- */
+// Quadtree cell keys, built by atlas/api_data.py (cell_keys): keep the two in step. A dataset sits at the finest level
+// where its extent spans at most 2 x 2 cells, with one key per cell, prefixed by its home country (and by concept in
+// the concept keys). A search reads, for each home it keeps: the exact cells over the area at every coarser level (the
+// bigger datasets) and every key under the area's own cells (the area's size and smaller). Keys are our own digits and
+// ISO codes, so they go into the SQL as literals (D1 allows only 100 bound parameters).
+const MAX_LEVEL = 18;
+function cellLevel(x0, y0, x1, y1) {
+  for (let lv = MAX_LEVEL; lv >= 0; lv--) {
+    const w = 360 / 2 ** lv, h = 180 / 2 ** lv;
+    if (Math.floor((x1 + 180) / w) - Math.floor((x0 + 180) / w) <= 1 && Math.floor((y1 + 90) / h) - Math.floor((y0 + 90) / h) <= 1) return lv;
+  }
+  return 0;
+}
+function quadkey(ix, iy, lv) {
+  let k = "";
+  for (let b = lv - 1; b >= 0; b--) k += String(((iy >> b) & 1) * 2 + ((ix >> b) & 1));
+  return k;
+}
+function cellsAt(v, lv) {
+  const w = 360 / 2 ** lv, h = 180 / 2 ** lv, top = 2 ** lv - 1, out = [];
+  const cx = (x) => Math.min(Math.max(Math.floor((x + 180) / w), 0), top), cy = (y) => Math.min(Math.max(Math.floor((y + 90) / h), 0), top);
+  for (let ix = cx(v[0]); ix <= cx(v[2]); ix++) for (let iy = cy(v[1]); iy <= cy(v[3]); iy++) out.push(quadkey(ix, iy, lv));
+  return out;
+}
+// SQL selecting the ids of datasets whose cells meet area v, for the given homes and optional concept.
+// Ranges are read at the finest level where the area spans at most RANGE_SPAN cells a side: finer ranges hug the area
+// more closely (fewer keys read from outside it) at the cost of more terms.
+const RANGE_SPAN = 4;
+function spanLevel(a, span) {
+  for (let lv = MAX_LEVEL; lv >= 0; lv--) {
+    const w = 360 / 2 ** lv, h = 180 / 2 ** lv;
+    if (Math.floor((a[2] + 180) / w) - Math.floor((a[0] + 180) / w) < span && Math.floor((a[3] + 90) / h) - Math.floor((a[1] + 90) / h) < span) return lv;
+  }
+  return 0;
+}
+// OR terms as a balanced tree: SQLite refuses expressions more than 100 deep, which a flat chain of 160 ORs is.
+const orTree = (t) => (t.length === 1 ? t[0] : `(${orTree(t.slice(0, t.length >> 1))} OR ${orTree(t.slice(t.length >> 1))})`);
+// SQL selecting the ids (with repeats) of datasets whose cells meet area v, for the given homes and optional concept.
+function cellSelect(v, homes, concept, span = RANGE_SPAN, box = true) {
+  const e = 1e-9; // a hair wider, so a dataset whose extent only touches the area's edge isn't lost to rounding
+  const a = [Math.max(-180, v[0] - e), Math.max(-90, v[1] - e), Math.min(180, v[2] + e), Math.min(90, v[3] + e)];
+  const lq = spanLevel(a, span);
+  const pre = concept ? `c:${concept}|` : "";
+  const lit = (k) => `'${k.replace(/'/g, "''")}'`;
+  const exact = [], ranges = [];
+  for (const h of homes) {
+    for (let lv = 0; lv < lq; lv++) for (const c of cellsAt(a, lv)) exact.push(lit(`${pre}${h}:${c}`));
+    for (const c of cellsAt(a, lq)) ranges.push(`(key >= ${lit(`${pre}${h}:${c}`)} AND key < ${lit(`${pre}${h}:${c}4`)})`);
+  }
+  // Plain SELECT (DISTINCT here makes SQLite scan the id index instead); "id IN (...)" dedupes.
+  // x0..y1: the dataset's extent rounded outwards, so datasets whose cell meets the area but whose extent doesn't are
+  // dropped here, before any lookup.
+  return `SELECT id FROM ds_cell WHERE ${orTree([`key IN (${exact.join(",") || "''"})`, ...ranges])}` + (box ?
+    ` AND x0 <= ${+a[2].toFixed(6)} AND x1 >= ${+a[0].toFixed(6)} AND y0 <= ${+a[3].toFixed(6)} AND y1 >= ${+a[1].toFixed(6)}` : "");
+}
+
 /* ---------------- tools ---------------- */
 const CAND = 3000;
 
@@ -211,6 +269,14 @@ const AUTH = { "central-gov": 1, "regional-gov": 1, "international": 1, "public-
 // best-score-first and the read stops at the cap, instead of sorting every row by fit (that overloaded D1, 17 Nov).
 const BIG_AREA = 25; // ~5° x 5°; 400 still let a Gulf of Mexico search (234) read most of the table (18 Nov)
 const COUNT_CAP = 10000;
+// Large areas without a concept: up to PROBE cell keys, read through the cells; more, and the SAMPLE best-scored
+// datasets world-wide are read instead (18 Nov).
+const PROBE = 20000, SAMPLE = 60000;
+const HUGE = 20000; // square degrees (an ocean, a few continents): always many datasets, so no probe
+// The cell paths return every match as a slim row (what ranking and folding need), up to SLIM_CAP; full rows are then
+// read for the kept results only.
+const SLIM = "d.id, d.title, d.publisher, d.ptype, d.score, d.xmin, d.ymin, d.xmax, d.ymax, d.xsus";
+const SLIM_CAP = 20000;
 
 // User text -> FTS5 query: words ANDed, 4+ letter words as prefixes, "quoted phrases" kept. Never passes FTS syntax through.
 function ftsQuery(text) {
@@ -238,53 +304,84 @@ function overlapShare(a, b) {
 
 async function findDatasets(env, a) {
   const v = queryArea(a, 5);
-  const P = "d.";
-  const where = [`${P}xmin <= ?`, `${P}xmax >= ?`, `${P}ymin <= ?`, `${P}ymax >= ?`];
-  const params = [v[2], v[0], v[3], v[1]];
-  if (!a.include_low_quality) where.push(`${P}pass = 1`);
-  if (a.browser_ready) where.push(`${P}cors = 1`);
-  if (a.role) { where.push(`${P}role = ?`); params.push(a.role); }
-  if (a.concept) { where.push(`${P}concepts LIKE ?`); params.push(`%,${a.concept},%`); }
-  if (a.theme) { where.push(`${P}themes LIKE ?`); params.push(`%,${a.theme},%`); }
-  if (a.capability) { where.push(`${P}caps LIKE ?`); params.push(`%,${a.capability},%`); }
-  if (a.geometry) {
-    if (!["point", "line", "polygon"].includes(a.geometry)) throw new Error("geometry must be point, line or polygon");
-    where.push(`(${P}gtypes LIKE ? OR ${P}gtypes = '' OR ${P}gtypes IS NULL)`); params.push(`%,${a.geometry},%`);
-  }
-  let touched = null;
-  if (!a.include_other_countries) {
-    touched = [...countriesTouching(v)].filter((c) => /^[A-Z]{2}$/.test(c));
-    where.push(`(${P}home = '' OR ${P}home IS NULL${touched.length ? ` OR ${P}home IN (${touched.map((c) => `'${c}'`).join(",")})` : ""})`);
-  }
+  if (a.geometry && !["point", "line", "polygon"].includes(a.geometry)) throw new Error("geometry must be point, line or polygon");
+  let mdm;
   if (a.min_detail) {
-    const m = VOCAB.detail_levels[a.min_detail];
-    if (m === undefined) throw new Error(`min_detail must be one of ${Object.keys(VOCAB.detail_levels).join(", ")}`);
-    where.push(a.known_detail_only ? `${P}detail_m <= ?` : `(${P}detail_m <= ? OR ${P}detail_m IS NULL)`);
-    params.push(m);
+    mdm = VOCAB.detail_levels[a.min_detail];
+    if (mdm === undefined) throw new Error(`min_detail must be one of ${Object.keys(VOCAB.detail_levels).join(", ")}`);
   }
+  const touched = a.include_other_countries ? null : [...countriesTouching(v)].filter((c) => /^[A-Z]{2}$/.test(c));
+  // touched includes "EU" when the area meets a European country; datasets about Europe as a whole have home "EU".
+  // The filters, with column prefix P: "d." normally, "+d." on the cell path, where the unary plus stops SQLite from
+  // reaching for the extent or rank indexes instead of starting from the cell keys.
+  const filters = (P) => {
+    const where = [`${P}xmin <= ?`, `${P}xmax >= ?`, `${P}ymin <= ?`, `${P}ymax >= ?`];
+    const params = [v[2], v[0], v[3], v[1]];
+    if (!a.include_low_quality) where.push(`${P}pass = 1`);
+    if (a.browser_ready) where.push(`${P}cors = 1`);
+    if (a.role) { where.push(`${P}role = ?`); params.push(a.role); }
+    if (a.concept) { where.push(`${P}concepts LIKE ?`); params.push(`%,${a.concept},%`); }
+    if (a.theme) { where.push(`${P}themes LIKE ?`); params.push(`%,${a.theme},%`); }
+    if (a.capability) { where.push(`${P}caps LIKE ?`); params.push(`%,${a.capability},%`); }
+    if (a.geometry) { where.push(`(${P}gtypes LIKE ? OR ${P}gtypes = '' OR ${P}gtypes IS NULL)`); params.push(`%,${a.geometry},%`); }
+    if (touched) where.push(`(${P}home = '' OR ${P}home IS NULL${touched.length ? ` OR ${P}home IN (${touched.map((c) => `'${c}'`).join(",")})` : ""})`);
+    if (mdm !== undefined) { where.push(a.known_detail_only ? `${P}detail_m <= ?` : `(${P}detail_m <= ? OR ${P}detail_m IS NULL)`); params.push(mdm); }
+    return [where.join(" AND "), params];
+  };
+  const [cond, params] = filters("d.");
   const va = Math.max((v[2] - v[0]) * (v[3] - v[1]), 1e-9);
-  const cond = where.join(" AND ");
   const q = a.text ? ftsQuery(a.text) : "";
   if (a.text && !q) throw new Error("text has no searchable words");
-  let sql, countSql, binds, countBinds, how;
+  const sizeOrder = "CASE WHEN d.area > 0 THEN MAX(d.area / ?, ? / d.area) ELSE 1e18 END";
+  let sql, countSql = null, binds, countBinds, how, index = "extent", sampled = false, slim = false, probeRows = 0;
+  // The cell index serves every search except text (which has its own index) and a search across all countries.
+  // An area over many countries (all of Europe is 50) gets coarser ranges, which keeps the SQL well under D1's 100 KB.
+  const homes = touched ? ["", ...touched] : null, span = (touched && touched.length > 8 ? 2 : RANGE_SPAN);
+  const cells = touched && !a.include_low_quality && !q ? cellSelect(v, homes, a.concept, span) : null;
+  let useCells = !!cells && (a.concept || va <= BIG_AREA);
+  if (cells && !useCells && va <= HUGE) {
+    // A large area without a concept: cheap through the cells where the area holds few datasets (Nigeria: 2k), costly
+    // where it holds many (the US: 90k). Count the keys (without the extent test, so the count reads at most PROBE).
+    const pr = await env.DB.prepare(`SELECT COUNT(*) AS n FROM (${cellSelect(v, homes, null, span, false)} LIMIT ${PROBE})`).all();
+    probeRows = pr.meta?.rows_read ?? 0;
+    useCells = pr.results[0].n < PROBE;
+  }
   if (q) {
     // Full-text: only rows matching the words are read, whatever the area.
     const fts = "SELECT id, rank FROM ds_fts WHERE ds_fts MATCH ? ORDER BY rank LIMIT 20000";
     sql = `SELECT d.*, f.rank AS rel FROM (${fts}) f CROSS JOIN datasets d ON d.id = f.id WHERE ${cond} ORDER BY f.rank LIMIT ${CAND}`;
     countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM (${fts}) f CROSS JOIN datasets d ON d.id = f.id WHERE ${cond} LIMIT ${COUNT_CAP})`;
     binds = [q, ...params]; countBinds = [q, ...params]; how = "text";
+  } else if (useCells) {
+    // Spatial index: only datasets with a cell over the area (and of the concept, if given) are looked up, and every
+    // match comes back as a slim row, so the count is exact and ranking sees them all (no SQL sort or count).
+    const [pcond, pparams] = filters("+d.");
+    sql = `SELECT ${SLIM} FROM datasets d WHERE d.id IN (${cells}) AND ${pcond} LIMIT ${SLIM_CAP + 1}`;
+    binds = pparams; how = va > BIG_AREA ? "large-area" : "area"; index = "cells"; slim = true;
+  } else if (va > BIG_AREA && cells) {
+    // A large area holding many datasets: read the best-scored datasets world-wide (their extent and home come from
+    // the rank index, no lookup), keep those in the area, and look up only the first few thousand of them.
+    const [pcond, pparams] = filters("+d.");
+    const near = touched.length ? ` AND (home = '' OR home IS NULL OR home IN (${touched.map((c) => `'${c}'`).join(",")}))` : " AND (home = '' OR home IS NULL)";
+    const top = `SELECT id FROM (SELECT id, xmin, xmax, ymin, ymax, home FROM datasets ORDER BY pass DESC, score DESC LIMIT ${SAMPLE}) ` +
+      `WHERE xmin <= ? AND xmax >= ? AND ymin <= ? AND ymax >= ?${near} LIMIT ${2 * CAND}`;
+    sql = `SELECT ${SLIM} FROM (${top}) c CROSS JOIN datasets d ON d.id = c.id WHERE ${pcond}`;
+    binds = [v[2], v[0], v[3], v[1], ...pparams]; how = "large-area"; index = "rank"; sampled = true; slim = true;
   } else if (va > BIG_AREA) {
     sql = `SELECT d.* FROM datasets d WHERE ${cond} ORDER BY d.pass DESC, d.score DESC LIMIT ${CAND}`;
     countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM datasets d WHERE ${cond} LIMIT ${COUNT_CAP})`;
     binds = params; countBinds = params; how = "large-area";
   } else {
     // Candidates nearest in size to the area come first, so the cap drops the far-too-big and far-too-small ones.
-    sql = `SELECT d.* FROM datasets d WHERE ${cond} ORDER BY CASE WHEN d.area > 0 THEN MAX(d.area / ?, ? / d.area) ELSE 1e18 END LIMIT ${CAND}`;
+    sql = `SELECT d.* FROM datasets d WHERE ${cond} ORDER BY ${sizeOrder} LIMIT ${CAND}`;
     countSql = `SELECT COUNT(*) AS n FROM (SELECT 1 FROM datasets d WHERE ${cond} LIMIT ${COUNT_CAP})`;
     binds = [...params, va, va]; countBinds = params; how = "area";
   }
-  const [res, cnt] = await Promise.all([env.DB.prepare(sql).bind(...binds).all(), env.DB.prepare(countSql).bind(...countBinds).first()]);
-  const results = res.results;
+  const [res, cntRes] = await Promise.all([env.DB.prepare(sql).bind(...binds).all(),
+    countSql ? env.DB.prepare(countSql).bind(...countBinds).all() : null]);
+  const over = slim && res.results.length > SLIM_CAP; // more matches than we take: rank the first SLIM_CAP
+  const results = over ? res.results.slice(0, SLIM_CAP) : res.results;
+  const cnt = countSql ? cntRes.results[0] : { n: results.length };
   // Text matches: relevance (FTS rank, more negative is better) first, then publisher authority; fit matters less,
   // since a world-wide search makes every extent look small. Area searches: fit, then authority, then score.
   const best = results.length && q ? Math.min(...results.map((r) => r.rel)) : 0;
@@ -301,16 +398,25 @@ async function findDatasets(env, a) {
   const fold = a.fold_duplicates !== false;
   for (const x of ranked) {
     if (kept.length >= limit && !fold) break;
-    const b = [x.r.xmin, x.r.ymin, x.r.xmax, x.r.ymax];
-    const twin = fold && kept.find((k) => k.t === normTitle(x.r.title) && overlapShare(k.b, b) > 0.5);
+    const b = [x.r.xmin, x.r.ymin, x.r.xmax, x.r.ymax], t = fold ? normTitle(x.r.title) : "";
+    const twin = fold && kept.find((k) => k.t === t && overlapShare(k.b, b) > 0.5);
     if (twin) { (twin.also = twin.also || []).push({ id: x.r.id, publisher: x.r.publisher, publisher_type: x.r.ptype }); continue; }
-    if (kept.length < limit) kept.push({ ...x, t: normTitle(x.r.title), b }); // when full, keep scanning only to fold twins
+    if (kept.length < limit) kept.push({ ...x, t, b }); // when full, keep scanning only to fold twins
   }
   const n = cnt ? cnt.n : results.length;
+  const capped = countSql ? n >= COUNT_CAP : sampled || over;
+  let fullRows = null;
+  if (slim && kept.length) {
+    // Full rows for the kept results only (ids are ours, but quote them anyway; D1 allows 100 bound parameters)
+    const ids = kept.map((k) => `'${String(k.r.id).replace(/'/g, "''")}'`).join(",");
+    fullRows = await env.DB.prepare(`SELECT * FROM datasets WHERE id IN (${ids})`).all();
+    const byId = new Map(fullRows.results.map((r) => [r.id, r]));
+    for (const k of kept) k.r = byId.get(k.r.id) || k.r;
+  }
   return {
     area: v.map((n) => +n.toFixed(5)),
     matches: n,
-    ...(n >= COUNT_CAP ? { matches_capped: true } : {}),
+    ...(capped ? { matches_capped: true } : {}),
     results: kept.map(({ r, f, also }) => ({
       id: r.id, title: r.title, publisher: r.publisher, publisher_type: r.ptype, role: r.role,
       fit: +f.toFixed(3), coverage: r.coverage, detail: r.detail || null,
@@ -324,10 +430,12 @@ async function findDatasets(env, a) {
     })),
     ...(touched ? { countries_in_area: touched } : {}),
     search: how,
-    ...(a.debug ? { rows_read: (res.meta?.rows_read ?? null), count_rows_read: null } : {}),
+    ...(a.debug ? { rows_read: (res.meta?.rows_read ?? 0) + (cntRes?.meta?.rows_read ?? 0) + probeRows + (fullRows?.meta?.rows_read ?? 0),
+      query_rows_read: res.meta?.rows_read ?? null, count_rows_read: cntRes ? (cntRes.meta?.rows_read ?? null) : 0, probe_rows_read: probeRows,
+      detail_rows_read: fullRows?.meta?.rows_read ?? 0, index } : {}),
     note: "fit = how well the dataset's extent matches the area (1 = same size and place)." +
-      (n >= COUNT_CAP ? ` matches counts up to ${COUNT_CAP}.` : "") +
-      (how === "large-area" ? " Large area without text: candidates are the best-scored datasets, not every one; add text or a concept to narrow." : "") +
+      (sampled ? " Large area holding many datasets: candidates (and matches) are the best-scored datasets in it, not every one; add text or a concept to narrow."
+        : over ? ` matches counts up to ${SLIM_CAP}; a smaller area or a concept narrows it.` : capped ? ` matches counts up to ${COUNT_CAP}.` : "") +
       (touched ? " National publishers' datasets are included only for the countries in the area (include_other_countries to widen)." : ""),
   };
 }

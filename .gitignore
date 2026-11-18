@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 out/
 .cache/
+worker/.wrangler/
+worker/.dev.vars

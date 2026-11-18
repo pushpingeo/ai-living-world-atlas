@@ -21,16 +21,20 @@ CREATE TABLE datasets_next (
   pass INTEGER, score INTEGER, themes TEXT, themes_src TEXT, concepts TEXT, protocols TEXT, caps TEXT,
   detail TEXT, detail_m REAL, coverage TEXT, cors INTEGER, xsus INTEGER, open_licence INTEGER, licence TEXT,
   gtypes TEXT, home TEXT
-);
+) WITHOUT ROWID;
 CREATE INDEX ix_x_{s} ON datasets_next (xmin, xmax);
 CREATE INDEX ix_y_{s} ON datasets_next (ymin, ymax);
-CREATE INDEX ix_rank_{s} ON datasets_next (pass, score);
+CREATE INDEX ix_rank_{s} ON datasets_next (pass, score, xmin, xmax, ymin, ymax, home);
 DROP TABLE IF EXISTS ds_fts_next;
 CREATE VIRTUAL TABLE ds_fts_next USING fts5(id UNINDEXED, title, publisher, body, tokenize='unicode61 remove_diacritics 2');
+DROP TABLE IF EXISTS ds_cell_next;
+CREATE TABLE ds_cell_next (key TEXT, id TEXT, x0 REAL, y0 REAL, x1 REAL, y1 REAL, PRIMARY KEY (key, id)) WITHOUT ROWID;
+CREATE INDEX ix_cell_id_{s} ON ds_cell_next (id);
 CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT);
 """
 SWAP = ("DROP TABLE IF EXISTS datasets;\nALTER TABLE datasets_next RENAME TO datasets;\n"
-        "DROP TABLE IF EXISTS ds_fts;\nALTER TABLE ds_fts_next RENAME TO ds_fts;\n")
+        "DROP TABLE IF EXISTS ds_fts;\nALTER TABLE ds_fts_next RENAME TO ds_fts;\n"
+        "DROP TABLE IF EXISTS ds_cell;\nALTER TABLE ds_cell_next RENAME TO ds_cell;\n")
 SCHEMA = SCHEMA_TEMPLATE  # what the layout hash is taken from
 
 
@@ -93,7 +97,7 @@ def home_of():
     return home
 
 
-def build_rows(ds, tags, gtypes=None, home=None, fts=None) -> dict:
+def build_rows(ds, tags, gtypes=None, home=None, fts=None, cells=None) -> dict:
     import json
 
     gtypes = gtypes or {}
@@ -118,6 +122,9 @@ def build_rows(ds, tags, gtypes=None, home=None, fts=None) -> dict:
         ]
         if fts is not None:
             fts[r["dataset_id"]] = fts_row(r, tg)
+        if cells is not None:
+            row = rows[r["dataset_id"]]
+            cells[r["dataset_id"]] = cell_keys(x0, y0, x1, y1, row[-1], [c for c in row[15].split(",") if c])
     return rows
 
 
@@ -144,21 +151,68 @@ def fts_row(r: dict, tg) -> list:
     return [fts_rowid(r["dataset_id"]), r["dataset_id"], r["title"] or "", r["publisher"] or "", body.strip()]
 
 
-def inserts(values: list[str], verb: str = "INSERT", table: str = "datasets", cols: str = "") -> list[str]:
-    out, batch = [], []
+# Spatial index (18 Nov). Area searches filtered on xmin/xmax/ymin/ymax, and a range on one column can't narrow the
+# other three, so a 5 km search read ~270k rows; a concept over a large area read the whole rank index. Each dataset
+# now gets quadtree cell keys: its level is the finest at which its extent spans at most 2 x 2 cells (lon/lat cells,
+# 360/2^L by 180/2^L degrees, levels 0-18), and it has one key per cell (up to 4). A key starts with the dataset's
+# home country, so search reads only the countries it would keep anyway:
+#   "<home>:<quadkey>"             e.g. "GB:031203..."; home is "" for international or unplaced datasets
+#   "c:<concept>|<home>:<quadkey>"  the same per concept, so a concept search reads only that concept
+# Each key row also carries the dataset's extent, rounded outwards to 0.001 degrees, so search can drop datasets whose
+# cell meets the area but whose extent doesn't before looking them up (about 40% of a city search's keys).
+# The rank index also holds extent and home, so a large-area search can sample the best-scored datasets without lookups.
+# datasets is a WITHOUT ROWID table, so looking a dataset up by id is one read rather than an index read plus a row.
+# The Worker (worker/src/index.js, cellSelect) reads exact keys for the levels coarser than the search area and key
+# ranges (prefixes) for the area's own level and finer. Keep the two in step.
+MAX_LEVEL = 18
+CELLS_VERSION = "cells-1"  # change when cell keys are made differently: forces a full reload
+
+
+def cell_level(x0, y0, x1, y1) -> int:
+    import math
+
+    for lv in range(MAX_LEVEL, -1, -1):
+        w, h = 360 / 2 ** lv, 180 / 2 ** lv
+        if math.floor((x1 + 180) / w) - math.floor((x0 + 180) / w) <= 1 and math.floor((y1 + 90) / h) - math.floor((y0 + 90) / h) <= 1:
+            return lv
+    return 0
+
+
+def quadkey(ix: int, iy: int, lv: int) -> str:
+    # digit = 2 * (y bit) + (x bit), most significant level first
+    return "".join(str(((iy >> b) & 1) * 2 + ((ix >> b) & 1)) for b in range(lv - 1, -1, -1))
+
+
+def cell_keys(x0, y0, x1, y1, home: str, concepts) -> list[str]:
+    import math
+
+    x0, x1 = max(-180.0, min(180.0, x0)), max(-180.0, min(180.0, x1))
+    y0, y1 = max(-90.0, min(90.0, y0)), max(-90.0, min(90.0, y1))
+    lv = cell_level(x0, y0, x1, y1)
+    w, h, top = 360 / 2 ** lv, 180 / 2 ** lv, 2 ** lv - 1
+    qks = [quadkey(ix, iy, lv)
+           for ix in range(min(math.floor((x0 + 180) / w), top), min(math.floor((x1 + 180) / w), top) + 1)
+           for iy in range(min(math.floor((y0 + 90) / h), top), min(math.floor((y1 + 90) / h), top) + 1)]
+    plain = [f"{home}:{k}" for k in qks]
+    return list(dict.fromkeys(plain + [f"c:{c}|{p}" for c in concepts for p in plain]))  # a concept can be tagged twice
+
+
+def inserts(values, verb: str = "INSERT", table: str = "datasets", cols: str = "", rows: int = 40):
+    batch, size = [], 0
     for v in values:
-        batch.append(v)
-        if len(batch) == 40 or sum(map(len, batch)) > 60_000:  # D1 caps a statement at 100 KB
-            out.append(f"{verb} INTO {table}{cols} VALUES " + ",".join(batch) + ";")
-            batch = []
+        batch.append(v); size += len(v)
+        if len(batch) == rows or size > 60_000:  # D1 caps a statement at 100 KB
+            yield f"{verb} INTO {table}{cols} VALUES " + ",".join(batch) + ";"
+            batch, size = [], 0
     if batch:
-        out.append(f"{verb} INTO {table}{cols} VALUES " + ",".join(batch) + ";")
-    return out
+        yield f"{verb} INTO {table}{cols} VALUES " + ",".join(batch) + ";"
 
 
 def main():
     import hashlib
+    import itertools
     import json
+    import math
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--datasets", required=True)
@@ -180,11 +234,23 @@ def main():
         tags = {r["dataset_id"]: r for r in t[t["status"] == "succeeded"].to_dict("records")}
     layers = pd.read_parquet(args.layers, columns=["dataset_id", "geometry_type"]) if args.layers and Path(args.layers).exists() and "geometry_type" in __import__("pyarrow.parquet", fromlist=["x"]).read_schema(args.layers).names else None
     gt = dataset_gtypes(layers)
-    fts = {}
-    rows = build_rows(ds, tags, gt, home_of(), fts)
+    fts, cells = {}, {}
+    rows = build_rows(ds, tags, gt, home_of(), fts, cells)
+    print(f"cell keys: {sum(map(len, cells.values()))} for {len(cells)} datasets")
     print(f"geometry types known for {sum(1 for v in rows.values() if v[-2])} datasets; home country set for {sum(1 for v in rows.values() if v[-1])}")
     sql_vals = {k: "(" + ",".join(q(v) for v in vals) + ")" for k, vals in rows.items()}
     fts_vals = {k: "(" + ",".join(q(v) for v in vals) + ")" for k, vals in fts.items()}
+    def box(k):
+        r = rows[k]
+        return ",".join(repr(round(f(v * 1000) / 1000, 3)) for f, v in ((math.floor, r[6]), (math.floor, r[7]), (math.ceil, r[8]), (math.ceil, r[9])))
+
+    def cell_vals(ids):  # made as written: 1.9M key rows held as strings ran a 7 GB machine out of memory
+        for k in ids:
+            b = box(k)
+            for c in cells.get(k, []):
+                yield f"({q(c)},{q(k)},{b})"
+    # Cell keys follow from the row's extent, home and concepts, so the row hash covers them; a change to how keys are
+    # made changes CELLS_VERSION, which forces a full reload like a table layout change.
     hashes = {k: hashlib.sha1((v + fts_vals.get(k, "")).encode()).hexdigest()[:12] for k, v in sql_vals.items()}
     FTS_COLS = "(rowid, id, title, publisher, body)"
 
@@ -192,31 +258,37 @@ def main():
     # is expensive. With the previous load's hashes we write only what changed.
     prev = json.loads(Path(args.previous).read_text()) if args.previous and Path(args.previous).exists() else None
     # A changed table layout (new columns, 17 Nov: gtypes, home) can't be loaded row by row: reload in full.
-    hashes["__schema__"] = hashlib.sha1(SCHEMA.encode()).hexdigest()[:12]
+    hashes["__schema__"] = hashlib.sha1((SCHEMA + CELLS_VERSION).encode()).hexdigest()[:12]
     if prev is not None and prev.get("__schema__") != hashes["__schema__"]:
         print("table layout changed: full reload")
         prev = None
     if prev is None:
         suffix = hashlib.sha1(f"{args.built}{len(rows)}".encode()).hexdigest()[:6]
-        lines = ([SCHEMA_TEMPLATE.replace("{s}", suffix)] + inserts(list(sql_vals.values()), table="datasets_next")
-                 + inserts(list(fts_vals.values()), table="ds_fts_next", cols=FTS_COLS) + [SWAP])
+        lines = itertools.chain([SCHEMA_TEMPLATE.replace("{s}", suffix)], inserts(sql_vals.values(), table="datasets_next"),
+                                inserts(fts_vals.values(), table="ds_fts_next", cols=FTS_COLS),
+                                inserts(cell_vals(rows), "INSERT OR IGNORE", table="ds_cell_next", rows=500), [SWAP])
         mode, changed, removed = "full", len(rows), 0
     else:
         changed_ids = [k for k, h in hashes.items() if prev.get(k) != h and k != "__schema__"]
         removed_ids = [k for k in prev if k not in hashes and k != "__schema__"]
-        lines = [CREATE_IF_MISSING] if (changed_ids or removed_ids) else []
+        head = [CREATE_IF_MISSING] if (changed_ids or removed_ids) else []
         for i in range(0, len(removed_ids), 200):
-            lines.append("DELETE FROM datasets WHERE id IN (" + ",".join(q(x) for x in removed_ids[i:i + 200]) + ");")
+            head.append("DELETE FROM datasets WHERE id IN (" + ",".join(q(x) for x in removed_ids[i:i + 200]) + ");")
         gone = removed_ids + changed_ids
         for i in range(0, len(gone), 200):
-            lines.append("DELETE FROM ds_fts WHERE rowid IN (" + ",".join(str(fts_rowid(x)) for x in gone[i:i + 200]) + ");")
-        lines += inserts([sql_vals[k] for k in changed_ids], "INSERT OR REPLACE")
-        lines += inserts([fts_vals[k] for k in changed_ids if k in fts_vals], table="ds_fts", cols=FTS_COLS)
+            head.append("DELETE FROM ds_fts WHERE rowid IN (" + ",".join(str(fts_rowid(x)) for x in gone[i:i + 200]) + ");")
+            head.append("DELETE FROM ds_cell WHERE id IN (" + ",".join(q(x) for x in gone[i:i + 200]) + ");")
+        lines = itertools.chain(head, inserts((sql_vals[k] for k in changed_ids), "INSERT OR REPLACE"),
+                                inserts((fts_vals[k] for k in changed_ids if k in fts_vals), table="ds_fts", cols=FTS_COLS),
+                                inserts(cell_vals(changed_ids), "INSERT OR IGNORE", table="ds_cell", rows=500))
         mode, changed, removed = "incremental", len(changed_ids), len(removed_ids)
-    if lines:
-        lines.append(f"INSERT OR REPLACE INTO meta VALUES ('built', {q(args.built)}), ('count', {q(str(len(rows)))}), ('tagged', {q(str(len(tags)))});")
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
-    Path(args.out).write_text("\n".join(lines) + ("\n" if lines else ""))
+    wrote = 0
+    with open(args.out, "w", encoding="utf-8") as f:
+        for line in lines:
+            f.write(line + "\n"); wrote += 1
+        if wrote:
+            f.write(f"INSERT OR REPLACE INTO meta VALUES ('built', {q(args.built)}), ('count', {q(str(len(rows)))}), ('tagged', {q(str(len(tags)))});\n")
     if args.hashes_out:
         Path(args.hashes_out).write_text(json.dumps(hashes, separators=(",", ":")))
     print(f"{mode}: {len(rows)} datasets, {changed} to write, {removed} to delete, {len(tags)} tags; "

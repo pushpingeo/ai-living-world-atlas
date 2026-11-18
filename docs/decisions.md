@@ -333,3 +333,61 @@ Fixed: the sweep didn't check atlas-hosted `geojson` endpoints, so GEM showed 0%
 from early December; it now fetches their index.json. Slow retries stop starting 3 minutes before the deadline
 (the run overran by 4.5 min). GEM endpoints keep "failing" status until their next recheck (every 3 days).
 Overture's S3 folder isn't due again until 20 Nov, so the listing fix is still unproven.
+
+## 2026-11-18 (evening): spatial index for find_datasets
+Area searches filtered on four extent columns, and an index range on one column can't narrow the other three, so a
+5 km search read ~270k rows (plus a count query reading as much again), and a concept over a large area read the whole
+rank index. A burst of those could overload D1 for its 10-second window and fail every query.
+
+**Quadtree cell keys** (`ds_cell`, built in `atlas/api_data.py`, read by `cellSelect` in the Worker). Lon/lat cells,
+360/2^L by 180/2^L degrees, levels 0-18. A dataset sits at the finest level where its extent spans at most 2 x 2 cells
+and gets one key per cell, so London (which straddles Greenwich) lands at level 10, not level 1 as a single
+"smallest containing cell" would put it. Keys start with the dataset's home country (`GB:0312...`), so a search reads
+only the countries it would keep anyway, and are repeated per concept (`c:oil-gas|GB:0312...`), so a concept search
+reads only that concept. 264k datasets give 1.88M keys. A search reads exact keys for the levels coarser than the
+area and key ranges (prefixes) at the area's own level. Each key row carries the extent rounded outwards to 0.001°,
+which drops datasets whose cell meets the area but whose extent doesn't before any lookup.
+
+**Shape of the query, found by measuring on a local D1** (each step was slower than the next):
+- UNION of ranges: D1 caps compound SELECTs. A flat chain of ORs: SQLite caps expression depth at 100 (Europe has
+  50 countries x 4 ranges). Now a balanced OR tree; areas over more than 8 countries use coarser ranges to keep the
+  SQL short (Europe-wide: ~20 KB, D1 allows 100 KB).
+- `DISTINCT` on the keys or a plain `pass = 1` on datasets makes SQLite scan a whole index instead; the cell path
+  prefixes filters with `+` and lets `id IN (...)` dedupe.
+- A window count and a SQL sort cost 3 reads per match. The cell paths now return every match as a slim row
+  (id, title, publisher, type, score, extent), rank and fold them all in the Worker, then read full rows for the 100
+  kept. Matches are exact, and every match is ranked by fit (before, only the 3,000 nearest in size were).
+- `datasets` is now WITHOUT ROWID: a lookup by id is one read, not two.
+
+**Large areas without a concept** are cheap through the cells where the area holds few datasets (Nigeria: 2k) and
+costly where it holds many (the US: 90k). The Worker counts the area's keys up to 20,000 first; below that it uses the
+cells, above it reads the 60,000 best-scored datasets world-wide from the rank index (which now also holds extent
+and home, so no lookups) and keeps those in the area. Areas over 20,000 square degrees skip the count. Those results
+are a best-scored sample, as before; `matches` then counts that sample and `matches_capped` is set.
+
+**Results, same local D1, rows read per search** (old: main query only, as mcp-check reported; the old count query
+read about as much again):
+
+| Search | Old | New |
+|---|---|---|
+| Edinburgh 5 km | 271,148 | 25,393 |
+| Edinburgh road, query, line | 264,429 | 348 |
+| Berlin 10 km | 278,628 | 54,902 |
+| Lagos 20 km | 266,145 | 8,043 |
+| Shetland pipeline, query | 264,442 | 381 |
+| Gulf of Mexico, oil-gas | 264,415 | 1,039 |
+| US protected-area | 264,415 | 10,263 |
+| Europe admin-boundary | 105,684 | 30,263 |
+| Nigeria, no text | 264,415 | 16,956 |
+| UK, no text | 35,874 (195k with count) | 84,227 |
+| World, no text | 3,000 (13k with count) | 12,200 |
+
+Same match counts on every complete path. A brute-force check over 400 random areas (city to world, poles,
+antimeridian, with and without concepts) found 0 missed or extra datasets. Unchanged: text search (FTS) and
+`include_other_countries`, which keeps the old extent path.
+
+**Costs.** The SQL for a full reload grows from 205 MB to 338 MB (about 85 pieces, ~8 minutes), the database from
+~377 MB to ~660 MB, and peaks near 1.3 GB while a reload builds the new tables beside the old. Fine on Workers Paid
+(10 GB, 50M row writes a month; a full reload is ~5M). **Over D1's free-plan 500 MB limit**: switching Workers Paid
+off would need a trim first (the id index on ds_cell, 88 MB, only serves incremental deletes; FTS keeps its own copy
+of the text, ~126 MB).

@@ -56,11 +56,17 @@ jobs:
                               ("Wildfire Response Points", {"bbox": W, "text": "Wildfire Response Points"}),
                               ("UK, no text", {"bbox": [-8, 49.5, 2, 61]}), ("Edinburgh 5 km", {"lon": -3.19, "lat": 55.95, "radius_km": 5}),
                               ("Gulf of Mexico, no text", {"bbox": [-98, 18, -80, 31]}), ("Atlantic, no text", {"bbox": [-80, -60, 20, 70]}),
-                              ("world, no text", {"bbox": W}), ("Gulf of Mexico, oil-gas", {"bbox": [-98, 18, -80, 31], "concept": "oil-gas"})]:
+                              ("world, no text", {"bbox": W}), ("Gulf of Mexico, oil-gas", {"bbox": [-98, 18, -80, 31], "concept": "oil-gas"}),
+                              # spatial index (18 Nov): small areas, concepts over large areas, sparse large areas
+                              ("Edinburgh 5 km, road, query, line", {"lon": -3.19, "lat": 55.95, "radius_km": 5, "concept": "road", "capability": "query", "geometry": "line"}),
+                              ("Berlin 10 km", {"lon": 13.4, "lat": 52.52, "radius_km": 10}), ("Lagos 20 km", {"lon": 3.4, "lat": 6.45, "radius_km": 20}),
+                              ("US, protected-area", {"bbox": [-125, 24, -66, 50], "concept": "protected-area"}),
+                              ("Europe, admin-boundary", {"bbox": [-11, 35, 30, 71], "concept": "admin-boundary"}),
+                              ("Nigeria, no text", {"bbox": [2.7, 4.2, 14.7, 13.9]})]:
               time.sleep(1.5)  # one query a second or so, like an agent; a burst of heavy ones trips D1's 10-second window
               r, status, s = call("find_datasets", {**args, "limit": 5, "debug": True})
               top = [f"{x['title'][:40]} ({x['publisher_type']}{', +' + str(len(x['also_available_from'])) if x.get('also_available_from') else ''})" for x in r["results"][:3]] if r else []
-              print(f"find_datasets [world: {label}]: {status}, {s:.1f}s, {r.get('search') if r else '-'}, matches {r.get('matches') if r else '-'}{' capped' if r and r.get('matches_capped') else ''}, rows read {r.get('rows_read') if r else '-'}: {top}")
+              print(f"find_datasets [world: {label}]: {status}, {s:.1f}s, {r.get('search') if r else '-'}, matches {r.get('matches') if r else '-'}{' capped' if r and r.get('matches_capped') else ''}, rows read {r.get('rows_read') if r else '-'} ({r.get('index') if r else '-'}): {top}")
           first_query = None
           for label, args in cases:
               r, status, s = call("find_datasets", args)
