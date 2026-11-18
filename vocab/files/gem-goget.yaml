@@ -1,0 +1,18 @@
+# Global Energy Monitor, Global Oil and Gas Extraction Tracker (GOGET). Requested by Rob, 18 Nov 2026.
+# Source: the .xlsx GEM emails after its download form. Licence: GEM states its tracker data is CC BY 4.0 unless
+# noted; check the file's About sheet for exceptions before publishing (atlas/files.py prints it).
+id: gem-goget
+title: Global Oil and Gas Extraction Tracker (extraction areas, development and discoveries)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: "CC BY 4.0 (Global Energy Monitor tracker data, unless noted in the file)"
+citation: "Global Oil and Gas Extraction Tracker, Global Energy Monitor, March 2026 release"
+release: "March 2026"
+landing_page: https://globalenergymonitor.org/projects/global-oil-gas-extraction-tracker/
+abstract: >
+  Global Energy Monitor's project-level tracker of oil and gas extraction: operating extraction areas, areas under
+  development and discoveries in about 95 countries, with operator, owners, status, discovery and production-start
+  years, and production and reserves where known. One point per extraction area (unit).
+concepts_hint: [oil-gas]
+sheet: ""      # set once the file has arrived if the main sheet isn't the first with latitude/longitude
+columns: []    # empty: keep every column

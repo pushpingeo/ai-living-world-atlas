@@ -33,6 +33,13 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (18 Nov) **Hosted download datasets: new endpoint protocol `geojson`.** Some sources only offer a download (Global
+  Energy Monitor's trackers come as an .xlsx by request form). The atlas converts them (`atlas/files.py`) and hosts
+  one GeoJSON at `…/data/f/<id>.geojson`; the dataset gets a `geojson` endpoint with `query` and `download`.
+  `fetch_features` filters the file by area and `text` like any service, and adds `matched` (total in the area) and
+  `source` (publisher, citation, licence, release). `where` isn't supported for these. Additive only. First one: GEM's
+  Global Oil and Gas Extraction Tracker, once Rob has the March 2026 file.
+
 - (18 Nov) **Tobler request: text search that holds up world-wide. Done** (deployed 18 Nov). `find_datasets`:
   - **`text`** now uses a full-text index (SQLite FTS5) over the **title, publisher, tags (concepts, ISO themes,
     keywords) and the first 300 characters of the description**. All words must match. Words of 4+ letters match as

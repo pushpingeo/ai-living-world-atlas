@@ -6,7 +6,7 @@ import AREAS from "./country_areas.json";
 
 const SERVER = { name: "ai-living-world-atlas", version: "0.1.0" };
 const PROTOCOLS = ["2025-06-18", "2025-03-26", "2024-11-05"];
-const FEATURE_PREF = ["arcgis-featureserver", "wfs", "arcgis-mapserver"];
+const FEATURE_PREF = ["arcgis-featureserver", "wfs", "arcgis-mapserver", "geojson"];
 
 /* ---------------- tool definitions ---------------- */
 const TOOLS = [
@@ -374,6 +374,10 @@ async function fetchFeatures(env, a) {
   if (!eps.length) throw new Error("This dataset has no endpoint that can return features. Use get_dataset for image or tile endpoints.");
   const errors = [];
   for (const e of eps) {
+    if (e.protocol === "geojson") {
+      // A download-only dataset the atlas hosts as one GeoJSON file (e.g. GEM's trackers): filter it here.
+      try { return await fileFeatures(e, d, a, v, limit); } catch (err) { errors.push(`geojson: ${String(err.message || err)}`); continue; }
+    }
     let url, alts = [];
     const [x0, y0, x1, y1] = v.map((n) => n.toFixed(6));
     if (e.protocol === "wfs") {
@@ -435,6 +439,38 @@ async function fetchFeatures(env, a) {
     }
   }
   throw new Error("Couldn't fetch features: " + errors.join("; "));
+}
+
+function featBbox(g) {
+  let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity;
+  const walk = (c) => { if (typeof c[0] === "number") { w = Math.min(w, c[0]); e = Math.max(e, c[0]); s = Math.min(s, c[1]); n = Math.max(n, c[1]); } else c.forEach(walk); };
+  if (g && g.coordinates) walk(g.coordinates);
+  return [w, s, e, n];
+}
+
+async function fileFeatures(e, d, a, v, limit) {
+  const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(25000) });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const gj = await r.json();
+  if (!Array.isArray(gj.features)) throw new Error("not GeoJSON");
+  const t = a.text ? String(a.text).toLowerCase() : "";
+  const hits = gj.features.filter((f) => {
+    const b = featBbox(f.geometry);
+    if (b[0] > v[2] || b[2] < v[0] || b[1] > v[3] || b[3] < v[1]) return false;
+    return !t || Object.values(f.properties || {}).some((x) => typeof x === "string" && x.toLowerCase().includes(t));
+  });
+  const feats = hits.slice(0, limit).map((f) => ({
+    type: "Feature", geometry: a.include_geometry === false ? null : f.geometry,
+    properties: Object.fromEntries(Object.entries(f.properties || {}).slice(0, 40)
+      .map(([k, val]) => [k, typeof val === "string" && val.length > 300 ? val.slice(0, 300) + "…" : val])),
+  }));
+  return {
+    dataset: a.id, endpoint: { protocol: "geojson", url: e.url }, area: v.map((n) => +n.toFixed(5)),
+    returned: feats.length, matched: hits.length, may_be_more: hits.length > feats.length,
+    licence: d.licence || "not stated", ...(gj.atlas_source ? { source: gj.atlas_source } : {}),
+    ...(a.where ? { note: "where isn't supported for hosted files; use text" } : {}),
+    type: "FeatureCollection", features: feats,
+  };
 }
 
 const HANDLERS = {

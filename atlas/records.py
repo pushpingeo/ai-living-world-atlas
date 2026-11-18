@@ -8,7 +8,8 @@ from .endpoints import dumps
 from .net import Client
 from .record import Layer, to_wgs84
 
-CAPS = {"download": ["download"], "cloud": ["download", "cloud"], "api": ["query"], "landing": []}
+# geojson: a download-only dataset converted and hosted by the atlas (atlas/files.py); fetch_features filters it.
+CAPS = {"download": ["download"], "cloud": ["download", "cloud"], "api": ["query"], "landing": [], "geojson": ["query", "download"]}
 
 
 def to_layers(records: list[dict]) -> list[Layer]:
@@ -22,7 +23,7 @@ def to_layers(records: list[dict]) -> list[Layer]:
                 layer_url=e["url"], service_url=e["url"], service_type=e["protocol"], layer_name=f"{s['id']}:{i}",
                 title=s["title"], abstract=s.get("abstract", ""), keywords=list(s.get("concepts_hint") or []),
                 licence_text=s.get("licence", ""), landing_page=s.get("landing_page", ""),
-                bbox=to_wgs84(*b) if b else None, geometry_type="file" if e["protocol"] in ("download", "cloud") else "",
+                bbox=to_wgs84(*b) if b else None, geometry_type=s.get("geometry_type") or ("file" if e["protocol"] in ("download", "cloud") else ""),
                 capabilities=CAPS.get(e["protocol"], []), crawled_at=now,
                 endpoint_info=dumps({"protocol": e["protocol"], "format": e.get("format", "")}),
                 pixel_size_m=s.get("detail_m"), **ctx,
