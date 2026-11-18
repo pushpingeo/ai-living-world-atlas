@@ -104,6 +104,22 @@ jobs:
           if gem:
               r2, status, s = call("fetch_features", {"id": gem[0]["id"], "bbox": [-4.6, 59.5, 1.5, 61.5], "limit": 20})
               print(f"fetch_features [GEM extraction, west of Shetland]: {status}, {s:.1f}s, returned {r2.get('returned') if r2 else '-'}, matched {r2.get('matched') if r2 else '-'}: {[f['properties'].get('Unit Name') for f in (r2 or {}).get('features', [])][:6]}")
+          # GEM trackers (hosted, tiled): one search and one fetch each, in places where they should have data
+          gem_cases = [
+              ("Gas pipelines", [-2, 53, 8, 62], ""), ("Oil and NGL pipelines", [2.7, 4.2, 14.7, 13.9], ""),
+              ("LNG import and export terminals", [-98, 18, -80, 31], ""), ("Oil and gas power plants", [-8, 49.5, 2, 61], ""),
+              ("Coal power plants", [68, 6, 98, 36], ""), ("Coal mines", [112, -44, 154, -10], ""), ("Wind farms", [-180, -85, 180, 85], "Hornsea"),
+              ("Solar farms", [-6, 36, 4, 44], ""), ("Nuclear power plants", [-6, 42, 9, 51], ""), ("Iron and steel plants", [-8, 49.5, 2, 61], ""),
+              ("Hydropower plants", [-80, -35, -35, 6], ""), ("Coal terminals", [112, -44, 154, -10], ""),
+          ]
+          for title, bbox, text in gem_cases:
+              time.sleep(1.2)
+              r, status, s = call("find_datasets", {"bbox": bbox, "text": f"Global Energy Monitor {title}", "limit": 10})
+              hit = next((x for x in (r or {}).get("results", []) if x["title"].startswith(title)), None)
+              if not hit:
+                  print(f"GEM [{title}]: not found by search ({status})"); continue
+              r2, status, s = call("fetch_features", {"id": hit["id"], "bbox": bbox, "limit": 5, **({"text": text} if text else {})})
+              print(f"GEM [{title}]: {status}, {s:.1f}s, returned {r2.get('returned') if r2 else '-'}, matched {r2.get('matched') if r2 else '-'}, licence {str((r2 or {}).get('licence'))[:20]!r}")
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})
