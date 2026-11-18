@@ -279,5 +279,6 @@ letting authoritative national sources pass without a description.
 Central-government and national public-body layers that answer and carry no junk flags now pass with a total of
 45+ even with no description, and code-like or all-caps titles are tidied (`authority_pass` in quality.py). It runs
 at scoring and again at merge, so a remerge rescores an old crawl. Local government is excluded. Africa was
-remerged (3,258 to 8,688 passing), tagged ($0.76) and published. Other regions pick the rule up when next crawled
-or remerged. For the US that will add many federal layers with sparse descriptions; worth a look before doing it.
+remerged (3,258 to 8,688 passing), tagged ($0.76) and published. **Trial, Africa only** (Rob): where data is scarce,
+something beats nothing; for the US and Europe it may add noise. Gated by layer country (`AUTHORITY_PASS_COUNTRIES`),
+so other regions are unchanged when recrawled. Review Africa's results before extending it.

@@ -99,7 +99,11 @@ def codelike(title: str) -> bool:
 # National authorities pass without a description (Rob, 18 Nov 2026): a national government or national public body's
 # live layer is worth listing even when the publisher wrote nothing about it (ONHYM's and Uganda's petroleum layers).
 # Junk flags and failed checks still keep a layer out. Local government is not included.
+# A TRIAL for regions where data is scarce: only layers whose country is listed here. Rob's reasoning: for Africa,
+# something beats nothing; for the US and Europe, with far more data, it may just add noise. Judge Africa first.
 AUTHORITATIVE = {"central-gov", "public-body"}
+AUTHORITY_PASS_COUNTRIES = set("""DZ AO BJ BW BF BI CV CM CF TD KM CG CD CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG
+MW ML MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW""".split())
 AUTHORITATIVE_MIN_TOTAL = 45
 
 
@@ -121,7 +125,8 @@ def authority_pass(r: dict) -> dict:
         return r
     flags = r.get("q_flags")
     flags = list(flags) if flags is not None else []
-    if (r.get("publisher_type_resolved") in AUTHORITATIVE and not flags and r.get("check_status") != "fail"
+    if (r.get("publisher_type_resolved") in AUTHORITATIVE and (r.get("country") or "") in AUTHORITY_PASS_COUNTRIES
+            and not flags and r.get("check_status") != "fail"
             and (r.get("q_total") or 0) >= AUTHORITATIVE_MIN_TOTAL):
         r["q_pass"] = True
         r["q_pass_rule"] = "national-authority"

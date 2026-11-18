@@ -170,7 +170,8 @@ Workspace notes:
    Includes ONHYM (Morocco), the Petroleum Authority of Uganda (slow server, ~30 s fetches) and ANPG's own server.
    GNPC (Ghana), Kenya's petroleum department and ANPG's ArcGIS Online services need a login token, so they're out.
    Nigeria and Tanzania still need domain discovery (`docs/spikes/africa-scoping.md`). FNDS (Mozambique) brings some
-   untidy work layers ("xtemp") under the new rule.
+   untidy work layers ("xtemp") under the new rule. The rule is **a trial for Africa only** (Rob, 18 Nov): judge
+   whether it helps or adds noise before extending it (`AUTHORITY_PASS_COUNTRIES` in quality.py).
 9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
    `runs/published.txt`, tagged for $0.14). NSTA status words done. Trusted services: design only, waiting on Rob.
    Still open from Tobler's list: text search that holds up world-wide (D1 overload) and the name index (licence

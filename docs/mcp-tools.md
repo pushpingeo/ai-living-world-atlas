@@ -38,7 +38,8 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   Petroleum Authority of Uganda and ANPG (Angola), plus Mozambique's FNDS and WRI's Forest Atlas. Quality rule change
   (Rob's call): central-government and national public-body layers that answer and aren't junk now pass even with no
   description, and code-like or all-caps titles are tidied ("Petroleum agreements onshore"). Expect thinner
-  `abstract` text on these. The rule applies to other regions when they're next crawled or remerged.
+  `abstract` text on these. **A trial for Africa only** (country list in `atlas/quality.py`); other regions are
+  unchanged until Rob decides.
   *Not available:* GNPC (Ghana), Kenya's State Department for Petroleum and ANPG's ArcGIS Online services need a login
   token. Additive only; no field changes.
 
