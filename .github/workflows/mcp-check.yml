@@ -77,6 +77,13 @@ jobs:
           r, status, s = call("find_datasets", {"bbox": [-4.6, 59.5, 1.5, 61.5], "concept": "pipeline", "capability": "query", "limit": 100})
           em = [x for x in (r or {}).get("results", []) if "EMODnet" in (x.get("publisher") or "")]
           print(f"find_datasets [Shetland, pipeline, query]: {status}, {len((r or {}).get('results', []))} results, EMODnet: {[x['title'] for x in em][:5]}")
+          # Africa: Uganda petroleum licences (national-authority rule)
+          r, status, s = call("find_datasets", {"bbox": [29.5, -1.5, 35.0, 4.3], "concept": "oil-gas", "limit": 100})
+          ug = [x for x in (r or {}).get("results", []) if "Petroleum Authority" in (x.get("publisher") or "")]
+          print(f"find_datasets [Uganda, oil-gas]: {status}, {len((r or {}).get('results', []))} results, PAU: {[x['title'] for x in ug][:6]}")
+          if ug:
+              r2, status, s = call("fetch_features", {"id": ug[0]["id"], "bbox": [29.5, -1.5, 35.0, 4.3], "limit": 20})
+              print(f"fetch_features [PAU {ug[0]['title']}]: {status}, {s:.1f}s, returned {r2.get('returned') if r2 else '-'}")
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})
