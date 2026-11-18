@@ -31,7 +31,7 @@ jobs:
           bash .github/actions-fetch.sh
           mkdir -p _site && cp -r site/. _site/
           # download-only datasets the atlas hosts (atlas/files.py), for fetch_features and downloads
-          mkdir -p _site/data/f && cp files/*.geojson _site/data/f/ 2>/dev/null || true
+          mkdir -p _site/data/f && for d in files/*/; do cp -r "$d" _site/data/f/; done
           # version-stamp the script and styles so a deploy's code and data load together (Pages caches for 10 min)
           sed -i "s#app.js\"#app.js?v=${GITHUB_SHA::8}\"#; s#style.css\"#style.css?v=${GITHUB_SHA::8}\"#" _site/index.html
           TAGS=""; [ -f /tmp/pub/tags.parquet ] && TAGS=/tmp/pub/tags.parquet

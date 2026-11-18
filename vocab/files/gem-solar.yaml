@@ -1,0 +1,19 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-solar
+title: Solar farms, utility-scale (Global Solar Power Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-solar-power-tracker/
+source: Global-Solar-Power-Tracker-February-2026.xlsx
+sheets:
+- Utility-Scale (1 MW+)
+exclude:
+  Other IDs (unit/phase): TZ
+exclude_reason: sourced from TransitionZero's Solar Asset Mapper under CC BY-NC 4.0, which doesn't allow commercial use
+citation: Global Solar Power Tracker, Global Energy Monitor, February 2026 release
+release: February 2026
+concepts_hint:
+- power-plant
+abstract: Global Energy Monitor's utility-scale solar phases (1 MW and over), with capacity, technology, status, owners and
+  start year.

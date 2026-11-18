@@ -1,0 +1,17 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-hydropower
+title: Hydropower plants (Global Hydropower Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-hydropower-tracker/
+source: Global-Hydropower-Tracker-March-2026.xlsx
+sheets:
+- Data
+- Below Threshold
+citation: Global Hydropower Tracker, Global Energy Monitor, March 2026 release
+release: March 2026
+concepts_hint:
+- power-plant
+abstract: Global Energy Monitor's hydropower plants of 75 MW and over (plus below-threshold plants, marked in the 'sheet'
+  property), with capacity, technology, river, status, owners and start year.

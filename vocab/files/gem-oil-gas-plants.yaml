@@ -1,0 +1,17 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-oil-gas-plants
+title: Oil and gas power plants (Global Oil and Gas Plant Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-oil-gas-plant-tracker/
+source: Global Oil and Gas Plant Tracker (GOGPT) - August 2026.xlsx
+sheets:
+- Gas & Oil Units
+- Sub-Threshold Units
+citation: Global Oil and Gas Plant Tracker, Global Energy Monitor, August 2026 release
+release: August 2026
+concepts_hint:
+- power-plant
+abstract: Global Energy Monitor's oil- and gas-fired power plants by unit, with capacity, fuel, technology, status, owners
+  and start year. Includes sub-threshold units (marked in the 'sheet' property).

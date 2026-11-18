@@ -1,0 +1,16 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-coal-plants
+title: Coal power plants (Global Coal Plant Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-coal-plant-tracker/
+source: Global-Coal-Plant-Tracker-July-2026.xlsx
+sheets:
+- Units
+citation: Global Coal Plant Tracker, Global Energy Monitor, July 2026 release
+release: July 2026
+concepts_hint:
+- power-plant
+abstract: Global Energy Monitor's coal-fired power units of 30 MW and over, with capacity, status (operating, construction,
+  proposed, retired, cancelled), combustion technology, owners and start and retirement years.

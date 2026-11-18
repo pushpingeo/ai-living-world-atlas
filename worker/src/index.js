@@ -450,7 +450,8 @@ function featBbox(g) {
 
 // Hosted files (atlas/files.py): files/<id>/index.json lists gzipped GeoJSON tiles with their extents; only tiles
 // touching the area are read. A plain .geojson (the first layout) still works.
-const MAX_TILES = 40;
+const MAX_TILES = 40;       // without text: the nearest tiles are enough to return a sample
+const MAX_TILES_TEXT = 300; // with text: every tile in the area, or a name search misses (tiles are small and gzipped)
 async function fileFeatures(e, d, a, v, limit) {
   const t = a.text ? String(a.text).toLowerCase() : "";
   const keep = (f) => {
@@ -466,8 +467,9 @@ async function fileFeatures(e, d, a, v, limit) {
     source = idx.atlas_source || null;
     const base = e.url.replace(/index\.json$/, "");
     const near = idx.tiles.filter((x) => !(x.bbox[0] > v[2] || x.bbox[2] < v[0] || x.bbox[1] > v[3] || x.bbox[3] < v[1]));
-    if (near.length > MAX_TILES) partial = true;
-    for (const tile of near.slice(0, MAX_TILES)) {
+    const cap = t ? MAX_TILES_TEXT : MAX_TILES;
+    if (near.length > cap) partial = true;
+    for (const tile of near.slice(0, cap)) {
       const gj = await readShard(`${base}${tile.key}.json.gz`);
       if (!gj || !Array.isArray(gj.features)) throw new Error(`tile ${tile.key} unreadable`);
       for (const f of gj.features) if (keep(f)) hits.push(f);

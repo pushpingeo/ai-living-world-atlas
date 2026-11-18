@@ -1,21 +1,19 @@
-# Global Energy Monitor, Global Oil and Gas Extraction Tracker (GOGET). Requested by Rob, 18 Nov 2026.
-# Source: the .xlsx GEM emails after its download form. Licence: GEM states its tracker data is CC BY 4.0 unless
-# noted; check the file's About sheet for exceptions before publishing (atlas/files.py prints it).
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
 id: gem-goget
-title: Global Oil and Gas Extraction Tracker (extraction areas, development and discoveries)
+title: 'Global Oil and Gas Extraction Tracker (fields: extraction areas, development and discoveries)'
 publisher: Global Energy Monitor
 publisher_type: civil-society
-licence: "CC BY 4.0 (Global Energy Monitor tracker data, unless noted in the file)"
-citation: "Global Oil and Gas Extraction Tracker, Global Energy Monitor, March 2026 release"
-release: "March 2026"
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
 landing_page: https://globalenergymonitor.org/projects/global-oil-gas-extraction-tracker/
-abstract: >
-  Global Energy Monitor's project-level tracker of oil and gas extraction: operating extraction areas, areas under
-  development and discoveries in about 95 countries, with operator, owners, status, discovery and production-start
-  years, and production and reserves where known. One feature per field: its outline where GEM has mapped one, otherwise a point. Fields with production of
-  1 million boe/yr or more and/or reserves of 25 million boe.
-concepts_hint: [oil-gas]
-sheet: "Field-level main data"   # 7,673 fields; project-level and production/reserves sheets not included yet
-wkt_column: "Field outline (WKT)" # outline where GEM has one, otherwise the field's point
-simplify_deg: 0.0005              # ~50 m
-columns: []                       # empty: keep every column
+source: Global-Oil-and-Gas-Extraction-Tracker-March-2026.xlsx
+sheets:
+- Field-level main data
+wkt_column: Field outline (WKT)
+citation: Global Oil and Gas Extraction Tracker, Global Energy Monitor, March 2026 release
+release: March 2026
+concepts_hint:
+- oil-gas
+abstract: 'Global Energy Monitor''s project-level tracker of oil and gas extraction: operating fields, fields in development
+  and discoveries in about 95 countries, with operator, owners, status, discovery, FID and production-start years, basin and
+  blocks. One feature per field: its outline where GEM has mapped one, otherwise a point. Fields with production of 1 million
+  boe/yr or more and/or reserves of 25 million boe.'

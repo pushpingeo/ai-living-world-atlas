@@ -1,0 +1,16 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-chemical-plants
+title: Chemical plants (Global Chemicals Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-chemicals-tracker/
+source: Plant-level-data-Global-Chemicals-Tracker-November-2026-V1.xlsx
+sheets:
+- Plant Data
+coords_column: Coordinates
+citation: Global Chemicals Tracker, Global Energy Monitor, November 2026 (V1) release
+release: November 2026
+concepts_hint: []
+abstract: Global Energy Monitor's chemical plants (ammonia, methanol, olefins and others), with owner, status and location;
+  product capacities are in GEM's download.

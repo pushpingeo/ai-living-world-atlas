@@ -1,0 +1,16 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-gas-pipelines
+title: Gas pipelines (Global Gas Infrastructure Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+source: GEM-GGIT-Gas-Pipelines-2025-11.zip!GEM-GGIT-Gas-Pipelines-2025-11.gpkg
+simplify_deg: 0.001
+citation: Global Gas Infrastructure Tracker, Global Energy Monitor, November 2025 release
+release: November 2025
+concepts_hint:
+- pipeline
+- oil-gas
+abstract: Global Energy Monitor's gas transmission pipelines, by segment, with route, status (operating, construction, proposed,
+  shelved, cancelled), capacity, length, diameter, owners and start year. Routes simplified to about 100 m.

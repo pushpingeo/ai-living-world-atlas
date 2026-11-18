@@ -3,17 +3,211 @@ defaults:
   publisher_type: civil-society
 sources:
 - kind: record
-  id: gem-goget
-  title: Global Oil and Gas Extraction Tracker (extraction areas, development and discoveries)
+  id: gem-bioenergy
+  title: Bioenergy power plants (Global Bioenergy Power Tracker)
   publisher: Global Energy Monitor
   publisher_type: civil-society
-  abstract: 'Global Energy Monitor''s project-level tracker of oil and gas extraction: operating extraction areas, areas under
-    development and discoveries in about 95 countries, with operator, owners, status, discovery and production-start years,
-    and production and reserves where known. One feature per field: its outline where GEM has mapped one, otherwise a point.
-    Fields with production of 1 million boe/yr or more and/or reserves of 25 million boe. Release: March 2026. Hosted by the
-    atlas as a copy of the publisher''s download; cite as: Global Oil and Gas Extraction Tracker, Global Energy Monitor, March
-    2026 release.'
-  licence: CC BY 4.0 (Global Energy Monitor tracker data, unless noted in the file)
+  abstract: 'Global Energy Monitor''s bioenergy power units, with capacity, fuel, status, owners and start year. Release:
+    September 2026. 4,815 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Bioenergy
+    Power Tracker, Global Energy Monitor, September 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-bioenergy-power-tracker/
+  bbox:
+  - -158.1053
+  - -46.12
+  - 179.3878
+  - 66.4946
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-bioenergy/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-bioenergy-power-tracker/
+- kind: record
+  id: gem-cement-plants
+  title: Cement and concrete plants (Global Cement and Concrete Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s cement plants, with owner, capacity, production type, status and start year. Release:
+    July 2026. 3,884 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Cement and Concrete
+    Tracker, Global Energy Monitor, July 2026 (V1) release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-cement-concrete-tracker/
+  bbox:
+  - -123.0232
+  - -53.0924
+  - 178.41
+  - 69.321
+  geometry_type: point
+  concepts_hint: []
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-cement-plants/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-cement-concrete-tracker/
+- kind: record
+  id: gem-chemical-plants
+  title: Chemical plants (Global Chemicals Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s chemical plants (ammonia, methanol, olefins and others), with owner, status and location;
+    product capacities are in GEM''s download. Release: November 2026. 1,320 features. Hosted by the atlas as a copy of the
+    publisher''s download; cite as: Global Chemicals Tracker, Global Energy Monitor, November 2026 (V1) release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-chemicals-tracker/
+  bbox:
+  - -122.8291
+  - -52.9428
+  - 174.2845
+  - 66.0673
+  geometry_type: point
+  concepts_hint: []
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-chemical-plants/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-chemicals-tracker/
+- kind: record
+  id: gem-coal-mines
+  title: Coal mines, open and closed (Global Coal Mine Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s coal mines with production, reserves, coal type, mine type, status and owners. Open
+    and proposed mines and closed mines (marked in the ''sheet'' property). Release: August 2026. 7,138 features; left out:
+    6 records without a location. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Coal Mine Tracker,
+    Global Energy Monitor, August 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-coal-mine-tracker/
+  bbox:
+  - -149.26
+  - -53.0007
+  - 178.9297
+  - 78.1568
+  geometry_type: point
+  concepts_hint:
+  - mineral-extraction
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-coal-mines/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-coal-mine-tracker/
+- kind: record
+  id: gem-coal-plants
+  title: Coal power plants (Global Coal Plant Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s coal-fired power units of 30 MW and over, with capacity, status (operating, construction,
+    proposed, retired, cancelled), combustion technology, owners and start and retirement years. Release: July 2026. 14,674
+    features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Coal Plant Tracker, Global Energy
+    Monitor, July 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-coal-plant-tracker/
+  bbox:
+  - -158.108
+  - -51.546
+  - 177.4969
+  - 69.7045
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-coal-plants/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-coal-plant-tracker/
+- kind: record
+  id: gem-coal-terminals
+  title: Coal terminals (Global Coal Terminals Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s coal import and export terminals at ports, with capacity, status, type and owners. Release:
+    December 2024. 519 features; left out: 2 records without a location. Hosted by the atlas as a copy of the publisher''s
+    download; cite as: Global Coal Terminals Tracker, Global Energy Monitor, December 2024 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-coal-terminals-tracker/
+  bbox:
+  - -149.4305
+  - -43.6061
+  - 179.3671
+  - 72.8487
+  geometry_type: point
+  concepts_hint:
+  - port-airport
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-coal-terminals/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-coal-terminals-tracker/
+- kind: record
+  id: gem-gas-pipelines
+  title: Gas pipelines (Global Gas Infrastructure Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s gas transmission pipelines, by segment, with route, status (operating, construction,
+    proposed, shelved, cancelled), capacity, length, diameter, owners and start year. Routes simplified to about 100 m. Release:
+    November 2025. 3,534 features; left out: 712 records without a location. Hosted by the atlas as a copy of the publisher''s
+    download; cite as: Global Gas Infrastructure Tracker, Global Energy Monitor, November 2025 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+  bbox:
+  - -158.0934
+  - -54.8096
+  - 177.9518
+  - 71.7823
+  geometry_type: line
+  concepts_hint:
+  - pipeline
+  - oil-gas
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-gas-pipelines/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+- kind: record
+  id: gem-geothermal
+  title: Geothermal power plants (Global Geothermal Power Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s geothermal power units, with capacity, technology, status, owners and start year. Release:
+    March 2026. 835 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Geothermal Power
+    Tracker, Global Energy Monitor, March 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-geothermal-power-tracker/
+  bbox:
+  - -166.934
+  - -38.6672
+  - 176.7278
+  - 65.8906
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-geothermal/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-geothermal-power-tracker/
+- kind: record
+  id: gem-goget
+  title: 'Global Oil and Gas Extraction Tracker (fields: extraction areas, development and discoveries)'
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s project-level tracker of oil and gas extraction: operating fields, fields in development
+    and discoveries in about 95 countries, with operator, owners, status, discovery, FID and production-start years, basin
+    and blocks. One feature per field: its outline where GEM has mapped one, otherwise a point. Fields with production of
+    1 million boe/yr or more and/or reserves of 25 million boe. Release: March 2026. 7,075 features; left out: 598 records
+    without a location. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Oil and Gas Extraction
+    Tracker, Global Energy Monitor, March 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
   landing_page: https://globalenergymonitor.org/projects/global-oil-gas-extraction-tracker/
   bbox:
   - -152.129
@@ -25,7 +219,230 @@ sources:
   - oil-gas
   endpoints:
   - protocol: geojson
-    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-goget.geojson
-    format: GeoJSON
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-goget/index.json
+    format: GeoJSON tiles
   - protocol: landing
     url: https://globalenergymonitor.org/projects/global-oil-gas-extraction-tracker/
+- kind: record
+  id: gem-hydropower
+  title: Hydropower plants (Global Hydropower Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s hydropower plants of 75 MW and over (plus below-threshold plants, marked in the ''sheet''
+    property), with capacity, technology, river, status, owners and start year. Release: March 2026. 7,023 features. Hosted
+    by the atlas as a copy of the publisher''s download; cite as: Global Hydropower Tracker, Global Energy Monitor, March
+    2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-hydropower-tracker/
+  bbox:
+  - -152.895
+  - -50.2128
+  - 178.1018
+  - 70.372
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-hydropower/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-hydropower-tracker/
+- kind: record
+  id: gem-iron-ore-mines
+  title: Iron ore mines (Global Iron Ore Mines Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s iron ore mines, with owner, status, capacity, production and reserves where known. Release:
+    September 2026. 980 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Iron Ore Mines
+    Tracker, Global Energy Monitor, September 2026 (V1) release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker/
+  bbox:
+  - -116.3047
+  - -41.7402
+  - 174.7356
+  - 71.337
+  geometry_type: point
+  concepts_hint:
+  - mineral-extraction
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-iron-ore-mines/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-iron-ore-mines-tracker/
+- kind: record
+  id: gem-lng-terminals
+  title: LNG import and export terminals (Global Gas Infrastructure Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s LNG import and export terminals, by unit, with status, capacity, owners, floating or
+    onshore, and start year. Release: October 2026. 1,268 features. Hosted by the atlas as a copy of the publisher''s download;
+    cite as: Global Gas Infrastructure Tracker, Global Energy Monitor, October 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+  bbox:
+  - -158.0636
+  - -41.1153
+  - 174.0348
+  - 73.1536
+  geometry_type: point
+  concepts_hint:
+  - oil-gas
+  - port-airport
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-lng-terminals/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+- kind: record
+  id: gem-nuclear
+  title: Nuclear power plants (Global Nuclear Power Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s nuclear power units, with capacity, reactor type, status, owners and start and retirement
+    years. Release: August 2026. 1,825 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global
+    Nuclear Power Tracker, Global Energy Monitor, August 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-nuclear-power-tracker/
+  bbox:
+  - -147.0616
+  - -33.9687
+  - 170.3011
+  - 69.9963
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-nuclear/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-nuclear-power-tracker/
+- kind: record
+  id: gem-oil-gas-plants
+  title: Oil and gas power plants (Global Oil and Gas Plant Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s oil- and gas-fired power plants by unit, with capacity, fuel, technology, status, owners
+    and start year. Includes sub-threshold units (marked in the ''sheet'' property). Release: August 2026. 15,203 features.
+    Hosted by the atlas as a copy of the publisher''s download; cite as: Global Oil and Gas Plant Tracker, Global Energy Monitor,
+    August 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-oil-gas-plant-tracker/
+  bbox:
+  - -171.8845
+  - -51.6675
+  - 178.456
+  - 70.9952
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-oil-gas-plants/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-oil-gas-plant-tracker/
+- kind: record
+  id: gem-oil-ngl-pipelines
+  title: Oil and NGL pipelines (Global Oil Infrastructure Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s crude oil, refined products and NGL pipelines, by segment, with route, status, capacity,
+    length, owners and start year. Routes simplified to about 100 m. Release: June 2026. 1,555 features; left out: 371 records
+    without a location. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Oil Infrastructure Tracker,
+    Global Energy Monitor, June 2026 release (corrected July 2026).'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-oil-infrastructure-tracker/
+  bbox:
+  - -152.0516
+  - -52.2156
+  - 174.3614
+  - 73.5099
+  geometry_type: line
+  concepts_hint:
+  - pipeline
+  - oil-gas
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-oil-ngl-pipelines/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-oil-infrastructure-tracker/
+- kind: record
+  id: gem-solar
+  title: Solar farms, utility-scale (Global Solar Power Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s utility-scale solar phases (1 MW and over), with capacity, technology, status, owners
+    and start year. Release: February 2026. 85,208 features; left out: 18,732 records excluded (sourced from TransitionZero''s
+    Solar Asset Mapper under CC BY-NC 4.0, which doesn''t allow commercial use). Hosted by the atlas as a copy of the publisher''s
+    download; cite as: Global Solar Power Tracker, Global Energy Monitor, February 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-solar-power-tracker/
+  bbox:
+  - -175.3292
+  - -53.1502
+  - 179.2125
+  - 68.3784
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-solar/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-solar-power-tracker/
+- kind: record
+  id: gem-steel-plants
+  title: Iron and steel plants (Global Iron and Steel Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s iron and steel plants, with owner, status, main production equipment and start year;
+    capacities by plant are in GEM''s download. Release: September 2026. 1,293 features. Hosted by the atlas as a copy of
+    the publisher''s download; cite as: Global Iron and Steel Tracker, Global Energy Monitor, September 2026 (V1) release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-iron-steel-tracker/
+  bbox:
+  - -123.1636
+  - -37.8314
+  - 174.7281
+  - 67.1891
+  geometry_type: point
+  concepts_hint: []
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-steel-plants/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-iron-steel-tracker/
+- kind: record
+  id: gem-wind
+  title: Wind farms (Global Wind Power Tracker)
+  publisher: Global Energy Monitor
+  publisher_type: civil-society
+  abstract: 'Global Energy Monitor''s onshore and offshore wind farm phases of 10 MW and over (plus below-threshold phases,
+    marked in the ''sheet'' property), with capacity, status, installation type, owners and start year. Release: February
+    2026. 35,089 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Global Wind Power Tracker,
+    Global Energy Monitor, February 2026 release.'
+  licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+  landing_page: https://globalenergymonitor.org/projects/global-wind-power-tracker/
+  bbox:
+  - -175.0353
+  - -53.7021
+  - 178.1714
+  - 71.5402
+  geometry_type: point
+  concepts_hint:
+  - power-plant
+  - offshore-wind-site
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/gem-wind/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://globalenergymonitor.org/projects/global-wind-power-tracker/

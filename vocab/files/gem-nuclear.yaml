@@ -1,0 +1,16 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-nuclear
+title: Nuclear power plants (Global Nuclear Power Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-nuclear-power-tracker/
+source: Global-Nuclear-Power-Tracker-August-2026.xlsx
+sheets:
+- Data
+citation: Global Nuclear Power Tracker, Global Energy Monitor, August 2026 release
+release: August 2026
+concepts_hint:
+- power-plant
+abstract: Global Energy Monitor's nuclear power units, with capacity, reactor type, status, owners and start and retirement
+  years.

@@ -1,0 +1,16 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-steel-plants
+title: Iron and steel plants (Global Iron and Steel Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-iron-steel-tracker/
+source: Plant-level data - Global Iron and Steel Tracker - September 2026 (V1).xlsx
+sheets:
+- Plant data
+coords_column: Coordinates
+citation: Global Iron and Steel Tracker, Global Energy Monitor, September 2026 (V1) release
+release: September 2026
+concepts_hint: []
+abstract: Global Energy Monitor's iron and steel plants, with owner, status, main production equipment and start year; capacities
+  by plant are in GEM's download.

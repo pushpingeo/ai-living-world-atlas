@@ -1,0 +1,16 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-oil-ngl-pipelines
+title: Oil and NGL pipelines (Global Oil Infrastructure Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-oil-infrastructure-tracker/
+source: GEM-GOIT-Oil-NGL-Pipelines-2026-06-corrected.zip!GEM-GOIT-Oil-NGL-Pipelines-2026-07-21.gpkg
+simplify_deg: 0.001
+citation: Global Oil Infrastructure Tracker, Global Energy Monitor, June 2026 release (corrected July 2026)
+release: June 2026
+concepts_hint:
+- pipeline
+- oil-gas
+abstract: Global Energy Monitor's crude oil, refined products and NGL pipelines, by segment, with route, status, capacity,
+  length, owners and start year. Routes simplified to about 100 m.

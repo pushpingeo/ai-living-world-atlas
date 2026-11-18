@@ -1,0 +1,15 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-coal-terminals
+title: Coal terminals (Global Coal Terminals Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-coal-terminals-tracker/
+source: Global-Coal-Terminals-Tracker-December-2024.xlsx
+sheets:
+- Terminals
+citation: Global Coal Terminals Tracker, Global Energy Monitor, December 2024 release
+release: December 2024
+concepts_hint:
+- port-airport
+abstract: Global Energy Monitor's coal import and export terminals at ports, with capacity, status, type and owners.

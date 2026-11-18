@@ -1,0 +1,17 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-lng-terminals
+title: LNG import and export terminals (Global Gas Infrastructure Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/
+source: GEM-GGIT-LNG-Terminals-2026-10.xlsx
+sheets:
+- LNG Terminals
+citation: Global Gas Infrastructure Tracker, Global Energy Monitor, October 2026 release
+release: October 2026
+concepts_hint:
+- oil-gas
+- port-airport
+abstract: Global Energy Monitor's LNG import and export terminals, by unit, with status, capacity, owners, floating or onshore,
+  and start year.

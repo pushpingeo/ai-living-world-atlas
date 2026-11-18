@@ -1,0 +1,15 @@
+# Written 18 Nov 2026 from Rob's GEM download (gem-data.zip). Licence checked in each file's About sheet.
+id: gem-geothermal
+title: Geothermal power plants (Global Geothermal Power Tracker)
+publisher: Global Energy Monitor
+publisher_type: civil-society
+licence: CC BY 4.0 (Global Energy Monitor; stated in the file's About sheet)
+landing_page: https://globalenergymonitor.org/projects/global-geothermal-power-tracker/
+source: Geothermal-Power-Tracker-March-2026-Final.xlsx
+sheets:
+- Data
+citation: Global Geothermal Power Tracker, Global Energy Monitor, March 2026 release
+release: March 2026
+concepts_hint:
+- power-plant
+abstract: Global Energy Monitor's geothermal power units, with capacity, technology, status, owners and start year.

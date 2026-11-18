@@ -33,6 +33,19 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (18 Nov) **Global Energy Monitor: 18 trackers as hosted datasets** (all CC BY 4.0, stated in each file; citation in
+  every `fetch_features` `source`). Oil and gas extraction fields (outlines where mapped), gas pipelines and oil/NGL
+  pipelines (routes, simplified to ~100 m), LNG terminals, oil and gas plants, coal plants, coal mines, coal
+  terminals, wind, utility-scale solar, hydropower, geothermal, bioenergy, nuclear, iron and steel plants, cement
+  plants, chemical plants, iron ore mines. Search with `text` "Global Energy Monitor" or the tracker name, or by
+  concept (`pipeline`, `power-plant`, `oil-gas`, `mineral-extraction`, `port-airport`).
+  - Hosted files are now **tiles**: the `geojson` endpoint URL ends in `index.json`, and `fetch_features` reads only
+    the tiles near the area (all tiles for a `text` search; up to 40 nearest otherwise, with `matched_is_partial`).
+  - **Left out:** solar rows sourced from TransitionZero (CC BY-NC 4.0, 18,732 rows); the integrated power tracker
+    (repeats the individual trackers and carries the same non-commercial part); the methane emitters tracker (plumes
+    are CC BY-NC-SA); coal mine boundaries (no licence stated); ownership, finance and LNG-carrier tables (not maps).
+  - The extraction tracker's dataset id changes with this (its record is regenerated). Field names are unchanged.
+
 - (18 Nov) **Hosted download datasets: new endpoint protocol `geojson`.** Some sources only offer a download (Global
   Energy Monitor's trackers come as an .xlsx by request form). The atlas converts them (`atlas/files.py`) and hosts
   one GeoJSON at `…/data/f/<id>.geojson`; the dataset gets a `geojson` endpoint with `query` and `download`.
