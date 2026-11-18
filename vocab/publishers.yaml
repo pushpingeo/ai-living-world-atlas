@@ -1,0 +1,55 @@
+# Publisher registry: reviewed by Rob. Design and matching rules: docs/publisher-registry-design.md, atlas/publishers.py.
+# Weekly candidates arrive as a GitHub issue; ticked ones are added here by the publishers workflow.
+# Hand edits are fine: keep ids stable (Tobler may store them) and never reuse one.
+publishers:
+# Seeded 18 Nov from the bodies Rob named (BGS, Ordnance Survey, NSTA), plus the platform OS uses.
+- id: bgs
+  name: British Geological Survey
+  country: GB
+  type: public-body
+  role: geological-survey
+  trusted: true
+  match:
+    hosts: [bgs.ac.uk]
+    names: [British Geological Survey, British Geological Survey (BGS)]
+  evidence: https://www.bgs.ac.uk/
+  added: 2026-11-18
+  approved_by: rob (named in chat)
+- id: nsta
+  name: North Sea Transition Authority
+  country: GB
+  type: public-body
+  role: energy-regulator
+  trusted: true
+  match:
+    agol_orgs: [OZMfUznmLTnWccBc]
+    names: [North Sea Transition Authority, NSTA, Oil and Gas Authority]
+  evidence: https://www.nstauthority.co.uk/data-and-insights/
+  added: 2026-11-18
+  approved_by: rob (named in chat)
+- id: esri-uk
+  name: Esri UK
+  country: GB
+  type: business
+  hosting_only: true   # hosts OS Open Data for Ordnance Survey, and its own copies of others' data
+  trusted: false
+  match:
+    agol_orgs: [qHLhLQrcvEnxjtPr]
+  added: 2026-11-18
+  approved_by: rob (named in chat)
+- id: ordnance-survey
+  name: Ordnance Survey
+  country: GB
+  type: public-body
+  role: national-mapping
+  trusted: true
+  match:
+    hosts: [os.uk, ordnancesurvey.co.uk]
+    hosted:
+    - agol_org: qHLhLQrcvEnxjtPr   # OS Open Data published by Esri UK
+      via: esri-uk
+      credits: [Contains OS data]
+    names: [Ordnance Survey]
+  evidence: https://www.ordnancesurvey.co.uk/products/os-open-data
+  added: 2026-11-18
+  approved_by: rob (named in chat)

@@ -33,6 +33,15 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (18 Nov, atlas change, **planned**, not yet live) **Publisher registry and trusted publishers**
+  (`docs/publisher-registry-design.md`). When it ships, all additive except one:
+  - `find_datasets` and `get_dataset` gain `publisher_id` (when matched), `trusted` (true/false) and, for data a
+    partner hosts, `hosted_by` (e.g. Ordnance Survey data hosted by Esri UK). `find_datasets` gains `trusted_only`;
+    trusted datasets get a small ranking boost.
+  - **Changed text:** `publisher` shows the registry name when matched ("British Geological Survey" rather than
+    "British Geological Survey (BGS)"); `get_dataset` keeps the crawled credit as `publisher_credit`.
+  - New D1 columns, so one full reload (search keeps working during it).
+
 - (18 Nov, atlas change, deployed ~14:38 UTC) **Spatial index for `find_datasets`.** Area and concept searches now read a quadtree cell
   key table instead of scanning the extent indexes: a 5 km search reads ~25k rows rather than ~270k (plus a count of
   as many again), and a concept search reads only that concept's datasets in the area (Gulf of Mexico oil-gas: ~1k

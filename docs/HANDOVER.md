@@ -208,10 +208,12 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
 9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
    `runs/published.txt`, tagged for $0.14). NSTA status words done. Text search done 18 Nov (FTS5). Spatial index
    done 18 Nov (above). Name index: waiting on Rob's licence call; names only, no outlines.
-   - **Trusted services:** Rob wants a couple of hundred trusted publishers, national agencies included, kept
-     semi-maintainable. Next: the publisher registry, **design in `docs/publisher-registry-design.md`, waiting on
-     Rob's four answers** (approval by issue checkboxes, registry name in `publisher`, what "trusted" means,
-     licence defaults). Then `trusted`/`trusted_only` and licence classes in one release (one full reload).
+   - **Trusted services / publisher registry** (`docs/publisher-registry-design.md`, Rob's decisions 18 Nov):
+     stage 1 built: `vocab/publishers.yaml` (seeded: BGS, NSTA, Ordnance Survey hosted by Esri UK, Esri UK as a
+     platform), `atlas/publishers.py`, and the `publishers` workflow (weekly candidate issue, Rob ticks and closes,
+     `apply` writes the registry). First issue: 250 candidates. **Stage 2 waits for Rob to close it**: registry
+     applied at publish time and in D1 (`publisher_id`, `trusted`, `hosted_by`, `publisher_credit`,
+     `trusted_only`), with the licence classes in the same full reload. No licence defaults from the registry.
 10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into gzipped GeoJSON tiles
     in `files/<id>/` (10° cells plus `index.json`, published at `data/f/<id>/`) and a catalogue record in
     `vocab/seeds/files.yaml`; the `spike-files` wave (first in `runs/published.txt`) lists them, and `fetch_features`

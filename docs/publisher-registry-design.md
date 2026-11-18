@@ -93,12 +93,41 @@ About a day for the registry, matcher and weekly issue workflow; half a day for 
 ranking boost; half a day for licence classes (same release). The first 250-candidate list comes out of the first
 workflow run.
 
-## Decisions for Rob
+## Decisions (Rob, 18 Nov)
 
-1. **Approval by GitHub issue checkboxes** (proposed), or would you rather edit a file?
-2. **Should `publisher` show the registry name** when matched (original kept in `get_dataset`), or stay as crawled?
-3. **Trusted means "authoritative body, own servers"** (host or org match only). Agreed? It leaves Esri copies and
-   name-only matches out.
-4. **Licence defaults from the registry** (for example, a body whose published policy is OGL for everything):
-   leave out for now? It would turn "not stated" into an inferred licence, which has commercial consequences, so I'd
-   only do it per publisher, with the policy URL as evidence and labelled "inferred", as for US federal works.
+1. **Approval by GitHub issue checkboxes.** Built: `.github/workflows/publishers.yml`.
+2. **`publisher` shows the registry name** when matched; `get_dataset` keeps the crawled credit as `publisher_credit`.
+3. **Trusted = an authoritative body publishing from its own servers, its own ArcGIS Online organisation, or a
+   registered hosting arrangement with a partner.** Rob's examples: OS Open Data published by Esri UK, and NSTA.
+   - NSTA has its own ArcGIS Online organisation (`OZMfUznmLTnWccBc`, 191 datasets): an `agol_orgs` match.
+   - OS Open Data sits in Esri UK's organisation (`qHLhLQrcvEnxjtPr`), which also holds Esri UK's own copies (COVID
+     figures, NOAA). A `hosted` match needs both the partner's organisation and the publisher's credit ("Contains OS
+     data"), so OS OpenMap Local and Zoomstack match and Esri UK's own layers don't. Esri UK is registered as a
+     platform (`hosting_only`): never credited, never trusted.
+   - The same rule covers shared government organisations (the Defra group organisation holds Natural England,
+     Environment Agency and others) and platforms such as govConnect and HALE»connect. The weekly list proposes
+     these as "hosted" candidates.
+4. **No licence defaults from the registry** for now.
+
+## Built (stage 1, 18 Nov)
+
+- `vocab/publishers.yaml`, seeded with the bodies Rob named: BGS (host bgs.ac.uk, 352 datasets), NSTA (its own
+  organisation, 191), Ordnance Survey (hosted by Esri UK, 5; its own APIs need a key, so that's all we have) and
+  Esri UK as a platform.
+- `atlas/publishers.py`: the matcher, the candidate list (whole hostnames, not registered domains: wa.gov.au is dozens
+  of agencies; the same body on several hosts is merged into one candidate) and `apply`.
+- The `publishers` workflow: a weekly issue (Mondays, top 20, only if the last one is closed) and `apply` when Rob
+  closes it. The first issue has 250 candidates, in sections: national agencies and international bodies,
+  other government, hosted on a platform, everyone else, platforms.
+- Tested locally: ticking 8 candidates added 8 entries (Met Office, Geoscience Australia, EEA, Environment Agency,
+  Natural England...), declined the other 242, and took matched datasets from 545 to 3,441; the next list left them out.
+
+## Next (stage 2), once the first issue is closed
+
+Apply the registry at publish time and in D1: `publisher` from the registry, `publisher_id`, `trusted`, `hosted_by`
+and `publisher_credit`; `trusted_only` and a ranking boost in `find_datasets`. One full reload, with the licence
+classes from `docs/trusted-services-design.md` in the same release. Contract note already in `docs/mcp-tools.md`.
+
+Known gap: some data in shared organisations carries the organisation's name as its credit (144 Natural England
+layers credited "Defra group ArcGIS Online organisation"), so a credit-based hosted match can't place them. These
+stay unmatched for now; matching on the service's item owner or title would be the next step.
