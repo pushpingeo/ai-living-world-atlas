@@ -99,7 +99,7 @@ jobs:
           # GEM extraction tracker (hosted file)
           time.sleep(1.5)
           r, status, s = call("find_datasets", {"bbox": [-4.6, 59.5, 1.5, 61.5], "text": "Global Energy Monitor extraction", "limit": 5})
-          gem = [x for x in (r or {}).get("results", []) if "Global Energy Monitor" in (x.get("publisher") or "")]
+          gem = [x for x in (r or {}).get("results", []) if "Extraction Tracker" in (x.get("title") or "")]
           print(f"find_datasets [GEM extraction, Shetland]: {status}, {[x['title'][:50] for x in gem]}")
           if gem:
               r2, status, s = call("fetch_features", {"id": gem[0]["id"], "bbox": [-4.6, 59.5, 1.5, 61.5], "limit": 20})
