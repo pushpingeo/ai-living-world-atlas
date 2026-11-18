@@ -71,9 +71,11 @@ Workspace notes:
 | Global backbones (`spike-global`) | 46.5k | 11.4k | UNEP-WCMC, GEM, GEBCO, Copernicus/EEA, ESA, GHSL, HydroSHEDS, USGS, FAO, public Living Atlas |
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
+| Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **256k passing datasets**, all tagged.
+- The viewer and the MCP server hold about **264k passing datasets**, all tagged (18 Nov).
 - Tagging spend is **$28.46** in total: UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
@@ -164,13 +166,11 @@ Workspace notes:
    (`docs/viewer-data-size.md`). Not yet tested in Safari or Firefox.
 7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
    sweep) until shards finish.
-8. **Africa.** Crawled 17 Nov (`results/spike-africa`: 17.6k datasets, 3,258 passing), **not published**.
-   - GNPC (Ghana), Kenya's State Department for Petroleum and ANPG's ArcGIS Online services show in public listings
-     but answer "Token Required": not open, can't be indexed without credentials.
-   - ONHYM (Morocco) and the Petroleum Authority of Uganda are open but fail the quality bar (no descriptions,
-     code-like titles), so the petroleum layers wouldn't appear.
-   - Needs Rob's call on letting authoritative national sources pass without a description (with a humanised title)
-     before publishing. Scoping: `docs/spikes/africa-scoping.md`.
+8. **Africa.** Published 18 Nov: 8,688 passing datasets (tagged for $0.76), after Rob's national-authority rule.
+   Includes ONHYM (Morocco), the Petroleum Authority of Uganda (slow server, ~30 s fetches) and ANPG's own server.
+   GNPC (Ghana), Kenya's petroleum department and ANPG's ArcGIS Online services need a login token, so they're out.
+   Nigeria and Tanzania still need domain discovery (`docs/spikes/africa-scoping.md`). FNDS (Mozambique) brings some
+   untidy work layers ("xtemp") under the new rule.
 9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
    `runs/published.txt`, tagged for $0.14). NSTA status words done. Trusted services: design only, waiting on Rob.
    Still open from Tobler's list: text search that holds up world-wide (D1 overload) and the name index (licence

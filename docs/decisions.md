@@ -274,3 +274,10 @@ seeded petroleum bodies don't come through. GNPC, Kenya's State Department for P
 services answer "Token Required" (listed publicly, not open). ONHYM and the Petroleum Authority of Uganda are open
 but fail the quality bar (no descriptions, code-like titles). Not tagged, not published. Waiting on Rob's call on
 letting authoritative national sources pass without a description.
+
+## 2026-11-18: national authorities pass without a description (Rob's call); Africa published
+Central-government and national public-body layers that answer and carry no junk flags now pass with a total of
+45+ even with no description, and code-like or all-caps titles are tidied (`authority_pass` in quality.py). It runs
+at scoring and again at merge, so a remerge rescores an old crawl. Local government is excluded. Africa was
+remerged (3,258 to 8,688 passing), tagged ($0.76) and published. Other regions pick the rule up when next crawled
+or remerged. For the US that will add many federal layers with sparse descriptions; worth a look before doing it.
