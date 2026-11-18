@@ -469,11 +469,16 @@ async function fileFeatures(e, d, a, v, limit) {
     const near = idx.tiles.filter((x) => !(x.bbox[0] > v[2] || x.bbox[2] < v[0] || x.bbox[1] > v[3] || x.bbox[3] < v[1]));
     const cap = t ? MAX_TILES_TEXT : MAX_TILES;
     if (near.length > cap) partial = true;
-    for (const tile of near.slice(0, cap)) {
-      const gj = await readShard(`${base}${tile.key}.json.gz`);
-      if (!gj || !Array.isArray(gj.features)) throw new Error(`tile ${tile.key} unreadable`);
-      for (const f of gj.features) if (keep(f)) hits.push(f);
-      if (hits.length >= limit * 4 && !a.text) { partial = partial || tile !== near[near.length - 1]; break; }
+    // tiles in batches of 12 at a time: a world-wide text search reads ~200 small tiles (21 s one by one, cold)
+    const todo = near.slice(0, cap);
+    for (let i = 0; i < todo.length; i += 12) {
+      const batch = todo.slice(i, i + 12);
+      const got = await Promise.all(batch.map((tile) => readShard(`${base}${tile.key}.json.gz`)));
+      got.forEach((gj, j) => {
+        if (!gj || !Array.isArray(gj.features)) throw new Error(`tile ${batch[j].key} unreadable`);
+        for (const f of gj.features) if (keep(f)) hits.push(f);
+      });
+      if (hits.length >= limit * 4 && !t) { partial = partial || i + 12 < near.length; break; }
     }
   } else {
     const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(25000) });
