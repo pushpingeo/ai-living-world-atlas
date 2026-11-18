@@ -267,3 +267,10 @@ uses. Lesson: a viewer data change is an MCP change and goes through docs/mcp-to
   title are split (444 across all waves; the original id keeps the live one); 172 titles gained a status word. Not
   "historic", "former" or "draft": in service names those mostly mean heritage, old boundaries or a work folder.
 - **Trusted services, key-gated APIs, Esri copies:** design only, `docs/trusted-services-design.md`.
+
+## 2026-11-18 01:00: Africa wave held back
+The 01:00 check found what the 22:00 review did: `results/spike-africa` has 17.6k datasets, 3,258 passing, but the
+seeded petroleum bodies don't come through. GNPC, Kenya's State Department for Petroleum and ANPG's ArcGIS Online
+services answer "Token Required" (listed publicly, not open). ONHYM and the Petroleum Authority of Uganda are open
+but fail the quality bar (no descriptions, code-like titles). Not tagged, not published. Waiting on Rob's call on
+letting authoritative national sources pass without a description.
