@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (17 Nov 2026)
+# AI Living World Atlas: handover (18 Nov 2026, evening)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -37,7 +37,8 @@ GitHub secrets (Rob set them; never print or handle the values):
 - `CLOUDFLARE_API_TOKEN`: D1 edit, Workers and R2 edit.
 - `CLOUDFLARE_ACCOUNT_ID`
 
-Cloudflare is on Workers Paid ($5/month); Rob may switch it off after the main build.
+Cloudflare is on Workers Paid ($5/month); Rob may switch it off after the main build. **Since the spatial index (18 Nov)
+the D1 database is ~660 MB, over the free plan's 500 MB**: switching Paid off needs a trim first (see decisions.md).
 
 ## How it runs
 
@@ -117,6 +118,33 @@ Workspace notes:
   check (2.0.0 first; advertised GetMap/GetFeature address; upper-case parameters) took WFS sample failures from
   86% to under 2%.
 
+## Spatial index (18 Nov, evening)
+
+`find_datasets` now reads a quadtree cell key table, `ds_cell` (1.88M keys: home country + cell, and concept + home +
+cell), instead of scanning the extent indexes. Built in `atlas/api_data.py` (`cell_keys`), read by `cellSelect` in
+the Worker: keep the two in step, and bump `CELLS_VERSION` if keys are made differently (forces a full reload).
+Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index`):
+
+| Search | Before | Now |
+|---|---|---|
+| Edinburgh 5 km | 271k (+ count) | 25k |
+| Edinburgh road, query, line | 264k | 330 |
+| Gulf of Mexico, oil-gas | 264k | 849 |
+| US protected-area | 264k | 10k |
+| Nigeria, no text | 264k | 17k |
+| UK, no text | 36k + 160k count | 84k |
+
+- Area and concept searches return every match as a slim row, ranked and folded in the Worker; full rows are read for
+  the kept 100 only. `matches` is exact (up to 20,000).
+- Large areas without a concept: the Worker counts the area's keys (up to 20k). Few: cells. Many: the 60k best-scored
+  datasets world-wide from the rank index (which now covers extent and home), as a sample (`matches_capped`).
+- Text (FTS) and `include_other_countries` use the old paths.
+- `datasets` is WITHOUT ROWID. Full reload: 338 MB of SQL, 84 pieces, ~8 minutes, tables swapped at the end.
+- Testing: rebuild the published data with `bash .github/actions-fetch.sh` (2.5 min), `python -m atlas.api_data`,
+  load the SQL into SQLite and copy the file over the local D1 file under `worker/.wrangler/state/v3/d1/`, then
+  `wrangler dev --local` (set `database_id` to any UUID and put `ATLAS_KEY` in `worker/.dev.vars`; both are
+  ignored by git). Local D1 reports the same rows_read as the live one.
+
 ## Search changes for Tobler (17 Nov, from the Tobler chat)
 
 - `find_datasets` returns each dataset's `geometry` (point/line/polygon from the ArcGIS crawl; known for 128k of 256k, most WFS say only "features") and takes `geometry` to filter (unknowns kept).
@@ -178,10 +206,12 @@ Workspace notes:
    untidy work layers ("xtemp") under the new rule. The rule is **a trial for Africa only** (Rob, 18 Nov): judge
    whether it helps or adds noise before extending it (`AUTHORITY_PASS_COUNTRIES` in quality.py).
 9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
-   `runs/published.txt`, tagged for $0.14). NSTA status words done. Trusted services: design only, waiting on Rob.
-   Text search done 18 Nov (FTS5; world-wide searches read tens to thousands of rows, not 265k). Still heavy:
-   small-area searches (~270k rows read) and a concept over a large area; next fix is a spatial cell key plus a
-   concept table. Name index: waiting on Rob's licence call; names only, no outlines.
+   `runs/published.txt`, tagged for $0.14). NSTA status words done. Text search done 18 Nov (FTS5). Spatial index
+   done 18 Nov (above). Name index: waiting on Rob's licence call; names only, no outlines.
+   - **Trusted services:** Rob wants a couple of hundred trusted publishers, national agencies included, kept
+     semi-maintainable. Next: the publisher registry, **design in `docs/publisher-registry-design.md`, waiting on
+     Rob's four answers** (approval by issue checkboxes, registry name in `publisher`, what "trusted" means,
+     licence defaults). Then `trusted`/`trusted_only` and licence classes in one release (one full reload).
 10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into gzipped GeoJSON tiles
     in `files/<id>/` (10° cells plus `index.json`, published at `data/f/<id>/`) and a catalogue record in
     `vocab/seeds/files.yaml`; the `spike-files` wave (first in `runs/published.txt`) lists them, and `fetch_features`

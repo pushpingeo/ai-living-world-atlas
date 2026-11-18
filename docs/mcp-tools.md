@@ -33,7 +33,7 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
-- (18 Nov, atlas change) **Spatial index for `find_datasets`.** Area and concept searches now read a quadtree cell
+- (18 Nov, atlas change, deployed ~14:38 UTC) **Spatial index for `find_datasets`.** Area and concept searches now read a quadtree cell
   key table instead of scanning the extent indexes: a 5 km search reads ~25k rows rather than ~270k (plus a count of
   as many again), and a concept search reads only that concept's datasets in the area (Gulf of Mexico oil-gas: ~1k
   rather than 264k). Details and measurements in `docs/decisions.md`. No input or output field changes. What can differ:
