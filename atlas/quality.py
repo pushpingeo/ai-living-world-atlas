@@ -96,6 +96,41 @@ def codelike(title: str) -> bool:
     return (not t) or (" " not in t and ("_" in t or t.isupper() or len(t) <= 3))
 
 
+# National authorities pass without a description (Rob, 18 Nov 2026): a national government or national public body's
+# live layer is worth listing even when the publisher wrote nothing about it (ONHYM's and Uganda's petroleum layers).
+# Junk flags and failed checks still keep a layer out. Local government is not included.
+AUTHORITATIVE = {"central-gov", "public-body"}
+AUTHORITATIVE_MIN_TOTAL = 45
+
+
+def tidy_title(title: str) -> str:
+    """PETROLEUM_AGREEMENTS_OFFSHORE -> Petroleum agreements offshore; UG_Licence_Areas_2023 -> UG licence areas 2023."""
+    t = re.sub(r"^[A-Za-z0-9]+:", "", (title or "").strip())  # workspace prefix
+    t = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", t)  # camelCase
+    words = [w for w in re.split(r"[_\-.\s]+", t) if w]
+    if not words:
+        return title
+    out = [w if (w.isupper() and len(w) <= 3) or any(ch.isdigit() for ch in w) else w.lower() for w in words]
+    out[0] = out[0][:1].upper() + out[0][1:]
+    return " ".join(out)
+
+
+def authority_pass(r: dict) -> dict:
+    """Apply the national-authority rule to an already-scored layer row (also used when a wave is remerged)."""
+    if r.get("q_pass"):
+        return r
+    flags = r.get("q_flags")
+    flags = list(flags) if flags is not None else []
+    if (r.get("publisher_type_resolved") in AUTHORITATIVE and not flags and r.get("check_status") != "fail"
+            and (r.get("q_total") or 0) >= AUTHORITATIVE_MIN_TOTAL):
+        r["q_pass"] = True
+        r["q_pass_rule"] = "national-authority"
+        dt = r.get("display_title") or ""
+        if r.get("q_title_codelike") or codelike(dt) or (dt.isupper() and len(dt) > 12):
+            r["display_title"] = tidy_title(r.get("display_title") or r.get("title") or "")
+    return r
+
+
 def score(row: dict) -> dict:
     """row: a layer dict with crawl + check info. Returns score components and flags."""
     ptype = publisher_override(row.get("service_url", "")) or row.get("publisher_type") or "unknown"
@@ -128,8 +163,9 @@ def score(row: dict) -> dict:
         flags.append("demo-data")
     total = authority + metadata + liveness + licence
     passes = total >= 60 and not flags and chk != "fail" and m_abs >= 8 and not codelike(title)
-    return {
+    return authority_pass({
         "q_authority": authority, "q_metadata": metadata, "q_liveness": liveness, "q_licence": licence,
         "q_total": total, "q_flags": flags, "q_pass": passes, "publisher_type_resolved": ptype,
         "display_title": title, "q_open_licence": bool(OPEN_LICENCES.search(lic)), "q_abstract_len": len(abstract), "q_title_codelike": codelike(title),
-    }
+        "q_pass_rule": "bar" if passes else "", "check_status": chk,
+    })

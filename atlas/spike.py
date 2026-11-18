@@ -307,6 +307,8 @@ def _to_geo(df, bbox_col):
 def write_outputs(out: Path, rows, svc_status, root_status, portal_status, http_stats, log, args, secs):
     import pandas as pd
 
+    from .quality import authority_pass
+    rows = [authority_pass(dict(r)) for r in rows]  # rows scored by older code (remerge) get the current rule
     df = pd.DataFrame(rows)
     ds = pd.DataFrame()
     if len(df):
