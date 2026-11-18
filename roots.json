@@ -1,0 +1,716 @@
+[
+ {
+  "root": "https://cadastre.mines.gov.gn/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 218,
+  "n_services": 1
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/374a99fc76574f72bb8c71af7b428d0a/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Unable to generate token with the credentials provided with username: osgur.mcdermott.long_UNEP_WCMC and sou",
+  "ms": 245,
+  "n_services": 0
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/8a8d4e24683a46e6b039aea78c8af20f/rest/services",
+  "status": 200,
+  "error": "{'code': 400, 'message': 'No proxy information found', 'details': []}",
+  "ms": 383,
+  "n_services": 0
+ },
+ {
+  "root": "https://miningcadastre.minerals.go.ug/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 326,
+  "n_services": 1
+ },
+ {
+  "root": "https://bgismaps.sanbi.org/server/rest/services",
+  "status": 403,
+  "error": "HTTP 403",
+  "ms": 289,
+  "n_services": 0
+ },
+ {
+  "root": "http://www.masterplan2013.kigalicity.gov.rw:6080/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 376,
+  "n_services": 6
+ },
+ {
+  "root": "https://gis.anpg.co.ao/hosting/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 316,
+  "n_services": 57
+ },
+ {
+  "root": "https://gisportal.kengen.co.ke/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 346,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.forest-atlas.org/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 70,
+  "n_services": 232
+ },
+ {
+  "root": "https://emaps.rcmrd.org/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host emaps.rcmrd.org:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.mosselbay.gov.za/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 421,
+  "n_services": 30
+ },
+ {
+  "root": "https://www.casasig.ma/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host www.casasig.ma:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issu",
+  "ms": 288,
+  "n_services": 0
+ },
+ {
+  "root": "https://dgsmportal.minerals.go.ug/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 294,
+  "n_services": 0
+ },
+ {
+  "root": "https://www.sagns.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 332,
+  "n_services": 6
+ },
+ {
+  "root": "https://gistz.nbs.go.tz/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 356,
+  "n_services": 34
+ },
+ {
+  "root": "https://gis.rmb.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 341,
+  "n_services": 44
+ },
+ {
+  "root": "https://gh.space.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 393,
+  "n_services": 259
+ },
+ {
+  "root": "https://maps.ppf.org.za/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorError: Cannot connect to host maps.ppf.org.za:443 ssl:default [Connection reset by peer]",
+  "ms": 582,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisportal.twk.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 390,
+  "n_services": 9
+ },
+ {
+  "root": "https://webgis.esri-southafrica.com/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 347,
+  "n_services": 17
+ },
+ {
+  "root": "https://cityimg.capetown.gov.za/erdas-iws/esri/GeoSpatial%20Datasets/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 289,
+  "n_services": 182
+ },
+ {
+  "root": "https://gis.gsibande.gov.za/hosting/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 453,
+  "n_services": 98
+ },
+ {
+  "root": "https://gis.westerncape.gov.za/server2/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 302,
+  "n_services": 82
+ },
+ {
+  "root": "https://geoportal.mwri.gov.eg/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 315,
+  "n_services": 1
+ },
+ {
+  "root": "https://citymaps.stellenbosch.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 390,
+  "n_services": 18
+ },
+ {
+  "root": "https://mis.mireme.gov.mz/server/rest/services",
+  "status": 0,
+  "error": "ClientConnectorError: Cannot connect to host mis.mireme.gov.mz:443 ssl:default [Connect call failed ('197.249.6.59', 443)]",
+  "ms": 1071,
+  "n_services": 0
+ },
+ {
+  "root": "https://portal.kfs.gov.eg/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25995,
+  "n_services": 0
+ },
+ {
+  "root": "https://siresarcgis.environnement.gov.ma:6443/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://imagery.esri-southafrica.com/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://services3.arcgis.com/P11fCRq9Db4CjHMS/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 82,
+  "n_services": 44
+ },
+ {
+  "root": "https://services6.arcgis.com/AiFYNnCB5tR7Kcz5/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 94,
+  "n_services": 57
+ },
+ {
+  "root": "https://gis.forest-atlas.org/arcgis/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 18,
+  "n_services": 0
+ },
+ {
+  "root": "https://services8.arcgis.com/B5sOc6ZFqt8DX44r/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 174,
+  "n_services": 26
+ },
+ {
+  "root": "https://services8.arcgis.com/Yb7xytb4Ff2eEN6Y/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 444,
+  "n_services": 580
+ },
+ {
+  "root": "https://landfolio.cadastreminiersenegal.sn/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 114,
+  "n_services": 2
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/374a99fc76574f72bb8c71af7b428d0a/rest/services",
+  "status": 200,
+  "error": "{'code': 500, 'messageCode': 'CONT_0044', 'message': 'Error invoking service', 'details': ['Unable to generate token with the credentials provided with username: osgur.mcdermott.long_UNEP_WCMC and sou",
+  "ms": 227,
+  "n_services": 0
+ },
+ {
+  "root": "https://data-gis.unep-wcmc.org/portal/sharing/servers/8a8d4e24683a46e6b039aea78c8af20f/rest/services",
+  "status": 200,
+  "error": "{'code': 400, 'message': 'No proxy information found', 'details': []}",
+  "ms": 285,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.kzndard.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 253,
+  "n_services": 11
+ },
+ {
+  "root": "https://gis.wasac.rw/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 377,
+  "n_services": 9
+ },
+ {
+  "root": "https://webgis10.ine.cv/arcgisinecv/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 184,
+  "n_services": 21
+ },
+ {
+  "root": "https://portal.space.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 250,
+  "n_services": 71
+ },
+ {
+  "root": "https://www.egis.idsc.gov.eg/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 421,
+  "n_services": 681
+ },
+ {
+  "root": "https://gis.miningcadastre.gov.bw/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 248,
+  "n_services": 1
+ },
+ {
+  "root": "https://gisportal.overstrand.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 236,
+  "n_services": 29
+ },
+ {
+  "root": "https://ags.joburg.org.za/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 297,
+  "n_services": 48
+ },
+ {
+  "root": "https://bofinetarcgisportal.bofinet.co.bw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 285,
+  "n_services": 15
+ },
+ {
+  "root": "https://gis.rbc.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1023,
+  "n_services": 39
+ },
+ {
+  "root": "https://cityimg.capetown.gov.za/erdas-iws/esri/GeoSpatial%20Datasets/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 238,
+  "n_services": 182
+ },
+ {
+  "root": "https://gis.kznworks.gov.za/hosting/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 332,
+  "n_services": 155
+ },
+ {
+  "root": "https://geodata.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 244,
+  "n_services": 369
+ },
+ {
+  "root": "https://cityimg.capetown.gov.za/erdas-iws/esri/Geospatial%20Datasets/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 6708,
+  "n_services": 182
+ },
+ {
+  "root": "https://esapqa.capetown.gov.za/agsext/rest/services",
+  "status": 200,
+  "error": "{'code': -1, 'message': \"Unable to check permission on folder Background_Maps.Failed to return all services configurations in the folder 'Background_Maps'. Could not connect to the ArcGIS component at",
+  "ms": 7295,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.eccogta.gov.za/server/rest/services",
+  "status": 0,
+  "error": "ClientConnectorError: Cannot connect to host gis.eccogta.gov.za:443 ssl:default [None]",
+  "ms": 20437,
+  "n_services": 0
+ },
+ {
+  "root": "https://euclgis.reg.rw/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://imagery.esri-southafrica.com/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://sigm.tg/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.postcode.gov.ng/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 26000,
+  "n_services": 0
+ },
+ {
+  "root": "https://services8.arcgis.com/0E8nlQLKk6G1m6rG/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 142,
+  "n_services": 14
+ },
+ {
+  "root": "https://services2.arcgis.com/D6cgxWzepFC1quJH/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 193,
+  "n_services": 20
+ },
+ {
+  "root": "https://mines.gouv.ci.cadastreminier.org/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 436,
+  "n_services": 2
+ },
+ {
+  "root": "https://gis.forest-atlas.org/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 76,
+  "n_services": 232
+ },
+ {
+  "root": "https://geopau.gov.tn/arcgisserver/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 171,
+  "n_services": 10
+ },
+ {
+  "root": "https://paumaps.pau.go.ug/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 330,
+  "n_services": 2
+ },
+ {
+  "root": "https://gis.kenha.co.ke/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host gis.kenha.co.ke:443 ssl:default [Name or service not known]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.rdb.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 308,
+  "n_services": 33
+ },
+ {
+  "root": "https://gis.mineduc.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 352,
+  "n_services": 39
+ },
+ {
+  "root": "https://ingtgeo.gov.cv/arcgisingt/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 239,
+  "n_services": 80
+ },
+ {
+  "root": "https://gis.gopp.info/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 734,
+  "n_services": 3
+ },
+ {
+  "root": "https://gisportal.mtn.com.gh/server/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host gisportal.mtn.com.gh:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get loca",
+  "ms": 559,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.uthukela.gov.za/hosting/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 366,
+  "n_services": 43
+ },
+ {
+  "root": "https://gis.aswan.gov.eg/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 275,
+  "n_services": 69
+ },
+ {
+  "root": "https://www.map.gov.zm/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 325,
+  "n_services": 22
+ },
+ {
+  "root": "https://gis.fseducation.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 378,
+  "n_services": 19
+ },
+ {
+  "root": "https://carto.auc.ma/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 227,
+  "n_services": 38
+ },
+ {
+  "root": "https://gis.polokwane.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 350,
+  "n_services": 54
+ },
+ {
+  "root": "https://maps.geoscience.org.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'details': [], 'message': 'Token Required'}",
+  "ms": 346,
+  "n_services": 3
+ },
+ {
+  "root": "https://gis.ekurhuleni.gov.za/arcgis/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 372,
+  "n_services": 93
+ },
+ {
+  "root": "https://geodata.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 338,
+  "n_services": 369
+ },
+ {
+  "root": "https://www.mozgis.gov.mz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 368,
+  "n_services": 491
+ },
+ {
+  "root": "https://euclgis.reg.rw/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://gisportal.mbombela.gov.za/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.southsinai.gov.eg/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25996,
+  "n_services": 0
+ },
+ {
+  "root": "https://amatholegis.gov.za/arcgis/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25997,
+  "n_services": 0
+ },
+ {
+  "root": "https://geoportal.cairodc.gov.eg/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25997,
+  "n_services": 0
+ },
+ {
+  "root": "https://services1.arcgis.com/Vlw77QWOmRIp56YB/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 126,
+  "n_services": 24
+ },
+ {
+  "root": "https://e-gis001.tshwane.gov.za/server/rest/services",
+  "status": 0,
+  "error": "robots.txt disallows",
+  "ms": 0,
+  "n_services": 0
+ },
+ {
+  "root": "https://portal.miningcadastre.go.ke/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 233,
+  "n_services": 1
+ },
+ {
+  "root": "https://licenses.inami.gov.mz/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 302,
+  "n_services": 2
+ },
+ {
+  "root": "https://gis-2.haroob.com/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 191,
+  "n_services": 11
+ },
+ {
+  "root": "https://gis.civilaviation.gov.eg/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 169,
+  "n_services": 29
+ },
+ {
+  "root": "https://gis.george.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 311,
+  "n_services": 83
+ },
+ {
+  "root": "https://maps.knysna.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 328,
+  "n_services": 31
+ },
+ {
+  "root": "https://sigpraia.gov.cv/servicossig/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 203,
+  "n_services": 30
+ },
+ {
+  "root": "https://masterplan.kigalicity.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1470,
+  "n_services": 19
+ },
+ {
+  "root": "https://gis.durban.gov.za/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorCertificateError: Cannot connect to host gis.durban.gov.za:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local i",
+  "ms": 525,
+  "n_services": 0
+ },
+ {
+  "root": "https://geoportail.asal.dz/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 460,
+  "n_services": 6
+ },
+ {
+  "root": "https://moegis.environment.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 262,
+  "n_services": 70
+ },
+ {
+  "root": "https://gis.andm.gov.za/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 1941,
+  "n_services": 7
+ },
+ {
+  "root": "https://gis.rema.gov.rw/server/rest/services",
+  "status": 200,
+  "error": "{'code': 499, 'message': 'Token Required', 'details': []}",
+  "ms": 245,
+  "n_services": 94
+ },
+ {
+  "root": "https://gis.fnds.gov.mz/server/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.buffalocity.gov.za/hosting/rest/services",
+  "status": 0,
+  "error": "TimeoutError: ",
+  "ms": 25994,
+  "n_services": 0
+ },
+ {
+  "root": "https://citymaps.capetown.gov.za/agsext/rest/services",
+  "status": 200,
+  "error": "{'code': -1, 'message': \"Unable to check permission on folder Background_Maps.Failed to return all services configurations in the folder 'Background_Maps'. Could not connect to the ArcGIS component at",
+  "ms": 5340,
+  "n_services": 0
+ }
+]

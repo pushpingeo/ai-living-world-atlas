@@ -1,0 +1,679 @@
+[
+ {
+  "portal": "https://ckan.scoda.co.za/dataset",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 25,
+  "count": 25
+ },
+ {
+  "portal": "hub:https://zambia-nsdi-mlnr.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://puma-sn.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://gisportal.gauteng.gov.za/portal/home",
+  "kind": "hub",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://cod-data.forest-atlas.org",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 500",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://hessequa-public-mapping-service-hessequa.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://kenya.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 14
+ },
+ {
+  "portal": "hub:https://za.africageoportal.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 17
+ },
+ {
+  "portal": "hub:https://sudan-uneplive.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 140
+ },
+ {
+  "portal": "hub:https://republiqueducongo.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 24
+ },
+ {
+  "portal": "hub:https://uganda-africa.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 23
+ },
+ {
+  "portal": "hub:https://sustainable-development-goals-bfdatahub.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 16
+ },
+ {
+  "portal": "hub:https://covid-19-research-and-emergency-response-uigis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 41
+ },
+ {
+  "portal": "hub:https://rwanda-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 12,
+  "total": 90
+ },
+ {
+  "portal": "hub:https://gab-data.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 5
+ },
+ {
+  "portal": "hub:https://cameroon.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://cmr.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 15
+ },
+ {
+  "portal": "hub:https://ghana.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 42
+ },
+ {
+  "portal": "hub:https://morocco.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 41,
+  "total": 90
+ },
+ {
+  "portal": "https://metadata.macmatlas.net",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 19,
+  "count": 19
+ },
+ {
+  "portal": "hub:https://senegal.africageoportal.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 48,
+  "total": 58
+ },
+ {
+  "portal": "hub:https://tunisia1-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 14,
+  "total": 94
+ },
+ {
+  "portal": "hub:https://angola.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 40,
+  "total": 79
+ },
+ {
+  "portal": "hub:https://cameroon-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 12,
+  "total": 80
+ },
+ {
+  "portal": "https://opendata.gia.gov.ly/",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 166,
+  "count": 166
+ },
+ {
+  "portal": "hub:https://gis.ehlanzeni.gov.za/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://gis.limpopo.gov.za/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://inondations-dakar.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "TimeoutError: ",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "http://102.210.149.64:8081",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://ckan.madiphs.org/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://oudtmungis-gardenroutedm.hub.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 400",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://nsdi-rla.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 14,
+  "total": 16
+ },
+ {
+  "portal": "hub:https://idsc-gisidscegy.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://nigeria.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 32,
+  "total": 39
+ },
+ {
+  "portal": "hub:https://cog.amenagement-territoire.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 10
+ },
+ {
+  "portal": "hub:https://namibia.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 23,
+  "total": 33
+ },
+ {
+  "portal": "https://db.sproutopencontent.com",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://wcg-opendataportal-westerncapegov.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 25,
+  "total": 140
+ },
+ {
+  "portal": "hub:https://tourism-and-culture-kuniversity.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 25,
+  "total": 152
+ },
+ {
+  "portal": "https://ckan.kdbs.ng/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://arcgis.ufs.ac.za/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://gisportal.saeon.ac.za/portal/home",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://congo-geoportal-powered-by-esri-africa.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 24
+ },
+ {
+  "portal": "https://saeoss.sansa.org.za",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://rwanda.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 131,
+  "total": 363
+ },
+ {
+  "portal": "hub:https://odp-cctegis.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 188,
+  "total": 267
+ },
+ {
+  "portal": "https://znrr.grz.gov.zm",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://dataportal-mdb-sa.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 23,
+  "total": 770
+ },
+ {
+  "portal": "hub:https://arcgis.nwu.ac.za/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "https://edge.durban",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 404 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://egis.dst.gov.za/portal/home/",
+  "kind": "hub",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host egis.dst.gov.za:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local iss",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://spatialhub-mdb-sa.opendata.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 21,
+  "total": 291
+ },
+ {
+  "portal": "https://www.data.gov.ma",
+  "kind": "ckan",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "scanned": 699,
+  "count": 699
+ },
+ {
+  "portal": "https://makerere-university-ai4d-hub.emergentai.ug/",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://pudc.maps.arcgis.com",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://alexandria-urban-and-planning-department-esrieg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://elminia-governrate-page-esrieg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 2
+ },
+ {
+  "portal": "hub:https://ghana-gridded-statistics-platform-statsghana.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://gnq.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 4
+ },
+ {
+  "portal": "hub:https://cod.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 5,
+  "total": 23
+ },
+ {
+  "portal": "hub:https://cmr-data.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 17,
+  "total": 100
+ },
+ {
+  "portal": "hub:https://ehlanzeni-municipality-ehlanzeni.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 7,
+  "total": 16
+ },
+ {
+  "portal": "hub:https://ethiopia.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 7,
+  "total": 61
+ },
+ {
+  "portal": "hub:https://burkina-faso-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 11,
+  "total": 71
+ },
+ {
+  "portal": "hub:https://senegal2-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 20,
+  "total": 102
+ },
+ {
+  "portal": "hub:https://idecv.gov.cv",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 80,
+  "total": 85
+ },
+ {
+  "portal": "https://data.govmu.org",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.gov.tn",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host catalog.data.gov.tn:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://agridata.ansd.sn",
+  "kind": "ckan",
+  "ok": false,
+  "error": "ClientConnectorCertificateError: Cannot connect to host agridata.ansd.sn:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local is",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://cog.atlas-forestier.org",
+  "kind": "hub",
+  "ok": false,
+  "error": "HTTP 404",
+  "records": 0
+ },
+ {
+  "portal": "hub:https://geospatial-open-data-site-nisrgis.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 12,
+  "total": 15
+ },
+ {
+  "portal": "hub:https://mapping-ocean-wealth-in-seychelles-tnc.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 42
+ },
+ {
+  "portal": "hub:https://cotedivoire.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 2,
+  "total": 31
+ },
+ {
+  "portal": "hub:https://mapping-kouga.hub.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 0
+ },
+ {
+  "portal": "hub:https://botswana.africageoportal.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 1,
+  "total": 9
+ },
+ {
+  "portal": "hub:https://caf.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 5
+ },
+ {
+  "portal": "hub:https://lbr.forest-atlas.org",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 4,
+  "total": 5
+ },
+ {
+  "portal": "hub:https://mozambique-sdg.hub.arcgis.com/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 12,
+  "total": 91
+ },
+ {
+  "portal": "hub:https://gis-ethekwini.opendata.arcgis.com",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 82,
+  "total": 82
+ },
+ {
+  "portal": "hub:https://www.greaterkrugerlandscape.co.za/",
+  "kind": "hub",
+  "ok": true,
+  "error": "",
+  "records": 0,
+  "total": 8
+ },
+ {
+  "portal": "https://ocims.csir.co.za",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 500 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "http://www.openculture.gov.tn",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://dms.hiv.health.gov.mw",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://data.moa.gov.et",
+  "kind": "ckan",
+  "ok": false,
+  "error": "robots.txt disallows",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "https://ckan.sabasi.io",
+  "kind": "ckan",
+  "ok": false,
+  "error": "HTTP 522 at start=0",
+  "records": 0,
+  "scanned": 0
+ },
+ {
+  "portal": "hub:https://opendata.go.ke/",
+  "kind": "hub",
+  "ok": false,
+  "error": "TimeoutError: ",
+  "records": 0
+ }
+]

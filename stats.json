@@ -1,0 +1,218 @@
+{
+ "minutes": 76.3,
+ "http": {
+  "requests": 21193,
+  "errors": 2082,
+  "robots_blocked": 19
+ },
+ "portals": {
+  "total": 86,
+  "ok": 54,
+  "records_with_service_links": 1002
+ },
+ "arcgis_roots": {
+  "total": 102,
+  "reachable": 77
+ },
+ "services": {
+  "attempted": 6481,
+  "ok": 5478,
+  "skipped_time": 0,
+  "by_type": {
+   "arcgis-imageserver": 54,
+   "arcgis-vectortileserver": 11,
+   "arcgis-mapserver": 2488,
+   "arcgis-featureserver": 2754,
+   "wmts": 27,
+   "wcs": 41,
+   "wfs": 47,
+   "wms": 56
+  },
+  "top_errors": [
+   [
+    "HTTP N",
+    184
+   ],
+   [
+    "{'code': N, 'message': 'Token Required', 'messageCode': 'S",
+    147
+   ],
+   [
+    "{'code': N, 'message': 'Token Required', 'details': []}",
+    137
+   ],
+   [
+    "TimeoutError: ",
+    100
+   ],
+   [
+    "{'code': N, 'message': 'Error creating object to be cached",
+    21
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :0x",
+    14
+   ],
+   [
+    "{'code': N, 'message': 'Error handling service request :GI",
+    9
+   ],
+   [
+    "{'code': N, 'message': \"User couldn't access this resource",
+    8
+   ]
+  ]
+ },
+ "layers": {
+  "total": 24370,
+  "by_service_type": {
+   "arcgis-mapserver": 11540,
+   "arcgis-featureserver": 5087,
+   "wms": 3909,
+   "wmts": 1820,
+   "wfs": 1580,
+   "wcs": 371,
+   "arcgis-imageserver": 52,
+   "arcgis-vectortileserver": 11
+  },
+  "with_bbox": 23966,
+  "with_abstract_50": 6010,
+  "with_licence_text": 4947,
+  "with_open_licence": 129,
+  "with_keywords": 14462,
+  "joined_to_catalogue": 539,
+  "codelike_titles": 8440,
+  "junk_flagged": 114,
+  "declared_iso_theme": 345,
+  "declared_theme_how": {
+   "none": 24025,
+   "keyword": 345
+  },
+  "publisher_type": {
+   "central-gov": 9590,
+   "local-gov": 5130,
+   "international": 4004,
+   "unknown": 2226,
+   "regional-gov": 1996,
+   "business": 550,
+   "academic": 484,
+   "civil-society": 325,
+   "public-body": 65
+  },
+  "detail_source": {
+   "none": 21452,
+   "display": 2132,
+   "stated": 733,
+   "pixel-size": 52,
+   "tile-cache": 1
+  },
+  "extent_source": {
+   "declared": 23357,
+   "measured": 1013
+  },
+  "extent_flags": {
+   "world": 1513,
+   "shared-default": 474,
+   "too-big-local": 437
+  },
+  "cors_ok": 20468,
+  "detail_level": {
+   "unknown": 21452,
+   "1:25k": 1008,
+   "1:100k": 824,
+   "1:500k": 529,
+   "1:5k": 428,
+   "1:2M": 124,
+   "coarser": 5
+  },
+  "coverage_level": {
+   "local": 6259,
+   "regional": 6230,
+   "national": 5064,
+   "continental": 4638,
+   "global": 1775,
+   "unknown": 404
+  },
+  "detail_level_passing": {
+   "unknown": 11644,
+   "1:100k": 456,
+   "1:500k": 415,
+   "1:25k": 331,
+   "1:5k": 202,
+   "1:2M": 82,
+   "coarser": 5
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 19473,
+   "ok": 4164,
+   "fail": 449,
+   "empty": 284
+  },
+  "live_rate_of_checked": 0.85,
+  "returns_data_or_empty_rate": 0.908
+ },
+ "quality": {
+  "pass": 13135,
+  "pass_rate": 0.539,
+  "score_median": 60.0,
+  "score_bands": {
+   "[0, 40)": 1397,
+   "[40, 50)": 846,
+   "[50, 60)": 7860,
+   "[60, 70)": 8969,
+   "[70, 80)": 3058,
+   "[80, 101)": 2240
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 15081,
+  "distinct_among_passing": 7292
+ },
+ "file_mb": 3.98,
+ "datasets": {
+  "total": 17647,
+  "passing": 8688,
+  "endpoints_per_dataset": {
+   "1": 12941,
+   "2": 3800,
+   "3": 444,
+   "4": 221,
+   "5": 83,
+   "6": 27,
+   "7": 12,
+   "8": 119
+  },
+  "multi_protocol": 3775,
+  "match_rules": {
+   "arcgis-pair": 2354,
+   "title-extent": 1486,
+   "ogc-name": 1180
+  },
+  "role": {
+   "data": 17375,
+   "imagery": 238,
+   "elevation": 24,
+   "basemap": 10
+  },
+  "role_passing": {
+   "data": 8585,
+   "imagery": 86,
+   "elevation": 11,
+   "basemap": 6
+  },
+  "capabilities": {
+   "render": 13263,
+   "query": 11865,
+   "feature-info": 3893,
+   "download": 3138,
+   "tiles": 2233,
+   "pixels": 371,
+   "time": 359,
+   "catalog": 47,
+   "raster-functions": 6
+  },
+  "detail_known_passing": 1173
+ }
+}
