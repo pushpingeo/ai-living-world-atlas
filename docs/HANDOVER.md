@@ -177,3 +177,11 @@ Workspace notes:
    Text search done 18 Nov (FTS5; world-wide searches read tens to thousands of rows, not 265k). Still heavy:
    small-area searches (~270k rows read) and a concept over a large area; next fix is a spatial cell key plus a
    concept table. Name index: waiting on Rob's licence call; names only, no outlines.
+10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into `files/<id>.geojson`
+    (published at `data/f/`) plus a catalogue record in `vocab/seeds/files.yaml`; the `spike-files` wave (first in
+    `runs/published.txt`) lists it, and `fetch_features` filters the file. Live: **GEM Global Oil and Gas Extraction
+    Tracker, March 2026** (CC BY 4.0; 7,075 fields, 967 with outlines; 598 without a location left out).
+    Rob's `gem-data.zip` (Downloads, 271 MB) holds 34 GEM trackers: pipelines (with routes), LNG terminals, oil and
+    gas plants, coal, power, steel and more. Each needs a spec in `vocab/files/`; check each About sheet's licence
+    (some GEM data is non-commercial, e.g. methane plumes). Raw files are not kept in the repo (GitHub's 100 MB limit).
+

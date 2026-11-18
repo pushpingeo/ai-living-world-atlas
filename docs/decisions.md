@@ -298,3 +298,11 @@ overloaded every query fails for the rest of its 10-second window (one heavy sea
 - Still heavy (not new): small-area searches read ~270k rows (the extent index narrows one axis only), and a concept
   over a large area reads the whole rank index. Fix: a spatial cell key and a concept table (next).
 - `debug: true` on find_datasets adds `rows_read`, for checking these.
+
+## 2026-11-18: download-only datasets hosted by the atlas (GEM first)
+GEM's trackers are only available as an .xlsx by request form, and the map files GEM's own maps use move between
+releases (March 2026 addresses already 404), so the atlas hosts a copy: CC BY 4.0, stated in the file's About sheet,
+allows it with attribution. `atlas/files.py` converts per a spec in `vocab/files/` (outline from WKT where valid and
+near the row's point, else the point), writes `files/<id>.geojson` and the record for the `spike-files` wave. New
+endpoint protocol `geojson` (query, download); the Worker filters the file by area and text and returns `matched`
+and `source`. Raw downloads stay out of git (size); refreshing is: new file, one command, push.
