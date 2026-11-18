@@ -45,7 +45,7 @@ HOST_DOWN_MIN, HOST_DOWN_SHARE = 20, 0.8   # a host is "down" when 80%+ of 20+ s
 SECOND_LOOK_MAX, SECOND_LOOK_PER_HOST, SECOND_LOOK_TIMEOUT, SECOND_LOOK_RESERVE = 3000, 40, 90, 20
 HOST_GIVE_UP = 10                          # stop knocking on a host after this many network failures in a row
 OGC = {"wms": "WMS", "wfs": "WFS", "wmts": "WMTS", "wcs": "WCS"}
-PLAIN = {"download", "cloud", "api", "landing"}
+PLAIN = {"download", "cloud", "api", "landing", "geojson"}  # geojson: atlas-hosted tiles, checked via index.json
 RESOLVING = {"ok", "unmatched"}
 FAILING = {"fail", "missing", "host-down"}
 
@@ -189,7 +189,8 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
     if again and time.monotonic() < deadline:
         async with Client(total=16, per_host=1, timeout=SECOND_LOOK_TIMEOUT) as c:
             before = sum(results[k][0] == "ok" for k in again)
-            await asyncio.gather(*[one(c, s, p, deadline, second=True) for s, p in again])
+            # stop starting retries 3 minutes early: one in flight can take 2 x 90 s (18 Nov ran 4.5 min over)
+            await asyncio.gather(*[one(c, s, p, deadline - 180, second=True) for s, p in again])
             stats.update(c.stats)
             stats["second_look"] = len(again)
             stats["second_look_ok"] = sum(results[k][0] == "ok" for k in again) - before
