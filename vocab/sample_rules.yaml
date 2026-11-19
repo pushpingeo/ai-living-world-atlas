@@ -8,18 +8,28 @@
 # Never: anything matching `never` in its title, layer name or address. Exaggerated relief returns exaggerated
 # numbers (GEBCO 5x gave -435 m where the grid says -86 m), and hillshades and colour ramps return display values.
 
-never: '(?i)exaggerat|\b\d+(\.\d+)?x\b|\d+pt\d+x|_\d+x(_|\b)|\d+x_|hillshade|hill shade|shaded relief|multidirectional|\bcolou?r(s|ed)?\b|rainbow|haxby|blue ?green|\brgb\b|_dra(_|\b)|\bdra\b|stretch'
+# WorldElevation3D (Esri's 3D elevation caches) answers identify with 0 everywhere, sea or land (checked 19 Nov 2026).
+never: '(?i)worldelevation3d|exaggerat|\b\d+(\.\d+)?x\b|\d+pt\d+x|_\d+x(_|\b)|\d+x_|hillshade|hill shade|shaded relief|multidirectional|\bcolou?r(s|ed)?\b|rainbow|haxby|blue ?green|\brgb\b|_dra(_|\b)|\bdra\b|stretch'
 
 # WMS layers whose GetFeatureInfo returns a number, checked by hand. `service` is the host, `layers` a regular
 # expression on the layer name, `field` the property holding the value.
 feature_info:
+  # The sign differs between DTM releases: the current layer, 2020 and 2022 answer -87 in the central North Sea;
+  # 2016 and 2018 answer 87 (checked 19 Nov 2026 through the MCP server's sample_url).
   - service: ows.emodnet-bathymetry.eu
-    layers: '^emodnet:mean(_20\d\d)?$'
+    layers: '^emodnet:mean(_2020|_2022)?$'
     field: Depth
     value: elevation
     units: m
     vertical_datum: LAT (Lowest Astronomical Tide), per EMODnet
-    note: Negative below the datum. Checked 19 Nov 2026 in the central North Sea (-86.3 m).
+    note: Negative below the datum. Checked 19 Nov 2026 in the central North Sea (-86.3 m; DTM 2020 -87.0 m).
+  - service: ows.emodnet-bathymetry.eu
+    layers: '^emodnet:mean_(2016|2018)$'
+    field: Depth
+    value: depth
+    units: m
+    vertical_datum: LAT (Lowest Astronomical Tide), per EMODnet
+    note: Positive below the datum in these older releases (87 m in the central North Sea, checked 19 Nov 2026).
   - service: ows.emodnet-humanactivities.eu
     layers: '^(emodnet:)?vesseldensity_\w+$'
     field: GRAY_INDEX

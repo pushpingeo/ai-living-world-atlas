@@ -443,3 +443,8 @@ Decisions:
 - **Licences and attribution recorded by hand** (`vocab/licence_overrides.yaml`, applied at publish time):
   EMODnet Bathymetry and EMODnet vessel density coverages get CC BY 4.0 from EMODnet's terms; GEBCO's terms and
   CEDA's citation are quoted verbatim; new detail fields `attribution` and `terms`, returned by `get_dataset`.
+
+Found by the first live check (mcp-check, 19 Nov 23:10 UTC), which reads a value through every sampled endpoint it
+finds: EMODnet's DTM 2016 and 2018 layers answer depth as a positive number (87 in the central North Sea) where the
+current, 2020 and 2022 layers answer -87, so those two are labelled `value: depth`; and Esri's WorldElevation3D
+caches answer identify with 0 everywhere, so they never get `sample`.
