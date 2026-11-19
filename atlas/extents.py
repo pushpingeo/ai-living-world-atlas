@@ -28,7 +28,7 @@ def flag(layers) -> None:
         boxes = {tuple(round(v, 3) for v in L.bbox) for L in ls if L.bbox}
         shared = len(ls) >= 3 and len(boxes) == 1
         for L in ls:
-            if not L.bbox:
+            if not L.bbox or L.extent_source == "curated":  # a curated record's extent was set by hand
                 continue
             x0, y0, x1, y1 = L.bbox
             f = []

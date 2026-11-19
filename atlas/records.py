@@ -31,7 +31,7 @@ def to_layers(records: list[dict]) -> list[Layer]:
                 bbox=to_wgs84(*b) if b else None, geometry_type=s.get("geometry_type") or ("file" if e["protocol"] in ("download", "cloud") else ""),
                 capabilities=list(e.get("capabilities") or CAPS.get(e["protocol"], [])), crawled_at=now,
                 endpoint_info=dumps({"protocol": e["protocol"], "format": e.get("format", ""), **(e.get("info") or {})}),
-                pixel_size_m=s.get("detail_m"), **ctx,
+                pixel_size_m=s.get("detail_m"), extent_source="curated" if b else "declared", **ctx,
             )
             CHECK_URL[L.uid] = e.get("check_url") or e["url"]
             out.append(L)
@@ -42,4 +42,7 @@ async def check(c: Client, layer: Layer) -> tuple[str, str]:
     r = await c.get(CHECK_URL.get(layer.uid) or layer.layer_url, retries=1)
     if r.ok:
         return "ok", f"HTTP {r.status}"
+    if "robots" in (r.error or ""):
+        # the host asks crawlers to keep out; we respect that, and a curated record was checked by hand instead
+        return "unchecked", "robots.txt disallows automated checks; checked by hand (see the seed file)"
     return "fail", r.error or f"HTTP {r.status}"

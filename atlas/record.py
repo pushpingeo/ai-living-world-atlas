@@ -80,7 +80,7 @@ class Layer:
     role: str = "data"                     # data | imagery | elevation | basemap
     cors: bool | None = None               # can a web page on another site use it directly
     declared_bbox: list[float] | None = None  # what the service claimed, kept when we replace bbox with a measured one
-    extent_source: str = "declared"        # declared | measured
+    extent_source: str = "declared"        # declared | measured | curated (set by hand in a seed record)
     extent_flags: list[str] = field(default_factory=list)  # why the declared extent looked wrong
     crawled_at: str = ""
     service_ms: int = 0

@@ -53,6 +53,10 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   - **Licence fix:** EMODnet Bathymetry layers (ows.emodnet-bathymetry.eu) and EMODnet's vessel density coverages
     now carry CC BY 4.0 from EMODnet's terms, with EMODnet's attribution line. `open_licence` becomes true.
   - Ids already in the atlas don't change.
+  - Curated records' extents are set by hand, so they aren't flagged as overstated: `get_dataset` may show
+    `extent_source: "curated"` (new value beside `declared` and `measured`).
+  - A curated record whose host refuses crawlers in robots.txt (CEDA, Esri's tiled image services) shows its check
+    as `unchecked`, not `fail`: we don't run automated checks there, and the record was checked by hand.
 
 - (18 Nov, atlas change, **planned**, not yet live) **Publisher registry and trusted publishers**
   (`docs/publisher-registry-design.md`). When it ships, all additive except one:

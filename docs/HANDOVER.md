@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (19 Nov 2026)
+# AI Living World Atlas: handover (19 Nov 2026, evening)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -73,6 +73,7 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| Values (`spike-values`) | 10 | 10 (expected) | Curated rasters that return a value at a point: GEBCO_2026 depth, NOAA DEM mosaic, World Bank/IMF ship density (19 Nov) |
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
@@ -231,3 +232,14 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
     - **To refresh** when GEM releases: put the new file in a folder, update `source`/`release`/`citation` in the
       spec, run `python -m atlas.files --source-dir DIR vocab/files/<id>.yaml`, bump `runs/spike-files.env`, push.
       Raw downloads stay out of git (size).
+
+11. **Values at a point** (19 Nov, Tobler request; `docs/decisions.md` has the table of checked values). Capability
+    `sample` = the endpoint returns a number at a point. Added at publish time (`atlas/sampling.py`, rules in
+    `vocab/sample_rules.yaml`): one-band ImageServers (identify), WCS, and hand-checked WMS feature-info; never
+    exaggerated relief, hillshades or colour ramps. Curated value sources are records in `vocab/seeds/values.yaml`
+    (wave `spike-values`) that carry their own `info.sample`. Hand-recorded licences, attribution lines and terms live
+    in `vocab/licence_overrides.yaml` (also publish time), shown by `get_dataset` as `attribution` and `terms`.
+    `mcp-check` reads a value through each sampled endpoint at the North Sea and Niger Delta points.
+    - Open: shipping density comes from Esri's tiles-only copy (LERC decoding). Hosting the World Bank GeoTIFFs as a
+      COG on R2 would make it a plain range read; Rob's call (storage).
+    - Open: GEBCO's OPeNDAP at CEDA is slow (6-8 s a cell). The UNH CCOM image service is the fast route.
