@@ -339,9 +339,16 @@ async function refreshFeatures(entry) {
   const ctrl = (entry.ctrl = new AbortController());
   const timeout = setTimeout(() => ctrl.abort("timeout"), 30000);
   try {
-    const r = await fetch(featureUrl(entry.e, viewBox()), { signal: ctrl.signal });
+    const url = featureUrl(entry.e, viewBox());
+    const r = await fetch(url, { signal: ctrl.signal });
     if (!r.ok) throw new Error("HTTP " + r.status);
-    const gj = await r.json();
+    let gj = await r.json();
+    if ((!gj || !Array.isArray(gj.features)) && /resultRecordCount=/.test(url)) {
+      // Layers that can't page refuse resultRecordCount ("Pagination is not supported."): ask again without it
+      const r2 = await fetch(url.replace(/&resultRecordCount=\d+/, ""), { signal: ctrl.signal });
+      if (r2.ok) gj = await r2.json();
+      if (gj && Array.isArray(gj.features)) gj.features = gj.features.slice(0, MAX_FEATURES);
+    }
     if (!gj || !Array.isArray(gj.features)) throw new Error(gj?.error?.message || "not GeoJSON");
     map.getSource(entry.id)?.setData(gj);
     entry.status = gj.features.length >= MAX_FEATURES ? `first ${MAX_FEATURES} features in view` : `${gj.features.length} features in view`;

@@ -202,6 +202,8 @@ function countriesTouching(v) {
 }
 
 
+const noPaging = (u) => u.replace(/&resultRecordCount=\d+/, "");
+
 /* ---------------- spatial index (18 Nov) ---------------- */
 // Quadtree cell keys, built by atlas/api_data.py (cell_keys): keep the two in step. A dataset sits at the finest level
 // where its extent spans at most 2 x 2 cells, with one key per cell, prefixed by its home country (and by concept in
@@ -506,10 +508,15 @@ async function fetchFeatures(env, a) {
         else e._filterAfter = true;
       }
       url = `${e.url}/query?where=${encodeURIComponent(where)}&geometry=${x0},${y0},${x1},${y1}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&f=geojson&resultRecordCount=${limit}&maxAllowableOffset=${tol}&geometryPrecision=6&returnGeometry=${a.include_geometry === false ? "false" : "true"}`;
+      // Layers that can't page (supportsPagination false, e.g. Historic Environment Scotland's) refuse any query with
+      // resultRecordCount ("Pagination is not supported."); without it they return up to their maxRecordCount, which
+      // we cut to the limit below.
+      alts = [noPaging(url)];
     }
     try {
-      let r, gj;
+      let r, gj, used = url;
       for (const u of [url, ...alts]) {
+        used = u;
         r = await fetch(u, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
         if (!r.ok) continue;
         const t = await r.text();
@@ -520,7 +527,7 @@ async function fetchFeatures(env, a) {
       if (!Array.isArray(gj.features) && a.text && !e._filterAfter && e.protocol !== "wfs") {
         // The server refused the text filter (some don't allow UPPER or LIKE): fetch without it and filter here.
         e._filterAfter = true;
-        const plain = url.replace(/where=[^&]*/, `where=${encodeURIComponent(a.where || "1=1")}`).replace(/resultRecordCount=\d+/, "resultRecordCount=2000");
+        const plain = used.replace(/where=[^&]*/, `where=${encodeURIComponent(a.where || "1=1")}`).replace(/resultRecordCount=\d+/, "resultRecordCount=2000");
         const r2 = await fetch(plain, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
         gj = r2.ok ? await r2.json() : {};
       }

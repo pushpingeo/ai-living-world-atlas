@@ -88,6 +88,19 @@ jobs:
           # EMODnet (Tobler request): wrecks as features, with a licence
           r, status, s = call("get_dataset", {"id": "ee41a8d58f1fe201"})
           print(f"get_dataset [EMODnet wrecks ee41a8d58f1fe201]: {status}, {r.get('title') if r else '-'!r}, protocols {[e['protocol'] for e in r['endpoints']] if r else '-'}, licence {str(r.get('licence'))[:70] if r else '-'!r}")
+          # Historic Environment Scotland (19 Nov): its ArcGIS layers can't page and refused resultRecordCount
+          for did, label, box in [("25ffbbeec3836e1a", "Scheduled Monuments", [-3.3, 55.9, -3.1, 56.0]),
+                                  ("3a18f791239ffd9d", "Listed Buildings by Category", [-3.22, 55.94, -3.17, 55.96]),
+                                  ("ef844f9125925d00", "Listed Buildings boundaries", [-3.22, 55.94, -3.17, 55.96]),
+                                  ("bee072abd4e7a820", "World Heritage Sites", [-3.3, 55.9, -3.1, 56.0]),
+                                  ("09cc8b2c75d938a0", "Gardens and Designed Landscapes", [-3.5, 55.8, -3.0, 56.1]),
+                                  ("2a6ccedd63e53b29", "Battlefields", [-4.5, 55.5, -2.5, 56.5]),
+                                  ("9a5e7b69b6270fe9", "Historic MPAs", [-8, 55, -1, 61]),
+                                  ("4b9fae48448e6b03", "Garden and Designed Landscapes (WMS only)", [-3.5, 55.8, -3.0, 56.1]),
+                                  ("130d381beaadd18e", "Canmore maritime", [-3.4, 55.9, -2.9, 56.1]),
+                                  ("32614f5d7b69b2e5", "Canmore terrestrial", [-3.3, 55.9, -3.1, 56.0])]:
+              r, status, s = call("fetch_features", {"id": did, "bbox": box, "limit": 20})
+              print(f"fetch_features [HES {label}]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'} via {(r or {}).get('endpoint', {}).get('protocol', '-')}" + (f", errors {r.get('errors')}" if r and r.get('errors') else ""))
           r, status, s = call("fetch_features", {"id": "ee41a8d58f1fe201", "bbox": [-6, 49, 2, 52], "limit": 50})
           print(f"fetch_features [EMODnet heritage wrecks, English Channel]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
           r, status, s = call("fetch_features", {"id": "d266bb32a493da90", "bbox": [-4.6, 60.6, -3.0, 61.4], "limit": 50})
