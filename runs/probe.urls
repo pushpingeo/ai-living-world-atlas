@@ -1,15 +1,7 @@
-# round 11 (19 Nov): GEBCO_2026 image services at UNH CCOM, GEBCO_2026 by OPeNDAP at CEDA, EMODnet WCS GetCoverage
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_IS/ImageServer?f=json
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_IS/ImageServer/identify?f=json&geometry=%7B%22x%22%3A1.9%2C%22y%22%3A57.9%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&returnGeometry=false&returnCatalogItems=false
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_IS/ImageServer/identify?f=json&geometry=%7B%22x%22%3A5.5%2C%22y%22%3A4.0%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&returnGeometry=false&returnCatalogItems=false
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_IS/ImageServer/info/iteminfo?f=json
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_depths_IS/ImageServer?f=json
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_depths_IS/ImageServer/identify?f=json&geometry=%7B%22x%22%3A1.9%2C%22y%22%3A57.9%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&returnGeometry=false&returnCatalogItems=false
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/GEBCO_2026_5X_Elevation/ImageServer?f=json
-https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/GEBCO_2026_5X_Elevation/ImageServer/identify?f=json&geometry=%7B%22x%22%3A1.9%2C%22y%22%3A57.9%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&returnGeometry=false&returnCatalogItems=false
-https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dds
-https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.das
-https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation%5B35496:1:35496%5D%5B43656:1:43656%5D
-https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?lat%5B35496:1:35496%5D,lon%5B43656:1:43656%5D
-https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=DescribeCoverage&coverageId=emodnet__mean
-https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=GetCoverage&coverageId=emodnet__mean&subset=Lat(57.895,57.905)&subset=Long(1.895,1.905)&format=application/arcgrid
+# round 12 (19 Nov): GEBCO_2026 TID image service, EMODnet vessel density feature-info, CEDA THREDDS OPeNDAP, EMODnet WCS GeoTIFF
+https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_tid_IS/ImageServer?f=json
+https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_tid_IS/ImageServer/identify?f=json&geometry=%7B%22x%22%3A1.9%2C%22y%22%3A57.9%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&returnGeometry=false&returnCatalogItems=false
+https://ows.emodnet-humanactivities.eu/wms?service=WMS&version=1.3.0&request=GetFeatureInfo&layers=vesseldensity_allavg&query_layers=vesseldensity_allavg&crs=EPSG:4326&bbox=57.8,1.8,58.0,2.0&width=101&height=101&i=50&j=50&info_format=application/json
+https://ows.emodnet-humanactivities.eu/wms?service=WMS&version=1.3.0&request=GetFeatureInfo&layers=emodnet:vesseldensity_allavg&query_layers=emodnet:vesseldensity_allavg&crs=EPSG:4326&bbox=50.9,1.35,51.1,1.55&width=101&height=101&i=50&j=50&info_format=application/json
+https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dds
+https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=GetCoverage&coverageId=emodnet__mean&subset=Lat(57.895,57.905)&subset=Long(1.895,1.905)&format=image/tiff
