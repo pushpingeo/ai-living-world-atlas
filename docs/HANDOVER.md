@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (18 Nov 2026, evening)
+# AI Living World Atlas: handover (19 Nov 2026)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -186,6 +186,8 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
    - UNEP-WCMC proxied ImageServers: their proxy's stored credentials fail ("Unable to generate token").
    - GFW tiles: blocked by robots.txt.
 4. **Smaller items.**
+   - 19 Nov: ArcGIS layers that can't page (Historic Environment Scotland) refused `resultRecordCount`; `fetch_features`
+     and the viewer now retry without it (decisions.md). The viewer side still needs a look in a real browser.
    - Trim long credit strings used as publisher names.
    - Add WMTS/WCS data checks (the sweep checks they resolve, not that they return tiles/coverages).
    - Work out true footprints for false extents (they are flagged and ranked down; national ones are now also filtered by home country, see above).

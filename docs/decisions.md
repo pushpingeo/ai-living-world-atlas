@@ -391,3 +391,16 @@ antimeridian, with and without concepts) found 0 missed or extra datasets. Uncha
 (10 GB, 50M row writes a month; a full reload is ~5M). **Over D1's free-plan 500 MB limit**: switching Workers Paid
 off would need a trim first (the id index on ds_cell, 88 MB, only serves incremental deletes; FTS keeps its own copy
 of the text, ~126 MB).
+
+## 2026-11-19: ArcGIS layers that can't page (Historic Environment Scotland)
+Rob reported HES layers not working. All 10 HES datasets are on inspire.hes.scot (ArcGIS Server 11.5, British
+National Grid), served as MapServer, WMS and WFS. The server was fine and the sweep marked them ok, but every
+`fetch_features` call failed: the layers say `supportsPagination: false`, and such a layer refuses any query that
+includes `resultRecordCount` ("Pagination is not supported."), which `fetch_features` and the viewer's feature preview
+always sent. Their WFS offers GML only, which neither can read, so there was no fallback. The sweep's data check
+doesn't send that parameter, which is why it said ok.
+
+Fix (generic, not HES-specific): when an ArcGIS query is refused, `fetch_features` and the viewer ask once more
+without `resultRecordCount` and cut the result to the limit themselves. Live check: 9 of the 10 HES datasets now
+return features (the tenth is WMS only: a picture, no features). mcp-check now covers all 10.
+Not tested in a browser: the cloud browser has no WebGL, so the viewer's map can't start there.
