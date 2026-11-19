@@ -92,6 +92,8 @@ def main():
         ])
         shards[r["dataset_id"][:DETAIL_KEY]][r["dataset_id"]] = {
             "abstract": (r.get("abstract") or "")[:2000], "licence": (r.get("licence") or "")[:400],
+            **({"attribution": r["attribution"]} if r.get("attribution") else {}),
+            **({"terms": r["terms"]} if r.get("terms") else {}),
             "open_licence": bool(r.get("open_licence")), "landing_page": r.get("landing_page") or "",
             "keywords": lst(r.get("keywords"))[:20], "coverage": r.get("coverage_level") or "",
             "detail_m": r.get("detail_m"), "detail_source": r.get("detail_source") or "",

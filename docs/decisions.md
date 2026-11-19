@@ -404,3 +404,42 @@ Fix (generic, not HES-specific): when an ArcGIS query is refused, `fetch_feature
 without `resultRecordCount` and cut the result to the limit themselves. Live check: 9 of the 10 HES datasets now
 return features (the tenth is WMS only: a picture, no features). mcp-check now covers all 10.
 Not tested in a browser: the cloud browser has no WebGL, so the viewer's map can't start there.
+
+## 2026-11-19 (evening): values at a point (water depth, shipping density)
+
+Tobler asked for a depth in metres at a site, anywhere, not a picture. What the atlas held: GEBCO's own WMS
+(GetFeatureInfo returns a service exception), Esri copies of GEBCO with 3.5x-10x vertical exaggeration (tiles only,
+exaggerated values), and EMODnet Bathymetry's WMS with no licence recorded. Checked by probe (rounds 10-13) at the
+central North Sea (57.9N 1.9E) and off the Niger Delta (4.0N 5.5E):
+
+| Source | Central North Sea | Niger Delta | Notes |
+|---|---|---|---|
+| GEBCO_2026 by OPeNDAP at CEDA (GEBCO's own distributor) | -86 | -83 | one cell per request, 6-8 s; index = floor((lat+90)*240), floor((lon+180)*240) |
+| GEBCO_2026 ImageServer at UNH CCOM | -86 | -87 (cell edge) | under 1 s; the 5x service beside it gave -435 |
+| GEBCO_2025 ImageServer at UNH CCOM | -87 | | not added; 2026 is current |
+| NOAA NCEI DEM Global Mosaic | -87 | -80 | best NCEI DEM at the point; datums vary |
+| EMODnet Bathymetry WMS feature-info (emodnet:mean) | -86.3 | outside | relative to LAT |
+| World Bank/IMF ship density (Esri LERC tiles) | 600,958 | 1,487,605 | Dover Strait 33.2M; AIS positions 2015-2021 |
+
+Decisions:
+- **New capability `sample`**, added at publish time (`atlas/sampling.py`, `vocab/sample_rules.yaml`) so no recrawl
+  is needed: one-band ArcGIS ImageServers that aren't tiles-only or RGB (identify), WCS coverages (GetCoverage), and
+  WMS layers whose feature-info we checked returns numbers (EMODnet bathymetry and vessel density only; other WMS
+  feature-info is usually HTML or attributes, so it isn't assumed). Anything titled or addressed as exaggerated,
+  hillshade or a colour ramp never gets it. About 2,100 endpoints today.
+- **The value sources that lacked metadata are curated records** (`vocab/seeds/values.yaml`, wave `spike-values`),
+  each saying how to sample itself. Records may now carry their own capabilities, endpoint info and check URL
+  (`atlas/records.py`). New protocol `opendap` (checked by a GET of its `.dds`).
+- **GEBCO: both routes.** CEDA's OPeNDAP is GEBCO's own grid from its own distributor (provenance); UNH CCOM's image
+  service is the same grid and fast (speed). The UNH records are publisher type academic with no country, so they
+  aren't filtered by country. GEBCO's TID grid is added too, so a depth can say whether it was measured.
+- **NOAA's mosaic** is a US federal record listed as genuinely wider in `vocab/extent_overrides.yaml`, so it shows
+  up for Nigeria. NOAA states no licence or credit: the US federal inference applies, and the atlas's suggested
+  credit says it is ours.
+- **Shipping density from Esri's copy** of the World Bank data (CC BY 4.0 on both). Esri serves it as tiles only, so
+  the value comes from decoding a LERC2D tile (`method: lerc-tile`). If that proves awkward for Tobler, the next step
+  is hosting the World Bank GeoTIFFs (510 MB for all vessels) as a Cloud Optimized GeoTIFF on R2, read by range
+  requests. Not done: a storage choice for Rob.
+- **Licences and attribution recorded by hand** (`vocab/licence_overrides.yaml`, applied at publish time):
+  EMODnet Bathymetry and EMODnet vessel density coverages get CC BY 4.0 from EMODnet's terms; GEBCO's terms and
+  CEDA's citation are quoted verbatim; new detail fields `attribution` and `terms`, returned by `get_dataset`.

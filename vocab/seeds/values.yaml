@@ -1,0 +1,304 @@
+# Rasters that return a value at a point: water depth and shipping density, for offshore screens anywhere
+# (Tobler request, 19 Nov 2026). Each service here was checked by hand: a point in the central North Sea and one off
+# the Niger Delta returned numbers, not pictures (runs/probe.urls rounds 10-13 and docs/decisions.md).
+# These are records rather than crawled services because their own metadata is empty (no description, no licence);
+# the record carries what we checked. Endpoint `info.sample` tells an agent how to read the value.
+# Attribution lines and terms: vocab/licence_overrides.yaml (applied at publish time).
+
+defaults:
+  publisher_type: international
+  country: ""
+
+# how to read a value from the World Bank / IMF shipping density tiles (Esri tiled imagery, LERC2D tiles)
+_ship_info: &shipinfo
+  bands: 1
+  pixel_type: S32
+  data_type: scientific
+  tiles_only: true
+  tile_format: LERC2D
+  sample:
+    method: lerc-tile
+    value: density
+    units: AIS positions per 0.005-degree cell, January 2015 to February 2021 (total)
+    level: 8
+    origin: [-180.015311275, 85.0026479370001]
+    cell_deg: 0.005
+    tile_size: 256
+    tile_url: "{service_url}/tile/{level}/{row}/{col}"
+    how: "px = (lon - origin_x) / cell_deg; py = (origin_y - lat) / cell_deg; col = floor(px / 256), row = floor(py / 256); the value is pixel (floor(py) mod 256, floor(px) mod 256) of the decoded tile. No data (masked) means no AIS positions recorded."
+    note: Checked 19 Nov 2026 by decoding tiles - Dover Strait 33,241,848; central North Sea 600,958; off the Niger Delta 1,487,605.
+
+sources:
+  # --- water depth -------------------------------------------------------------------------------
+  - kind: record
+    id: gebco-2026-grid-opendap
+    title: "GEBCO_2026 Grid: global elevation and water depth, 15 arc-second (OPeNDAP)"
+    publisher: GEBCO (IHO-IOC); distributed by NERC CEDA for BODC
+    abstract: >-
+      GEBCO's global terrain model for ocean and land: elevation in metres on a 15 arc-second grid (about 460 m at the
+      equator), negative below sea level. The 2026 release, published 23 April 2026, built on SRTM15+ v2.8 with the
+      Seabed 2030 regional grids. This is GEBCO's own distribution, through CEDA; OPeNDAP returns a single cell, so
+      one depth costs one small request (slow: 6-8 seconds when checked). Most ocean cells are interpolated rather
+      than measured: the GEBCO_2026 TID grid says which. Not for navigation.
+    endpoints:
+      - protocol: opendap
+        url: https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc
+        service_url: https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dds
+        format: netCDF (OPeNDAP)
+        capabilities: [download, sample]
+        info:
+          bands: 1
+          pixel_type: S16
+          data_type: elevation
+          sample:
+            method: opendap
+            variable: elevation
+            value: elevation
+            units: m
+            vertical_datum: mean sea level (CF standard name height_above_mean_sea_level)
+            origin: [-180, -90]
+            cell_deg: 0.004166666666666667
+            rows: 43200
+            cols: 86400
+            row: "floor((lat + 90) * 240)"
+            col: "floor((lon + 180) * 240)"
+            sample_url: "{url}.ascii?elevation[{row}:1:{row}][{col}:1:{col}]"
+            note: "Negative below sea level. Checked 19 Nov 2026: central North Sea (57.9N 1.9E) -86 m; off the Niger Delta (4.0N 5.5E) -83 m. The answer is text: the value follows the line 'elevation.elevation[1][1]'."
+      - {protocol: download, url: "https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc", format: netCDF (7.5 GB)}
+    landing_page: https://www.gebco.net/data-products/gridded-bathymetry-data
+    licence: Public domain, attribution required (GEBCO terms of use)
+    bbox: [-180, -90, 180, 90]
+    detail_m: 460
+    geometry_type: raster
+    concepts_hint: [bathymetry, elevation, seabed depth]
+  - kind: record
+    id: gebco-2026-grid-unh-imageserver
+    title: "GEBCO_2026 Grid: global elevation and water depth, 15 arc-second (ArcGIS image service, UNH CCOM)"
+    publisher: GEBCO grid, served by the University of New Hampshire Center for Coastal and Ocean Mapping
+    publisher_type: academic
+    abstract: >-
+      The same GEBCO_2026 grid served as an ArcGIS image service by UNH's Center for Coastal and Ocean Mapping:
+      identify or getSamples returns the elevation in metres at a point, negative below sea level, in well under a
+      second. Raw grid values, no vertical exaggeration (the 5x service in the same folder is left out). Not GEBCO's
+      own distribution: use the OPeNDAP record when provenance matters, this one when speed does. Not for navigation.
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_IS/ImageServer
+        check_url: https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_IS/ImageServer?f=json
+        capabilities: [render, sample]
+        info:
+          bands: 1
+          pixel_type: S16
+          data_type: elevation
+          sample:
+            method: identify
+            value: elevation
+            units: m
+            vertical_datum: mean sea level (GEBCO grid)
+            note: "Checked 19 Nov 2026: central North Sea -86 m, matching GEBCO's own file; 4.0N 5.5E -87 m (a cell edge; OPeNDAP's cell there gives -83 m)."
+    landing_page: https://www.gebco.net/data-products/gridded-bathymetry-data
+    licence: Public domain, attribution required (GEBCO terms of use)
+    bbox: [-180, -90, 180, 90]
+    detail_m: 460
+    geometry_type: raster
+    concepts_hint: [bathymetry, elevation, seabed depth]
+  - kind: record
+    id: gebco-2026-tid-unh-imageserver
+    title: "GEBCO_2026 Type Identifier (TID) grid: measured or interpolated depth (ArcGIS image service, UNH CCOM)"
+    publisher: GEBCO grid, served by the University of New Hampshire Center for Coastal and Ocean Mapping
+    publisher_type: academic
+    abstract: >-
+      For each GEBCO_2026 cell, a code for what the depth is based on, so a depth can be reported with its footing.
+      Per GEBCO's TID table: 0 land; 10-17 direct measurements (for example 10 singlebeam, 11 multibeam, 17 a
+      combination); 40-46 indirect, such as predicted from satellite gravity or interpolated; 70-72 pre-generated
+      grids, unknown sources and steering points. Check the code table on gebco.net before relying on a specific code.
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_tid_IS/ImageServer
+        check_url: https://gis.ccom.unh.edu/server/rest/services/GEBCO2026/gebco_2026_tid_IS/ImageServer?f=json
+        capabilities: [render, sample]
+        info:
+          bands: 1
+          data_type: thematic
+          sample:
+            method: identify
+            value: class
+            note: "TID code. Checked 19 Nov 2026: central North Sea 17 (combination of direct measurements)."
+    landing_page: https://www.gebco.net/data-products/gridded-bathymetry-data
+    licence: Public domain, attribution required (GEBCO terms of use)
+    bbox: [-180, -90, 180, 90]
+    detail_m: 460
+    geometry_type: raster
+    concepts_hint: [bathymetry, data quality, source identifier]
+  - kind: record
+    id: noaa-ncei-dem-global-mosaic
+    title: "DEM Global Mosaic: elevation and water depth from NOAA NCEI's DEMs (ArcGIS image service)"
+    publisher: NOAA National Centers for Environmental Information (NCEI)
+    publisher_type: central-gov
+    country: US
+    abstract: >-
+      A seamless worldwide mosaic of the bathymetric and topographic digital elevation models NOAA NCEI stewards, from
+      global grids to detailed US coastal DEMs. Identify or getSamples returns the elevation in metres at a point,
+      negative below sea level, taken from the best DEM available there; identify with returnCatalogItems=true says
+      which DEM it came from. Vertical datums differ between the source DEMs. The hillshade version beside it is a
+      picture and is left out.
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_global_mosaic/ImageServer
+        check_url: https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_global_mosaic/ImageServer?f=json
+        capabilities: [render, catalog, raster-functions, sample]
+        info:
+          bands: 1
+          pixel_type: F32
+          data_type: elevation
+          mosaic: true
+          sample:
+            method: identify
+            value: elevation
+            units: m
+            vertical_datum: varies by source DEM (identify with returnCatalogItems=true names the DEM)
+            note: "Checked 19 Nov 2026: central North Sea -87 m; off the Niger Delta (4.0N 5.5E) -80 m."
+    landing_page: https://www.ncei.noaa.gov/products/coastal-elevation-models
+    bbox: [-180, -90, 180, 90]
+    geometry_type: raster
+    concepts_hint: [bathymetry, elevation, digital elevation model]
+
+  # --- shipping density ----------------------------------------------------------------------------
+  - kind: record
+    id: worldbank-ship-density-global
+    title: "Global Shipping Traffic Density: all vessels (World Bank / IMF, AIS 2015-2021)"
+    publisher: The World Bank and IMF (served by Esri)
+    abstract: >-
+      All ship categories combined. The number of AIS positions reported in each 0.005-degree cell (about 500 m at the equator) between
+      January 2015 and February 2021, from IMF's analysis of hourly AIS positions for its World Seaborne Trade
+      Monitoring System; published by the World Bank for its Offshore Wind Development Program. Moving and stationary
+      ships both count, so read it as the general intensity of shipping, not ship transits. Served here from Esri's
+      copy as tiled imagery; the original GeoTIFFs are on the World Bank Data Catalog (dataset 0037580).
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Global/ImageServer
+        check_url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Global/ImageServer?f=json
+        capabilities: [render, tiles, sample]
+        info: *shipinfo
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0037580"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0037580
+    licence: CC BY 4.0 (World Bank Data Catalog)
+    bbox: [-180, -85, 180, 85]
+    detail_m: 500
+    geometry_type: raster
+    concepts_hint: [shipping, vessel density, AIS]
+  - kind: record
+    id: worldbank-ship-density-commercial
+    title: "Global Shipping Traffic Density: commercial ships (World Bank / IMF, AIS 2015-2021)"
+    publisher: The World Bank and IMF (served by Esri)
+    abstract: >-
+      Commercial ships (cargo, tankers and similar). The number of AIS positions reported in each 0.005-degree cell (about 500 m at the equator) between
+      January 2015 and February 2021, from IMF's analysis of hourly AIS positions for its World Seaborne Trade
+      Monitoring System; published by the World Bank for its Offshore Wind Development Program. Moving and stationary
+      ships both count, so read it as the general intensity of shipping, not ship transits. Served here from Esri's
+      copy as tiled imagery; the original GeoTIFFs are on the World Bank Data Catalog (dataset 0037580).
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Commercial/ImageServer
+        check_url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Commercial/ImageServer?f=json
+        capabilities: [render, tiles, sample]
+        info: *shipinfo
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0037580"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0037580
+    licence: CC BY 4.0 (World Bank Data Catalog)
+    bbox: [-180, -85, 180, 85]
+    detail_m: 500
+    geometry_type: raster
+    concepts_hint: [shipping, vessel density, AIS]
+  - kind: record
+    id: worldbank-ship-density-fishing
+    title: "Global Shipping Traffic Density: fishing vessels (World Bank / IMF, AIS 2015-2021)"
+    publisher: The World Bank and IMF (served by Esri)
+    abstract: >-
+      Fishing vessels. The number of AIS positions reported in each 0.005-degree cell (about 500 m at the equator) between
+      January 2015 and February 2021, from IMF's analysis of hourly AIS positions for its World Seaborne Trade
+      Monitoring System; published by the World Bank for its Offshore Wind Development Program. Moving and stationary
+      ships both count, so read it as the general intensity of shipping, not ship transits. Served here from Esri's
+      copy as tiled imagery; the original GeoTIFFs are on the World Bank Data Catalog (dataset 0037580).
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Fishing/ImageServer
+        check_url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Fishing/ImageServer?f=json
+        capabilities: [render, tiles, sample]
+        info: *shipinfo
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0037580"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0037580
+    licence: CC BY 4.0 (World Bank Data Catalog)
+    bbox: [-180, -85, 180, 85]
+    detail_m: 500
+    geometry_type: raster
+    concepts_hint: [shipping, vessel density, AIS]
+  - kind: record
+    id: worldbank-ship-density-oil-and-gas
+    title: "Global Shipping Traffic Density: oil and gas (World Bank / IMF, AIS 2015-2021)"
+    publisher: The World Bank and IMF (served by Esri)
+    abstract: >-
+      Oil and gas: platforms, rigs and FPSOs, per the World Bank's description, not tankers. The number of AIS positions reported in each 0.005-degree cell (about 500 m at the equator) between
+      January 2015 and February 2021, from IMF's analysis of hourly AIS positions for its World Seaborne Trade
+      Monitoring System; published by the World Bank for its Offshore Wind Development Program. Moving and stationary
+      ships both count, so read it as the general intensity of shipping, not ship transits. Served here from Esri's
+      copy as tiled imagery; the original GeoTIFFs are on the World Bank Data Catalog (dataset 0037580).
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Oil_and_Gas/ImageServer
+        check_url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Oil_and_Gas/ImageServer?f=json
+        capabilities: [render, tiles, sample]
+        info: *shipinfo
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0037580"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0037580
+    licence: CC BY 4.0 (World Bank Data Catalog)
+    bbox: [-180, -85, 180, 85]
+    detail_m: 500
+    geometry_type: raster
+    concepts_hint: [shipping, vessel density, AIS]
+  - kind: record
+    id: worldbank-ship-density-passenger
+    title: "Global Shipping Traffic Density: passenger ships (World Bank / IMF, AIS 2015-2021)"
+    publisher: The World Bank and IMF (served by Esri)
+    abstract: >-
+      Passenger ships. The number of AIS positions reported in each 0.005-degree cell (about 500 m at the equator) between
+      January 2015 and February 2021, from IMF's analysis of hourly AIS positions for its World Seaborne Trade
+      Monitoring System; published by the World Bank for its Offshore Wind Development Program. Moving and stationary
+      ships both count, so read it as the general intensity of shipping, not ship transits. Served here from Esri's
+      copy as tiled imagery; the original GeoTIFFs are on the World Bank Data Catalog (dataset 0037580).
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Passenger/ImageServer
+        check_url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Passenger/ImageServer?f=json
+        capabilities: [render, tiles, sample]
+        info: *shipinfo
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0037580"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0037580
+    licence: CC BY 4.0 (World Bank Data Catalog)
+    bbox: [-180, -85, 180, 85]
+    detail_m: 500
+    geometry_type: raster
+    concepts_hint: [shipping, vessel density, AIS]
+  - kind: record
+    id: worldbank-ship-density-leisure
+    title: "Global Shipping Traffic Density: leisure vessels (World Bank / IMF, AIS 2015-2021)"
+    publisher: The World Bank and IMF (served by Esri)
+    abstract: >-
+      Leisure vessels. The number of AIS positions reported in each 0.005-degree cell (about 500 m at the equator) between
+      January 2015 and February 2021, from IMF's analysis of hourly AIS positions for its World Seaborne Trade
+      Monitoring System; published by the World Bank for its Offshore Wind Development Program. Moving and stationary
+      ships both count, so read it as the general intensity of shipping, not ship transits. Served here from Esri's
+      copy as tiled imagery; the original GeoTIFFs are on the World Bank Data Catalog (dataset 0037580).
+    endpoints:
+      - protocol: arcgis-imageserver
+        url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Leisure/ImageServer
+        check_url: https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_Ship_Density_Leisure/ImageServer?f=json
+        capabilities: [render, tiles, sample]
+        info: *shipinfo
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0037580"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0037580
+    licence: CC BY 4.0 (World Bank Data Catalog)
+    bbox: [-180, -85, 180, 85]
+    detail_m: 500
+    geometry_type: raster
+    concepts_hint: [shipping, vessel density, AIS]

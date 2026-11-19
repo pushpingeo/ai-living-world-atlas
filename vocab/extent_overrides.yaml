@@ -3,3 +3,4 @@
 # Regular expressions matched against "title | publisher". Add one only after checking the layer's features.
 genuinely_wider:
   - '^Minerals Resource Data System \| U\.S\. Geological Survey'   # USGS MRDS: mineral sites worldwide
+  - '^DEM Global Mosaic: .* \| NOAA National Centers for Environmental Information'   # NCEI's worldwide DEM mosaic (vocab/seeds/values.yaml)

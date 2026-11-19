@@ -42,7 +42,9 @@ const TOOLS = [
   {
     name: "get_dataset",
     description: "Full record for one dataset: publisher description, licence, themes and concepts (with where they came from), " +
-      "detail and extent notes, and every endpoint with what it can do and a ready-to-use request URL.",
+      "detail and extent notes, attribution line and terms where recorded, and every endpoint with what it can do and a " +
+      "ready-to-use request URL. Endpoints with the 'sample' capability return a number at a point (a depth, a density): " +
+      "details.sample says how (method, value, units) and use.sample_url is the request.",
     inputSchema: { type: "object", properties: { id: { type: "string" } }, required: ["id"] },
   },
   {
@@ -166,6 +168,18 @@ function usage(e) {
     if (!fmt) out.note = "This WFS only offers GML.";
   }
   if (e.protocol === "wmts" && inf.tile_template) out.tile_template = inf.tile_template;
+  // capability "sample": a value at a point. {lon},{lat} in WGS84; feature-info takes a small box round the point
+  // ({west},{south},{east},{north}, e.g. +-0.001 degrees) and reads the centre pixel.
+  const smp = caps.includes("sample") ? inf.sample || {} : null;
+  if (smp && smp.method === "identify")
+    out.sample_url = `${e.service_url}/identify?f=json&geometryType=esriGeometryPoint&returnGeometry=false&returnCatalogItems=false&geometry=` +
+      `%7B%22x%22%3A{lon}%2C%22y%22%3A{lat}%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D`;
+  if (smp && smp.method === "feature-info")
+    out.sample_url = `${e.service_url}${sep(e.service_url)}service=WMS&request=GetFeatureInfo&version=1.3.0&layers=${encodeURIComponent(e.layer_name)}` +
+      `&query_layers=${encodeURIComponent(e.layer_name)}&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json`;
+  if (smp && smp.method === "opendap" && smp.sample_url) out.sample_url = smp.sample_url.replace("{url}", e.url.split("#")[0]);
+  if (smp && smp.method === "lerc-tile" && smp.tile_url)
+    out.tile_url = smp.tile_url.replace("{service_url}", e.service_url).replace("{level}", String(smp.level));
   return out;
 }
 
@@ -449,6 +463,7 @@ async function getDataset(env, a) {
   return {
     id: row.id, title: row.title, publisher: row.publisher, publisher_type: row.ptype, role: row.role,
     description: d.abstract || "", licence: d.licence || row.licence || "not stated", open_licence: !!row.open_licence,
+    ...(d.attribution ? { attribution: d.attribution } : {}), ...(d.terms ? { terms: d.terms } : {}),
     catalogue_page: d.landing_page || null, keywords: d.keywords || [],
     themes: unwrap(row.themes), themes_source: row.themes_src || null, concepts: unwrap(row.concepts),
     tagging_reason: d.tag_reason || null,

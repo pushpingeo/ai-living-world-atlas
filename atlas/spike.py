@@ -259,7 +259,8 @@ async def run(args):
             if time.monotonic() > deadline - reserve / 4:
                 return
             fn = (crawl_ogc.check_layer if L.service_type in ("wms", "wfs", "wmts", "wcs")
-                  else curated_records.check if L.service_type in curated_records.CAPS else crawl_arcgis.check_layer)
+                  else curated_records.check if (L.uid in curated_records.CHECK_URL or L.service_type in curated_records.CAPS)
+                  else crawl_arcgis.check_layer)
             try:
                 checks[L.uid] = await fn(c, L)
             except Exception as e:

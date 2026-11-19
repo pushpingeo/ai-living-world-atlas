@@ -325,6 +325,7 @@
   "catalog",
   "raster-functions",
   "time",
-  "multidimensional"
+  "multidimensional",
+  "sample"
  ]
 }

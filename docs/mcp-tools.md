@@ -33,6 +33,27 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (19 Nov, Tobler request, **in progress**) **Values at a point: water depth and shipping density.** All additive.
+  - **New capability `sample`**: the endpoint returns a number at a point, not a picture. `find_datasets` takes
+    `capability: "sample"`. Picture-only services and vertically exaggerated ones (titles with 3.5x, 5x, 10x,
+    "exaggeration", hillshade, colour ramps) never get it.
+  - **`get_dataset` endpoints gain `details.sample`**, which says how to read the value:
+    `method` (`identify`: ArcGIS ImageServer identify/getSamples; `feature-info`: WMS GetFeatureInfo as JSON, value
+    in `field`; `opendap`: one grid cell by index; `lerc-tile`: ArcGIS tiled imagery, read the pixel from a LERC2D
+    tile; `wcs`: GetCoverage of a tiny box, GeoTIFF), plus `value` (what the number is: `elevation`, `depth`,
+    `density`, `class`, `measure`), `units` and `vertical_datum` where known. For `opendap` and `lerc-tile` it also
+    gives the grid (origin, cell size, level) so the cell can be worked out. `use.sample_url` is a ready template
+    with `{lon}` and `{lat}` (WGS84) for `identify` and `feature-info`.
+  - **`get_dataset` gains `attribution`** (the publisher's attribution or citation line, verbatim) and **`terms`**
+    (the publisher's terms of use, verbatim) where recorded. Both are omitted when we haven't recorded them.
+  - **New records** (wave `spike-values`, concept `bathymetry` or `shipping`): GEBCO_2026 grid by OPeNDAP from CEDA
+    (GEBCO's own distributor); GEBCO_2026 and its type-identifier grid as ImageServers at UNH CCOM; NOAA NCEI's DEM
+    Global Mosaic; the World Bank/IMF Global Shipping Traffic Density (all vessels and five types, Esri-hosted tiles,
+    CC BY 4.0).
+  - **Licence fix:** EMODnet Bathymetry layers (ows.emodnet-bathymetry.eu) and EMODnet's vessel density coverages
+    now carry CC BY 4.0 from EMODnet's terms, with EMODnet's attribution line. `open_licence` becomes true.
+  - Ids already in the atlas don't change.
+
 - (18 Nov, atlas change, **planned**, not yet live) **Publisher registry and trusted publishers**
   (`docs/publisher-registry-design.md`). When it ships, all additive except one:
   - `find_datasets` and `get_dataset` gain `publisher_id` (when matched), `trusted` (true/false) and, for data a

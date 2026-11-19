@@ -13,6 +13,8 @@ import pandas as pd
 import pyarrow.parquet as pq
 
 from .licences import infer as infer_licences
+from .licences import overrides as licence_overrides
+from .sampling import add_sample
 from .titles import fix_titles
 
 
@@ -125,6 +127,8 @@ def main():
         ds = apply_liveness(ds, Path(a.liveness))
     ds, splits = fix_titles(ds)  # status words from service names; live and removed services split apart
     ds = infer_licences(ds)  # e.g. US federal works; the wave files keep what was crawled
+    ds = licence_overrides(ds)  # hand-recorded licences, attribution lines and terms (vocab/licence_overrides.yaml)
+    ds = add_sample(ds)  # capability "sample": endpoints that return a value at a point (vocab/sample_rules.yaml)
     ds.to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     if a.layers:
         cols = ["uid", "dataset_id", "fields", "title", "abstract", "geometry_type"]  # title/abstract: the liveness sweep compares against them; geometry_type: the MCP search

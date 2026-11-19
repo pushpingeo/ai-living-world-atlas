@@ -1,0 +1,89 @@
+# Licences, attribution lines and terms we record by hand, where the service doesn't carry them.
+# Applied at publish time by atlas/licences.py (overrides); the wave files keep what was crawled.
+# First matching rule wins. A rule matches a dataset when one of its endpoints matches `host` (exact) and, if given,
+# `layers` (regular expression on the layer name) and `url` (regular expression on the endpoint address).
+# `only_if_not_open: true` keeps the licence of datasets that already carry an open one (attribution still applies).
+# Quote attribution and terms verbatim from the publisher, and say where they came from in `source`.
+
+rules:
+  # EMODnet Bathymetry. EMODnet's terms: "Unless indicated otherwise, data products created by EMODnet are owned by the
+  # EU and therefore licensed under Creative Commons CC-BY 4.0"; the DTM's catalogue records say CC BY 4.0 too.
+  - host: ows.emodnet-bathymetry.eu
+    layers: '^emodnet:mean$'
+    only_if_not_open: true
+    licence: "CC BY 4.0 (EMODnet terms of use; the DTM's catalogue record also states CC BY 4.0). Not for navigation."
+    open: true
+    attribution: >-
+      This data product was created by EMODnet (https://emodnet.ec.europa.eu/en/), and is owned by the EU and licensed
+      under the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+      EMODnet Bathymetry Consortium (2024). EMODnet Digital Bathymetry (DTM 2024). EMODnet Bathymetry Consortium.
+      https://doi.org/10.12770/cf51df64-56f9-4a99-b1aa-36b8d7b743a1
+    source: https://emodnet.ec.europa.eu/en/terms-use-emodnet-online-services-data-and-data-products (attribution line); DTM 2024 citation from its catalogue record
+  - host: ows.emodnet-bathymetry.eu
+    only_if_not_open: true
+    licence: "CC BY 4.0 (EMODnet terms of use). Not for navigation."
+    open: true
+    attribution: >-
+      This data product was created by EMODnet (https://emodnet.ec.europa.eu/en/), and is owned by the EU and licensed
+      under the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+    source: https://emodnet.ec.europa.eu/en/terms-use-emodnet-online-services-data-and-data-products
+  # EMODnet Human Activities vessel density: an EMODnet product. The WMS records already carry CC BY from EMODnet's
+  # catalogue; the WCS coverages weren't joined to it and showed no licence.
+  - host: ows.emodnet-humanactivities.eu
+    layers: '^(emodnet(:|__))?vesseldensity_\w+$'
+    only_if_not_open: true
+    licence: "CC BY 4.0 (EMODnet terms of use)"
+    open: true
+    attribution: >-
+      This data product was created by EMODnet (https://emodnet.ec.europa.eu/en/), and is owned by the EU and licensed
+      under the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+    source: https://emodnet.ec.europa.eu/en/terms-use-emodnet-online-services-data-and-data-products
+
+  # GEBCO grid, wherever it is served from (CEDA is GEBCO's own distributor; UNH CCOM serves the same grid as
+  # ImageServers). Terms quoted from GEBCO's terms of use; citation from CEDA's record for the GEBCO_2026 Grid.
+  - host: dap.ceda.ac.uk
+    url: 'gebco_2026'
+    attribution: &gebco2026 >-
+      GEBCO Bathymetric Compilation Group 2026 (2026): The GEBCO_2026 Grid - a continuous terrain model for oceans and
+      land at 15 arc-second intervals. NERC British Oceanographic Data Centre, 23 April 2026.
+      doi:10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa.
+    terms: &gebcoterms >-
+      The GEBCO Grid is placed in the public domain and may be used free of charge. Use of the GEBCO Grid indicates
+      that the user accepts the conditions of use and disclaimer information given below. Users are free to: Copy,
+      publish, distribute and transmit The GEBCO Grid; Adapt The GEBCO Grid; Commercially exploit The GEBCO Grid, by,
+      for example, combining it with other information, or by including it in their own product or application.
+      Users must: Acknowledge the source of The GEBCO Grid. A suitable form of attribution is given in the
+      documentation that accompanies The GEBCO Grid. Not use The GEBCO Grid in a way that suggests any official
+      status or that GEBCO, or the IHO or IOC, endorses any particular application of The GEBCO Grid. Not mislead
+      others or misrepresent The GEBCO Grid or its source. The GEBCO Grid should NOT be used for navigation or for
+      any other purpose involving safety at sea.
+      (Full terms and disclaimer: https://www.gebco.net/data-products/gridded-bathymetry/terms-of-use)
+    source: https://www.gebco.net/data-products/gridded-bathymetry/terms-of-use; citation from catalogue.ceda.ac.uk (GEBCO_2026 Grid)
+  - host: gis.ccom.unh.edu
+    url: 'GEBCO2026/gebco_2026_(tid_)?IS'
+    attribution: *gebco2026
+    terms: *gebcoterms
+    source: https://www.gebco.net/data-products/gridded-bathymetry/terms-of-use; citation from catalogue.ceda.ac.uk (GEBCO_2026 Grid)
+
+  # NOAA NCEI DEM Global Mosaic: no licence or credit line on the service, its item info or its NOAA record.
+  # The US federal inference (atlas/licences.py) applies; we suggest a credit and say it is ours.
+  - host: gis.ngdc.noaa.gov
+    url: 'DEM_mosaics/DEM_global_mosaic/ImageServer'
+    attribution: >-
+      Suggested by the atlas (NOAA states none for this service): NOAA National Centers for Environmental Information
+      (NCEI), DEM Global Mosaic image service. The value at a point comes from one of the DEMs NCEI stewards; identify
+      with returnCatalogItems=true names it, and that DEM may have its own citation.
+    source: none stated by NOAA (service JSON, item info and the data.noaa.gov record checked 19 Nov 2026)
+
+  # World Bank / IMF Global Shipping Traffic Density, as served by Esri (esri_oceans). CC BY 4.0 on the World Bank
+  # Data Catalog (dataset 0037580) and on each Esri item.
+  - host: tiledimageservices.arcgis.com
+    url: 'Global_Ship_Density_'
+    licence: "CC BY 4.0 (World Bank Data Catalog, dataset 0037580; the Esri-hosted copy states the same)"
+    open: true
+    attribution: >-
+      Composed by the atlas from the World Bank's dataset page (no attribution line is given there): Global Shipping
+      Traffic Density, The World Bank (Data Catalog dataset 0037580), from IMF's World Seaborne Trade
+      Monitoring System (Cerdeiro, Komaromi, Liu and Saeed, 2020); analysis supported by the World Bank's ESMAP and
+      PROBLUE programs. Licensed CC BY 4.0. Served by Esri (ArcGIS Living Atlas, esri_oceans).
+    source: https://datacatalog.worldbank.org/search/dataset/0037580; Esri items 2f72eb72cc0b403bb19a7cd1853f3d94 and siblings

@@ -1,0 +1,27 @@
+# Which endpoints return a number at a point: capability "sample" (Tobler request, 19 Nov 2026).
+# Applied at publish time by atlas/sampling.py; the wave files keep what was crawled.
+#
+# Automatic:
+#   - ArcGIS ImageServers with one band that aren't tiles-only and aren't RGB or display products: identify/getSamples.
+#   - WCS coverages: GetCoverage of a tiny box.
+# Curated records (vocab/seeds/values.yaml) say how to sample themselves in their endpoint info.
+# Never: anything matching `never` in its title, layer name or address. Exaggerated relief returns exaggerated
+# numbers (GEBCO 5x gave -435 m where the grid says -86 m), and hillshades and colour ramps return display values.
+
+never: '(?i)exaggerat|\b\d+(\.\d+)?x\b|\d+pt\d+x|_\d+x(_|\b)|\d+x_|hillshade|hill shade|shaded relief|multidirectional|\bcolou?r(s|ed)?\b|rainbow|haxby|blue ?green|\brgb\b|_dra(_|\b)|\bdra\b|stretch'
+
+# WMS layers whose GetFeatureInfo returns a number, checked by hand. `service` is the host, `layers` a regular
+# expression on the layer name, `field` the property holding the value.
+feature_info:
+  - service: ows.emodnet-bathymetry.eu
+    layers: '^emodnet:mean(_20\d\d)?$'
+    field: Depth
+    value: elevation
+    units: m
+    vertical_datum: LAT (Lowest Astronomical Tide), per EMODnet
+    note: Negative below the datum. Checked 19 Nov 2026 in the central North Sea (-86.3 m).
+  - service: ows.emodnet-humanactivities.eu
+    layers: '^(emodnet:)?vesseldensity_\w+$'
+    field: GRAY_INDEX
+    value: density
+    note: EMODnet vessel density (time spent by vessels per grid cell); see the layer description for units. Checked 19 Nov 2026 in the Dover Strait (4.56) and central North Sea (0.006).

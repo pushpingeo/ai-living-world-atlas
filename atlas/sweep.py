@@ -45,7 +45,7 @@ HOST_DOWN_MIN, HOST_DOWN_SHARE = 20, 0.8   # a host is "down" when 80%+ of 20+ s
 SECOND_LOOK_MAX, SECOND_LOOK_PER_HOST, SECOND_LOOK_TIMEOUT, SECOND_LOOK_RESERVE = 3000, 40, 90, 20
 HOST_GIVE_UP = 10                          # stop knocking on a host after this many network failures in a row
 OGC = {"wms": "WMS", "wfs": "WFS", "wmts": "WMTS", "wcs": "WCS"}
-PLAIN = {"download", "cloud", "api", "landing", "geojson"}  # geojson: atlas-hosted tiles, checked via index.json
+PLAIN = {"download", "cloud", "api", "landing", "geojson", "opendap"}  # geojson: atlas-hosted tiles, checked via index.json; opendap: GET of its .dds
 RESOLVING = {"ok", "unmatched"}
 FAILING = {"fail", "missing", "host-down"}
 

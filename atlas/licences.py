@@ -8,6 +8,7 @@ inference spelled out in the licence text. It is skipped when the credit line na
 from __future__ import annotations
 
 import re
+from pathlib import Path
 
 import pandas as pd
 
@@ -36,3 +37,45 @@ def infer(ds: pd.DataFrame) -> pd.DataFrame:
     print(f"licences: {int(m.sum()):,} US federal datasets marked open (inferred); "
           f"{int((fed & other).sum()):,} skipped because the credit names a non-federal party", flush=True)
     return ds
+
+
+OVERRIDES = Path(__file__).resolve().parent.parent / "vocab" / "licence_overrides.yaml"
+
+
+def overrides(ds: pd.DataFrame) -> pd.DataFrame:
+    """Licences, attribution lines and terms recorded by hand (vocab/licence_overrides.yaml). Adds `attribution` and
+    `terms` columns (blank where nothing is recorded)."""
+    import json
+    from urllib.parse import urlsplit
+
+    import yaml
+
+    rules = (yaml.safe_load(OVERRIDES.read_text()) or {}).get("rules") or [] if OVERRIDES.exists() else []
+    for r in rules:
+        r["_layers"] = re.compile(r["layers"]) if r.get("layers") else None
+        r["_url"] = re.compile(r["url"]) if r.get("url") else None
+    hosts = {r["host"] for r in rules}
+    ds = ds.copy()
+    for col in ("attribution", "terms"):
+        if col not in ds.columns:
+            ds[col] = ""
+    lic, opn, att, trm = list(ds["licence"]), list(ds["open_licence"]), list(ds["attribution"]), list(ds["terms"])
+    n = 0
+    for i, eps_json in enumerate(ds["endpoints"]):
+        if not eps_json or not any(h in eps_json for h in hosts):
+            continue
+        eps = json.loads(eps_json)
+        for r in rules:
+            hit = any(urlsplit(e.get("service_url") or e.get("url") or "").netloc.lower() == r["host"]
+                      and (r["_layers"] is None or r["_layers"].search(e.get("layer_name") or ""))
+                      and (r["_url"] is None or r["_url"].search(e.get("url") or "")) for e in eps)
+            if not hit:
+                continue
+            if r.get("licence") and not (r.get("only_if_not_open") and bool(opn[i])):
+                lic[i], opn[i] = r["licence"], bool(r.get("open", opn[i]))
+            att[i] = r.get("attribution", att[i]) or ""
+            trm[i] = r.get("terms", trm[i]) or ""
+            n += 1
+            break
+    print(f"licences: {n:,} datasets given a recorded licence, attribution or terms (vocab/licence_overrides.yaml)", flush=True)
+    return ds.assign(licence=lic, open_licence=opn, attribution=att, terms=trm)

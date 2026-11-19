@@ -139,6 +139,45 @@ jobs:
                   print(f"GEM [{title}]: not found by search ({status})"); continue
               r2, status, s = call("fetch_features", {"id": hit["id"], "bbox": bbox, "limit": 5, **({"text": text} if text else {})})
               print(f"GEM [{title}]: {status}, {s:.1f}s, returned {r2.get('returned') if r2 else '-'}, matched {r2.get('matched') if r2 else '-'}, licence {str((r2 or {}).get('licence'))[:20]!r}")
+          # Values at a point (Tobler request, 19 Nov): find sampled endpoints, then read a number through each one
+          import math, re as _re
+          def fill(u, lon, lat):
+              d = 0.001
+              return (u.replace("{lon}", str(lon)).replace("{lat}", str(lat)).replace("{west}", str(lon - d)).replace("{south}", str(lat - d))
+                       .replace("{east}", str(lon + d)).replace("{north}", str(lat + d))
+                       .replace("{row}", str(math.floor((lat + 90) * 240))).replace("{col}", str(math.floor((lon + 180) * 240))))
+          def read_value(ep, lon, lat):
+              smp, use = (ep.get("details") or {}).get("sample") or {}, ep.get("use") or {}
+              if smp.get("method") == "lerc-tile":
+                  return "lerc tile (decode not run here): " + str(use.get("tile_url"))[-40:]
+              if not use.get("sample_url"):
+                  return f"no sample_url ({smp.get('method')})"
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(fill(use["sample_url"], lon, lat), headers={"User-Agent": "atlas-mcp-check"}), timeout=60) as rr:
+                      txt = rr.read().decode("utf-8", "replace")
+              except Exception as e:
+                  return f"{type(e).__name__}: {e}"[:80]
+              if smp.get("method") == "identify":
+                  return json.loads(txt).get("value")
+              if smp.get("method") == "feature-info":
+                  f = json.loads(txt).get("features") or [{}]
+                  return f[0].get("properties", {}).get(smp.get("field"))
+              if smp.get("method") == "opendap":
+                  m = _re.search(r"\[0\], (-?\d+)", txt)
+                  return m.group(1) if m else txt[:80]
+              return txt[:80]
+          for label, lon, lat in [("central North Sea", 1.9, 57.9), ("off the Niger Delta", 5.5, 4.0)]:
+              for concept in ("bathymetry", "shipping"):
+                  time.sleep(1.5)
+                  r, status, s = call("find_datasets", {"lon": lon, "lat": lat, "radius_km": 2, "concept": concept, "capability": "sample", "limit": 12})
+                  res = (r or {}).get("results", [])
+                  print(f"find_datasets [{label}, {concept}, sample]: {status}, matches {(r or {}).get('matches')}: {[x['title'][:45] for x in res][:8]}")
+                  for x in res[:6]:
+                      g, status, s = call("get_dataset", {"id": x["id"]})
+                      for ep in (g or {}).get("endpoints", []):
+                          if "sample" in (ep.get("capabilities") or []):
+                              print(f"  {x['id']} {x['title'][:40]!r}: {ep['protocol']} {((ep.get('details') or {}).get('sample') or {}).get('method')} -> {read_value(ep, lon, lat)}; attribution {'yes' if g.get('attribution') else 'no'}, open {g.get('open_licence')}")
+                              break
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})
