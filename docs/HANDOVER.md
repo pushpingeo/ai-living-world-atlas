@@ -73,7 +73,7 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
-| Values (`spike-values`) | 10 | 10 (expected) | Curated rasters that return a value at a point: GEBCO_2026 depth, NOAA DEM mosaic, World Bank/IMF ship density (19 Nov) |
+| Values (`spike-values`) | 10 | 10 | Curated rasters that return a value at a point: GEBCO_2026 depth, NOAA DEM mosaic, World Bank/IMF ship density (19 Nov; tagged for under $0.01) |
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
@@ -243,3 +243,7 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
     - Open: shipping density comes from Esri's tiles-only copy (LERC decoding). Hosting the World Bank GeoTIFFs as a
       COG on R2 would make it a plain range read; Rob's call (storage).
     - Open: GEBCO's OPeNDAP at CEDA is slow (6-8 s a cell). The UNH CCOM image service is the fast route.
+    - CEDA and Esri's tiled image services refuse crawlers in robots.txt. We respect that: a curated record there
+      shows `unchecked` ("checked by hand"), and the sweep will report it as robots, not failing.
+    - The generic rule trusts identify on one-band ImageServers. mcp-check is how false positives show up (Esri's
+      WorldElevation3D answered 0 everywhere and is now excluded); add any others to `never` in sample_rules.yaml.
