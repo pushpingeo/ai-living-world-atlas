@@ -399,7 +399,8 @@ sources:
             units: m
             sample_url: "{url}?lon={lon}&lat={lat}&resource=ign_rge_alti_wld&zonly=true"
             value_path: /elevations/0
-            note: "Checked 20 Nov 2026: Paris (48.8566N 2.3522E) 34.83 m. Browser-readable (CORS open)."
+            nodata: -99999
+            note: "Checked 20 Nov 2026: Paris (48.8566N 2.3522E) 34.83 m; -99999 outside its data (Bern, Cologne). Browser-readable (CORS open)."
     landing_page: https://www.data.gouv.fr/dataservices/api-geoplateforme-calcul-altimetrique
     licence: Licence Ouverte / Open Licence version 2.0 (stated for RGE ALTI on data.gouv.fr)
     bbox: [-5.5, 41.2, 9.8, 51.2]
@@ -618,7 +619,7 @@ sources:
             box_m: 50
             field: value_list
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=dtm_05m&query_layers=dtm_05m&styles=&crs=EPSG:28992&bbox={xmin},{ymin},{xmax},{ymax}&width=101&height=101&i=50&j=50&info_format=application/json"
-            note: "Value is a string. Checked 20 Nov 2026: Amsterdam, Dam square, 1.31 m (NAP). Browser-readable (CORS open)."
+            note: "Value is a string. Checked 20 Nov 2026: Amsterdam 1.31 m and 1.78 m (NAP). No feature comes back on buildings and water, where the DTM has no ground value. Browser-readable (CORS open)."
             vertical_datum: NAP
     landing_page: https://www.ahn.nl/
     licence: CC0 1.0 (AHN via PDOK)
@@ -697,7 +698,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Scottish Coastal LiDAR Survey 2025-26 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -712,6 +713,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:coastal-2025-2026-dtm&query_layers=scotland:coastal-2025-2026-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -728,7 +730,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "National Lidar Program DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -743,6 +745,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:nlp-dtm&query_layers=scotland:nlp-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -759,7 +762,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Orkney Islands Council 2023 dtm", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -774,6 +777,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:orkney-islands-council-23-dtm&query_layers=scotland:orkney-islands-council-23-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -790,7 +794,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Outer Hebrides 2019 - 25cm DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -805,6 +809,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:outer-hebrides-2019-dtm-25cm&query_layers=scotland:outer-hebrides-2019-dtm-25cm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -821,7 +826,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Outer Hebrides 2019 - 50cm DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -836,6 +841,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:outer-hebrides-2019-dtm-50cm&query_layers=scotland:outer-hebrides-2019-dtm-50cm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -852,7 +858,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "HES LiDAR Data Stirling City and surrounding area (2010) DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -867,6 +873,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-2010-dtm&query_layers=scotland:scotland-gov-lidar-hes-2010-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -883,7 +890,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Historic Environment Scotland Ten Project (2010) DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -898,6 +905,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-hes-2010s10-dtm&query_layers=scotland:scotland-gov-lidar-hes-hes-2010s10-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -914,7 +922,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Historic Environment Scotland Projects (2016-2017 Sub project 4) DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -929,6 +937,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-hes-2016-2017-dtm&query_layers=scotland:scotland-gov-lidar-hes-hes-2016-2017-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -945,7 +954,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Historic Environment Scotland Projects (2016) DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -960,6 +969,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-hes-2016-dtm&query_layers=scotland:scotland-gov-lidar-hes-hes-2016-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -976,7 +986,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Historic Environment Scotland Projects (2017) DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -991,6 +1001,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-hes-2017-dtm&query_layers=scotland:scotland-gov-lidar-hes-hes-2017-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1007,7 +1018,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Historic Environment Scotland Projects (2017 sub project 3) DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1022,6 +1033,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-hes-2017sp3-dtm&query_layers=scotland:scotland-gov-lidar-hes-hes-2017sp3-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1038,7 +1050,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "LiDAR for Historic Environment Scotland Isle of Luing DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1053,6 +1065,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-gov-lidar-hes-hes-luing-dtm&query_layers=scotland:scotland-gov-lidar-hes-hes-luing-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1069,7 +1082,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Lidar Phase 1 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1084,6 +1097,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-lidar-1-dtm&query_layers=scotland:scotland-lidar-1-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1100,7 +1114,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Lidar Phase 2 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1115,6 +1129,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-lidar-2-dtm&query_layers=scotland:scotland-lidar-2-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1131,7 +1146,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Lidar Phase 3 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1146,6 +1161,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-lidar-3-dtm&query_layers=scotland:scotland-lidar-3-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1162,7 +1178,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Lidar Phase 4 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1177,6 +1193,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-lidar-4-dtm&query_layers=scotland:scotland-lidar-4-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1193,7 +1210,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Lidar Phase 5 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1208,6 +1225,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-lidar-5-dtm&query_layers=scotland:scotland-lidar-5-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/
@@ -1224,7 +1242,7 @@ sources:
     abstract: >-
       Bare-earth terrain heights in metres from "Lidar Phase 6 DTM", one of the Scottish public-sector lidar surveys on the
       Scottish Remote Sensing Portal. The portal's WMS answers GetFeatureInfo with the height at a point (GRAY_INDEX);
-      outside the survey's flown area it returns no value. Where surveys overlap, prefer the most recent.
+      outside the survey's flown area it answers -9999 (or -999), or nothing. Where surveys overlap, prefer the most recent.
     endpoints:
       - protocol: api
         url: https://ows.remotesensing.data.gov.scot/geoserver/ows
@@ -1239,6 +1257,7 @@ sources:
             value: elevation
             units: m
             field: GRAY_INDEX
+            nodata: [-9999, -999]
             sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=scotland:scotland-lidar-6-dtm&query_layers=scotland:scotland-lidar-6-dtm&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json"
             box_deg: 0.0005
     landing_page: https://remotesensingdata.gov.scot/

@@ -87,3 +87,29 @@ rules:
       Monitoring System (Cerdeiro, Komaromi, Liu and Saeed, 2020); analysis supported by the World Bank's ESMAP and
       PROBLUE programs. Licensed CC BY 4.0. Served by Esri (ArcGIS Living Atlas, esri_oceans).
     source: https://datacatalog.worldbank.org/search/dataset/0037580; Esri items 2f72eb72cc0b403bb19a7cd1853f3d94 and siblings
+
+  # Land elevation records (vocab/seeds/values.yaml), 20 Nov 2026. Open in the sense Tobler needs (any use, with
+  # attribution); the crawl's licence check doesn't recognise these licences by name.
+  - host: copernicus-dem-30m.s3.amazonaws.com
+    open: true
+    licence: "Copernicus DEM GLO-30 licence: free of charge for any use, including commercial, with attribution"
+    attribution: >-
+      © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European
+      Union and ESA; all rights reserved
+    source: Copernicus Data Space Ecosystem, Copernicus DEM collection page (attribution line verbatim)
+  - host: cyberjapandata2.gsi.go.jp
+    open: true
+    licence: "GSI content terms of use (Public Data License 1.0): free use, source must be credited"
+    attribution: "出典：国土地理院ウェブサイト (https://maps.gsi.go.jp/development/elevation_s.html)"
+    source: https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html (credit format from GSI's example)
+  - host: api3.geo.admin.ch
+    open: true
+    licence: "swisstopo free geodata (OGD): free use for any purpose, including commercial; the source must be stated"
+    source: https://www.swisstopo.admin.ch/en/conditions-geodata
+  - host: servicios.idee.es
+    url: 'wcs-inspire/mdt'
+    attribution: "MDT05 CC BY 4.0 scne.es"
+    source: IDEE / IGN metadata for MDT05 (use constraints, verbatim)
+  - host: datacube.services.geo.ca
+    attribution: "Contains information licensed under the Open Government Licence – Canada."
+    source: https://open.canada.ca/en/open-government-licence-canada (the licence's own attribution statement)

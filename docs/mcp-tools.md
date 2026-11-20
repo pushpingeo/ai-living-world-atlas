@@ -51,6 +51,8 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     Netherlands (AHN feature-info), Australia (GA 5 m lidar and 1 second, MapServer identify).
   - **England's EA lidar WMS** and **Scotland's lidar WMS** layers now have `sample` (feature-info, metres).
   - Records whose host refuses GitHub's runners (Geoscience Australia) are checked by hand and show `unchecked`.
+  - **`sample.nodata`** gives a service's no-data answer where it isn't empty: France's API answers -99999 outside
+    its data, Scotland's surveys -9999 (or -999) outside the flown area. Treat these as "no value", not a height.
 
 - (19 Nov, Tobler request, **done**, live 20 Nov) **Values at a point: water depth and shipping density.** All additive.
   - **New capability `sample`**: the endpoint returns a number at a point, not a picture. `find_datasets` takes

@@ -8,7 +8,7 @@ import json
 import math
 import urllib.request
 
-UA = {"User-Agent": "atlas-mcp-check (+https://github.com/pushpingeo/ai-living-world-atlas)"}
+UA = {"User-Agent": "ai-living-world-atlas probe (+https://github.com/pushpingeo/ai-living-world-atlas)"}
 
 
 def _get(url: str, timeout: int = 60) -> bytes:
