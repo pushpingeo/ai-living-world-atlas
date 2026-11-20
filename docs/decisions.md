@@ -448,3 +448,39 @@ Found by the first live check (mcp-check, 19 Nov 23:10 UTC), which reads a value
 finds: EMODnet's DTM 2016 and 2018 layers answer depth as a positive number (87 in the central North Sea) where the
 current, 2020 and 2022 layers answer -87, so those two are labelled `value: depth`; and Esri's WorldElevation3D
 caches answer identify with 0 everywhere, so they never get `sample`.
+
+## 2026-11-20: land elevation at a point, national and global
+
+Tobler asked for higher-resolution elevation as values, not pictures. Checked live (probe rounds 16-19, now sending
+an Origin header so CORS is reported, plus a browser for Geoscience Australia, whose CDN refuses GitHub's runners):
+
+| Country | Source | How | Value read | Browser |
+|---|---|---|---|---|
+| England | EA lidar composite 1-2 m | WMS feature-info | London 9.55 m | yes |
+| Scotland | National lidar 50 cm (2025-27) | COG on S3, 1 km OS squares | (mcp-check) | yes |
+| Scotland | 18 public-sector lidar surveys | WMS feature-info | Stornoway 3.14 m | yes |
+| France | IGN altimetry API (RGE ALTI) | point API | Paris 34.83 m | yes |
+| Japan | GSI elevation API | point API | Tokyo 3.6 m (1 m lidar) | yes |
+| Switzerland | swisstopo height service | point API, LV95 | Bern 555.5 m | yes |
+| Spain | IGN MDT05 | WCS 2.0 | Madrid 648 m | yes |
+| Norway | Kartverket NHM DTM | WCS 1.0, UTM33 | Oslo 4.85 m | yes |
+| Germany (NRW) | DGM1 | WCS 2.0, UTM32 | Cologne 46.5 m | yes |
+| Canada | NRCan HRDEM mosaic | WCS 1.1.1, EPSG:3979 | GeoTIFF returned | yes |
+| Netherlands | AHN 50 cm | WMS feature-info, RD only | Amsterdam 1.31 m | yes |
+| Australia | GA 5 m lidar / 1 second | MapServer identify | Sydney 20.9 m / Canberra 568 m | yes |
+| US | USGS 3DEP (already in) | ImageServer identify | Washington 18.4 m | yes |
+| World | Copernicus GLO-30 on AWS | COG, 1-degree files | (mcp-check) | **no CORS** |
+| World | Esri copdemglo30 (already in) | ImageServer identify | Edinburgh 94.7 m | yes, Esri terms |
+
+Decisions:
+- **Two new sample methods:** `api` (point-height services, with a JSON pointer to the value) and `cog` (which file
+  covers a point, then the pixel). Any `sample` can carry its own templates; the Worker fills `{url}`, the caller the
+  coordinates, in WGS84 or the record's `crs`.
+- **Hosts that refuse GitHub's runners** (Geoscience Australia) get `manual_check`: the record says how it was
+  checked, the crawl marks it unchecked and the sweep skips it, so it isn't retired for a block that isn't an outage.
+- **Scotland's WMS layers have no descriptions**, so they don't pass when crawled. Rather than loosen the quality
+  rule, each survey is a curated record (18), with the layer's extent so search finds the ones covering a place.
+- **Not added:** Denmark, Finland and Sweden need an account or key; Hessen refused GitHub (403); Flanders' WCS
+  wants its own axis names (not yet working); Italy's TINITALY asks users to register. New Zealand is covered by the
+  LINZ elevation ImageServer already in the atlas; LINZ's own 1 m COGs (STAC, CC BY 4.0) are a later addition.
+- **Found on the way:** a bare `NO` in YAML is a boolean. Norway's country code is quoted.
