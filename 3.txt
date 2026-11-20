@@ -1,0 +1,23 @@
+URL: https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation%5B35496:1:35496%5D%5B43656:1:43656%5D
+RESULT: 200 0.882840s 395B https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation%5B35496:1:35496%5D%5B43656:1:43656%5D
+HEADERS: content-type: text/plain;access-control-allow-origin: *;
+Dataset {
+    Grid {
+     ARRAY:
+        Int16 elevation[lat = 1][lon = 1];
+     MAPS:
+        Float64 lat[lat = 1];
+        Float64 lon[lon = 1];
+    } elevation;
+} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;
+---------------------------------------------
+elevation.elevation[1][1]
+[0], -86
+
+elevation.lat[1]
+57.90208333333334
+
+elevation.lon[1]
+1.9020833333333371
+
+
