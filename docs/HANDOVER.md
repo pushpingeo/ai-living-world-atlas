@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (19 Nov 2026, evening)
+# AI Living World Atlas: handover (20 Nov 2026)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -73,7 +73,7 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
-| Values (`spike-values`) | 10 | 10 | Curated rasters that return a value at a point: GEBCO_2026 depth, NOAA DEM mosaic, World Bank/IMF ship density (19 Nov; tagged for under $0.01) |
+| Values (`spike-values`) | 40 | 40 | Curated sources that return a value at a point: depth (GEBCO_2026, NOAA), ship density (World Bank/IMF), land elevation in 12 countries plus GLO-30 (19-20 Nov; tagged for under $0.01) |
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
@@ -243,6 +243,16 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
     - Open: shipping density comes from Esri's tiles-only copy (LERC decoding). Hosting the World Bank GeoTIFFs as a
       COG on R2 would make it a plain range read; Rob's call (storage).
     - Open: GEBCO's OPeNDAP at CEDA is slow (6-8 s a cell). The UNH CCOM image service is the fast route.
+    - **Land elevation (20 Nov):** curated records for Scotland (50 cm national lidar COGs, 18 lidar surveys via WMS),
+      France, Japan, Switzerland (point APIs), Spain, Norway, North Rhine-Westphalia, Canada (WCS), Netherlands (AHN
+      feature-info), Australia (GA MapServer identify, checked by hand: GA's CDN refuses GitHub) and Copernicus GLO-30
+      (COGs on AWS, no CORS). England's EA lidar WMS and the US 3DEP ImageServer were already in and now sample.
+      New methods `api` and `cog`; `atlas/sample_check.py` reads values the way an agent would, and mcp-check runs it
+      at 15 points. Table of values in decisions.md (20 Nov).
+    - Next for elevation: New Zealand from LINZ's own 1 m COGs (STAC, CC BY 4.0; the Eagle-hosted NZ service in the
+      atlas is "for use with ArcGIS software"); Germany's other states (Hessen refused GitHub); Flanders' WCS axis
+      names; Denmark, Finland, Sweden need keys or accounts.
+    - CEDA's OPeNDAP answered 403 to one run and 200 to the next: watch it in mcp-check.
     - CEDA and Esri's tiled image services refuse crawlers in robots.txt. We respect that: a curated record there
       shows `unchecked` ("checked by hand"), and the sweep will report it as robots, not failing.
     - The generic rule trusts identify on one-band ImageServers. mcp-check is how false positives show up (Esri's
