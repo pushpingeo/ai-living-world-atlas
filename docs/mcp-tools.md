@@ -33,7 +33,7 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
-- (19 Nov, Tobler request, **in progress**) **Values at a point: water depth and shipping density.** All additive.
+- (19 Nov, Tobler request, **done**, live 20 Nov) **Values at a point: water depth and shipping density.** All additive.
   - **New capability `sample`**: the endpoint returns a number at a point, not a picture. `find_datasets` takes
     `capability: "sample"`. Picture-only services and vertically exaggerated ones (titles with 3.5x, 5x, 10x,
     "exaggeration", hillshade, colour ramps) never get it.
@@ -53,6 +53,14 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   - **Licence fix:** EMODnet Bathymetry layers (ows.emodnet-bathymetry.eu) and EMODnet's vessel density coverages
     now carry CC BY 4.0 from EMODnet's terms, with EMODnet's attribution line. `open_licence` becomes true.
   - Ids already in the atlas don't change.
+  - Live check (mcp-check, 20 Nov), values read through the server's own `sample_url`: off the Niger Delta (4.0N
+    5.5E) GEBCO_2026 OPeNDAP -83 m (`dae2320fae0b26f0`), UNH image service -87 m (`9e5419ff6f330200`), NOAA mosaic
+    -80 m (`962c2706d519ddd4`), GEBCO TID 40 (predicted, not measured; `77444d56f4682135`). Central North Sea: EMODnet
+    DTM -87 m. Esri's own `gebco` copy said -140.5 m off the Niger Delta: prefer the GEBCO records. Shipping density
+    ids: all vessels `a337942943e725dd`, commercial `2340ba1f3edf4c6d`, fishing `7ff33a9404410501`, oil and gas
+    `7b04932bbcfb62ac`, passenger `11baa92a9a648e32`, leisure `26a0e614508f04e6`.
+  - Watch `details.sample.value`: EMODnet's DTM 2016 and 2018 layers give depth as a positive number (`value:
+    depth`); everything else in metres is `elevation`, negative below the datum.
   - Curated records' extents are set by hand, so they aren't flagged as overstated: `get_dataset` may show
     `extent_source: "curated"` (new value beside `declared` and `measured`).
   - A curated record whose host refuses crawlers in robots.txt (CEDA, Esri's tiled image services) shows its check
