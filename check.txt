@@ -1,0 +1,246 @@
+find_datasets [world: VIIRS]: HTTP 200, 0.2s, text, matches 12, rows read 48 (extent): ['Most Recent VIIRS Heat Points (academic)', 'Satellite (VIIRS) Thermal Hotspots and F (curated-collection)', 'Fire Heat VIIRS I-Band 48+ hours (academic)']
+find_datasets [world: fire]: HTTP 200, 0.7s, text, matches 5369, rows read 16737 (extent): ['Fire History Locations (Points) (public-body)', 'False Alarms (public-body)', 'Active Fire Perimeters (public-body)']
+find_datasets [world: thermal]: HTTP 200, 0.3s, text, matches 188, rows read 752 (extent): ['Generation thermal (central-gov)', 'ThermalConductivity (regional-gov)', 'Thermal future (central-gov)']
+find_datasets [world: hotspot]: HTTP 200, 0.2s, text, matches 106, rows read 424 (extent): ['hotspot.duesseldorf (public-body)', 'Wildfire hotspots Cumulative Effects pro (public-body)', 'Eastern afromontane hotspot 50km buffer (central-gov)']
+find_datasets [world: MODIS]: HTTP 200, 0.2s, text, matches 116, rows read 464 (extent): ['bluemarble.ecw (regional-gov, +1)', 'MODIS EU NRT (public-body, +1)', 'MODIS EU Daily (public-body, +1)']
+find_datasets [world: essential fish habitat]: HTTP 200, 0.3s, text, matches 248, rows read 992 (extent): ['[ES005005] Essential fish habitat for En (international, +2)', '[ES005003] Essential fish habitat for Sa (international, +1)', '[ES005002] Essential fish habitat for Sa (international, +1)']
+find_datasets [world: Wildfire Response Points]: HTTP 200, 0.2s, text, matches 5, rows read 20 (extent): ['Wildfire Response Points (business, +1)', 'Wildfire Response Points (business, +1)', 'Garfield Debris Fan Points (academic)']
+find_datasets [world: UK, no text]: HTTP 200, 0.6s, large-area, matches 3885 capped, rows read 84067 (rank): ['Canker Stain of Pine Survey England 10K  (central-gov)', 'Protected Zone Plots Additional GB 10K G (central-gov)', 'Sweet Chestnut Blight Survey England 10K (central-gov)']
+find_datasets [world: Edinburgh 5 km]: HTTP 200, 0.6s, area, matches 6756, rows read 25273 (cells): ['Polling Places 2024 (local-gov)', 'Scheduled Ancient Monuments (local-gov)', 'Listed Buildings (local-gov, +1)']
+find_datasets [world: Gulf of Mexico, no text]: HTTP 200, 0.6s, large-area, matches 4002 capped, rows read 84225 (rank): ['all public EQuIS stations (regional-gov)', 'Recreation site data unavailable (central-gov)', 'BOPP Exclusion Zones No Buffer (regional-gov)']
+find_datasets [world: Atlantic, no text]: HTTP 200, 0.8s, large-area, matches 6000 capped, rows read 41358 (rank): ['Sanitary Structures (regional-gov)', 'AgreementData (central-gov)', 'Nationally designated areas 2017 (CDDA)  (international)']
+find_datasets [world: world, no text]: HTTP 200, 0.6s, large-area, matches 6000 capped, rows read 12010 (rank): ['AgreementData (central-gov)', 'Primary Control Points (central-gov)', 'Monthly Global Precipitation Projections (central-gov)']
+find_datasets [world: Gulf of Mexico, oil-gas]: HTTP 200, 0.2s, large-area, matches 132, rows read 852 (cells): ['OCS Oil and Natural Gas Wells (central-gov)', 'OCS Oil and Natural Gas Wells (central-gov)', 'OCS Oil and Natural Gas Wells (central-gov)']
+find_datasets [world: Edinburgh 5 km, road, query, line]: HTTP 200, 0.2s, area, matches 14, rows read 330 (cells): ['Speed Limits 20mph Project (local-gov)', 'Waiting and Loading Markings (unknown)', 'Gritting Routes (unknown)']
+find_datasets [world: Berlin 10 km]: HTTP 200, 1.0s, area, matches 14224, rows read 54745 (cells): ['Modulare Kindertagesstätten (public-body, +1)', 'Standorte öffentlich bestellter Vermessu (public-body, +1)', 'Industrie und Gewerbe L N (Nacht-Index)  (public-body)']
+find_datasets [world: Lagos 20 km]: HTTP 200, 0.4s, area, matches 1741, rows read 7886 (cells): ['Etendues d eau (central-gov)', 'Bas fonds du Bénin (central-gov)', 'Surfaces hydrographiques (central-gov)']
+find_datasets [world: US, protected-area]: HTTP 200, 0.4s, large-area, matches 1778, rows read 10073 (cells): ['Class I Areas (public-body)', 'NCED Easement Holder Type (public-body)', 'Region 6 Wilderness Boundaries (central-gov)']
+find_datasets [world: Europe, admin-boundary]: HTTP 200, 0.8s, large-area, matches 5495, rows read 30073 (cells): ['European Boundaries (international)', 'EuropeCountries (international)', 'EEA39 Countries (international)']
+find_datasets [world: Nigeria, no text]: HTTP 200, 0.4s, large-area, matches 2111, rows read 16810 (cells): ['Grid3 market buffer merged (central-gov)', 'Boundary adm1 (central-gov)', 'Disco coverage (central-gov)']
+find_datasets [Edinburgh, any]: HTTP 200, 0.5s, matches 6756, results 100
+   first: Polling Places 2024 | licence: This information is supplied under the Open Government Licen | missing fields: none
+find_datasets [Edinburgh, road, query]: HTTP 200, 0.2s, matches 14, results 14
+   first: Speed Limits 20mph Project | licence: This information is supplied under the Open Government Licen | missing fields: none
+find_datasets [Nigeria bbox, oil-gas]: HTTP 200, 0.2s, matches 30, results 29
+   first: Global Shipping Traffic Density: oil and gas (World Bank / IMF, AIS 20 | licence: CC BY 4.0 (World Bank Data Catalog, dataset 0037580; the Esr | missing fields: none
+find_datasets [North Sea, protected-area]: HTTP 200, 0.2s, matches 176, results 100
+   first: gems habitat polygon dataset | licence: Data collated by NatureScot and Joint Nature Conservation Co | missing fields: none
+fetch_features [bdb5d0a70436343e at Rosebank]: HTTP 200, 0.9s, returned 42
+fetch_features [29a134d61746d7dc at Rosebank]: HTTP 200, 1.1s, returned 42
+get_dataset [bdb5d0a70436343e]: HTTP 200, title 'UKCS offshore infrastructure pipeline linear (WGS84)', endpoint UKCS_offshore_infrastructure_pipeline_linear_(WGS84)/FeatureServer/1
+get_dataset [EMODnet wrecks ee41a8d58f1fe201]: HTTP 200, 'Heritage Ship Wrecks', protocols ['wfs', 'wms', 'wms'], licence 'No limitations on public access; Creative Commons CC-BY 4.0 https://cr'
+fetch_features [HES Scheduled Monuments]: HTTP 200, 9.1s, returned 20 via arcgis-mapserver
+fetch_features [HES Listed Buildings by Category]: HTTP 200, tool error: [{"type": "text", "text": "Couldn't fetch features: WFS offers GML only; WFS offers GML only; arcgis-mapserver: timed out; arcgis-mapserver: timed out"}], 58.3s, returned - via -
+fetch_features [HES Listed Buildings boundaries]: HTTP 200, 6.2s, returned 20 via arcgis-mapserver
+fetch_features [HES World Heritage Sites]: HTTP 200, 1.1s, returned 1 via arcgis-mapserver
+fetch_features [HES Gardens and Designed Landscapes]: HTTP 200, tool error: [{"type": "text", "text": "Couldn't fetch features: WFS offers GML only; WFS offers GML only; arcgis-mapserver: timed out; arcgis-mapserver: timed out"}], 50.2s, returned - via -
+fetch_features [HES Battlefields]: HTTP 200, 1.0s, returned 20 via arcgis-mapserver
+fetch_features [HES Historic MPAs]: HTTP 200, 1.0s, returned 20 via arcgis-mapserver
+fetch_features [HES Garden and Designed Landscapes (WMS only)]: HTTP 200, tool error: [{"type": "text", "text": "This dataset has no endpoint that can return features. Use get_dataset for image or tile endpoints."}], 0.2s, returned - via -
+fetch_features [HES Canmore maritime]: HTTP 200, 13.3s, returned 20 via arcgis-mapserver
+fetch_features [HES Canmore terrestrial]: HTTP 200, tool error: [{"type": "text", "text": "Couldn't fetch features: arcgis-mapserver: timed out"}], 25.6s, returned - via -
+fetch_features [EMODnet heritage wrecks, English Channel]: HTTP 200, 0.7s, returned 50
+fetch_features [UKHO wrecks via EMODnet, Rosebank]: HTTP 200, 0.8s, returned 3
+find_datasets [Shetland, pipeline, query]: HTTP 200, 27 results, EMODnet: ['Pipelines']
+find_datasets [Uganda, oil-gas]: HTTP 200, 20 results, PAU: ['Sedimentary basins', 'Facility footprint', 'Pipeline facility', '2D seismic', 'Oil and gas wells', 'Seismic 3D']
+fetch_features [PAU Sedimentary basins]: HTTP 200, 26.8s, returned 10
+find_datasets [GEM extraction, Shetland]: HTTP 200, ['Global Oil and Gas Extraction Tracker (fields: ext']
+fetch_features [GEM extraction, west of Shetland]: HTTP 200, 0.5s, returned 20, matched 39: ['Alligin Oil and Gas Field (United Kingdom)', 'Cambo Oil and Gas Field (United Kingdom)', 'Capercaillie Oil and Gas Field (United Kingdom)', 'Clair Phase 1 Oil and Gas Field (United Kingdom)', 'Clair Ridge Oil and Gas Field (United Kingdom)', 'Clair South Oil and Gas Field (United Kingdom)']
+GEM [Gas pipelines]: HTTP 200, 0.5s, returned 5, matched 69, licence 'CC BY 4.0 (Global En'
+GEM [Oil and NGL pipelines]: HTTP 200, 0.4s, returned 5, matched 30, licence 'CC BY 4.0 (Global En'
+GEM [LNG import and export terminals]: HTTP 200, 0.4s, returned 5, matched 137, licence 'CC BY 4.0 (Global En'
+GEM [Oil and gas power plants]: HTTP 200, 0.4s, returned 5, matched 311, licence 'CC BY 4.0 (Global En'
+GEM [Coal power plants]: HTTP 200, 0.6s, returned 5, matched 2169, licence 'CC BY 4.0 (Global En'
+GEM [Coal mines]: HTTP 200, 0.5s, returned 5, matched 228, licence 'CC BY 4.0 (Global En'
+GEM [Wind farms]: HTTP 200, 4.8s, returned 4, matched 4, licence 'CC BY 4.0 (Global En'
+GEM [Solar farms]: HTTP 200, 0.5s, returned 5, matched 2209, licence 'CC BY 4.0 (Global En'
+GEM [Nuclear power plants]: HTTP 200, 0.4s, returned 5, matched 109, licence 'CC BY 4.0 (Global En'
+GEM [Iron and steel plants]: HTTP 200, 0.4s, returned 5, matched 7, licence 'CC BY 4.0 (Global En'
+GEM [Hydropower plants]: HTTP 200, 0.5s, returned 5, matched 324, licence 'CC BY 4.0 (Global En'
+GEM [Coal terminals]: HTTP 200, 0.5s, returned 5, matched 26, licence 'CC BY 4.0 (Global En'
+find_datasets [central North Sea, bathymetry, sample]: HTTP 200, matches 20: ['Kinetic energy at the seabed due to currents ', 'Light (PAR) at the seabed - Europe-wide', 'Marine/Bathymetry', 'Mean depth (DTM release 2016)', 'Mean depth (DTM release 2020)', 'Mean depth (DTM release 2018)', 'Mean depth (DTM release 2022)', 'Mean depth']
+  34408f7dfccd9379 'Kinetic energy at the seabed due to curr': wcs wcs -> no sample_url (wcs); attribution no, open False
+  7dedd66c9d413d89 'Light (PAR) at the seabed - Europe-wide': wcs wcs -> no sample_url (wcs); attribution no, open False
+  0a8ae283bb4d5e07 'Marine/Bathymetry': arcgis-imageserver identify -> -87; attribution no, open False
+  50187aa1077fc280 'Mean depth (DTM release 2016)': wms feature-info -> 87; attribution yes, open True
+  51491ac2f19052c1 'Mean depth (DTM release 2020)': wms feature-info -> -87.02318572998047; attribution yes, open True
+  1dbbfb98de88ca68 'Mean depth (DTM release 2018)': wms feature-info -> 87; attribution yes, open True
+find_datasets [central North Sea, shipping, sample]: HTTP 200, matches 75: ['Vessel Density Annual Averages - Tanker', 'Vessel Density Monthly totals - Military and ', 'Vessel Density Monthly totals - Fishing', 'Vessel Density Annual Averages - Cargo', 'Vessel Density Annual Averages - Dredging or ', 'Vessel Density Monthly totals - Tanker', 'Vessel Density Monthly totals - Other', 'Vessel Density Annual Averages - Sailing']
+  01334737d36e3e00 'Vessel Density Annual Averages - Tanker': wms feature-info -> 0; attribution yes, open True
+  163a66f23b61a1f8 'Vessel Density Monthly totals - Military': wms feature-info -> 0; attribution yes, open True
+  1d7941f2b3cc759c 'Vessel Density Monthly totals - Fishing': wms feature-info -> 0; attribution yes, open True
+  2b65569aa477a5bc 'Vessel Density Annual Averages - Cargo': wms feature-info -> 0.0034887820947915316; attribution yes, open True
+  34ad095361cfed05 'Vessel Density Annual Averages - Dredgin': wms feature-info -> 0; attribution yes, open True
+  46613f47f28376bf 'Vessel Density Monthly totals - Tanker': wms feature-info -> 0; attribution yes, open True
+find_datasets [off the Niger Delta, bathymetry, sample]: HTTP 200, matches 6: ['GEBCO_2026 Grid: global elevation and water d', 'DEM Global Mosaic: elevation and water depth ', 'GEBCO_2026 Type Identifier (TID) grid: measur', 'GEBCO_2026 Grid: global elevation and water d', 'NCEI Bathymetric Attributed Grid (BAG) Mosaic', 'gebco']
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and wa': opendap opendap -> -83; attribution yes, open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water d': arcgis-imageserver identify -> -80; attribution yes, open True
+  77444d56f4682135 'GEBCO_2026 Type Identifier (TID) grid: m': arcgis-imageserver identify -> 40; attribution yes, open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and wa': arcgis-imageserver identify -> -87; attribution yes, open True
+  ed0bc7015a5ff44f 'NCEI Bathymetric Attributed Grid (BAG) M': arcgis-imageserver identify -> NoData; attribution no, open False
+  1a10029513807fb9 'gebco': arcgis-imageserver identify -> -140.511; attribution no, open False
+find_datasets [off the Niger Delta, shipping, sample]: HTTP 200, matches 4: ['Global Shipping Traffic Density: commercial s', 'Global Shipping Traffic Density: leisure vess', 'Global Shipping Traffic Density: oil and gas ', 'Global Shipping Traffic Density: all vessels ']
+  2340ba1f3edf4c6d 'Global Shipping Traffic Density: commerc': arcgis-imageserver lerc-tile -> lerc tile (decode not run here): ommercial/ImageServer/tile/8/{row}/{col}; attribution yes, open True
+  26a0e614508f04e6 'Global Shipping Traffic Density: leisure': arcgis-imageserver lerc-tile -> lerc tile (decode not run here): y_Leisure/ImageServer/tile/8/{row}/{col}; attribution yes, open True
+  7b04932bbcfb62ac 'Global Shipping Traffic Density: oil and': arcgis-imageserver lerc-tile -> lerc tile (decode not run here): l_and_Gas/ImageServer/tile/8/{row}/{col}; attribution yes, open True
+  a337942943e725dd 'Global Shipping Traffic Density: all ves': arcgis-imageserver lerc-tile -> lerc tile (decode not run here): ty_Global/ImageServer/tile/8/{row}/{col}; attribution yes, open True
+elevation [London]: HTTP 200, matches 15
+  75ec1e6d9382729c 'LIDAR Vegetation Object Model (VOM)' (GB): wcs -> no sample_url (wcs); open True
+  d11f90fbbd11cb27 'LIDAR Composite First Return Digital Surface Mod' (GB): feature-info -> 9.539250373840332; open True
+  eb6e50ae60683350 'SurfZone Digital Elevation Model (DEM) - 2m' (GB): wcs -> no sample_url (wcs); open True
+  80881c04296c6e8d 'LIDAR Composite Digital Surface Model (DSM) - 2m' (GB): wcs -> no sample_url (wcs); open True
+  9c74f4cc60416e00 'LIDAR Composite Digital Terrain Model (DTM) 2m' (GB): wcs -> no sample_url (wcs); open True
+  a28ea3ad51e8c230 'LIDAR Composite Digital Terrain Model (DTM) - 1m' (GB): wcs -> no sample_url (wcs); open True
+  e59da6ea6392b3b9 'LIDAR Composite Digital Surface Model (DSM) - 1m' (GB): wcs -> no sample_url (wcs); open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 8.583718299865723; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 11.5393; open True
+elevation [Skye]: HTTP 200, matches 15
+  761e9fec1232aba0 'Scotland lidar terrain heights: LiDAR for Outer ' (GB): feature-info -> None; open True
+  aef470b499bb7470 'Scotland lidar terrain heights: Scottish Coastal' (GB): feature-info -> -9999; open True
+  8511446561509602 'Scotland lidar terrain heights: LiDAR for Histor' (GB): feature-info -> -9999; open True
+  c0424e5149bf341e 'Scotland lidar terrain heights: Lidar Phase 2 DT' (GB): feature-info -> None; open True
+  6e10046c0e6671b8 'Scotland lidar terrain heights: National Lidar P' (GB): feature-info -> 121.4749984741211; open True
+  a4bf104d938e2bc0 'Scottish National LiDAR Programme: 50 cm terrain' (GB): cog -> 121.73100280761719; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 122.0886459350586; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 113.13; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 115; open True
+elevation [Stornoway]: HTTP 200, matches 14
+  78d883b5a7f2d648 'Scotland lidar terrain heights: LiDAR for Outer ' (GB): feature-info -> 3.1439783573150635; open True
+  761e9fec1232aba0 'Scotland lidar terrain heights: LiDAR for Outer ' (GB): feature-info -> 3.139500141143799; open True
+  aef470b499bb7470 'Scotland lidar terrain heights: Scottish Coastal' (GB): feature-info -> -9999; open True
+  8511446561509602 'Scotland lidar terrain heights: LiDAR for Histor' (GB): feature-info -> -9999; open True
+  c0424e5149bf341e 'Scotland lidar terrain heights: Lidar Phase 2 DT' (GB): feature-info -> 2.930000066757202; open True
+  a4bf104d938e2bc0 'Scottish National LiDAR Programme: 50 cm terrain' (GB): cog -> RasterioIOError: HTTP response code: 404; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 2.226839542388916; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 8.48; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 8; open True
+elevation [Edinburgh]: HTTP 200, matches 21
+  29f412fc40747998 'Scotland lidar terrain heights: Lidar Phase 5 DT' (GB): feature-info -> 86.05392456054688; open True
+  b7819ea053734ef0 'Scotland lidar terrain heights: LiDAR for Histor' (GB): feature-info -> -9999; open True
+  62a32260a0de652e 'Scotland lidar terrain heights: LiDAR for Histor' (GB): feature-info -> -9999; open True
+  f7e9a43bed534b38 'Scotland lidar terrain heights: LiDAR for Histor' (GB): feature-info -> -999; open True
+  a65d6f2f6f3a35a3 'Scotland lidar terrain heights: Lidar Phase 4 DT' (GB): feature-info -> -9999; open True
+  a81a00264a313cd8 'Scotland lidar terrain heights: Lidar Phase 3 DT' (GB): feature-info -> -9999; open True
+  373aa9727ff4f5b1 'Scotland lidar terrain heights: Lidar Phase 1 DT' (GB): feature-info -> -9999; open True
+  aef470b499bb7470 'Scotland lidar terrain heights: Scottish Coastal' (GB): feature-info -> -9999; open True
+  8511446561509602 'Scotland lidar terrain heights: LiDAR for Histor' (GB): feature-info -> 85.99300384521484; open True
+  c0424e5149bf341e 'Scotland lidar terrain heights: Lidar Phase 2 DT' (GB): feature-info -> -9999; open True
+elevation [Paris]: HTTP 200, matches 9
+  245a9a4d96d8bf33 'France: IGN altimetry API (RGE ALTI, 1-5 m terra' (FR): api -> 34.83; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 47.37554931640625; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 36.641; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 40; open True
+  53d9b0bd05eccfc2 'ArcticDEM - High-resolution Elevation Models of ' (-): identify -> NoData; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 47; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 47.3755; open False
+  1a10029513807fb9 'gebco' (-): identify -> 40; open False
+elevation [Tokyo]: HTTP 200, matches 9
+  e16c8e16bce4d117 'Japan: GSI elevation API (heights at a point fro' (JP): api -> 3.6; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 8.7352933883667; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 11.44; open True
+  58788bb04ebe0e76 'geoid/DGHM' (-): identify -> 36.6551; open False
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 16; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 12; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 8.73529; open False
+  1a10029513807fb9 'gebco' (-): identify -> 16; open False
+elevation [Bern]: HTTP 200, matches 12
+  26a336ee554d450d 'Switzerland: swisstopo height service (swissALTI' (CH): api -> 553.8; open True
+  245a9a4d96d8bf33 'France: IGN altimetry API (RGE ALTI, 1-5 m terra' (FR): api -> -99999.0; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 562.308837890625; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 545.958; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 551; open True
+  6a6fddcc62f370c8 'SRTM X-SAR Elevation Mosaic' (DE): wcs -> no sample_url (wcs); open False
+  9c2508de8645020d 'SRTM X-SAR Error Mosaic' (DE): wcs -> no sample_url (wcs); open False
+  53d9b0bd05eccfc2 'ArcticDEM - High-resolution Elevation Models of ' (-): identify -> NoData; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 561; open False
+elevation [Madrid]: HTTP 200, matches 9
+  842dc31e8ae5d729 'Spain: IGN 5 m digital terrain model (MDT05) as ' (ES): wcs -> 648.0; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 648.8198852539062; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 666.006; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 675; open True
+  53d9b0bd05eccfc2 'ArcticDEM - High-resolution Elevation Models of ' (-): identify -> NoData; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 660; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 648.82; open False
+  1a10029513807fb9 'gebco' (-): identify -> 671; open False
+elevation [Oslo]: HTTP 200, matches 9
+  c8c15c048cf8ccd0 'Norway: Kartverket national detailed terrain mod' (NO): wcs -> 4.90070915222168; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 20.886577606201172; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 13.51; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 22; open True
+  53d9b0bd05eccfc2 'ArcticDEM - High-resolution Elevation Models of ' (-): identify -> 63.2031; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 22; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 20.8866; open False
+  1a10029513807fb9 'gebco' (-): identify -> 22; open False
+elevation [Cologne]: HTTP 200, matches 14
+  f10189e9a8785772 'Germany, North Rhine-Westphalia: 1 m digital ter' (DE): wcs -> 46.5099983215332; open True
+  490f2f8b171bcb28 'Netherlands: AHN 50 cm terrain model (DTM) heigh' (NL): feature-info -> None; open True
+  245a9a4d96d8bf33 'France: IGN altimetry API (RGE ALTI, 1-5 m terra' (FR): api -> -99999.0; open True
+  58c36908b91f2883 'Grid Coverage' (DE): wcs -> no sample_url (wcs); open False
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 57.0813102722168; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 51.368; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 55; open True
+  6a6fddcc62f370c8 'SRTM X-SAR Elevation Mosaic' (DE): wcs -> no sample_url (wcs); open False
+  9c2508de8645020d 'SRTM X-SAR Error Mosaic' (DE): wcs -> no sample_url (wcs); open False
+elevation [Ottawa]: HTTP 200, matches 10
+  c1c0d7ddb50c2b3e 'Canada: NRCan High Resolution DEM mosaic (1-2 m,' (CA): wcs -> 71.01493835449219; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 76.97528076171875; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> HTTPError: HTTP Error 403: Forbidden; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 76.4903; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 66; open True
+  4bda0e02a44ab32c '3DEPElevation' (US): identify -> 78.8875; open False
+  53d9b0bd05eccfc2 'ArcticDEM - High-resolution Elevation Models of ' (-): identify -> NoData; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 82; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 76.9753; open False
+  1a10029513807fb9 'gebco' (-): identify -> 9; open False
+elevation [Amsterdam]: HTTP 200, matches 11
+  490f2f8b171bcb28 'Netherlands: AHN 50 cm terrain model (DTM) heigh' (NL): feature-info -> None; open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 15.302997589111328; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 9.2588; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 15; open True
+  6a6fddcc62f370c8 'SRTM X-SAR Elevation Mosaic' (DE): wcs -> no sample_url (wcs); open False
+  9c2508de8645020d 'SRTM X-SAR Error Mosaic' (DE): wcs -> no sample_url (wcs); open False
+  53d9b0bd05eccfc2 'ArcticDEM - High-resolution Elevation Models of ' (-): identify -> NoData; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 13; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 15.303; open False
+elevation [Sydney]: HTTP 200, matches 11
+  ba5a7a94ce2dd648 'Australia: Geoscience Australia 1 second (30 m) ' (AU): identify -> 60.886894; open True
+  cc91e7a6f623140a 'Australia: Geoscience Australia 5 m lidar DEM (b' (AU): identify -> 20.918352; open True
+  1d7f3380e7a82fa6 'Predicted Elevation (Median) - Version 1 (KY22)' (AU): wcs -> no sample_url (wcs); open True
+  dc7188cdc4af220f 'Input Elevation - Version 1 (KY22)' (AU): wcs -> no sample_url (wcs); open True
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 84.62777709960938; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 50.3456; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 28; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 66; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 84.6278; open False
+elevation [Washington]: HTTP 200, matches 11
+  410e3c839b8d7f6e 'LiDAR/LiDARBareEarth' (US): identify -> NoData; open False
+  da2aa9adeb3f217b 'LiDAR/HeightAboveGround' (US): identify -> NoData; open False
+  ea6d50484474c017 'WatershedDelineation/OverlandReliefAcres2018' (US): identify -> 0; open False
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 22.824687957763672; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 18.0111; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 21; open True
+  4bda0e02a44ab32c '3DEPElevation' (US): identify -> 18.3981; open False
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 25; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 22.8247; open False
+elevation [Wellington]: HTTP 200, matches 7
+  6193080f9267eea2 'Copernicus DEM GLO-30: 30 m global surface heigh' (-): cog -> 11.359331130981445; open True
+  dae2320fae0b26f0 'GEBCO_2026 Grid: global elevation and water dept' (-): opendap -> URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>; open True
+  962c2706d519ddd4 'DEM Global Mosaic: elevation and water depth fro' (-): identify -> 7.46; open True
+  9e5419ff6f330200 'GEBCO_2026 Grid: global elevation and water dept' (-): identify -> 20; open True
+  5fe6dcfcf134d3aa 'nasadem30' (-): identify -> 20; open False
+  757e9d598b7b22af 'copdemglo30' (-): identify -> 11.3593; open False
+  1a10029513807fb9 'gebco' (-): identify -> 25; open False
+get_dataset: HTTP 200, 0.2s, endpoints 3
+fetch_features: HTTP 200, 0.7s, returned 50
