@@ -1,0 +1,16 @@
+skipping 10 already tagged
+submitted batch msgbatch_01GGcRD9eAWwrXyWGvdmLoSk with 30 requests
+[0s] dmLoSk in_progress {'processing': 30, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] dmLoSk in_progress {'processing': 30, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] dmLoSk in_progress {'processing': 30, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[180s] dmLoSk in_progress {'processing': 30, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[240s] dmLoSk in_progress {'processing': 30, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[301s] dmLoSk in_progress {'processing': 30, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[361s] dmLoSk ended {'processing': 0, 'succeeded': 30, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch(es) msgbatch_01GGcRD9eAWwrXyWGvdmLoSk
+
+- Requests: 30; succeeded: 30
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 13326, "output_tokens": 5315, "cache_read_input_tokens": 89726, "cache_creation_input_tokens": 3094}
+- **Cost: $0.00** (estimated from token counts and published batch prices)
+
