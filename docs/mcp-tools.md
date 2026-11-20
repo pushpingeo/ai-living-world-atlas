@@ -33,6 +33,24 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (20 Nov, Tobler request, **in progress**) **Land elevation at a point, national and global.** All additive; builds
+  on `sample` from the depth request below.
+  - **New `details.sample.method` values:** `api` (a point-height service: `sample_url` plus `value_path`, a JSON
+    pointer such as `/elevations/0`) and `cog` (a cloud-optimised GeoTIFF: `use.file_url` names the file for a point,
+    `details.sample.how` says how to fill it, then read the pixel). `identify` can now also be a MapServer identify
+    (Geoscience Australia), with `value_path` saying where the number is.
+  - **Any `sample` may carry its own templates** (`sample_url`, `file_url`). Placeholders the caller fills:
+    `{lon}` `{lat}` and `{west}` `{south}` `{east}` `{north}` (WGS84, box half-size `box_deg`, default 0.001);
+    `{x}` `{y}` and `{xmin}` `{ymin}` `{xmax}` `{ymax}` in `sample.crs` (box half-size `box_m`). Some services need
+    a national grid (Swiss LV95, Dutch RD, UTM): the `crs` says which.
+  - **`sample.browser: false`** marks a source a web page can't read directly (no CORS): fetch through a server.
+  - **New records** (concept `elevation`): Scotland's 50 cm national lidar (COG) and its lidar WMS; Copernicus GLO-30
+    (COG on AWS, surface model, server-side only); France (IGN API), Japan (GSI API), Switzerland (swisstopo API),
+    Spain (IGN 5 m WCS), Norway (Kartverket WCS), North Rhine-Westphalia (1 m WCS), Canada (NRCan HRDEM WCS),
+    Netherlands (AHN feature-info), Australia (GA 5 m lidar and 1 second, MapServer identify).
+  - **England's EA lidar WMS** and **Scotland's lidar WMS** layers now have `sample` (feature-info, metres).
+  - Records whose host refuses GitHub's runners (Geoscience Australia) are checked by hand and show `unchecked`.
+
 - (19 Nov, Tobler request, **done**, live 20 Nov) **Values at a point: water depth and shipping density.** All additive.
   - **New capability `sample`**: the endpoint returns a number at a point, not a picture. `find_datasets` takes
     `capability: "sample"`. Picture-only services and vertically exaggerated ones (titles with 3.5x, 5x, 10x,

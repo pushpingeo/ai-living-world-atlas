@@ -302,3 +302,392 @@ sources:
     detail_m: 500
     geometry_type: raster
     concepts_hint: [shipping, vessel density, AIS]
+
+  # --- land elevation: national and global sources that return a height at a point (20 Nov 2026) ------------
+  # Template placeholders an agent fills: {lon} {lat} (WGS84); {west} {south} {east} {north} (WGS84 box);
+  # {x} {y} and {xmin} {ymin} {xmax} {ymax} in sample.crs (box half-size sample.box_m). Values below were read live.
+  - kind: wms
+    url: https://ows.remotesensing.data.gov.scot/geoserver/ows
+    publisher: Scottish Government and JNCC (Scottish Remote Sensing Portal)
+    publisher_type: central-gov
+    country: GB
+    licence: Open Government Licence v3 (Scottish Remote Sensing Portal; each phase states its own attribution)
+  - kind: record
+    id: scotland-national-lidar-dtm-cog
+    title: "Scottish National LiDAR Programme: 50 cm terrain model as cloud-optimised GeoTIFFs (1 km tiles)"
+    publisher: Scottish Government (Scottish Remote Sensing Portal, hosted on AWS Open Data)
+    publisher_type: central-gov
+    country: GB
+    abstract: >-
+      Bare-earth digital terrain model at 50 cm from the Scottish National LiDAR Programme (captured 2025 to 2027), one
+      cloud-optimised GeoTIFF per Ordnance Survey 1 km square, in British National Grid. A browser can read the cell at
+      a point with a range request. Coverage grows as capture continues: a missing file means not flown yet. The older
+      lidar phases are in the same bucket under their own names.
+    endpoints:
+      - protocol: cloud
+        url: https://srsp-open-data.s3.eu-west-2.amazonaws.com/lidar/national-lidar-programme/dtm/27700/gridded/
+        check_url: https://srsp-open-data.s3.eu-west-2.amazonaws.com/?list-type=2&max-keys=1&prefix=lidar/national-lidar-programme/dtm/27700/gridded/
+        format: COG
+        capabilities: [download, cloud, sample]
+        info:
+          bands: 1
+          data_type: elevation
+          sample:
+            method: cog
+            value: elevation
+            units: m
+            crs: EPSG:27700
+            file_url: "{url}{osgb_1km}_50cm_DTM_ScotlandNationalLiDAR.tif"
+            how: "osgb_1km is the Ordnance Survey 1 km grid reference of the point (two letters, then the km digits of easting and northing within the 100 km square, e.g. NG2205). Read the pixel at (x, y) in EPSG:27700. A 404 means the square isn't covered yet."
+            note: "Browser-readable (CORS open). Checked 20 Nov 2026 by mcp-check."
+    landing_page: https://remotesensingdata.gov.scot/
+    licence: Open Government Licence v3
+    bbox: [-8.8, 54.6, -0.7, 60.9]
+    detail_m: 0.5
+    geometry_type: raster
+    concepts_hint: [elevation, lidar, digital terrain model]
+  - kind: record
+    id: copernicus-dem-glo30-cog-sample
+    title: "Copernicus DEM GLO-30: 30 m global surface heights as cloud-optimised GeoTIFFs (AWS Open Data)"
+    publisher: European Space Agency / Copernicus (AWS Open Data copy)
+    abstract: >-
+      Copernicus GLO-30, one cloud-optimised GeoTIFF per 1-degree square, worldwide. It is a surface model: heights
+      include buildings and trees, so it reads high in towns and forests; national lidar terrain models are bare earth.
+      Range reads work, but the bucket sends no CORS headers, so a web page can't read it directly: fetch through a
+      server (Tobler's Worker). A missing file means sea, or a square not released at 30 m (Armenia, Azerbaijan).
+    endpoints:
+      - protocol: cloud
+        url: https://copernicus-dem-30m.s3.amazonaws.com/
+        check_url: https://copernicus-dem-30m.s3.amazonaws.com/?list-type=2&max-keys=1
+        format: COG
+        capabilities: [download, cloud, sample]
+        info:
+          bands: 1
+          data_type: elevation
+          sample:
+            method: cog
+            value: elevation
+            units: m
+            crs: EPSG:4326
+            browser: false
+            file_url: "{url}Copernicus_DSM_COG_10_{NS}{LAT}_00_{EW}{LON}_00_DEM/Copernicus_DSM_COG_10_{NS}{LAT}_00_{EW}{LON}_00_DEM.tif"
+            how: "LAT = abs(floor(lat)) as 2 digits, NS = N if floor(lat) >= 0 else S; LON = abs(floor(lon)) as 3 digits, EW = E if floor(lon) >= 0 else W. Read the pixel at (lon, lat)."
+            vertical_datum: EGM2008 geoid
+            note: "Surface model (DSM), not bare earth. Checked 20 Nov 2026 by mcp-check."
+    landing_page: https://registry.opendata.aws/copernicus-dem/
+    licence: Copernicus DEM GLO-30 licence (free of charge for any use, attribution required)
+    bbox: [-180, -90, 180, 90]
+    detail_m: 30
+    geometry_type: raster
+    concepts_hint: [elevation, digital surface model]
+  - kind: record
+    id: france-ign-altimetrie-api
+    title: "France: IGN altimetry API (RGE ALTI, 1-5 m terrain heights at a point)"
+    publisher: Institut national de l'information géographique et forestière (IGN)
+    publisher_type: central-gov
+    country: FR
+    abstract: >-
+      IGN's Géoplateforme altimetry service returns the ground height at a point from RGE ALTI, France's 1 m and 5 m
+      terrain model, with a world dataset as fallback outside France. One request per point (several points can be
+      sent at once). IGN asks for no more than 5 requests a second from one address. RGE ALTI updates paused in 2024
+      while lidar HD replaces it.
+    endpoints:
+      - protocol: api
+        url: https://data.geopf.fr/altimetrie/1.0/calcul/alti/rest/elevation.json
+        service_url: https://data.geopf.fr/altimetrie/1.0/calcul/alti/rest/elevation.json?lon=2.3522&lat=48.8566&resource=ign_rge_alti_wld&zonly=true
+        check_url: https://data.geopf.fr/altimetrie/1.0/calcul/alti/rest/elevation.json?lon=2.3522&lat=48.8566&resource=ign_rge_alti_wld&zonly=true
+        format: JSON
+        capabilities: [sample]
+        info:
+          sample:
+            method: api
+            value: elevation
+            units: m
+            sample_url: "{url}?lon={lon}&lat={lat}&resource=ign_rge_alti_wld&zonly=true"
+            value_path: /elevations/0
+            note: "Checked 20 Nov 2026: Paris (48.8566N 2.3522E) 34.83 m. Browser-readable (CORS open)."
+    landing_page: https://www.data.gouv.fr/dataservices/api-geoplateforme-calcul-altimetrique
+    licence: Licence Ouverte / Open Licence version 2.0 (stated for RGE ALTI on data.gouv.fr)
+    bbox: [-5.5, 41.2, 9.8, 51.2]
+    detail_m: 1
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model]
+  - kind: record
+    id: japan-gsi-elevation-api
+    title: "Japan: GSI elevation API (heights at a point from 1 m lidar and 5 m / 10 m DEMs)"
+    publisher: Geospatial Information Authority of Japan (GSI)
+    publisher_type: central-gov
+    country: JP
+    abstract: >-
+      The Geospatial Information Authority of Japan's elevation API returns the height at a point and which source it
+      came from (hsrc: for example 1 m lidar, 5 m photogrammetry or 10 m). It answers with a non-numeric value where
+      it has no data, such as at sea or outside Japan.
+    endpoints:
+      - protocol: api
+        url: https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php
+        service_url: https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php?lon=139.7671&lat=35.6812&outtype=JSON
+        check_url: https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php?lon=139.7671&lat=35.6812&outtype=JSON
+        format: JSON
+        capabilities: [sample]
+        info:
+          sample:
+            method: api
+            value: elevation
+            units: m
+            sample_url: "{url}?lon={lon}&lat={lat}&outtype=JSON"
+            value_path: /elevation
+            source_path: /hsrc
+            note: "Checked 20 Nov 2026: Tokyo Station 3.6 m, source 1 m lidar. Browser-readable (CORS open)."
+    landing_page: https://maps.gsi.go.jp/development/elevation_s.html
+    licence: GSI content terms of use (Public Data License 1.0); cite the source
+    bbox: [122.9, 24.0, 153.99, 45.6]
+    detail_m: 1
+    geometry_type: raster
+    concepts_hint: [elevation, digital elevation model]
+  - kind: record
+    id: switzerland-swisstopo-height-api
+    title: "Switzerland: swisstopo height service (swissALTI3D terrain heights at a point)"
+    publisher: Federal Office of Topography swisstopo
+    publisher_type: central-gov
+    country: CH
+    abstract: >-
+      swisstopo's height service returns the terrain height at a point from swissALTI3D (0.5 m and 2 m) in Switzerland
+      and Liechtenstein, with a 10 m model outside. Coordinates are Swiss LV95 (EPSG:2056) easting and northing, not
+      longitude and latitude.
+    endpoints:
+      - protocol: api
+        url: https://api3.geo.admin.ch/rest/services/height
+        service_url: https://api3.geo.admin.ch/rest/services/height?easting=2600000&northing=1200000
+        check_url: https://api3.geo.admin.ch/rest/services/height?easting=2600000&northing=1200000
+        format: JSON
+        capabilities: [sample]
+        info:
+          sample:
+            method: api
+            value: elevation
+            units: m
+            crs: EPSG:2056
+            sample_url: "{url}?easting={x}&northing={y}"
+            value_path: /height
+            note: "Checked 20 Nov 2026: Bern (E 2600000, N 1200000) 555.5 m. Browser-readable (CORS open)."
+    landing_page: https://docs.geo.admin.ch/access-data/get-point-height.html
+    licence: swisstopo free geodata (OGD) terms - free use for any purpose, source must be stated
+    bbox: [5.95, 45.82, 10.49, 47.81]
+    detail_m: 0.5
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model]
+  - kind: record
+    id: spain-ign-mdt05-wcs
+    title: "Spain: IGN 5 m digital terrain model (MDT05) as a WCS"
+    publisher: Instituto Geográfico Nacional (IGN), Spain
+    publisher_type: central-gov
+    country: ES
+    abstract: >-
+      Spain's national terrain model at 5 m from PNOA lidar, served by IDEE as a Web Coverage Service. A GetCoverage
+      for a few metres round a point returns a small GeoTIFF whose centre pixel is the height. Coarser grids (25 m to
+      1000 m) are in the same service.
+    endpoints:
+      - protocol: wcs
+        url: https://servicios.idee.es/wcs-inspire/mdt
+        check_url: https://servicios.idee.es/wcs-inspire/mdt?request=GetCapabilities&service=WCS
+        format: GeoTIFF
+        capabilities: [download, pixels, sample]
+        info:
+          sample:
+            method: wcs
+            value: elevation
+            units: m
+            sample_url: "{url}?service=WCS&version=2.0.1&request=GetCoverage&coverageId=Elevacion4258_5&subset=Lat({south},{north})&subset=Long({west},{east})&format=image/tiff"
+            box_deg: 0.0002
+            note: "Checked 20 Nov 2026: Madrid, Puerta del Sol, 648 m. Browser-readable (CORS open)."
+    landing_page: https://www.idee.es/
+    licence: CC BY 4.0 (IGN; credit as "MDT05 CC BY 4.0 scne.es")
+    bbox: [-9.4, 35.9, 4.4, 43.8]
+    detail_m: 5
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model]
+  - kind: record
+    id: norway-kartverket-dtm-wcs
+    title: "Norway: Kartverket national detailed terrain model (NHM DTM) as a WCS"
+    publisher: Kartverket (Norwegian Mapping Authority)
+    publisher_type: central-gov
+    country: NO
+    abstract: >-
+      Norway's national detailed elevation model (Nasjonal detaljert høydemodell), bare earth from airborne lidar, as
+      a Web Coverage Service in UTM zone 33 (EPSG:25833). A GetCoverage for a few metres round a point returns a small
+      GeoTIFF.
+    endpoints:
+      - protocol: wcs
+        url: https://wcs.geonorge.no/skwms1/wcs.hoyde-dtm-nhm-25833
+        check_url: https://wcs.geonorge.no/skwms1/wcs.hoyde-dtm-nhm-25833?request=GetCapabilities&service=WCS
+        format: GeoTIFF
+        capabilities: [download, pixels, sample]
+        info:
+          sample:
+            method: wcs
+            value: elevation
+            units: m
+            crs: EPSG:25833
+            box_m: 2
+            sample_url: "{url}?service=WCS&version=1.0.0&request=GetCoverage&coverage=nhm_dtm_topo_25833&crs=EPSG:25833&bbox={xmin},{ymin},{xmax},{ymax}&width=4&height=4&format=GeoTIFF"
+            note: "Checked 20 Nov 2026: Oslo city hall 4.85 m. Browser-readable (CORS open)."
+    landing_page: https://hoydedata.no/
+    licence: CC BY 4.0 (Kartverket)
+    bbox: [4.0, 57.9, 31.2, 71.3]
+    detail_m: 1
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model, lidar]
+  - kind: record
+    id: germany-nrw-dgm1-wcs
+    title: "Germany, North Rhine-Westphalia: 1 m digital terrain model (DGM1) as a WCS"
+    publisher: Geobasis NRW (Bezirksregierung Köln)
+    publisher_type: regional-gov
+    country: DE
+    abstract: >-
+      North Rhine-Westphalia's 1 m bare-earth terrain model as a Web Coverage Service in UTM zone 32 (EPSG:25832).
+      Germany's high-resolution terrain models are run by each state; this is one of them. A GetCoverage for a few
+      metres round a point returns a small GeoTIFF.
+    endpoints:
+      - protocol: wcs
+        url: https://www.wcs.nrw.de/geobasis/wcs_nw_dgm
+        check_url: https://www.wcs.nrw.de/geobasis/wcs_nw_dgm?REQUEST=GetCapabilities&SERVICE=WCS
+        format: GeoTIFF
+        capabilities: [download, pixels, sample]
+        info:
+          sample:
+            method: wcs
+            value: elevation
+            units: m
+            crs: EPSG:25832
+            box_m: 2
+            sample_url: "{url}?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=nw_dgm&FORMAT=image/tiff&SUBSET=x({xmin},{xmax})&SUBSET=y({ymin},{ymax})"
+            note: "Checked 20 Nov 2026: Cologne, by the cathedral, 46.5 m. CORS allowed for the asking site."
+    landing_page: https://www.opengeodata.nrw.de/produkte/geobasis/hm/
+    licence: Datenlizenz Deutschland - Zero - Version 2.0 (per NRW's open-data listings for its WCS family)
+    bbox: [5.8, 50.3, 9.5, 52.6]
+    detail_m: 1
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model]
+  - kind: record
+    id: canada-nrcan-hrdem-wcs
+    title: "Canada: NRCan High Resolution DEM mosaic (1-2 m, HRDEM) as a WCS"
+    publisher: Natural Resources Canada (NRCan)
+    publisher_type: central-gov
+    country: CA
+    abstract: >-
+      Natural Resources Canada's HRDEM mosaic: terrain (dtm) and surface (dsm) models at 1 m to 2 m from lidar,
+      mainly in the south and around cities, plus satellite-derived heights in the north. Web Coverage Service in
+      Canada Atlas Lambert (EPSG:3979). The same mosaic is on AWS Open Data as cloud-optimised GeoTIFFs.
+    endpoints:
+      - protocol: wcs
+        url: https://datacube.services.geo.ca/ows/elevation
+        check_url: https://datacube.services.geo.ca/ows/elevation?service=WCS&request=GetCapabilities
+        format: GeoTIFF
+        capabilities: [download, pixels, sample]
+        info:
+          sample:
+            method: wcs
+            value: elevation
+            units: m
+            crs: EPSG:3979
+            box_m: 2
+            sample_url: "{url}?service=WCS&version=1.1.1&request=GetCoverage&identifier=dtm&BoundingBox={xmin},{ymin},{xmax},{ymax},urn:ogc:def:crs:EPSG::3979&format=image/geotiff&GridBaseCRS=urn:ogc:def:crs:EPSG::3979&GridOffsets=1,-1"
+            note: "Answers with a GeoTIFF (checked 20 Nov 2026); the value at a point is confirmed by mcp-check."
+    landing_page: https://open.canada.ca/data/dataset/0fe65119-e96e-4a57-8bfe-9d9245fba06b
+    licence: Open Government Licence - Canada
+    bbox: [-141.0, 41.7, -52.6, 83.1]
+    detail_m: 1
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model, lidar]
+  - kind: record
+    id: netherlands-ahn-dtm-featureinfo
+    title: "Netherlands: AHN 50 cm terrain model (DTM) heights at a point"
+    publisher: Rijkswaterstaat / Het Waterschapshuis (AHN), served by PDOK
+    publisher_type: central-gov
+    country: NL
+    abstract: >-
+      The Actueel Hoogtebestand Nederland 50 cm bare-earth model through PDOK's WMS. GetFeatureInfo answers with the
+      height when asked in the Dutch grid (RD New, EPSG:28992); in longitude and latitude it returns nothing.
+    endpoints:
+      - protocol: api
+        url: https://service.pdok.nl/rws/ahn/wms/v1_0
+        service_url: https://service.pdok.nl/rws/ahn/wms/v1_0?request=GetCapabilities&service=WMS
+        check_url: https://service.pdok.nl/rws/ahn/wms/v1_0?request=GetCapabilities&service=WMS
+        format: JSON
+        capabilities: [sample]
+        info:
+          sample:
+            method: feature-info
+            value: elevation
+            units: m
+            crs: EPSG:28992
+            box_m: 50
+            field: value_list
+            sample_url: "{url}?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=dtm_05m&query_layers=dtm_05m&styles=&crs=EPSG:28992&bbox={xmin},{ymin},{xmax},{ymax}&width=101&height=101&i=50&j=50&info_format=application/json"
+            note: "Value is a string. Checked 20 Nov 2026: Amsterdam, Dam square, 1.31 m (NAP). Browser-readable (CORS open)."
+            vertical_datum: NAP
+    landing_page: https://www.ahn.nl/
+    licence: CC0 1.0 (AHN via PDOK)
+    bbox: [3.2, 50.7, 7.3, 53.6]
+    detail_m: 0.5
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model, lidar]
+  - kind: record
+    id: australia-ga-dem-lidar-5m
+    title: "Australia: Geoscience Australia 5 m lidar DEM (bare earth, populated and coastal areas)"
+    publisher: Geoscience Australia
+    publisher_type: central-gov
+    country: AU
+    abstract: >-
+      Geoscience Australia's national 5 m bare-earth DEM, merged from some 236 lidar surveys, covering mainly
+      populated coastal areas and the Murray-Darling Basin. A MapServer identify returns the cell value ("NoData"
+      outside coverage). For the whole country at 30 m, use the 1 second DEM record.
+    endpoints:
+      - protocol: api
+        url: https://services.ga.gov.au/gis/rest/services/DEM_LiDAR_5m_2025/MapServer
+        format: JSON
+        capabilities: [sample]
+        manual_check: "checked by hand on 20 Nov 2026 in a browser: Sydney CBD 20.92 m"
+        info:
+          sample:
+            method: identify
+            value: elevation
+            units: m
+            sample_url: "{url}/identify?geometry={lon},{lat}&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=0&mapExtent={west},{south},{east},{north}&imageDisplay=101,101,96&returnGeometry=false&f=json"
+            value_path: "/results/0/attributes/Stretch.Pixel Value"
+            note: "MapServer identify, not ImageServer. GitHub's runners are refused by GA's CDN, so the atlas can't check it automatically."
+    landing_page: https://data.gov.au/data/dataset/51d7866e-202f-49e4-85d9-5ac3f76d41a4
+    licence: CC BY 4.0 (stated for the 5 m DEM)
+    bbox: [112.0, -44.0, 154.0, -10.0]
+    detail_m: 5
+    geometry_type: raster
+    concepts_hint: [elevation, digital terrain model, lidar]
+  - kind: record
+    id: australia-ga-dem-1-second
+    title: "Australia: Geoscience Australia 1 second (30 m) national DEM"
+    publisher: Geoscience Australia
+    publisher_type: central-gov
+    country: AU
+    abstract: >-
+      Geoscience Australia's national 1 second (about 30 m) DEM derived from SRTM, with vegetation removed, covering
+      the whole country. A MapServer identify returns the cell value.
+    endpoints:
+      - protocol: api
+        url: https://services.ga.gov.au/gis/rest/services/DEM_SRTM_1Second_2024/MapServer
+        format: JSON
+        capabilities: [sample]
+        manual_check: "checked by hand on 20 Nov 2026 in a browser: Canberra 567.99 m"
+        info:
+          sample:
+            method: identify
+            value: elevation
+            units: m
+            sample_url: "{url}/identify?geometry={lon},{lat}&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=0&mapExtent={west},{south},{east},{north}&imageDisplay=101,101,96&returnGeometry=false&f=json"
+            value_path: "/results/0/attributes/Stretch.Pixel Value"
+            note: "MapServer identify. GitHub's runners are refused by GA's CDN, so the atlas can't check it automatically."
+    landing_page: https://pid.geoscience.gov.au/dataset/ga/72759
+    licence: Not stated on the service (Geoscience Australia usually publishes under CC BY 4.0; check before commercial use)
+    bbox: [112.9, -43.7, 153.7, -10.0]
+    detail_m: 30
+    geometry_type: raster
+    concepts_hint: [elevation, digital elevation model]

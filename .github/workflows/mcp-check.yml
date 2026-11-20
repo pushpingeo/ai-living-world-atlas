@@ -15,6 +15,7 @@ jobs:
       ATLAS_MCP_KEY: ${{ secrets.ATLAS_MCP_KEY }}
     steps:
       - uses: actions/checkout@v4
+      - run: pip install -q pyproj rasterio lerc
       - name: Call the tools
         run: |
           python3 - <<'PY' | tee /tmp/check.txt
@@ -178,6 +179,24 @@ jobs:
                           if "sample" in (ep.get("capabilities") or []):
                               print(f"  {x['id']} {x['title'][:40]!r}: {ep['protocol']} {((ep.get('details') or {}).get('sample') or {}).get('method')} -> {read_value(ep, lon, lat)}; attribution {'yes' if g.get('attribution') else 'no'}, open {g.get('open_licence')}")
                               break
+          # Land elevation (Tobler request, 20 Nov): read a height through every sampled elevation endpoint near each point
+          from atlas.sample_check import read_value as rv
+          for label, lon, lat in [("London", -0.1271, 51.5079), ("Skye", -6.5785, 57.0567), ("Stornoway", -6.389, 58.21),
+                                  ("Edinburgh", -3.19, 55.95), ("Paris", 2.3522, 48.8566), ("Tokyo", 139.7671, 35.6812),
+                                  ("Bern", 7.4386, 46.9511), ("Madrid", -3.7038, 40.4168), ("Oslo", 10.7522, 59.9139),
+                                  ("Cologne", 6.9603, 50.9375), ("Ottawa", -75.6972, 45.4215), ("Amsterdam", 4.8951, 52.3731),
+                                  ("Sydney", 151.2093, -33.8688), ("Washington", -77.0365, 38.8977), ("Wellington", 174.7762, -41.2865)]:
+              time.sleep(1.2)
+              r, status, s = call("find_datasets", {"lon": lon, "lat": lat, "radius_km": 1, "concept": "elevation", "capability": "sample", "limit": 40})
+              res = (r or {}).get("results", [])
+              print(f"elevation [{label}]: {status}, matches {(r or {}).get('matches')}")
+              for x in res[:10]:
+                  g, status, s = call("get_dataset", {"id": x["id"]})
+                  for ep in (g or {}).get("endpoints", []):
+                      if "sample" in (ep.get("capabilities") or []):
+                          smp = (ep.get("details") or {}).get("sample") or {}
+                          print(f"  {x['id']} {x['title'][:48]!r} ({x.get('country') or '-'}): {smp.get('method')} -> {rv(ep, lon, lat)}; open {g.get('open_licence')}")
+                          break
           if first_query:
               did, args = first_query
               r, status, s = call("get_dataset", {"id": did})

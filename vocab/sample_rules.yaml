@@ -35,3 +35,19 @@ feature_info:
     field: GRAY_INDEX
     value: density
     note: EMODnet vessel density (time spent by vessels per grid cell); see the layer description for units. Checked 19 Nov 2026 in the Dover Strait (4.56) and central North Sea (0.006).
+  # Environment Agency lidar composites (England, OGL). The "Elevation" layers answer feature-info in metres;
+  # the plain and Hillshade layers are display styles. Checked 20 Nov 2026: DTM 1m at Trafalgar Square, 9.55.
+  - service: environment.data.gov.uk
+    layers: '^Lidar_Composite_Elevation_(DTM|LZ_DSM|FZ_DSM)_(1m|2m)$'
+    field: Elevation
+    value: elevation
+    units: m
+    note: Bare-earth heights for DTM layers; DSM layers include buildings and trees. England only, where flown.
+  # Scottish Remote Sensing Portal lidar (Scottish Government / JNCC, OGL). GeoServer answers feature-info with the
+  # cell value as GRAY_INDEX. Checked 20 Nov 2026: Outer Hebrides 2019 DTM 50 cm at Stornoway, 3.14.
+  - service: ows.remotesensing.data.gov.scot
+    layers: '(?i)(dtm|dsm)'
+    field: GRAY_INDEX
+    value: elevation
+    units: m
+    note: DTM layers are bare earth; DSM layers include buildings and trees. Scotland only, where flown.

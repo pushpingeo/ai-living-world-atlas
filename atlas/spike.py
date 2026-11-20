@@ -258,8 +258,9 @@ async def run(args):
         async def chk(L):
             if time.monotonic() > deadline - reserve / 4:
                 return
-            fn = (crawl_ogc.check_layer if L.service_type in ("wms", "wfs", "wmts", "wcs")
-                  else curated_records.check if (L.uid in curated_records.CHECK_URL or L.service_type in curated_records.CAPS)
+            fn = (curated_records.check if L.uid in curated_records.CHECK_URL  # curated records first, whatever the protocol
+                  else crawl_ogc.check_layer if L.service_type in ("wms", "wfs", "wmts", "wcs")
+                  else curated_records.check if L.service_type in curated_records.CAPS
                   else crawl_arcgis.check_layer)
             try:
                 checks[L.uid] = await fn(c, L)

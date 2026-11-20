@@ -177,7 +177,11 @@ function usage(e) {
   if (smp && smp.method === "feature-info")
     out.sample_url = `${e.service_url}${sep(e.service_url)}service=WMS&request=GetFeatureInfo&version=1.3.0&layers=${encodeURIComponent(e.layer_name)}` +
       `&query_layers=${encodeURIComponent(e.layer_name)}&styles=&crs=CRS:84&bbox={west},{south},{east},{north}&width=101&height=101&i=50&j=50&info_format=application/json`;
-  if (smp && smp.method === "opendap" && smp.sample_url) out.sample_url = smp.sample_url.replace("{url}", e.url.split("#")[0]);
+  // a curated record can carry its own templates (point APIs, WCS in a national grid, OPeNDAP, cloud files):
+  // {url} and {service_url} are filled here; the rest ({lon} {lat}, {x} {y} and {xmin}.. in sample.crs) by the caller
+  const fillSvc = (t) => t.replaceAll("{url}", e.url.split("#")[0]).replaceAll("{service_url}", e.service_url || e.url.split("#")[0]);
+  if (smp && smp.sample_url) out.sample_url = fillSvc(smp.sample_url);
+  if (smp && smp.file_url) out.file_url = fillSvc(smp.file_url);
   if (smp && smp.method === "lerc-tile" && smp.tile_url)
     out.tile_url = smp.tile_url.replace("{service_url}", e.service_url).replace("{level}", String(smp.level));
   return out;

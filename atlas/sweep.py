@@ -65,6 +65,8 @@ def population(datasets: str, layers: str) -> pd.DataFrame:
     rows = []
     for did, eps in zip(ds["dataset_id"], ds["endpoints"]):
         for e in json.loads(eps):
+            if "manual_check" in (e.get("info") or ""):
+                continue  # a curated record whose host refuses GitHub's runners; checked by hand (atlas/records.py)
             rows.append((e["uid"], did, e.get("service_url") or e["url"], e["protocol"]))
     pop = pd.DataFrame(rows, columns=["uid", "dataset_id", "service_url", "protocol"]).drop_duplicates("uid")
     cols = ["uid", "title", "abstract"]
