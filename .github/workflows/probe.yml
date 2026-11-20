@@ -16,9 +16,12 @@ jobs:
           mkdir -p /tmp/out; i=0
           grep -v '^#' runs/probe.urls | grep . | while read -r url; do
             i=$((i+1))
-            code=$(curl -sSL -m 60 -A "ai-living-world-atlas probe (+https://github.com/pushpingeo/ai-living-world-atlas)" \
+            # a line may start with "RANGE " to ask for the first 16 KB only (cloud-optimised files)
+            rng=""; case "$url" in "RANGE "*) url="${url#RANGE }"; rng="-r 0-16383";; esac
+            # Origin: a browser page elsewhere; the CORS headers in the answer say whether a page could use it
+            code=$(curl -sSL -m 60 $rng -H "Origin: https://asktobler.com" -D /tmp/hdr -A "ai-living-world-atlas probe (+https://github.com/pushpingeo/ai-living-world-atlas)" \
               -o /tmp/body -w '%{http_code} %{time_total}s %{size_download}B %{url_effective}' "$url" || echo "ERR")
-            { echo "URL: $url"; echo "RESULT: $code"; } > /tmp/out/$i.txt
+            { echo "URL: $url"; echo "RESULT: $code"; echo "HEADERS: $(grep -iE '^(access-control-allow-origin|content-type|content-range|accept-ranges):' /tmp/hdr | tr -d '\r' | tr '\n' ';')"; } > /tmp/out/$i.txt
             head -c 200000 /tmp/body >> /tmp/out/$i.txt 2>/dev/null || true
           done
           date -u > /tmp/out/when.txt
