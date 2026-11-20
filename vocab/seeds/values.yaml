@@ -511,7 +511,7 @@ sources:
     title: "Norway: Kartverket national detailed terrain model (NHM DTM) as a WCS"
     publisher: Kartverket (Norwegian Mapping Authority)
     publisher_type: central-gov
-    country: NO
+    country: "NO"  # quoted: bare NO is a YAML boolean
     abstract: >-
       Norway's national detailed elevation model (Nasjonal detaljert høydemodell), bare earth from airborne lidar, as
       a Web Coverage Service in UTM zone 33 (EPSG:25833). A GetCoverage for a few metres round a point returns a small
