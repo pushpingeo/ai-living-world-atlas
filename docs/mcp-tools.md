@@ -44,7 +44,8 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     `{x}` `{y}` and `{xmin}` `{ymin}` `{xmax}` `{ymax}` in `sample.crs` (box half-size `box_m`). Some services need
     a national grid (Swiss LV95, Dutch RD, UTM): the `crs` says which.
   - **`sample.browser: false`** marks a source a web page can't read directly (no CORS): fetch through a server.
-  - **New records** (concept `elevation`): Scotland's 50 cm national lidar (COG) and its lidar WMS; Copernicus GLO-30
+  - **New records** (concept `elevation`): Scotland's 50 cm national lidar (COG) and one record per Scottish lidar
+    survey (18, WMS feature-info); Copernicus GLO-30
     (COG on AWS, surface model, server-side only); France (IGN API), Japan (GSI API), Switzerland (swisstopo API),
     Spain (IGN 5 m WCS), Norway (Kartverket WCS), North Rhine-Westphalia (1 m WCS), Canada (NRCan HRDEM WCS),
     Netherlands (AHN feature-info), Australia (GA 5 m lidar and 1 second, MapServer identify).
