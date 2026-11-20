@@ -33,7 +33,7 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
-- (20 Nov, Tobler request, **in progress**) **Land elevation at a point, national and global.** All additive; builds
+- (20 Nov, Tobler request, **done**, live 08:00 UTC) **Land elevation at a point, national and global.** All additive; builds
   on `sample` from the depth request below.
   - **New `details.sample.method` values:** `api` (a point-height service: `sample_url` plus `value_path`, a JSON
     pointer such as `/elevations/0`) and `cog` (a cloud-optimised GeoTIFF: `use.file_url` names the file for a point,
@@ -53,6 +53,12 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   - Records whose host refuses GitHub's runners (Geoscience Australia) are checked by hand and show `unchecked`.
   - **`sample.nodata`** gives a service's no-data answer where it isn't empty: France's API answers -99999 outside
     its data, Scotland's surveys -9999 (or -999) outside the flown area. Treat these as "no value", not a height.
+  - Live check (mcp-check, 20 Nov 08:13 UTC), heights read through the server's templates: Paris 34.83 m (IGN),
+    Tokyo 3.6 m (GSI), Bern 553.8 m (swisstopo), Madrid 648 m (IGN Spain), Oslo 4.90 m (Kartverket), Cologne
+    46.51 m (NRW), Ottawa 71.0 m (NRCan), Sydney 20.9 m (GA 5 m), Skye 121.7 m (Scotland 50 cm COG; 121.5 m by its
+    WMS), Edinburgh 86.1 m (Scotland lidar phase 5), London 9.54 m (EA), Washington 18.4 m (3DEP). GLO-30 answered
+    everywhere (read server-side). AHN gives nothing on buildings and water. CEDA's OPeNDAP refused repeated requests
+    from GitHub (403) though single requests work: use the UNH image service for GEBCO in bulk.
 
 - (19 Nov, Tobler request, **done**, live 20 Nov) **Values at a point: water depth and shipping density.** All additive.
   - **New capability `sample`**: the endpoint returns a number at a point, not a picture. `find_datasets` takes
