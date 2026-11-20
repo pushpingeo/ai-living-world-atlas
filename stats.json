@@ -1,0 +1,138 @@
+{
+ "minutes": 0.9,
+ "http": {
+  "requests": 19,
+  "errors": 2,
+  "robots_blocked": 8
+ },
+ "portals": {
+  "total": 0,
+  "ok": 0,
+  "records_with_service_links": 0
+ },
+ "arcgis_roots": {
+  "total": 0,
+  "reachable": 0
+ },
+ "services": {
+  "attempted": 0,
+  "ok": 0,
+  "skipped_time": 0,
+  "by_type": {},
+  "top_errors": []
+ },
+ "layers": {
+  "total": 47,
+  "by_service_type": {
+   "api": 24,
+   "arcgis-imageserver": 9,
+   "landing": 6,
+   "wcs": 4,
+   "cloud": 2,
+   "opendap": 1,
+   "download": 1
+  },
+  "with_bbox": 47,
+  "with_abstract_50": 47,
+  "with_licence_text": 46,
+  "with_open_licence": 43,
+  "with_keywords": 47,
+  "joined_to_catalogue": 0,
+  "codelike_titles": 0,
+  "junk_flagged": 0,
+  "declared_iso_theme": 34,
+  "declared_theme_how": {
+   "keyword": 34,
+   "none": 13
+  },
+  "publisher_type": {
+   "central-gov": 29,
+   "international": 15,
+   "academic": 2,
+   "regional-gov": 1
+  },
+  "detail_source": {
+   "pixel-size": 28,
+   "none": 19
+  },
+  "extent_source": {
+   "curated": 47
+  },
+  "extent_flags": {},
+  "cors_ok": 0,
+  "detail_level": {
+   "unknown": 19,
+   "1:2M": 16,
+   "1:5k": 8,
+   "1:100k": 2,
+   "1:25k": 2
+  },
+  "coverage_level": {
+   "global": 20,
+   "national": 11,
+   "regional": 11,
+   "continental": 3,
+   "local": 2
+  },
+  "detail_level_passing": {
+   "unknown": 19,
+   "1:2M": 14,
+   "1:5k": 8,
+   "1:100k": 2,
+   "1:25k": 2
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 30,
+   "ok": 15,
+   "fail": 2
+  },
+  "live_rate_of_checked": 0.882,
+  "returns_data_or_empty_rate": 0.882
+ },
+ "quality": {
+  "pass": 45,
+  "pass_rate": 0.957,
+  "score_median": 95.0,
+  "score_bands": {
+   "[80, 101)": 47
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 40,
+  "distinct_among_passing": 40
+ },
+ "file_mb": 0.07,
+ "datasets": {
+  "total": 40,
+  "passing": 40,
+  "endpoints_per_dataset": {
+   "1": 33,
+   "2": 7
+  },
+  "multi_protocol": 7,
+  "match_rules": {
+   "catalogue": 7
+  },
+  "role": {
+   "elevation": 31,
+   "data": 9
+  },
+  "role_passing": {
+   "elevation": 31,
+   "data": 9
+  },
+  "capabilities": {
+   "sample": 40,
+   "render": 9,
+   "download": 7,
+   "tiles": 6,
+   "pixels": 4,
+   "cloud": 2,
+   "catalog": 1,
+   "raster-functions": 1
+  },
+  "detail_known_passing": 21
+ }
+}
