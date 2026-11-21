@@ -1,0 +1,3 @@
+cell keys: 1877231 for 264455 datasets
+geometry types known for 133844 datasets; home country set for 250135
+incremental: 264455 datasets, 0 to write, 0 to delete, 276484 tags; 0.00 MB of SQL

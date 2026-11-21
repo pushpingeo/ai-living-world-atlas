@@ -1,0 +1,7 @@
+MCP endpoint: https://atlas-mcp.robdunfey.workers.dev/mcp
+matches 6756
+ - Polling Places 2024
+ - Scheduled Ancient Monuments
+ - Listed Buildings
+get_dataset endpoints 4
+no-key request: 401
