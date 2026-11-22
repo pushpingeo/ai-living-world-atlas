@@ -1,4 +1,18 @@
-# round 20 (20 Nov): AHN feature-info at the check's Amsterdam point and near Waterlooplein; CEDA OPeNDAP again
-https://service.pdok.nl/rws/ahn/wms/v1_0?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=dtm_05m&query_layers=dtm_05m&styles=&crs=EPSG:28992&bbox=121438.000467,487310.931630,121538.000467,487410.931630&width=101&height=101&i=50&j=50&info_format=application/json
-https://service.pdok.nl/rws/ahn/wms/v1_0?service=WMS&request=GetFeatureInfo&version=1.3.0&layers=dtm_05m&query_layers=dtm_05m&styles=&crs=EPSG:28992&bbox=122046.809264,486694.860992,122146.809264,486794.860992&width=101&height=101&i=50&j=50&info_format=application/json
-https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation%5B35496:1:35496%5D%5B43656:1:43656%5D
+# round 21 (22 Nov): UK protected sites (Tobler, 22 Nov) - JNCC's own OGC services, DAERA's server, EEA/EMODnet Natura 2000 over UK waters, Hutton paging
+https://mpa-ows.jncc.gov.uk/mpa_mapper/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://mpa-ows.jncc.gov.uk/mpa_mapper/wms?service=WMS&request=GetCapabilities&version=1.3.0
+https://ows.jncc.gov.uk/mpa_mapper/wfs?service=WFS&request=GetCapabilities&version=2.0.0
+https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=emodnet:natura2000areas&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=1,54,3,55.5,urn:ogc:def:crs:OGC:1.3:CRS84
+https://ows.emodnet-humanactivities.eu/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=emodnet:natura2000areas&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=-4,51,-1,53,urn:ogc:def:crs:OGC:1.3:CRS84
+https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites?f=json
+https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=1%3D1&geometry=-8,49.5,2,61&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json
+https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=1%3D1&geometry=-8,49.5,2,61&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&resultRecordCount=3&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/NIEAEnvironmentViewer/ProtectedAreas/MapServer?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/NIEAEnvironmentViewer/ProtectedAreas/MapServer/5?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/NIEAEnvironmentViewer/ProtectedAreas/MapServer/5/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted?f=json
+https://environment.data.gov.uk/spatialdata/special-areas-of-conservation-england/wfs?service=WFS&request=GetCapabilities
+http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0?f=json
+http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0/query?where=1%3D1&geometry=-3.7,55.9,-3.5,56.05&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&returnGeometry=false&f=geojson
