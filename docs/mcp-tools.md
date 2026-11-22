@@ -86,8 +86,9 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     2024, which is why Cnoc Buidhe isn't in it. No GIS layer of Scottish Section 36 applications was found (the Energy
     Consents portal publishes cases, not boundaries); Wales's DNS not checked yet.
   - **Ids of hosted and curated records are now fixed** (they had followed whichever endpoint passed its check). On
-    22 Nov between about 20:45 and 21:20 UTC the 18 GEM trackers briefly had other ids (e.g. extraction
-    `97dd06297d3a4f43` instead of `11650fec8b9d8e5f`); they are back, and won't move again.
+    22 Nov a rerun gave the 18 GEM trackers other ids (e.g. extraction `97dd06297d3a4f43` instead of
+    `11650fec8b9d8e5f`) for at most 15 minutes (about 20:35-20:50 UTC); they are back (checked live 20:55), and won't
+    move again.
   - Already working, checked live 22 Nov: HES Scheduled Monuments `25ffbbeec3836e1a` (50 near Linlithgow, 2.2 s) and
     Hutton land capability `bd18c4d31d168bf4` (50, 3.5 s), since the 19 Nov no-paging fix; GEM extraction "Bonga" (3, 0.4 s).
 
