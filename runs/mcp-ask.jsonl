@@ -1,9 +1,11 @@
-# 22 Nov: state before changes. HES and Hutton near Linlithgow (Tobler 18 Nov); Seabed Habitats timeouts at Dogger Bank (22 Nov); GEM Bonga (18 Nov)
-{"label": "HES scheduled monuments, Linlithgow", "tool": "fetch_features", "args": {"id": "25ffbbeec3836e1a", "lon": -3.60, "lat": 55.977, "radius_km": 10, "limit": 50}}
-{"label": "Hutton land capability, Linlithgow", "tool": "fetch_features", "args": {"id": "bd18c4d31d168bf4", "lon": -3.60, "lat": 55.977, "radius_km": 10, "limit": 50}}
+# 22 Nov, after shipping: UK records, Crown Estate rank, Kintyre wind proposals rank, NSTA concepts, wrecks
+{"label": "JNCC record", "tool": "get_dataset", "args": {"id": "fa98f1a8571830ba"}}
+{"label": "NE SAC record", "tool": "get_dataset", "args": {"id": "a9cad137cd6e2466"}}
+{"label": "JNCC at Dogger Bank SW", "tool": "fetch_features", "args": {"id": "fa98f1a8571830ba", "lon": 1.47, "lat": 54.75, "radius_km": 10, "limit": 20, "include_geometry": false}}
+{"label": "Dogger, protected-area query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 10, "concept": "protected-area", "capability": "query", "limit": 15}}
+{"label": "UK statutory text", "tool": "find_datasets", "args": {"bbox": [-11, 49, 3, 61], "text": "uk statutory designation", "limit": 40}}
+{"label": "UK offshore-wind-site query polygon", "tool": "find_datasets", "args": {"bbox": [-8.65, 49.86, 1.77, 60.86], "concept": "offshore-wind-site", "capability": "query", "geometry": "polygon", "limit": 100}}
+{"label": "Kintyre power-plant query polygon", "tool": "find_datasets", "args": {"bbox": [-5.8, 55.3, -5.3, 55.8], "concept": "power-plant", "capability": "query", "geometry": "polygon", "limit": 100}}
+{"label": "Kintyre renewable-potential query polygon", "tool": "find_datasets", "args": {"bbox": [-5.8, 55.3, -5.3, 55.8], "concept": "renewable-potential", "capability": "query", "geometry": "polygon", "limit": 100}}
+{"label": "Dogger oil-gas query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 25, "concept": "oil-gas", "capability": "query", "limit": 40}}
 {"label": "wrecks record", "tool": "get_dataset", "args": {"id": "d266bb32a493da90"}}
-{"label": "GEM extraction Bonga, Nigeria waters", "tool": "fetch_features", "args": {"id": "11650fec8b9d8e5f", "bbox": [0.2, 1.8, 17.2, 16.4], "text": "Bonga", "limit": 20}}
-{"label": "Dogger Bank, seabed habitat search", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 25, "text": "habitat point data", "limit": 10}}
-{"label": "Dogger Bank, protected-area query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 25, "concept": "protected-area", "capability": "query", "limit": 30}}
-{"label": "Dogger Bank, offshore platform concept (oil-gas)", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 25, "concept": "oil-gas", "capability": "query", "limit": 40}}
-{"label": "UK, wind farm text", "tool": "find_datasets", "args": {"bbox": [-8, 49.5, 2, 61], "concept": "offshore-wind-site", "limit": 40}}
