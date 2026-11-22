@@ -446,3 +446,35 @@ sources:
     format: GeoJSON tiles
   - protocol: landing
     url: https://globalenergymonitor.org/projects/global-wind-power-tracker/
+- kind: record
+  id: jncc-offshore-mpas
+  title: UK offshore Marine Protected Areas (JNCC)
+  publisher: Joint Nature Conservation Committee (JNCC)
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of the UK''s offshore Marine Protected Areas, beyond 12 nautical miles, as JNCC publishes them:
+    Special Areas of Conservation and Special Protection Areas with marine components, Marine Conservation Zones, Highly Protected
+    Marine Areas and Scottish Nature Conservation MPAs, including sites that straddle the 12-mile limit (their inshore parts
+    are also in the country layers from Natural England, NatureScot, Natural Resources Wales and DAERA). Dogger Bank SAC is
+    here. JNCC updates the file when the network changes; this copy is refreshed by hand. Release: version 20251203 (3 December
+    2025; West of Scotland boundary update). 78 features. Hosted by the atlas as a copy of the publisher''s download; cite
+    as: UK Offshore Marine Protected Areas, JNCC, version 20251203.'
+  licence: 'Open Government Licence v3.0: re-use is subject to the terms of the OGL including attribution of the relevant
+    copyright holders'
+  landing_page: https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27
+  bbox:
+  - -19.25
+  - 48.1667
+  - 3.2499
+  - 63.8871
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - marine-activity
+  - uk-statutory-designation
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/jncc-offshore-mpas/index.json
+    format: GeoJSON tiles
+  - protocol: landing
+    url: https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27
