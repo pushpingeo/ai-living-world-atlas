@@ -33,6 +33,46 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (22 Nov, Tobler requests, **shipping 22 Nov evening**) **UK protected sites as fixed records, and four fixes.**
+  All additive except the concept and publisher-type changes marked below.
+  - **25 new records**, one per designation and nation, pointing at the designating body's own feature service (JNCC's
+    offshore set is hosted by the atlas as tiles, because JNCC's OGC server doesn't answer cloud runners). Ids are fixed:
+
+    | Nation | SAC | SPA | Ramsar | SSSI/ASSI | Marine | Ancient woodland | Other |
+    |---|---|---|---|---|---|---|---|
+    | UK offshore (JNCC) | | | | | `fa98f1a8571830ba` SAC, SPA, MCZ, NCMPA, HPMA beyond 12 nm | | |
+    | England (Natural England) | `a9cad137cd6e2466` | `8b28077c10e3e057` | `fc67624f3bd09663` | `0c53cecc65701f0c` | `2470b667af95db9c` MCZ | `4d20427c9827e672` | `f7fd85401cdf700f` priority habitats |
+    | Scotland (NatureScot) | `7d382e1686a08bff` | `b10cb9d7a2892f7f` | `b2f1c178d39c0d0e` | `c6e90f0435ff9097` | `f682edebaabd1b8b` NCMPA inshore | `83edcb984cbc578d` | |
+    | Wales (NRW) | `f1f2acb0cb971df9` | `0f71127c51a2172c` | `a6fa6c34e1ffe4c1` | `0761e0de1e55f269` | `10f54cd67c434aa8` MCZ | `dae5eef189e09f22` | |
+    | Northern Ireland (DAERA) | `da17adda6e50b6da` | `7571a1f57be683da` | `a13d205bd42efeb8` | `e4d3902ce86a9334` ASSI | `6f8ffc3a4d831d53` all NI MPAs | | |
+
+    Their keywords include `uk-statutory-designation`, so `find_datasets` with `text: "uk statutory designation"` lists
+    them; concepts come from tagging as usual (protected-area, plus habitat, wetland, woodland or marine-activity).
+  - **Licences and attribution, verbatim:** all are OGL v3.0 (checked). `get_dataset` gives each publisher's attribution
+    statement in `attribution` (JNCC also `terms`); `vocab/licence_overrides.yaml` says where each was read. NRW's and
+    DAERA's ArcGIS items carry thin licence text, so theirs come from DataMapWales and Open Data NI.
+  - **New `get_dataset` details on these endpoints** (`endpoints[].details`): `name_field`, `code_field` (JNCC also
+    `designation_field`: `SITE_STATU`), `data_date` and `data_date_source` (the data's own last edit, not our check).
+  - **Overlaps to know:** sites straddling 12 nm are in JNCC's set and the country's; Dee and Severn estuary sites in
+    both England's and Wales's. NatureScot's layers have one row per polygon part (Tobler already joins pieces).
+  - **Natura 2000 and the UK, confirmed:** EMODnet's copy of the EEA Natura 2000 polygons (`2edf9cd303464f05`) has no UK
+    sites (Dogger Bank returns only the Dutch Doggersbank; a Welsh/English box returns none). The EEA's centroid layer
+    (`03094468579f7159`) still lists 924 UK sites, but from a 2013 release. Don't use either for UK sites.
+  - **`fetch_features`, additive:** an ArcGIS layer whose page is smaller than `limit` (Natural England's MCZs send 3 a
+    page) is now read page by page in parallel up to the limit; `pages_read` says how many pages when more than one.
+    A WFS gets one 15 s wait (was two of 25 s: EMODnet Seabed Habitats' point layers failed after ~52 s); the error now
+    says "timed out after 15 s". ArcGIS requests wait 20 s. Hosted-file tiles retry once and a failed read is no longer
+    cached for an hour (the likely cause of GEM's "tile 0_0 unreadable" on 18 Nov).
+  - **Changed concepts (hand-set at publish time, `vocab/concept_overrides.yaml`):** 38 NSTA seismic survey layers
+    are now `geology` only (were `oil-gas`), so "offshore platform" searches by `oil-gas` stop picking them. Licensing
+    round prospects and areas stay `oil-gas`. Wreck layers (UKHO via EMODnet `d266bb32a493da90`, EMODnet heritage
+    wrecks, NOAA, Historic England protected wrecks and others, 25 in all) are `heritage-site` and `shipping` (were
+    mostly `seabed-habitat`).
+  - **Changed publisher type:** The Crown Estate's layers (21) are `public-body` (were `business`), so they rank with
+    other authorities; Crown Estate Scotland was already `regional-gov`. (`vocab/publisher_type_overrides.yaml`.)
+  - Already working, checked live 22 Nov: HES Scheduled Monuments `25ffbbeec3836e1a` (50 near Linlithgow, 2.2 s) and
+    Hutton land capability `bd18c4d31d168bf4` (50, 3.5 s), since the 19 Nov no-paging fix; GEM extraction "Bonga" (3, 0.4 s).
+
 - (20 Nov, Tobler request, **done**, live 08:00 UTC) **Land elevation at a point, national and global.** All additive; builds
   on `sample` from the depth request below.
   - **New `details.sample.method` values:** `api` (a point-height service: `sample_url` plus `value_path`, a JSON

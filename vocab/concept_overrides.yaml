@@ -1,0 +1,16 @@
+# Hand-set concepts, applied at publish time (atlas/concept_fixes.py) over the AI tags, for cases the tagger gets
+# wrong in a way that misleads searches. Each rule: match (publisher / title: case-insensitive regex, all given must
+# match; not_publisher / not_title leave matches out; or ids), then set: the concepts the dataset gets instead. Keep rules few and say why.
+
+rules:
+  # Tobler, 22 Nov: a search for offshore platforms near Dogger Bank (concept oil-gas) asked NSTA seismic line and
+  # survey layers. Seismic surveys are geophysical data coverage, not oil and gas assets: geology, as the concept's
+  # definition already covers subsurface data. Licensing-round prospects and areas stay oil-gas (they are licensing).
+  - why: seismic surveys are geophysical data coverage, not oil and gas assets
+    match: {publisher: "North Sea Transition Authority|Oil and Gas Authority|NSTA", title: "seismic"}
+    set: [geology]
+  # Tobler, 18 Nov: wreck layers were tagged seabed-habitat, so a concept search filed wrecks under biodiversity.
+  # Wrecks are heritage (and charted hazards to shipping).
+  - why: wrecks are heritage sites and charted hazards, not habitats
+    match: {title: "\\bwrecks?\\b|ship ?wrecks?|shipwrecks", not_title: "bathymetry|wreck reefs?"}
+    set: [heritage-site, shipping]

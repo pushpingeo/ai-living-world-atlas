@@ -12,6 +12,8 @@ import geopandas as gpd
 import pandas as pd
 import pyarrow.parquet as pq
 
+from .hand_fixes import apply as fix_concepts
+from .hand_fixes import publisher_types
 from .licences import infer as infer_licences
 from .licences import overrides as licence_overrides
 from .sampling import add_sample
@@ -129,6 +131,7 @@ def main():
     ds = infer_licences(ds)  # e.g. US federal works; the wave files keep what was crawled
     ds = licence_overrides(ds)  # hand-recorded licences, attribution lines and terms (vocab/licence_overrides.yaml)
     ds = add_sample(ds)  # capability "sample": endpoints that return a value at a point (vocab/sample_rules.yaml)
+    ds = publisher_types(ds)  # by publisher name, where the host is shared (vocab/publisher_type_overrides.yaml)
     ds.to_parquet(out / "datasets.parquet", write_covering_bbox=True, compression="zstd")
     if a.layers:
         cols = ["uid", "dataset_id", "fields", "title", "abstract", "geometry_type"]  # title/abstract: the liveness sweep compares against them; geometry_type: the MCP search
@@ -151,6 +154,7 @@ def main():
             add = [par.loc[o].to_dict() | {"dataset_id": n} for n, o in splits.items() if o in par.index]
             if add:
                 tg = pd.concat([tg, pd.DataFrame(add)], ignore_index=True)
+        tg = fix_concepts(tg, ds)  # hand-set concepts where the tagger misleads searches (vocab/concept_overrides.yaml)
         tg.to_parquet(out / "tags.parquet")
     print(f"{len(ds)} datasets from {len(a.datasets)} waves; tags: {len(tg) if a.tags else 0}")
 

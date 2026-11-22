@@ -1,0 +1,10 @@
+# Publisher types set by publisher name at publish time (atlas/hand_fixes.py), for publishers on shared hosts such as
+# ArcGIS Online, where vocab/publisher_overrides.yaml (by host) can't tell them apart. The type feeds search ranking
+# (authority). The publisher registry (docs/publisher-registry-design.md) will replace this once it is applied.
+
+rules:
+  # Tobler, 22 Nov: a UK-wide named search for a wind lease ranked The Crown Estate's lease registers after other layers,
+  # because the crawl called it a business. The Crown Estate is a statutory body (Crown Estate Act 1961) that manages
+  # the seabed around England, Wales and Northern Ireland and grants the offshore wind leases.
+  - publisher: "^The Crown Estate"
+    type: public-body

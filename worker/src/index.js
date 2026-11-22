@@ -6,6 +6,9 @@ import AREAS from "./country_areas.json";
 
 const SERVER = { name: "ai-living-world-atlas", version: "0.1.0" };
 const PROTOCOLS = ["2025-06-18", "2025-03-26", "2024-11-05"];
+const WFS_WAIT_MS = 15000;    // one wait per WFS endpoint
+const ARCGIS_WAIT_MS = 20000; // and per ArcGIS request
+const MAX_PAGES = 25;         // pages read for layers with a small page size
 const FEATURE_PREF = ["arcgis-featureserver", "wfs", "arcgis-mapserver", "geojson"];
 
 /* ---------------- tool definitions ---------------- */
@@ -129,8 +132,12 @@ const unwrap = (s) => (s ? s.split(",").filter(Boolean) : []);
 // Dataset details come from the viewer's detail shards on GitHub Pages. Since 17 Nov they are gzipped and keyed by
 // 3 characters (dz/xxx.json.gz); the old layout (d/xx.json) is tried if the new one isn't there. A file that arrives
 // already unzipped is read as it is. (The viewer layout change on 17 Nov broke this for ~1 hour: keep them in step.)
+// Only good answers are cached: with a plain cacheTtl Cloudflare also keeps a 404 or 5xx for the hour, so a file
+// that was briefly missing (a Pages deploy) stayed "unreadable" (GEM tile 0_0, 18 Nov). A failed read is retried once.
+const GOOD_ONLY = { cacheTtlByStatus: { "200-299": 3600, "404": 0, "500-599": 0 } };
 async function readShard(url) {
-  const r = await fetch(url, { cf: { cacheTtl: 3600 } });
+  let r = await fetch(url, { cf: GOOD_ONLY });
+  if (!r.ok && r.status !== 404) r = await fetch(url, { cf: GOOD_ONLY });
   if (!r.ok) return null;
   const buf = await r.arrayBuffer();
   const b = new Uint8Array(buf);
@@ -534,13 +541,37 @@ async function fetchFeatures(env, a) {
     }
     try {
       let r, gj, used = url;
+      // One wait per endpoint, not per attempt: a WFS that times out on 1.1.0 won't answer 1.0.0 any faster, and two
+      // 25 s waits made EMODnet Seabed Habitats' point layers fail after ~52 s (Tobler, 22 Nov). A timeout ends the
+      // endpoint; other errors still try the alternative request.
+      const wait = e.protocol === "wfs" ? WFS_WAIT_MS : ARCGIS_WAIT_MS;
       for (const u of [url, ...alts]) {
         used = u;
-        r = await fetch(u, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(25000) });
+        r = await fetch(u, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(wait) });
         if (!r.ok) continue;
         const t = await r.text();
         try { gj = JSON.parse(t); } catch { gj = { error: { message: t.trimStart().startsWith("<") ? "the server answered in XML (an exception report)" : "not JSON" } }; }
         if (Array.isArray(gj.features)) break;
+      }
+      // ArcGIS layers whose page is smaller than the limit (Natural England's Marine Conservation Zones: 3 a page)
+      // say exceededTransferLimit: read the next pages in parallel, up to the limit.
+      let pages = 1;
+      if (e.protocol !== "wfs" && Array.isArray(gj?.features) && used === url && gj.features.length && gj.features.length < limit
+          && (gj.exceededTransferLimit || gj.properties?.exceededTransferLimit)) {
+        const size = gj.features.length;
+        const more = Math.min(Math.ceil((limit - size) / size), MAX_PAGES - 1);
+        const urls = Array.from({ length: more }, (_, i) => `${used}&resultOffset=${(i + 1) * size}`);
+        for (let i = 0; i < urls.length; i += 8) {
+          const got = await Promise.all(urls.slice(i, i + 8).map((u) => fetch(u, { headers: { "user-agent": "AI-Living-World-Atlas-MCP/0.1" }, signal: AbortSignal.timeout(wait) })
+            .then((x) => (x.ok ? x.json() : null)).catch(() => null)));
+          let last = false;
+          for (const g of got) {
+            if (!g || !Array.isArray(g.features)) { last = true; break; }
+            gj.features.push(...g.features); pages++;
+            if (!(g.exceededTransferLimit || g.properties?.exceededTransferLimit)) { last = true; break; }
+          }
+          if (last || gj.features.length >= limit) { if (last) { gj.exceededTransferLimit = false; if (gj.properties) gj.properties.exceededTransferLimit = false; } break; }
+        }
       }
       if (!r.ok && !gj) { errors.push(`${e.protocol}: HTTP ${r.status}`); continue; }
       if (!Array.isArray(gj.features) && a.text && !e._filterAfter && e.protocol !== "wfs") {
@@ -565,11 +596,12 @@ async function fetchFeatures(env, a) {
       return {
         dataset: a.id, endpoint: { protocol: e.protocol, url: e.url.split("#")[0] }, area: v.map((n) => +n.toFixed(5)),
         returned: feats.length, may_be_more: feats.length >= limit || !!gj.exceededTransferLimit || !!gj.properties?.exceededTransferLimit,
+        ...(pages > 1 ? { pages_read: pages } : {}),
         licence: d.licence || "not stated",
         type: "FeatureCollection", features: feats,
       };
     } catch (err) {
-      errors.push(`${e.protocol}: ${err.name === "TimeoutError" ? "timed out" : String(err.message || err)}`);
+      errors.push(`${e.protocol}: ${err.name === "TimeoutError" ? `timed out after ${(e.protocol === "wfs" ? WFS_WAIT_MS : ARCGIS_WAIT_MS) / 1000} s (the publisher's server is slow for this request; a smaller area may answer)` : String(err.message || err)}`);
     }
   }
   throw new Error("Couldn't fetch features: " + errors.join("; "));
@@ -595,7 +627,7 @@ async function fileFeatures(e, d, a, v, limit) {
   };
   let hits = [], source = null, partial = false;
   if (/index\.json$/.test(e.url)) {
-    const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(15000) });
+    const r = await fetch(e.url, { cf: GOOD_ONLY, signal: AbortSignal.timeout(15000) });
     if (!r.ok) throw new Error(`index: HTTP ${r.status}`);
     const idx = await r.json();
     source = idx.atlas_source || null;
@@ -607,7 +639,8 @@ async function fileFeatures(e, d, a, v, limit) {
     const todo = near.slice(0, cap);
     for (let i = 0; i < todo.length; i += 12) {
       const batch = todo.slice(i, i + 12);
-      const got = await Promise.all(batch.map((tile) => readShard(`${base}${tile.key}.json.gz`)));
+      const got = await Promise.all(batch.map(async (tile) => (await readShard(`${base}${tile.key}.json.gz`))
+        || (await readShard(`${base}${tile.key}.json.gz?retry=1`))));
       got.forEach((gj, j) => {
         if (!gj || !Array.isArray(gj.features)) throw new Error(`tile ${batch[j].key} unreadable`);
         for (const f of gj.features) if (keep(f)) hits.push(f);
@@ -615,7 +648,7 @@ async function fileFeatures(e, d, a, v, limit) {
       if (hits.length >= limit * 4 && !t) { partial = partial || i + 12 < near.length; break; }
     }
   } else {
-    const r = await fetch(e.url, { cf: { cacheTtl: 3600 }, signal: AbortSignal.timeout(25000) });
+    const r = await fetch(e.url, { cf: GOOD_ONLY, signal: AbortSignal.timeout(25000) });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const gj = await r.json();
     if (!Array.isArray(gj.features)) throw new Error("not GeoJSON");
