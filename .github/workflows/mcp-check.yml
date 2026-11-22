@@ -102,6 +102,31 @@ jobs:
                                   ("32614f5d7b69b2e5", "Canmore terrestrial", [-3.3, 55.9, -3.1, 56.0])]:
               r, status, s = call("fetch_features", {"id": did, "bbox": box, "limit": 20})
               print(f"fetch_features [HES {label}]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'} via {(r or {}).get('endpoint', {}).get('protocol', '-')}" + (f", errors {r.get('errors')}" if r and r.get('errors') else ""))
+          # UK protected sites (Tobler, 22 Nov): every curated record returns features for a box inside its nation, quickly
+          uk = [("fa98f1a8571830ba", "JNCC offshore MPAs, Dogger Bank", [1.0, 54.5, 2.0, 55.0]),
+                ("a9cad137cd6e2466", "NE SAC, north Norfolk", [0.5, 52.8, 1.8, 53.2]), ("8b28077c10e3e057", "NE SPA, north Norfolk", [0.5, 52.8, 1.8, 53.2]),
+                ("fc67624f3bd09663", "NE Ramsar, north Norfolk", [0.5, 52.8, 1.8, 53.2]), ("0c53cecc65701f0c", "NE SSSI, north Norfolk", [0.5, 52.8, 1.8, 53.2]),
+                ("2470b667af95db9c", "NE MCZ, Channel (3 a page)", [-6, 49.5, 2, 51]), ("4d20427c9827e672", "NE ancient woodland, Norfolk", [1.0, 52.6, 1.4, 52.9]),
+                ("f7fd85401cdf700f", "NE priority habitats, Norfolk", [1.0, 52.85, 1.1, 52.9]),
+                ("7d382e1686a08bff", "NatureScot SAC, Forth", [-3.5, 55.95, -2.5, 56.3]), ("b10cb9d7a2892f7f", "NatureScot SPA, Forth", [-3.5, 55.95, -2.5, 56.3]),
+                ("b2f1c178d39c0d0e", "NatureScot Ramsar, Forth", [-3.5, 55.95, -2.5, 56.3]), ("c6e90f0435ff9097", "NatureScot SSSI, Linlithgow", [-3.7, 55.9, -3.5, 56.05]),
+                ("f682edebaabd1b8b", "NatureScot NCMPA, Sound of Mull", [-6.3, 56.3, -5.4, 56.8]), ("83edcb984cbc578d", "NatureScot ancient woodland, Linlithgow", [-3.7, 55.9, -3.5, 56.05]),
+                ("f1f2acb0cb971df9", "NRW SAC, Pembrokeshire", [-5.4, 51.6, -4.9, 51.9]), ("0f71127c51a2172c", "NRW SPA, Pembrokeshire", [-5.4, 51.6, -4.9, 51.9]),
+                ("a6fa6c34e1ffe4c1", "NRW Ramsar, Burry Inlet", [-4.4, 51.55, -4.0, 51.75]), ("0761e0de1e55f269", "NRW SSSI, Pembrokeshire", [-5.4, 51.6, -4.9, 51.9]),
+                ("10f54cd67c434aa8", "NRW MCZ, Skomer", [-5.4, 51.6, -4.9, 51.9]), ("dae5eef189e09f22", "NRW ancient woodland, Pembrokeshire", [-5.0, 51.7, -4.8, 51.85]),
+                ("da17adda6e50b6da", "DAERA SAC, Strangford", [-5.8, 54.3, -5.5, 54.6]), ("7571a1f57be683da", "DAERA SPA, Strangford", [-5.8, 54.3, -5.5, 54.6]),
+                ("e4d3902ce86a9334", "DAERA ASSI, Strangford", [-5.8, 54.3, -5.5, 54.6]), ("a13d205bd42efeb8", "DAERA Ramsar, Strangford", [-5.8, 54.3, -5.5, 54.6]),
+                ("6f8ffc3a4d831d53", "DAERA MPAs, Strangford", [-5.8, 54.3, -5.5, 54.6])]
+          for did, label, box in uk:
+              r, status, s = call("fetch_features", {"id": did, "bbox": box, "limit": 50, "include_geometry": False})
+              names = sorted({str(next((v for k, v in f["properties"].items() if "name" in k.lower() and isinstance(v, str)), ""))[:28] for f in (r or {}).get("features", [])})[:4]
+              print(f"UK protected [{label}]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}{', pages ' + str(r['pages_read']) if r and r.get('pages_read') else ''}: {names}")
+          g, status, s = call("get_dataset", {"id": "fa98f1a8571830ba"})
+          print(f"get_dataset [JNCC offshore MPAs]: {status}, attribution {'yes' if (g or {}).get('attribution') else 'no'}, details {((g or {}).get('endpoints') or [{}])[0].get('details')}")
+          # EMODnet Seabed Habitats point layers timed out after ~52 s at Dogger Bank (Tobler, 22 Nov): now one 15 s wait
+          for did in ("31d669aa63029af3", "bf4c481ed3840316", "f992e3e075927999"):
+              r, status, s = call("fetch_features", {"id": did, "lon": 1.47, "lat": 54.75, "radius_km": 25, "limit": 50})
+              print(f"Seabed Habitats [{did}, Dogger Bank 50 km box]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
           r, status, s = call("fetch_features", {"id": "ee41a8d58f1fe201", "bbox": [-6, 49, 2, 52], "limit": 50})
           print(f"fetch_features [EMODnet heritage wrecks, English Channel]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}")
           r, status, s = call("fetch_features", {"id": "d266bb32a493da90", "bbox": [-4.6, 60.6, -3.0, 61.4], "limit": 50})
