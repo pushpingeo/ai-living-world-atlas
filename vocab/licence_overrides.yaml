@@ -311,3 +311,9 @@ rules:
       Zone Order 2013.
     source: https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27 (use constraints and attribution statement,
       read 22 Nov 2026 by probe round 21)
+  - host: pushpingeo.github.io
+    url: /data/f/pins-nsip-england/
+    licence: Licensed under the Open Government Licence v.3.0.
+    open: true
+    attribution: © Crown copyright and database right 2026
+    source: https://www.planning.data.gov.uk/dataset/infrastructure-project (licence and attribution, read 22 Nov 2026)

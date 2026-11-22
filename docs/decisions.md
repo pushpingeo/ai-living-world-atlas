@@ -484,3 +484,34 @@ Decisions:
   wants its own axis names (not yet working); Italy's TINITALY asks users to register. New Zealand is covered by the
   LINZ elevation ImageServer already in the atlas; LINZ's own 1 m COGs (STAC, CC BY 4.0) are a later addition.
 - **Found on the way:** a bare `NO` in YAML is a boolean. Norway's country code is quoted.
+
+## 2026-11-22: UK protected sites as fixed records, and fixes from Tobler's Dogger Bank screen
+Tobler's first users are environmental consultants (Rob, 22 Nov). A screen of a 100 km² offshore wind site by Dogger
+Bank found no protected areas, though Dogger Bank is an SAC.
+- **Why records, not a crawl.** The UK crawl already held many of these layers, but under other titles, often without a
+  licence, and scattered across mirrors (Defra group, MMO, consultants' copies). Tobler wants a short must-check list
+  with fixed ids. So `vocab/seeds/uk-protected.yaml` (wave `spike-ukprotected`) has one record per designation and
+  nation, each pointing at the designating body's own feature service, written from the live layer metadata by a
+  one-off script (counts, dates, extents, name and code fields). Record endpoints have their own uid (`<id>:0`), so the
+  crawled copies keep their ids; search folds nothing because the titles differ.
+- **JNCC offshore** is the gap that mattered at Dogger Bank. JNCC's OGC server (mpa-ows.jncc.gov.uk) didn't answer
+  GitHub's runners in 60 s; its Resource Hub has an open shapefile (OGL). Hosted as tiles (`files/jncc-offshore-mpas`,
+  78 sites, 0.3 MB) through a new `files` workflow that downloads a spec's `source_url` in Actions.
+- **Licences, checked one by one:** all OGL v3.0. Natural England and NatureScot from their ArcGIS items; NRW's items say
+  "Open Data under OSL", so the licence and attribution come from DataMapWales; DAERA's designations from Open Data NI
+  (OGL, no attribution given: OGL's own wording plus the service's "© NIEA, 2024"). Verbatim in licence_overrides.yaml.
+- **Natura 2000 and the UK:** EMODnet's copy of the EEA polygons has no UK sites; the EEA centroid layer still lists
+  924 UK sites from a 2013 release. Tobler's belief was right.
+- **fetch_features:** small-page ArcGIS layers (NE MCZs, 3 a page) are read page by page in parallel; a WFS gets one 15 s
+  wait (two 25 s waits made EMODnet Seabed Habitats fail at ~52 s); detail shards and hosted tiles are cached only when
+  the answer was good (a plain cacheTtl also caches 404s for the hour: the likely cause of GEM's "tile 0_0 unreadable").
+- **Hand fixes at publish time** (`atlas/hand_fixes.py`): concepts (`vocab/concept_overrides.yaml`: NSTA seismic layers
+  to geology; wreck layers to heritage-site and shipping) and publisher types by publisher name for shared hosts
+  (`vocab/publisher_type_overrides.yaml`: The Crown Estate is a statutory body, not a business). The publisher registry
+  should absorb the second once Rob approves it.
+- **Not changed: ranking.** At an offshore point, England-wide land layers whose bounding boxes reach the North Sea
+  still outrank the offshore records. True footprints are the real fix (known gap); Tobler uses the ids.
+- **Project outlines (20 Nov):** NatureScot's Onshore Windfarm Proposals already ranks first for power-plant in Kintyre;
+  the Cnoc Buidhe miss was the layer's age (Sept 2024). The data's own date is now in `details.data_date` for the new
+  records. England's NSIP boundaries (planning.data.gov.uk, OGL, daily) are hosted as tiles. No GIS layer of Scottish
+  Section 36 applications was found: the Energy Consents portal lists cases but publishes no boundaries.
