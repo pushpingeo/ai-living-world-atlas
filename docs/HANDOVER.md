@@ -166,7 +166,7 @@ Details in decisions.md (22 Nov) and the contract note in mcp-tools.md.
   refreshed daily at source: rerun `files` then bump `runs/spike-files.env` to refresh).
 - **Record ids are now fixed** (`record_id` in atlas/datasets.py): a hosted file takes its landing endpoint's uid, any
   other record its first endpoint's. Before, the id followed whichever endpoint passed its check, and a rerun changed
-  all 18 GEM ids for about half an hour on 22 Nov.
+  all 18 GEM ids for up to 15 minutes on 22 Nov.
 - Publish-time hand fixes (`atlas/hand_fixes.py`): concepts (`vocab/concept_overrides.yaml`) and publisher types by name
   (`vocab/publisher_type_overrides.yaml`).
 - `mcp-ask` workflow: push `runs/mcp-ask.jsonl` (one call per line) for quick live MCP calls; results on `results/mcp-ask`.
