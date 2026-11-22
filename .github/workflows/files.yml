@@ -1,0 +1,52 @@
+name: files
+# Hosted download datasets whose source is an open download (spec key `source_url`): fetch it, convert it to tiles
+# (atlas/files.py) and commit files/<id>/ and vocab/seeds/files.yaml back to main. Edit runs/files.env (SPECS=...) and
+# push to run it. Then bump runs/spike-files.env so the wave picks the record up (a push from here doesn't start it).
+on:
+  push:
+    branches: [main]
+    paths: ['runs/files.env']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: files
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q -r requirements.txt pyogrio openpyxl
+      - name: Download and convert
+        run: |
+          set -euo pipefail
+          source runs/files.env
+          mkdir -p /tmp/src
+          for spec in $SPECS; do
+            url=$(python3 -c "import yaml,sys; print(yaml.safe_load(open('$spec')).get('source_url') or '')")
+            [ -z "$url" ] && { echo "::error::$spec has no source_url"; exit 1; }
+            curl -sSfL -m 600 -A "ai-living-world-atlas (+https://github.com/pushpingeo/ai-living-world-atlas)" -o "/tmp/src/$(basename "$url")" "$url"
+            ls -la /tmp/src
+          done
+          python -m atlas.files --source-dir /tmp/src $SPECS | tee /tmp/files.log
+          # what the converted features look like (fields for the record's notes)
+          for spec in $SPECS; do
+            id=$(python3 -c "import yaml; print(yaml.safe_load(open('$spec'))['id'])")
+            python3 - "$id" <<'PY'
+          import gzip, json, sys, collections
+          from pathlib import Path
+          d = Path("files") / sys.argv[1]
+          idx = json.loads((d / "index.json").read_text())
+          feats = [f for t in idx["tiles"] for f in json.loads(gzip.decompress((d / f"{t['key']}.json.gz").read_bytes()))["features"]]
+          print(sys.argv[1], len(feats), "features; fields:", list(feats[0]["properties"].keys()))
+          for k in feats[0]["properties"]:
+              vals = collections.Counter(str(f["properties"].get(k)) for f in feats)
+              if len(vals) < 15: print("  ", k, dict(vals.most_common(15)))
+          print("  sample:", json.dumps(feats[0]["properties"])[:600])
+          PY
+          done
+      - name: Commit the tiles and the catalogue record
+        run: |
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git add files vocab/seeds/files.yaml
+          git commit -qm "files: converted $(grep '^SPECS' runs/files.env | cut -d= -f2-)" || { echo "nothing changed"; exit 0; }
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep 5; done

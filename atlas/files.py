@@ -14,6 +14,9 @@ Spec keys: id, title, publisher, publisher_type, licence, citation, release, lan
   coords_column one "lat, lon" text column, when there are no separate latitude/longitude columns
   exclude       {column: regex}: rows to leave out (e.g. third-party rows under a non-commercial licence)
   simplify_deg  geometry simplification tolerance, default 0.0005 (~50 m)
+  source_url    where the `files` workflow downloads the source from (publishers whose download is open, e.g. JNCC)
+  country, endpoint_info, attribution   passed to the record: home country, details for get_dataset (e.g. name_field),
+                and the publisher's attribution statement (also give it in vocab/licence_overrides.yaml)
 """
 from __future__ import annotations
 
@@ -75,9 +78,12 @@ def _bounds(c, bb):
 
 
 def open_source(src_dir: Path, source: str):
-    """A path or a file-like object for 'name' or 'archive.zip!member'."""
+    """A path or a file-like object for 'name' or 'archive.zip!member'. A shapefile inside a zip is read in place
+    (zip://), because it needs its .dbf, .shx and .prj beside it."""
     if "!" in source:
         zname, member = source.split("!", 1)
+        if re.search(r"\.shp$", member, re.I):
+            return f"zip://{(src_dir / zname).resolve()}!{member}", member
         return io.BytesIO(zipfile.ZipFile(src_dir / zname).read(member)), member
     return src_dir / source, source
 
@@ -237,14 +243,15 @@ def record(spec: dict, index: dict, feats: list) -> dict:
         left.append(f"{index['atlas_source']['excluded']:,} records excluded ({spec.get('exclude_reason', 'see spec')})")
     return {
         "kind": "record", "id": spec["id"], "title": spec["title"], "publisher": spec["publisher"],
-        "publisher_type": spec.get("publisher_type", "civil-society"),
+        "publisher_type": spec.get("publisher_type", "civil-society"), **({"country": spec["country"]} if spec.get("country") else {}),
         "abstract": spec["abstract"].strip() + (f" Release: {spec['release']}." if spec.get("release") else "")
                     + f" {index['count']:,} features" + (f"; left out: {'; '.join(left)}" if left else "") + "."
                     + f" Hosted by the atlas as a copy of the publisher's download; cite as: {spec.get('citation', spec['publisher'])}.",
         "licence": spec["licence"], "landing_page": spec.get("landing_page", ""),
         "bbox": [round(x, 4) for x in index["bbox"]], "geometry_type": gtype,
         "concepts_hint": spec.get("concepts_hint", []),
-        "endpoints": [{"protocol": "geojson", "url": PAGES_BASE + f"{spec['id']}/index.json", "format": "GeoJSON tiles"},
+        "endpoints": [{"protocol": "geojson", "url": PAGES_BASE + f"{spec['id']}/index.json", "format": "GeoJSON tiles",
+                       **({"info": spec["endpoint_info"]} if spec.get("endpoint_info") else {})},
                       {"protocol": "landing", "url": spec.get("landing_page", "")}],
     }
 

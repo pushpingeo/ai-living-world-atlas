@@ -1,0 +1,26 @@
+# Written 22 Nov 2026 for Tobler's UK protected-sites request. JNCC publishes the offshore MPA network as a shapefile on
+# its Resource Hub (https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27); its OGC server
+# (mpa-ows.jncc.gov.uk) didn't answer GitHub's runners (probe round 21), so the atlas hosts a copy as tiles.
+# Licence and attribution statement copied from the Resource Hub page (probe round 21, 22 Nov 2026).
+id: jncc-offshore-mpas
+title: UK offshore Marine Protected Areas (JNCC)
+publisher: Joint Nature Conservation Committee (JNCC)
+publisher_type: public-body
+country: GB
+licence: "Open Government Licence v3.0: re-use is subject to the terms of the OGL including attribution of the relevant copyright holders"
+landing_page: https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27
+source: c20251203-OffshoreMPAs-WGS84.zip!c20251203_OffshoreMPAs_WGS84.shp
+source_url: https://data.jncc.gov.uk/data/ade43f34-54d6-4084-b66a-64f0b4a5ef27/c20251203-OffshoreMPAs-WGS84.zip
+citation: UK Offshore Marine Protected Areas, JNCC, version 20251203
+release: version 20251203 (3 December 2025; West of Scotland boundary update)
+simplify_deg: 0.0001
+concepts_hint:
+- protected-area
+- marine-activity
+- uk-statutory-designation
+abstract: >-
+  The boundaries of the UK's offshore Marine Protected Areas, beyond 12 nautical miles, as JNCC publishes them: Special
+  Areas of Conservation and Special Protection Areas with marine components, Marine Conservation Zones, Highly Protected
+  Marine Areas and Scottish Nature Conservation MPAs, including sites that straddle the 12-mile limit (their inshore
+  parts are also in the country layers from Natural England, NatureScot, Natural Resources Wales and DAERA). Dogger
+  Bank SAC is here. JNCC updates the file when the network changes; this copy is refreshed by hand.
