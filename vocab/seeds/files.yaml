@@ -484,3 +484,41 @@ sources:
       data_date_source: JNCC's version number (20251203)
   - protocol: landing
     url: https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27
+- kind: record
+  id: pins-nsip-england
+  title: Nationally Significant Infrastructure Projects, site boundaries (Planning Inspectorate, England and Wales)
+  publisher: Planning Inspectorate (via planning.data.gov.uk)
+  publisher_type: central-gov
+  country: GB
+  abstract: 'The site boundaries of Nationally Significant Infrastructure Projects handled by the Planning Inspectorate under
+    the Planning Act 2008: energy (generating stations, electric lines, gas), transport, water and waste projects, from pre-application
+    to decision, with each project''s reference (e.g. EN010151), stage, type, description and a link to its page. The boundaries
+    are the ones used to inform environmental impact assessment and may change as a project develops. Covers projects in England
+    (and some in Welsh waters); Scotland''s Section 36 consents are not here. Release: download of 22 November 2026 (the collector
+    runs daily). 285 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Infrastructure project,
+    planning.data.gov.uk (Planning Inspectorate).'
+  licence: Licensed under the Open Government Licence v.3.0.
+  landing_page: https://www.planning.data.gov.uk/dataset/infrastructure-project
+  bbox:
+  - -7.0655
+  - 48.9354
+  - 3.3809
+  - 56.987
+  geometry_type: polygon
+  concepts_hint:
+  - planning-application
+  - power-plant
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/pins-nsip-england/index.json
+    format: GeoJSON tiles
+    info:
+      name_field: name
+      code_field: reference
+      status_field: infrastructure-project-decision
+      type_field: infrastructure-project-type
+      link_field: documentation-url
+      data_date: '2026-11-22'
+      data_date_source: date of the atlas's copy; each project's own entry-date and start-date are in its properties
+  - protocol: landing
+    url: https://www.planning.data.gov.uk/dataset/infrastructure-project
