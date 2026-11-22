@@ -1,18 +1,14 @@
-# round 21 (22 Nov): UK protected sites (Tobler, 22 Nov) - JNCC's own OGC services, DAERA's server, EEA/EMODnet Natura 2000 over UK waters, Hutton paging
-https://mpa-ows.jncc.gov.uk/mpa_mapper/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://mpa-ows.jncc.gov.uk/mpa_mapper/wms?service=WMS&request=GetCapabilities&version=1.3.0
-https://ows.jncc.gov.uk/mpa_mapper/wfs?service=WFS&request=GetCapabilities&version=2.0.0
-https://hub.jncc.gov.uk/assets/ade43f34-54d6-4084-b66a-64f0b4a5ef27
-https://ows.emodnet-humanactivities.eu/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=emodnet:natura2000areas&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=1,54,3,55.5,urn:ogc:def:crs:OGC:1.3:CRS84
-https://ows.emodnet-humanactivities.eu/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=emodnet:natura2000areas&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=-4,51,-1,53,urn:ogc:def:crs:OGC:1.3:CRS84
-https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites?f=json
-https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=1%3D1&geometry=-8,49.5,2,61&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json
-https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=1%3D1&geometry=-8,49.5,2,61&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&resultRecordCount=3&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/NIEAEnvironmentViewer/ProtectedAreas/MapServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/NIEAEnvironmentViewer/ProtectedAreas/MapServer/5?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/NIEAEnvironmentViewer/ProtectedAreas/MapServer/5/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.daera-ni.gov.uk/server/rest/services?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted?f=json
-https://environment.data.gov.uk/spatialdata/special-areas-of-conservation-england/wfs?service=WFS&request=GetCapabilities
-http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0?f=json
-http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0/query?where=1%3D1&geometry=-3.7,55.9,-3.5,56.05&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&returnGeometry=false&f=geojson
+# round 22 (22 Nov): UK protected sites - EEA Natura 2000 UK rows, Open Data NI licences, NRW attribution, JNCC download, DAERA hosted layers
+https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=MS%3D%27UK%27&returnCountOnly=true&f=json
+https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=1%3D1&outStatistics=%5B%7B%22statisticType%22%3A%22count%22%2C%22onStatisticField%22%3A%22OBJECTID%22%2C%22outStatisticFieldName%22%3A%22n%22%7D%5D&groupByFieldsForStatistics=MS&f=json
+https://admin.opendatani.gov.uk/api/3/action/package_search?q=organization:northern-ireland-environment-agency-natural-environment-division&rows=60&fl=name,title,license_title,notes
+https://datamap.gov.wales/layers/inspire-nrw:NRW_SAC
+https://datamap.gov.wales/api/v2/resources?search=NRW_SAC
+RANGE https://data.jncc.gov.uk/data/ade43f34-54d6-4084-b66a-64f0b4a5ef27/c20251203-OffshoreMPAs-WGS84.zip
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer/0?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer/0?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0/query?where=1%3D1&geometry=-6.2,54.5,-5.6,54.8&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=4326&resultRecordCount=2&f=geojson
+https://environment.data.gov.uk/spatialdata/marine-conservation-zones-england/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=dataset-c0061f84-6bd5-4f4b-be2c-6d64fb0e4efe:Marine_Conservation_Zones_England&count=2&outputFormat=GEOJSON
