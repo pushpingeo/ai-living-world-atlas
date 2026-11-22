@@ -152,6 +152,26 @@ def group(df: pd.DataFrame) -> tuple[pd.Series, pd.Series]:
     return pd.Series(roots, index=df.index), pd.Series(rule, index=df.index)
 
 
+CURATED_LAYER = re.compile(r"^([a-z0-9][a-z0-9-]*):(\d+)$")
+
+
+def record_id(g: pd.DataFrame) -> str | None:
+    """A curated record's id must not depend on which of its endpoints passed its check (on 22 Nov a rerun of the
+    hosted files changed every GEM id, because their tile checks passed where they had failed on 18 Nov). Its layers
+    are named "<record id>:<n>". Hosted files (a geojson and a landing endpoint) take the landing endpoint's uid, which
+    is the id they were first published with; every other record takes its first endpoint's (n = 0)."""
+    m = [CURATED_LAYER.match(str(x)) for x in g["layer_name"]]
+    if not all(m) or len({x.group(1) for x in m}) != 1:
+        return None
+    if "discovered_via" in g.columns and not (g["discovered_via"] == "curated").all():
+        return None
+    by_n = {int(x.group(2)): u for x, u in zip(m, g["uid"])}
+    types = set(g["service_type"])
+    if {"geojson", "landing"} <= types:
+        return g.loc[g["service_type"] == "landing", "uid"].iloc[0]
+    return by_n.get(0)
+
+
 def build(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     """df: scored layer rows with a '_bbox' list column. Returns (df with dataset_id, datasets)."""
     root, rule = group(df)
@@ -164,7 +184,7 @@ def build(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     for r, g in df.groupby("_root", sort=False):
         g = g.assign(_p=g["service_type"].map(lambda s: pref.get(s, 99)))
         best = g.sort_values(["q_pass", "q_total", "_p"], ascending=[False, False, True]).iloc[0]
-        ids[r] = best["uid"]
+        ids[r] = record_id(g) or best["uid"]
         abstracts = [a for a in list(g["abstract"]) + list(g["portal_abstract"]) if isinstance(a, str) and a]
         roles = set(g["role"])
         eps = [{
