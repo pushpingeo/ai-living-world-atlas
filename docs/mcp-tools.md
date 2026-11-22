@@ -33,7 +33,7 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
-- (22 Nov, Tobler requests, **shipping 22 Nov evening**) **UK protected sites as fixed records, and four fixes.**
+- (22 Nov, Tobler requests, **done**, live 22 Nov evening) **UK protected sites as fixed records, project outlines, and fixes.**
   All additive except the concept and publisher-type changes marked below.
   - **25 new records**, one per designation and nation, pointing at the designating body's own feature service (JNCC's
     offshore set is hosted by the atlas as tiles, because JNCC's OGC server doesn't answer cloud runners). Ids are fixed:
@@ -77,6 +77,17 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   - **Ranking, not changed:** in a plain `protected-area` search at an offshore point these records come well down the
     list (Dogger Bank: places 58-75 of 188), behind England-wide land layers whose bounding boxes reach the North Sea.
     Use the ids above for the baseline rather than relying on search order.
+  - **Project outlines (20 Nov request):** new hosted record **`03cc52745432ee74`**, the Planning Inspectorate's NSIP
+    site boundaries from planning.data.gov.uk (285 projects with a location, OGL v3.0, attribution "© Crown copyright
+    and database right 2026"). `details`: `name_field` name, `code_field` reference (EN010151…), `status_field`
+    infrastructure-project-decision (pre-application, examination, decision, post-decision, withdrawn…), `type_field`,
+    `link_field` documentation-url. A copy of 22 Nov: refreshed by hand (the source updates daily). NatureScot's Onshore
+    Windfarm Proposals (`a0484a5671248c7a`) already ranks first for `power-plant` in Kintyre; its data predate Sept
+    2024, which is why Cnoc Buidhe isn't in it. No GIS layer of Scottish Section 36 applications was found (the Energy
+    Consents portal publishes cases, not boundaries); Wales's DNS not checked yet.
+  - **Ids of hosted and curated records are now fixed** (they had followed whichever endpoint passed its check). On
+    22 Nov between about 20:45 and 21:20 UTC the 18 GEM trackers briefly had other ids (e.g. extraction
+    `97dd06297d3a4f43` instead of `11650fec8b9d8e5f`); they are back, and won't move again.
   - Already working, checked live 22 Nov: HES Scheduled Monuments `25ffbbeec3836e1a` (50 near Linlithgow, 2.2 s) and
     Hutton land capability `bd18c4d31d168bf4` (50, 3.5 s), since the 19 Nov no-paging fix; GEM extraction "Bonga" (3, 0.4 s).
 

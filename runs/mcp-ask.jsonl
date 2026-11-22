@@ -1,7 +1,7 @@
-# 22 Nov: JNCC record under its real id; full result order for Dogger protected areas and UK wind leases
+# 22 Nov, final: GEM ids back, NSIP boundaries, JNCC
+{"label": "GEM extraction, published id", "tool": "get_dataset", "args": {"id": "11650fec8b9d8e5f"}}
+{"label": "GEM extraction, transient id (should be gone)", "tool": "get_dataset", "args": {"id": "97dd06297d3a4f43"}}
+{"label": "NSIP record", "tool": "get_dataset", "args": {"id": "03cc52745432ee74"}}
+{"label": "NSIP near Beacon Fen", "tool": "fetch_features", "args": {"id": "03cc52745432ee74", "lon": -0.33, "lat": 53.0, "radius_km": 5, "limit": 10, "include_geometry": false}}
+{"label": "NSIP text Hornsea", "tool": "fetch_features", "args": {"id": "03cc52745432ee74", "bbox": [-3, 52, 3, 56], "text": "Hornsea", "limit": 10, "include_geometry": false}}
 {"label": "JNCC record", "tool": "get_dataset", "args": {"id": "1d6371b702df0abc"}}
-{"label": "JNCC at Dogger Bank SW", "tool": "fetch_features", "args": {"id": "1d6371b702df0abc", "lon": 1.47, "lat": 54.75, "radius_km": 10, "limit": 20, "include_geometry": false}}
-{"label": "Dogger, protected-area query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 10, "concept": "protected-area", "capability": "query", "limit": 100}}
-{"label": "UK offshore-wind-site query polygon", "tool": "find_datasets", "args": {"bbox": [-8.65, 49.86, 1.77, 60.86], "concept": "offshore-wind-site", "capability": "query", "geometry": "polygon", "limit": 100}}
-{"label": "UK power-plant query polygon", "tool": "find_datasets", "args": {"bbox": [-8.65, 49.86, 1.77, 60.86], "concept": "power-plant", "capability": "query", "geometry": "polygon", "limit": 100}}
-{"label": "NE MCZ, Channel (3 a page)", "tool": "fetch_features", "args": {"id": "2470b667af95db9c", "bbox": [-6, 49.5, 2, 51], "limit": 50, "include_geometry": false}}
