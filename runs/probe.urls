@@ -1,13 +1,13 @@
-# round 23 (22 Nov): licences and attribution, verbatim - Open Data NI (NIEA designations), DataMapWales (NRW); EEA's UK Natura 2000 release date
-https://admin.opendatani.gov.uk/api/3/action/package_show?id=special-areas-of-conservation
-https://admin.opendatani.gov.uk/api/3/action/package_show?id=special-protection-areas
-https://admin.opendatani.gov.uk/api/3/action/package_show?id=areas-of-special-scientific-interest
-https://admin.opendatani.gov.uk/api/3/action/package_show?id=ramsar-sites
-https://datamap.gov.wales/layers/inspire-nrw:NRW_SPA
-https://datamap.gov.wales/layers/inspire-nrw:NRW_SSSI
-https://datamap.gov.wales/layers/inspire-nrw:NRW_RAMSAR
-https://datamap.gov.wales/layers/inspire-nrw:NRW_ANCIENT_WOODLAND_INVENTORY_2021
-https://datamap.gov.wales/layers/inspire-nrw:NRW_MNR
-https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=MS%3D%27UK%27&outFields=SITECODE,SITENAME,RELEASE_DATE&resultRecordCount=3&returnGeometry=false&f=json
-https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Centers_WM/MapServer/0/query?where=MS%3D%27NL%27&outFields=SITECODE,SITENAME,RELEASE_DATE&resultRecordCount=2&returnGeometry=false&f=json
-https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites?f=json
+# round 24 (22 Nov): DAERA hosted designations - fields, a sample row, counts (curated UK records)
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer?f=json
