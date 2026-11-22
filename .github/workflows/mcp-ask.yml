@@ -1,0 +1,61 @@
+name: mcp-ask
+# Ad-hoc live MCP calls for debugging: one JSON object per line in runs/mcp-ask.jsonl, {"tool": ..., "args": {...}}.
+# Results (never the key) go to results/mcp-ask: one block per call with status, time and the answer cut to 4 KB.
+on:
+  push:
+    branches: [main]
+    paths: ['runs/mcp-ask.jsonl']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ask:
+    runs-on: ubuntu-latest
+    env:
+      ATLAS_MCP_KEY: ${{ secrets.ATLAS_MCP_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Call the tools
+        run: |
+          python3 - <<'PY' | tee /tmp/ask.txt
+          import json, os, time, urllib.request
+          EP = "https://atlas-mcp.robdunfey.workers.dev/mcp"
+          KEY = os.environ["ATLAS_MCP_KEY"]
+          for line in open("runs/mcp-ask.jsonl"):
+              line = line.strip()
+              if not line or line.startswith("#"):
+                  continue
+              q = json.loads(line)
+              body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": q["tool"], "arguments": q["args"]}}).encode()
+              req = urllib.request.Request(EP, body, {"Authorization": f"Bearer {KEY}", "content-type": "application/json", "User-Agent": "atlas-mcp-ask (+https://github.com/pushpingeo/ai-living-world-atlas)"})
+              t = time.time()
+              try:
+                  with urllib.request.urlopen(req, timeout=120) as r:
+                      raw, code = r.read(), r.status
+              except urllib.error.HTTPError as e:
+                  raw, code = e.read(), e.code
+              except Exception as e:
+                  raw, code = str(e).encode(), "ERR"
+              s = time.time() - t
+              try:
+                  d = json.loads(raw); res = d.get("result", {})
+                  out = res.get("structuredContent") or res.get("content") or d.get("error")
+                  if isinstance(out, dict) and "features" in out:   # keep properties of the first few features, drop geometry
+                      out = {**out, "features": [{"properties": f.get("properties"), "geometry_type": (f.get("geometry") or {}).get("type")} for f in out["features"][:8]]}
+                  if isinstance(out, dict) and "results" in out:
+                      out = {**out, "results": [{k: x.get(k) for k in ("id", "title", "publisher", "licence", "geometry", "country", "concepts", "trusted")} for x in out["results"][:25]]}
+                  txt = json.dumps(out, ensure_ascii=False)
+              except Exception:
+                  txt = raw.decode("utf-8", "replace")
+              tag = q.get("label") or q["tool"]
+              print(f"### {tag} | HTTP {code} | {s:.1f}s | args {json.dumps(q['args'])}\n{txt[:4000]}\n")
+              time.sleep(1.2)
+          PY
+      - name: Publish result (never the key)
+        if: always()
+        run: |
+          mkdir -p /tmp/r && cp /tmp/ask.txt /tmp/r/ 2>/dev/null || echo "ask did not run" > /tmp/r/ask.txt
+          echo "commit ${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > /tmp/r/RUN.txt
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git checkout -q --orphan tmp && git rm -rfq . && git clean -fdxq
+          cp /tmp/r/* . && git add -A && git commit -qm "MCP ask" && git push -qf origin HEAD:refs/heads/results/mcp-ask
