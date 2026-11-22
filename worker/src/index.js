@@ -7,7 +7,7 @@ import AREAS from "./country_areas.json";
 const SERVER = { name: "ai-living-world-atlas", version: "0.1.0" };
 const PROTOCOLS = ["2025-06-18", "2025-03-26", "2024-11-05"];
 const WFS_WAIT_MS = 15000;    // one wait per WFS endpoint
-const ARCGIS_WAIT_MS = 20000; // and per ArcGIS request
+const ARCGIS_WAIT_MS = 25000; // and per ArcGIS request (as before: Natural England's priority habitats can take 20 s)
 const MAX_PAGES = 25;         // pages read for layers with a small page size
 const FEATURE_PREF = ["arcgis-featureserver", "wfs", "arcgis-mapserver", "geojson"];
 

@@ -1,0 +1,33 @@
+# Written 22 Nov 2026 for Tobler's 20 Nov request (a project's own outline). The Planning Inspectorate's NSIP site
+# boundaries, as published daily on planning.data.gov.uk (dataset infrastructure-project). The one GeoJSON is 21 MB,
+# too big to read per request, so the atlas hosts it as tiles; refresh by rerunning the files workflow.
+# Licence and attribution copied from https://www.planning.data.gov.uk/dataset/infrastructure-project (22 Nov 2026).
+id: pins-nsip-england
+title: Nationally Significant Infrastructure Projects, site boundaries (Planning Inspectorate, England and Wales)
+publisher: Planning Inspectorate (via planning.data.gov.uk)
+publisher_type: central-gov
+country: GB
+licence: Licensed under the Open Government Licence v.3.0.
+landing_page: https://www.planning.data.gov.uk/dataset/infrastructure-project
+source: infrastructure-project.geojson
+source_url: https://files.planning.data.gov.uk/dataset/infrastructure-project.geojson
+citation: Infrastructure project, planning.data.gov.uk (Planning Inspectorate)
+release: download of 22 November 2026 (the collector runs daily)
+simplify_deg: 0.0001
+endpoint_info:
+  name_field: name
+  code_field: reference
+  status_field: infrastructure-project-decision
+  type_field: infrastructure-project-type
+  link_field: documentation-url
+  data_date: '2026-11-22'
+  data_date_source: date of the atlas's copy; each project's own entry-date and start-date are in its properties
+concepts_hint:
+- planning-application
+- power-plant
+abstract: >-
+  The site boundaries of Nationally Significant Infrastructure Projects handled by the Planning Inspectorate under the
+  Planning Act 2008: energy (generating stations, electric lines, gas), transport, water and waste projects, from
+  pre-application to decision, with each project's reference (e.g. EN010151), stage, type, description and a link to its
+  page. The boundaries are the ones used to inform environmental impact assessment and may change as a project
+  develops. Covers projects in England (and some in Welsh waters); Scotland's Section 36 consents are not here.

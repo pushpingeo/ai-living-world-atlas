@@ -40,7 +40,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
 
     | Nation | SAC | SPA | Ramsar | SSSI/ASSI | Marine | Ancient woodland | Other |
     |---|---|---|---|---|---|---|---|
-    | UK offshore (JNCC) | | | | | `fa98f1a8571830ba` SAC, SPA, MCZ, NCMPA, HPMA beyond 12 nm | | |
+    | UK offshore (JNCC) | | | | | `1d6371b702df0abc` SAC, SPA, MCZ, NCMPA, HPMA beyond 12 nm | | |
     | England (Natural England) | `a9cad137cd6e2466` | `8b28077c10e3e057` | `fc67624f3bd09663` | `0c53cecc65701f0c` | `2470b667af95db9c` MCZ | `4d20427c9827e672` | `f7fd85401cdf700f` priority habitats |
     | Scotland (NatureScot) | `7d382e1686a08bff` | `b10cb9d7a2892f7f` | `b2f1c178d39c0d0e` | `c6e90f0435ff9097` | `f682edebaabd1b8b` NCMPA inshore | `83edcb984cbc578d` | |
     | Wales (NRW) | `f1f2acb0cb971df9` | `0f71127c51a2172c` | `a6fa6c34e1ffe4c1` | `0761e0de1e55f269` | `10f54cd67c434aa8` MCZ | `dae5eef189e09f22` | |
@@ -61,7 +61,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
   - **`fetch_features`, additive:** an ArcGIS layer whose page is smaller than `limit` (Natural England's MCZs send 3 a
     page) is now read page by page in parallel up to the limit; `pages_read` says how many pages when more than one.
     A WFS gets one 15 s wait (was two of 25 s: EMODnet Seabed Habitats' point layers failed after ~52 s); the error now
-    says "timed out after 15 s". ArcGIS requests wait 20 s. Hosted-file tiles retry once and a failed read is no longer
+    says "timed out after 15 s". ArcGIS requests still wait 25 s. Hosted-file tiles retry once and a failed read is no longer
     cached for an hour (the likely cause of GEM's "tile 0_0 unreadable" on 18 Nov).
   - **Changed concepts (hand-set at publish time, `vocab/concept_overrides.yaml`):** 38 NSTA seismic survey layers
     are now `geology` only (were `oil-gas`), so "offshore platform" searches by `oil-gas` stop picking them. Licensing
@@ -70,6 +70,13 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     mostly `seabed-habitat`).
   - **Changed publisher type:** The Crown Estate's layers (21) are `public-body` (were `business`), so they rank with
     other authorities; Crown Estate Scotland was already `regional-gov`. (`vocab/publisher_type_overrides.yaml`.)
+  - **Speed, live 22 Nov (mcp-check, one box per record inside its nation, limit 50):** 0.2-3.1 s for 23 of the 25.
+    JNCC at Dogger Bank 0.4 s (Dogger Bank and Southern North Sea SACs). Natural England's MCZs: 47 in 1.1 s over 16
+    pages. **Slow: England's priority habitats** (818k polygons on Natural England's ArcGIS Online) took 1.4-20 s in
+    direct tests and once timed out; keep boxes small and treat a timeout as "not checked".
+  - **Ranking, not changed:** in a plain `protected-area` search at an offshore point these records come well down the
+    list (Dogger Bank: places 58-75 of 188), behind England-wide land layers whose bounding boxes reach the North Sea.
+    Use the ids above for the baseline rather than relying on search order.
   - Already working, checked live 22 Nov: HES Scheduled Monuments `25ffbbeec3836e1a` (50 near Linlithgow, 2.2 s) and
     Hutton land capability `bd18c4d31d168bf4` (50, 3.5 s), since the 19 Nov no-paging fix; GEM extraction "Bonga" (3, 0.4 s).
 

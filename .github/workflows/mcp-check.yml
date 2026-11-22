@@ -103,7 +103,7 @@ jobs:
               r, status, s = call("fetch_features", {"id": did, "bbox": box, "limit": 20})
               print(f"fetch_features [HES {label}]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'} via {(r or {}).get('endpoint', {}).get('protocol', '-')}" + (f", errors {r.get('errors')}" if r and r.get('errors') else ""))
           # UK protected sites (Tobler, 22 Nov): every curated record returns features for a box inside its nation, quickly
-          uk = [("fa98f1a8571830ba", "JNCC offshore MPAs, Dogger Bank", [1.0, 54.5, 2.0, 55.0]),
+          uk = [("1d6371b702df0abc", "JNCC offshore MPAs, Dogger Bank", [1.0, 54.5, 2.0, 55.0]),
                 ("a9cad137cd6e2466", "NE SAC, north Norfolk", [0.5, 52.8, 1.8, 53.2]), ("8b28077c10e3e057", "NE SPA, north Norfolk", [0.5, 52.8, 1.8, 53.2]),
                 ("fc67624f3bd09663", "NE Ramsar, north Norfolk", [0.5, 52.8, 1.8, 53.2]), ("0c53cecc65701f0c", "NE SSSI, north Norfolk", [0.5, 52.8, 1.8, 53.2]),
                 ("2470b667af95db9c", "NE MCZ, Channel (3 a page)", [-6, 49.5, 2, 51]), ("4d20427c9827e672", "NE ancient woodland, Norfolk", [1.0, 52.6, 1.4, 52.9]),
@@ -121,7 +121,7 @@ jobs:
               r, status, s = call("fetch_features", {"id": did, "bbox": box, "limit": 50, "include_geometry": False})
               names = sorted({str(next((v for k, v in f["properties"].items() if "name" in k.lower() and isinstance(v, str)), ""))[:28] for f in (r or {}).get("features", [])})[:4]
               print(f"UK protected [{label}]: {status}, {s:.1f}s, returned {r.get('returned') if r else '-'}{', pages ' + str(r['pages_read']) if r and r.get('pages_read') else ''}: {names}")
-          g, status, s = call("get_dataset", {"id": "fa98f1a8571830ba"})
+          g, status, s = call("get_dataset", {"id": "1d6371b702df0abc"})
           print(f"get_dataset [JNCC offshore MPAs]: {status}, attribution {'yes' if (g or {}).get('attribution') else 'no'}, details {((g or {}).get('endpoints') or [{}])[0].get('details')}")
           # EMODnet Seabed Habitats point layers timed out after ~52 s at Dogger Bank (Tobler, 22 Nov): now one 15 s wait
           for did in ("31d669aa63029af3", "bf4c481ed3840316", "f992e3e075927999"):
