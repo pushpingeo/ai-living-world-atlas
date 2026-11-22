@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (20 Nov 2026)
+# AI Living World Atlas: handover (22 Nov 2026)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -73,6 +73,7 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| UK protected (`spike-ukprotected`) | 24 | 24 | Curated records for UK statutory sites (22 Nov, Tobler): SAC, SPA, Ramsar, SSSI/ASSI, marine designations, ancient woodland per nation; JNCC offshore in `spike-files` |
 | Values (`spike-values`) | 40 | 40 | Curated sources that return a value at a point: depth (GEBCO_2026, NOAA), ship density (World Bank/IMF), land elevation in 12 countries plus GLO-30 (19-20 Nov; tagged for under $0.01) |
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
@@ -154,6 +155,23 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
 - `parts get` streams part by part and takes a column list, so a small machine can read Europe's layers.
 - Tobler now uses the MCP server live, through a service binding from a Worker (today `north-sea-geo-demo`, route `/atlas`; moving to Tobler's own Worker in the Tobler chat). Keep the Worker name `atlas-mcp`: the binding points at it.
 
+## UK protected sites and Tobler fixes (22 Nov)
+
+Details in decisions.md (22 Nov) and the contract note in mcp-tools.md.
+- `vocab/seeds/uk-protected.yaml`: 24 records, one per designation and nation, on each designating body's own feature
+  service. Written by a one-off script from live metadata; to refresh counts and dates, re-read the layers and edit.
+  Licences and attribution statements: `vocab/licence_overrides.yaml` (rules `^uk-...:`).
+- Hosted from open downloads by the new `files` workflow (`runs/files.env`, spec key `source_url`): JNCC offshore MPAs
+  (`jncc-offshore-mpas`, version 20251203) and England's NSIP boundaries (`pins-nsip-england`, planning.data.gov.uk,
+  refreshed daily at source: rerun `files` then bump `runs/spike-files.env` to refresh).
+- **Record ids are now fixed** (`record_id` in atlas/datasets.py): a hosted file takes its landing endpoint's uid, any
+  other record its first endpoint's. Before, the id followed whichever endpoint passed its check, and a rerun changed
+  all 18 GEM ids for about half an hour on 22 Nov.
+- Publish-time hand fixes (`atlas/hand_fixes.py`): concepts (`vocab/concept_overrides.yaml`) and publisher types by name
+  (`vocab/publisher_type_overrides.yaml`).
+- `mcp-ask` workflow: push `runs/mcp-ask.jsonl` (one call per line) for quick live MCP calls; results on `results/mcp-ask`.
+- Workspace can't reach gis.daera-ni.gov.uk, JNCC or planning.data.gov.uk: use `probe`.
+
 ## Known gaps and next steps (rough priority)
 
 1. **Watch the sweep's first week.** history.csv on `results/liveness` now has one line per run, with `trigger`
@@ -187,6 +205,11 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
    - UNEP-WCMC proxied ImageServers: their proxy's stored credentials fail ("Unable to generate token").
    - GFW tiles: blocked by robots.txt.
 4. **Smaller items.**
+   - From 22 Nov: the data's own date per record (`details.data_date`) is only on the curated UK records and hosted
+     files; for crawled ArcGIS layers the sweep could read `editingInfo.lastEditDate` on its nightly visit. Offshore
+     points still rank England-wide land layers above the offshore records (bounding boxes; footprints would fix it).
+     No GIS layer found for Scottish Section 36 applications or Welsh DNS. Natural England's priority habitats layer is
+     slow (1-20 s).
    - 19 Nov: ArcGIS layers that can't page (Historic Environment Scotland) refused `resultRecordCount`; `fetch_features`
      and the viewer now retry without it (decisions.md). The viewer side still needs a look in a real browser.
    - Trim long credit strings used as publisher names.

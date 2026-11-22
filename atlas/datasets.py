@@ -194,7 +194,7 @@ def build(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         } for e in g.sort_values("_p").itertuples()]
         details = g.dropna(subset=["detail_m"]).sort_values("detail_m")
         out.append({
-            "dataset_id": best["uid"], "title": best["display_title"], "abstract": max(abstracts, key=len) if abstracts else "",
+            "dataset_id": ids[r], "title": best["display_title"], "abstract": max(abstracts, key=len) if abstracts else "",
             "publisher": best["publisher"], "publisher_type": best["publisher_type_resolved"], "country": best["country"],
             "licence": best["portal_licence"] or best["licence_text"],
             "open_licence": bool(g["q_open_licence"].any()),
