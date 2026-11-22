@@ -1,13 +1,4 @@
-# round 24 (22 Nov): DAERA hosted designations - fields, a sample row, counts (curated UK records)
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=1&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer?f=json
+# round 25 (22 Nov): England's NSIP boundaries on planning.data.gov.uk (Tobler 20 Nov: project outlines) - size, fields, CORS
+RANGE https://files.planning.data.gov.uk/dataset/infrastructure-project.geojson
+https://files.planning.data.gov.uk/dataset/infrastructure-project.csv
+https://digital-land.github.io/specification/dataset/infrastructure-project
