@@ -43,12 +43,12 @@ jobs:
                   if isinstance(out, dict) and "features" in out:   # keep properties of the first few features, drop geometry
                       out = {**out, "features": [{"properties": f.get("properties"), "geometry_type": (f.get("geometry") or {}).get("type")} for f in out["features"][:8]]}
                   if isinstance(out, dict) and "results" in out:
-                      out = {**out, "results": [{k: x.get(k) for k in ("id", "title", "publisher", "licence", "geometry", "country", "concepts", "trusted")} for x in out["results"][:25]]}
+                      out = {**out, "results": [f"{x.get('id')} | {(x.get('title') or '')[:60]} | {(x.get('publisher') or '')[:30]} | {x.get('publisher_type')}" for x in out["results"][:100]]}
                   txt = json.dumps(out, ensure_ascii=False)
               except Exception:
                   txt = raw.decode("utf-8", "replace")
               tag = q.get("label") or q["tool"]
-              print(f"### {tag} | HTTP {code} | {s:.1f}s | args {json.dumps(q['args'])}\n{txt[:4000]}\n")
+              print(f"### {tag} | HTTP {code} | {s:.1f}s | args {json.dumps(q['args'])}\n{txt[:12000]}\n")
               time.sleep(1.2)
           PY
       - name: Publish result (never the key)

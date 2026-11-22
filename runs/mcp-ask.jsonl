@@ -1,11 +1,7 @@
-# 22 Nov, after shipping: UK records, Crown Estate rank, Kintyre wind proposals rank, NSTA concepts, wrecks
-{"label": "JNCC record", "tool": "get_dataset", "args": {"id": "fa98f1a8571830ba"}}
-{"label": "NE SAC record", "tool": "get_dataset", "args": {"id": "a9cad137cd6e2466"}}
-{"label": "JNCC at Dogger Bank SW", "tool": "fetch_features", "args": {"id": "fa98f1a8571830ba", "lon": 1.47, "lat": 54.75, "radius_km": 10, "limit": 20, "include_geometry": false}}
-{"label": "Dogger, protected-area query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 10, "concept": "protected-area", "capability": "query", "limit": 15}}
-{"label": "UK statutory text", "tool": "find_datasets", "args": {"bbox": [-11, 49, 3, 61], "text": "uk statutory designation", "limit": 40}}
+# 22 Nov: JNCC record under its real id; full result order for Dogger protected areas and UK wind leases
+{"label": "JNCC record", "tool": "get_dataset", "args": {"id": "1d6371b702df0abc"}}
+{"label": "JNCC at Dogger Bank SW", "tool": "fetch_features", "args": {"id": "1d6371b702df0abc", "lon": 1.47, "lat": 54.75, "radius_km": 10, "limit": 20, "include_geometry": false}}
+{"label": "Dogger, protected-area query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 10, "concept": "protected-area", "capability": "query", "limit": 100}}
 {"label": "UK offshore-wind-site query polygon", "tool": "find_datasets", "args": {"bbox": [-8.65, 49.86, 1.77, 60.86], "concept": "offshore-wind-site", "capability": "query", "geometry": "polygon", "limit": 100}}
-{"label": "Kintyre power-plant query polygon", "tool": "find_datasets", "args": {"bbox": [-5.8, 55.3, -5.3, 55.8], "concept": "power-plant", "capability": "query", "geometry": "polygon", "limit": 100}}
-{"label": "Kintyre renewable-potential query polygon", "tool": "find_datasets", "args": {"bbox": [-5.8, 55.3, -5.3, 55.8], "concept": "renewable-potential", "capability": "query", "geometry": "polygon", "limit": 100}}
-{"label": "Dogger oil-gas query", "tool": "find_datasets", "args": {"lon": 1.47, "lat": 54.75, "radius_km": 25, "concept": "oil-gas", "capability": "query", "limit": 40}}
-{"label": "wrecks record", "tool": "get_dataset", "args": {"id": "d266bb32a493da90"}}
+{"label": "UK power-plant query polygon", "tool": "find_datasets", "args": {"bbox": [-8.65, 49.86, 1.77, 60.86], "concept": "power-plant", "capability": "query", "geometry": "polygon", "limit": 100}}
+{"label": "NE MCZ, Channel (3 a page)", "tool": "fetch_features", "args": {"id": "2470b667af95db9c", "bbox": [-6, 49.5, 2, 51], "limit": 50, "include_geometry": false}}
