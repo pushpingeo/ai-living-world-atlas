@@ -1,4 +1,23 @@
-# round 25 (22 Nov): England's NSIP boundaries on planning.data.gov.uk (Tobler 20 Nov: project outlines) - size, fields, CORS
-RANGE https://files.planning.data.gov.uk/dataset/infrastructure-project.geojson
-https://files.planning.data.gov.uk/dataset/infrastructure-project.csv
-https://digital-land.github.io/specification/dataset/infrastructure-project
+# round 26 (23 Nov): UK pack broadened (Tobler 23 Nov) - landscape, heritage, peat, farmland quality, flood zones.
+# Directory listings and layer metadata on hosts the Claude workspace can't reach.
+https://inspire.hes.scot/arcgis/rest/services/HES?f=json
+https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer?f=json
+https://maps.data.gov.scot/arcgis/rest/services?f=json
+https://maps.data.gov.scot/arcgis/rest/services/NationalScenicAreas/MapServer/0?f=json
+https://cagmap.snh.gov.uk/arcgis/rest/services?f=json
+https://cagmap.snh.gov.uk/arcgis/rest/services/snh_protected_sites/MapServer?f=json
+https://map.sepa.org.uk/server/rest/services/Open?f=json
+http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0?f=json
+https://environment.data.gov.uk/arcgis/rest/services/EA?f=json
+https://environment.data.gov.uk/spatialdata/flood-map-for-planning-flood-zones/wfs?service=WFS&version=2.0.0&request=DescribeFeatureType
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/AONB/FeatureServer/0?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/AONB/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/World_Heritage_Site/FeatureServer/0?f=json
+https://datamap.gov.wales/api/v2/resources?search=cadw&page_size=50
+https://datamap.gov.wales/api/v2/resources?search=flood%20map%20for%20planning&page_size=20
+https://datamap.gov.wales/api/v2/resources?search=agricultural%20land%20classification&page_size=20
+https://datamap.gov.wales/api/v2/resources?search=national%20park&page_size=20
+https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=inspire-wg:Cadw_ListedBuildings,inspire-wg:vGeoServer_WorldHeritageSites_Public,inspire-wg:wg_predictive_alc2,inspire-nrw:NRW_FLOODZONE_RIVERS_SEAS_MERGED,inspire-nrw:NRW_NATIONAL_PARK,inspire-nrw:NRW_AONB,geonode:nrw_special_landscape_area
+https://www.opendatani.gov.uk/api/3/action/package_search?q=Historic%20Environment%20Division&rows=40
+https://www.opendatani.gov.uk/api/3/action/package_search?q=outstanding%20natural%20beauty&rows=10
+https://www.opendatani.gov.uk/api/3/action/package_search?q=flood%20maps&rows=20
