@@ -1159,11 +1159,13 @@ sources:
   publisher_type: public-body
   country: GB
   abstract: 'NatureScot''s Carbon and Peatland map (2016): classes 1 and 2 are nationally important carbon-rich soils, deep
-    peat and priority peatland habitat (class field CARBON_250 holds the class); used in Scotland''s spatial framework for
-    onshore wind. LICENCE: UK Non-Commercial Government Licence, not OGL: commercial use needs the publishers'' permission.
-    Fields: class field CARBON_250. 439,700 features; data last edited 2023-03-02; item updated 2024-08-16. 439,700 polygons:
-    keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
-    body''s own layer and checked to return features for a bounding box.'
+    peat and priority peatland habitat. Field IMPORTANCE holds the map class (values -2 to 5 occur; classes 1 and 2 are the
+    nationally important ones; NatureScot''s legend gives the rest), CARBON_250 the soil carbon class from the 1:250,000 soil
+    map. Used in Scotland''s spatial framework for onshore wind. LICENCE: UK Non-Commercial Government Licence, not OGL: commercial
+    use needs the publishers'' permission. Fields: class field IMPORTANCE, soil_carbon field CARBON_250. 439,700 features;
+    data last edited 2023-03-02; item updated 2024-08-16. 439,700 polygons: keep boxes small. A curated record for UK screening
+    (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features
+    for a bounding box.'
   licence: Available under the UK Non-Commercial Government Licence - https://www.nationalarchives.gov.uk/doc/non-commercial-government-licence/version/2/
   landing_page: https://opendata.nature.scot/datasets/snh::carbon-and-peatland-2016-map
   bbox:
@@ -1185,7 +1187,8 @@ sources:
     - query
     - download
     info:
-      class_field: CARBON_250
+      class_field: IMPORTANCE
+      soil_carbon_field: CARBON_250
       data_date: '2023-03-02'
       data_date_source: layer editing info
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Carbon_And_Peatland_2016_map/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
