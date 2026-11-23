@@ -1,51 +1,5 @@
-# 23 Nov: UK pack (45 records) live: one fetch_features per record where it should find something; IRZ and WFS details
-{"label": "uk-ne-national-parks near Peak District", "tool": "fetch_features", "args": {"id": "e6b26569ae936cbc", "lon": -1.8, "lat": 53.35, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-ne-national-landscapes near Cotswolds", "tool": "fetch_features", "args": {"id": "516acf7fb62329d4", "lon": -1.9, "lat": 51.9, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-ne-alc-provisional near Leicestershire", "tool": "fetch_features", "args": {"id": "13092572fa28c747", "lon": -1.0, "lat": 52.5, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-ne-alc-post1988 near Cambridge", "tool": "fetch_features", "args": {"id": "5e7c583217c03078", "lon": 0.12, "lat": 52.2, "radius_km": 10, "limit": 5, "include_geometry": false}}
-{"label": "uk-ne-sssi-impact-risk-zones near Leeds", "tool": "fetch_features", "args": {"id": "05ca97cc51458e33", "lon": -1.55, "lat": 53.8, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-he-listed-buildings near York", "tool": "fetch_features", "args": {"id": "983f6d4fe0ad19b7", "lon": -1.08, "lat": 53.96, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "uk-he-scheduled-monuments near Stonehenge", "tool": "fetch_features", "args": {"id": "3ab45d9b3f6c7b62", "lon": -1.826, "lat": 51.179, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-he-registered-parks-gardens near Blenheim", "tool": "fetch_features", "args": {"id": "cb837def8797354a", "lon": -1.36, "lat": 51.84, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-he-registered-battlefields near Hastings", "tool": "fetch_features", "args": {"id": "eeddb3a335fe89ac", "lon": 0.487, "lat": 50.912, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-he-world-heritage-sites near Stonehenge", "tool": "fetch_features", "args": {"id": "88dd85f584df67eb", "lon": -1.826, "lat": 51.179, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-ea-flood-zones near York", "tool": "fetch_features", "args": {"id": "5ffe9c81924b8082", "lon": -1.08, "lat": 53.96, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "uk-sg-cairngorms-national-park near Cairngorms", "tool": "fetch_features", "args": {"id": "2c64c45082dde4d4", "lon": -3.6, "lat": 57.1, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-sg-loch-lomond-trossachs-national-park near Loch Lomond", "tool": "fetch_features", "args": {"id": "31c64df372cb3cc8", "lon": -4.6, "lat": 56.2, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-sg-national-scenic-areas near Glencoe", "tool": "fetch_features", "args": {"id": "cab9ecdbc9a0d348", "lon": -5.0, "lat": 56.68, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-ns-wild-land-areas near Torridon", "tool": "fetch_features", "args": {"id": "e3aaad523213b9e5", "lon": -5.3, "lat": 57.6, "radius_km": 5, "limit": 5, "include_geometry": false}}
-{"label": "uk-ns-carbon-peatland-2016 near Inverness hills", "tool": "fetch_features", "args": {"id": "c083949b58058a10", "lon": -4.0, "lat": 57.5, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-hes-listed-buildings near Edinburgh", "tool": "fetch_features", "args": {"id": "11286ed717adf1b6", "lon": -3.19, "lat": 55.95, "radius_km": 0.5, "limit": 5, "include_geometry": false}}
-{"label": "uk-hes-scheduled-monuments near Linlithgow", "tool": "fetch_features", "args": {"id": "a6136b469d7f05be", "lon": -3.6, "lat": 55.977, "radius_km": 5, "limit": 5, "include_geometry": false}}
-{"label": "uk-hes-gardens-designed-landscapes near Hopetoun", "tool": "fetch_features", "args": {"id": "34e3e976f1938536", "lon": -3.46, "lat": 55.99, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-hes-battlefields near Culloden", "tool": "fetch_features", "args": {"id": "f4cbbfd5efdb9163", "lon": -4.07, "lat": 57.48, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-hes-world-heritage-sites near Edinburgh", "tool": "fetch_features", "args": {"id": "0d622d81aa3431a4", "lon": -3.19, "lat": 55.95, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "uk-hutton-lca-250k near Linlithgow", "tool": "fetch_features", "args": {"id": "339b7b656d0df917", "lon": -3.6, "lat": 55.97, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-sepa-flood-river-medium near Perth", "tool": "fetch_features", "args": {"id": "f267f1d11983d686", "lon": -3.43, "lat": 56.4, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-sepa-flood-river-low near Perth", "tool": "fetch_features", "args": {"id": "e65fa9c5834c9d96", "lon": -3.43, "lat": 56.4, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-sepa-flood-coastal-medium near Forth", "tool": "fetch_features", "args": {"id": "b998a526249919d6", "lon": -3.4, "lat": 56.02, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-sepa-flood-coastal-low near Forth", "tool": "fetch_features", "args": {"id": "53dde745af4ecbd8", "lon": -3.4, "lat": 56.02, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-sepa-flood-surface-water-medium near Edinburgh", "tool": "fetch_features", "args": {"id": "874a454456a0df96", "lon": -3.19, "lat": 55.95, "radius_km": 0.5, "limit": 5, "include_geometry": false}}
-{"label": "uk-nrw-national-parks near Eryri", "tool": "fetch_features", "args": {"id": "b92f5c5c3588e51d", "lon": -3.9, "lat": 53.0, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-nrw-national-landscapes near Gower", "tool": "fetch_features", "args": {"id": "c36dc458130de6ad", "lon": -4.15, "lat": 51.58, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-nrw-special-landscape-areas near Blaenau Gwent", "tool": "fetch_features", "args": {"id": "59dcdad44dc244ad", "lon": -3.2, "lat": 51.75, "radius_km": 10, "limit": 5, "include_geometry": false}}
-{"label": "uk-cadw-listed-buildings near Cardiff", "tool": "fetch_features", "args": {"id": "80195c0f4b64266b", "lon": -3.18, "lat": 51.48, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "uk-cadw-scheduled-monuments near Cardiff area", "tool": "fetch_features", "args": {"id": "2a620f0931d8f136", "lon": -3.2, "lat": 51.5, "radius_km": 10, "limit": 5, "include_geometry": false}}
-{"label": "uk-cadw-registered-parks-gardens near Chirk", "tool": "fetch_features", "args": {"id": "72b425ef6d5c8d27", "lon": -3.07, "lat": 52.94, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-cadw-historic-landscapes near Vale of Clwyd", "tool": "fetch_features", "args": {"id": "f4a9ac905085b8bb", "lon": -3.35, "lat": 53.15, "radius_km": 5, "limit": 5, "include_geometry": false}}
-{"label": "uk-cadw-world-heritage-sites near Conwy", "tool": "fetch_features", "args": {"id": "4af8b44459c04866", "lon": -3.83, "lat": 53.28, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-wg-predictive-alc near Monmouthshire", "tool": "fetch_features", "args": {"id": "ad19381cfa5083b1", "lon": -3.0, "lat": 52.0, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-nrw-fmfp-rivers near Ammanford", "tool": "fetch_features", "args": {"id": "9474dd68603a995c", "lon": -3.99, "lat": 51.79, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-nrw-fmfp-sea near Abersoch", "tool": "fetch_features", "args": {"id": "56805a5239c6052a", "lon": -4.5, "lat": 52.83, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "uk-nrw-fmfp-surface-water near Cardiff", "tool": "fetch_features", "args": {"id": "75b9c6058f651588", "lon": -3.18, "lat": 51.48, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "uk-daera-national-landscapes near Antrim Glens", "tool": "fetch_features", "args": {"id": "e592ebe2d66ea421", "lon": -6.1, "lat": 55.0, "radius_km": 5, "limit": 5, "include_geometry": false}}
-{"label": "uk-daera-world-heritage-site near Giant's Causeway", "tool": "fetch_features", "args": {"id": "916bd027a2130550", "lon": -6.51, "lat": 55.24, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "uk-dfc-listed-buildings near Belfast", "tool": "fetch_features", "args": {"id": "f88428f3ab779e89", "lon": -5.93, "lat": 54.6, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "uk-dfc-scheduled-zones near Lisburn", "tool": "fetch_features", "args": {"id": "bd19212dd9c5657b", "lon": -6.0, "lat": 54.5, "radius_km": 10, "limit": 5, "include_geometry": false}}
-{"label": "uk-dfc-historic-parks-gardens near Belfast", "tool": "fetch_features", "args": {"id": "950ab4ea78ffb5d6", "lon": -5.93, "lat": 54.58, "radius_km": 5, "limit": 5, "include_geometry": false}}
-{"label": "uk-dfc-battlesites near mid-Ulster", "tool": "fetch_features", "args": {"id": "94d72c520a2f4a38", "lon": -6.6, "lat": 54.7, "radius_km": 20, "limit": 5, "include_geometry": false}}
-{"label": "IRZ record details", "tool": "get_dataset", "args": {"id": "05ca97cc51458e33"}}
-{"label": "Cadw SAM details (WFS type_name)", "tool": "get_dataset", "args": {"id": "2a620f0931d8f136"}}
-{"label": "Carbon and peatland details (licence)", "tool": "get_dataset", "args": {"id": "c083949b58058a10"}}
+# 23 Nov, after the Carbon and Peatland fix: details and two fetches
+{"label": "Carbon and peatland details (class_field)", "tool": "get_dataset", "args": {"id": "c083949b58058a10"}}
+{"label": "Carbon and peatland near Flow Country", "tool": "fetch_features", "args": {"id": "c083949b58058a10", "lon": -3.9, "lat": 58.4, "radius_km": 2, "limit": 5, "include_geometry": false}}
+{"label": "Cadw scheduled monuments near Cardiff", "tool": "fetch_features", "args": {"id": "2a620f0931d8f136", "lon": -3.2, "lat": 51.5, "radius_km": 10, "limit": 5, "include_geometry": false}}
 {"label": "text uk-screening-pack over GB", "tool": "find_datasets", "args": {"text": "uk-screening-pack", "bbox": [-8.7, 49.8, 1.8, 60.9], "limit": 100}}
-{"label": "heritage-site near Stonehenge (rank)", "tool": "find_datasets", "args": {"lon": -1.826, "lat": 51.179, "radius_km": 5, "concept": "heritage-site", "limit": 20}}

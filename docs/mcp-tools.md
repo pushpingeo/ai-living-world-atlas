@@ -33,6 +33,59 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (23 Nov, Tobler request, **done**, live 23 Nov 23:55 UTC) **The UK pack, broadened: landscape, heritage, peat, farmland
+  quality, flood zones and the SSSI Impact Risk Zones.** All additive (one additive field, `type_name`, below).
+  - **45 new records** (wave `spike-ukpack`, `vocab/seeds/uk-pack.yaml`), each on the designating or publishing body's own
+    service, ids fixed. Their keywords include `uk-screening-pack`, so `find_datasets` with `text: "uk-screening-pack"` and
+    a UK box lists all 45 (checked live).
+
+    | Topic | England | Scotland | Wales | Northern Ireland |
+    |---|---|---|---|---|
+    | National Parks | `e6b26569ae936cbc` | `2c64c45082dde4d4` Cairngorms, `31c64df372cb3cc8` Loch Lomond & Trossachs | `b92f5c5c3588e51d` | (none exist) |
+    | National Landscapes (AONBs) / NSAs | `516acf7fb62329d4` | `cab9ecdbc9a0d348` NSAs | `c36dc458130de6ad` | `e592ebe2d66ea421` AONBs |
+    | Other landscape | | `e3aaad523213b9e5` Wild Land Areas | `59dcdad44dc244ad` Special Landscape Areas (local plans, collated by NRW); `f4a9ac905085b8bb` Registered Historic Landscapes | |
+    | Listed buildings | `983f6d4fe0ad19b7` | `11286ed717adf1b6` | `80195c0f4b64266b` | `f88428f3ab779e89` (filter, see below) |
+    | Scheduled monuments | `3ab45d9b3f6c7b62` | `a6136b469d7f05be` | `2a620f0931d8f136` | `bd19212dd9c5657b` scheduled zones |
+    | Parks and gardens | `cb837def8797354a` | `34e3e976f1938536` Inventory GDL | `72b425ef6d5c8d27` | `950ab4ea78ffb5d6` |
+    | Battlefields | `eeddb3a335fe89ac` | `f4cbbfd5efdb9163` Inventory | (no layer found) | `94d72c520a2f4a38` (not statutory) |
+    | World Heritage Sites | `88dd85f584df67eb` | `0d622d81aa3431a4` | `4af8b44459c04866` | `916bd027a2130550` |
+    | Peat | | `c083949b58058a10` Carbon and Peatland 2016 (**not open**, see below) | | |
+    | Farmland quality | `13092572fa28c747` provisional ALC; `5e7c583217c03078` post-1988 ALC | `339b7b656d0df917` LCA 1:250k (**licence not OGL**) | `ad19381cfa5083b1` predictive ALC v2 | (none found) |
+    | Flood zones | `5ffe9c81924b8082` FZ2 and FZ3, rivers and sea | SEPA: river `f267f1d11983d686` medium, `e65fa9c5834c9d96` low; coastal `b998a526249919d6` medium, `53dde745af4ecbd8` low; surface water `874a454456a0df96` medium | NRW Flood Map for Planning: rivers `9474dd68603a995c`, sea `56805a5239c6052a`, surface water `75b9c6058f651588` | (none found) |
+    | SSSI Impact Risk Zones | `05ca97cc51458e33` | | | |
+
+  - **`get_dataset` endpoint details** (`endpoints[].details`) say which field to read: `name_field`, `code_field`,
+    `link_field`, and per topic `grade_field` (listed buildings, parks and gardens, ALC), `zone_field` (EA: `flood_zone` FZ2/FZ3;
+    NRW: `risk` "Flood Zone 2"/"Flood Zone 3"), `likelihood_field` (SEPA: `BAND_DESC`), `class_field` (Carbon and Peatland:
+    `IMPORTANCE`, classes 1 and 2 nationally important; Hutton: `LCCODE`, 1-7). NI listed buildings: the layer is the whole
+    Historic Buildings Record; listed ones have `CurrentGra` in `listed_values` (A, B+, B, B1, B2); "Record Only" and "Delisted"
+    aren't listed. Wales predictive ALC: `predictive` is 1, 2, 3a, 3b, 4, 5, NA or U.
+  - **SSSI Impact Risk Zones, decoded.** `details.irzcode` points to `vocab/sssi_irz_codes.json` (raw URL) and
+    `docs/sssi-irz-codes.md`. The 13 digits are, in order: all consultations, infrastructure, wind and solar, minerals/oil/gas,
+    rural non-residential, residential, rural residential, air pollution, combustion, waste, composting, discharges, water
+    supply. 0 = no consultation for that category; any other digit selects a threshold text (verbatim from Natural England's
+    checker). First digit 1 = all applications, 2 = all but householder; all zeros = none. All 208,189 zones decode.
+  - **Licences, verbatim, with attribution** in `licence` and `attribution` (`vocab/licence_overrides.yaml` says where each was
+    read). All OGL except: **Carbon and Peatland 2016** is under the UK **Non-Commercial** Government Licence (`open_licence`
+    false); **Hutton's LCA** is under the James Hutton Institute Open Data Licence, whose terms we haven't read (`open_licence`
+    false until someone does). Historic England's wording comes from its ArcGIS item ("Released under OGL", plus its Open Data
+    Hub terms, whose page refuses bots). The EA's own attribution line wasn't readable (script-only page).
+  - **New additive field: `type_name`.** A curated WFS record (Cadw, Welsh Government, NRW flood zones, EA flood zones) names
+    its feature type in `details.type_name`; its `layer` is `<record id>:0`. `fetch_features` and `usage.query_url` use it.
+  - **Speed, live 23 Nov (mcp-ask, one box per record where it should find something, limit 5):** all 45 returned features,
+    0.2-1.8 s, except the IRZ (4.4 s, Leeds). Big layers, keep boxes small: SEPA surface water (8.2M polygons), NRW surface water
+    (2.3M), Carbon and Peatland (440k), HE listed buildings (380k), Welsh ALC (255k), IRZ (208k). HES and Hutton can't page
+    (up to 10,000 and 1,000 features per query); Hutton was ~20 s in an earlier direct test.
+  - **Ranking, not changed:** in a plain concept search older crawled copies rank first (near Stonehenge the HE records come
+    below Wiltshire's and HE's other layers). Use the ids. Crawled copies with other ids also exist for HES scheduled monuments
+    (`25ffbbeec3836e1a`), SEPA river medium (`ce6e59e44174bf68`) and Hutton LCA (`bd18c4d31d168bf4`): prefer the new ids.
+  - **Not found or not added (gaps to report as "not checked"):** Dark Sky Parks (no national layer; only council local-plan
+    copies, e.g. Galloway Forest in D&G's LDP2, Northumberland's local plan); Scotland's Local Landscape Areas (on the
+    Improvement Service's Spatial Hub, not checked); England's local landscape designations (council by council); Cadw's
+    battlefields list (no layer found); Northern Ireland flood maps (DfI; only a DfC "premium" copy found) and farmland
+    classification (none). Available but not asked for, so not added: England Peat Map (Natural England), Wales unified peat
+    map (DataMapWales), HES listed-building outlines (746), Cadw WHS essential settings and significant views.
+
 - (22 Nov, Tobler requests, **done**, live 22 Nov evening) **UK protected sites as fixed records, project outlines, and fixes.**
   All additive except the concept and publisher-type changes marked below.
   - **25 new records**, one per designation and nation, pointing at the designating body's own feature service (JNCC's

@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (22 Nov 2026)
+# AI Living World Atlas: handover (23 Nov 2026)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -73,13 +73,14 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| UK pack (`spike-ukpack`) | 45 | 45 | Curated records for landscape, heritage, peat, farmland quality, flood zones, SSSI IRZs, per nation (23 Nov, Tobler) |
 | UK protected (`spike-ukprotected`) | 24 | 24 | Curated records for UK statutory sites (22 Nov, Tobler): SAC, SPA, Ramsar, SSSI/ASSI, marine designations, ancient woodland per nation; JNCC offshore in `spike-files` |
 | Values (`spike-values`) | 40 | 40 | Curated sources that return a value at a point: depth (GEBCO_2026, NOAA), ship density (World Bank/IMF), land elevation in 12 countries plus GLO-30 (19-20 Nov; tagged for under $0.01) |
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
 - The viewer and the MCP server hold about **264k passing datasets**, all tagged (18 Nov).
-- Tagging spend is **$28.46** in total: UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
+- Tagging spend is **$28.46** in total (plus under a cent each for the UK protected sites and the UK pack): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
@@ -171,6 +172,21 @@ Details in decisions.md (22 Nov) and the contract note in mcp-tools.md.
   (`vocab/publisher_type_overrides.yaml`).
 - `mcp-ask` workflow: push `runs/mcp-ask.jsonl` (one call per line) for quick live MCP calls; results on `results/mcp-ask`.
 - Workspace can't reach gis.daera-ni.gov.uk, JNCC or planning.data.gov.uk: use `probe`.
+
+## The broadened UK pack (23 Nov)
+
+Details in decisions.md (23 Nov) and the contract note in mcp-tools.md (with every record id).
+- `vocab/seeds/uk-pack.yaml`: 45 records for landscape, heritage, peat, farmland quality, flood zones and the SSSI Impact
+  Risk Zones, per nation, on each publisher's own service (wave `spike-ukpack`, published after `spike-ukprotected`).
+  Keyword `uk-screening-pack` lists them all. Written by a one-off script; to refresh counts or dates, re-read the layers
+  and edit (hosts the workspace can't reach need `probe`).
+- Two are not open on purpose: Carbon and Peatland 2016 (non-commercial licence) and Hutton's LCA (JHI licence unread).
+- SSSI IRZ `irzcode` decoding: `vocab/sssi_irz_codes.json`, `docs/sssi-irz-codes.md`.
+- Curated WFS records name their feature type in `info.type_name` (Worker and viewer use it).
+- Reachable from GitHub but not from the workspace: inspire.hes.scot, map.sepa.org.uk, maps.gov.scot/server,
+  datamap.gov.wales, gis.daera-ni.gov.uk, environment.data.gov.uk, druid.hutton.ac.uk, irz.geodata.org.uk.
+  Refuse GitHub: maps.data.gov.scot (403), cagmap.snh.gov.uk (no answer), historicengland.org.uk and
+  portal.historicenvironment.scot (403 bot checks).
 
 ## Known gaps and next steps (rough priority)
 

@@ -515,3 +515,28 @@ Bank found no protected areas, though Dogger Bank is an SAC.
   the Cnoc Buidhe miss was the layer's age (Sept 2024). The data's own date is now in `details.data_date` for the new
   records. England's NSIP boundaries (planning.data.gov.uk, OGL, daily) are hosted as tiles. No GIS layer of Scottish
   Section 36 applications was found: the Energy Consents portal lists cases but publishes no boundaries.
+
+## 2026-11-23: the UK pack broadened (landscape, heritage, peat, farmland, flood zones, SSSI IRZs)
+Tobler's example sites (wind, solar, battery) were decided mostly by landscape, heritage, peat and farmland quality, not
+by nature sites. Request in the Tobler repo's docs/atlas-requests.md (23 Nov); contract note in mcp-tools.md.
+- **Same pattern as 22 Nov:** 45 curated records (`vocab/seeds/uk-pack.yaml`, wave `spike-ukpack`), one per designation
+  and nation, each on the designating or publishing body's own service, written by a one-off script from live metadata.
+  Hosts the workspace can't reach were read through `probe` (rounds 26-31). Tagging: 45 datasets, under a cent.
+- **Choices of source:** Cadw's own layers on DataMapWales rather than RCAHMW's ArcGIS copy (2021); DfC's
+  "Historic_Environment_Division_GIS_Data" service, which Open Data NI lists as current, rather than its older standalone
+  services; DAERA for NI's AONBs and its WHS. Scotland's National Parks and NSAs: the Scottish Government's
+  maps.data.gov.scot refuses GitHub's runners (403), but its newer maps.gov.scot/server answers, so these are live records,
+  not hosted copies (a hosted-files change for multi-file specs was written and dropped as unneeded).
+- **WFS records:** a curated record's layer_name is `<record id>:<n>` (record ids and licence rules depend on it), so a WFS
+  record names its feature type in `info.type_name`; the Worker and the viewer use it, else layer_name. Its url carries the
+  type after `#`, which norm_url drops: the uid stays unique because the layer_name differs from the crawled copy's.
+- **Licences:** checked one by one; two aren't open and are recorded so: Carbon and Peatland 2016 (UK Non-Commercial
+  Government Licence) and Hutton's LCA (James Hutton Institute Open Data Licence; terms not read, so not marked open).
+- **SSSI IRZ decoding** from Natural England's own checker (step2.html splits the code; templates give each level's text);
+  all 208,189 zones decode (3,120 distinct codes). `vocab/sssi_irz_codes.json` and `docs/sssi-irz-codes.md`. Natural England
+  changes the zones every two months: if a digit appears with no text, re-read the templates (probe round 28 has the list).
+- **Landing pages that answer:** Historic England's site and HES's portal refuse bots (403) and SEPA's data page has moved
+  (404), so their records link to the ArcGIS item or the service directory instead.
+- **Live check (mcp-ask, 23 Nov 23:48 UTC):** all 45 returned features at a known place, 0.2-1.8 s (IRZ 4.4 s).
+- **Gaps:** Dark Sky Parks (no national layer), Scotland's Local Landscape Areas (Spatial Hub, not checked), Cadw
+  battlefields, NI flood maps and farmland classification. Not added because not asked: England Peat Map, Wales unified peat.
