@@ -317,3 +317,400 @@ rules:
     open: true
     attribution: © Crown copyright and database right 2026
     source: https://www.planning.data.gov.uk/dataset/infrastructure-project (licence and attribution, read 22 Nov 2026)
+
+  # The broadened UK screening pack (Tobler, 23 Nov 2026): vocab/seeds/uk-pack.yaml. Licence and attribution verbatim from
+  # each publisher; `source` says where each was read. Not open, on purpose: Carbon and Peatland 2016 (UK Non-Commercial
+  # Government Licence) and Hutton's LCA (James Hutton Institute Open Data Licence; its terms weren't read).
+  - host: services.arcgis.com
+    layers: '^uk-ne-national-parks:'
+    licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+      - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    open: true
+    attribution: © Natural England copyright. Contains Ordnance Survey data © Crown copyright and database right 2024.
+    source: 'ArcGIS Online item d333c7529754444894e2d7f5044d1bbf (''National Parks (England)'', owner Opendata_NE): licence
+      and credits fields, read 23 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-ne-national-landscapes:'
+    licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+      - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3//
+    open: true
+    attribution: © Natural England copyright. Contains Ordnance Survey data © Crown copyright and database right 2024.
+    source: 'ArcGIS Online item 6f2ad07d91304ad79cdecd52489d5046 (''Areas of Outstanding Natural Beauty (England)'', owner Opendata_NE):
+      licence and credits fields, read 23 Nov 2026'
+  - host: maps.gov.scot
+    layers: '^uk-sg-cairngorms-national-park:'
+    licence: 'Available under the terms of the Open Government Licence. The following attribution statement must be used to
+      acknowledge the source of the information: © Scottish Government, contains Ordnance Survey data © Crown copyright and
+      database right [insert year].'
+    open: true
+    attribution: © Scottish Government, contains Ordnance Survey data © Crown copyright and database right [insert year].
+    source: data.gov.uk record 'National Scenic Areas - Scotland' (Scottish Government SpatialData.gov.scot), access constraints,
+      read 23 Nov 2026 by probe round 28
+  - host: maps.gov.scot
+    layers: '^uk-sg-loch-lomond-trossachs-national-park:'
+    licence: 'Available under the terms of the Open Government Licence. The following attribution statement must be used to
+      acknowledge the source of the information: © Scottish Government, contains Ordnance Survey data © Crown copyright and
+      database right [insert year].'
+    open: true
+    attribution: © Scottish Government, contains Ordnance Survey data © Crown copyright and database right [insert year].
+    source: data.gov.uk record 'National Scenic Areas - Scotland' (Scottish Government SpatialData.gov.scot), access constraints,
+      read 23 Nov 2026 by probe round 28
+  - host: maps.gov.scot
+    layers: '^uk-sg-national-scenic-areas:'
+    licence: 'Available under the terms of the Open Government Licence. The following attribution statement must be used to
+      acknowledge the source of the information: © Scottish Government, contains Ordnance Survey data © Crown copyright and
+      database right [insert year].'
+    open: true
+    attribution: © Scottish Government, contains Ordnance Survey data © Crown copyright and database right [insert year].
+    source: data.gov.uk record 'National Scenic Areas - Scotland' (Scottish Government SpatialData.gov.scot), access constraints,
+      read 23 Nov 2026 by probe round 28
+  - host: services1.arcgis.com
+    layers: '^uk-ns-wild-land-areas:'
+    licence: Available under the Open Government Licence (http://www.nationalarchives.gov.uk/doc/open-government-licence)
+    open: true
+    attribution: © NatureScot. Contains Ordnance Survey data © Crown copyright and database right (year)
+    source: 'ArcGIS Online item 6679cd5bc96c4c0ea41fde13ee89b9db (''Wild_Land_Areas_2014'', owner SNH_Maps): licence and credits
+      fields, read 23 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-nrw-national-parks:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    attribution: Copyright NRW
+    source: https://datamap.gov.wales/layers/inspire-nrw:NRW_NATIONAL_PARK (DataMapWales licence); attribution from ArcGIS Online
+      item a18bf9d0bde44b3287d0e3164216799c, read 23 Nov 2026
+  - host: services.arcgis.com
+    layers: '^uk-nrw-national-landscapes:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    attribution: NRW
+    source: https://datamap.gov.wales/layers/inspire-nrw:NRW_AONB (DataMapWales licence); attribution from ArcGIS Online item
+      92ee53cc8e5e47e883a099b3d9ace72b, read 23 Nov 2026
+  - host: services.arcgis.com
+    layers: '^uk-nrw-special-landscape-areas:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    source: https://datamap.gov.wales/layers/geonode:nrw_special_landscape_area (DataMapWales licence, no attribution statement
+      given), read 23 Nov 2026 by probe round 30
+  - host: gis.daera-ni.gov.uk
+    layers: '^uk-daera-national-landscapes:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    attribution: © NIEA, 2024.
+    source: https://www.opendatani.gov.uk/dataset/areas-of-outstanding-natural-beauty (licence) and the service's copyright
+      text, read 23 Nov 2026
+  - host: services-eu1.arcgis.com
+    layers: '^uk-he-listed-buildings:'
+    licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+      © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+    open: true
+    attribution: © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under
+      OGL.
+    source: 'ArcGIS Online item 767f279327a24845bf47dfe5eae9862b (''National Heritage List for England (NHLE)'', owner gis_historicengland):
+      licence and credits fields, read 23 Nov 2026'
+  - host: services-eu1.arcgis.com
+    layers: '^uk-he-scheduled-monuments:'
+    licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+      © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+    open: true
+    attribution: © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under
+      OGL.
+    source: 'ArcGIS Online item 767f279327a24845bf47dfe5eae9862b (''National Heritage List for England (NHLE)'', owner gis_historicengland):
+      licence and credits fields, read 23 Nov 2026'
+  - host: services-eu1.arcgis.com
+    layers: '^uk-he-registered-parks-gardens:'
+    licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+      © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+    open: true
+    attribution: © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under
+      OGL.
+    source: 'ArcGIS Online item 767f279327a24845bf47dfe5eae9862b (''National Heritage List for England (NHLE)'', owner gis_historicengland):
+      licence and credits fields, read 23 Nov 2026'
+  - host: services-eu1.arcgis.com
+    layers: '^uk-he-registered-battlefields:'
+    licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+      © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+    open: true
+    attribution: © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under
+      OGL.
+    source: 'ArcGIS Online item 767f279327a24845bf47dfe5eae9862b (''National Heritage List for England (NHLE)'', owner gis_historicengland):
+      licence and credits fields, read 23 Nov 2026'
+  - host: services-eu1.arcgis.com
+    layers: '^uk-he-world-heritage-sites:'
+    licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+      © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+    open: true
+    attribution: © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under
+      OGL.
+    source: 'ArcGIS Online item 767f279327a24845bf47dfe5eae9862b (''National Heritage List for England (NHLE)'', owner gis_historicengland):
+      licence and credits fields, read 23 Nov 2026'
+  - host: inspire.hes.scot
+    layers: '^uk-hes-listed-buildings:'
+    licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+      Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+      SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+      Survey licence number AC0000807262. Public Sector Viewing Terms .'
+    open: true
+    attribution: Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish
+      Charity No. SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved.
+      Ordnance Survey licence number AC0000807262.
+    source: ArcGIS Online item 'Designations Map Search' (owner gis_admin_HESPortal, Historic Environment Scotland), licence
+      field, read 23 Nov 2026
+  - host: inspire.hes.scot
+    layers: '^uk-hes-scheduled-monuments:'
+    licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+      Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+      SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+      Survey licence number AC0000807262. Public Sector Viewing Terms .'
+    open: true
+    attribution: Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish
+      Charity No. SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved.
+      Ordnance Survey licence number AC0000807262.
+    source: ArcGIS Online item 'Designations Map Search' (owner gis_admin_HESPortal, Historic Environment Scotland), licence
+      field, read 23 Nov 2026
+  - host: inspire.hes.scot
+    layers: '^uk-hes-gardens-designed-landscapes:'
+    licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+      Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+      SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+      Survey licence number AC0000807262. Public Sector Viewing Terms .'
+    open: true
+    attribution: Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish
+      Charity No. SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved.
+      Ordnance Survey licence number AC0000807262.
+    source: ArcGIS Online item 'Designations Map Search' (owner gis_admin_HESPortal, Historic Environment Scotland), licence
+      field, read 23 Nov 2026
+  - host: inspire.hes.scot
+    layers: '^uk-hes-battlefields:'
+    licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+      Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+      SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+      Survey licence number AC0000807262. Public Sector Viewing Terms .'
+    open: true
+    attribution: Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish
+      Charity No. SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved.
+      Ordnance Survey licence number AC0000807262.
+    source: ArcGIS Online item 'Designations Map Search' (owner gis_admin_HESPortal, Historic Environment Scotland), licence
+      field, read 23 Nov 2026
+  - host: inspire.hes.scot
+    layers: '^uk-hes-world-heritage-sites:'
+    licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+      Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+      SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+      Survey licence number AC0000807262. Public Sector Viewing Terms .'
+    open: true
+    attribution: Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish
+      Charity No. SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved.
+      Ordnance Survey licence number AC0000807262.
+    source: ArcGIS Online item 'Designations Map Search' (owner gis_admin_HESPortal, Historic Environment Scotland), licence
+      field, read 23 Nov 2026
+  - host: datamap.gov.wales
+    layers: '^uk-cadw-listed-buildings:'
+    licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+      may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+      both the source and copyright as specified (see below),, and do not use it in a misleading context.
+    open: true
+    attribution: Designated Historic Asset GIS Data, The Welsh Historic Environment Service (Cadw), DATE [the date that you
+      received the data from Cadw], licensed under the Open Government Licence http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    source: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM (Cadw's use-of-data and attribution statement, verbatim; the
+      other Cadw layers carry the same), read 23 Nov 2026 by probe round 27
+  - host: datamap.gov.wales
+    layers: '^uk-cadw-scheduled-monuments:'
+    licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+      may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+      both the source and copyright as specified (see below),, and do not use it in a misleading context.
+    open: true
+    attribution: Designated Historic Asset GIS Data, The Welsh Historic Environment Service (Cadw), DATE [the date that you
+      received the data from Cadw], licensed under the Open Government Licence http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    source: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM (Cadw's use-of-data and attribution statement, verbatim; the
+      other Cadw layers carry the same), read 23 Nov 2026 by probe round 27
+  - host: datamap.gov.wales
+    layers: '^uk-cadw-registered-parks-gardens:'
+    licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+      may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+      both the source and copyright as specified (see below),, and do not use it in a misleading context.
+    open: true
+    attribution: Designated Historic Asset GIS Data, The Welsh Historic Environment Service (Cadw), DATE [the date that you
+      received the data from Cadw], licensed under the Open Government Licence http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    source: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM (Cadw's use-of-data and attribution statement, verbatim; the
+      other Cadw layers carry the same), read 23 Nov 2026 by probe round 27
+  - host: datamap.gov.wales
+    layers: '^uk-cadw-historic-landscapes:'
+    licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+      may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+      both the source and copyright as specified (see below),, and do not use it in a misleading context.
+    open: true
+    attribution: Designated Historic Asset GIS Data, The Welsh Historic Environment Service (Cadw), DATE [the date that you
+      received the data from Cadw], licensed under the Open Government Licence http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    source: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM (Cadw's use-of-data and attribution statement, verbatim; the
+      other Cadw layers carry the same), read 23 Nov 2026 by probe round 27
+  - host: datamap.gov.wales
+    layers: '^uk-cadw-world-heritage-sites:'
+    licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+      may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+      both the source and copyright as specified (see below),, and do not use it in a misleading context.
+    open: true
+    attribution: Designated Historic Asset GIS Data, The Welsh Historic Environment Service (Cadw), DATE [the date that you
+      received the data from Cadw], licensed under the Open Government Licence http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    source: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM (Cadw's use-of-data and attribution statement, verbatim; the
+      other Cadw layers carry the same), read 23 Nov 2026 by probe round 27
+  - host: services2.arcgis.com
+    layers: '^uk-dfc-listed-buildings:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    source: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api (UK Open Government Licence (OGL);
+      no attribution statement given), read 23 Nov 2026 by probe round 27
+  - host: services2.arcgis.com
+    layers: '^uk-dfc-scheduled-zones:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    source: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api (UK Open Government Licence (OGL);
+      no attribution statement given), read 23 Nov 2026 by probe round 27
+  - host: services2.arcgis.com
+    layers: '^uk-dfc-historic-parks-gardens:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    source: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api (UK Open Government Licence (OGL);
+      no attribution statement given), read 23 Nov 2026 by probe round 27
+  - host: services2.arcgis.com
+    layers: '^uk-dfc-battlesites:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    source: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api (UK Open Government Licence (OGL);
+      no attribution statement given), read 23 Nov 2026 by probe round 27
+  - host: gis.daera-ni.gov.uk
+    layers: '^uk-daera-world-heritage-site:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    attribution: © NIEA, 2024.
+    source: https://www.opendatani.gov.uk/dataset/world-heritage-site (licence) and the service's copyright text, read 23 Nov
+      2026
+  - host: services1.arcgis.com
+    layers: '^uk-ns-carbon-peatland-2016:'
+    licence: Available under the UK Non-Commercial Government Licence - https://www.nationalarchives.gov.uk/doc/non-commercial-government-licence/version/2/
+    open: false
+    attribution: © SNH and JHI
+    source: 'ArcGIS Online item 171df29c8c5b45a9b93438a3bc5700c6 (''Carbon_And_Peatland_2016_map'', owner SNH_Maps): licence
+      and credits fields, read 23 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-ne-alc-provisional:'
+    licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+      - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    open: true
+    attribution: © Natural England copyright. Contains Ordnance Survey data © Crown copyright and database right [year].
+    source: 'ArcGIS Online item 5d2477d8d04b41d4bbc9a8742f858f4d (''Provisional Agricultural Land Classification (ALC) (England)'',
+      owner Opendata_NE): licence and credits fields, read 23 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-ne-alc-post1988:'
+    licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+      - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    open: true
+    attribution: © Natural England copyright. Contains Ordnance Survey data © Crown copyright and database right [year].
+    source: 'ArcGIS Online item 26d1ef630b9f46ea8fc4e96711d81376 (''Agricultural Land Classification (ALC) Grades - Post 1988
+      (England)'', owner Opendata_NE): licence and credits fields, read 23 Nov 2026'
+  - host: datamap.gov.wales
+    layers: '^uk-wg-predictive-alc:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    source: https://datamap.gov.wales/layers/inspire-wg:wg_predictive_alc2 (licence; no attribution statement given), read 23
+      Nov 2026 by probe round 27
+  - host: druid.hutton.ac.uk
+    layers: '^uk-hutton-lca-250k:'
+    licence: The James Hutton Institute Open Data Licence. Use is permitted under the terms of the Open Data licence included
+      in the download.
+    source: SpatialData.gov.scot ISO record 24c6df5a-6b04-43f8-839f-0d45cc2802e3 (use limitation), read 23 Nov 2026 by probe
+      round 29
+    open: false
+  - host: environment.data.gov.uk
+    layers: '^uk-ea-flood-zones:'
+    licence: Open Government Licence. These datasets have been made freely available by Defra and its agencies for your use.
+    open: true
+    source: 'Defra Data Services Platform WFS (licence as crawled, Nov 2026); EA''s own attribution line not read: the dataset
+      page is a script-only app'
+  - host: map.sepa.org.uk
+    layers: '^uk-sepa-flood-river-medium:'
+    licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+      is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+      2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+      Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+    open: true
+    attribution: ©SEPA 2025; this SEPA product is licensed under the Open Government Licence version 3.0
+    source: 'SEPA''s own services: copyright text of the Open/*Flooding* FeatureServers and the Flood_Maps WMS access constraints
+      (crawl, Nov 2026)'
+  - host: map.sepa.org.uk
+    layers: '^uk-sepa-flood-river-low:'
+    licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+      is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+      2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+      Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+    open: true
+    attribution: ©SEPA 2025; this SEPA product is licensed under the Open Government Licence version 3.0
+    source: 'SEPA''s own services: copyright text of the Open/*Flooding* FeatureServers and the Flood_Maps WMS access constraints
+      (crawl, Nov 2026)'
+  - host: map.sepa.org.uk
+    layers: '^uk-sepa-flood-coastal-medium:'
+    licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+      is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+      2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+      Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+    open: true
+    attribution: ©SEPA 2025; this SEPA product is licensed under the Open Government Licence version 3.0
+    source: 'SEPA''s own services: copyright text of the Open/*Flooding* FeatureServers and the Flood_Maps WMS access constraints
+      (crawl, Nov 2026)'
+  - host: map.sepa.org.uk
+    layers: '^uk-sepa-flood-coastal-low:'
+    licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+      is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+      2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+      Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+    open: true
+    attribution: ©SEPA 2025; this SEPA product is licensed under the Open Government Licence version 3.0
+    source: 'SEPA''s own services: copyright text of the Open/*Flooding* FeatureServers and the Flood_Maps WMS access constraints
+      (crawl, Nov 2026)'
+  - host: map.sepa.org.uk
+    layers: '^uk-sepa-flood-surface-water-medium:'
+    licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+      is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+      2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+      Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+    open: true
+    attribution: ©SEPA 2025; this SEPA product is licensed under the Open Government Licence version 3.0
+    source: 'SEPA''s own services: copyright text of the Open/*Flooding* FeatureServers and the Flood_Maps WMS access constraints
+      (crawl, Nov 2026)'
+  - host: datamap.gov.wales
+    layers: '^uk-nrw-fmfp-rivers:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and database right. All rights reserved.
+      Some features of this information are based on digital spatial data licensed from the UK Centre for Ecology & Hydrology
+      © UKCEH. Defra, Met Office and DARD Rivers Agency © Crown copyright. © Cranfield University. © James Hutton Institute.
+      Contains OS data © Crown copyright and database right.
+    source: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_RIVERS (licence and attribution statement), read 23 Nov
+      2026 by probe round 27
+  - host: datamap.gov.wales
+    layers: '^uk-nrw-fmfp-sea:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and database right. All rights reserved.
+      Some features of this information are based on digital spatial data licensed from the UK Centre for Ecology & Hydrology
+      © UKCEH. Defra, Met Office and DARD Rivers Agency © Crown copyright. © Cranfield University. © James Hutton Institute.
+      Contains OS data © Crown copyright and database right.
+    source: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_RIVERS (licence and attribution statement), read 23 Nov
+      2026 by probe round 27
+  - host: datamap.gov.wales
+    layers: '^uk-nrw-fmfp-surface-water:'
+    licence: Open Government Licence for Public Sector Information (OGL)
+    open: true
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and database right. All rights reserved.
+      Some features of this information are based on digital spatial data licensed from the UK Centre for Ecology & Hydrology
+      © UKCEH. Defra, Met Office and DARD Rivers Agency © Crown copyright. © Cranfield University. © James Hutton Institute.
+      Contains OS data © Crown copyright and database right.
+    source: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_RIVERS (licence and attribution statement), read 23 Nov
+      2026 by probe round 27
+  - host: services.arcgis.com
+    layers: '^uk-ne-sssi-impact-risk-zones:'
+    licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+      - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    open: true
+    attribution: © Natural England copyright. Contains Ordnance Survey data © Crown copyright and database right 2025.
+    source: 'ArcGIS Online item dd6ff0bd464e42fea19f289423a1d22a (''SSSI Impact Risk Zones (England)'', owner Opendata_NE):
+      licence and credits fields, read 23 Nov 2026'

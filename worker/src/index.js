@@ -155,6 +155,9 @@ async function details(env, id) {
 }
 
 const info = (e) => { try { return JSON.parse(e.info || "{}"); } catch { return {}; } };
+// A curated WFS record names its feature type in info.type_name (its layer_name is "<record id>:<n>"); crawled WFS
+// layers use layer_name.
+const wfsType = (e) => info(e).type_name || e.layer_name;
 const sep = (u) => (u.includes("?") ? "&" : "?");
 
 function usage(e) {
@@ -171,7 +174,7 @@ function usage(e) {
     out.image_url = `${e.service_url}${sep(e.service_url)}service=WMS&request=GetMap&version=1.1.1&layers=${encodeURIComponent(e.layer_name)}&styles=&srs=EPSG:3857&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&transparent=true`;
   if (e.protocol === "wfs") {
     const fmt = (inf.output_formats || []).find((x) => /json/i.test(x));
-    out.query_url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.1.0&typeName=${encodeURIComponent(e.layer_name)}&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox={west},{south},{east},{north},urn:ogc:def:crs:OGC:1.3:CRS84` + (fmt ? `&outputFormat=${encodeURIComponent(fmt)}` : "");
+    out.query_url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.1.0&typeName=${encodeURIComponent(wfsType(e))}&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox={west},{south},{east},{north},urn:ogc:def:crs:OGC:1.3:CRS84` + (fmt ? `&outputFormat=${encodeURIComponent(fmt)}` : "");
     if (!fmt) out.note = "This WFS only offers GML.";
   }
   if (e.protocol === "wmts" && inf.tile_template) out.tile_template = inf.tile_template;
@@ -521,7 +524,7 @@ async function fetchFeatures(env, a) {
       if (!fmt) { errors.push("WFS offers GML only"); continue; }
       // The bbox must say it's in degrees: without a CRS, WFS reads it in the layer's own CRS (e.g. British
       // National Grid metres), so a lon/lat box lands off Cornwall and returns nothing. CRS84 keeps lon/lat order.
-      const head = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&typeName=${encodeURIComponent(e.layer_name)}&outputFormat=${encodeURIComponent(fmt)}&maxFeatures=${limit}`;
+      const head = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&typeName=${encodeURIComponent(wfsType(e))}&outputFormat=${encodeURIComponent(fmt)}&maxFeatures=${limit}`;
       const crs84 = "urn:ogc:def:crs:OGC:1.3:CRS84";
       url = `${head}&version=1.1.0&srsName=${crs84}&bbox=${x0},${y0},${x1},${y1},${crs84}`;
       alts = [`${head}&version=1.0.0&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1},EPSG:4326`];

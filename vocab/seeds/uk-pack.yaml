@@ -1,0 +1,1715 @@
+# The broadened UK screening pack (Tobler request, 23 Nov 2026): landscape, heritage, peat, farmland quality, flood zones
+# and the SSSI Impact Risk Zones, per nation, each on the designating or publishing body's own service. Complements
+# vocab/seeds/uk-protected.yaml (nature sites, 22 Nov). Written by a one-off script from live metadata on 23 Nov 2026
+# (counts, dates, extents, fields); hosts the workspace can't reach (HES, SEPA, Scottish Government, DataMapWales,
+# DAERA, Hutton, Defra) were read through the probe workflow (rounds 26-30). Licences and attribution statements,
+# verbatim, are in vocab/licence_overrides.yaml (rules for "^uk-...:" and for the WFS feature types).
+# WFS endpoints name their feature type in info.type_name, which the MCP server and the viewer send as typeName.
+# Not licence-open, on purpose: uk-ns-carbon-peatland-2016 (UK Non-Commercial Government Licence) and uk-hutton-lca-250k
+# (James Hutton Institute Open Data Licence, terms not read).
+defaults:
+  publisher_type: public-body
+  country: GB
+sources:
+- kind: record
+  id: uk-ne-national-parks
+  title: National Parks, England (Natural England)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of England''s National Parks, from Natural England''s own service. Fields: name field NAME, code
+    field CODE. 10 features; data last edited 2024-06-18; item updated 2024-10-18. A curated record for UK screening (Tobler
+    request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a
+    bounding box.'
+  licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+    - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  landing_page: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::national-parks-england
+  bbox:
+  - -4.4306
+  - 50.3525
+  - 1.9994
+  - 55.5676
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/National_Parks_England/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/National_Parks_England/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: NAME
+      code_field: CODE
+      data_date: '2024-06-18'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/National_Parks_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::national-parks-england
+- kind: record
+  id: uk-ne-national-landscapes
+  title: National Landscapes (Areas of Outstanding Natural Beauty), England (Natural England)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of England''s National Landscapes, designated as Areas of Outstanding Natural Beauty (AONBs; renamed
+    National Landscapes in 2023), from Natural England''s own service. Fields: name field NAME, code field CODE. 34 features;
+    data last edited 2024-06-18; item updated 2024-11-22. A curated record for UK screening (Tobler request, 23 Nov 2026):
+    chosen as the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+    - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3//
+  landing_page: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::areas-of-outstanding-natural-beauty-england
+  bbox:
+  - -7.094
+  - 49.8523
+  - 2.0378
+  - 55.6825
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Areas_of_Outstanding_Natural_Beauty_England/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Areas_of_Outstanding_Natural_Beauty_England/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: NAME
+      code_field: CODE
+      data_date: '2024-06-18'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Areas_of_Outstanding_Natural_Beauty_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::areas-of-outstanding-natural-beauty-england
+- kind: record
+  id: uk-sg-cairngorms-national-park
+  title: Cairngorms National Park, Scotland (Scottish Government)
+  publisher: Scottish Government
+  publisher_type: public-body
+  country: GB
+  abstract: 'The designated boundary of the Cairngorms National Park (2003, extended 2010), from the Scottish Government''s
+    Protected Sites service. Scotland''s other National Park, Loch Lomond and The Trossachs, is its own record. 1 features.
+    A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer
+    and checked to return features for a bounding box.'
+  licence: 'Available under the terms of the Open Government Licence. The following attribution statement must be used to
+    acknowledge the source of the information: © Scottish Government, contains Ordnance Survey data © Crown copyright and
+    database right [insert year].'
+  landing_page: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=Cairngorms%20National%20Park
+  bbox:
+  - -4.4761
+  - 56.7411
+  - -2.7987
+  - 57.4109
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/0
+    service_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer
+    capabilities:
+    - query
+    info: {}
+    check_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=Cairngorms%20National%20Park
+- kind: record
+  id: uk-sg-loch-lomond-trossachs-national-park
+  title: Loch Lomond and The Trossachs National Park, Scotland (Scottish Government)
+  publisher: Scottish Government
+  publisher_type: public-body
+  country: GB
+  abstract: 'The designated boundary of Loch Lomond and The Trossachs National Park (2002), from the Scottish Government''s
+    Protected Sites service. Scotland''s other National Park, the Cairngorms, is its own record. 1 features. A curated record
+    for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked
+    to return features for a bounding box.'
+  licence: 'Available under the terms of the Open Government Licence. The following attribution statement must be used to
+    acknowledge the source of the information: © Scottish Government, contains Ordnance Survey data © Crown copyright and
+    database right [insert year].'
+  landing_page: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=Loch%20Lomond%20National%20Park
+  bbox:
+  - -5.1009
+  - 55.9818
+  - -4.0803
+  - 56.4788
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/1
+    service_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer
+    capabilities:
+    - query
+    info: {}
+    check_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/1/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=Loch%20Lomond%20National%20Park
+- kind: record
+  id: uk-sg-national-scenic-areas
+  title: National Scenic Areas, Scotland (Scottish Government)
+  publisher: Scottish Government
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of Scotland''s 40 National Scenic Areas, its national landscape designation, from the Scottish
+    Government''s Protected Sites service. Fields: name field nsaname, code field nsacode. 40 features. A curated record for
+    UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return
+    features for a bounding box.'
+  licence: 'Available under the terms of the Open Government Licence. The following attribution statement must be used to
+    acknowledge the source of the information: © Scottish Government, contains Ordnance Survey data © Crown copyright and
+    database right [insert year].'
+  landing_page: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=National%20Scenic%20Areas
+  bbox:
+  - -8.6561
+  - 54.8014
+  - -0.832
+  - 60.8623
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/3
+    service_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: nsaname
+      code_field: nsacode
+    check_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/3/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=National%20Scenic%20Areas
+- kind: record
+  id: uk-ns-wild-land-areas
+  title: Wild Land Areas 2014, Scotland (NatureScot)
+  publisher: NatureScot
+  publisher_type: public-body
+  country: GB
+  abstract: 'The 42 Wild Land Areas NatureScot mapped in 2014; Scottish planning policy (NPF4) protects their wild land character.
+    Fields: name field NAME, code field ID. 42 features; data last edited 2023-07-19; item updated 2023-07-24. A curated record
+    for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked
+    to return features for a bounding box.'
+  licence: Available under the Open Government Licence (http://www.nationalarchives.gov.uk/doc/open-government-licence)
+  landing_page: https://opendata.nature.scot/datasets/snh::wild-land-areas-2014
+  bbox:
+  - -7.8823
+  - 54.9954
+  - -1.3561
+  - 60.5965
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Wild_Land_Areas_2014/FeatureServer/0
+    service_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Wild_Land_Areas_2014/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: NAME
+      code_field: ID
+      data_date: '2023-07-19'
+      data_date_source: layer editing info
+    check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Wild_Land_Areas_2014/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://opendata.nature.scot/datasets/snh::wild-land-areas-2014
+- kind: record
+  id: uk-nrw-national-parks
+  title: National Parks, Wales (Natural Resources Wales)
+  publisher: Natural Resources Wales
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of Wales''s three National Parks, from Natural Resources Wales''s own service. Fields: name field
+    NP_NAME, code field ISIS_ID. 3 features; data last edited 2024-07-24; item updated 2024-07-24. A curated record for UK
+    screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return
+    features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/inspire-nrw:NRW_NATIONAL_PARK
+  bbox:
+  - -5.6693
+  - 51.5959
+  - -2.9521
+  - 53.2892
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/National_Parks/FeatureServer/0
+    service_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/National_Parks/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: NP_NAME
+      code_field: ISIS_ID
+      data_date: '2024-07-24'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/National_Parks/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-nrw:NRW_NATIONAL_PARK
+- kind: record
+  id: uk-nrw-national-landscapes
+  title: National Landscapes (Areas of Outstanding Natural Beauty), Wales (Natural Resources Wales)
+  publisher: Natural Resources Wales
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of Wales''s Areas of Outstanding Natural Beauty (National Landscapes), from Natural Resources
+    Wales''s own service. Fields: name field AONB_NAME, code field ISIS_ID. 6 features; data last edited 2021-10-19; item
+    updated 2020-07-06. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/inspire-nrw:NRW_AONB
+  bbox:
+  - -4.8033
+  - 51.535
+  - -2.5292
+  - 53.4358
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Area_of_Outstanding_Natural_Beauty/FeatureServer/0
+    service_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Area_of_Outstanding_Natural_Beauty/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: AONB_NAME
+      code_field: ISIS_ID
+      data_date: '2021-10-19'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Area_of_Outstanding_Natural_Beauty/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-nrw:NRW_AONB
+- kind: record
+  id: uk-nrw-special-landscape-areas
+  title: Special Landscape Areas, Wales (local plan designations, collated by Natural Resources Wales)
+  publisher: Natural Resources Wales
+  publisher_type: public-body
+  country: GB
+  abstract: 'Special Landscape Areas designated by Welsh local planning authorities in their local development plans, collated
+    in one layer by Natural Resources Wales. Each feature names its authority and the plan policy; some authorities are reviewing
+    theirs, so check the plan before relying on a boundary. Fields: name field SLA_Name, authority field Authority, link field
+    Local_Plan_Policy_URL. 159 features; data last edited 2023-07-31; item updated 2023-07-31. A curated record for UK screening
+    (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features
+    for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/geonode:nrw_special_landscape_area
+  bbox:
+  - -4.7125
+  - 51.3746
+  - -2.7266
+  - 53.4115
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - land-use-plan
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Special_Landscape_Areas_Wales/FeatureServer/0
+    service_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Special_Landscape_Areas_Wales/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: SLA_Name
+      authority_field: Authority
+      link_field: Local_Plan_Policy_URL
+      data_date: '2023-07-31'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Special_Landscape_Areas_Wales/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/geonode:nrw_special_landscape_area
+- kind: record
+  id: uk-daera-national-landscapes
+  title: Areas of Outstanding Natural Beauty, Northern Ireland (DAERA)
+  publisher: Department of Agriculture, Environment and Rural Affairs (DAERA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'The boundaries of Northern Ireland''s eight Areas of Outstanding Natural Beauty (NIEA). Northern Ireland has
+    no National Parks. Fields: name field name, code field id_ref. 8 features. A curated record for UK screening (Tobler request,
+    23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a bounding
+    box.'
+  licence: UK Open Government Licence (OGL)
+  landing_page: https://www.opendatani.gov.uk/dataset/areas-of-outstanding-natural-beauty
+  bbox:
+  - -7.4472
+  - 54.0359
+  - -5.3857
+  - 55.2977
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/AONB/FeatureServer/0
+    service_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/AONB/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: name
+      code_field: id_ref
+    check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/AONB/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.opendatani.gov.uk/dataset/areas-of-outstanding-natural-beauty
+- kind: record
+  id: uk-he-listed-buildings
+  title: Listed Buildings, England (Historic England)
+  publisher: Historic England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Listed buildings in England as points, from the National Heritage List for England (NHLE); Historic England''s
+    own service. The same service has outlines for buildings listed or amended since April 2011 (layer 3). Fields: name field
+    Name, code field ListEntry, grade field Grade, link field hyperlink. 379,688 features; data last edited 2026-11-23; item
+    updated 2026-11-04. Updated daily at source. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as
+    the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+    © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  bbox:
+  - -7.0804
+  - 49.8729
+  - 2.0642
+  - 55.717
+  geometry_type: point
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/0
+    service_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: Name
+      code_field: ListEntry
+      grade_field: Grade
+      link_field: hyperlink
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+- kind: record
+  id: uk-he-scheduled-monuments
+  title: Scheduled Monuments, England (Historic England)
+  publisher: Historic England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Scheduled monuments in England, from the NHLE; Historic England''s own service. Fields: name field Name, code
+    field ListEntry, link field hyperlink. 20,006 features; data last edited 2026-11-23; item updated 2026-11-04. Updated
+    daily at source. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+    © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  bbox:
+  - -7.031
+  - 49.8695
+  - 2.025
+  - 55.7212
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/6
+    service_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: Name
+      code_field: ListEntry
+      link_field: hyperlink
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/6/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+- kind: record
+  id: uk-he-registered-parks-gardens
+  title: Registered Parks and Gardens, England (Historic England)
+  publisher: Historic England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Registered parks and gardens in England, from the NHLE; Historic England''s own service. Fields: name field Name,
+    code field ListEntry, grade field Grade, link field hyperlink. 1,721 features; data last edited 2026-11-23; item updated
+    2026-11-04. Updated daily at source. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+    © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  bbox:
+  - -6.9379
+  - 49.944
+  - 2.0519
+  - 55.6187
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/7
+    service_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: Name
+      code_field: ListEntry
+      grade_field: Grade
+      link_field: hyperlink
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+- kind: record
+  id: uk-he-registered-battlefields
+  title: Registered Battlefields, England (Historic England)
+  publisher: Historic England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Registered battlefields in England, from the NHLE; Historic England''s own service. Fields: name field Name,
+    code field ListEntry, link field hyperlink. 47 features; data last edited 2026-11-23; item updated 2026-11-04. Updated
+    daily at source. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+    © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  bbox:
+  - -5.0335
+  - 50.3595
+  - 0.9854
+  - 55.7667
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/8
+    service_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: Name
+      code_field: ListEntry
+      link_field: hyperlink
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+- kind: record
+  id: uk-he-world-heritage-sites
+  title: World Heritage Sites, England (Historic England)
+  publisher: Historic England
+  publisher_type: public-body
+  country: GB
+  abstract: 'World Heritage Sites in England, from the NHLE; Historic England''s own service. Buffer zones are not in this
+    layer. Fields: name field Name, code field ListEntry, link field hyperlink. 28 features; data last edited 2026-11-23;
+    item updated 2026-11-04. Updated daily at source. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen
+    as the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
+    © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
+  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  bbox:
+  - -6.1464
+  - 50.0781
+  - 1.3806
+  - 55.0275
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/10
+    service_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: Name
+      code_field: ListEntry
+      link_field: hyperlink
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/10/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+- kind: record
+  id: uk-hes-listed-buildings
+  title: Listed Buildings, Scotland (Historic Environment Scotland)
+  publisher: Historic Environment Scotland
+  publisher_type: public-body
+  country: GB
+  abstract: 'Listed buildings in Scotland as points (statutory addresses), from Historic Environment Scotland''s own service;
+    CATEGORY is A, B or C. Outlines exist for 746 buildings (layer 7). Fields: name field DES_TITLE, code field DES_REF, link
+    field LINK, grade field CATEGORY. 67,483 features. The service can''t page: a query returns up to 10,000 features, so
+    keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+    Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+    SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+    Survey licence number AC0000807262. Public Sector Viewing Terms .'
+  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  bbox:
+  - -7.3393
+  - 54.5508
+  - -0.711
+  - 60.8537
+  geometry_type: point
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/0
+    service_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: DES_TITLE
+      code_field: DES_REF
+      link_field: LINK
+      grade_field: CATEGORY
+    check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://portal.historicenvironment.scot/spatialdownloads
+- kind: record
+  id: uk-hes-scheduled-monuments
+  title: Scheduled Monuments, Scotland (Historic Environment Scotland)
+  publisher: Historic Environment Scotland
+  publisher_type: public-body
+  country: GB
+  abstract: 'Scheduled monuments in Scotland, from Historic Environment Scotland''s own service. Fields: name field DES_TITLE,
+    code field DES_REF, link field LINK. 8,077 features. The service can''t page: a query returns up to 10,000 features, so
+    keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+    Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+    SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+    Survey licence number AC0000807262. Public Sector Viewing Terms .'
+  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  bbox:
+  - -8.0634
+  - 54.5168
+  - -0.759
+  - 60.8296
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/5
+    service_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: DES_TITLE
+      code_field: DES_REF
+      link_field: LINK
+    check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/5/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://portal.historicenvironment.scot/spatialdownloads
+- kind: record
+  id: uk-hes-gardens-designed-landscapes
+  title: Inventory of Gardens and Designed Landscapes, Scotland (Historic Environment Scotland)
+  publisher: Historic Environment Scotland
+  publisher_type: public-body
+  country: GB
+  abstract: 'Sites in the Inventory of Gardens and Designed Landscapes, from Historic Environment Scotland''s own service.
+    Fields: name field DES_TITLE, code field DES_REF, link field LINK. 371 features. The service can''t page: a query returns
+    up to 10,000 features, so keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as
+    the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+    Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+    SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+    Survey licence number AC0000807262. Public Sector Viewing Terms .'
+  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  bbox:
+  - -6.2751
+  - 54.6909
+  - -0.9341
+  - 60.6897
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/4
+    service_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: DES_TITLE
+      code_field: DES_REF
+      link_field: LINK
+    check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/4/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://portal.historicenvironment.scot/spatialdownloads
+- kind: record
+  id: uk-hes-battlefields
+  title: Inventory of Historic Battlefields, Scotland (Historic Environment Scotland)
+  publisher: Historic Environment Scotland
+  publisher_type: public-body
+  country: GB
+  abstract: 'Sites in the Inventory of Historic Battlefields, from Historic Environment Scotland''s own service. Fields: name
+    field DES_TITLE, code field DES_REF, link field LINK. 40 features. The service can''t page: a query returns up to 10,000
+    features, so keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+    Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+    SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+    Survey licence number AC0000807262. Public Sector Viewing Terms .'
+  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  bbox:
+  - -5.1529
+  - 54.9437
+  - -2.3232
+  - 57.9489
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/3
+    service_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: DES_TITLE
+      code_field: DES_REF
+      link_field: LINK
+    check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/3/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://portal.historicenvironment.scot/spatialdownloads
+- kind: record
+  id: uk-hes-world-heritage-sites
+  title: World Heritage Sites, Scotland (Historic Environment Scotland)
+  publisher: Historic Environment Scotland
+  publisher_type: public-body
+  country: GB
+  abstract: 'World Heritage Sites in Scotland, from Historic Environment Scotland''s own service. Buffer zones are not in
+    this layer. Fields: name field DES_TITLE, code field DES_REF, link field LINK. 10 features. The service can''t page: a
+    query returns up to 10,000 features, so keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026):
+    chosen as the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: 'Licenced under an Open Government Licence . If this data is reproduced it must be attributed with the following:
+    Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
+    SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
+    Survey licence number AC0000807262. Public Sector Viewing Terms .'
+  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  bbox:
+  - -8.3069
+  - 55.4913
+  - -3.1403
+  - 59.0856
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/6
+    service_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: DES_TITLE
+      code_field: DES_REF
+      link_field: LINK
+    check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://portal.historicenvironment.scot/spatialdownloads
+- kind: record
+  id: uk-cadw-listed-buildings
+  title: Listed Buildings, Wales (Cadw)
+  publisher: Cadw (Welsh Government)
+  publisher_type: public-body
+  country: GB
+  abstract: 'Listed buildings in Wales as points, from Cadw''s own layer on DataMapWales. Fields: name field Name, code field
+    RecordNumber, grade field Grade, link field Report. 30,110 features. Served as WFS in British National Grid; the MCP server
+    asks for WGS84. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+    may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+    both the source and copyright as specified (see below),, and do not use it in a misleading context.
+  landing_page: https://datamap.gov.wales/layers/inspire-wg:Cadw_ListedBuildings
+  bbox: &id001
+  - -5.6703
+  - 51.3746
+  - -2.6518
+  - 53.4358
+  geometry_type: point
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-wg:Cadw_ListedBuildings
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-wg:Cadw_ListedBuildings
+      output_formats:
+      - application/json
+      name_field: Name
+      code_field: RecordNumber
+      grade_field: Grade
+      link_field: Report
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:Cadw_ListedBuildings
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-wg:Cadw_ListedBuildings
+- kind: record
+  id: uk-cadw-scheduled-monuments
+  title: Scheduled Monuments, Wales (Cadw)
+  publisher: Cadw (Welsh Government)
+  publisher_type: public-body
+  country: GB
+  abstract: 'Scheduled monuments in Wales, from Cadw''s own layer on DataMapWales. Fields: name field Name, code field SAMNumber,
+    link field Report. 4,239 features. Served as WFS in British National Grid; the MCP server asks for WGS84. A curated record
+    for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked
+    to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+    may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+    both the source and copyright as specified (see below),, and do not use it in a misleading context.
+  landing_page: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-wg:Cadw_SAM
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-wg:Cadw_SAM
+      output_formats:
+      - application/json
+      name_field: Name
+      code_field: SAMNumber
+      link_field: Report
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:Cadw_SAM
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM
+- kind: record
+  id: uk-cadw-registered-parks-gardens
+  title: Registered Historic Parks and Gardens, Wales (Cadw)
+  publisher: Cadw (Welsh Government)
+  publisher_type: public-body
+  country: GB
+  abstract: 'Sites on Cadw''s Register of Parks and Gardens of Special Historic Interest in Wales, from DataMapWales. Fields:
+    name field site_name_en, code field reference_number, grade field grade_gradd, link field report_en. 385 features. Served
+    as WFS in British National Grid; the MCP server asks for WGS84. A curated record for UK screening (Tobler request, 23
+    Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+    may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+    both the source and copyright as specified (see below),, and do not use it in a misleading context.
+  landing_page: https://datamap.gov.wales/layers/geonode:cadw_rhpg_registeredareas
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#geonode:cadw_rhpg_registeredareas
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: geonode:cadw_rhpg_registeredareas
+      output_formats:
+      - application/json
+      name_field: site_name_en
+      code_field: reference_number
+      grade_field: grade_gradd
+      link_field: report_en
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=geonode:cadw_rhpg_registeredareas
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/geonode:cadw_rhpg_registeredareas
+- kind: record
+  id: uk-cadw-historic-landscapes
+  title: Registered Historic Landscapes, Wales (Cadw)
+  publisher: Cadw (Welsh Government)
+  publisher_type: public-body
+  country: GB
+  abstract: 'Landscapes on the Register of Landscapes of Outstanding and Special Historic Interest in Wales, from Cadw''s
+    own layer on DataMapWales; RegisterType says Outstanding or Special. Fields: name field Name, code field RecordNumber,
+    link field Report. 58 features. Served as WFS in British National Grid; the MCP server asks for WGS84. A curated record
+    for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked
+    to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+    may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+    both the source and copyright as specified (see below),, and do not use it in a misleading context.
+  landing_page: https://datamap.gov.wales/layers/inspire-wg:Cadw_HistoricLandscapes
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-landscape-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-wg:Cadw_HistoricLandscapes
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-wg:Cadw_HistoricLandscapes
+      output_formats:
+      - application/json
+      name_field: Name
+      code_field: RecordNumber
+      link_field: Report
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:Cadw_HistoricLandscapes
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-wg:Cadw_HistoricLandscapes
+- kind: record
+  id: uk-cadw-world-heritage-sites
+  title: World Heritage Sites, Wales (Cadw)
+  publisher: Cadw (Welsh Government)
+  publisher_type: public-body
+  country: GB
+  abstract: 'World Heritage Sites in Wales, from Cadw''s layer on DataMapWales. Essential settings and significant views are
+    separate Cadw layers. Fields: name field Name, code field UNESCO_Ref, link field Report. 12 features. Served as WFS in
+    British National Grid; the MCP server asks for WGS84. A curated record for UK screening (Tobler request, 23 Nov 2026):
+    chosen as the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL). There are no use restrictions on this data. Recipients
+    may re-use, reproduce, disseminate this data free of charge in any format or medium, provided they do so accurately, acknowledging
+    both the source and copyright as specified (see below),, and do not use it in a misleading context.
+  landing_page: https://datamap.gov.wales/layers/inspire-wg:vGeoServer_WorldHeritageSites_Public
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-wg:vGeoServer_WorldHeritageSites_Public
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-wg:vGeoServer_WorldHeritageSites_Public
+      output_formats:
+      - application/json
+      name_field: Name
+      code_field: UNESCO_Ref
+      link_field: Report
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:vGeoServer_WorldHeritageSites_Public
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-wg:vGeoServer_WorldHeritageSites_Public
+- kind: record
+  id: uk-dfc-listed-buildings
+  title: Historic Buildings Record incl. Listed Buildings, Northern Ireland (DfC Historic Environment Division)
+  publisher: Department for Communities (DfC), Historic Environment Division
+  publisher_type: public-body
+  country: GB
+  abstract: 'Northern Ireland''s Historic Buildings Record as points. Listed buildings are those with CurrentGra A, B+, B,
+    B1 or B2 (9,202 on 23 Nov 2026); ''Record Only'', ''D1 Record Only'' and ''Delisted'' are not listed: filter on CurrentGra.
+    Fields: name field Address, code field HB_ref, grade field CurrentGra. 15,884 features; data last edited 2026-11-03; item
+    updated 2026-11-17. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: UK Open Government Licence (OGL)
+  landing_page: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+  bbox:
+  - -8.142
+  - 54.0097
+  - -5.3867
+  - 55.3152
+  geometry_type: point
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/1
+    service_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: Address
+      code_field: HB_ref
+      grade_field: CurrentGra
+      listed_values:
+      - A
+      - B+
+      - B
+      - B1
+      - B2
+      data_date: '2026-11-03'
+      data_date_source: layer editing info
+    check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+- kind: record
+  id: uk-dfc-scheduled-zones
+  title: Scheduled Monument Zones, Northern Ireland (DfC Historic Environment Division)
+  publisher: Department for Communities (DfC), Historic Environment Division
+  publisher_type: public-body
+  country: GB
+  abstract: 'The scheduled zones of Northern Ireland''s scheduled monuments, as polygons. Fields: code field SMNO, name field
+    TOWNLAND. 2,099 features; data last edited 2026-11-04; item updated 2026-11-17. A curated record for UK screening (Tobler
+    request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a
+    bounding box.'
+  licence: UK Open Government Licence (OGL)
+  landing_page: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+  bbox:
+  - -8.115
+  - 54.0097
+  - -5.4071
+  - 55.3203
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/10
+    service_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      code_field: SMNO
+      name_field: TOWNLAND
+      data_date: '2026-11-04'
+      data_date_source: layer editing info
+    check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/10/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+- kind: record
+  id: uk-dfc-historic-parks-gardens
+  title: Historic Parks, Gardens and Demesnes, Northern Ireland (DfC Historic Environment Division)
+  publisher: Department for Communities (DfC), Historic Environment Division
+  publisher_type: public-body
+  country: GB
+  abstract: 'Northern Ireland''s Register of Parks, Gardens and Demesnes of Special Historic Interest; STATUS is REGISTER
+    (155) or SUPPLEMENTARY (97). Fields: name field SITE, code field REF_NO, grade field Grade, status field STATUS. 252 features;
+    data last edited 2026-11-04; item updated 2026-11-17. A curated record for UK screening (Tobler request, 23 Nov 2026):
+    chosen as the designating or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: UK Open Government Licence (OGL)
+  landing_page: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+  bbox:
+  - -8.0039
+  - 54.0513
+  - -5.43
+  - 55.3072
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/9
+    service_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: SITE
+      code_field: REF_NO
+      grade_field: Grade
+      status_field: STATUS
+      data_date: '2026-11-04'
+      data_date_source: layer editing info
+    check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/9/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+- kind: record
+  id: uk-dfc-battlesites
+  title: Battlesites, Northern Ireland (DfC Historic Environment Division)
+  publisher: Department for Communities (DfC), Historic Environment Division
+  publisher_type: public-body
+  country: GB
+  abstract: 'Battle and siege sites recorded by the Historic Environment Division. Not a statutory designation: Northern Ireland
+    has no battlefield register. Fields: name field BATTLE, code field MAIN_REF. 324 features; data last edited 2026-11-03;
+    item updated 2026-11-17. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or
+    publishing body''s own layer and checked to return features for a bounding box.'
+  licence: UK Open Government Licence (OGL)
+  landing_page: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+  bbox:
+  - -8.1051
+  - 54.0301
+  - -5.463
+  - 55.3085
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/8
+    service_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      name_field: BATTLE
+      code_field: MAIN_REF
+      data_date: '2026-11-03'
+      data_date_source: layer editing info
+    check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
+- kind: record
+  id: uk-daera-world-heritage-site
+  title: World Heritage Site (Giant's Causeway), Northern Ireland (DAERA)
+  publisher: Department of Agriculture, Environment and Rural Affairs (DAERA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'The Giant''s Causeway and Causeway Coast World Heritage Site, Northern Ireland''s only one, from NIEA''s own
+    service. Fields: name field name_whs, code field site_code. 1 features. A curated record for UK screening (Tobler request,
+    23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a bounding
+    box.'
+  licence: UK Open Government Licence (OGL)
+  landing_page: https://www.opendatani.gov.uk/dataset/world-heritage-site
+  bbox:
+  - -6.5286
+  - 55.2327
+  - -6.4773
+  - 55.2549
+  geometry_type: polygon
+  concepts_hint:
+  - heritage-site
+  - uk-heritage-designation
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/World_Heritage_Site/FeatureServer/0
+    service_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/World_Heritage_Site/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: name_whs
+      code_field: site_code
+    check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/World_Heritage_Site/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.opendatani.gov.uk/dataset/world-heritage-site
+- kind: record
+  id: uk-ns-carbon-peatland-2016
+  title: Carbon and Peatland 2016 map, Scotland (NatureScot)
+  publisher: NatureScot
+  publisher_type: public-body
+  country: GB
+  abstract: 'NatureScot''s Carbon and Peatland map (2016): classes 1 and 2 are nationally important carbon-rich soils, deep
+    peat and priority peatland habitat (class field CARBON_250 holds the class); used in Scotland''s spatial framework for
+    onshore wind. LICENCE: UK Non-Commercial Government Licence, not OGL: commercial use needs the publishers'' permission.
+    Fields: class field CARBON_250. 439,700 features; data last edited 2023-03-02; item updated 2024-08-16. 439,700 polygons:
+    keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Available under the UK Non-Commercial Government Licence - https://www.nationalarchives.gov.uk/doc/non-commercial-government-licence/version/2/
+  landing_page: https://opendata.nature.scot/datasets/snh::carbon-and-peatland-2016-map
+  bbox:
+  - -8.3417
+  - 54.549
+  - -0.7168
+  - 60.8545
+  geometry_type: polygon
+  concepts_hint:
+  - soil
+  - wetland
+  - peat
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Carbon_And_Peatland_2016_map/FeatureServer/0
+    service_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Carbon_And_Peatland_2016_map/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      class_field: CARBON_250
+      data_date: '2023-03-02'
+      data_date_source: layer editing info
+    check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Carbon_And_Peatland_2016_map/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://opendata.nature.scot/datasets/snh::carbon-and-peatland-2016-map
+- kind: record
+  id: uk-ne-alc-provisional
+  title: Provisional Agricultural Land Classification, England (Natural England)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'The provisional (pre-1988, 1:250,000) Agricultural Land Classification of England: grades 1-5 (grade 3 not split
+    into 3a/3b), plus non-agricultural and urban. Indicative only: site decisions use post-1988 surveys or new survey. Fields:
+    grade field ALC_GRADE. 1,826 features; data last edited 2024-11-26; item updated 2023-06-06. A curated record for UK screening
+    (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features
+    for a bounding box.'
+  licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+    - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  landing_page: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::provisional-agricultural-land-classification-alc-england
+  bbox:
+  - -6.9846
+  - 49.8817
+  - 2.0759
+  - 55.7441
+  geometry_type: polygon
+  concepts_hint:
+  - agriculture
+  - soil
+  - uk-farmland-quality
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Provisional%20Agricultural%20Land%20Classification%20(ALC)%20(England)/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Provisional%20Agricultural%20Land%20Classification%20(ALC)%20(England)/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      grade_field: ALC_GRADE
+      data_date: '2024-11-26'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Provisional%20Agricultural%20Land%20Classification%20(ALC)%20(England)/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::provisional-agricultural-land-classification-alc-england
+- kind: record
+  id: uk-ne-alc-post1988
+  title: Agricultural Land Classification, post-1988 surveys, England (Natural England)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Agricultural Land Classification grades from detailed field surveys since 1988 (including 3a and 3b, which decides
+    best and most versatile land). Covers only surveyed sites; elsewhere use the provisional map. Fields: grade field ALC_GRADE,
+    code field JOB_NUMBER. 46,981 features; data last edited 2024-11-26; item updated 2023-06-06. A curated record for UK
+    screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return
+    features for a bounding box.'
+  licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+    - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  landing_page: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::agricultural-land-classification-alc-grades-post-1988-england
+  bbox:
+  - -6.2041
+  - 50.0039
+  - 2.0507
+  - 55.7397
+  geometry_type: polygon
+  concepts_hint:
+  - agriculture
+  - soil
+  - uk-farmland-quality
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Agricultural_Land_Classification_Post_1988/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Agricultural_Land_Classification_Post_1988/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      grade_field: ALC_GRADE
+      code_field: JOB_NUMBER
+      data_date: '2024-11-26'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Agricultural_Land_Classification_Post_1988/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::agricultural-land-classification-alc-grades-post-1988-england
+- kind: record
+  id: uk-wg-predictive-alc
+  title: Predictive Agricultural Land Classification Map 2, Wales (Welsh Government)
+  publisher: Welsh Government
+  publisher_type: public-body
+  country: GB
+  abstract: 'The Welsh Government''s Predictive ALC map, version 2. Field predictive holds the grade: 1, 2, 3a, 3b, 4, 5,
+    NA (non-agricultural) or U (urban), per the layer''s legend. Fields: grade field predictive. 254,576 features. 254,576
+    polygons: keep boxes small. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/inspire-wg:wg_predictive_alc2
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - agriculture
+  - soil
+  - uk-farmland-quality
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-wg:wg_predictive_alc2
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-wg:wg_predictive_alc2
+      output_formats:
+      - application/json
+      grade_field: predictive
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:wg_predictive_alc2
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-wg:wg_predictive_alc2
+- kind: record
+  id: uk-hutton-lca-250k
+  title: Land Capability for Agriculture, national scale (1:250,000), Scotland (James Hutton Institute)
+  publisher: James Hutton Institute
+  publisher_type: public-body
+  country: GB
+  abstract: 'Scotland''s Land Capability for Agriculture at 1:250,000: field LCCODE is the class (1-7; classes 1 to 3.1 are
+    prime agricultural land, also flagged in Prime). LICENCE: The James Hutton Institute Open Data Licence (its terms come
+    in the download), not OGL. Fields: class field LCCODE, prime field Prime. 18,989 features. Slow (about 20 s for a small
+    box on 23 Nov) and can''t page. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: The James Hutton Institute Open Data Licence. Use is permitted under the terms of the Open Data licence included
+    in the download.
+  landing_page: https://soils.environment.gov.scot/maps/capability-maps/national-scale-land-capability-for-agriculture/
+  bbox:
+  - -7.7198
+  - 54.6331
+  - -0.7244
+  - 60.8607
+  geometry_type: polygon
+  concepts_hint:
+  - agriculture
+  - soil
+  - uk-farmland-quality
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0
+    service_url: http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer
+    capabilities:
+    - query
+    info:
+      class_field: LCCODE
+      prime_field: Prime
+    check_url: http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://soils.environment.gov.scot/maps/capability-maps/national-scale-land-capability-for-agriculture/
+- kind: record
+  id: uk-ea-flood-zones
+  title: 'Flood Map for Planning: Flood Zones 2 and 3, rivers and sea, England (Environment Agency)'
+  publisher: Environment Agency
+  publisher_type: public-body
+  country: GB
+  abstract: 'The Environment Agency''s Flood Map for Planning flood zones: flood_zone is FZ2 or FZ3, flood_source is river,
+    sea or both. Flood Zone 1 is everywhere else. Defra Data Services Platform WFS. Fields: zone field flood_zone, source
+    field flood_source. 415,408 features. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence. These datasets have been made freely available by Defra and its agencies for your use.
+  landing_page: https://environment.data.gov.uk/dataset/04532375-a198-476e-985e-0579a0a11b47
+  bbox:
+  - -6.4185
+  - 49.8646
+  - 1.7629
+  - 55.8112
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://environment.data.gov.uk/spatialdata/flood-map-for-planning-flood-zones/wfs#dataset-04532375-a198-476e-985e-0579a0a11b47:Flood_Zones_2_3_Rivers_and_Sea
+    service_url: https://environment.data.gov.uk/spatialdata/flood-map-for-planning-flood-zones/wfs
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: dataset-04532375-a198-476e-985e-0579a0a11b47:Flood_Zones_2_3_Rivers_and_Sea
+      output_formats:
+      - application/json
+      zone_field: flood_zone
+      source_field: flood_source
+    check_url: https://environment.data.gov.uk/spatialdata/flood-map-for-planning-flood-zones/wfs?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=dataset-04532375-a198-476e-985e-0579a0a11b47:Flood_Zones_2_3_Rivers_and_Sea
+  - protocol: landing
+    url: https://environment.data.gov.uk/dataset/04532375-a198-476e-985e-0579a0a11b47
+- kind: record
+  id: uk-sepa-flood-river-medium
+  title: River flooding, medium likelihood (1 in 200 years), Scotland (SEPA)
+  publisher: Scottish Environment Protection Agency (SEPA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'SEPA''s flood map extent for this source and likelihood, from SEPA''s own open service. BAND_DESC and PROB describe
+    the likelihood. In Scotland, medium likelihood is the usual planning test (roughly England''s Flood Zone 3) and low likelihood
+    roughly Flood Zone 2. Fields: likelihood field BAND_DESC. 47,093 features. A curated record for UK screening (Tobler request,
+    23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a bounding
+    box.'
+  licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+    is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+    2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+    Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  bbox:
+  - -7.5292
+  - 54.6649
+  - -0.7765
+  - 60.8268
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer/1
+    service_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer
+    capabilities:
+    - query
+    info:
+      likelihood_field: BAND_DESC
+    check_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.sepa.org.uk/environment/environmental-data/
+- kind: record
+  id: uk-sepa-flood-river-low
+  title: River flooding, low likelihood (1 in 1,000 years and 1 in 200 plus climate change), Scotland (SEPA)
+  publisher: Scottish Environment Protection Agency (SEPA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'SEPA''s flood map extent for this source and likelihood, from SEPA''s own open service. BAND_DESC and PROB describe
+    the likelihood. In Scotland, medium likelihood is the usual planning test (roughly England''s Flood Zone 3) and low likelihood
+    roughly Flood Zone 2. Fields: likelihood field BAND_DESC. 44,671 features. A curated record for UK screening (Tobler request,
+    23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return features for a bounding
+    box.'
+  licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+    is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+    2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+    Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  bbox:
+  - -7.5292
+  - 54.6649
+  - -0.7765
+  - 60.8268
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer/2
+    service_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer
+    capabilities:
+    - query
+    info:
+      likelihood_field: BAND_DESC
+    check_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer/2/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.sepa.org.uk/environment/environmental-data/
+- kind: record
+  id: uk-sepa-flood-coastal-medium
+  title: Coastal flooding, medium likelihood (1 in 200 years), Scotland (SEPA)
+  publisher: Scottish Environment Protection Agency (SEPA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'SEPA''s flood map extent for this source and likelihood, from SEPA''s own open service. BAND_DESC and PROB describe
+    the likelihood. In Scotland, medium likelihood is the usual planning test (roughly England''s Flood Zone 3) and low likelihood
+    roughly Flood Zone 2. Fields: likelihood field BAND_DESC. 16 features. Few, very large polygons: a query returns the whole
+    coastal outline that touches the box. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+    is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+    2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+    Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  bbox:
+  - -7.7323
+  - 54.6288
+  - -0.7155
+  - 60.8653
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer/7
+    service_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer
+    capabilities:
+    - query
+    info:
+      likelihood_field: BAND_DESC
+    check_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.sepa.org.uk/environment/environmental-data/
+- kind: record
+  id: uk-sepa-flood-coastal-low
+  title: Coastal flooding, low likelihood (1 in 1,000 years and 1 in 200 plus climate change), Scotland (SEPA)
+  publisher: Scottish Environment Protection Agency (SEPA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'SEPA''s flood map extent for this source and likelihood, from SEPA''s own open service. BAND_DESC and PROB describe
+    the likelihood. In Scotland, medium likelihood is the usual planning test (roughly England''s Flood Zone 3) and low likelihood
+    roughly Flood Zone 2. Fields: likelihood field BAND_DESC. 16 features. Few, very large polygons: a query returns the whole
+    coastal outline that touches the box. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+    is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+    2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+    Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  bbox:
+  - -7.7323
+  - 54.6288
+  - -0.7155
+  - 60.8653
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer/8
+    service_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer
+    capabilities:
+    - query
+    info:
+      likelihood_field: BAND_DESC
+    check_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.sepa.org.uk/environment/environmental-data/
+- kind: record
+  id: uk-sepa-flood-surface-water-medium
+  title: Surface water and small watercourses flooding, medium likelihood (1 in 200 years), Scotland (SEPA)
+  publisher: Scottish Environment Protection Agency (SEPA)
+  publisher_type: public-body
+  country: GB
+  abstract: 'SEPA''s flood map extent for this source and likelihood, from SEPA''s own open service. BAND_DESC and PROB describe
+    the likelihood. In Scotland, medium likelihood is the usual planning test (roughly England''s Flood Zone 3) and low likelihood
+    roughly Flood Zone 2. Fields: likelihood field BAND_DESC. 8,164,291 features. 8.2 million polygons: keep boxes small.
+    A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer
+    and checked to return features for a bounding box.'
+  licence: 'Any use of these products must fully acknowledge the sources of the data. A full set of Data Attribution Statement
+    is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
+    2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
+    Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
+  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  bbox:
+  - -7.7323
+  - 54.6288
+  - -0.7155
+  - 60.8653
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer/4
+    service_url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer
+    capabilities:
+    - query
+    info:
+      likelihood_field: BAND_DESC
+    check_url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer/4/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.sepa.org.uk/environment/environmental-data/
+- kind: record
+  id: uk-nrw-fmfp-rivers
+  title: 'Flood Map for Planning: rivers, Wales (Natural Resources Wales)'
+  publisher: Natural Resources Wales
+  publisher_type: public-body
+  country: GB
+  abstract: 'Natural Resources Wales''s Flood Map for Planning (TAN 15): field risk is Flood Zone 2 or Flood Zone 3; pub_date
+    is the publication date (21 May 2026 on 23 Nov 2026). Fields: zone field risk. 324,163 features. Keep boxes small: the
+    layer is large. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_RIVERS
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-nrw:NRW_FLOODZONE_RIVERS
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-nrw:NRW_FLOODZONE_RIVERS
+      output_formats:
+      - application/json
+      zone_field: risk
+      data_date: '2026-05-21'
+      data_date_source: pub_date field
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-nrw:NRW_FLOODZONE_RIVERS
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_RIVERS
+- kind: record
+  id: uk-nrw-fmfp-sea
+  title: 'Flood Map for Planning: sea, Wales (Natural Resources Wales)'
+  publisher: Natural Resources Wales
+  publisher_type: public-body
+  country: GB
+  abstract: 'Natural Resources Wales''s Flood Map for Planning (TAN 15): field risk is Flood Zone 2 or Flood Zone 3; pub_date
+    is the publication date (21 May 2026 on 23 Nov 2026). Fields: zone field risk. 30,743 features. A curated record for UK
+    screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing body''s own layer and checked to return
+    features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_SEAS
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-nrw:NRW_FLOODZONE_SEAS
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-nrw:NRW_FLOODZONE_SEAS
+      output_formats:
+      - application/json
+      zone_field: risk
+      data_date: '2026-05-21'
+      data_date_source: pub_date field
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-nrw:NRW_FLOODZONE_SEAS
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_SEAS
+- kind: record
+  id: uk-nrw-fmfp-surface-water
+  title: 'Flood Map for Planning: surface water and small watercourses, Wales (Natural Resources Wales)'
+  publisher: Natural Resources Wales
+  publisher_type: public-body
+  country: GB
+  abstract: 'Natural Resources Wales''s Flood Map for Planning (TAN 15): field risk is Flood Zone 2 or Flood Zone 3; pub_date
+    is the publication date (21 May 2026 on 23 Nov 2026). Fields: zone field risk. 2,341,000 features. Keep boxes small: the
+    layer is large. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating or publishing
+    body''s own layer and checked to return features for a bounding box.'
+  licence: Open Government Licence for Public Sector Information (OGL)
+  landing_page: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - uk-flood-zone
+  - uk-screening-pack
+  endpoints:
+  - protocol: wfs
+    url: https://datamap.gov.wales/geoserver/ows#inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
+    service_url: https://datamap.gov.wales/geoserver/ows
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
+      output_formats:
+      - application/json
+      zone_field: risk
+      data_date: '2026-05-21'
+      data_date_source: pub_date field
+    check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
+  - protocol: landing
+    url: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
+- kind: record
+  id: uk-ne-sssi-impact-risk-zones
+  title: SSSI Impact Risk Zones, England (Natural England)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Natural England''s Impact Risk Zones round SSSIs (and the SACs, SPAs and Ramsar sites they underpin): each zone
+    says which kinds of development need consultation there. The only attribute, IRZURL, links to Natural England''s checker;
+    its irzcode parameter (13 digits) holds the categories. How to decode it: get_dataset details.irzcode, or docs/sssi-irz-codes.md
+    in the atlas repo. Fields: code field IRZURL. 208,189 features; data last edited 2026-10-14; item updated 2026-10-22.
+    Updated every two months at source. A curated record for UK screening (Tobler request, 23 Nov 2026): chosen as the designating
+    or publishing body''s own layer and checked to return features for a bounding box.'
+  licence: There are no public access constraints to this data. Use of this data is subject to the Open Government Licence
+    - https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  landing_page: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::sssi-impact-risk-zones-england
+  bbox:
+  - -7.2233
+  - 49.7671
+  - 2.2425
+  - 55.8282
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - planning-application
+  - uk-sssi-irz
+  - uk-screening-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/SSSI_Impact_Risk_Zones_England/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/SSSI_Impact_Risk_Zones_England/FeatureServer
+    capabilities:
+    - query
+    - download
+    info:
+      code_field: IRZURL
+      irzcode:
+        from: IRZURL query parameter irzcode
+        decode_url: https://raw.githubusercontent.com/pushpingeo/ai-living-world-atlas/main/vocab/sssi_irz_codes.json
+        doc: https://github.com/pushpingeo/ai-living-world-atlas/blob/main/docs/sssi-irz-codes.md
+      data_date: '2026-10-14'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/SSSI_Impact_Risk_Zones_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::sssi-impact-risk-zones-england
