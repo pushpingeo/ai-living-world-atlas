@@ -390,7 +390,7 @@ sources:
     the designating or publishing body''s own layer and checked to return features for a bounding box.'
   licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
     © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
-  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  landing_page: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
   bbox:
   - -7.0804
   - 49.8729
@@ -417,7 +417,7 @@ sources:
       data_date_source: layer editing info
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+    url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
 - kind: record
   id: uk-he-scheduled-monuments
   title: Scheduled Monuments, England (Historic England)
@@ -430,7 +430,7 @@ sources:
     body''s own layer and checked to return features for a bounding box.'
   licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
     © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
-  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  landing_page: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
   bbox:
   - -7.031
   - 49.8695
@@ -456,7 +456,7 @@ sources:
       data_date_source: layer editing info
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+    url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
 - kind: record
   id: uk-he-registered-parks-gardens
   title: Registered Parks and Gardens, England (Historic England)
@@ -469,7 +469,7 @@ sources:
     or publishing body''s own layer and checked to return features for a bounding box.'
   licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
     © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
-  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  landing_page: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
   bbox:
   - -6.9379
   - 49.944
@@ -496,7 +496,7 @@ sources:
       data_date_source: layer editing info
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+    url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
 - kind: record
   id: uk-he-registered-battlefields
   title: Registered Battlefields, England (Historic England)
@@ -509,7 +509,7 @@ sources:
     body''s own layer and checked to return features for a bounding box.'
   licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
     © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
-  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  landing_page: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
   bbox:
   - -5.0335
   - 50.3595
@@ -535,7 +535,7 @@ sources:
       data_date_source: layer editing info
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+    url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
 - kind: record
   id: uk-he-world-heritage-sites
   title: World Heritage Sites, England (Historic England)
@@ -548,7 +548,7 @@ sources:
     as the designating or publishing body''s own layer and checked to return features for a bounding box.'
   licence: Historic England Open Data Hub Terms and Conditions (https://historicengland.org.uk/terms/website-terms-conditions/open-data-hub/).
     © Crown Copyright 2026. Contains Ordnance Survey data © Crown copyright and database right 2026. Released under OGL.
-  landing_page: https://historicengland.org.uk/listing/the-list/open-data-hub/
+  landing_page: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
   bbox:
   - -6.1464
   - 50.0781
@@ -574,7 +574,7 @@ sources:
       data_date_source: layer editing info
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/10/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://historicengland.org.uk/listing/the-list/open-data-hub/
+    url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
 - kind: record
   id: uk-hes-listed-buildings
   title: Listed Buildings, Scotland (Historic Environment Scotland)
@@ -590,7 +590,7 @@ sources:
     Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
     SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
     Survey licence number AC0000807262. Public Sector Viewing Terms .'
-  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  landing_page: https://inspire.hes.scot/arcgis/rest/services/HES
   bbox:
   - -7.3393
   - 54.5508
@@ -614,7 +614,7 @@ sources:
       grade_field: CATEGORY
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://portal.historicenvironment.scot/spatialdownloads
+    url: https://inspire.hes.scot/arcgis/rest/services/HES
 - kind: record
   id: uk-hes-scheduled-monuments
   title: Scheduled Monuments, Scotland (Historic Environment Scotland)
@@ -629,7 +629,7 @@ sources:
     Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
     SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
     Survey licence number AC0000807262. Public Sector Viewing Terms .'
-  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  landing_page: https://inspire.hes.scot/arcgis/rest/services/HES
   bbox:
   - -8.0634
   - 54.5168
@@ -652,7 +652,7 @@ sources:
       link_field: LINK
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/5/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://portal.historicenvironment.scot/spatialdownloads
+    url: https://inspire.hes.scot/arcgis/rest/services/HES
 - kind: record
   id: uk-hes-gardens-designed-landscapes
   title: Inventory of Gardens and Designed Landscapes, Scotland (Historic Environment Scotland)
@@ -667,7 +667,7 @@ sources:
     Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
     SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
     Survey licence number AC0000807262. Public Sector Viewing Terms .'
-  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  landing_page: https://inspire.hes.scot/arcgis/rest/services/HES
   bbox:
   - -6.2751
   - 54.6909
@@ -690,7 +690,7 @@ sources:
       link_field: LINK
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/4/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://portal.historicenvironment.scot/spatialdownloads
+    url: https://inspire.hes.scot/arcgis/rest/services/HES
 - kind: record
   id: uk-hes-battlefields
   title: Inventory of Historic Battlefields, Scotland (Historic Environment Scotland)
@@ -705,7 +705,7 @@ sources:
     Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
     SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
     Survey licence number AC0000807262. Public Sector Viewing Terms .'
-  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  landing_page: https://inspire.hes.scot/arcgis/rest/services/HES
   bbox:
   - -5.1529
   - 54.9437
@@ -728,7 +728,7 @@ sources:
       link_field: LINK
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/3/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://portal.historicenvironment.scot/spatialdownloads
+    url: https://inspire.hes.scot/arcgis/rest/services/HES
 - kind: record
   id: uk-hes-world-heritage-sites
   title: World Heritage Sites, Scotland (Historic Environment Scotland)
@@ -743,7 +743,7 @@ sources:
     Contains Historic Environment Scotland and Ordnance Survey data © Historic Environment Scotland - Scottish Charity No.
     SC045925 © Crown copyright and database right 2026. © Copyright and database right 2026 . All rights reserved. Ordnance
     Survey licence number AC0000807262. Public Sector Viewing Terms .'
-  landing_page: https://portal.historicenvironment.scot/spatialdownloads
+  landing_page: https://inspire.hes.scot/arcgis/rest/services/HES
   bbox:
   - -8.3069
   - 55.4913
@@ -766,7 +766,7 @@ sources:
       link_field: LINK
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://portal.historicenvironment.scot/spatialdownloads
+    url: https://inspire.hes.scot/arcgis/rest/services/HES
 - kind: record
   id: uk-cadw-listed-buildings
   title: Listed Buildings, Wales (Cadw)
@@ -1394,7 +1394,7 @@ sources:
     is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
     2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
     Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
-  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  landing_page: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer
   bbox:
   - -7.5292
   - 54.6649
@@ -1415,7 +1415,7 @@ sources:
       likelihood_field: BAND_DESC
     check_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://www.sepa.org.uk/environment/environmental-data/
+    url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer
 - kind: record
   id: uk-sepa-flood-river-low
   title: River flooding, low likelihood (1 in 1,000 years and 1 in 200 plus climate change), Scotland (SEPA)
@@ -1431,7 +1431,7 @@ sources:
     is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
     2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
     Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
-  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  landing_page: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer
   bbox:
   - -7.5292
   - 54.6649
@@ -1452,7 +1452,7 @@ sources:
       likelihood_field: BAND_DESC
     check_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer/2/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://www.sepa.org.uk/environment/environmental-data/
+    url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer
 - kind: record
   id: uk-sepa-flood-coastal-medium
   title: Coastal flooding, medium likelihood (1 in 200 years), Scotland (SEPA)
@@ -1468,7 +1468,7 @@ sources:
     is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
     2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
     Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
-  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  landing_page: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer
   bbox:
   - -7.7323
   - 54.6288
@@ -1489,7 +1489,7 @@ sources:
       likelihood_field: BAND_DESC
     check_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://www.sepa.org.uk/environment/environmental-data/
+    url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer
 - kind: record
   id: uk-sepa-flood-coastal-low
   title: Coastal flooding, low likelihood (1 in 1,000 years and 1 in 200 plus climate change), Scotland (SEPA)
@@ -1505,7 +1505,7 @@ sources:
     is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
     2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
     Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
-  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  landing_page: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer
   bbox:
   - -7.7323
   - 54.6288
@@ -1526,7 +1526,7 @@ sources:
       likelihood_field: BAND_DESC
     check_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://www.sepa.org.uk/environment/environmental-data/
+    url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer
 - kind: record
   id: uk-sepa-flood-surface-water-medium
   title: Surface water and small watercourses flooding, medium likelihood (1 in 200 years), Scotland (SEPA)
@@ -1542,7 +1542,7 @@ sources:
     is available on our website: https://www.sepa.org.uk/media/5zidnja5/sepa_flood_maps_data_attribution_statements.pdf ©SEPA
     2025; this SEPA product is licensed under the Open Government Licence version 3.0 [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/].
     Copyright and attribution information is available on SEPA’s Data Publication webpage.[https://www.sepa.org.uk/environment/environmental-data/]]'
-  landing_page: https://www.sepa.org.uk/environment/environmental-data/
+  landing_page: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer
   bbox:
   - -7.7323
   - 54.6288
@@ -1563,7 +1563,7 @@ sources:
       likelihood_field: BAND_DESC
     check_url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer/4/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://www.sepa.org.uk/environment/environmental-data/
+    url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer
 - kind: record
   id: uk-nrw-fmfp-rivers
   title: 'Flood Map for Planning: rivers, Wales (Natural Resources Wales)'
