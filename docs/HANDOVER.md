@@ -218,6 +218,9 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
   NPL points, all SEMS), ACRES brownfields, RCRA corrective action boundaries, TRI, ICIS-Air, NPDES (major, all), RCRA TSD.
   Public domain. Completeness is per federal programme; state lists aren't in them.
 - **Next:** the EU's industrial emissions register (EEA), then England's EA downloads if Rob agrees to host them.
+  Scope (24 Nov, evening): project doc `claude/hosting-uk-downloads-scope.md`. Host EPR industrial, EPR waste and
+  pollution incidents (MS Access and CSV in zips; `access-parser` reads them), drop personal fields, refresh monthly.
+  Probe: a `FULL ` line keeps a small download whole; never use it on files with personal data (public branch).
 
 ## Known gaps and next steps (rough priority)
 
