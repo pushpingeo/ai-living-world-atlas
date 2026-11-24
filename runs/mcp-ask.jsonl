@@ -1,18 +1,7 @@
-# 24 Nov evening: EA hosted files, storm overflows, England Peat Map
-{"label": "EA installations Ellesmere Port", "tool": "fetch_features", "args": {"id": "e96296234c630eca", "lon": -2.88, "lat": 53.28, "radius_km": 3, "limit": 3, "include_geometry": false}}
-{"label": "EA waste sites Dover", "tool": "fetch_features", "args": {"id": "81ad43b046380b3d", "lon": -1.29, "lat": 51.20, "radius_km": 3, "limit": 3, "include_geometry": false}}
-{"label": "EA incidents Oldham", "tool": "fetch_features", "args": {"id": "d4e38afd394a1bf4", "lon": -2.0, "lat": 53.53, "radius_km": 3, "limit": 3, "include_geometry": false}}
-{"label": "EA installations record", "tool": "get_dataset", "args": {"id": "e96296234c630eca"}}
-{"label": "Thames live", "tool": "fetch_features", "args": {"id": "4ae36af79367ade1", "lon": -1.0, "lat": 51.45, "radius_km": 8, "limit": 3, "include_geometry": false}}
-{"label": "SWW live", "tool": "fetch_features", "args": {"id": "59dc11dc3b75f3ee", "lon": -4.14, "lat": 50.37, "radius_km": 5, "limit": 3, "include_geometry": false}}
-{"label": "Annual returns 2025 Oxford", "tool": "fetch_features", "args": {"id": "4123e7d7391d4cbd", "lon": -1.25, "lat": 51.75, "radius_km": 5, "limit": 3, "include_geometry": false}}
-{"label": "Scottish Water Edinburgh", "tool": "fetch_features", "args": {"id": "e80013b64da35b0d", "lon": -3.19, "lat": 55.95, "radius_km": 5, "limit": 3, "include_geometry": false}}
-{"label": "Peat extent Dartmoor", "tool": "fetch_features", "args": {"id": "9c44057149e34495", "lon": -3.95, "lat": 50.6, "radius_km": 1, "limit": 3, "include_geometry": false}}
-{"label": "Peat depth Dartmoor", "tool": "fetch_features", "args": {"id": "202e4d558bbf7718", "lon": -3.95, "lat": 50.6, "radius_km": 3, "limit": 3, "include_geometry": false}}
-{"label": "Peat restoration Peak District", "tool": "fetch_features", "args": {"id": "3a350525aee8b4cc", "lon": -1.85, "lat": 53.4, "radius_km": 10, "limit": 3, "include_geometry": false}}
-{"label": "Anglian live", "tool": "fetch_features", "args": {"id": "590f8c58e1f154eb", "lon": 1.3, "lat": 52.63, "radius_km": 5, "limit": 2, "include_geometry": false}}
-{"label": "Wessex live", "tool": "fetch_features", "args": {"id": "44d4446b579eae51", "lon": -2.59, "lat": 51.45, "radius_km": 5, "limit": 2, "include_geometry": false}}
-{"label": "Severn Trent live", "tool": "fetch_features", "args": {"id": "ba844827cc3cfa78", "lon": -1.9, "lat": 52.48, "radius_km": 5, "limit": 2, "include_geometry": false}}
-{"label": "Yorkshire live", "tool": "fetch_features", "args": {"id": "834984471176a754", "lon": -1.55, "lat": 53.8, "radius_km": 5, "limit": 2, "include_geometry": false}}
-{"label": "UU live", "tool": "fetch_features", "args": {"id": "69c7a58eed102b4f", "lon": -2.24, "lat": 53.48, "radius_km": 5, "limit": 2, "include_geometry": false}}
-{"label": "Northumbrian live", "tool": "fetch_features", "args": {"id": "8b2942f395985f0c", "lon": -1.61, "lat": 54.97, "radius_km": 5, "limit": 2, "include_geometry": false}}
+# 24 Nov night: best-in-class fill wave (NASA, USGS, Met Office, EFFIS)
+{"label": "Met Office text, UK", "tool": "find_datasets", "args": {"text": "Met Office rainfall", "bbox": [-8, 49.8, 2, 60.9], "limit": 5}}
+{"label": "FIRMS text, world", "tool": "find_datasets", "args": {"text": "FIRMS active fires", "limit": 5}}
+{"label": "National Map hydro, Colorado", "tool": "find_datasets", "args": {"text": "National Hydrography", "lon": -105, "lat": 39.7, "radius_km": 20, "limit": 5}}
+{"label": "Natural hazard, San Francisco", "tool": "find_datasets", "args": {"concept": "natural-hazard", "lon": -122.4, "lat": 37.77, "radius_km": 10, "limit": 10}}
+{"label": "EFFIS text, Portugal", "tool": "find_datasets", "args": {"text": "EFFIS burnt areas", "lon": -8.2, "lat": 39.6, "radius_km": 50, "limit": 5}}
+{"label": "NASA Black Marble", "tool": "find_datasets", "args": {"text": "Black Marble night", "limit": 5}}
