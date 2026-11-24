@@ -641,3 +641,26 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
   A real 3-minute sweep of *.arcgis.com services stopped at 2 min 58 s with 2,421 of 5,000 due checked.
 - **What to expect:** a slow night now checks fewer than 45k services instead of overrunning; the rest roll to the next
   night. Watch `services_checked` against `services_due` in history.csv.
+
+## 2026-11-24 (night): best-in-class list and the fill wave
+
+- **Why.** The publisher registry's weekly list was sorted by number of services, so it surfaced volume (Brisbane City
+  Council) rather than the standout sources Rob had in mind. Split agreed with Rob: "trusted" (authoritative for its own
+  data) should become mostly automatic; "best in class" is a short hand list (`vocab/best_in_class.yaml`, not used by
+  the pipeline yet) whose own services should lead broad searches. Issues #2-#13 stay open until the automatic rule
+  replaces them (closing them would decline everything unticked; open, they also hold back the weekly lists).
+- **Fill wave** (`spike-fill`, `vocab/seeds/fill.yaml`, published last so no existing id changes): NASA GIBS (WMS,
+  WMTS), NASA Earthdata GIS and Disasters (by ArcGIS Online owner), FIRMS 24-hour CSVs, USGS National Map (5 servers)
+  and earthquakes (server and feed), EFFIS, GloFAS, Copernicus Marine, Smithsonian GVP, WRI, the rest of SoilGrids,
+  Met Office (its own ArcGIS Online organisation), World Bank boundaries. 5,100 datasets, 463 passing, tagged for $0.03.
+- **Bug found on the way:** ArcGIS Online searches now bracket the query. `owner:A OR owner:B type:X access:public`
+  let the OR escape the type filter: the first run harvested 119,745 items and was cancelled before publishing.
+- **What didn't come through, and why:**
+  - Most failures have no description: GIBS (2,884 layers, 1 with a description), Smithsonian GVP (399 feature types),
+    SoilGrids depth layers, WRI. The quality bar is doing its job. GIBS can be fixed properly: each layer's
+    `layer-metadata/v1.0/<id>.json` names its NASA CMR collections, and CMR holds NASA's own summary for each.
+  - Copernicus Marine: 84 MB capabilities, over the client's 30 MB cap.
+  - GloFAS answered 502 during the crawl (fine before and after); USGS mineral resources (mrdata) disallows crawlers.
+  - Not found or refused before the crawl: Bureau of Meteorology (403 to GitHub), KNMI (data platform needs a key),
+    TNO/NLOG (no public service found), SEDAC's geoserver (timed out), NEO, World Bank map services (none).
+    volcano.si.edu's website answers bots with a verification page; its GeoServer is open.
