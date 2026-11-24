@@ -553,7 +553,7 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
   Clackmannanshire's.
 - **Completeness, not "coverage":** Tobler asked for a coverage field. Dataset details already have `coverage` (extent
   size), so the new field is `completeness` (complete | partial) with `completeness_note`, plus `nation`, in every
-  curated UK record's endpoint info (86 records; the 69 from 22-23 Nov too, ids unchanged).
+  curated UK record's endpoint info (85 records; the 69 from 22-23 Nov too, ids unchanged).
 - **Licences are the main finding.** Only 4 of 17 are open (coal high risk, both SPZ, NRW mining waste). EA landfill is
   under the EA Conditional Licence (commercial use allowed; one-year term; personal data in licence-holder fields). NRW
   says it doesn't grant re-use of its full landfill data. Radon: UKHSA's current item names no licence, its 2015 copy says
