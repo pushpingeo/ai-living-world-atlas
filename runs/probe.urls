@@ -1,44 +1,12 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 43 (24 Nov): best-in-class fill wave: NASA, USGS, Copernicus, JRC, BoM, KNMI, TNO/NLOG, GVP, ISRIC, WRI, ECMWF
-https://maps.disasters.nasa.gov/ags04/rest/services?f=json
-https://maps.disasters.nasa.gov/arcgis/rest/services?f=json
-https://gis.earthdata.nasa.gov/image/rest/services?f=json
-https://gis.earthdata.nasa.gov/server/rest/services?f=json
-https://gis.earthdata.nasa.gov/maphost/rest/services?f=json
-https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetCapabilities
-https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml
-https://neo.gsfc.nasa.gov/wms/wms?SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.3.0
-RANGE https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv
-RANGE https://firms.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/csv/MODIS_C6_1_Global_24h.csv
-https://sedac.ciesin.columbia.edu/geoserver/wms?SERVICE=WMS&REQUEST=GetCapabilities
-https://index.nationalmap.gov/arcgis/rest/services?f=json
-https://basemap.nationalmap.gov/arcgis/rest/services?f=json
-https://hydro.nationalmap.gov/arcgis/rest/services?f=json
-https://carto.nationalmap.gov/arcgis/rest/services?f=json
-https://elevation.nationalmap.gov/arcgis/rest/services?f=json
-https://earthquake.usgs.gov/arcgis/rest/services?f=json
-RANGE https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson
-https://mrdata.usgs.gov/services/mrds?SERVICE=WMS&REQUEST=GetCapabilities
-https://gis1.usgs.gov/arcgis/rest/services?f=json
-https://www.sciencebase.gov/arcgis/rest/services?f=json
-https://landslides.usgs.gov/arcgis/rest/services?f=json
-https://wmts.marine.copernicus.eu/teroWmts?SERVICE=WMTS&REQUEST=GetCapabilities
-https://maps.effis.emergency.copernicus.eu/effis?SERVICE=WMS&REQUEST=GetCapabilities
+# round 44 (24 Nov): official descriptions for GIBS and Smithsonian GVP layers; GloFAS again
+https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/MODIS_Terra_CorrectedReflectance_TrueColor.json
+https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/VIIRS_Black_Marble.json
+https://worldview.earthdata.nasa.gov/config/metadata/layers/MODIS_Terra_CorrectedReflectance_TrueColor.md
+https://worldview.earthdata.nasa.gov/config/wv.json
+https://volcano.si.edu/gvp_votw.cfm
+https://volcano.si.edu/database/webservices.cfm
+https://webservices.volcano.si.edu/geoserver/GVP-VOTW/wfs?SERVICE=WFS&REQUEST=DescribeFeatureType&TYPENAME=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes
 https://ows.globalfloods.eu/glofas-ows/ows.py?SERVICE=WMS&REQUEST=GetCapabilities
-https://ies-ows.jrc.ec.europa.eu/gwis?SERVICE=WMS&REQUEST=GetCapabilities
-https://edo.jrc.ec.europa.eu/gdo/php/wms?SERVICE=WMS&REQUEST=GetCapabilities
-https://jeodpp.jrc.ec.europa.eu/jeodpp/services/ows/wms/landcover/gsw?SERVICE=WMS&REQUEST=GetCapabilities
-https://hosting.wsapi.cloud.bom.gov.au/arcgis/rest/services?f=json
-https://geofabric.bom.gov.au/arcgis/rest/services?f=json
-https://anonymous.api.dataplatform.knmi.nl/wms/adaguc-server?DATASET=Actuele10mindataKNMIstations&SERVICE=WMS&REQUEST=GetCapabilities
-https://www.gdngeoservices.nl/arcgis/rest/services?f=json
-https://www.nlog.nl/arcgis/rest/services?f=json
-https://webservices.volcano.si.edu/geoserver/GVP-VOTW/wfs?SERVICE=WFS&REQUEST=GetCapabilities
-https://webservices.volcano.si.edu/geoserver/GVP-VOTW/wms?SERVICE=WMS&REQUEST=GetCapabilities
-https://maps.isric.org/mapserv?map=/map/soc.map&SERVICE=WMS&REQUEST=GetCapabilities
-https://datacatalogapi.worldbank.org/ddhxext/DatasetList?
-https://gis.wri.org/server/rest/services?f=json
-https://api.gbif.org/v2/map/occurrence/density/0/0/0@1x.png?style=classic.poly
-https://geoserver.ecmwf.int/wms?SERVICE=WMS&REQUEST=GetCapabilities
