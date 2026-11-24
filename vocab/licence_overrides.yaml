@@ -1012,3 +1012,91 @@ rules:
       the site's owner or operator caused it. Refreshed monthly; re-read the licence by Nov 2027.
     source: data.gov.uk record (special conditions, probe round 38) and gov.uk's Environment Agency Conditional Licence page,
       read 24 Nov 2026
+  # Storm overflows and the England Peat Map (vocab/seeds/uk-water-peat.yaml), 24 Nov 2026: read from each ArcGIS Online item.
+  - host: services3.arcgis.com
+    layers: '^uk-anglian-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Anglian Water's ArcGIS Online item.
+    open: true
+    attribution: Anglian Water
+    source: ArcGIS Online item 333c5c0600f94757b134b276ac4ad8b0, licence and credits fields, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^uk-wessex-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Wessex Water's ArcGIS Online item.
+    open: true
+    attribution: Wessex Water
+    source: ArcGIS Online item 632885799ff946cd86200f07b7f175fb, licence and credits fields, read 24 Nov 2026
+  - host: services1.arcgis.com
+    layers: '^uk-severn-trent-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Severn Trent Water's ArcGIS Online item.
+    open: true
+    attribution: Severn Trent Water
+    source: ArcGIS Online item 9c5edb37e19044738373137ac76feea2, licence and credits fields, read 24 Nov 2026
+  - host: services-eu1.arcgis.com
+    layers: '^uk-yorkshire-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Yorkshire Water's ArcGIS Online item.
+    open: true
+    attribution: Yorkshire Water
+    source: ArcGIS Online item 7f575862a2254a4aaba62573e1012731, licence and credits fields, read 24 Nov 2026
+  - host: services-eu1.arcgis.com
+    layers: '^uk-south-west-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on South West Water's ArcGIS Online item.
+    open: true
+    attribution: South West Water
+    source: ArcGIS Online item cabfce76b72a4a278a33d737c0708d42, licence and credits fields, read 24 Nov 2026
+  - host: services5.arcgis.com
+    layers: '^uk-united-utilities-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on United Utilities's ArcGIS Online item.
+    open: true
+    attribution: United Utilities
+    source: ArcGIS Online item 8225548a267f4a408c36a91b6e0f5a1c, licence and credits fields, read 24 Nov 2026
+  - host: services-eu1.arcgis.com
+    layers: '^uk-northumbrian-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Northumbrian Water's ArcGIS Online item.
+    open: true
+    attribution: Northumbrian Water
+    source: ArcGIS Online item 2d91e4a41b884c9a9dd58dec4ee49b75, licence and credits fields, read 24 Nov 2026
+  - host: services2.arcgis.com
+    layers: '^uk-thames-water-storm-overflows-live:'
+    licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Thames Water's ArcGIS Online item.
+    open: true
+    attribution: Thames Water
+    source: ArcGIS Online item 216f455c4435450693cf1d0d0ecf6023, licence and credits fields, read 24 Nov 2026
+  - host: services3.arcgis.com
+    layers: '^uk-ea-storm-overflow-annual-returns-2025:'
+    licence: 'Open Government Licence v3.0: "Available under the Open Government Licence. Attribution statement: Produced by
+      The Rivers Trust. © Environment Agency copyright and/or database right 2025. All rights reserved. © Dŵr Cymru/Welsh Water.
+      © Hafren Dyfrydwy."'
+    open: true
+    attribution: Produced by The Rivers Trust. © Environment Agency copyright and/or database right 2025. All rights reserved.
+      © Dŵr Cymru/Welsh Water. © Hafren Dyfrydwy.
+    source: ArcGIS Online item c0a57d7a953f48c681f8868ace281bbd (The Rivers Trust), licence and credits fields, read 24 Nov
+      2026
+  - host: services3.arcgis.com
+    layers: '^uk-scottish-water-storm-overflows-live:'
+    licence: 'Not open: "© Copyright 2025 Scottish Water. All rights reserved." (the item''s credits); no licence stated.'
+    open: false
+    attribution: © Copyright 2025 Scottish Water. All rights reserved.
+    source: ArcGIS Online item 79ae4b6138ee4f28b27f9dabfa339161 (The Rivers Trust), credits field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^uk-ne-peaty-soil-extent:'
+    licence: 'Open Government Licence v3.0: "There are no public access constraints to this data. Use of this data is subject
+      to the Open Government Licence" (Natural England''s ArcGIS Online item).'
+    open: true
+    attribution: © Natural England 2025. Contains OS data © Crown copyright and database rights 2025. OS AC0000851168.
+    source: ArcGIS Online item bdfa9ac8cb4f4f10b29f2617470b68b1 (Opendata_NE), licence and credits fields, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^uk-ne-peat-depth-observations:'
+    licence: 'Open Government Licence v3.0: "There are no public access constraints to this data. Use of this data is subject
+      to the Open Government Licence" (Natural England''s ArcGIS Online item).'
+    open: true
+    attribution: © Natural England 2025. Contains OS data © Crown copyright and database rights 2025. OS AC0000851168.
+    terms: 'The surveyor field names individual surveyors: leave it out.'
+    source: ArcGIS Online item 1fee9e141f3b4fed9aa0990b97fa1065 (Opendata_NE), licence and credits fields, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^uk-ne-peatland-restoration-register:'
+    licence: 'Open Government Licence v3.0: "There are no public access constraints to this data. Use of this data is subject
+      to the Open Government Licence" (Natural England''s ArcGIS Online item).'
+    open: true
+    attribution: © Natural England 2026. Contains peat restoration data from a variety of national sources © Environment Agency
+      copyright and/or database rights 2025. All rights reserved. © Rural Payments Agency.
+    source: ArcGIS Online item f471cf7868d44acc8a730ef6dee0c156 (Opendata_NE), licence and credits fields, read 24 Nov 2026

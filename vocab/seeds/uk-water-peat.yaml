@@ -1,0 +1,629 @@
+# UK screening: storm overflows (live status per English water company, the 2025 annual returns for England and
+# Wales, Scottish Water) and the England Peat Map (peaty soil extent, depth observations, restoration register).
+# Rob, 24 Nov 2026: curate these as normal records (claude/hosting-uk-downloads-scope.md in the project: they're live
+# services, so no hosting). Same shape as the other UK packs: nation, completeness, completeness_note on every endpoint.
+# Written by a one-off script from live metadata. Not open: Scottish Water's (all rights reserved, third-party copy).
+# Not found: Southern Water's and Welsh Water's live layers (both are in the annual returns).
+defaults:
+  publisher_type: public-body
+  country: GB
+sources:
+- kind: record
+  id: uk-anglian-water-storm-overflows-live
+  title: 'Storm overflows, live status: Anglian Water'
+  publisher: Anglian Water
+  publisher_type: business
+  country: GB
+  abstract: 'Anglian Water''s storm overflows (combined sewer overflows) with their status, updated in near real time from
+    the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow Hub.
+    Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and LatestEventEnd
+    give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not a history: for
+    spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date field LatestEventEnd,
+    water field ReceivingWaterCourse. 1,439 features. Completeness: partial (only Anglian Water''s overflows; each English
+    water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty answer here says nothing
+    about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked
+    to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Anglian Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=333c5c0600f94757b134b276ac4ad8b0
+  bbox:
+  - -1.2363
+  - 51.4525
+  - 1.7685
+  - 53.7069
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services3.arcgis.com/VCOY1atHWVcDlvlJ/arcgis/rest/services/stream_service_outfall_locations_view/FeatureServer/0
+    service_url: https://services3.arcgis.com/VCOY1atHWVcDlvlJ/arcgis/rest/services/stream_service_outfall_locations_view/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: &id001
+      - 1 (overflowing now)
+      - 0 (not overflowing)
+      - -1 (monitor offline)
+      nation: England
+      completeness: partial
+      completeness_note: only Anglian Water's overflows; each English water company publishes its own layer (Southern Water's
+        isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services3.arcgis.com/VCOY1atHWVcDlvlJ/arcgis/rest/services/stream_service_outfall_locations_view/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=333c5c0600f94757b134b276ac4ad8b0
+- kind: record
+  id: uk-wessex-water-storm-overflows-live
+  title: 'Storm overflows, live status: Wessex Water'
+  publisher: Wessex Water
+  publisher_type: business
+  country: GB
+  abstract: 'Wessex Water''s storm overflows (combined sewer overflows) with their status, updated in near real time from
+    the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow Hub.
+    Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and LatestEventEnd
+    give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not a history: for
+    spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date field LatestEventEnd,
+    water field ReceivingWaterCourse. 1,427 features. Completeness: partial (only Wessex Water''s overflows; each English
+    water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty answer here says nothing
+    about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked
+    to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Wessex Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=632885799ff946cd86200f07b7f175fb
+  bbox:
+  - -3.6015
+  - 50.5134
+  - -1.6523
+  - 51.6903
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/3SZ6e0uCvPROr4mS/arcgis/rest/services/Wessex_Water_Storm_Overflow_Activity/FeatureServer/0
+    service_url: https://services.arcgis.com/3SZ6e0uCvPROr4mS/arcgis/rest/services/Wessex_Water_Storm_Overflow_Activity/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only Wessex Water's overflows; each English water company publishes its own layer (Southern Water's
+        isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/3SZ6e0uCvPROr4mS/arcgis/rest/services/Wessex_Water_Storm_Overflow_Activity/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=632885799ff946cd86200f07b7f175fb
+- kind: record
+  id: uk-severn-trent-water-storm-overflows-live
+  title: 'Storm overflows, live status: Severn Trent Water'
+  publisher: Severn Trent Water
+  publisher_type: business
+  country: GB
+  abstract: 'Severn Trent Water''s storm overflows (combined sewer overflows) with their status, updated in near real time
+    from the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow
+    Hub. Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and
+    LatestEventEnd give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not
+    a history: for spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date
+    field LatestEventEnd, water field ReceivingWaterCourse. 2,417 features. Completeness: partial (only Severn Trent Water''s
+    overflows; each English water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty
+    answer here says nothing about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the
+    publisher''s own layer, checked to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Severn Trent Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=9c5edb37e19044738373137ac76feea2
+  bbox:
+  - -3.0827
+  - 51.6833
+  - -0.6
+  - 53.6882
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services1.arcgis.com/NO7lTIlnxRMMG9Gw/arcgis/rest/services/Severn_Trent_Water_Storm_Overflow_Activity/FeatureServer/0
+    service_url: https://services1.arcgis.com/NO7lTIlnxRMMG9Gw/arcgis/rest/services/Severn_Trent_Water_Storm_Overflow_Activity/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only Severn Trent Water's overflows; each English water company publishes its own layer (Southern
+        Water's isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services1.arcgis.com/NO7lTIlnxRMMG9Gw/arcgis/rest/services/Severn_Trent_Water_Storm_Overflow_Activity/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=9c5edb37e19044738373137ac76feea2
+- kind: record
+  id: uk-yorkshire-water-storm-overflows-live
+  title: 'Storm overflows, live status: Yorkshire Water'
+  publisher: Yorkshire Water
+  publisher_type: business
+  country: GB
+  abstract: 'Yorkshire Water''s storm overflows (combined sewer overflows) with their status, updated in near real time from
+    the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow Hub.
+    Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and LatestEventEnd
+    give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not a history: for
+    spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date field LatestEventEnd,
+    water field ReceivingWaterCourse. 2,177 features. Completeness: partial (only Yorkshire Water''s overflows; each English
+    water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty answer here says nothing
+    about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked
+    to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Yorkshire Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=7f575862a2254a4aaba62573e1012731
+  bbox:
+  - -2.195
+  - 53.1553
+  - 0.1187
+  - 54.5624
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire_Water_Storm_Overflow_Activity/FeatureServer/0
+    service_url: https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire_Water_Storm_Overflow_Activity/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only Yorkshire Water's overflows; each English water company publishes its own layer (Southern Water's
+        isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/1WqkK5cDKUbF0CkH/arcgis/rest/services/Yorkshire_Water_Storm_Overflow_Activity/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=7f575862a2254a4aaba62573e1012731
+- kind: record
+  id: uk-south-west-water-storm-overflows-live
+  title: 'Storm overflows, live status: South West Water'
+  publisher: South West Water
+  publisher_type: business
+  country: GB
+  abstract: 'South West Water''s storm overflows (combined sewer overflows) with their status, updated in near real time from
+    the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow Hub.
+    Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and LatestEventEnd
+    give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not a history: for
+    spill counts over a year use the annual returns record. Fields: code field Id, status field status, date field latestEventEnd,
+    water field receivingWaterCourse. 1,342 features. Completeness: partial (only South West Water''s overflows; each English
+    water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty answer here says nothing
+    about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked
+    to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on South West Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=cabfce76b72a4a278a33d737c0708d42
+  bbox:
+  - -6.342
+  - 49.9156
+  - -2.7719
+  - 51.2369
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/OMdMOtfhATJPcHe3/arcgis/rest/services/NEH_outlets_PROD/FeatureServer/0
+    service_url: https://services-eu1.arcgis.com/OMdMOtfhATJPcHe3/arcgis/rest/services/NEH_outlets_PROD/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: status
+      date_field: latestEventEnd
+      water_field: receivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only South West Water's overflows; each English water company publishes its own layer (Southern Water's
+        isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/OMdMOtfhATJPcHe3/arcgis/rest/services/NEH_outlets_PROD/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=cabfce76b72a4a278a33d737c0708d42
+- kind: record
+  id: uk-united-utilities-storm-overflows-live
+  title: 'Storm overflows, live status: United Utilities'
+  publisher: United Utilities
+  publisher_type: business
+  country: GB
+  abstract: 'United Utilities''s storm overflows (combined sewer overflows) with their status, updated in near real time from
+    the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow Hub.
+    Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and LatestEventEnd
+    give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not a history: for
+    spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date field LatestEventEnd,
+    water field ReceivingWaterCourse. 2,255 features. Completeness: partial (only United Utilities''s overflows; each English
+    water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty answer here says nothing
+    about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked
+    to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on United Utilities's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=8225548a267f4a408c36a91b6e0f5a1c
+  bbox:
+  - -3.6046
+  - 52.9879
+  - -1.9118
+  - 55.1432
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services5.arcgis.com/5eoLvR0f8HKb7HWP/arcgis/rest/services/United_Utilities_Storm_Overflow_Activity/FeatureServer/0
+    service_url: https://services5.arcgis.com/5eoLvR0f8HKb7HWP/arcgis/rest/services/United_Utilities_Storm_Overflow_Activity/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only United Utilities's overflows; each English water company publishes its own layer (Southern Water's
+        isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services5.arcgis.com/5eoLvR0f8HKb7HWP/arcgis/rest/services/United_Utilities_Storm_Overflow_Activity/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=8225548a267f4a408c36a91b6e0f5a1c
+- kind: record
+  id: uk-northumbrian-water-storm-overflows-live
+  title: 'Storm overflows, live status: Northumbrian Water'
+  publisher: Northumbrian Water
+  publisher_type: business
+  country: GB
+  abstract: 'Northumbrian Water''s storm overflows (combined sewer overflows) with their status, updated in near real time
+    from the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow
+    Hub. Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and
+    LatestEventEnd give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not
+    a history: for spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date
+    field LatestEventEnd, water field ReceivingWaterCourse. 1,578 features. Completeness: partial (only Northumbrian Water''s
+    overflows; each English water company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty
+    answer here says nothing about another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the
+    publisher''s own layer, checked to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Northumbrian Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=2d91e4a41b884c9a9dd58dec4ee49b75
+  bbox:
+  - -2.5951
+  - 54.4193
+  - -0.8832
+  - 55.7852
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services-eu1.arcgis.com/MSNNjkZ51iVh8yBj/arcgis/rest/services/Northumbrian_Water_Storm_Overflow_Activity_2_view/FeatureServer/0
+    service_url: https://services-eu1.arcgis.com/MSNNjkZ51iVh8yBj/arcgis/rest/services/Northumbrian_Water_Storm_Overflow_Activity_2_view/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only Northumbrian Water's overflows; each English water company publishes its own layer (Southern
+        Water's isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services-eu1.arcgis.com/MSNNjkZ51iVh8yBj/arcgis/rest/services/Northumbrian_Water_Storm_Overflow_Activity_2_view/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=2d91e4a41b884c9a9dd58dec4ee49b75
+- kind: record
+  id: uk-thames-water-storm-overflows-live
+  title: 'Storm overflows, live status: Thames Water'
+  publisher: Thames Water
+  publisher_type: business
+  country: GB
+  abstract: 'Thames Water''s storm overflows (combined sewer overflows) with their status, updated in near real time from
+    the monitors on each outlet, in the format all English water companies publish through the National Storm Overflow Hub.
+    Status is 1 when the overflow is discharging now, 0 when not, -1 when the monitor is offline; LatestEventStart and LatestEventEnd
+    give the latest discharge; ReceivingWaterCourse is the river or sea it discharges to. Live status, not a history: for
+    spill counts over a year use the annual returns record. Fields: code field Id, status field Status, date field LatestEventEnd,
+    water field ReceivingWaterCourse. 573 features. Completeness: partial (only Thames Water''s overflows; each English water
+    company publishes its own layer (Southern Water''s isn''t on ArcGIS Online), so an empty answer here says nothing about
+    another company''s area). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked
+    to return features for a bounding box.'
+  licence: Creative Commons Attribution 4.0 (CC BY 4.0), stated on Thames Water's ArcGIS Online item.
+  landing_page: https://www.arcgis.com/home/item.html?id=216f455c4435450693cf1d0d0ecf6023
+  bbox:
+  - -1.9651
+  - 51.0761
+  - 0.3067
+  - 52.1688
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services2.arcgis.com/g6o32ZDQ33GpCIu3/arcgis/rest/services/Thames_Water_Storm_Overflow_Activity_(Production)_view/FeatureServer/0
+    service_url: https://services2.arcgis.com/g6o32ZDQ33GpCIu3/arcgis/rest/services/Thames_Water_Storm_Overflow_Activity_(Production)_view/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: Id
+      status_field: Status
+      date_field: LatestEventEnd
+      water_field: ReceivingWaterCourse
+      class_values: *id001
+      nation: England
+      completeness: partial
+      completeness_note: only Thames Water's overflows; each English water company publishes its own layer (Southern Water's
+        isn't on ArcGIS Online), so an empty answer here says nothing about another company's area
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services2.arcgis.com/g6o32ZDQ33GpCIu3/arcgis/rest/services/Thames_Water_Storm_Overflow_Activity_(Production)_view/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=216f455c4435450693cf1d0d0ecf6023
+- kind: record
+  id: uk-ea-storm-overflow-annual-returns-2025
+  title: Storm overflow spills in 2025, England and Wales (EA annual returns, mapped by The Rivers Trust)
+  publisher: The Rivers Trust
+  publisher_type: civil-society
+  country: GB
+  abstract: 'Every storm overflow in England and Wales with an event duration monitor, from the water companies'' 2025 annual
+    returns to the Environment Agency and Natural Resources Wales: countedSpills (spills in the year, counted the EA''s way),
+    totalDurationAllSpillsHrs, edmOperationPercent (how much of the year the monitor worked), the receiving water (recievingWaterName,
+    spelt so), whether it affects a bathing or shellfish water, and any improvement or investigation activity. The Rivers
+    Trust mapped the outlets and flags locations it corrected (riversTrustErrorFlag). All eleven companies, including Southern
+    Water and Dŵr Cymru Welsh Water. Fields: name field siteNameEA, code field permitReferenceEA, class field waterCompanyName,
+    count field countedSpills. 16,501 features. Completeness: complete (every monitored storm overflow in England and Wales
+    in the 2025 returns; one year, so a site built or monitored since isn''t in it). The EA''s own annual return files are
+    downloads on data.gov.uk (OGL); this is the mapped copy. Earlier years (2020-2024) are separate layers from the same publisher.
+    A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a
+    bounding box.'
+  licence: 'Open Government Licence v3.0: "Available under the Open Government Licence. Attribution statement: Produced by
+    The Rivers Trust. © Environment Agency copyright and/or database right 2025. All rights reserved. © Dŵr Cymru/Welsh Water.
+    © Hafren Dyfrydwy."'
+  landing_page: https://www.arcgis.com/home/item.html?id=c0a57d7a953f48c681f8868ace281bbd
+  bbox:
+  - -6.9551
+  - 49.9148
+  - 2.0713
+  - 55.7185
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services3.arcgis.com/Bb8lfThdhugyc4G3/arcgis/rest/services/Event_Duration_Monitoring_Storm_Overflows_2025/FeatureServer/0
+    service_url: https://services3.arcgis.com/Bb8lfThdhugyc4G3/arcgis/rest/services/Event_Duration_Monitoring_Storm_Overflows_2025/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: siteNameEA
+      code_field: permitReferenceEA
+      class_field: waterCompanyName
+      count_field: countedSpills
+      nation: England, Wales
+      completeness: complete
+      completeness_note: every monitored storm overflow in England and Wales in the 2025 returns; one year, so a site built
+        or monitored since isn't in it
+      data_date: '2026-04-14'
+      data_date_source: layer editing info
+    check_url: https://services3.arcgis.com/Bb8lfThdhugyc4G3/arcgis/rest/services/Event_Duration_Monitoring_Storm_Overflows_2025/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=c0a57d7a953f48c681f8868ace281bbd
+- kind: record
+  id: uk-scottish-water-storm-overflows-live
+  title: 'Storm overflows, live status: Scottish Water (republished by The Rivers Trust)'
+  publisher: The Rivers Trust
+  publisher_type: civil-society
+  country: GB
+  abstract: 'Scottish Water''s monitored storm overflows with their latest discharge (START_DATETIME, END_DATETIME, DURATION_MIN),
+    the one before it, TOTAL_DURATION_PAST_48_HRS, STATUS_DESCRIPTION, OVERFLOW_TYPE, RECEIVING_WATER and INVESTMENT_PRIORITY.
+    Republished on ArcGIS Online by The Rivers Trust from Scottish Water''s feed. Fields: name field ASSET_NAME, code field
+    ASSET_ID, status field STATUS_DESCRIPTION, date field END_DATETIME. 2,091 features. Completeness: complete (Scottish Water''s
+    monitored overflows; not every overflow in Scotland has a monitor). A third-party copy: check Scottish Water''s own Overflow
+    Map for the latest. A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return
+    features for a bounding box.'
+  licence: 'Not open: "© Copyright 2025 Scottish Water. All rights reserved." (the item''s credits); no licence stated.'
+  landing_page: https://www.arcgis.com/home/item.html?id=79ae4b6138ee4f28b27f9dabfa339161
+  bbox:
+  - -7.9419
+  - 54.7057
+  - -0.8648
+  - 60.758
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - water-utility
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services3.arcgis.com/Bb8lfThdhugyc4G3/arcgis/rest/services/Scottish_Water_Storm_Overflow_Activity/FeatureServer/0
+    service_url: https://services3.arcgis.com/Bb8lfThdhugyc4G3/arcgis/rest/services/Scottish_Water_Storm_Overflow_Activity/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: ASSET_NAME
+      code_field: ASSET_ID
+      status_field: STATUS_DESCRIPTION
+      date_field: END_DATETIME
+      nation: Scotland
+      completeness: complete
+      completeness_note: Scottish Water's monitored overflows; not every overflow in Scotland has a monitor
+      data_date: '2026-11-24'
+      data_date_source: layer editing info
+    check_url: https://services3.arcgis.com/Bb8lfThdhugyc4G3/arcgis/rest/services/Scottish_Water_Storm_Overflow_Activity/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=79ae4b6138ee4f28b27f9dabfa339161
+- kind: record
+  id: uk-ne-peaty-soil-extent
+  title: Peaty soil extent, England (Natural England, England Peat Map)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Where England''s soils are peaty (deep peat and shallow peaty soils), as modelled for the England Peat Map from
+    soil surveys, depth observations and earth observation data. Presence only: every polygon is peaty soil (DN 1); land outside
+    the layer isn''t mapped as peaty. A modelled map at around 10 m, for screening, not a site survey. 249,743 features. Completeness:
+    complete (all of England; modelled, so a site survey can still find peat outside it). 249,743 polygons: query small areas.
+    A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a
+    bounding box.'
+  licence: 'Open Government Licence v3.0: "There are no public access constraints to this data. Use of this data is subject
+    to the Open Government Licence" (Natural England''s ArcGIS Online item).'
+  landing_page: https://www.arcgis.com/home/item.html?id=bdfa9ac8cb4f4f10b29f2617470b68b1
+  bbox:
+  - -6.9707
+  - 49.8872
+  - 2.0394
+  - 55.7027
+  geometry_type: polygon
+  concepts_hint:
+  - soil
+  - wetland
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/peaty_soil_extent_v1/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/peaty_soil_extent_v1/FeatureServer
+    capabilities:
+    - query
+    info:
+      nation: England
+      completeness: complete
+      completeness_note: all of England; modelled, so a site survey can still find peat outside it
+      data_date: '2025-02-28'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/peaty_soil_extent_v1/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=bdfa9ac8cb4f4f10b29f2617470b68b1
+- kind: record
+  id: uk-ne-peat-depth-observations
+  title: Peat presence and depth observations, England (Natural England, England Peat Map)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Points where peat presence or depth was recorded on the ground, collated from many surveys for the England Peat
+    Map: peatPresence (true or false), surfacePeatDepth (cm), probeReachedBottom, eventDate, institution and sourceDatasetName.
+    Useful next to the modelled extent: a measured depth near a site beats a model. Fields: code field observationID, date
+    field eventDate, class field peatPresence. 95,465 features. Completeness: partial (only where someone surveyed; absence
+    of a point means no observation, not no peat). A curated record for UK screening (Tobler, 24 Nov 2026): the publisher''s
+    own layer, checked to return features for a bounding box.'
+  licence: 'Open Government Licence v3.0: "There are no public access constraints to this data. Use of this data is subject
+    to the Open Government Licence" (Natural England''s ArcGIS Online item).'
+  landing_page: https://www.arcgis.com/home/item.html?id=1fee9e141f3b4fed9aa0990b97fa1065
+  bbox:
+  - -6.1958
+  - 50.0691
+  - 2.0235
+  - 55.6648
+  geometry_type: point
+  concepts_hint:
+  - soil
+  - wetland
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/England_Peat_Map_Collated_Peaty_Soil_Presence_and_Depth_Observations/FeatureServer/1
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/England_Peat_Map_Collated_Peaty_Soil_Presence_and_Depth_Observations/FeatureServer
+    capabilities:
+    - query
+    info:
+      code_field: observationID
+      date_field: eventDate
+      class_field: peatPresence
+      nation: England
+      completeness: partial
+      completeness_note: only where someone surveyed; absence of a point means no observation, not no peat
+      data_date: '2025-05-06'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/England_Peat_Map_Collated_Peaty_Soil_Presence_and_Depth_Observations/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=1fee9e141f3b4fed9aa0990b97fa1065
+- kind: record
+  id: uk-ne-peatland-restoration-register
+  title: Peatland restoration register, England (Natural England, England Peat Map)
+  publisher: Natural England
+  publisher_type: public-body
+  country: GB
+  abstract: 'Peatland restoration projects in England from national schemes: Hab_Type (e.g. Blanket bog priority habitat,
+    Lowland raised bog priority habitat), Act_Mech (the funding scheme: Countryside Stewardship, Nature for Climate, flood
+    and water programmes), Act_Desc, Act_Date, Lead_Org and the restoration stage. A restored or restoring peatland is a strong
+    constraint on development. Fields: class field Hab_Type, date field Act_Date, code field RestoID. 1,171 features. Completeness:
+    partial (projects funded through the national schemes it collates; privately funded restoration may be missing). A curated
+    record for UK screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
+  licence: 'Open Government Licence v3.0: "There are no public access constraints to this data. Use of this data is subject
+    to the Open Government Licence" (Natural England''s ArcGIS Online item).'
+  landing_page: https://www.arcgis.com/home/item.html?id=f471cf7868d44acc8a730ef6dee0c156
+  bbox:
+  - -6.0976
+  - 50.0298
+  - 1.8935
+  - 55.5865
+  geometry_type: polygon
+  concepts_hint:
+  - soil
+  - wetland
+  - habitat
+  - uk-water-peat-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/England_Peat_Map_Peatland_Restoration_Register/FeatureServer/0
+    service_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/England_Peat_Map_Peatland_Restoration_Register/FeatureServer
+    capabilities:
+    - query
+    info:
+      class_field: Hab_Type
+      date_field: Act_Date
+      code_field: RestoID
+      nation: England
+      completeness: partial
+      completeness_note: projects funded through the national schemes it collates; privately funded restoration may be missing
+      data_date: '2026-10-01'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/England_Peat_Map_Peatland_Restoration_Register/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=f471cf7868d44acc8a730ef6dee0c156

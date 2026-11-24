@@ -2,8 +2,8 @@ name: files
 # Hosted download datasets whose source is an open download (spec key `source_url`): fetch it, convert it to tiles
 # (atlas/files.py) and commit files/<id>/ and vocab/seeds/files.yaml back to main. Edit runs/files.env (SPECS=...) and
 # push to run it. Monthly (schedule below) it refreshes the specs in runs/files-monthly.env instead: the EA downloads,
-# whose licence lasts a year, and England's NSIP boundaries. When anything changed, it starts the spike-files wave itself
-# (a push from a workflow doesn't start other workflows, a dispatch does), and pages and deploy-mcp follow from that. (Push runs do the same since 24 Nov: no need to bump runs/spike-files.env by hand.)
+# whose licence lasts a year, and England's NSIP boundaries. When anything changed, it publishes them itself: spike-files,
+# then pages, then deploy-mcp, each started and waited for in the last step (see the note there).
 # A failed download stops the run before anything is written: the old tiles stay, and their data_date shows their age.
 on:
   push:
@@ -12,6 +12,11 @@ on:
   schedule:
     - cron: '17 4 3 * *'   # 04:17 UTC on the 3rd of each month
   workflow_dispatch:
+    inputs:
+      publish:
+        description: publish even if nothing changed (tests the spike -> pages -> deploy-mcp step)
+        type: boolean
+        default: false
 permissions:
   contents: write
   actions: write
@@ -62,8 +67,30 @@ jobs:
           git commit -qm "files: converted $SPECS" || { echo "nothing changed"; exit 0; }
           for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep 5; done
           echo "changed=1" >> "$GITHUB_ENV"
-      - name: Start the spike-files wave
-        if: env.changed == '1'
+      - name: Publish (spike-files, then pages, then deploy-mcp)
+        # Runs started with the workflow token don't fire workflow_run, so the usual spike -> pages -> deploy-mcp chain
+        # doesn't follow on its own: start each one here and wait for it. Record ids are fixed, so a refresh needs no
+        # re-tagging; a new spec does (push runs/tag-files.env by hand, which also publishes).
+        if: env.changed == '1' || inputs.publish
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api repos/${{ github.repository }}/actions/workflows/spike.yml/dispatches -f ref=main -f 'inputs[run_file]=runs/spike-files.env'
+        run: |
+          set -euo pipefail
+          run_and_wait() {  # workflow file, then optional -f inputs
+            local wf=$1; shift
+            local since; since=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            gh api repos/${{ github.repository }}/actions/workflows/$wf/dispatches -f ref=main "$@"
+            local id=""
+            for i in $(seq 1 30); do
+              sleep 10
+              id=$(gh run list -R ${{ github.repository }} --workflow "$wf" --event workflow_dispatch -L 5 --json databaseId,createdAt \
+                   -q "[.[] | select(.createdAt >= \"$since\")][0].databaseId // empty")
+              [ -n "$id" ] && break
+            done
+            [ -z "$id" ] && { echo "::error::$wf didn't start"; exit 1; }
+            gh run watch -R ${{ github.repository }} "$id" --exit-status --interval 30 > /dev/null
+            echo "$wf: run $id done"
+          }
+          run_and_wait spike.yml -f 'inputs[run_file]=runs/spike-files.env'
+          run_and_wait pages.yml
+          run_and_wait deploy-mcp.yml
