@@ -3,6 +3,163 @@ defaults:
   publisher_type: civil-society
 sources:
 - kind: record
+  id: ea-epr-industrial-sites
+  title: Environmental permits for industrial installations, England (Environment Agency)
+  publisher: Environment Agency
+  publisher_type: public-body
+  country: GB
+  abstract: 'Installations in England permitted by the Environment Agency under the Environmental Permitting Regulations (the
+    industrial emissions regime): power stations, refineries, chemical works, cement, metals, food and drink, landfills and
+    large waste treatment, and intensive pig and poultry farms. One point per permit. Status is Effective for permits in force,
+    or Surrendered, Revoked, Expired (Inactive), Closure & Aftercare and similar for ended ones; primary_activity is the main
+    activity (e.g. "Intensive Farming; > 40,000 Poultry", "Recovery Of Waste; Hazardous Waste >10T") and activities lists
+    all of them. Operator names and addresses are not in this copy. 6,333 features; left out: 8 records without a location;
+    1,861 records excluded (administrative duplicates (superseded, consolidated or regulatory-change versions of a permit)
+    and refused applications). Hosted by the atlas as a copy of the publisher''s download; cite as: Environmental Permitting
+    Regulations - Industrial Sites, Environment Agency.'
+  licence: 'Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence):
+    copy, publish, distribute, adapt and use commercially, with attribution. Special conditions on this dataset: the licence
+    lasts one year and ends without notice, and the data includes personal data (individuals and sites operated by individuals),
+    for which whoever passes it on is responsible under data protection law.'
+  landing_page: https://www.data.gov.uk/dataset/b5b5a07f-c646-4d99-a210-e337fcc60470/environmental-permitting-regulations-industrial-sites
+  bbox:
+  - -6.45
+  - 49.8666
+  - 1.7614
+  - 55.7621
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/ea-epr-industrial-sites/index.json
+    format: GeoJSON tiles
+    info:
+      name_field: Installation_Name
+      code_field: Permit_Number
+      status_field: Status
+      class_field: primary_activity
+      date_field: Permit_Effective_From_Date
+      nation: England
+      completeness: complete
+      completeness_note: all of England; every installation permit in the EA's register, in force or ended (surrendered, revoked,
+        expired), not only current ones
+      terms: Operator names and street addresses are left out of this copy because some operators are private individuals;
+        look a permit up on the EA's public register by its number if the operator is needed. Re-read the licence by Nov 2027.
+      data_date: '2026-11-24'
+      data_date_source: the day the atlas downloaded the publisher's file
+  - protocol: landing
+    url: https://www.data.gov.uk/dataset/b5b5a07f-c646-4d99-a210-e337fcc60470/environmental-permitting-regulations-industrial-sites
+- kind: record
+  id: ea-epr-waste-sites
+  title: Environmental permits for waste sites, England (Environment Agency)
+  publisher: Environment Agency
+  publisher_type: public-body
+  country: GB
+  abstract: 'Waste operations in England permitted by the Environment Agency (Environmental Permitting Regulations, and waste
+    management licences before them): landfills, transfer stations, treatment, recycling, metal recycling, composting and
+    others. One point per permit. STAT_SDESC is Issued for permits in force, or Surrendered, Expired, Revoked, Closure and
+    similar for ended ones (an ended landfill permit can still mark a past landfill); licence_type is the EA''s type (e.g.
+    "Non Hazardous LF", "Household, Commercial & Industrial Waste T Stn"); LIC_EFFD, LIC_SURD, LIC_RVKD and LIC_EXPD are the
+    effective, surrender, revocation and expiry dates. Holder names and addresses are not in this copy. 19,092 features; left
+    out: 3 records without a location; 616 records excluded (superseded versions of a permit). Hosted by the atlas as a copy
+    of the publisher''s download; cite as: Environmental Permitting Regulations - Waste Sites, Environment Agency.'
+  licence: 'Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence):
+    copy, publish, distribute, adapt and use commercially, with attribution. Special conditions on this dataset: the licence
+    lasts one year and ends without notice, and the data includes personal data (individuals and sites operated by individuals),
+    for which whoever passes it on is responsible under data protection law.'
+  landing_page: https://www.data.gov.uk/dataset/e2cc8101-d8b7-434d-a26a-9115061bb57c/environmental-permitting-regulations-waste-sites
+  bbox:
+  - -6.45
+  - 49.8666
+  - 1.7609
+  - 55.8054
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - waste
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/ea-epr-waste-sites/index.json
+    format: GeoJSON tiles
+    info:
+      name_field: LIC_SITE
+      code_field: LIC_NMBR
+      status_field: STAT_SDESC
+      class_field: licence_type
+      date_field: LIC_EFFD
+      class_values:
+      - Issued
+      - Surrendered
+      - Expired
+      - Revoked
+      - Closure
+      - Part Suspended
+      - Part revoke
+      - Suspended
+      - Surr Part
+      nation: England
+      completeness: complete
+      completeness_note: all of England; every waste permit and old waste management licence in the EA's register, current
+        or ended
+      terms: Licence holder names, contact details and street addresses are left out of this copy because some holders are
+        private individuals; look a permit up on the EA's public register by its number if the holder is needed. Re-read the
+        licence by Nov 2027.
+      data_date: '2026-11-24'
+      data_date_source: the day the atlas downloaded the publisher's file
+  - protocol: landing
+    url: https://www.data.gov.uk/dataset/e2cc8101-d8b7-434d-a26a-9115061bb57c/environmental-permitting-regulations-waste-sites
+- kind: record
+  id: ea-pollution-incidents
+  title: Serious environmental pollution incidents (Category 1 and 2), England, 2001 to date (Environment Agency)
+  publisher: Environment Agency
+  publisher_type: public-body
+  country: GB
+  abstract: 'Substantiated environmental pollution incidents in England that the Environment Agency rated Category 1 (major)
+    or Category 2 (significant) for their impact on water, land or air, from 2001 to the latest quarter. One point per incident
+    at its confirmed location. EIL_WATER, EIL_LAND and EIL_AIR give the impact category on each (an incident is in the set
+    if any of them is 1 or 2); pollutant_types and pollutants list what was released (e.g. "Sewage Materials", "Crude Sewage",
+    "Chemical Odour"); NOT_DATE is when it was reported. An incident near a site does not mean the site''s owner was responsible.
+    17,507 features. Hosted by the atlas as a copy of the publisher''s download; cite as: Environmental Pollution Incidents
+    (Category 1 and 2), Environment Agency.'
+  licence: 'Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence):
+    copy, publish, distribute, adapt and use commercially, with attribution. Special conditions on this dataset: the licence
+    lasts one year and ends without notice, and the data includes personal data (individuals and sites operated by individuals),
+    for which whoever passes it on is responsible under data protection law.'
+  landing_page: https://www.data.gov.uk/dataset/c8625e18-c329-4032-b4c7-444b33af6780/environmental-pollution-incidents-category-1-and-2
+  bbox:
+  - -6.2923
+  - 49.915
+  - 2.0291
+  - 55.7654
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/ea-pollution-incidents/index.json
+    format: GeoJSON tiles
+    info:
+      code_field: NOT_ID
+      date_field: NOT_DATE
+      class_field: EIL_WATER
+      class_values:
+      - Category 1 (Major)
+      - Category 2 (Significant)
+      - Category 3 (Minor)
+      - Category 4 (No Impact)
+      nation: England
+      completeness: complete
+      completeness_note: all of England from 2001; only substantiated incidents with a Category 1 or 2 impact on water, land
+        or air. Minor incidents aren't in it
+      terms: An incident at or near a site does not mean the site's owner or operator caused it. Re-read the licence by Nov
+        2027.
+      data_date: '2026-11-24'
+      data_date_source: the day the atlas downloaded the publisher's file
+  - protocol: landing
+    url: https://www.data.gov.uk/dataset/c8625e18-c329-4032-b4c7-444b33af6780/environmental-pollution-incidents-category-1-and-2
+- kind: record
   id: gem-bioenergy
   title: Bioenergy power plants (Global Bioenergy Power Tracker)
   publisher: Global Energy Monitor
