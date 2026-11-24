@@ -73,6 +73,8 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| US contamination (`spike-uscontamination`) | 10 | 10 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD |
+| UK pollution (`spike-ukpollution`) | 6 | 6 | Contamination step 2 (24 Nov, Tobler): SEPA authorisations, NRW permits, DAERA incidents and consents, NI historical land use |
 | UK ground (`spike-ukground`) | 16 | 16 | Contamination step 1 (24 Nov, Tobler): landfill, coal mining risk, closed mining waste, source protection zones, radon, council records |
 | UK pack (`spike-ukpack`) | 45 | 45 | Curated records for landscape, heritage, peat, farmland quality, flood zones, SSSI IRZs, per nation (23 Nov, Tobler) |
 | UK protected (`spike-ukprotected`) | 24 | 24 | Curated records for UK statutory sites (22 Nov, Tobler): SAC, SPA, Ramsar, SSSI/ASSI, marine designations, ancient woodland per nation; JNCC offshore in `spike-files` |
@@ -81,7 +83,7 @@ Workspace notes:
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
 - The viewer and the MCP server hold about **264k passing datasets**, all tagged (18 Nov).
-- Tagging spend is **$30.25** in total (24 Nov: $1.79 contamination re-tags; under a cent each for the curated UK waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
+- Tagging spend is **$30.25** in total (24 Nov: $1.79 contamination re-tags; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
@@ -197,7 +199,7 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
   script from live metadata; to refresh, re-read the layers and edit.
 - Every curated UK record carries `nation`, `completeness` (complete | partial) and `completeness_note` in its endpoint
   info. Tobler called it "coverage"; dataset details already use `coverage` for extent size.
-- Most of these licences are not open, each with its reason (decisions.md). Radon waits on UKHSA (Rob).
+- Most of these licences are not open, each with its reason (decisions.md). Radon accepted as OGL by Rob (24 Nov afternoon).
 - New concepts and a full re-tag ($1.79 with the groundwater-protection fix). The tag workflow takes `RETAG_CONCEPTS` and `RETAG_TITLE`. **Clear `BATCH_ID`
   in a run file before reusing it** (it resumes that batch instead of tagging).
 - Radon now open (Rob accepted OGL, 24 Nov); EA landfill's Conditional Licence accepted for screening (still not open).
