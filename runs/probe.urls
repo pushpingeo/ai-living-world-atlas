@@ -36,3 +36,13 @@ https://datamap.gov.wales/api/v2/datasets?search=pollution%20incidents
 https://datamap.gov.wales/api/v2/datasets?search=permitting
 https://www.data.gov.uk/api/action/package_search?q=%22Environmental+Permitting+Regulations%22+%22Natural+Resources+Wales%22&rows=10
 https://www.data.gov.uk/api/action/package_search?q=%22Scottish+Pollutant+Release+Inventory%22&rows=10
+# round 37 (24 Nov): Defra AQMA service, SPRI atom feeds, NRW incidents, DAERA consents
+https://ukair.maps.rcdo.co.uk/ukairserver/rest/services?f=json
+https://ukair.maps.rcdo.co.uk/ukairserver/rest/services/AQMA?f=json
+https://ukair.maps.rcdo.co.uk/ukairserver/rest/services/AQMA/AQMA/MapServer?f=json
+https://ukair.maps.rcdo.co.uk/ukairserver/rest/services/AQMA/AQMA/MapServer/0?f=json
+http://map.sepa.org.uk/atom/SEPA_SPRI_Air_Releases.atom
+https://datamap.gov.wales/documents/2642
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents_Stations_Trade/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents_Stations_Trade/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=3&returnGeometry=false&f=json
+https://www.data.gov.uk/api/action/package_search?q=%22industrial+consents%22+DAERA&rows=5
