@@ -5,6 +5,7 @@ spike-ukpack
 spike-ukground
 spike-ukpollution
 spike-uscontamination
+spike-ukwaterpeat
 spike-emodnet
 spike-gb
 spike-global
