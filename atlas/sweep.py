@@ -29,6 +29,7 @@ import random
 import time
 from collections import Counter, defaultdict
 from datetime import date, timedelta
+from itertools import zip_longest
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -43,6 +44,8 @@ HOST_DOWN_MIN, HOST_DOWN_SHARE = 20, 0.8   # a host is "down" when 80%+ of 20+ s
 # second look at the end of a run: up to 3,000 failed services (40 per host), one at a time per host, 90 s timeout,
 # with the last 20 minutes of the run kept for it
 SECOND_LOOK_MAX, SECOND_LOOK_PER_HOST, SECOND_LOOK_TIMEOUT, SECOND_LOOK_RESERVE = 3000, 40, 90, 20
+FIRST_PASS_SLOTS = 256                     # services in progress at once in the first pass (see run_checks)
+FIRST_PASS_GRACE = 120                     # seconds a service already started may run past the first pass's end before it is cut
 HOST_GIVE_UP = 10                          # stop knocking on a host after this many network failures in a row
 OGC = {"wms": "WMS", "wfs": "WFS", "wmts": "WMTS", "wcs": "WCS"}
 PLAIN = {"download", "cloud", "api", "landing", "geojson", "opendap"}  # geojson: atlas-hosted tiles, checked via index.json; opendap: GET of its .dds
@@ -148,7 +151,22 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
     host_net_fails: Counter = Counter()
     stats = Counter()
 
-    async def one(c, svc, proto, until, second=False):
+    # A service waits for a slot before it looks at the clock. gather() starts every task at once, so a clock check at
+    # the top of a task passes for all of them at minute zero and the deadline never bites (24 Nov ran 307 minutes on a
+    # 240-minute budget). Slots are wider than the client's 64 connections so a few slow hosts can't starve the rest.
+    # A service still waiting on a slow host when time runs out is cancelled at `hard` and records nothing, so it
+    # stays due and is first in line tomorrow.
+    async def one(c, gate, svc, proto, until, hard, second=False):
+        async with gate:
+            if time.monotonic() > until:
+                return
+            try:
+                async with asyncio.timeout(max(1.0, hard - time.monotonic())):
+                    await _one(c, svc, proto, until, second)
+            except TimeoutError:
+                stats["cut_at_deadline"] += 1
+
+    async def _one(c, svc, proto, until, second=False):
             host = urlsplit(svc).netloc
             if time.monotonic() > until:
                 return
@@ -176,7 +194,8 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
         # spread hosts out so a slow host with thousands of services doesn't hold the queue
         # leave the last few minutes for the second look; services not reached are first in line tomorrow
         first_until = deadline - min(SECOND_LOOK_RESERVE * 60, (deadline - time.monotonic()) / 6)
-        await asyncio.gather(*[one(c, s, p, first_until) for s, p in services])
+        gate = asyncio.Semaphore(FIRST_PASS_SLOTS)
+        await asyncio.gather(*[one(c, gate, s, p, first_until, first_until + FIRST_PASS_GRACE) for s, p in services])
         stats.update(c.stats)
     # Second look at failures, one at a time per host and with a long timeout. Some live services are just slow
     # (a 3.7 MB WFS GetCapabilities taking 47 s; dados.gov.pt redirects taking 40-60 s) and would otherwise fail
@@ -192,11 +211,19 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
         async with Client(total=16, per_host=1, timeout=SECOND_LOOK_TIMEOUT) as c:
             before = sum(results[k][0] == "ok" for k in again)
             # stop starting retries 3 minutes early: one in flight can take 2 x 90 s (18 Nov ran 4.5 min over)
-            await asyncio.gather(*[one(c, s, p, deadline - 180, second=True) for s, p in again])
+            # one slot per connection, hosts interleaved, so the 3-minute stop isn't overrun by retries queued on one host
+            by_host = defaultdict(list)
+            for k in again:
+                by_host[urlsplit(k[0]).netloc].append(k)
+            order = [k for grp in zip_longest(*by_host.values()) for k in grp if k is not None]
+            gate = asyncio.Semaphore(16)
+            await asyncio.gather(*[one(c, gate, s, p, deadline - 180, deadline, second=True) for s, p in order])
             stats.update(c.stats)
             stats["second_look"] = len(again)
             stats["second_look_ok"] = sum(results[k][0] == "ok" for k in again) - before
         print(f"second look: {stats['second_look_ok']:,} of {len(again):,} failed services answered", flush=True)
+    if stats["cut_at_deadline"]:
+        print(f"{stats['cut_at_deadline']:,} services cut off at the deadline (left due for tomorrow)", flush=True)
     return results, dict(stats)
 
 
@@ -348,6 +375,8 @@ def report(st: pd.DataFrame, outcomes, results, down, retag_n, retag_note, today
     lines = [
         f"# Liveness sweep {today.isoformat()}", "",
         f"- Services checked today: {h['services_checked']:,} of {n_due:,} due ({h['minutes']} min, {h['requests']:,} requests)",
+        *([f"- Stopped at the time limit: {stats['cut_at_deadline']:,} services were cut off mid-check and stay due"]
+          if stats.get("cut_at_deadline") else []),
         f"- Service results today: " + ", ".join(f"{k} {v:,}" for k, v in svc_today.most_common()),
         f"- Endpoints checked today: {len(outcomes):,}: " + ", ".join(f"{k} {v:,}" for k, v in oc.most_common()),
         f"- Second look (slow retry of failed services): {h['second_look_ok']:,} of {h['second_look']:,} answered",

@@ -625,3 +625,19 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
 - **Probe:** a `FULL ` line keeps a small download as `N.bin`. Round 40 put the EA files (with operator names) on the
   public results branch for about ten minutes until round 41 overwrote it; the probe file now warns against it.
 
+
+## 2026-11-24 (evening): the sweep's time limit now actually stops it
+
+- **The bug.** The 24 Nov night run took 307 minutes on a 240-minute budget, 43 minutes short of the job's 350-minute
+  timeout. The time check sat at the top of each service's task, but `asyncio.gather` starts all 45k tasks at once and
+  they only queue for a connection after that check, so every service passed it at minute zero. The limit never bit;
+  earlier nights just happened to finish in time. The 18 Nov "4.5 minutes over" was the same thing in the second look.
+- **The fix** (`run_checks` in atlas/sweep.py): a service waits for one of 256 slots (16 in the second look) before it
+  looks at the clock, and anything still running 2 minutes after the first pass's end (or at the deadline, in the second
+  look) is cancelled. A cancelled service records nothing, so it stays due and is first in line tomorrow. REPORT.md says
+  how many were cut. The second look interleaves hosts so retries queued on one host can't overrun its 3-minute stop.
+- **Tested** with a fake check that holds the client's connection limits (2,000 services on 20 hosts): old code 100 s on a
+  30 s budget, new 28 s with 216 cut; hung retries cut at the deadline (old code was still running after 10 minutes).
+  A real 3-minute sweep of *.arcgis.com services stopped at 2 min 58 s with 2,421 of 5,000 due checked.
+- **What to expect:** a slow night now checks fewer than 45k services instead of overrunning; the rest roll to the next
+  night. Watch `services_checked` against `services_due` in history.csv.
