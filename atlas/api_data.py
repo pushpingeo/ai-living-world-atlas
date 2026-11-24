@@ -117,7 +117,7 @@ def build_rows(ds, tags, gtypes=None, home=None, fts=None, cells=None) -> dict:
             r.get("detail_level") or "", r.get("detail_m"), r.get("coverage_level") or "",
             any(e.get("cors") for e in json.loads(r["endpoints"] or "[]")),
             bool(flags) and r.get("extent_source", "declared") != "measured",
-            bool(r.get("open_licence")), (r.get("licence") or "")[:200],
+            bool(r.get("open_licence")), _txt(r.get("licence"))[:200],
             wrap(gtypes.get(r["dataset_id"], [])), home(r) if home else "",
         ]
         if fts is not None:
@@ -141,14 +141,19 @@ def fts_rowid(dataset_id: str) -> int:
     return int(hashlib.sha1(str(dataset_id).encode()).hexdigest()[:15], 16)
 
 
+def _txt(v) -> str:
+    """A text field as a string: None, NaN (a float after a merge) and other non-strings become ""."""
+    return v if isinstance(v, str) else ""
+
+
 def fts_row(r: dict, tg) -> list:
     concepts = list(tg["concepts"]) if tg is not None else []
     themes = list(tg["iso_themes"]) if tg is not None else list(r.get("iso_themes_declared") if r.get("iso_themes_declared") is not None else [])
     kw = r.get("keywords")
     kw = list(kw)[:20] if kw is not None and not isinstance(kw, str) else []
     words = [c.replace("-", " ") for c in concepts + themes] + [str(k) for k in kw]
-    body = " ".join(words) + " " + (r.get("abstract") or "")[:FTS_BODY_CHARS]
-    return [fts_rowid(r["dataset_id"]), r["dataset_id"], r["title"] or "", r["publisher"] or "", body.strip()]
+    body = " ".join(words) + " " + _txt(r.get("abstract"))[:FTS_BODY_CHARS]
+    return [fts_rowid(r["dataset_id"]), r["dataset_id"], _txt(r["title"]), _txt(r["publisher"]), body.strip()]
 
 
 # Spatial index (18 Nov). Area searches filtered on xmin/xmax/ymin/ymax, and a range on one column can't narrow the

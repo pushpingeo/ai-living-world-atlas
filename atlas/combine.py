@@ -82,8 +82,12 @@ def apply_liveness(ds, d: Path):
             if len(p):
                 p = p.set_index("dataset_id")
                 idx = ds["dataset_id"].isin(p.index)
-                ds.loc[idx, "title"] = ds.loc[idx, "dataset_id"].map(p["title"]).values
-                ds.loc[idx, "abstract"] = ds.loc[idx, "dataset_id"].map(p["abstract"]).values
+                # an edit replaces text only with real text: a blank (NaN) in the sweep's record means "not read",
+                # not "deleted" (24 Nov: 306 titles and 7 abstracts went blank and broke the viewer and MCP builds)
+                for col in ("title", "abstract"):
+                    new_txt = ds.loc[idx, "dataset_id"].map(p[col])
+                    good = new_txt.apply(lambda v: isinstance(v, str) and v.strip() != "")
+                    ds.loc[idx, col] = new_txt.where(good, ds.loc[idx, col]).values
                 edits = len(p)
     print(f"liveness: {dropped_eps} retired endpoints removed, {gone} datasets dropped, {len(failing)} endpoints failing, "
           f"{edits} datasets with publisher text edits", flush=True)

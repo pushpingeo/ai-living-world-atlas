@@ -23,6 +23,11 @@ LEVELS = [(5, "a"), (20, "b")]   # (cell size in degrees, level name), finest fi
 MAX_CELLS = 4                     # a dataset is copied into at most this many cells of a level
 
 
+
+def _txt(v) -> str:
+    """A text field as a string: None, NaN and other non-strings become \"\"."""
+    return v if isinstance(v, str) else ""
+
 def nn(v):
     """JSON has no NaN: turn pandas missing values into null."""
     if isinstance(v, float) and v != v:
@@ -91,10 +96,11 @@ def main():
             1 if (lst(r.get("extent_flags")) and r.get("extent_source", "declared") != "measured") else 0,
         ])
         shards[r["dataset_id"][:DETAIL_KEY]][r["dataset_id"]] = {
-            "abstract": (r.get("abstract") or "")[:2000], "licence": (r.get("licence") or "")[:400],
+            # text fields can come through as NaN (float) after a merge; treat any non-string as empty
+            "abstract": _txt(r.get("abstract"))[:2000], "licence": _txt(r.get("licence"))[:400],
             **({"attribution": r["attribution"]} if r.get("attribution") else {}),
             **({"terms": r["terms"]} if r.get("terms") else {}),
-            "open_licence": bool(r.get("open_licence")), "landing_page": r.get("landing_page") or "",
+            "open_licence": bool(r.get("open_licence")), "landing_page": _txt(r.get("landing_page")),
             "keywords": lst(r.get("keywords"))[:20], "coverage": r.get("coverage_level") or "",
             "detail_m": r.get("detail_m"), "detail_source": r.get("detail_source") or "",
             "themes_source": th_src, "tag_reason": (tg.get("reason") if tg is not None else "") or "",

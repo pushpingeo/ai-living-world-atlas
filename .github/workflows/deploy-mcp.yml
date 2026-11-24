@@ -41,6 +41,7 @@ jobs:
       - name: Build database load
         if: steps.have.outputs.ok == '1'
         run: |
+          set -o pipefail  # a crash in api_data (piped to tee) must stop the deploy
           pip install -q -r requirements.txt
           bash .github/actions-fetch.sh
           cp /tmp/pub/datasets.parquet /tmp/datasets.parquet
