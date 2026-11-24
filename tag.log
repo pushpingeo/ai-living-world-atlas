@@ -1,0 +1,15 @@
+skipping 70361 already tagged; tagging 470 again
+submitted batch msgbatch_01PfMSM3CMrPRrVK3r1KBBXj with 470 requests
+[0s] 1KBBXj in_progress {'processing': 470, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] 1KBBXj in_progress {'processing': 470, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] 1KBBXj in_progress {'processing': 470, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[181s] 1KBBXj in_progress {'processing': 470, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[241s] 1KBBXj in_progress {'processing': 470, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[301s] 1KBBXj ended {'processing': 0, 'succeeded': 470, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch(es) msgbatch_01PfMSM3CMrPRrVK3r1KBBXj
+
+- Requests: 470; succeeded: 470
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 312550, "output_tokens": 105563, "cache_read_input_tokens": 1662390, "cache_creation_input_tokens": 0}
+- **Cost: $0.05** (estimated from token counts and published batch prices)
+
