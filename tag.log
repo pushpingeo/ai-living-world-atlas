@@ -1,0 +1,31 @@
+skipping 0 already tagged; tagging 0 again
+submitted batch msgbatch_01Ar983wgG1tqtQNMG4g8XJs with 13 requests
+[0s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[181s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[241s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[301s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[361s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[421s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[482s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[542s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[602s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[662s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[723s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[783s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[843s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[904s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[964s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[1024s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[1084s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[1145s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[1205s] 4g8XJs in_progress {'processing': 13, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[1265s] 4g8XJs ended {'processing': 0, 'succeeded': 13, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch(es) msgbatch_01Ar983wgG1tqtQNMG4g8XJs
+
+- Requests: 13; succeeded: 13
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 7965, "output_tokens": 2732, "cache_read_input_tokens": 45981, "cache_creation_input_tokens": 0}
+- **Cost: $0.00** (estimated from token counts and published batch prices)
+
