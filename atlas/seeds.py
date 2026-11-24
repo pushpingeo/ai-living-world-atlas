@@ -106,7 +106,9 @@ def load_curated(path: str) -> dict:
         elif kind in ("geonetwork", "data-europa"):
             t["gn"][s["url"]] = {**ctx, "discovered_via": f"gn:{s['url']}", "portal": s["url"], "api": kind}
         elif kind == "arcgis-online-search":
-            t["agol"][s["query"]] = {**ctx, "publisher_type": "curated-collection", "discovered_via": f"agol:{s['query']}"}
+            # a search of a body's own organisation keeps its stated type; a curated group (Living Atlas) is a collection
+            t["agol"][s["query"]] = {**ctx, "publisher_type": s.get("publisher_type", "curated-collection"),
+                                     "discovered_via": f"agol:{s['query']}"}
         elif kind == "record":
             t["records"].append({**s, "_ctx": ctx})
         else:
