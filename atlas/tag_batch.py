@@ -64,6 +64,9 @@ def main():
     ap.add_argument("--only-passing", action="store_true")
     ap.add_argument("--batch-id", default="")
     ap.add_argument("--skip-tagged", default="", help="tags.parquet of datasets already tagged; those are skipped")
+    ap.add_argument("--retag-concepts", default="",
+                    help="comma list: datasets already tagged with any of these concepts are tagged again (vocabulary splits)")
+    ap.add_argument("--retag-title", default="", help="regex (case-insensitive): matching titles are tagged again")
     ap.add_argument("--max-wait-min", type=float, default=320)
     ap.add_argument("--max-datasets", type=int, default=0,
                     help="refuse to submit more than this many (Rob's rule: ask before a run over ~$20, about 220k datasets)")
@@ -76,10 +79,18 @@ def main():
         # filter while reading: Europe's wave alone is 1.6M datasets and 2.3M layers
         ds = pd.read_parquet(args.datasets, filters=[("q_pass", "==", True)] if args.only_passing else None)
         if args.skip_tagged and Path(args.skip_tagged).exists():
-            done = set(pd.read_parquet(args.skip_tagged, columns=["dataset_id"])["dataset_id"])
+            tagged = pd.read_parquet(args.skip_tagged)
+            done = set(tagged["dataset_id"])
+            redo = set()
+            if args.retag_concepts and "concepts" in tagged:
+                want = {c.strip() for c in args.retag_concepts.split(",") if c.strip()}
+                hit = tagged["concepts"].apply(lambda c: c is not None and bool(want & set(c)))
+                redo |= set(tagged.loc[hit, "dataset_id"])
+            if args.retag_title:
+                redo |= set(ds.loc[ds["title"].fillna("").str.contains(args.retag_title, case=False, regex=True), "dataset_id"])
             before = len(ds)
-            ds = ds[~ds["dataset_id"].isin(done)]
-            print(f"skipping {before - len(ds)} already tagged", flush=True)
+            ds = ds[~ds["dataset_id"].isin(done - redo)]
+            print(f"skipping {before - len(ds)} already tagged; tagging {len(set(ds['dataset_id']) & done)} again", flush=True)
         if args.max_datasets and len(ds) > args.max_datasets:
             msg = (f"# Not submitted\n\n{len(ds):,} datasets to tag is over the cap of {args.max_datasets:,} "
                    f"(about ${len(ds) * 0.09 / 1000:.2f} at batch rates). Raise MAX_DATASETS in the run file to go ahead.\n")

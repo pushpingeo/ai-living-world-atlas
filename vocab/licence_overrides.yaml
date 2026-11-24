@@ -714,3 +714,141 @@ rules:
     attribution: © Natural England copyright. Contains Ordnance Survey data © Crown copyright and database right 2025.
     source: 'ArcGIS Online item dd6ff0bd464e42fea19f289423a1d22a (''SSSI Impact Risk Zones (England)'', owner Opendata_NE):
       licence and credits fields, read 23 Nov 2026'
+
+  # UK contamination screening, step 1 (24 Nov 2026): vocab/seeds/uk-ground.yaml. Verbatim where the publisher states a
+  # licence; `source` says where each was read. Most are not open, each for a stated reason (EA Conditional Licence,
+  # NRW's refusal of full re-use, no licence stated, radon terms unsettled, OS INSPIRE).
+  - host: services-eu1.arcgis.com
+    layers: '^uk-ea-historic-landfill:'
+    licence: 'Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence).
+      Use constraint, verbatim: "1. Notwithstanding the fact that the standard wording of the Environment Agency Conditional
+      Licence indicates that it is perpetual, this Licence has a limited duration of one year at the end of which it will terminate
+      automatically without notice. 2.1. The Information contains some data that we believe is within the definition of “personal
+      data” under the Data Protection Act 1998 [...] This personal data comprises information relating to individuals, or to
+      sites operated by an individual or partnership of individuals. 2.2 [...] you have responsibility to check that you are
+      compliant with the Act in respect of this personal data."'
+    open: false
+    attribution: © Environment Agency copyright and/or database right 2024. All rights reserved. Contains information © Local
+      Authorities
+    terms: 'The Conditional Licence allows commercial use, but it lasts one year (renew by re-reading the terms) and the data
+      holds personal data: licence holder names and addresses (fields lic_hold, licholdadd, lic_name). Show site names and dates;
+      leave the personal fields out.'
+    source: 'ArcGIS Online item 19379dec0a9043838ee89c896b12b48a (Defra open data publisher): licence field, read 24 Nov 2026;
+      the Conditional Licence''s own text on gov.uk (probe round 32)'
+  - host: services-eu1.arcgis.com
+    layers: '^uk-ea-authorised-landfill:'
+    licence: 'Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence).
+      Use constraint, verbatim: "1. Notwithstanding the fact that the standard wording of the Environment Agency Conditional
+      Licence indicates that it is perpetual, this Licence has a limited duration of one year at the end of which it will terminate
+      automatically without notice. 2.1. The Information contains some data that we believe is within the definition of “personal
+      data” under the Data Protection Act 1998 [...] This personal data comprises information relating to individuals, or to
+      sites operated by an individual or partnership of individuals. 2.2 [...] you have responsibility to check that you are
+      compliant with the Act in respect of this personal data."'
+    open: false
+    attribution: © Environment Agency copyright and/or database right 2015. All rights reserved.
+    terms: 'The Conditional Licence allows commercial use, but it lasts one year (renew by re-reading the terms) and the data
+      holds personal data: licence holder names and addresses (fields lic_hold, licholdadd, lic_name). Show site names and dates;
+      leave the personal fields out.'
+    source: 'ArcGIS Online item 79ecf9387ec44ac39da68b716fc8a3ff (Defra open data publisher): licence field, read 24 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-nrw-historic-landfill:'
+    licence: 'Not open for re-use. Data.gov.uk record (NRW): "© CNC/NRW. NRW does NOT grant permission to third parties to re-use
+      or disseminate the full dataset. A redacted version of the data may be re-used under provision and in line with the terms
+      of a NRW licence." NRW''s ArcGIS Online item says "Open data under OGL" for its historic landfill copy; the two disagree,
+      so treat it as not open until NRW confirms.'
+    open: false
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.
+    terms: 'Licence holder names and addresses are personal data: leave them out.'
+    source: data.gov.uk records 'Historic Landfill Sites' and 'Historic Landfill Sites points' (NRW), access constraints, and
+      ArcGIS Online item cfad11b9daed43db8de9843529c4df47, read 24 Nov 2026 (probe round 32)
+  - host: services.arcgis.com
+    layers: '^uk-nrw-authorised-landfill:'
+    licence: 'Not open for re-use. Data.gov.uk record (NRW): "© CNC/NRW. NRW does NOT grant permission to third parties to re-use
+      or disseminate the full dataset. A redacted version of the data may be re-used under provision and in line with the terms
+      of a NRW licence."'
+    open: false
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.
+    source: data.gov.uk record 'Authorised Landfill Sites Points' (NRW), access constraints, read 24 Nov 2026 (probe round 32);
+      the ArcGIS item states no licence
+  - host: services-eu1.arcgis.com
+    layers: '^uk-mra-development-high-risk-area:'
+    licence: UK Open Government Licence (OGL)
+    open: true
+    attribution: Contains Mining Remediation Authority data © Crown copyright
+    source: data.gov.uk record 'Coal Development High Risk Area' (Mining Remediation Authority), licence, read 24 Nov 2026 (probe
+      round 32); attribution line is the authority's usual one, not read from this record
+  - host: services-eu1.arcgis.com
+    layers: '^uk-mra-development-low-risk-area:'
+    licence: Licence not specified (data.gov.uk record 'Coal Development Low Risk Area', Mining Remediation Authority). The
+      high risk area beside it is OGL.
+    open: false
+    source: 'data.gov.uk record ''Coal Development Low Risk Area'': ''License not specified'', read 24 Nov 2026 (probe round
+      33)'
+  - host: environment.data.gov.uk
+    layers: '^uk-ea-closed-mining-waste:'
+    licence: 'Licence not stated: data.gov.uk says "Use of this data is subject to the licence identified" without naming one.'
+    open: false
+    source: data.gov.uk record 'Inventory of Closed Mining Waste Facilities' (Environment Agency), read 24 Nov 2026 (probe round
+      33)
+  - host: services.arcgis.com
+    layers: '^uk-nrw-closed-mining-waste:'
+    licence: 'Open Government Licence: "© CNC/NRW. Data may be re-used under the terms of the Open Government Licence providing
+      it is done so, acknowledging both the source and NRW''s copyright."'
+    open: true
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.
+    source: data.gov.uk record 'Inventory of Closed Mining Waste Facilities' (NRW), access constraints, read 24 Nov 2026 (probe
+      round 33)
+  - host: services-eu1.arcgis.com
+    layers: '^uk-ea-source-protection-zones:'
+    licence: Open Government Licence (OGL)
+    open: true
+    attribution: © Environment Agency copyright and/or database right 2016. All rights reserved.
+    source: 'ArcGIS Online item c4f4d073f78b43a3bfeb3912ed26a6db (Defra open data publisher): licence field, read 24 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-nrw-source-protection-zones:'
+    licence: 'Open Government Licence: "© CNC/NRW. Data may be re-used under the terms of the Open Government Licence providing
+      it is done so, acknowledging both the source and NRW''s copyright."'
+    open: true
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.
+    source: data.gov.uk record 'Source Protection Zones (SPZ) Merged' (NRW), access constraints, read 24 Nov 2026 (probe round
+      33)
+  - host: services1.arcgis.com
+    layers: '^uk-ukhsa-radon-potential:'
+    licence: Not settled. This UKHSA item states no licence; an earlier UKHSA copy of the same map (2015) says Open Government
+      Licence v3; the underlying radon potential data is British Geological Survey's, which data.gov.uk lists under the BGS
+      Digital Data Licence, not open. Treat as not open until UKHSA confirms.
+    open: false
+    attribution: © UK Health Security Agency, © British Geological Survey
+    source: ArcGIS Online items 39549b376eda4b6195d8c08d16351f20 (UKHSA, no licence) and 855186f0d0a9403ab49557d90bd057af (OGL,
+      2015); data.gov.uk BGS radon records (probe round 32), read 24 Nov 2026
+  - host: maps.derby.gov.uk
+    layers: '^uk-derby-potentially-contaminated-sites:'
+    licence: Licence not stated by the publisher.
+    open: false
+    source: crawled metadata and live layer, 24 Nov 2026 (probe round 32)
+  - host: gis.lambeth.gov.uk
+    layers: '^uk-lambeth-contaminated-land-possible:'
+    licence: Licence not stated by the publisher.
+    open: false
+    source: service metadata, 24 Nov 2026 (probe round 32)
+  - host: gis.lambeth.gov.uk
+    layers: '^uk-lambeth-historic-landfill:'
+    licence: Licence not stated by the publisher.
+    open: false
+    source: service metadata, 24 Nov 2026 (probe round 32)
+  - host: maps.york.gov.uk
+    layers: '^uk-york-contaminated-land-register:'
+    licence: Licence not stated by the publisher.
+    open: false
+    source: service metadata, 24 Nov 2026 (probe round 32)
+  - host: utility.arcgis.com
+    layers: '^uk-sheffield-contaminated-land-register:'
+    licence: Ordnance Survey INSPIRE end user licence (https://www.ordnancesurvey.co.uk/documents/licensing/inspire-end-user-licence.pdf),
+      as the council's INSPIRE service states; it restricts commercial use.
+    open: false
+    source: crawled licence of the council's INSPIRE service, Nov 2026
+  - host: clacks.cloud.cadcorp.com
+    layers: '^uk-clacks-potentially-contaminated-land:'
+    licence: Licence not stated by the publisher.
+    open: false
+    source: crawled metadata, Nov 2026

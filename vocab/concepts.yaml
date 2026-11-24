@@ -14,7 +14,9 @@ land-cover: {theme: imageryBaseMapsEarthCover, def: "Land cover or land use clas
 land-use-plan: {theme: planningCadastre, def: "Development plans, zoning, allocations, policy areas, green belt"}
 planning-application: {theme: planningCadastre, def: "Planning applications, permissions, building control"}
 land-ownership: {theme: planningCadastre, def: "Land and property ownership, cadastral parcels, council-owned land, assets"}
-brownfield: {theme: planningCadastre, def: "Brownfield and contaminated land, derelict land registers"}
+brownfield: {theme: planningCadastre, def: "Brownfield land registers, vacant and derelict land, previously developed land for housing (known contamination is contaminated-land)"}
+contaminated-land: {theme: environment, def: "Known or potentially contaminated land: Part 2A registers, potentially contaminated sites, cleanup and remediation sites (Superfund, state cleanup), polluted soil registers (Altlasten, BASOL)"}
+landfill: {theme: environment, def: "Landfill sites, historic and authorised (permitted) landfills, waste tips"}
 heritage-site: {theme: society, def: "Listed buildings, scheduled monuments, conservation areas, historic environment records, World Heritage"}
 admin-boundary: {theme: boundaries, def: "Administrative and electoral boundaries, wards, parishes, local authority areas"}
 statistical-area: {theme: boundaries, def: "Census and statistical geographies (output areas, LSOAs, data zones) and the statistics on them"}
@@ -35,7 +37,9 @@ port-airport: {theme: transportation, def: "Ports, harbours, airports and their 
 shipping: {theme: oceans, def: "Shipping lanes, vessel density, navigation features"}
 river: {theme: inlandWaters, def: "Rivers, streams, canals, lakes, catchments, water body status"}
 flood-risk: {theme: inlandWaters, def: "Flood zones, flood risk, flood defences, historic flooding"}
-water-quality: {theme: environment, def: "Water quality, bathing waters, pollution incidents, discharges"}
+water-quality: {theme: environment, def: "Water quality status and monitoring, bathing waters, water body classification"}
+groundwater-protection: {theme: inlandWaters, def: "Groundwater source protection zones, drinking water protected areas, aquifer designations, wellhead protection"}
+pollution-source: {theme: environment, def: "Pollution sources and events: permitted and industrial installations, pollutant release inventories (PRTR, TRI), discharge consents, pollution incidents"}
 coastline: {theme: oceans, def: "Coastline, coastal change, erosion, shoreline management"}
 bathymetry: {theme: elevation, def: "Seabed depth and seabed morphology"}
 seabed-habitat: {theme: oceans, def: "Seabed sediments and marine habitats"}
@@ -44,7 +48,8 @@ elevation: {theme: elevation, def: "Terrain and surface models, LiDAR, contours,
 imagery: {theme: imageryBaseMapsEarthCover, def: "Aerial photography, satellite imagery, orthophotos"}
 basemap: {theme: imageryBaseMapsEarthCover, def: "General-purpose background or reference maps"}
 climate: {theme: climatologyMeteorologyAtmosphere, def: "Climate observations, projections, temperature, rainfall"}
-air-quality: {theme: environment, def: "Air quality measurements, management areas, emissions"}
+air-quality: {theme: environment, def: "Air quality measurements, monitoring stations, modelled pollutant concentrations"}
+air-quality-area: {theme: environment, def: "Air Quality Management Areas, low emission and clean air zones, smoke control areas"}
 noise: {theme: environment, def: "Noise mapping and noise action areas"}
 natural-hazard: {theme: geoscientificInformation, def: "Landslides, subsidence, earthquakes, radon, other natural hazards"}
 agriculture: {theme: farming, def: "Crops, agricultural land classification, farm schemes, livestock"}
@@ -55,9 +60,10 @@ pipeline: {theme: utilitiesCommunication, def: "Oil, gas, water or CO2 pipelines
 oil-gas: {theme: economy, def: "Oil and gas licences, fields, wells, platforms"}
 offshore-wind-site: {theme: economy, def: "Offshore wind leases, sites and cable routes"}
 mineral-extraction: {theme: economy, def: "Quarries, mines, mineral safeguarding areas"}
+mining-legacy: {theme: geoscientificInformation, def: "Former mining: mine entries, shallow workings, coal mining risk areas, abandoned mine lands, closed mining waste facilities"}
 renewable-potential: {theme: economy, def: "Wind, solar, heat or other renewable resource and opportunity areas"}
 telecoms: {theme: utilitiesCommunication, def: "Broadband, mobile coverage, telecoms infrastructure"}
-waste: {theme: utilitiesCommunication, def: "Waste sites, recycling points, bin collection"}
+waste: {theme: utilitiesCommunication, def: "Waste management facilities and permits, recycling points, bin collection (landfill is its own concept)"}
 water-utility: {theme: utilitiesCommunication, def: "Water supply and sewerage networks"}
 school: {theme: society, def: "Schools, catchments, education facilities"}
 health-facility: {theme: health, def: "Hospitals, GP surgeries, pharmacies, care homes"}

@@ -46,6 +46,9 @@ sources:
       code_field: SAC_CODE
       data_date: '2024-04-16'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Special_Areas_of_Conservation_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::special-areas-of-conservation-england
@@ -84,6 +87,9 @@ sources:
       code_field: SPA_CODE
       data_date: '2025-02-27'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Special_Protection_Areas_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::special-protection-areas-england
@@ -121,6 +127,9 @@ sources:
       code_field: CODE
       data_date: '2024-01-23'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Ramsar_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::ramsar-england
@@ -158,6 +167,9 @@ sources:
       code_field: REF_CODE
       data_date: '2026-10-21'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/SSSI_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::sites-of-special-scientific-interest-england
@@ -197,6 +209,9 @@ sources:
       code_field: MCZ_CODE
       data_date: '2023-07-28'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: English inshore waters (to 12 nm); offshore sites are in jncc-offshore-mpas
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Marine_Conservation_Zones_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::marine-conservation-zones-england
@@ -236,6 +251,9 @@ sources:
       code_field: THEMNAME
       data_date: '2026-09-29'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Ancient_Woodland_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::ancient-woodland-england
@@ -276,6 +294,9 @@ sources:
       code_field: UID
       data_date: '2026-10-21'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Priority_Habitats_Inventory_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::priority-habitats-inventory-england
@@ -313,6 +334,9 @@ sources:
       code_field: PA_CODE
       data_date: '2023-08-29'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Special_Areas_of_Conservation/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::special-areas-of-conservation
@@ -350,6 +374,9 @@ sources:
       code_field: PA_CODE
       data_date: '2023-08-29'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Special_Protection_Areas/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::special-protection-areas
@@ -387,6 +414,9 @@ sources:
       code_field: PA_CODE
       data_date: '2024-01-25'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/RAMSAR_Wetlands_of_International_Importance/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::ramsar-wetlands-of-international-importance
@@ -425,6 +455,9 @@ sources:
       code_field: PA_CODE
       data_date: '2026-11-20'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Sites_of_Special_Scientific_Interest/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::sites-of-special-scientific-interest
@@ -463,6 +496,9 @@ sources:
       code_field: PA_CODE
       data_date: '2023-06-19'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: Scottish inshore waters (to 12 nm); offshore sites are in jncc-offshore-mpas
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Marine_Protected_Areas/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::marine-protected-areas
@@ -500,6 +536,9 @@ sources:
       code_field: ANTIQUITY
       data_date: '2023-02-20'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Ancient_Woodland_Inventory/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::ancient-woodland-inventory
@@ -537,6 +576,9 @@ sources:
       code_field: Site_code
       data_date: '2024-10-25'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Special_Areas_of_Conservation/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_SAC
@@ -573,6 +615,9 @@ sources:
       code_field: SPA_code
       data_date: '2023-05-02'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Special_Protection_Areas/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_SPA
@@ -609,6 +654,9 @@ sources:
       code_field: RAM_code
       data_date: '2021-10-19'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Ramsar/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_RAMSAR
@@ -645,6 +693,9 @@ sources:
       code_field: SSSI_Code
       data_date: '2026-08-12'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Sites_of_Special_Scientific_Interest/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_SSSI
@@ -682,6 +733,9 @@ sources:
       code_field: MNR_Code
       data_date: '2020-05-28'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: Welsh inshore waters
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Marine_Conservation_Zones/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_MNR
@@ -720,6 +774,9 @@ sources:
       code_field: UNIQUE_ID
       data_date: '2026-10-01'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/NRW_ANCIENT_WOODLAND_INVENTORY_2021/FeatureServer/2/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_ANCIENT_WOODLAND_INVENTORY_2021
@@ -755,6 +812,9 @@ sources:
     info:
       name_field: name
       code_field: reference
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SAC/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/special-areas-of-conservation
@@ -785,6 +845,9 @@ sources:
     info:
       name_field: name
       code_field: reference
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/SPA/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/special-protection-areas
@@ -815,6 +878,9 @@ sources:
     info:
       name_field: name
       code_field: reference
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/ASSI/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/areas-of-special-scientific-interest
@@ -845,6 +911,9 @@ sources:
     info:
       name_field: name
       code_field: reference
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Ramsar/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/ramsar-sites
@@ -883,6 +952,9 @@ sources:
       code_field: Site_Code
       data_date: '2021-07-17'
       data_date_source: layer editing info
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: Northern Ireland inshore waters
     check_url: https://services-eu1.arcgis.com/kswen6BYexuc1SUk/arcgis/rest/services/All_MPAs_NI_Marine_Plan_Extent/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata-daerani.hub.arcgis.com/datasets/DAERANI::northern-ireland-marine-protected-areas-mpas

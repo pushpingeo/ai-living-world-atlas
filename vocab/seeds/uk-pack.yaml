@@ -46,6 +46,9 @@ sources:
       code_field: CODE
       data_date: '2024-06-18'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/National_Parks_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::national-parks-england
@@ -84,6 +87,9 @@ sources:
       code_field: CODE
       data_date: '2024-06-18'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Areas_of_Outstanding_Natural_Beauty_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::areas-of-outstanding-natural-beauty-england
@@ -117,7 +123,10 @@ sources:
     service_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer
     capabilities:
     - query
-    info: {}
+    info:
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=Cairngorms%20National%20Park
@@ -151,7 +160,10 @@ sources:
     service_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer
     capabilities:
     - query
-    info: {}
+    info:
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/1/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=Loch%20Lomond%20National%20Park
@@ -188,6 +200,9 @@ sources:
     info:
       name_field: nsaname
       code_field: nsacode
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://maps.gov.scot/server/rest/services/ScotGov/ProtectedSites/MapServer/3/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/search?any=National%20Scenic%20Areas
@@ -225,6 +240,9 @@ sources:
       code_field: ID
       data_date: '2023-07-19'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Wild_Land_Areas_2014/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::wild-land-areas-2014
@@ -262,6 +280,9 @@ sources:
       code_field: ISIS_ID
       data_date: '2024-07-24'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/National_Parks/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_NATIONAL_PARK
@@ -299,6 +320,9 @@ sources:
       code_field: ISIS_ID
       data_date: '2021-10-19'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Area_of_Outstanding_Natural_Beauty/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_AONB
@@ -340,6 +364,9 @@ sources:
       link_field: Local_Plan_Policy_URL
       data_date: '2023-07-31'
       data_date_source: layer editing info
+      nation: Wales
+      coverage: national
+      coverage_note: all Welsh planning authorities that designate Special Landscape Areas, collated by NRW; check the plan
     check_url: https://services.arcgis.com/hQoYDJEEJMaPw8Sy/arcgis/rest/services/Special_Landscape_Areas_Wales/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://datamap.gov.wales/layers/geonode:nrw_special_landscape_area
@@ -374,6 +401,9 @@ sources:
     info:
       name_field: name
       code_field: id_ref
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/AONB/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/areas-of-outstanding-natural-beauty
@@ -415,6 +445,9 @@ sources:
       link_field: hyperlink
       data_date: '2026-11-23'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
@@ -454,6 +487,9 @@ sources:
       link_field: hyperlink
       data_date: '2026-11-23'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
@@ -494,6 +530,9 @@ sources:
       link_field: hyperlink
       data_date: '2026-11-23'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
@@ -533,6 +572,9 @@ sources:
       link_field: hyperlink
       data_date: '2026-11-23'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
@@ -572,6 +614,9 @@ sources:
       link_field: hyperlink
       data_date: '2026-11-23'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/10/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.arcgis.com/home/item.html?id=767f279327a24845bf47dfe5eae9862b
@@ -612,6 +657,9 @@ sources:
       code_field: DES_REF
       link_field: LINK
       grade_field: CATEGORY
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://inspire.hes.scot/arcgis/rest/services/HES
@@ -650,6 +698,9 @@ sources:
       name_field: DES_TITLE
       code_field: DES_REF
       link_field: LINK
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/5/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://inspire.hes.scot/arcgis/rest/services/HES
@@ -688,6 +739,9 @@ sources:
       name_field: DES_TITLE
       code_field: DES_REF
       link_field: LINK
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/4/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://inspire.hes.scot/arcgis/rest/services/HES
@@ -726,6 +780,9 @@ sources:
       name_field: DES_TITLE
       code_field: DES_REF
       link_field: LINK
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/3/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://inspire.hes.scot/arcgis/rest/services/HES
@@ -764,6 +821,9 @@ sources:
       name_field: DES_TITLE
       code_field: DES_REF
       link_field: LINK
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://inspire.hes.scot/arcgis/rest/services/HES/HES_Designations/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://inspire.hes.scot/arcgis/rest/services/HES
@@ -806,6 +866,9 @@ sources:
       code_field: RecordNumber
       grade_field: Grade
       link_field: Report
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:Cadw_ListedBuildings
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-wg:Cadw_ListedBuildings
@@ -843,6 +906,9 @@ sources:
       name_field: Name
       code_field: SAMNumber
       link_field: Report
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:Cadw_SAM
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-wg:Cadw_SAM
@@ -881,6 +947,9 @@ sources:
       code_field: reference_number
       grade_field: grade_gradd
       link_field: report_en
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=geonode:cadw_rhpg_registeredareas
   - protocol: landing
     url: https://datamap.gov.wales/layers/geonode:cadw_rhpg_registeredareas
@@ -920,6 +989,9 @@ sources:
       name_field: Name
       code_field: RecordNumber
       link_field: Report
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:Cadw_HistoricLandscapes
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-wg:Cadw_HistoricLandscapes
@@ -957,6 +1029,9 @@ sources:
       name_field: Name
       code_field: UNESCO_Ref
       link_field: Report
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:vGeoServer_WorldHeritageSites_Public
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-wg:vGeoServer_WorldHeritageSites_Public
@@ -1002,6 +1077,9 @@ sources:
       - B2
       data_date: '2026-11-03'
       data_date_source: layer editing info
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
@@ -1039,6 +1117,9 @@ sources:
       name_field: TOWNLAND
       data_date: '2026-11-04'
       data_date_source: layer editing info
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/10/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
@@ -1078,6 +1159,9 @@ sources:
       status_field: STATUS
       data_date: '2026-11-04'
       data_date_source: layer editing info
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/9/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
@@ -1115,6 +1199,9 @@ sources:
       code_field: MAIN_REF
       data_date: '2026-11-03'
       data_date_source: layer editing info
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://services2.arcgis.com/BdBkthNLO9mzGAMO/arcgis/rest/services/Historic_Environment_Division_GIS_Data/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/historic-environment-division-esri-rest-api
@@ -1149,6 +1236,9 @@ sources:
     info:
       name_field: name_whs
       code_field: site_code
+      nation: Northern Ireland
+      coverage: national
+      coverage_note: all of Northern Ireland; the publisher's national dataset
     check_url: https://gis.daera-ni.gov.uk/server/rest/services/Hosted/World_Heritage_Site/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.opendatani.gov.uk/dataset/world-heritage-site
@@ -1191,6 +1281,9 @@ sources:
       soil_carbon_field: CARBON_250
       data_date: '2023-03-02'
       data_date_source: layer editing info
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://services1.arcgis.com/LM9GyVFsughzHdbO/arcgis/rest/services/Carbon_And_Peatland_2016_map/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://opendata.nature.scot/datasets/snh::carbon-and-peatland-2016-map
@@ -1230,6 +1323,9 @@ sources:
       grade_field: ALC_GRADE
       data_date: '2024-11-26'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Provisional%20Agricultural%20Land%20Classification%20(ALC)%20(England)/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::provisional-agricultural-land-classification-alc-england
@@ -1270,6 +1366,9 @@ sources:
       code_field: JOB_NUMBER
       data_date: '2024-11-26'
       data_date_source: layer editing info
+      nation: England
+      coverage: partial
+      coverage_note: England, surveyed sites only (detailed surveys since 1988); elsewhere use the provisional map
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Agricultural_Land_Classification_Post_1988/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::agricultural-land-classification-alc-grades-post-1988-england
@@ -1304,6 +1403,9 @@ sources:
       output_formats:
       - application/json
       grade_field: predictive
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-wg:wg_predictive_alc2
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-wg:wg_predictive_alc2
@@ -1341,6 +1443,9 @@ sources:
     info:
       class_field: LCCODE
       prime_field: Prime
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: http://druid.hutton.ac.uk/arcgis/rest/services/Hutton_LCA250K_UKSO/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://soils.environment.gov.scot/maps/capability-maps/national-scale-land-capability-for-agriculture/
@@ -1379,6 +1484,9 @@ sources:
       - application/json
       zone_field: flood_zone
       source_field: flood_source
+      nation: England
+      coverage: national
+      coverage_note: all of England; the publisher's national dataset
     check_url: https://environment.data.gov.uk/spatialdata/flood-map-for-planning-flood-zones/wfs?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=dataset-04532375-a198-476e-985e-0579a0a11b47:Flood_Zones_2_3_Rivers_and_Sea
   - protocol: landing
     url: https://environment.data.gov.uk/dataset/04532375-a198-476e-985e-0579a0a11b47
@@ -1416,6 +1524,9 @@ sources:
     - query
     info:
       likelihood_field: BAND_DESC
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Medium_Likelihood/FeatureServer
@@ -1453,6 +1564,9 @@ sources:
     - query
     info:
       likelihood_field: BAND_DESC
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer/2/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://map.sepa.org.uk/server/rest/services/Open/River_Flooding_Low_Likelihood/FeatureServer
@@ -1490,6 +1604,9 @@ sources:
     - query
     info:
       likelihood_field: BAND_DESC
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Medium_Likelihood/FeatureServer
@@ -1527,6 +1644,9 @@ sources:
     - query
     info:
       likelihood_field: BAND_DESC
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer/8/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://map.sepa.org.uk/server/rest/services/Open/Coastal_Flooding_Low_Likelihood/FeatureServer
@@ -1564,6 +1684,9 @@ sources:
     - query
     info:
       likelihood_field: BAND_DESC
+      nation: Scotland
+      coverage: national
+      coverage_note: all of Scotland; the publisher's national dataset
     check_url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer/4/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://map.sepa.org.uk/server/rest/services/Open/Surface_Water_and_Small_Watercourses_Flooding_Medium_Likelihood/FeatureServer
@@ -1599,6 +1722,9 @@ sources:
       zone_field: risk
       data_date: '2026-05-21'
       data_date_source: pub_date field
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-nrw:NRW_FLOODZONE_RIVERS
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_RIVERS
@@ -1634,6 +1760,9 @@ sources:
       zone_field: risk
       data_date: '2026-05-21'
       data_date_source: pub_date field
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-nrw:NRW_FLOODZONE_SEAS
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_SEAS
@@ -1669,6 +1798,9 @@ sources:
       zone_field: risk
       data_date: '2026-05-21'
       data_date_source: pub_date field
+      nation: Wales
+      coverage: national
+      coverage_note: all of Wales; the publisher's national dataset
     check_url: https://datamap.gov.wales/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
   - protocol: landing
     url: https://datamap.gov.wales/layers/inspire-nrw:NRW_FLOODZONE_SURFACE_WATER_AND_SMALL_WATERCOURSES
@@ -1713,6 +1845,9 @@ sources:
         doc: https://github.com/pushpingeo/ai-living-world-atlas/blob/main/docs/sssi-irz-codes.md
       data_date: '2026-10-14'
       data_date_source: layer editing info
+      nation: England
+      coverage: national
+      coverage_note: all of England; zones round every SSSI
     check_url: https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/SSSI_Impact_Risk_Zones_England/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://naturalengland-defra.opendata.arcgis.com/datasets/Defra::sssi-impact-risk-zones-england
