@@ -4,6 +4,7 @@ spike-ukprotected
 spike-ukpack
 spike-ukground
 spike-ukpollution
+spike-uscontamination
 spike-emodnet
 spike-gb
 spike-global
