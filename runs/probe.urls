@@ -1,12 +1,8 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
-# round 39 (24 Nov): sizes and pages for hosting candidates
-RANGE https://environment.data.gov.uk/api/file/download?fileDataSetId=ed666abb-5613-4a0f-8ff4-8722f05756f2&fileName=Environmental%20Permitting%20Regulations%20-%20Industrial%20Sites.zip
-RANGE https://environment.data.gov.uk/api/file/download?fileDataSetId=f3edf4f4-30b4-4e36-afc5-418d27d901f4&fileName=Environmental%20Permitting%20Regulations%20-%20Waste%20Sites.zip
-RANGE https://environment.data.gov.uk/api/file/download?fileDataSetId=a5a11813-517a-478b-be89-4acdf2c1f105&fileName=Environmental%20Pollution%20Incidents%20(Category%201%20and%202).zip
-RANGE https://environment.data.gov.uk/api/file/download?fileDataSetId=a5a11813-517a-478b-be89-4acdf2c1f105&fileName=Environmental_Pollution_Incidents.zip
-https://datamap.gov.wales/documents/2642
-https://datamap.gov.wales/api/v2/documents/2642
-http://map.sepa.org.uk/atom/SEPA_SPRI_Air_Releases.atom
-https://data.spatialhub.scot/dataset/local_landscape_areas-is
-https://catalogue.ceh.ac.uk/documents/58139ce6-63f9-4444-9f77-fc7b5dcc00d8
-RANGE https://data-package.ceh.ac.uk/sd/58139ce6-63f9-4444-9f77-fc7b5dcc00d8.zip
+# Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin.
+# round 40 (24 Nov): inspect the EA downloads (fields, coordinates, personal data)
+FULL https://environment.data.gov.uk/api/file/download?fileDataSetId=ed666abb-5613-4a0f-8ff4-8722f05756f2&fileName=Environmental%20Permitting%20Regulations%20-%20Industrial%20Sites.zip
+FULL https://environment.data.gov.uk/api/file/download?fileDataSetId=f3edf4f4-30b4-4e36-afc5-418d27d901f4&fileName=Environmental%20Permitting%20Regulations%20-%20Waste%20Sites.zip
+FULL https://environment.data.gov.uk/api/file/download?fileDataSetId=a5a11813-517a-478b-be89-4acdf2c1f105&fileName=Environmental%20Pollution%20Incidents%20(Category%201%20and%202).zip
+FULL https://environment.data.gov.uk/api/file/download?fileDataSetId=a5a11813-517a-478b-be89-4acdf2c1f105&fileName=Environmental_Pollution_Incidents.zip
+FULL https://data-package.ceh.ac.uk/data/58139ce6-63f9-4444-9f77-fc7b5dcc00d8
