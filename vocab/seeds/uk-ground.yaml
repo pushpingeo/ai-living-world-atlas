@@ -512,7 +512,7 @@ sources:
     refuses the atlas''s checks). Most councils publish none). A curated record for UK contamination screening (Tobler, 24
     Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
   licence: Licence not stated by the publisher.
-  landing_page: https://www.derby.gov.uk/environmental-health-licensing-trading-standards/environmental-health/environmental-protection/contaminated-land/
+  landing_page: https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&request=GetCapabilities
   bbox:
   - -1.56
   - 52.86
@@ -543,7 +543,7 @@ sources:
         none'
     check_url: https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=ns:Potentially_Contaminated_Sites
   - protocol: landing
-    url: https://www.derby.gov.uk/environmental-health-licensing-trading-standards/environmental-health/environmental-protection/contaminated-land/
+    url: https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&request=GetCapabilities
 - kind: record
   id: uk-lambeth-contaminated-land-possible
   title: Contaminated Land (Possible), Lambeth (London Borough of Lambeth)
@@ -670,7 +670,7 @@ sources:
     box.'
   licence: Ordnance Survey INSPIRE end user licence (https://www.ordnancesurvey.co.uk/documents/licensing/inspire-end-user-licence.pdf),
     as the council's INSPIRE service states; it restricts commercial use.
-  landing_page: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer
+  landing_page: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6?f=pjson
   bbox:
   - -1.8
   - 53.3
@@ -694,7 +694,7 @@ sources:
         Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none'
     check_url: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
-    url: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer
+    url: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6?f=pjson
 - kind: record
   id: uk-clacks-potentially-contaminated-land
   title: Potentially Contaminated Land, Clackmannanshire (Clackmannanshire Council)
