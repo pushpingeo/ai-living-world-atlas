@@ -848,3 +848,58 @@ rules:
     licence: Licence not stated by the publisher.
     open: false
     source: crawled metadata, Nov 2026
+  # UK contamination screening, step 2 (vocab/seeds/uk-pollution.yaml), 24 Nov 2026: read from each publisher's own record.
+  - host: services-eu1.arcgis.com
+    layers: '^uk-sepa-authorisations:'
+    licence: 'Open Government Licence v3.0: "Available free of charge under the terms of the current Open Government Licence
+      (OGL) version 3.0. Acknowledgement of the copyright and source of the data is required by including the following attribution
+      statement: © Scottish Environment Protection Agency."'
+    open: true
+    attribution: © Scottish Environment Protection Agency.
+    terms: 'Authorisation holders include private individuals (most CAR registrations): treat authorisation_holder as personal
+      data and leave it out unless the holder is clearly a company or public body.'
+    source: 'ArcGIS Online item 3b62789bac6e4282824f1cc2a7c05edf (SEPAContent): licence and credits fields, read 24 Nov 2026'
+  - host: services.arcgis.com
+    layers: '^uk-nrw-epr-installations:'
+    licence: 'Not open for re-use. Data.gov.uk record (NRW): "Access to this data may be restricted under relevant legislation.
+      NRW may NOT publish or disseminate the data freely." and "© CNC/NRW. Data may be re-used under provision and in line with
+      the terms of a NRW licence." The ArcGIS Online item states no licence.'
+    open: false
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.
+    terms: 'Operators include individuals (Operator_party_type ''Individual''): their names are personal data, so leave the
+      Operator field out for those.'
+    source: data.gov.uk record 'Environmental Permitting Regulations - Industrial Sites' (NRW), access constraints, read 24
+      Nov 2026 (probe round 36); ArcGIS Online item 751380ec74c1440b9f93fe05a94cc7bc states none
+  - host: services.arcgis.com
+    layers: '^uk-nrw-epr-waste-sites:'
+    licence: 'Not open for re-use. Data.gov.uk record (NRW): "Access to this data may be restricted under relevant legislation.
+      NRW may NOT publish or disseminate the data freely." and "© CNC/NRW. Data may be re-used under provision and in line with
+      the terms of a NRW licence." The ArcGIS Online item states no licence.'
+    open: false
+    attribution: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.
+    terms: 'Operators include individuals (Operator_party_type ''Individual''): their names are personal data, so leave the
+      Operator field out for those.'
+    source: data.gov.uk record 'Environmental Permitting Regulations - Waste Sites' (NRW), access constraints, read 24 Nov 2026
+      (probe round 36); ArcGIS Online item ee779c88755a4245a5600de869e99e0e states none
+  - host: services-eu1.arcgis.com
+    layers: '^uk-daera-pollution-incidents-1km:'
+    licence: 'Open Government Licence v3.0: "This public sector information is licensed under the terms of the Open Government
+      Licence v3.0" (DAERA''s ArcGIS Online item).'
+    open: true
+    attribution: Contains DAERA NIEA data licensed under the Open Government Licence v3.0.
+    source: ArcGIS Online item 1d6a7d9fac7149829532a05941866c88 (DAERA_OpenContent), licence field; OpenDataNI on data.gov.uk
+      lists it as OGL; read 24 Nov 2026
+  - host: gis.daera-ni.gov.uk
+    layers: '^uk-daera-trade-discharge-consents:'
+    licence: Licence not stated by the publisher.
+    open: false
+    source: DAERA's ArcGIS Server (gis.daera-ni.gov.uk, Hosted folder), service metadata, 24 Nov 2026 (probe rounds 36-37);
+      no data.gov.uk or ArcGIS Online record found
+  - host: services-eu1.arcgis.com
+    layers: '^uk-daera-historical-land-use:'
+    licence: 'Open Government Licence v3.0: "Contains Ordnance Survey of Northern Ireland information licensed under the Open
+      Government Licence v3.0" (DAERA''s ArcGIS Online item).'
+    open: true
+    attribution: DAERA NIEA, contains OSNI information licensed under OGL v3.0
+    source: ArcGIS Online item b5f5710384f94bb299239df4a1b032a3 (DAERA_OpenContent), licence and credits fields, read 24 Nov
+      2026
