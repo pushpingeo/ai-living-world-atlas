@@ -65,6 +65,9 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     `status`). For "how often does it spill", use the annual returns' `countedSpills` and `totalDurationAllSpillsHrs`.
     Licences: water companies CC BY 4.0, annual returns and peat OGL. `terms` on the peat observations: leave out
     `surveyor` (names people).
+  - **Speed, live 24 Nov:** 0.3-1.7 s for all of these except **peaty soil extent: ~20 s** (Natural England has
+    dissolved it into very large polygons, up to ~550 km² each). Give it its own time budget, and treat a timeout as
+    "not checked".
 - (24 Nov afternoon, **US done**) **US contamination screening: EPA's national layers.** Additive. Same fields as the UK
   packs: `details.nation` ("United States"), `completeness`, `completeness_note`.
   - **10 new records** (wave `spike-uscontamination`, `vocab/seeds/us-contamination.yaml`), ids fixed; keyword
