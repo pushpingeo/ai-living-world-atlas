@@ -200,10 +200,17 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
 - Most of these licences are not open, each with its reason (decisions.md). Radon waits on UKHSA (Rob).
 - New concepts and a full re-tag ($1.79 with the groundwater-protection fix). The tag workflow takes `RETAG_CONCEPTS` and `RETAG_TITLE`. **Clear `BATCH_ID`
   in a run file before reusing it** (it resumes that batch instead of tagging).
-- **Step 2, next:** current pollution: permitted sites and release inventories (EA Pollution Inventory if a service
-  exists, SEPA's SPRI on its Environmental_Monitoring service, DAERA industrial consents), pollution incidents (DAERA
-  has its own; EA's own not found yet), AQMAs (Defra's national download as a hosted file). Then the US (EPA FRS layers
-  are already in the atlas: curate them) and the EU industrial emissions register.
+- Radon now open (Rob accepted OGL, 24 Nov); EA landfill's Conditional Licence accepted for screening (still not open).
+
+## UK contamination, step 2 (24 Nov, afternoon)
+
+- `vocab/seeds/uk-pollution.yaml`: 6 records (keyword `uk-pollution-pack`): SEPA authorisations, NRW installation and
+  waste permits, DAERA pollution incidents (1 km) and trade discharge consents, NIEA historical land use.
+- **England is the gap:** EA permits, incidents and the Pollution Inventory are ZIP downloads only (Conditional Licence;
+  the Pollution Inventory is internal use only). Hosting them is Rob's call. SEPA's SPRI and Defra's national AQMA layer
+  aren't available as services.
+- **Next:** the US (EPA's national layers are already crawled: curate the FRS layers with fixed ids), then the EU
+  industrial emissions register.
 
 ## Known gaps and next steps (rough priority)
 

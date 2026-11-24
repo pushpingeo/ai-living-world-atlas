@@ -570,3 +570,22 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
   real text; both builds treat non-string text as empty; deploy-mcp stops when its data build crashes (pipefail), and
   never saves or reads an empty hashes file (the failed runs had saved one, which broke the next deploys). Result: one
   full D1 reload.
+
+## 2026-11-24 (afternoon): UK contamination screening, step 2 (current pollution), and two licence calls
+- **Rob's licence calls.** Radon: accepted as OGL, so `open` true (UKHSA's 2015 copy says OGL; the current item says
+  nothing). EA landfill: the Conditional Licence is accepted for screening (site names and dates, personal fields left
+  out). It stays `open: false`, because the licence isn't an open one; the acceptance is written into `terms`, so Tobler
+  can see both facts. The alternative, marking it open, would have hidden the one-year term and the personal data.
+- **6 curated records** (`vocab/seeds/uk-pollution.yaml`, wave `spike-ukpollution`, tags $0.00): SEPA granted
+  authorisations (all of Scotland, OGL), NRW installation and waste permits (not open: NRW licence), DAERA confirmed
+  pollution incidents per 1 km square (OGL), DAERA trade discharge consents (no licence stated), and NIEA's Historical
+  Land Use Database (OGL), which fills step 1's Northern Ireland gap.
+- **England left out on purpose.** The EA publishes its permits (industrial, waste), Category 1-2 pollution incidents and
+  the Pollution Inventory only as ZIP downloads under the Conditional Licence; no service. Adding them means the atlas
+  hosting EA files, which is redistribution: Rob's call. The Pollution Inventory's conditions limit it to internal or
+  personal use, so it can't go in a commercial product at all.
+- **Not available:** SEPA's SPRI (no longer a map layer; a 2018 shapefile remains), Defra's national AQMA map (token
+  required), NRW's incidents (download). AQMAs therefore come from council layers only, tagged `air-quality-area`.
+- **No wider re-tag needed:** step 1's vocabulary already covers step 2 (`pollution-source`). The 2 CANZ datasets whose
+  sweep re-tags are shadowed (above) were left: fixing them means rewriting a results branch by hand, for two records.
+

@@ -33,6 +33,36 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (24 Nov afternoon, **step 2 done for Scotland, Wales and NI; England waits on Rob**) **UK contamination screening:
+  current pollution.** Additive. Same fields as step 1 (`nation`, `completeness`, `completeness_note` in endpoint details).
+  - **6 new records** (wave `spike-ukpollution`, `vocab/seeds/uk-pollution.yaml`), ids fixed; keyword `uk-pollution-pack`.
+
+    | Topic | England | Wales | Scotland | Northern Ireland |
+    |---|---|---|---|---|
+    | Permitted sites | (download only: see gaps) | installations `44f83dc4a6a75e38`, waste sites `2301597b68920a17` (NRW) | all granted authorisations `b32daeca2c368112` (SEPA) | trade discharge consents `2abb7782c0d51447` (DAERA) |
+    | Pollution incidents | (download only) | (download only) | (none found) | confirmed incidents per 1 km square, 2011-2024, `ca262452381e06c6` (DAERA) |
+    | Past land use (step 1 gap) | – | – | – | Historical Land Use Database `ecea8189ad7c042f` (NIEA, ~14,600 sites) |
+
+  - **How to read them.** SEPA: 120k points, mostly small water registrations (septic tanks); for pollution sources use
+    `where: "regulatory_area IN ('Industrial Activities','Waste','Radioactive Substances')"` or filter on
+    `authorisation_level` (PPC Part A, PPC Part B, Waste Management Licence...). NRW installations: `Primary_activity_desc_en`;
+    NRW waste: `Operational_status` (Operational, Closed, Pre-Operational). DAERA incidents: only squares with an incident are
+    in the layer, so a square that isn't there had none confirmed; `totals`, per-year `y2011`...`y2024`, source and severity
+    fields. DAERA consents: `app_status` includes revoked and historic consents (`cons_type` "Trade (Historic)"), so filter
+    on it. NI land use: `Descriptio` is the past use, `DBID` the source list; a list of past uses, not of contamination.
+  - **Licences.** Open (OGL): SEPA, DAERA incidents, NI land use. Not open: NRW's permits (NRW licence only, like its
+    landfill), DAERA consents (no licence stated). **Personal data:** SEPA's `authorisation_holder` and NRW's `Operator`
+    include private individuals; `terms` says leave them out.
+  - **Licence decisions (Rob, 24 Nov):** radon `3f1f871836efd2da` is now `open_licence` true (accepted as OGL). EA landfill
+    (`3a4c49302d01deb3`, `7c9fa9e8c48a162a`) stays `open_licence` false, because the Conditional Licence isn't an open
+    licence, but its `terms` now say it's accepted for screening use on those terms (site names and dates, no personal
+    fields; re-read by Nov 2027).
+  - **Speed, live 24 Nov:** 0.4-1.1 s per fetch_features.
+  - **Gaps (report as "not checked"):** England's permits, pollution incidents and Pollution Inventory exist only as
+    Environment Agency ZIP downloads, not services (the Pollution Inventory's licence allows internal use only, so it
+    won't be added); SEPA's Pollutant Release Inventory is a 2018 shapefile only; NRW's pollution incidents are a download;
+    Scotland has no incident layer; Defra's national AQMA map needs a token, so AQMAs come only from councils that publish
+    their own (`concept: "air-quality-area"`, partial). Wales's permit layers were last edited December 2023.
 - (24 Nov, Tobler reply `claude/contamination-tobler-reply.md`, **step 1 done**) **UK contamination screening:
   old sources and receptors.** Additive. Step 2 (current pollution: permits, release inventories, incidents, AQMAs)
   comes next.
