@@ -540,3 +540,33 @@ by nature sites. Request in the Tobler repo's docs/atlas-requests.md (23 Nov); c
 - **Live check (mcp-ask, 23 Nov 23:48 UTC):** all 45 returned features at a known place, 0.2-1.8 s (IRZ 4.4 s).
 - **Gaps:** Dark Sky Parks (no national layer), Scotland's Local Landscape Areas (Spatial Hub, not checked), Cadw
   battlefields, NI flood maps and farmland classification. Not added because not asked: England Peat Map, Wales unified peat.
+
+## 2026-11-24: UK contamination screening, step 1 (old sources and receptors)
+Thinking in the project doc `claude/contamination-and-pollution-screening.md`; Tobler's reply in
+`claude/contamination-tobler-reply.md`. Rob passed the reply on: all three kinds in two steps, UK then US then the EU
+register, new concepts and a re-tag, radon only if OGL, old maps as a link only, a coverage field per record.
+- **17 curated records** (`vocab/seeds/uk-ground.yaml`, wave `spike-ukground`): EA and NRW historic and authorised
+  landfill, the Mining Remediation Authority's coal high and low risk areas, EA and NRW closed mining waste, EA and NRW
+  source protection zones, UKHSA radon (1 km), and every council contaminated-land layer the atlas found that answers
+  (Derby, Lambeth x2, York, Sheffield, Clackmannanshire; Carlisle refuses GitHub). Scotland and NI have no national
+  landfill or contaminated-land layers; the "Potentially Contaminated Land" thought to be Scottish Government's is
+  Clackmannanshire's.
+- **Completeness, not "coverage":** Tobler asked for a coverage field. Dataset details already have `coverage` (extent
+  size), so the new field is `completeness` (complete | partial) with `completeness_note`, plus `nation`, in every
+  curated UK record's endpoint info (86 records; the 69 from 22-23 Nov too, ids unchanged).
+- **Licences are the main finding.** Only 4 of 17 are open (coal high risk, both SPZ, NRW mining waste). EA landfill is
+  under the EA Conditional Licence (commercial use allowed; one-year term; personal data in licence-holder fields). NRW
+  says it doesn't grant re-use of its full landfill data. Radon: UKHSA's current item names no licence, its 2015 copy says
+  OGL, BGS's underlying data is under BGS's licence: not open until UKHSA confirms (Rob). Others state none.
+- **Concepts:** contaminated-land, landfill, mining-legacy, groundwater-protection, pollution-source, air-quality-area;
+  brownfield, waste, water-quality and air-quality narrowed. New tag-workflow options `RETAG_CONCEPTS` and `RETAG_TITLE`
+  tag chosen datasets again (newest tag wins). Re-tag of every wave: 15,773 datasets, **$1.55** (Europe 0.72, US 0.34,
+  CANZ 0.20, UK 0.11, EMODnet 0.11, global 0.06, Africa 0.01). The CANZ run file still held November's batch id, so its
+  first run re-downloaded that batch (no spend) and re-dated those tags; re-run with the id cleared. Side effect: the
+  sweep's re-tags of 2 CANZ datasets (88ad6f9067b6c11f, 3cf30612522516bd) are now older than the re-dated wave tags.
+- **Builds broken 07:34-08:30 UTC, fixed.** The sweep records a publisher text edit with a blank title or abstract
+  when it didn't read one; combine copied the blank over the original (306 titles, 7 abstracts), and the viewer and MCP
+  builds crashed on it. The live site and server kept last night's data throughout. Fixes: edits replace text only with
+  real text; both builds treat non-string text as empty; deploy-mcp stops when its data build crashes (pipefail), and
+  never saves or reads an empty hashes file (the failed runs had saved one, which broke the next deploys). Result: one
+  full D1 reload.
