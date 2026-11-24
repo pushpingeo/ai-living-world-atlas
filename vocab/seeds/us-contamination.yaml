@@ -1,0 +1,498 @@
+# US contamination screening (24 Nov 2026; Tobler's reply in the project, claude/contamination-tobler-reply.md): EPA's
+# national layers, curated with fixed ids, in the same shape as the UK packs: every endpoint's info carries nation
+# ("United States"), completeness (complete | partial) and completeness_note. Legacy sources (Superfund, brownfields, RCRA
+# corrective action) and current pollution sources (TRI, ICIS-Air, NPDES, RCRA TSD). All public domain (US federal works).
+# Written by a one-off script from live metadata. Not curated: EPA's 900k RCRA hazardous waste handlers (too broad for a
+# screen), Cleanups in My Community (overlaps these), state cleanup lists (search concept contaminated-land: partial).
+defaults:
+  publisher_type: central-gov
+  country: US
+sources:
+- kind: record
+  id: us-epa-npl-site-boundaries
+  title: Superfund National Priorities List site boundaries (EPA)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Boundaries of Superfund sites on EPA''s National Priorities List: the country''s most serious known hazardous
+    waste sites. NPL_STATUS_CODE: F final (1,423), D deleted (468), P proposed (36), N not on the NPL (68), R removed, A,
+    S. SITE_NAME and EPA_ID identify the site; FEATURE_INFO_URL links to its EPA profile. Refreshed weekly. Fields: name field
+    SITE_NAME, code field EPA_ID, class field NPL_STATUS_CODE, date field LAST_CHANGE_DATE. 2,118 features. Completeness:
+    complete (every NPL site in the US and its territories that EPA has drawn a boundary for; EPA''s federal list only, so
+    state-run cleanup sites aren''t in it). Boundaries can change a lot early in a cleanup. A curated record for US contamination
+    screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
+  licence: 'Public domain (US federal work). The item says: "This content item is licensed under the US EPA Data Licensing
+    Agreement for public use." Terms: EPA "does not vouch for the accuracy, completeness, or currency of data"; not for establishing
+    liability.'
+  landing_page: https://www.arcgis.com/home/item.html?id=d6e1591d9a424f1fa6d95a02095a06d7
+  bbox:
+  - -176.8104
+  - -14.3591
+  - 151.7859
+  - 64.8779
+  geometry_type: polygon
+  concepts_hint:
+  - contaminated-land
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FAC_Superfund_Site_Boundaries_EPA_Public/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FAC_Superfund_Site_Boundaries_EPA_Public/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: SITE_NAME
+      code_field: EPA_ID
+      class_field: NPL_STATUS_CODE
+      class_values:
+      - F
+      - D
+      - P
+      - N
+      - R
+      - A
+      - S
+      date_field: LAST_CHANGE_DATE
+      nation: United States
+      completeness: complete
+      completeness_note: every NPL site in the US and its territories that EPA has drawn a boundary for; EPA's federal list
+        only, so state-run cleanup sites aren't in it
+      data_date: '2026-11-21'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FAC_Superfund_Site_Boundaries_EPA_Public/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=d6e1591d9a424f1fa6d95a02095a06d7
+- kind: record
+  id: us-epa-npl-sites
+  title: Superfund National Priorities List sites with status (EPA)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'One point per Superfund National Priorities List site, with its status: Status is NPL Site (1,337), Deleted NPL
+    Site (466) or Proposed NPL Site (37). Site_Score is the Hazard Ranking System score; Proposed_Date, Listing_Date, Construction_Completion_Date
+    and Deletion_Date give its history; Site_Progress_Profile links to EPA''s page. Fields: name field Site_Name, code field
+    Site_EPA_ID, class field Status, date field Listing_Date. 1,840 features. Completeness: complete (every final, proposed
+    and deleted NPL site; EPA''s federal list only, so state-run cleanup sites aren''t in it). A curated record for US contamination
+    screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
+  licence: 'Public domain (US federal work). The item says: "Security Classification: Public - Data asset is or could be made
+    publicly available to all without restriction. Access Constraints: None".'
+  landing_page: https://www.arcgis.com/home/item.html?id=c2b7cdff579c41bbba4898400aa38815
+  bbox:
+  - -176.6525
+  - -14.3601
+  - 151.7837
+  - 64.823
+  geometry_type: point
+  concepts_hint:
+  - contaminated-land
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Superfund_National_Priorities_List_(NPL)_Sites_with_Status_Information/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Superfund_National_Priorities_List_(NPL)_Sites_with_Status_Information/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: Site_Name
+      code_field: Site_EPA_ID
+      class_field: Status
+      class_values:
+      - NPL Site
+      - Deleted NPL Site
+      - Proposed NPL Site
+      date_field: Listing_Date
+      nation: United States
+      completeness: complete
+      completeness_note: every final, proposed and deleted NPL site; EPA's federal list only, so state-run cleanup sites aren't
+        in it
+      data_date: '2026-09-30'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Superfund_National_Priorities_List_(NPL)_Sites_with_Status_Information/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=c2b7cdff579c41bbba4898400aa38815
+- kind: record
+  id: us-epa-superfund-sites
+  title: Superfund sites, NPL and non-NPL (EPA, SEMS)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Every site in EPA''s Superfund Enterprise Management System (SEMS): the NPL sites and the far larger number of
+    sites EPA has assessed or acted on without listing them. INTEREST_TYPE is SUPERFUND NPL (1,766) or SUPERFUND (NON-NPL)
+    (30,253); ACTIVE_STATUS gives the NPL status (e.g. CURRENTLY ON THE FINAL NPL, DELETED FROM THE FINAL NPL, NOT ON THE
+    NPL). Fields: name field PRIMARY_NAME, code field REGISTRY_ID, status field ACTIVE_STATUS, date field UPDATE_DATE, class
+    field INTEREST_TYPE. 32,019 features. Completeness: complete (every site in EPA''s Superfund system; state-run cleanup
+    sites aren''t in it). Points come from EPA''s Facility Registry Service (FRS): one point per facility and programme, located
+    from reported coordinates or the address; ACCURACY_VALUE and COLLECT_MTH_DESC say how good the location is. FAC_URL links
+    to the facility''s FRS page. Updated weekly. A non-NPL record means EPA looked at a site, not that it is contaminated.
+    A curated record for US contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features
+    for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=7dd2b44b4cfc4f75b034a7bbe86c0a60
+  bbox:
+  - -179.0
+  - -14.3601
+  - 177.5192
+  - 71.3559
+  geometry_type: point
+  concepts_hint:
+  - contaminated-land
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_SEMS/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_SEMS/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      class_field: INTEREST_TYPE
+      class_values:
+      - SUPERFUND NPL
+      - SUPERFUND (NON-NPL)
+      nation: United States
+      completeness: complete
+      completeness_note: every site in EPA's Superfund system; state-run cleanup sites aren't in it
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_SEMS/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=7dd2b44b4cfc4f75b034a7bbe86c0a60
+- kind: record
+  id: us-epa-brownfields-acres
+  title: Brownfield properties with EPA grant funding (EPA, ACRES)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Brownfield properties recorded in EPA''s Assessment, Cleanup and Redevelopment Exchange System (ACRES): properties
+    assessed or cleaned up with EPA brownfield grants. 44,762 properties. Fields: name field PRIMARY_NAME, code field REGISTRY_ID,
+    status field ACTIVE_STATUS, date field UPDATE_DATE. 44,762 features. Completeness: partial (only properties funded through
+    EPA brownfield grants; most brownfields in the US aren''t in it). Points come from EPA''s Facility Registry Service (FRS):
+    one point per facility and programme, located from reported coordinates or the address; ACCURACY_VALUE and COLLECT_MTH_DESC
+    say how good the location is. FAC_URL links to the facility''s FRS page. Updated weekly. A curated record for US contamination
+    screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=becec3456e414008ab77b26b640331a8
+  bbox:
+  - -176.629
+  - 13.4379
+  - 145.8027
+  - 71.2747
+  geometry_type: point
+  concepts_hint:
+  - brownfield
+  - contaminated-land
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_ACRES/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_ACRES/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      nation: United States
+      completeness: partial
+      completeness_note: only properties funded through EPA brownfield grants; most brownfields in the US aren't in it
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_ACRES/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=becec3456e414008ab77b26b640331a8
+- kind: record
+  id: us-epa-rcra-corrective-action-boundaries
+  title: RCRA corrective action site boundaries (EPA)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Boundaries of hazardous waste facilities under RCRA corrective action (cleanup of releases at operating or closed
+    facilities), plus a few TSCA PCB sites, from each EPA regional office. HANDLER_ID and HANDLER_NAME identify the facility;
+    EPA_PROGRAM says which programme; ENTIRE_FACILITY_IND says whether the polygon is the whole facility or one area. Fields:
+    name field HANDLER_NAME, code field HANDLER_ID, class field EPA_PROGRAM, date field GIS_FEATURE_LAST_CHANGE_DATE. 4,452
+    features. Completeness: partial (the boundaries EPA regions have mapped so far; many corrective action facilities have
+    none). Layer last edited February 2024. Many boundaries were converted from older systems and are approximate. A curated
+    record for US contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for
+    a bounding box.'
+  licence: 'Public domain (US federal work). The item says: "These data are public and there are no restrictions for its use."
+    EPA "cannot and does not vouch for the accuracy, completeness, or currency of data supplied".'
+  landing_page: https://www.arcgis.com/home/item.html?id=59249de89e3f4ce1833706b0bdc9cc2a
+  bbox:
+  - -152.6615
+  - 26.345
+  - -66.9964
+  - 70.4588
+  geometry_type: polygon
+  concepts_hint:
+  - contaminated-land
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/NationalRCRABoundaries/FeatureServer/1
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/NationalRCRABoundaries/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: HANDLER_NAME
+      code_field: HANDLER_ID
+      class_field: EPA_PROGRAM
+      date_field: GIS_FEATURE_LAST_CHANGE_DATE
+      nation: United States
+      completeness: partial
+      completeness_note: the boundaries EPA regions have mapped so far; many corrective action facilities have none
+      data_date: '2024-02-05'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/NationalRCRABoundaries/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=59249de89e3f4ce1833706b0bdc9cc2a
+- kind: record
+  id: us-epa-tri-facilities
+  title: Toxics Release Inventory reporting facilities (EPA)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Facilities that report to EPA''s Toxics Release Inventory: industrial sites above the TRI thresholds that release
+    or manage listed toxic chemicals. The releases themselves are in EPA''s TRI data, not this layer; follow PGM_REPORT_URL.
+    Fields: name field PRIMARY_NAME, code field REGISTRY_ID, status field ACTIVE_STATUS, date field UPDATE_DATE. 74,228 features.
+    Completeness: complete (every TRI reporting facility in the US and its territories; smaller sites below the thresholds
+    don''t report). Points come from EPA''s Facility Registry Service (FRS): one point per facility and programme, located
+    from reported coordinates or the address; ACCURACY_VALUE and COLLECT_MTH_DESC say how good the location is. FAC_URL links
+    to the facility''s FRS page. Updated weekly. A curated record for US contamination screening (Tobler, 24 Nov 2026): the
+    publisher''s own layer, checked to return features for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=de71cdcedc924aca86af4f838744fce7
+  bbox:
+  - -176.6345
+  - -14.322
+  - 174.1077
+  - 70.2939
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_TRI/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_TRI/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      class_values:
+      - ACTIVE
+      - OPEN
+      - CLOSED
+      - INACTIVE
+      - '***UNCHANGED***'
+      nation: United States
+      completeness: complete
+      completeness_note: every TRI reporting facility in the US and its territories; smaller sites below the thresholds don't
+        report
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_TRI/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=de71cdcedc924aca86af4f838744fce7
+- kind: record
+  id: us-epa-air-facilities
+  title: Air emission sources in EPA's compliance system (EPA, ICIS-Air)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Stationary sources of air pollution tracked in EPA''s ICIS-Air compliance system. INTEREST_TYPE is the source
+    class: AIR MAJOR (17,390), AIR SYNTHETIC MINOR (32,711), AIR MINOR (165,598), AIR EMISSIONS CLASSIFICATION UNKNOWN, AIR
+    - OTHER, AIR - NOT APPLICABLE. For larger sources use where="INTEREST_TYPE=''AIR MAJOR''". Fields: name field PRIMARY_NAME,
+    code field REGISTRY_ID, status field ACTIVE_STATUS, date field UPDATE_DATE, class field INTEREST_TYPE. 236,683 features.
+    Completeness: partial (sources in EPA''s air compliance system; many minor sources are tracked only by states and aren''t
+    in it). Points come from EPA''s Facility Registry Service (FRS): one point per facility and programme, located from reported
+    coordinates or the address; ACCURACY_VALUE and COLLECT_MTH_DESC say how good the location is. FAC_URL links to the facility''s
+    FRS page. Updated weekly. A curated record for US contamination screening (Tobler, 24 Nov 2026): the publisher''s own
+    layer, checked to return features for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=2ec5c12c263c45b9a800f48666bdf4f2
+  bbox:
+  - -176.659
+  - 13.4169
+  - 174.1077
+  - 71.3559
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - air-quality
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_AIR/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_AIR/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      class_field: INTEREST_TYPE
+      class_values:
+      - AIR MAJOR
+      - AIR SYNTHETIC MINOR
+      - AIR MINOR
+      - AIR EMISSIONS CLASSIFICATION UNKNOWN
+      - AIR - OTHER
+      - AIR - NOT APPLICABLE
+      nation: United States
+      completeness: partial
+      completeness_note: sources in EPA's air compliance system; many minor sources are tracked only by states and aren't
+        in it
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_AIR/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=2ec5c12c263c45b9a800f48666bdf4f2
+- kind: record
+  id: us-epa-npdes-major
+  title: Major water discharge permits (EPA, NPDES major)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Facilities with a major permit under the National Pollutant Discharge Elimination System: the larger municipal
+    and industrial discharges to rivers, lakes and the sea. Fields: name field PRIMARY_NAME, code field REGISTRY_ID, status
+    field ACTIVE_STATUS, date field UPDATE_DATE. 7,712 features. Completeness: complete (every NPDES major facility). Points
+    come from EPA''s Facility Registry Service (FRS): one point per facility and programme, located from reported coordinates
+    or the address; ACCURACY_VALUE and COLLECT_MTH_DESC say how good the location is. FAC_URL links to the facility''s FRS
+    page. Updated weekly. A curated record for US contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer,
+    checked to return features for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=dcbc597562f34a7bb55dce6ce8a4c19a
+  bbox:
+  - -170.7226
+  - -14.3401
+  - 145.75
+  - 70.4909
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_NPDES_MAJOR/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_NPDES_MAJOR/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      nation: United States
+      completeness: complete
+      completeness_note: every NPDES major facility
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_NPDES_MAJOR/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=dcbc597562f34a7bb55dce6ce8a4c19a
+- kind: record
+  id: us-epa-npdes-all
+  title: All water discharge permits (EPA, NPDES)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Every facility with a National Pollutant Discharge Elimination System permit, including general permits for stormwater
+    from construction sites and industry: 1.9 million points. Use the major permits record for large discharges; use this
+    one only for small boxes (the server returns at most 1,000 features a request). Fields: name field PRIMARY_NAME, code
+    field REGISTRY_ID, status field ACTIVE_STATUS, date field UPDATE_DATE. 1,888,351 features. Completeness: complete (every
+    NPDES permit in EPA''s system, including general and stormwater permits). Points come from EPA''s Facility Registry Service
+    (FRS): one point per facility and programme, located from reported coordinates or the address; ACCURACY_VALUE and COLLECT_MTH_DESC
+    say how good the location is. FAC_URL links to the facility''s FRS page. Updated weekly. Its extent isn''t served; the
+    bbox is the US and its territories. A curated record for US contamination screening (Tobler, 24 Nov 2026): the publisher''s
+    own layer, checked to return features for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=56eac669cfbf4b529c067a65a3c559b5
+  bbox:
+  - -176.6544
+  - -14.3561
+  - 174.1077
+  - 71.5752
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - water-quality
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_NPDES/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_NPDES/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      nation: United States
+      completeness: complete
+      completeness_note: every NPDES permit in EPA's system, including general and stormwater permits
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_NPDES/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=56eac669cfbf4b529c067a65a3c559b5
+- kind: record
+  id: us-epa-rcra-tsd
+  title: Hazardous waste treatment, storage and disposal facilities (EPA, RCRA TSD)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Facilities permitted under RCRA to treat, store or dispose of hazardous waste: incinerators, landfills, storage
+    sites. The far larger list of hazardous waste handlers (generators) isn''t curated here. Fields: name field PRIMARY_NAME,
+    code field REGISTRY_ID, status field ACTIVE_STATUS, date field UPDATE_DATE. 1,995 features. Completeness: complete (every
+    RCRA treatment, storage and disposal facility). Points come from EPA''s Facility Registry Service (FRS): one point per
+    facility and programme, located from reported coordinates or the address; ACCURACY_VALUE and COLLECT_MTH_DESC say how
+    good the location is. FAC_URL links to the facility''s FRS page. Updated weekly. A curated record for US contamination
+    screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.arcgis.com/home/item.html?id=0b30c57359194330bb89c9b3cf9c0bd5
+  bbox:
+  - -166.7913
+  - 13.4198
+  - 145.8046
+  - 70.6431
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - waste
+  - us-contamination-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_RCRA_TSD/FeatureServer/0
+    service_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_RCRA_TSD/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: PRIMARY_NAME
+      code_field: REGISTRY_ID
+      status_field: ACTIVE_STATUS
+      date_field: UPDATE_DATE
+      nation: United States
+      completeness: complete
+      completeness_note: every RCRA treatment, storage and disposal facility
+      data_date: '2026-11-23'
+      data_date_source: layer editing info
+    check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_RCRA_TSD/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.arcgis.com/home/item.html?id=0b30c57359194330bb89c9b3cf9c0bd5

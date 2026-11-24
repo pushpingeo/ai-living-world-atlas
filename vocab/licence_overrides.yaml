@@ -903,3 +903,76 @@ rules:
     attribution: DAERA NIEA, contains OSNI information licensed under OGL v3.0
     source: ArcGIS Online item b5f5710384f94bb299239df4a1b032a3 (DAERA_OpenContent), licence and credits fields, read 24 Nov
       2026
+  # US contamination screening (vocab/seeds/us-contamination.yaml), 24 Nov 2026: read from each EPA item.
+  - host: services.arcgis.com
+    layers: '^us-epa-npl-site-boundaries:'
+    licence: 'Public domain (US federal work). The item says: "This content item is licensed under the US EPA Data Licensing
+      Agreement for public use." Terms: EPA "does not vouch for the accuracy, completeness, or currency of data"; not for establishing
+      liability.'
+    open: true
+    attribution: U.S. EPA Office of Land and Emergency Management
+    source: ArcGIS Online item d6e1591d9a424f1fa6d95a02095a06d7 (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-npl-sites:'
+    licence: 'Public domain (US federal work). The item says: "Security Classification: Public - Data asset is or could be made
+      publicly available to all without restriction. Access Constraints: None".'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item c2b7cdff579c41bbba4898400aa38815 (EPA), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-superfund-sites:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item 7dd2b44b4cfc4f75b034a7bbe86c0a60 (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-brownfields-acres:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item becec3456e414008ab77b26b640331a8 (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-rcra-corrective-action-boundaries:'
+    licence: 'Public domain (US federal work). The item says: "These data are public and there are no restrictions for its use."
+      EPA "cannot and does not vouch for the accuracy, completeness, or currency of data supplied".'
+    open: true
+    attribution: EPA Office of Land and Emergency Management (OLEM) and contributing EPA regions.
+    terms: 'FACILITY_CONTACT_NAME, CONTACT_EMAIL_ADDRESS and the phone fields name people: leave them out.'
+    source: ArcGIS Online item 59249de89e3f4ce1833706b0bdc9cc2a (CIMC_EPA), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-tri-facilities:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item de71cdcedc924aca86af4f838744fce7 (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-air-facilities:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item 2ec5c12c263c45b9a800f48666bdf4f2 (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-npdes-major:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item dcbc597562f34a7bb55dce6ce8a4c19a (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-npdes-all:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item 56eac669cfbf4b529c067a65a3c559b5 (EPA_GEO), licence field, read 24 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-rcra-tsd:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+      and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: U.S. Environmental Protection Agency
+    source: ArcGIS Online item 0b30c57359194330bb89c9b3cf9c0bd5 (EPA_GEO), licence field, read 24 Nov 2026
