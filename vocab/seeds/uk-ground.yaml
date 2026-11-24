@@ -5,6 +5,7 @@
 # vocab/licence_overrides.yaml. Not open, on purpose (each says why): EA landfill (Conditional Licence: one year, personal
 # data), NRW landfill (NRW refuses full re-use), MRA low risk area and EA closed mining waste (no licence stated), radon
 # (UKHSA vs BGS terms unsettled), council layers (licence not stated, or OS INSPIRE).
+# York's register layer was taken out on 24 Nov: its only feature is labelled "test data".
 defaults:
   publisher_type: public-body
   country: GB
@@ -508,9 +509,9 @@ sources:
   abstract: 'Sites in Derby that may be contaminated because of past use, from the council''s survey of historic maps: Land_Use
     and Industry_Prior give the past use, Map_Date the map it came from. Not a finding of contamination. Fields: class field
     Industry_Prior, use field Land_Use, date field Map_Date. Completeness: partial (Derby City only; the atlas found published
-    contaminated-land layers for 6 councils: Derby, Lambeth, York, Sheffield, Clackmannanshire (and Carlisle, whose server
-    refuses the atlas''s checks). Most councils publish none). A curated record for UK contamination screening (Tobler, 24
-    Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
+    contaminated-land layers for 5 councils: Derby, Lambeth, Sheffield, Clackmannanshire (and Carlisle, whose server refuses
+    the atlas''s checks). Most councils publish none). A curated record for UK contamination screening (Tobler, 24 Nov 2026):
+    the publisher''s own layer, checked to return features for a bounding box.'
   licence: Licence not stated by the publisher.
   landing_page: https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&request=GetCapabilities
   bbox:
@@ -538,9 +539,8 @@ sources:
       date_field: Map_Date
       nation: England
       completeness: partial
-      completeness_note: 'Derby City only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth,
-        York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish
-        none'
+      completeness_note: 'Derby City only; the atlas found published contaminated-land layers for 5 councils: Derby, Lambeth,
+        Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none'
     check_url: https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=ns:Potentially_Contaminated_Sites
   - protocol: landing
     url: https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&request=GetCapabilities
@@ -552,7 +552,7 @@ sources:
   country: GB
   abstract: 'Sites in Lambeth the council has recorded as possibly contaminated, as points with an address and description.
     Not a finding of contamination. Fields: name field ADDRESS_1, class field DESCRIPTION. 1,609 features. Completeness: partial
-    (Lambeth only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth, York, Sheffield, Clackmannanshire
+    (Lambeth only; the atlas found published contaminated-land layers for 5 councils: Derby, Lambeth, Sheffield, Clackmannanshire
     (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none). A curated record for UK contamination
     screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
   licence: Licence not stated by the publisher.
@@ -577,9 +577,8 @@ sources:
       class_field: DESCRIPTION
       nation: England
       completeness: partial
-      completeness_note: 'Lambeth only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth,
-        York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish
-        none'
+      completeness_note: 'Lambeth only; the atlas found published contaminated-land layers for 5 councils: Derby, Lambeth,
+        Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none'
     check_url: https://gis.lambeth.gov.uk/arcgis/rest/services/LambethContaminatedLandPossible/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://gis.lambeth.gov.uk/arcgis/rest/services/LambethContaminatedLandPossible/MapServer
@@ -619,46 +618,6 @@ sources:
   - protocol: landing
     url: https://gis.lambeth.gov.uk/arcgis/rest/Services/LambethHistoricLandfillSites/MapServer
 - kind: record
-  id: uk-york-contaminated-land-register
-  title: Contaminated Land register, York (City of York Council)
-  publisher: City of York Council
-  publisher_type: local-gov
-  country: GB
-  abstract: 'Land in York formally determined as contaminated under Part 2A (one site on 24 Nov 2026). Determinations are
-    rare: an empty register says nothing about land not yet inspected. Fields: name field ADDRESS, code field REF_NO, date
-    field DETERMINED. 1 features. Completeness: partial (York only; the atlas found published contaminated-land layers for
-    6 councils: Derby, Lambeth, York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks).
-    Most councils publish none). A curated record for UK contamination screening (Tobler, 24 Nov 2026): the publisher''s own
-    layer, checked to return features for a bounding box.'
-  licence: Licence not stated by the publisher.
-  landing_page: https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer
-  bbox:
-  - -1.23
-  - 53.88
-  - -0.92
-  - 54.06
-  geometry_type: polygon
-  concepts_hint:
-  - contaminated-land
-  - uk-ground-pack
-  endpoints:
-  - protocol: arcgis-mapserver
-    url: https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer/41
-    service_url: https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer
-    capabilities:
-    - query
-    info:
-      name_field: ADDRESS
-      code_field: REF_NO
-      date_field: DETERMINED
-      nation: England
-      completeness: partial
-      completeness_note: 'York only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth, York,
-        Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none'
-    check_url: https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer/41/query?where=1%3D1&returnCountOnly=true&f=json
-  - protocol: landing
-    url: https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer
-- kind: record
   id: uk-sheffield-contaminated-land-register
   title: Contaminated Land register, Sheffield (Sheffield City Council)
   publisher: Sheffield City Council
@@ -666,7 +625,7 @@ sources:
   country: GB
   abstract: 'Land in Sheffield formally determined as contaminated under Part 2A (two sites on 24 Nov 2026). Determinations
     are rare: an empty register says nothing about land not yet inspected. Fields: name field site_name. 2 features. Completeness:
-    partial (Sheffield only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth, York, Sheffield,
+    partial (Sheffield only; the atlas found published contaminated-land layers for 5 councils: Derby, Lambeth, Sheffield,
     Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none). A curated record
     for UK contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding
     box.'
@@ -692,9 +651,8 @@ sources:
       name_field: site_name
       nation: England
       completeness: partial
-      completeness_note: 'Sheffield only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth,
-        York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish
-        none'
+      completeness_note: 'Sheffield only; the atlas found published contaminated-land layers for 5 councils: Derby, Lambeth,
+        Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none'
     check_url: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6?f=pjson
@@ -706,10 +664,10 @@ sources:
   country: GB
   abstract: 'Potentially contaminated land in Clackmannanshire, from the council''s vacant and derelict land survey service,
     as polygons, lines and points (three endpoints). Not a finding of contamination. Slow: about 20 s a request. Completeness:
-    partial (Clackmannanshire only; the atlas found published contaminated-land layers for 6 councils: Derby, Lambeth, York,
-    Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none). A curated
-    record for UK contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for
-    a bounding box.'
+    partial (Clackmannanshire only; the atlas found published contaminated-land layers for 5 councils: Derby, Lambeth, Sheffield,
+    Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish none). A curated record
+    for UK contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for a bounding
+    box.'
   licence: Licence not stated by the publisher.
   landing_page: https://www.clacks.gov.uk/environment/contaminatedland/
   bbox:
@@ -734,9 +692,9 @@ sources:
       - application/json
       nation: Scotland
       completeness: partial
-      completeness_note: 'Clackmannanshire only; the atlas found published contaminated-land layers for 6 councils: Derby,
-        Lambeth, York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils
-        publish none'
+      completeness_note: 'Clackmannanshire only; the atlas found published contaminated-land layers for 5 councils: Derby,
+        Lambeth, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish
+        none'
     check_url: https://clacks.cloud.cadcorp.com/WFS91/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=ns:Potentially_Contaminated_Land_-_Polygons
   - protocol: wfs
     url: https://clacks.cloud.cadcorp.com/WFS91/wfs.exe#ns:Potentially_Contaminated_Land_-_Lines
@@ -750,9 +708,9 @@ sources:
       - application/json
       nation: Scotland
       completeness: partial
-      completeness_note: 'Clackmannanshire only; the atlas found published contaminated-land layers for 6 councils: Derby,
-        Lambeth, York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils
-        publish none'
+      completeness_note: 'Clackmannanshire only; the atlas found published contaminated-land layers for 5 councils: Derby,
+        Lambeth, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish
+        none'
     check_url: https://clacks.cloud.cadcorp.com/WFS91/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=ns:Potentially_Contaminated_Land_-_Lines
   - protocol: wfs
     url: https://clacks.cloud.cadcorp.com/WFS91/wfs.exe#ns:Potentially_Contaminated_Land_-_Points
@@ -766,9 +724,9 @@ sources:
       - application/json
       nation: Scotland
       completeness: partial
-      completeness_note: 'Clackmannanshire only; the atlas found published contaminated-land layers for 6 councils: Derby,
-        Lambeth, York, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils
-        publish none'
+      completeness_note: 'Clackmannanshire only; the atlas found published contaminated-land layers for 5 councils: Derby,
+        Lambeth, Sheffield, Clackmannanshire (and Carlisle, whose server refuses the atlas''s checks). Most councils publish
+        none'
     check_url: https://clacks.cloud.cadcorp.com/WFS91/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&count=1&outputFormat=application/json&typeNames=ns:Potentially_Contaminated_Land_-_Points
   - protocol: landing
     url: https://www.clacks.gov.uk/environment/contaminatedland/

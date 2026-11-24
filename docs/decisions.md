@@ -545,10 +545,10 @@ by nature sites. Request in the Tobler repo's docs/atlas-requests.md (23 Nov); c
 Thinking in the project doc `claude/contamination-and-pollution-screening.md`; Tobler's reply in
 `claude/contamination-tobler-reply.md`. Rob passed the reply on: all three kinds in two steps, UK then US then the EU
 register, new concepts and a re-tag, radon only if OGL, old maps as a link only, a coverage field per record.
-- **17 curated records** (`vocab/seeds/uk-ground.yaml`, wave `spike-ukground`): EA and NRW historic and authorised
+- **16 curated records** (`vocab/seeds/uk-ground.yaml`, wave `spike-ukground`): EA and NRW historic and authorised
   landfill, the Mining Remediation Authority's coal high and low risk areas, EA and NRW closed mining waste, EA and NRW
   source protection zones, UKHSA radon (1 km), and every council contaminated-land layer the atlas found that answers
-  (Derby, Lambeth x2, York, Sheffield, Clackmannanshire; Carlisle refuses GitHub). Scotland and NI have no national
+  (Derby, Lambeth x2, Sheffield, Clackmannanshire; Carlisle refuses GitHub; York's register layer was taken out because its only feature is "test data"). Scotland and NI have no national
   landfill or contaminated-land layers; the "Potentially Contaminated Land" thought to be Scottish Government's is
   Clackmannanshire's.
 - **Completeness, not "coverage":** Tobler asked for a coverage field. Dataset details already have `coverage` (extent

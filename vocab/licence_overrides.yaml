@@ -836,11 +836,6 @@ rules:
     licence: Licence not stated by the publisher.
     open: false
     source: service metadata, 24 Nov 2026 (probe round 32)
-  - host: maps.york.gov.uk
-    layers: '^uk-york-contaminated-land-register:'
-    licence: Licence not stated by the publisher.
-    open: false
-    source: service metadata, 24 Nov 2026 (probe round 32)
   - host: utility.arcgis.com
     layers: '^uk-sheffield-contaminated-land-register:'
     licence: Ordnance Survey INSPIRE end user licence (https://www.ordnancesurvey.co.uk/documents/licensing/inspire-end-user-licence.pdf),

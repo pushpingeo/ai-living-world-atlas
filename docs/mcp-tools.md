@@ -36,7 +36,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
 - (24 Nov, Tobler reply `claude/contamination-tobler-reply.md`, **step 1 done**) **UK contamination screening:
   old sources and receptors.** Additive. Step 2 (current pollution: permits, release inventories, incidents, AQMAs)
   comes next.
-  - **17 new records** (wave `spike-ukground`, `vocab/seeds/uk-ground.yaml`), ids fixed; keyword `uk-ground-pack` lists
+  - **16 new records** (wave `spike-ukground`, `vocab/seeds/uk-ground.yaml`), ids fixed; keyword `uk-ground-pack` lists
     them all.
 
     | Topic | England | Wales | Scotland | Northern Ireland |
@@ -47,14 +47,14 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     | Closed mining waste | `7719defbb5b780ef` EA | `4f4d8e01d0678a76` NRW | – | – |
     | Source protection zones | `6c3e0babf56f294e` EA | `5d4037034edc4d37` NRW | (none in this form) | (none in this form) |
     | Radon | `3f1f871836efd2da` UKHSA, whole UK and Isle of Man | | | |
-    | Council records (**partial**) | Derby `5ef41092de2010de`, Lambeth `164c454dced356b7` and landfill `ac1475ee668c32b4`, York register `0dcca8046d00b762`, Sheffield register `8d25d1f7b39def53` | – | Clackmannanshire `e310e4158da08197` | – |
+    | Council records (**partial**) | Derby `5ef41092de2010de`, Lambeth `164c454dced356b7` and landfill `ac1475ee668c32b4`, Sheffield register `8d25d1f7b39def53` | – | Clackmannanshire `e310e4158da08197` | – |
 
   - **New field on every curated UK record (86: these 17 plus the 69 of 22-23 Nov):** `get_dataset`
     `endpoints[].details.nation` (England, Scotland, Wales, Northern Ireland, "England, Scotland, Wales", UK),
     `details.completeness` (`complete` or `partial`) and `details.completeness_note`. **This is what Tobler's reply called
     "coverage".** It's named completeness because dataset details already have `coverage`, which means extent size
     (local, regional, national...). `complete`: an empty answer means none in that nation. `partial`: silence never means
-    none. Partial today: the 6 council layers, and England's post-1988 ALC (surveyed sites only).
+    none. Partial today: the 5 council layers, and England's post-1988 ALC (surveyed sites only).
   - **Class values, read live 24 Nov** (also in `details.class_values` where listed):
     - EA SPZ `number`: 1 (2,478), 1c (217), 2 (1,370), 2c (200), 3 (403), 3c (2), 4 (16). "c" = confined aquifer
       (subsurface activity only); 4 = zone of special interest. NRW SPZ `NUMBER`: 1, 2, 3 (integers).
@@ -79,7 +79,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     (keep boxes small).
   - **Gaps (report as "not checked"):** no national historic landfill or contaminated-land layer for Scotland or Northern
     Ireland; no source protection zones in Scotland or NI in this form; NI has no coal mining risk layer; Carlisle publishes
-    a layer but refuses the atlas's checks; most councils publish nothing. Historic land use (old maps) is not open data.
+    a layer but refuses the atlas's checks; York's register layer holds only a "test data" placeholder, so it was left out; most councils publish nothing. Historic land use (old maps) is not open data.
   - **New concepts** (all datasets re-tagged where relevant, 24 Nov): `contaminated-land`, `landfill`, `mining-legacy`,
     `groundwater-protection`, `pollution-source`, `air-quality-area`. `brownfield` now means land registers only; `waste`,
     `water-quality` and `air-quality` are narrower. `find_datasets` with `concept: "contaminated-land"` is the way to find
