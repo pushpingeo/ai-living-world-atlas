@@ -33,6 +33,38 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (24 Nov evening, **England's current pollution, storm overflows, England Peat Map**) Additive. Same fields as the UK
+  packs (`nation`, `completeness`, `completeness_note` in endpoint details).
+  - **3 hosted EA files** (wave `spike-files`; `vocab/files/ea-*.yaml`), fetched like the GEM and JNCC files
+    (`fetch_features` reads the 1° tiles near the area; `where` isn't supported on hosted files):
+
+    | Record | Id | Features |
+    |---|---|---|
+    | Industrial installation permits, England | `e96296234c630eca` | 6,333 (in force and ended; superseded versions left out) |
+    | Waste site permits, England | `81ad43b046380b3d` | 19,092 (in force and ended) |
+    | Serious pollution incidents (Category 1 and 2), England, 2001 to date | `d4e38afd394a1bf4` | 17,507 |
+
+    Status fields: `Status` (Effective = in force) on installations, `STAT_SDESC` (Issued = in force) on waste sites;
+    activity in `primary_activity` / `activities` and `licence_type`. Incidents: `EIL_WATER`, `EIL_LAND`, `EIL_AIR`
+    (Category 1 to 4), `pollutant_types`, `pollutants`, `NOT_DATE`. **Licence:** EA Conditional Licence, `open_licence`
+    false, accepted by Rob for screening (in `terms`). **Operator and holder names, contacts and street addresses are
+    not in the copy** (some are private individuals). Refreshed monthly (3rd of the month); `details.data_date` is the
+    download day. Say on a report that an incident near a site doesn't mean its owner caused it.
+  - **13 curated records** (wave `spike-ukwaterpeat`, `vocab/seeds/uk-water-peat.yaml`; keyword `uk-water-peat-pack`):
+
+    | Record | Id | Completeness |
+    |---|---|---|
+    | Storm overflows live: Anglian `590f8c58e1f154eb`, Wessex `44d4446b579eae51`, Severn Trent `ba844827cc3cfa78`, Yorkshire `834984471176a754`, South West `59dc11dc3b75f3ee`, United Utilities `69c7a58eed102b4f`, Northumbrian `8b2942f395985f0c`, Thames `4ae36af79367ade1` | | **partial** (each company's own area; no live layer for Southern or Welsh Water) |
+    | Storm overflow spills in 2025, England and Wales (annual returns, all 11 companies) | `4123e7d7391d4cbd` | complete for 2025 |
+    | Storm overflows live, Scottish Water (Rivers Trust copy, **not open**) | `e80013b64da35b0d` | complete for monitored overflows |
+    | Peaty soil extent, England | `9c44057149e34495` | complete (modelled) |
+    | Peat presence and depth observations, England | `202e4d558bbf7718` | **partial** (where surveyed) |
+    | Peatland restoration register, England | `3a350525aee8b4cc` | **partial** (national schemes) |
+
+    Live storm overflow `Status`: 1 discharging now, 0 not, -1 monitor offline (South West Water's fields are lower case:
+    `status`). For "how often does it spill", use the annual returns' `countedSpills` and `totalDurationAllSpillsHrs`.
+    Licences: water companies CC BY 4.0, annual returns and peat OGL. `terms` on the peat observations: leave out
+    `surveyor` (names people).
 - (24 Nov afternoon, **US done**) **US contamination screening: EPA's national layers.** Additive. Same fields as the UK
   packs: `details.nation` ("United States"), `completeness`, `completeness_note`.
   - **10 new records** (wave `spike-uscontamination`, `vocab/seeds/us-contamination.yaml`), ids fixed; keyword

@@ -73,6 +73,7 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| UK water and peat (`spike-ukwaterpeat`) | 13 | 13 | Storm overflows (8 companies live, 2025 annual returns, Scottish Water) and the England Peat Map (24 Nov) |
 | US contamination (`spike-uscontamination`) | 10 | 10 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD |
 | UK pollution (`spike-ukpollution`) | 6 | 6 | Contamination step 2 (24 Nov, Tobler): SEPA authorisations, NRW permits, DAERA incidents and consents, NI historical land use |
 | UK ground (`spike-ukground`) | 16 | 16 | Contamination step 1 (24 Nov, Tobler): landfill, coal mining risk, closed mining waste, source protection zones, radon, council records |
@@ -221,6 +222,16 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
   Scope (24 Nov, evening): project doc `claude/hosting-uk-downloads-scope.md`. Host EPR industrial, EPR waste and
   pollution incidents (MS Access and CSV in zips; `access-parser` reads them), drop personal fields, refresh monthly.
   Probe: a `FULL ` line keeps a small download whole; never use it on files with personal data (public branch).
+
+## EA downloads, storm overflows, England Peat Map (24 Nov, evening)
+
+- Hosted (`vocab/files/ea-*.yaml`, wave `spike-files`): EA industrial permits, waste permits, serious pollution incidents.
+  Personal fields dropped by keep-list. **Monthly refresh on the 3rd** (`runs/files-monthly.env`, which also refreshes
+  NSIP); the files job publishes its own refreshes (spike-files, pages, deploy-mcp in turn). Check the first one on 3 Dec.
+- Curated (`vocab/seeds/uk-water-peat.yaml`, wave `spike-ukwaterpeat`): 8 water companies' live storm overflows, the 2025
+  annual returns (England and Wales), Scottish Water (not open), England Peat Map extent, observations, restoration.
+- Still open from the scope: NRW incidents (manual quarterly download) and Scotland's Local Landscape Areas (Spatial Hub
+  account), both Rob's call. Southern Water and Welsh Water publish no live overflow layer that we found.
 
 ## Known gaps and next steps (rough priority)
 

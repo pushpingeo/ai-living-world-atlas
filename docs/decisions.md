@@ -601,3 +601,27 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
 - **Left out:** RCRA hazardous waste handlers (900k, mostly small generators), Cleanups in My Community (overlaps the
   others, with coded categories), EPA radon zones and sole source aquifers (only third-party copies found).
 
+## 2026-11-24 (evening): hosting the EA's downloads; storm overflows and the England Peat Map
+- **Rob's go (1 and 2 of the hosting scope, `claude/hosting-uk-downloads-scope.md` in the project).** Three EA downloads
+  hosted as tiles: industrial installation permits (6,333), waste site permits (19,092), serious pollution incidents
+  2001-2026 (17,507). The EA Conditional Licence allows publishing and commercial use; its special conditions add a
+  one-year term and responsibility for personal data.
+- **Personal data is left out, not passed on.** Operator, licence holder and contact names, phone, fax, email and street
+  addresses are dropped (spec `columns` is a keep-list, so a new EA column can't leak in). About 8% of installation
+  operators are private individuals. The point, permit number, site name, activity, status and dates stay.
+- **Superseded, consolidated, regulatory-change and refused permit versions are left out** (administrative duplicates).
+  Ended permits (surrendered, revoked, expired) stay: they mark past activity, which matters for contamination.
+- **files.py learned**: MS Access tables in a zip (pure-Python access-parser, no ODBC), joins from other tables (activities
+  per permit, licence type names, pollutants per incident), projected coordinates (BNG to WGS84 with pyproj, in Actions),
+  per-spec tile size (1° here, so a fetch reads one small tile, not all of England), and data_date = download day.
+  Database date-times are written as dates. YAML 1.1 reads a key called `on` as true, so joins use `key`.
+- **Monthly refresh** on the 3rd (runs/files-monthly.env: the EA files and NSIP). Runs started with the workflow token
+  don't fire workflow_run, so the files job starts spike-files, pages and deploy-mcp itself and waits for each
+  (`publish` input tests it by hand). A failed download stops the run before anything is written.
+- **13 curated records** (wave `spike-ukwaterpeat`): eight English water companies' live storm overflow layers (CC BY 4.0;
+  publisher type business), the 2025 annual returns for England and Wales as mapped by The Rivers Trust (OGL, all 11
+  companies), Scottish Water's live layer as republished by The Rivers Trust (not open: all rights reserved), and three
+  England Peat Map layers from Natural England (OGL): peaty soil extent, depth observations, restoration register.
+- **Probe:** a `FULL ` line keeps a small download as `N.bin`. Round 40 put the EA files (with operator names) on the
+  public results branch for about ten minutes until round 41 overwrote it; the probe file now warns against it.
+
