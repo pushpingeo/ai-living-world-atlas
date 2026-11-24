@@ -296,3 +296,13 @@ Details in decisions.md (23 Nov) and the contract note in mcp-tools.md (with eve
       shows `unchecked` ("checked by hand"), and the sweep will report it as robots, not failing.
     - The generic rule trusts identify on one-band ImageServers. mcp-check is how false positives show up (Esri's
       WorldElevation3D answered 0 everywhere and is now excluded); add any others to `never` in sample_rules.yaml.
+
+12. **UK pack follow-ups** (23 Nov; contract note in mcp-tools.md).
+    - Read the James Hutton Institute Open Data Licence (it comes in the LCA download) and decide whether Hutton's LCA
+      can be marked open. Historic England's Open Data Hub terms page refuses bots: read it in a browser once.
+    - Gaps Tobler will report as "not checked": Dark Sky Parks (no national layer), Scotland's Local Landscape Areas
+      (Spatial Hub), Cadw battlefields, NI flood maps and farmland classification. England Peat Map and the Wales unified
+      peat map exist and could be added if Tobler wants peat beyond Scotland.
+    - Curated records rank below older crawled copies in plain concept searches; Tobler uses the ids. Footprints or the
+      publisher registry (stage 2) would fix the ranking.
+    - Add a few pack records to mcp-check (a WFS one, HES, SEPA surface water, the IRZ) so a break shows up nightly.
