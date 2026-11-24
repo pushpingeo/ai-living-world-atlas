@@ -33,6 +33,33 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (24 Nov afternoon, **US done**) **US contamination screening: EPA's national layers.** Additive. Same fields as the UK
+  packs: `details.nation` ("United States"), `completeness`, `completeness_note`.
+  - **10 new records** (wave `spike-uscontamination`, `vocab/seeds/us-contamination.yaml`), ids fixed; keyword
+    `us-contamination-pack`. All public domain (`open_licence` true), attribution "U.S. Environmental Protection Agency".
+
+    | Topic | Record | Completeness |
+    |---|---|---|
+    | Superfund NPL boundaries (polygons) | `5e0e98fb5909b1e1` | complete (EPA's federal list) |
+    | Superfund NPL sites with status (points) | `c38ed5a534806b6f` | complete |
+    | All Superfund sites, NPL and non-NPL (SEMS) | `a1a721163c4fb225` | complete |
+    | Brownfields with EPA grant funding (ACRES) | `85b4bdc7c49e5055` | **partial**: only EPA-funded properties |
+    | RCRA corrective action boundaries | `8427fb0a7235a865` | **partial**: only where EPA regions mapped one |
+    | Toxics Release Inventory facilities | `287038202610ca08` | complete (above the TRI thresholds) |
+    | Air emission sources (ICIS-Air) | `41198ffb356b4b40` | **partial**: many minor sources are state-only |
+    | Major water discharge permits (NPDES major) | `33493d9c2306128a` | complete |
+    | All water discharge permits (NPDES, 1.9M points) | `85a67d0fcb04bf97` | complete; small boxes only |
+    | Hazardous waste treatment, storage, disposal (RCRA TSD) | `07c5b1364a229296` | complete |
+
+  - **How to read them.** "Complete" here means complete for EPA's federal programme. State cleanup sites aren't in any
+    of these, so say "none in EPA's national records", not "none". NPL status: `Status` (NPL Site, Deleted NPL Site,
+    Proposed NPL Site) on the points; `NPL_STATUS_CODE` (F, D, P, N, R...) on the boundaries. SEMS: `INTEREST_TYPE`
+    SUPERFUND NPL or SUPERFUND (NON-NPL); a non-NPL record means EPA looked at the site, not that it is contaminated.
+    Air: `where: "INTEREST_TYPE='AIR MAJOR'"` for large sources. FRS points carry `ACCURACY_VALUE` and `FAC_URL`.
+  - **Personal data:** the RCRA boundaries carry facility contact names, emails and phones; `terms` says leave them out.
+  - **Not curated:** EPA's 900k RCRA hazardous waste handlers (too broad for a screen), Cleanups in My Community
+    (overlaps these), state lists (`concept: "contaminated-land"`, partial). The crawled EPA copies of some of these
+    still exist under other ids; use these.
 - (24 Nov afternoon, **step 2 done for Scotland, Wales and NI; England waits on Rob**) **UK contamination screening:
   current pollution.** Additive. Same fields as step 1 (`nation`, `completeness`, `completeness_note` in endpoint details).
   - **6 new records** (wave `spike-ukpollution`, `vocab/seeds/uk-pollution.yaml`), ids fixed; keyword `uk-pollution-pack`.
