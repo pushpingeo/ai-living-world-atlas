@@ -49,7 +49,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     | Radon | `3f1f871836efd2da` UKHSA, whole UK and Isle of Man | | | |
     | Council records (**partial**) | Derby `5ef41092de2010de`, Lambeth `164c454dced356b7` and landfill `ac1475ee668c32b4`, Sheffield register `8d25d1f7b39def53` | – | Clackmannanshire `e310e4158da08197` | – |
 
-  - **New field on every curated UK record (86: these 17 plus the 69 of 22-23 Nov):** `get_dataset`
+  - **New field on every curated UK record (85: these 16 plus the 69 of 22-23 Nov):** `get_dataset`
     `endpoints[].details.nation` (England, Scotland, Wales, Northern Ireland, "England, Scotland, Wales", UK),
     `details.completeness` (`complete` or `partial`) and `details.completeness_note`. **This is what Tobler's reply called
     "coverage".** It's named completeness because dataset details already have `coverage`, which means extent size
@@ -75,7 +75,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
       under BGS's own licence. Not open until UKHSA confirms (a question for Rob).
     - **Coal low risk area, EA closed mining waste:** no licence stated.
     - **Council layers:** no licence stated; Sheffield's is the OS INSPIRE end user licence.
-  - **Speed:** see the live check in decisions.md (24 Nov). Clackmannanshire's server takes ~20 s; radon has 254k squares
+  - **Speed, live 24 Nov:** 0.3-5.8 s per fetch_features (Lambeth and the coal low risk area slowest). Clackmannanshire's server takes ~20 s; radon has 254k squares
     (keep boxes small).
   - **Gaps (report as "not checked"):** no national historic landfill or contaminated-land layer for Scotland or Northern
     Ireland; no source protection zones in Scotland or NI in this form; NI has no coal mining risk layer; Carlisle publishes
