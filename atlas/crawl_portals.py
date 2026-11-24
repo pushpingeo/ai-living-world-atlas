@@ -182,7 +182,7 @@ async def harvest_arcgis_online(c: Client, query: str, portal: str, max_records:
     for typ in AGOL_TYPES:
         start = 1
         while start > 0 and start <= 10_000 and st["scanned"] < max_records:
-            q = quote(f'{query} type:"{typ}" access:public')
+            q = quote(f'({query}) type:"{typ}" access:public')
             r = await c.get(f"https://www.arcgis.com/sharing/rest/search?q={q}&num=100&start={start}&sortField=modified&f=json", retries=2)
             if not r.ok:
                 st["error"] = r.error or f"HTTP {r.status}"
