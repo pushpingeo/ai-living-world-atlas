@@ -1,0 +1,27 @@
+# Best-in-class sources (Rob, 24 Nov 2026): authoritative bodies whose own services should lead broad and global
+# searches. Not used by the pipeline yet: the ranking boost and a `best_in_class` flag come with the publisher registry's
+# stage 2 release (docs/publisher-registry-design.md). Matching will be by host or ArcGIS Online organisation, never by name.
+# Thin or missing bodies are being filled by the `fill` wave (vocab/seeds/fill.yaml).
+
+global:
+  - NASA (GIBS, FIRMS, Earthdata GIS, Disasters Program)
+  - Copernicus / ESA (Land via EEA, Marine, Emergency Management: EFFIS, GloFAS)
+  - European Environment Agency
+  - JRC (GHSL, EFFIS, GloFAS)
+  - EMODnet
+  - GEBCO
+  - UNEP-WCMC
+  - Global Energy Monitor
+  - FAO
+  - EUMETSAT
+  - GBIF
+  - WRI / Global Forest Watch
+  - ISRIC (SoilGrids)
+  - HydroSHEDS
+  - Overture Maps
+  - World Bank
+  - Smithsonian Global Volcanism Program
+usa: [NOAA, USGS, US Census Bureau, EPA, BLM, BOEM, USFWS]
+uk: [BGS, NSTA, Ordnance Survey, Natural England, Environment Agency, JNCC, Met Office, SEPA, NatureScot, NRW, Historic England, Historic Environment Scotland, DAERA]
+australia: [Geoscience Australia, CSIRO, DCCEEW, Bureau of Meteorology]
+netherlands: [PDOK (Kadaster), Rijkswaterstaat, KNMI, TNO / NLOG]

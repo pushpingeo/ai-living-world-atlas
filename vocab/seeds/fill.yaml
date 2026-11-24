@@ -1,0 +1,155 @@
+# Best-in-class fill (24 Nov 2026): the authoritative bodies on vocab/best_in_class.yaml that were thin or missing
+# from their own servers. Every entry was checked from GitHub's runners in probe round 43 first.
+# Not here because they refused or weren't found: Bureau of Meteorology (403 to GitHub), KNMI (data platform needs a
+# key), TNO/NLOG (no public service found; BRO layers come through PDOK), SEDAC's geoserver (timed out; much of SEDAC
+# now sits on NASA's Earthdata GIS), World Bank (no map service; download records only).
+#
+# kind: arcgis-root | arcgis-service | wms | wfs | wmts | wcs | arcgis-online-search | record
+
+defaults:
+  publisher_type: central-gov
+  country: ""
+
+sources:
+  # --- NASA ----------------------------------------------------------------------------------
+  - kind: wms
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi
+    publisher: NASA Global Imagery Browse Services (GIBS)
+    publisher_type: central-gov
+    country: US
+    licence: "NASA data are not copyrighted and may be used freely; credit NASA GIBS (per earthdata.nasa.gov)"
+  - kind: wmts
+    url: https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml
+    publisher: NASA Global Imagery Browse Services (GIBS)
+    publisher_type: central-gov
+    country: US
+    licence: "NASA data are not copyrighted and may be used freely; credit NASA GIBS (per earthdata.nasa.gov)"
+  - kind: arcgis-online-search
+    query: 'owner:"NASA_Earthdata" OR owner:"prrea_NASA"'
+    publisher: NASA Earthdata GIS
+    publisher_type: central-gov
+    country: US
+  - kind: arcgis-online-search
+    query: 'owner:"gwlayne_NASA"'
+    publisher: NASA Disasters Program
+    publisher_type: central-gov
+    country: US
+  - kind: record
+    id: nasa-firms-viirs-snpp-24h
+    title: NASA FIRMS active fires, VIIRS (Suomi NPP), last 24 hours
+    publisher: NASA Fire Information for Resource Management System (FIRMS)
+    publisher_type: central-gov
+    abstract: Active fire and thermal anomaly detections worldwide from the VIIRS sensor on Suomi NPP at 375 m, as a CSV of points with brightness, confidence, fire radiative power and acquisition time. Refreshed through the day by NASA LANCE.
+    endpoints:
+      - {protocol: download, url: "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv", format: CSV}
+    landing_page: https://firms.modaps.eosdis.nasa.gov/active_fire/
+    licence: "NASA data are not copyrighted and may be used freely; credit NASA FIRMS (per earthdata.nasa.gov)"
+    bbox: [-180, -90, 180, 90]
+    detail_m: 375
+    concepts_hint: [natural-hazard]
+  - kind: record
+    id: nasa-firms-viirs-noaa20-24h
+    title: NASA FIRMS active fires, VIIRS (NOAA-20), last 24 hours
+    publisher: NASA Fire Information for Resource Management System (FIRMS)
+    publisher_type: central-gov
+    abstract: Active fire and thermal anomaly detections worldwide from the VIIRS sensor on NOAA-20 at 375 m, as a CSV of points with brightness, confidence, fire radiative power and acquisition time. Refreshed through the day by NASA LANCE.
+    endpoints:
+      - {protocol: download, url: "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_Global_24h.csv", format: CSV}
+    landing_page: https://firms.modaps.eosdis.nasa.gov/active_fire/
+    licence: "NASA data are not copyrighted and may be used freely; credit NASA FIRMS (per earthdata.nasa.gov)"
+    bbox: [-180, -90, 180, 90]
+    detail_m: 375
+    concepts_hint: [natural-hazard]
+  - kind: record
+    id: nasa-firms-modis-24h
+    title: NASA FIRMS active fires, MODIS (Terra and Aqua), last 24 hours
+    publisher: NASA Fire Information for Resource Management System (FIRMS)
+    publisher_type: central-gov
+    abstract: Active fire and thermal anomaly detections worldwide from MODIS on Terra and Aqua at 1 km, as a CSV of points with brightness, confidence, fire radiative power and acquisition time. Refreshed through the day by NASA LANCE.
+    endpoints:
+      - {protocol: download, url: "https://firms.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/csv/MODIS_C6_1_Global_24h.csv", format: CSV}
+    landing_page: https://firms.modaps.eosdis.nasa.gov/active_fire/
+    licence: "NASA data are not copyrighted and may be used freely; credit NASA FIRMS (per earthdata.nasa.gov)"
+    bbox: [-180, -90, 180, 90]
+    detail_m: 1000
+    concepts_hint: [natural-hazard]
+
+  # --- USGS ----------------------------------------------------------------------------------
+  - {kind: arcgis-root, url: "https://index.nationalmap.gov/arcgis/rest/services", publisher: U.S. Geological Survey (The National Map), country: US}
+  - {kind: arcgis-root, url: "https://basemap.nationalmap.gov/arcgis/rest/services", publisher: U.S. Geological Survey (The National Map), country: US}
+  - {kind: arcgis-root, url: "https://hydro.nationalmap.gov/arcgis/rest/services", publisher: U.S. Geological Survey (The National Map), country: US}
+  - {kind: arcgis-root, url: "https://carto.nationalmap.gov/arcgis/rest/services", publisher: U.S. Geological Survey (The National Map), country: US}
+  - {kind: arcgis-root, url: "https://elevation.nationalmap.gov/arcgis/rest/services", publisher: U.S. Geological Survey (The National Map), country: US}
+  - {kind: arcgis-root, url: "https://earthquake.usgs.gov/arcgis/rest/services", publisher: U.S. Geological Survey (Earthquake Hazards Program), country: US}
+  - {kind: wms, url: "https://mrdata.usgs.gov/services/mrds", publisher: U.S. Geological Survey (Mineral Resources), country: US}
+  - kind: record
+    id: usgs-earthquakes-past-30-days
+    title: USGS earthquakes worldwide, past 30 days (GeoJSON feed)
+    publisher: U.S. Geological Survey (Earthquake Hazards Program)
+    country: US
+    abstract: Every earthquake located by the USGS and its network partners in the past 30 days, worldwide, as a GeoJSON feed of points with magnitude, depth, time, place and alert level. Updated every minute.
+    endpoints:
+      - {protocol: download, url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson", format: GeoJSON}
+    landing_page: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+    licence: "Public domain (USGS-authored or produced data, per usgs.gov/information-policies-and-instructions)"
+    bbox: [-180, -90, 180, 90]
+    concepts_hint: [natural-hazard]
+
+  # --- Copernicus and JRC --------------------------------------------------------------------
+  - kind: wmts
+    url: https://wmts.marine.copernicus.eu/teroWmts
+    publisher: Copernicus Marine Service (Mercator Ocean International)
+    publisher_type: international
+    licence: "Copernicus Marine Service licence: free and open, with attribution (per marine.copernicus.eu)"
+  - kind: wms
+    url: https://maps.effis.emergency.copernicus.eu/effis
+    publisher: European Forest Fire Information System (EFFIS), Copernicus Emergency Management Service / JRC
+    publisher_type: international
+  - kind: wms
+    url: https://ows.globalfloods.eu/glofas-ows/ows.py
+    publisher: Global Flood Awareness System (GloFAS), Copernicus Emergency Management Service / JRC
+    publisher_type: international
+
+  # --- ISRIC SoilGrids: the properties not already in the global wave (soc, phh2o, clay are) ---
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/bdod.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/cec.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/cfvo.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/nitrogen.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/ocd.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/ocs.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/sand.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/silt.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+  - {kind: wms, url: "https://maps.isric.org/mapserv?map=/map/wrb.map", publisher: ISRIC - World Soil Information (SoilGrids), publisher_type: research}
+
+  # --- other global references ---------------------------------------------------------------
+  - kind: wfs
+    url: https://webservices.volcano.si.edu/geoserver/GVP-VOTW/wfs
+    publisher: Smithsonian Institution Global Volcanism Program
+    publisher_type: research
+    country: US
+  - kind: wms
+    url: https://webservices.volcano.si.edu/geoserver/GVP-VOTW/wms
+    publisher: Smithsonian Institution Global Volcanism Program
+    publisher_type: research
+    country: US
+  - kind: arcgis-root
+    url: https://gis.wri.org/server/rest/services
+    publisher: World Resources Institute
+    publisher_type: civil-society
+  - kind: arcgis-online-search
+    query: 'owner:"MetOffice_data" OR owner:"MetOffice_AirQuality"'
+    publisher: Met Office
+    publisher_type: public-body
+    country: GB
+  - kind: record
+    id: world-bank-official-boundaries
+    title: World Bank official boundaries (admin 0 and admin 1)
+    publisher: World Bank Group
+    publisher_type: international
+    abstract: The World Bank's official country and first-level administrative boundaries, as used in its own maps, with disputed areas and lines marked. Download from the World Bank Data Catalog.
+    endpoints:
+      - {protocol: landing, url: "https://datacatalog.worldbank.org/search/dataset/0038272"}
+    landing_page: https://datacatalog.worldbank.org/search/dataset/0038272
+    licence: "CC BY 4.0 (per World Bank Data Catalog)"
+    bbox: [-180, -90, 180, 90]
+    concepts_hint: [admin-boundary]
