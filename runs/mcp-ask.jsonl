@@ -1,8 +1,12 @@
-# 24 Nov: after the groundwater-protection re-tag and taking York out
-{"label": "concept groundwater-protection UK", "tool": "find_datasets", "args": {"concept": "groundwater-protection", "bbox": [-8.7, 49.8, 1.8, 60.9], "limit": 12}}
-{"label": "concept groundwater-protection US", "tool": "find_datasets", "args": {"concept": "groundwater-protection", "bbox": [-125, 24, -66, 50], "limit": 8}}
-{"label": "text uk-ground-pack over GB", "tool": "find_datasets", "args": {"text": "uk-ground-pack", "bbox": [-8.7, 49.8, 1.8, 60.9], "limit": 50}}
-{"label": "York record gone", "tool": "get_dataset", "args": {"id": "0dcca8046d00b762"}}
-{"label": "SPZ near Chilterns", "tool": "fetch_features", "args": {"id": "6c3e0babf56f294e", "lon": -0.8, "lat": 51.6, "radius_km": 3, "limit": 5, "include_geometry": false}}
-{"label": "coal high risk near Barnsley", "tool": "fetch_features", "args": {"id": "ec38ddbef814026b", "lon": -1.48, "lat": 53.55, "radius_km": 1, "limit": 5, "include_geometry": false}}
-{"label": "Clackmannanshire near Alloa", "tool": "fetch_features", "args": {"id": "e310e4158da08197", "lon": -3.78, "lat": 56.11, "radius_km": 5, "limit": 5, "include_geometry": false}}
+# 24 Nov: contamination step 2 live check, and the two licence decisions
+{"label": "text uk-pollution-pack over UK", "tool": "find_datasets", "args": {"text": "uk-pollution-pack", "bbox": [-8.7, 49.8, 1.8, 60.9], "limit": 20}}
+{"label": "concept pollution-source UK", "tool": "find_datasets", "args": {"concept": "pollution-source", "bbox": [-8.7, 49.8, 1.8, 60.9], "limit": 15}}
+{"label": "SEPA industrial near Grangemouth", "tool": "fetch_features", "args": {"id": "b32daeca2c368112", "lon": -3.70, "lat": 56.01, "radius_km": 2, "limit": 5, "include_geometry": false, "where": "regulatory_area='Industrial Activities'"}}
+{"label": "NRW installations near Port Talbot", "tool": "fetch_features", "args": {"id": "44f83dc4a6a75e38", "lon": -3.78, "lat": 51.57, "radius_km": 3, "limit": 5, "include_geometry": false}}
+{"label": "NRW waste sites near Cardiff", "tool": "fetch_features", "args": {"id": "2301597b68920a17", "lon": -3.17, "lat": 51.47, "radius_km": 3, "limit": 5, "include_geometry": false}}
+{"label": "DAERA incidents near Belfast", "tool": "fetch_features", "args": {"id": "ca262452381e06c6", "lon": -5.93, "lat": 54.60, "radius_km": 3, "limit": 5, "include_geometry": false}}
+{"label": "DAERA trade consents near Belfast", "tool": "fetch_features", "args": {"id": "2abb7782c0d51447", "lon": -5.93, "lat": 54.60, "radius_km": 5, "limit": 5, "include_geometry": false}}
+{"label": "NI historical land use, Belfast", "tool": "fetch_features", "args": {"id": "ecea8189ad7c042f", "lon": -5.93, "lat": 54.60, "radius_km": 1, "limit": 5, "include_geometry": false}}
+{"label": "NI historical land use record", "tool": "get_dataset", "args": {"id": "ecea8189ad7c042f"}}
+{"label": "radon licence now open", "tool": "get_dataset", "args": {"id": "3f1f871836efd2da"}}
+{"label": "EA historic landfill terms", "tool": "get_dataset", "args": {"id": "3a4c49302d01deb3"}}
