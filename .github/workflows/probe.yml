@@ -21,7 +21,7 @@ jobs:
             # Origin: a browser page elsewhere; the CORS headers in the answer say whether a page could use it
             code=$(curl -sSL -m 60 $rng -H "Origin: https://asktobler.com" -D /tmp/hdr -A "ai-living-world-atlas probe (+https://github.com/pushpingeo/ai-living-world-atlas)" \
               -o /tmp/body -w '%{http_code} %{time_total}s %{size_download}B %{url_effective}' "$url" || echo "ERR")
-            { echo "URL: $url"; echo "RESULT: $code"; echo "HEADERS: $(grep -iE '^(access-control-allow-origin|content-type|content-range|accept-ranges):' /tmp/hdr | tr -d '\r' | tr '\n' ';')"; } > /tmp/out/$i.txt
+            { echo "URL: $url"; echo "RESULT: $code"; echo "HEADERS: $(grep -iE '^(access-control-allow-origin|content-type|content-range|accept-ranges|content-length|last-modified|location):' /tmp/hdr | tr -d '\r' | tr '\n' ';')"; } > /tmp/out/$i.txt
             head -c 200000 /tmp/body >> /tmp/out/$i.txt 2>/dev/null || true
           done
           date -u > /tmp/out/when.txt

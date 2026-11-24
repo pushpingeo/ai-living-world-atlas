@@ -1,48 +1,17 @@
-# round 34 (24 Nov): York contaminated land register location
-https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer/41/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=json
-# round 35 (24 Nov): contamination step 2 (current pollution) candidates
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/13?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/14?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/15?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/16?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/13/query?where=1%3D1&returnCountOnly=true&f=json
-https://map.sepa.org.uk/server/rest/services/Open?f=json
-https://gis.daera-ni.gov.uk/server/rest/services?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted?f=json
-https://environment.data.gov.uk/spatialdata/environmental-permitting-regulations-industrial-sites/wfs?service=WFS&request=GetCapabilities
-https://environment.data.gov.uk/spatialdata/environmental-permitting-regulations-waste-sites/wfs?service=WFS&request=GetCapabilities
-https://environment.data.gov.uk/api/file/download?fileDataSetId=&fileName=
-https://www.data.gov.uk/api/action/package_search?q=%22Environmental+Permitting+Regulations%22+Environment+Agency&rows=20
-https://www.data.gov.uk/api/action/package_search?q=%22pollution+inventory%22&rows=20
-https://www.data.gov.uk/api/action/package_search?q=%22pollution+incidents%22&rows=20
-https://www.data.gov.uk/api/action/package_search?q=%22air+quality+management+areas%22&rows=20
-https://uk-air.defra.gov.uk/aqma/maps
-https://uk-air.defra.gov.uk/aqma/download
-# round 36 (24 Nov): step 2 follow-ups (SEPA SPRI, DAERA consents and incidents, Defra AQMA map config, NRW)
-https://map.sepa.org.uk/server/rest/services/Open/Utility_and_Governmental_Services/MapServer?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Regulation_Zones/MapServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents/FeatureServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents/FeatureServer/0?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents_Stations_Trade/FeatureServer/0?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Pollution_Incidents/FeatureServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Pollution_Incidents/FeatureServer/0?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Pollution_Incidents_2011_to_2025_Gridded/FeatureServer/0?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Groundwater_Authorisation_Sites/FeatureServer/0?f=json
-https://uk-air.defra.gov.uk/aqma/maps/CONFIG-STUB.js
-https://uk-air.defra.gov.uk/aqma/maps/gis-init.js
-https://uk-air.defra.gov.uk/aqma/maps/dist/aqma-aq.js
-https://datamap.gov.wales/api/v2/datasets?search=pollution%20incidents
-https://datamap.gov.wales/api/v2/datasets?search=permitting
-https://www.data.gov.uk/api/action/package_search?q=%22Environmental+Permitting+Regulations%22+%22Natural+Resources+Wales%22&rows=10
-https://www.data.gov.uk/api/action/package_search?q=%22Scottish+Pollutant+Release+Inventory%22&rows=10
-# round 37 (24 Nov): Defra AQMA service, SPRI atom feeds, NRW incidents, DAERA consents
-https://ukair.maps.rcdo.co.uk/ukairserver/rest/services?f=json
-https://ukair.maps.rcdo.co.uk/ukairserver/rest/services/AQMA?f=json
-https://ukair.maps.rcdo.co.uk/ukairserver/rest/services/AQMA/AQMA/MapServer?f=json
-https://ukair.maps.rcdo.co.uk/ukairserver/rest/services/AQMA/AQMA/MapServer/0?f=json
-http://map.sepa.org.uk/atom/SEPA_SPRI_Air_Releases.atom
+# Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
+# round 38 (24 Nov): scoping hosted UK downloads (data.gov.uk records for the download-only gaps)
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Environmental+Permitting+Regulations+-+Industrial+Sites%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Environmental+Permitting+Regulations+-+Waste+Sites%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Environmental+Pollution+Incidents%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Pollution+Inventory%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Air+Quality+Management+Areas%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=%22Scottish+Pollutant+Release+Inventory%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=%22pollution+incidents%22+%22Natural+Resources+Wales%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Registered+Historic+Battlefields%22+Wales
+https://www.data.gov.uk/api/action/package_search?rows=6&q=%22Local+Landscape+Areas%22+Scotland
+https://www.data.gov.uk/api/action/package_search?rows=6&q=title:%22Peat+Map%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=%22Water+Abstraction%22+%22Environment+Agency%22
+https://www.data.gov.uk/api/action/package_search?rows=6&q=%22Storm+Overflow%22+%22Environment+Agency%22
+https://environment.data.gov.uk/dataset/conditional-licence
+https://environment.data.gov.uk/support/faqs
 https://datamap.gov.wales/documents/2642
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents_Stations_Trade/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted/Industrial_Consents_Stations_Trade/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=3&returnGeometry=false&f=json
-https://www.data.gov.uk/api/action/package_search?q=%22industrial+consents%22+DAERA&rows=5
