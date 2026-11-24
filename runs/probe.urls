@@ -1,2 +1,21 @@
 # round 34 (24 Nov): York contaminated land register location
 https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer/41/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=json
+# round 35 (24 Nov): contamination step 2 (current pollution) candidates
+https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer?f=json
+https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/13?f=json
+https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/14?f=json
+https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/15?f=json
+https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/16?f=json
+https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/13/query?where=1%3D1&returnCountOnly=true&f=json
+https://map.sepa.org.uk/server/rest/services/Open?f=json
+https://gis.daera-ni.gov.uk/server/rest/services?f=json
+https://gis.daera-ni.gov.uk/server/rest/services/Hosted?f=json
+https://environment.data.gov.uk/spatialdata/environmental-permitting-regulations-industrial-sites/wfs?service=WFS&request=GetCapabilities
+https://environment.data.gov.uk/spatialdata/environmental-permitting-regulations-waste-sites/wfs?service=WFS&request=GetCapabilities
+https://environment.data.gov.uk/api/file/download?fileDataSetId=&fileName=
+https://www.data.gov.uk/api/action/package_search?q=%22Environmental+Permitting+Regulations%22+Environment+Agency&rows=20
+https://www.data.gov.uk/api/action/package_search?q=%22pollution+inventory%22&rows=20
+https://www.data.gov.uk/api/action/package_search?q=%22pollution+incidents%22&rows=20
+https://www.data.gov.uk/api/action/package_search?q=%22air+quality+management+areas%22&rows=20
+https://uk-air.defra.gov.uk/aqma/maps
+https://uk-air.defra.gov.uk/aqma/download

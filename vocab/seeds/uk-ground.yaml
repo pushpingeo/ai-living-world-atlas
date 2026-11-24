@@ -3,8 +3,8 @@
 # zones, radon). Every endpoint's info carries nation, completeness (complete | partial) and completeness_note. Written by a
 # one-off script from live metadata; hosts the workspace can't reach were read by probe rounds 32-33. Licences verbatim in
 # vocab/licence_overrides.yaml. Not open, on purpose (each says why): EA landfill (Conditional Licence: one year, personal
-# data), NRW landfill (NRW refuses full re-use), MRA low risk area and EA closed mining waste (no licence stated), radon
-# (UKHSA vs BGS terms unsettled), council layers (licence not stated, or OS INSPIRE).
+# data), NRW landfill (NRW refuses full re-use), MRA low risk area and EA closed mining waste (no licence stated), council layers (licence not stated, or OS INSPIRE).
+# Rob, 24 Nov: radon accepted as OGL (now open); EA landfill's Conditional Licence accepted for screening (still not open).
 # York's register layer was taken out on 24 Nov: its only feature is labelled "test data".
 defaults:
   publisher_type: public-body
@@ -463,9 +463,8 @@ sources:
     of Man. Fields: class field CLASS_MAX, advice field Advice. 254,123 features. Completeness: complete (all of the UK and
     the Isle of Man, 1 km squares). 254,123 squares: keep boxes small. A curated record for UK contamination screening (Tobler,
     24 Nov 2026): the publisher''s own layer, checked to return features for a bounding box.'
-  licence: Not settled. This UKHSA item states no licence; an earlier UKHSA copy of the same map (2015) says Open Government
-    Licence v3; the underlying radon potential data is British Geological Survey's, which data.gov.uk lists under the BGS
-    Digital Data Licence, not open. Treat as not open until UKHSA confirms.
+  licence: Open Government Licence v3.0. UKHSA's 2015 ArcGIS copy of this map states OGL v3; the current item states no
+    licence. Accepted as OGL by the atlas owner (Rob Dunfey), 24 Nov 2026.
   landing_page: https://www.ukradon.org/information/ukmaps
   bbox:
   - -8.1771

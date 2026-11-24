@@ -732,7 +732,8 @@ rules:
       Authorities
     terms: 'The Conditional Licence allows commercial use, but it lasts one year (renew by re-reading the terms) and the data
       holds personal data: licence holder names and addresses (fields lic_hold, licholdadd, lic_name). Show site names and dates;
-      leave the personal fields out.'
+      leave the personal fields out. Accepted for screening use by the atlas owner (Rob Dunfey), 24 Nov 2026, on those
+      terms; re-read the licence by Nov 2027.'
     source: 'ArcGIS Online item 19379dec0a9043838ee89c896b12b48a (Defra open data publisher): licence field, read 24 Nov 2026;
       the Conditional Licence''s own text on gov.uk (probe round 32)'
   - host: services-eu1.arcgis.com
@@ -748,7 +749,8 @@ rules:
     attribution: © Environment Agency copyright and/or database right 2015. All rights reserved.
     terms: 'The Conditional Licence allows commercial use, but it lasts one year (renew by re-reading the terms) and the data
       holds personal data: licence holder names and addresses (fields lic_hold, licholdadd, lic_name). Show site names and dates;
-      leave the personal fields out.'
+      leave the personal fields out. Accepted for screening use by the atlas owner (Rob Dunfey), 24 Nov 2026, on those
+      terms; re-read the licence by Nov 2027.'
     source: 'ArcGIS Online item 79ecf9387ec44ac39da68b716fc8a3ff (Defra open data publisher): licence field, read 24 Nov 2026'
   - host: services.arcgis.com
     layers: '^uk-nrw-historic-landfill:'
@@ -814,10 +816,9 @@ rules:
       33)
   - host: services1.arcgis.com
     layers: '^uk-ukhsa-radon-potential:'
-    licence: Not settled. This UKHSA item states no licence; an earlier UKHSA copy of the same map (2015) says Open Government
-      Licence v3; the underlying radon potential data is British Geological Survey's, which data.gov.uk lists under the BGS
-      Digital Data Licence, not open. Treat as not open until UKHSA confirms.
-    open: false
+    licence: Open Government Licence v3.0. UKHSA's 2015 ArcGIS copy of this map states OGL v3; the current item states no
+      licence. Accepted as OGL by the atlas owner (Rob Dunfey), 24 Nov 2026.
+    open: true
     attribution: © UK Health Security Agency, © British Geological Survey
     source: ArcGIS Online items 39549b376eda4b6195d8c08d16351f20 (UKHSA, no licence) and 855186f0d0a9403ab49557d90bd057af (OGL,
       2015); data.gov.uk BGS radon records (probe round 32), read 24 Nov 2026
