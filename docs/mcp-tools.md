@@ -44,7 +44,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     | Superfund NPL sites with status (points) | `c38ed5a534806b6f` | complete |
     | All Superfund sites, NPL and non-NPL (SEMS) | `a1a721163c4fb225` | complete |
     | Brownfields with EPA grant funding (ACRES) | `85b4bdc7c49e5055` | **partial**: only EPA-funded properties |
-    | RCRA corrective action boundaries | `8427fb0a7235a865` | **partial**: only where EPA regions mapped one |
+    | RCRA corrective action boundaries | `8427fb0a7235a865` | **partial**: only EPA Regions 1, 3, 4, 7, 10 (no Texas, California, Great Lakes, Southwest) |
     | Toxics Release Inventory facilities | `287038202610ca08` | complete (above the TRI thresholds) |
     | Air emission sources (ICIS-Air) | `41198ffb356b4b40` | **partial**: many minor sources are state-only |
     | Major water discharge permits (NPDES major) | `33493d9c2306128a` | complete |

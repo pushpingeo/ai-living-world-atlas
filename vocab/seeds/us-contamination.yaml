@@ -216,8 +216,9 @@ sources:
     facilities), plus a few TSCA PCB sites, from each EPA regional office. HANDLER_ID and HANDLER_NAME identify the facility;
     EPA_PROGRAM says which programme; ENTIRE_FACILITY_IND says whether the polygon is the whole facility or one area. Fields:
     name field HANDLER_NAME, code field HANDLER_ID, class field EPA_PROGRAM, date field GIS_FEATURE_LAST_CHANGE_DATE. 4,452
-    features. Completeness: partial (the boundaries EPA regions have mapped so far; many corrective action facilities have
-    none). Layer last edited February 2024. Many boundaries were converted from older systems and are approximate. A curated
+    features. Completeness: partial (only EPA Regions 1, 3, 4, 7 and 10 have loaded boundaries (29 states and DC, e.g. PA,
+    VA, IA, KS, MO; none in Texas, California, the Great Lakes states or the Southwest), and not every facility there has
+    one). Layer last edited February 2024. Many boundaries were converted from older systems and are approximate. A curated
     record for US contamination screening (Tobler, 24 Nov 2026): the publisher''s own layer, checked to return features for
     a bounding box.'
   licence: 'Public domain (US federal work). The item says: "These data are public and there are no restrictions for its use."
@@ -245,7 +246,8 @@ sources:
       date_field: GIS_FEATURE_LAST_CHANGE_DATE
       nation: United States
       completeness: partial
-      completeness_note: the boundaries EPA regions have mapped so far; many corrective action facilities have none
+      completeness_note: only EPA Regions 1, 3, 4, 7 and 10 have loaded boundaries (29 states and DC, e.g. PA, VA, IA, KS,
+        MO; none in Texas, California, the Great Lakes states or the Southwest), and not every facility there has one
       data_date: '2024-02-05'
       data_date_source: layer editing info
     check_url: https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/NationalRCRABoundaries/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json
