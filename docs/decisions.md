@@ -558,7 +558,7 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
   under the EA Conditional Licence (commercial use allowed; one-year term; personal data in licence-holder fields). NRW
   says it doesn't grant re-use of its full landfill data. Radon: UKHSA's current item names no licence, its 2015 copy says
   OGL, BGS's underlying data is under BGS's licence: not open until UKHSA confirms (Rob). Others state none.
-- **Concepts:** contaminated-land, landfill, mining-legacy, groundwater-protection, pollution-source, air-quality-area;
+- **Concepts** (groundwater-protection narrowed after the first re-tag: aquifer geology and North Sea CO2 storage maps had got it; re-tag of its 2,461 datasets $0.24, so $1.79 in all): contaminated-land, landfill, mining-legacy, groundwater-protection, pollution-source, air-quality-area;
   brownfield, waste, water-quality and air-quality narrowed. New tag-workflow options `RETAG_CONCEPTS` and `RETAG_TITLE`
   tag chosen datasets again (newest tag wins). Re-tag of every wave: 15,773 datasets, **$1.55** (Europe 0.72, US 0.34,
   CANZ 0.20, UK 0.11, EMODnet 0.11, global 0.06, Africa 0.01). The CANZ run file still held November's batch id, so its

@@ -81,7 +81,7 @@ Workspace notes:
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
 - The viewer and the MCP server hold about **264k passing datasets**, all tagged (18 Nov).
-- Tagging spend is **$30.01** in total (24 Nov: $1.55 contamination re-tag; under a cent each for the curated UK waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
+- Tagging spend is **$30.25** in total (24 Nov: $1.79 contamination re-tags; under a cent each for the curated UK waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
@@ -198,7 +198,7 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
 - Every curated UK record carries `nation`, `completeness` (complete | partial) and `completeness_note` in its endpoint
   info. Tobler called it "coverage"; dataset details already use `coverage` for extent size.
 - Most of these licences are not open, each with its reason (decisions.md). Radon waits on UKHSA (Rob).
-- New concepts and a full re-tag ($1.55). The tag workflow takes `RETAG_CONCEPTS` and `RETAG_TITLE`. **Clear `BATCH_ID`
+- New concepts and a full re-tag ($1.79 with the groundwater-protection fix). The tag workflow takes `RETAG_CONCEPTS` and `RETAG_TITLE`. **Clear `BATCH_ID`
   in a run file before reusing it** (it resumes that batch instead of tagging).
 - **Step 2, next:** current pollution: permitted sites and release inventories (EA Pollution Inventory if a service
   exists, SEPA's SPRI on its Environmental_Monitoring service, DAERA industrial consents), pollution incidents (DAERA
