@@ -1,0 +1,29 @@
+[
+ {
+  "portal": "agol:owner:\"gwlayne_NASA\"",
+  "kind": "arcgis-online",
+  "ok": true,
+  "error": "",
+  "records": 191,
+  "scanned": 191,
+  "skipped_paid": 0
+ },
+ {
+  "portal": "agol:owner:\"MetOffice_data\" OR owner:\"MetOffice_AirQuality\"",
+  "kind": "arcgis-online",
+  "ok": true,
+  "error": "",
+  "records": 149,
+  "scanned": 149,
+  "skipped_paid": 0
+ },
+ {
+  "portal": "agol:owner:\"NASA_Earthdata\" OR owner:\"prrea_NASA\"",
+  "kind": "arcgis-online",
+  "ok": true,
+  "error": "",
+  "records": 217,
+  "scanned": 217,
+  "skipped_paid": 0
+ }
+]

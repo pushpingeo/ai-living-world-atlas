@@ -1,0 +1,211 @@
+{
+ "minutes": 8.3,
+ "http": {
+  "requests": 3458,
+  "errors": 281,
+  "robots_blocked": 1
+ },
+ "portals": {
+  "total": 3,
+  "ok": 3,
+  "records_with_service_links": 557
+ },
+ "arcgis_roots": {
+  "total": 14,
+  "reachable": 8
+ },
+ "services": {
+  "attempted": 1279,
+  "ok": 473,
+  "skipped_time": 0,
+  "by_type": {
+   "arcgis-imageserver": 103,
+   "wms": 14,
+   "arcgis-mapserver": 153,
+   "wmts": 1,
+   "arcgis-featureserver": 201,
+   "wfs": 1
+  },
+  "top_errors": [
+   [
+    "{'code': N, 'details': 'error', 'message': 'HTTP N Not F",
+    505
+   ],
+   [
+    "HTTP N",
+    195
+   ],
+   [
+    "{'code': N, 'details': [], 'message': 'Service not found'}",
+    69
+   ],
+   [
+    "{'code': N, 'details': [], 'message': 'Service not found.'",
+    28
+   ],
+   [
+    "{'code': N, 'details': [], 'message': 'Token Required'}",
+    3
+   ],
+   [
+    "TimeoutError: ",
+    2
+   ],
+   [
+    "parse: ParseError: no element found: line 1, column N",
+    1
+   ],
+   [
+    "{'code': N, 'message': 'Invalid URL', 'details': ['Invalid",
+    1
+   ]
+  ]
+ },
+ "layers": {
+  "total": 6903,
+  "by_service_type": {
+   "arcgis-mapserver": 2809,
+   "wms": 1932,
+   "wmts": 1332,
+   "wfs": 399,
+   "arcgis-featureserver": 323,
+   "arcgis-imageserver": 103,
+   "download": 4,
+   "landing": 1
+  },
+  "with_bbox": 6510,
+  "with_abstract_50": 1701,
+  "with_licence_text": 5833,
+  "with_open_licence": 151,
+  "with_keywords": 3043,
+  "joined_to_catalogue": 330,
+  "codelike_titles": 2799,
+  "junk_flagged": 2,
+  "declared_iso_theme": 210,
+  "declared_theme_how": {
+   "none": 6693,
+   "keyword": 210
+  },
+  "publisher_type": {
+   "central-gov": 5811,
+   "research": 660,
+   "civil-society": 223,
+   "public-body": 149,
+   "international": 60
+  },
+  "detail_source": {
+   "none": 4505,
+   "tile-cache": 1327,
+   "stated": 912,
+   "pixel-size": 106,
+   "display": 53
+  },
+  "extent_source": {
+   "declared": 5897,
+   "measured": 1001,
+   "curated": 5
+  },
+  "extent_flags": {
+   "world": 4168,
+   "shared-default": 3488,
+   "grid-default": 92
+  },
+  "cors_ok": 6493,
+  "detail_level": {
+   "unknown": 4505,
+   "coarser": 1953,
+   "1:2M": 240,
+   "1:25k": 78,
+   "1:100k": 59,
+   "1:500k": 56,
+   "1:5k": 12
+  },
+  "coverage_level": {
+   "global": 4497,
+   "continental": 970,
+   "national": 721,
+   "unknown": 393,
+   "regional": 237,
+   "local": 85
+  },
+  "detail_level_passing": {
+   "unknown": 310,
+   "1:25k": 62,
+   "coarser": 45,
+   "1:100k": 28,
+   "1:2M": 22,
+   "1:500k": 20,
+   "1:5k": 8
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 6311,
+   "ok": 557,
+   "fail": 26,
+   "empty": 9
+  },
+  "live_rate_of_checked": 0.941,
+  "returns_data_or_empty_rate": 0.956
+ },
+ "quality": {
+  "pass": 495,
+  "pass_rate": 0.072,
+  "score_median": 73.0,
+  "score_bands": {
+   "[0, 40)": 654,
+   "[40, 50)": 157,
+   "[50, 60)": 169,
+   "[60, 70)": 1408,
+   "[70, 80)": 2791,
+   "[80, 101)": 1724
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 4854,
+  "distinct_among_passing": 448
+ },
+ "file_mb": 0.77,
+ "datasets": {
+  "total": 5100,
+  "passing": 463,
+  "endpoints_per_dataset": {
+   "1": 4631,
+   "2": 216,
+   "3": 1,
+   "4": 21,
+   "5": 25,
+   "6": 10,
+   "8": 196
+  },
+  "multi_protocol": 76,
+  "match_rules": {
+   "title-extent": 445,
+   "arcgis-pair": 18,
+   "ogc-name": 6
+  },
+  "role": {
+   "imagery": 2946,
+   "data": 2151,
+   "elevation": 3
+  },
+  "role_passing": {
+   "data": 404,
+   "imagery": 57,
+   "elevation": 2
+  },
+  "capabilities": {
+   "render": 3149,
+   "tiles": 1731,
+   "query": 1570,
+   "time": 1191,
+   "download": 555,
+   "feature-info": 309,
+   "catalog": 77,
+   "raster-functions": 56,
+   "multidimensional": 30,
+   "pixels": 11
+  },
+  "detail_known_passing": 172
+ }
+}

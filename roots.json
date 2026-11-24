@@ -1,0 +1,100 @@
+[
+ {
+  "root": "https://index.nationalmap.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 204,
+  "n_services": 5
+ },
+ {
+  "root": "https://basemap.nationalmap.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 175,
+  "n_services": 4
+ },
+ {
+  "root": "https://elevation.nationalmap.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 183,
+  "n_services": 1
+ },
+ {
+  "root": "https://carto.nationalmap.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 182,
+  "n_services": 7
+ },
+ {
+  "root": "https://earthquake.usgs.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 302,
+  "n_services": 55
+ },
+ {
+  "root": "https://gis.earthdata.nasa.gov/gis05/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 50,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.disasters.nasa.gov/ags04/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 88,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.earthdata.nasa.gov/maps/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 119,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.disasters.nasa.gov/ags02/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 164,
+  "n_services": 0
+ },
+ {
+  "root": "https://maps.disasters.nasa.gov/ags03/rest/services",
+  "status": 404,
+  "error": "HTTP 404",
+  "ms": 158,
+  "n_services": 0
+ },
+ {
+  "root": "https://hydro.nationalmap.gov/arcgis/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 27,
+  "n_services": 6
+ },
+ {
+  "root": "https://gis.wri.org/server/rest/services",
+  "status": 200,
+  "error": "",
+  "ms": 67,
+  "n_services": 38
+ },
+ {
+  "root": "https://idpgis.ncep.noaa.gov/arcgis/rest/services",
+  "status": 0,
+  "error": "ClientConnectorDNSError: Cannot connect to host idpgis.ncep.noaa.gov:443 ssl:default [No address associated with hostname]",
+  "ms": 1,
+  "n_services": 0
+ },
+ {
+  "root": "https://gis.earthdata.nasa.gov/portal/rest/services",
+  "status": 200,
+  "error": "{'code': 403, 'message': 'You do not have permissions to use this resource.', 'details': None}",
+  "ms": 1590,
+  "n_services": 605
+ }
+]
