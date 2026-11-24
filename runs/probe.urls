@@ -1,26 +1,7 @@
-# round 32 (24 Nov): contamination pack - licences (MRA, UKHSA radon, NRW, EA conditional), SEPA and DAERA directories, council layers
-https://ckan.publishing.service.gov.uk/api/action/package_search?q=%22Development%20High%20Risk%20Area%22&rows=5
-https://ckan.publishing.service.gov.uk/api/action/package_search?q=radon%20potential&rows=5
-https://ckan.publishing.service.gov.uk/api/action/package_search?q=%22authorised%20landfill%22%20Wales&rows=5
-https://ckan.publishing.service.gov.uk/api/action/package_search?q=%22closed%20mining%20waste%22%20Wales&rows=5
-https://www.ukradon.org/information/ukmaps
-https://environment.data.gov.uk/dataset/7a955570-d465-11e4-a37c-f0def148f590
-https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence
-https://map.sepa.org.uk/server/rest/services/Open?f=json
-https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer?f=json
-https://gis.daera-ni.gov.uk/server/rest/services?f=json
-https://gis.daera-ni.gov.uk/server/rest/services/Hosted?f=json
-https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer/41?f=json
-https://maps.york.gov.uk/ArcGIS/rest/services/Public/EnvPlan/MapServer/41/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.lambeth.gov.uk/arcgis/rest/services/LambethContaminatedLandPossible/MapServer/0?f=json
-https://gis.lambeth.gov.uk/arcgis/rest/services/LambethContaminatedLandPossible/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://gis.lambeth.gov.uk/arcgis/rest/Services/LambethHistoricLandfillSites/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6?f=json
-https://utility.arcgis.com/usrsvcs/servers/602d312d41514bcb9b6758d0812746af/rest/services/AGOL/INSPIRE/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
-https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&typeNames=ns:Potentially_Contaminated_Sites&count=1&outputFormat=application/json
-https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&typeNames=ns:Potentially_Contaminated_Sites&resultType=hits
-https://maps.derby.gov.uk/wfs/wfs.exe?service=WFS&request=GetCapabilities
-http://maps.carlisle.gov.uk/getows.ashx?mapsource=CCC%2Finspire&service=WFS&version=1.1.0&request=GetFeature&typeName=potentially_contaminated_land&maxFeatures=1&outputFormat=application/json
-http://maps.carlisle.gov.uk/getows.ashx?mapsource=CCC%2Finspire&service=WFS&request=GetCapabilities
-https://clacks.cloud.cadcorp.com/WFS91/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&typeNames=ns:Potentially_Contaminated_Land_-_Polygons&count=1&outputFormat=application/json
-https://clacks.cloud.cadcorp.com/WFS91/wfs.exe?service=WFS&version=2.0.0&request=GetFeature&typeNames=ns:Potentially_Contaminated_Land_-_Polygons&resultType=hits
+# round 33 (24 Nov): EA closed mining waste WFS, MRA low risk licence, NRW historic landfill AGOL item vs data.gov.uk
+https://environment.data.gov.uk/spatialdata/inventory-of-closed-mining-waste-facilities/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=dataset-65ef1430-d465-11e4-96c6-f0def148f590:Inventory_of_Closed_Mining_Waste_Facilities&count=1&outputFormat=application/json&srsName=urn:ogc:def:crs:OGC:1.3:CRS84
+https://environment.data.gov.uk/spatialdata/inventory-of-closed-mining-waste-facilities/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=dataset-65ef1430-d465-11e4-96c6-f0def148f590:Inventory_of_Closed_Mining_Waste_Facilities&resultType=hits
+https://environment.data.gov.uk/spatialdata/inventory-of-closed-mining-waste-facilities/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=dataset-65ef1430-d465-11e4-96c6-f0def148f590:Inventory_of_Closed_Mining_Waste_Facilities&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=-6,50,-4.5,51,urn:ogc:def:crs:OGC:1.3:CRS84
+https://ckan.publishing.service.gov.uk/api/action/package_search?q=%22Development%20Low%20Risk%20Area%22&rows=3
+https://ckan.publishing.service.gov.uk/api/action/package_search?q=%22inventory%20of%20closed%20mining%20waste%22%20Environment%20Agency&rows=3
+https://ckan.publishing.service.gov.uk/api/action/package_search?q=%22source%20protection%20zones%22%20Natural%20Resources%20Wales&rows=3
