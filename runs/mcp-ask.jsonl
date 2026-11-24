@@ -1,5 +1,35 @@
-# 23 Nov, after the Carbon and Peatland fix: details and two fetches
-{"label": "Carbon and peatland details (class_field)", "tool": "get_dataset", "args": {"id": "c083949b58058a10"}}
-{"label": "Carbon and peatland near Flow Country", "tool": "fetch_features", "args": {"id": "c083949b58058a10", "lon": -3.9, "lat": 58.4, "radius_km": 2, "limit": 5, "include_geometry": false}}
-{"label": "Cadw scheduled monuments near Cardiff", "tool": "fetch_features", "args": {"id": "2a620f0931d8f136", "lon": -3.2, "lat": 51.5, "radius_km": 10, "limit": 5, "include_geometry": false}}
-{"label": "text uk-screening-pack over GB", "tool": "find_datasets", "args": {"text": "uk-screening-pack", "bbox": [-8.7, 49.8, 1.8, 60.9], "limit": 100}}
+# 24 Nov: what the atlas holds for contaminated land (UK, US, Europe, world)
+{"label": "UK brownfield concept", "tool": "find_datasets", "args": {"limit": 40, "concept": "brownfield", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK waste concept", "tool": "find_datasets", "args": {"limit": 40, "concept": "waste", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text contaminated land", "tool": "find_datasets", "args": {"limit": 40, "text": "contaminated land", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text historic landfill", "tool": "find_datasets", "args": {"limit": 40, "text": "historic landfill", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text landfill", "tool": "find_datasets", "args": {"limit": 40, "text": "landfill", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text Part 2A", "tool": "find_datasets", "args": {"limit": 40, "text": "Part 2A", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text land contamination", "tool": "find_datasets", "args": {"limit": 40, "text": "land contamination", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text authorised landfill", "tool": "find_datasets", "args": {"limit": 40, "text": "authorised landfill", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text waste site", "tool": "find_datasets", "args": {"limit": 40, "text": "waste site", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text radioactive contaminated", "tool": "find_datasets", "args": {"limit": 40, "text": "radioactive contaminated", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text coal mining risk", "tool": "find_datasets", "args": {"limit": 40, "text": "coal mining risk", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "UK text made ground", "tool": "find_datasets", "args": {"limit": 40, "text": "made ground", "bbox": [-8.7, 49.8, 1.8, 60.9]}}
+{"label": "US brownfield concept", "tool": "find_datasets", "args": {"limit": 40, "concept": "brownfield", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text superfund", "tool": "find_datasets", "args": {"limit": 40, "text": "superfund", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text national priorities list", "tool": "find_datasets", "args": {"limit": 40, "text": "national priorities list", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text brownfield", "tool": "find_datasets", "args": {"limit": 40, "text": "brownfield", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text cleanup sites", "tool": "find_datasets", "args": {"limit": 40, "text": "cleanup sites", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text RCRA", "tool": "find_datasets", "args": {"limit": 40, "text": "RCRA", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text leaking underground storage tank", "tool": "find_datasets", "args": {"limit": 40, "text": "leaking underground storage tank", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text contaminated sites", "tool": "find_datasets", "args": {"limit": 40, "text": "contaminated sites", "bbox": [-125, 24, -66, 50]}}
+{"label": "US text FRS facilities", "tool": "find_datasets", "args": {"limit": 40, "text": "FRS facilities", "bbox": [-125, 24, -66, 50]}}
+{"label": "Europe brownfield concept", "tool": "find_datasets", "args": {"limit": 40, "concept": "brownfield", "bbox": [-11, 35, 32, 71]}}
+{"label": "text contaminated sites [-11, 35, 32, 71]", "tool": "find_datasets", "args": {"limit": 40, "text": "contaminated sites", "bbox": [-11, 35, 32, 71]}}
+{"label": "text Altlasten [-11, 35, 32, 71]", "tool": "find_datasets", "args": {"limit": 40, "text": "Altlasten", "bbox": [-11, 35, 32, 71]}}
+{"label": "text sites pollu\u00e9s [-11, 35, 32, 71]", "tool": "find_datasets", "args": {"limit": 40, "text": "sites pollu\u00e9s", "bbox": [-11, 35, 32, 71]}}
+{"label": "text BASOL [-11, 35, 32, 71]", "tool": "find_datasets", "args": {"limit": 40, "text": "BASOL", "bbox": [-11, 35, 32, 71]}}
+{"label": "text bodemverontreiniging [-11, 35, 32, 71]", "tool": "find_datasets", "args": {"limit": 40, "text": "bodemverontreiniging", "bbox": [-11, 35, 32, 71]}}
+{"label": "text suelos contaminados [-11, 35, 32, 71]", "tool": "find_datasets", "args": {"limit": 40, "text": "suelos contaminados", "bbox": [-11, 35, 32, 71]}}
+{"label": "text contaminated sites [110, -45, 180, -8]", "tool": "find_datasets", "args": {"limit": 40, "text": "contaminated sites", "bbox": [110, -45, 180, -8]}}
+{"label": "text contaminated sites [-141, 41, -52, 70]", "tool": "find_datasets", "args": {"limit": 40, "text": "contaminated sites", "bbox": [-141, 41, -52, 70]}}
+{"label": "text contaminated sites [-180, -60, 180, 80]", "tool": "find_datasets", "args": {"limit": 40, "text": "contaminated sites", "bbox": [-180, -60, 180, 80]}}
+{"label": "text brownfield [-180, -60, 180, 80]", "tool": "find_datasets", "args": {"limit": 40, "text": "brownfield", "bbox": [-180, -60, 180, 80]}}
+{"label": "text landfill [-180, -60, 180, 80]", "tool": "find_datasets", "args": {"limit": 40, "text": "landfill", "bbox": [-180, -60, 180, 80]}}
+{"label": "World brownfield concept", "tool": "find_datasets", "args": {"limit": 40, "concept": "brownfield", "bbox": [-180, -60, 180, 80]}}
