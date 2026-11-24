@@ -129,7 +129,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     - **NRW landfill (both):** NRW says on data.gov.uk that it doesn't grant re-use of the full dataset (a redacted version
       under an NRW licence). NRW's ArcGIS item says OGL for historic landfill; they disagree, so not open.
     - **Radon:** unsettled. UKHSA's current item states no licence, its 2015 copy says OGL, and the underlying BGS data is
-      under BGS's own licence. Not open until UKHSA confirms (a question for Rob).
+      under BGS's own licence. **Superseded the same afternoon: Rob accepted it as OGL, so it is now open.**
     - **Coal low risk area, EA closed mining waste:** no licence stated.
     - **Council layers:** no licence stated; Sheffield's is the OS INSPIRE end user licence.
   - **Speed, live 24 Nov:** 0.3-5.8 s per fetch_features (Lambeth and the coal low risk area slowest). Clackmannanshire's server takes ~20 s; radon has 254k squares
