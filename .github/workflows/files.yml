@@ -1,30 +1,41 @@
 name: files
 # Hosted download datasets whose source is an open download (spec key `source_url`): fetch it, convert it to tiles
 # (atlas/files.py) and commit files/<id>/ and vocab/seeds/files.yaml back to main. Edit runs/files.env (SPECS=...) and
-# push to run it. Then bump runs/spike-files.env so the wave picks the record up (a push from here doesn't start it).
+# push to run it. Monthly (schedule below) it refreshes the specs in runs/files-monthly.env instead: the EA downloads,
+# whose licence lasts a year, and England's NSIP boundaries. When anything changed, it starts the spike-files wave itself
+# (a push from a workflow doesn't start other workflows, a dispatch does), and pages and deploy-mcp follow from that. (Push runs do the same since 24 Nov: no need to bump runs/spike-files.env by hand.)
+# A failed download stops the run before anything is written: the old tiles stay, and their data_date shows their age.
 on:
   push:
     branches: [main]
     paths: ['runs/files.env']
+  schedule:
+    - cron: '17 4 3 * *'   # 04:17 UTC on the 3rd of each month
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 concurrency: files
 jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install -q -r requirements.txt pyogrio openpyxl
+      - run: pip install -q -r requirements.txt pyogrio openpyxl access-parser
+      - name: Which specs
+        run: |
+          f=runs/files.env; [ "${{ github.event_name }}" = schedule ] && f=runs/files-monthly.env
+          grep '^SPECS=' "$f" >> "$GITHUB_ENV"; echo "from $f: $(grep '^SPECS=' "$f")"
       - name: Download and convert
         run: |
           set -euo pipefail
-          source runs/files.env
           mkdir -p /tmp/src
           for spec in $SPECS; do
             url=$(python3 -c "import yaml,sys; print(yaml.safe_load(open('$spec')).get('source_url') or '')")
             [ -z "$url" ] && { echo "::error::$spec has no source_url"; exit 1; }
-            curl -sSfL -m 600 -A "ai-living-world-atlas (+https://github.com/pushpingeo/ai-living-world-atlas)" -o "/tmp/src/$(basename "$url")" "$url"
+            # saved under the file name the spec's source expects (the zip's name, before any "!member")
+            name=$(python3 -c "import yaml; print(yaml.safe_load(open('$spec'))['source'].split('!')[0])")
+            curl -sSfL -m 600 -A "ai-living-world-atlas (+https://github.com/pushpingeo/ai-living-world-atlas)" -o "/tmp/src/$name" "$url"
             ls -la /tmp/src
           done
           python -m atlas.files --source-dir /tmp/src $SPECS | tee /tmp/files.log
@@ -48,5 +59,11 @@ jobs:
         run: |
           git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
           git add files vocab/seeds/files.yaml
-          git commit -qm "files: converted $(grep '^SPECS' runs/files.env | cut -d= -f2-)" || { echo "nothing changed"; exit 0; }
+          git commit -qm "files: converted $SPECS" || { echo "nothing changed"; exit 0; }
           for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep 5; done
+          echo "changed=1" >> "$GITHUB_ENV"
+      - name: Start the spike-files wave
+        if: env.changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/${{ github.repository }}/actions/workflows/spike.yml/dispatches -f ref=main -f 'inputs[run_file]=runs/spike-files.env'

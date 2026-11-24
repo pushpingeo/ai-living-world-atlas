@@ -976,3 +976,39 @@ rules:
     open: true
     attribution: U.S. Environmental Protection Agency
     source: ArcGIS Online item 0b30c57359194330bb89c9b3cf9c0bd5 (EPA_GEO), licence field, read 24 Nov 2026
+  # The EA downloads the atlas hosts (vocab/files/ea-*.yaml), 24 Nov 2026: not open, accepted by Rob for screening.
+  - host: pushpingeo.github.io
+    url: /data/f/ea-epr-industrial-sites/
+    licence: 'Environment Agency Conditional Licence: copy, publish, distribute, adapt and use commercially, with attribution.
+      Special conditions: the licence lasts one year and ends without notice; the data includes personal data (individuals and
+      sites operated by individuals), for which whoever passes it on is responsible under data protection law.'
+    open: false
+    attribution: Contains Environment Agency information © Environment Agency and/or database right.
+    terms: 'Accepted for screening use by the atlas owner (Rob Dunfey), 24 Nov 2026. Operator names and street addresses are
+      left out of this copy (some operators are private individuals): look a permit up on the EA''s public register by its number.
+      Refreshed monthly; re-read the licence by Nov 2027.'
+    source: data.gov.uk record (special conditions, probe round 38) and gov.uk's Environment Agency Conditional Licence page,
+      read 24 Nov 2026
+  - host: pushpingeo.github.io
+    url: /data/f/ea-epr-waste-sites/
+    licence: 'Environment Agency Conditional Licence: copy, publish, distribute, adapt and use commercially, with attribution.
+      Special conditions: the licence lasts one year and ends without notice; the data includes personal data (individuals and
+      sites operated by individuals), for which whoever passes it on is responsible under data protection law.'
+    open: false
+    attribution: Contains Environment Agency information © Environment Agency and/or database right.
+    terms: 'Accepted for screening use by the atlas owner (Rob Dunfey), 24 Nov 2026. Licence holder names, contact details and
+      street addresses are left out of this copy (some holders are private individuals): look a permit up on the EA''s public
+      register by its number. Refreshed monthly; re-read the licence by Nov 2027.'
+    source: data.gov.uk record (special conditions, probe round 38) and gov.uk's Environment Agency Conditional Licence page,
+      read 24 Nov 2026
+  - host: pushpingeo.github.io
+    url: /data/f/ea-pollution-incidents/
+    licence: 'Environment Agency Conditional Licence: copy, publish, distribute, adapt and use commercially, with attribution.
+      Special conditions: the licence lasts one year and ends without notice; the data includes personal data (individuals and
+      sites operated by individuals), for which whoever passes it on is responsible under data protection law.'
+    open: false
+    attribution: Contains Environment Agency information © Environment Agency and/or database right.
+    terms: Accepted for screening use by the atlas owner (Rob Dunfey), 24 Nov 2026. An incident at or near a site does not mean
+      the site's owner or operator caused it. Refreshed monthly; re-read the licence by Nov 2027.
+    source: data.gov.uk record (special conditions, probe round 38) and gov.uk's Environment Agency Conditional Licence page,
+      read 24 Nov 2026

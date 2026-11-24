@@ -14,7 +14,15 @@ Spec keys: id, title, publisher, publisher_type, licence, citation, release, lan
   coords_column one "lat, lon" text column, when there are no separate latitude/longitude columns
   exclude       {column: regex}: rows to leave out (e.g. third-party rows under a non-commercial licence)
   simplify_deg  geometry simplification tolerance, default 0.0005 (~50 m)
-  source_url    where the `files` workflow downloads the source from (publishers whose download is open, e.g. JNCC)
+  source_url    where the `files` workflow downloads the source from (publishers whose download is open, e.g. JNCC);
+                saved under the zip's name from `source`
+  table         MS Access (.accdb) sources: the table to read (pure-Python access-parser, no ODBC)
+  join          list of joins from other tables in the same database, each {table, key, other_key (default: key), column,
+                into, where {col: value} (optional), first (one value) or else every distinct value joined with "; "}
+  easting, northing, source_crs   projected coordinate columns (e.g. British National Grid, 27700), turned into WGS84
+  columns       the fields to keep (personal fields are left out by not listing them)
+  tile_deg      tile size in degrees (default 10; 1 for dense national point layers, so a fetch reads one small tile)
+  data_date     "download" sets endpoint_info.data_date to the day the file was converted (monthly refreshes)
   country, endpoint_info, attribution   passed to the record: home country, details for get_dataset (e.g. name_field),
                 and the publisher's attribution statement (also give it in vocab/licence_overrides.yaml)
 """
@@ -51,6 +59,11 @@ def clean(v):
         v = v.item()
     if isinstance(v, float) and v.is_integer() and abs(v) < 1e15:
         return int(v)
+    if isinstance(v, str):
+        v = v.strip()
+        m = re.match(r"^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(:\d{2})?$", v)  # database date-times as text
+        if m:
+            return m.group(1) if m.group(2) == "00:00" else f"{m.group(1)}T{m.group(2)}"
     return v
 
 
@@ -86,6 +99,48 @@ def open_source(src_dir: Path, source: str):
             return f"zip://{(src_dir / zname).resolve()}!{member}", member
         return io.BytesIO(zipfile.ZipFile(src_dir / zname).read(member)), member
     return src_dir / source, source
+
+
+def read_access(f, name: str, spec: dict) -> pd.DataFrame:
+    """One table from an MS Access database, with the spec's joins from other tables in it."""
+    import tempfile
+    from access_parser import AccessParser
+
+    if not isinstance(f, (str, Path)):  # a zip member in memory: access-parser wants a path
+        tmp = tempfile.NamedTemporaryFile(suffix=".accdb", delete=False)
+        tmp.write(f.read())
+        tmp.close()
+        f = tmp.name
+    db = AccessParser(str(f))
+    df = pd.DataFrame(db.parse_table(spec["table"]))
+    for j in spec.get("join") or []:
+        o = pd.DataFrame(db.parse_table(j["table"]))
+        for col, val in (j.get("where") or {}).items():
+            o = o[o[col].astype(str) == str(val)]
+        key = j.get("other_key", j["key"])
+        o = o[[key, j["column"]]].dropna()
+        o = o[o[j["column"]].astype(str).str.strip() != ""]
+        if j.get("first"):
+            m = o.drop_duplicates(key).set_index(key)[j["column"]]
+        else:
+            m = o.groupby(key)[j["column"]].agg(lambda v: "; ".join(dict.fromkeys(str(x).strip() for x in v)))
+        df[j["into"]] = df[j["key"]].map(m)
+    return df
+
+
+def add_lonlat(df: pd.DataFrame, spec: dict, stats: dict) -> pd.DataFrame:
+    """Projected easting/northing columns (spec easting, northing, source_crs) to lon/lat columns."""
+    from pyproj import Transformer
+
+    e = pd.to_numeric(df[spec["easting"]], errors="coerce")
+    n = pd.to_numeric(df[spec["northing"]], errors="coerce")
+    bad = e.isna() | n.isna() | (e <= 0) | (n <= 0)  # 0,0 is "no location" in these registers
+    stats["no_location"] += int(bad.sum())
+    df = df[~bad].copy()
+    t = Transformer.from_crs(int(spec.get("source_crs", 27700)), 4326, always_xy=True)
+    lon, lat = t.transform(e[~bad].to_numpy(dtype=float), n[~bad].to_numpy(dtype=float))
+    df["lon"], df["lat"] = lon, lat
+    return df
 
 
 def rows_to_features(df: pd.DataFrame, spec: dict, stats: dict) -> list:
@@ -177,7 +232,13 @@ def convert(spec: dict, src_dir: Path) -> tuple[list, dict, str]:
     stats = defaultdict(int)
     f, name = open_source(src_dir, spec["source"])
     about = ""
-    if re.search(r"\.(xlsx|xls)$", name, re.I):
+    if re.search(r"\.accdb$", name, re.I):
+        df = read_access(f, name, spec)
+        stats["rows"] = len(df)
+        if spec.get("easting"):
+            df = add_lonlat(df, spec, stats)
+        feats = rows_to_features(df, spec, stats)
+    elif re.search(r"\.(xlsx|xls)$", name, re.I):
         xl = pd.ExcelFile(f)
         sheets = spec.get("sheets") or [spec["sheet"]]
         feats = []
@@ -204,10 +265,11 @@ def write_tiles(spec: dict, feats: list, stats: dict) -> dict:
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
+    deg = float(spec.get("tile_deg", TILE_DEG))
     cells = defaultdict(list)
     for x in feats:
         lon, lat = _first(x["geometry"]["coordinates"])
-        cells[(int(math.floor(lon / TILE_DEG)), int(math.floor(lat / TILE_DEG)))].append(x)
+        cells[(int(math.floor(lon / deg)), int(math.floor(lat / deg)))].append(x)
     tiles, total = [], 0
     for (cx, cy), fs in sorted(cells.items()):
         bb = [math.inf, math.inf, -math.inf, -math.inf]
@@ -226,7 +288,7 @@ def write_tiles(spec: dict, feats: list, stats: dict) -> dict:
                          "release": spec.get("release", ""), "landing_page": spec.get("landing_page", ""),
                          "converted": date.today().isoformat(), "source_file": spec["source"].split("!")[-1],
                          **{k: v for k, v in stats.items()}},
-        "count": len(feats), "bbox": bb, "tile_deg": TILE_DEG, "format": "gzip GeoJSON per tile", "tiles": tiles,
+        "count": len(feats), "bbox": bb, "tile_deg": deg, "format": "gzip GeoJSON per tile", "tiles": tiles,
     }
     (out / "index.json").write_text(json.dumps(index, separators=(",", ":")))
     print(f"files/{spec['id']}/: {len(feats):,} features in {len(tiles)} tiles, {total / 1e6:.1f} MB gzipped; {stats}")
@@ -241,6 +303,10 @@ def record(spec: dict, index: dict, feats: list) -> dict:
         left.append(f"{index['atlas_source']['no_location']:,} records without a location")
     if index["atlas_source"].get("excluded"):
         left.append(f"{index['atlas_source']['excluded']:,} records excluded ({spec.get('exclude_reason', 'see spec')})")
+    info = dict(spec.get("endpoint_info") or {})
+    if spec.get("data_date") == "download":
+        info["data_date"] = index["atlas_source"]["converted"]
+        info.setdefault("data_date_source", "the day the atlas downloaded the publisher's file")
     return {
         "kind": "record", "id": spec["id"], "title": spec["title"], "publisher": spec["publisher"],
         "publisher_type": spec.get("publisher_type", "civil-society"), **({"country": spec["country"]} if spec.get("country") else {}),
@@ -251,7 +317,7 @@ def record(spec: dict, index: dict, feats: list) -> dict:
         "bbox": [round(x, 4) for x in index["bbox"]], "geometry_type": gtype,
         "concepts_hint": spec.get("concepts_hint", []),
         "endpoints": [{"protocol": "geojson", "url": PAGES_BASE + f"{spec['id']}/index.json", "format": "GeoJSON tiles",
-                       **({"info": spec["endpoint_info"]} if spec.get("endpoint_info") else {})},
+                       **({"info": info} if info else {})},
                       {"protocol": "landing", "url": spec.get("landing_page", "")}],
     }
 

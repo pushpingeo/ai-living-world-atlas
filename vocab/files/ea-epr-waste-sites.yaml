@@ -1,0 +1,47 @@
+# Written 24 Nov 2026 with ea-epr-industrial-sites.yaml (same licence, conditions and approach). Personal data: licence
+# holder, trading and site contact names, phone, fax, email and street addresses are left out by not listing them.
+id: ea-epr-waste-sites
+title: Environmental permits for waste sites, England (Environment Agency)
+publisher: Environment Agency
+publisher_type: public-body
+country: GB
+licence: "Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence): copy, publish, distribute, adapt and use commercially, with attribution. Special conditions on this dataset: the licence lasts one year and ends without notice, and the data includes personal data (individuals and sites operated by individuals), for which whoever passes it on is responsible under data protection law."
+attribution: Contains Environment Agency information © Environment Agency and/or database right.
+landing_page: https://www.data.gov.uk/dataset/e2cc8101-d8b7-434d-a26a-9115061bb57c/environmental-permitting-regulations-waste-sites
+source: Environmental Permitting Regulations - Waste Sites.zip!Environmental Permitting Regulations - Waste Sites.accdb
+source_url: https://environment.data.gov.uk/api/file/download?fileDataSetId=f3edf4f4-30b4-4e36-afc5-418d27d901f4&fileName=Environmental%20Permitting%20Regulations%20-%20Waste%20Sites.zip
+citation: Environmental Permitting Regulations - Waste Sites, Environment Agency
+table: EPR_Waste
+join:
+- {table: lic_LType, key: LIC_LTYPE, other_key: Type_Code, column: Type_Description, into: licence_type, first: true}
+easting: Easting
+northing: Northing
+source_crs: 27700
+exclude:
+  STAT_SDESC: '^Superceded$'
+exclude_reason: superseded versions of a permit
+columns: [LIC_NMBR, LIC_EPR, LIC_SITE, STAT_SDESC, licence_type, LIC_ISSD, LIC_EFFD, LIC_SURD, LIC_RVKD, LIC_EXPD, Area]
+tile_deg: 1
+data_date: download
+endpoint_info:
+  name_field: LIC_SITE
+  code_field: LIC_NMBR
+  status_field: STAT_SDESC
+  class_field: licence_type
+  date_field: LIC_EFFD
+  class_values: [Issued, Surrendered, Expired, Revoked, Closure, Part Suspended, Part revoke, Suspended, Surr Part]
+  nation: England
+  completeness: complete
+  completeness_note: all of England; every waste permit and old waste management licence in the EA's register, current or ended
+  terms: >-
+    Licence holder names, contact details and street addresses are left out of this copy because some holders are
+    private individuals; look a permit up on the EA's public register by its number if the holder is needed. Re-read the
+    licence by Nov 2027.
+concepts_hint: [pollution-source, waste]
+abstract: >-
+  Waste operations in England permitted by the Environment Agency (Environmental Permitting Regulations, and waste
+  management licences before them): landfills, transfer stations, treatment, recycling, metal recycling, composting and
+  others. One point per permit. STAT_SDESC is Issued for permits in force, or Surrendered, Expired, Revoked, Closure and
+  similar for ended ones (an ended landfill permit can still mark a past landfill); licence_type is the EA's type (e.g.
+  "Non Hazardous LF", "Household, Commercial & Industrial Waste T Stn"); LIC_EFFD, LIC_SURD, LIC_RVKD and LIC_EXPD are the
+  effective, surrender, revocation and expiry dates. Holder names and addresses are not in this copy.

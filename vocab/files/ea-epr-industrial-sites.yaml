@@ -1,0 +1,50 @@
+# Written 24 Nov 2026 (Rob: go ahead with hosting the EA downloads; scope in the project, claude/hosting-uk-downloads-scope.md).
+# The Environment Agency publishes its installation permits only as a zipped MS Access database on data.gov.uk. Licence
+# and special conditions read from the data.gov.uk record (probe round 38) and gov.uk's licence page, 24 Nov 2026.
+# Personal data: operator names (some are private individuals) and street addresses are left out by not listing them in
+# `columns`; the EA's public register gives the operator from the permit number. Refreshed monthly (files workflow schedule,
+# runs/files-monthly.env), which also keeps inside the licence's one-year term.
+id: ea-epr-industrial-sites
+title: Environmental permits for industrial installations, England (Environment Agency)
+publisher: Environment Agency
+publisher_type: public-body
+country: GB
+licence: "Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence): copy, publish, distribute, adapt and use commercially, with attribution. Special conditions on this dataset: the licence lasts one year and ends without notice, and the data includes personal data (individuals and sites operated by individuals), for which whoever passes it on is responsible under data protection law."
+attribution: Contains Environment Agency information © Environment Agency and/or database right.
+landing_page: https://www.data.gov.uk/dataset/b5b5a07f-c646-4d99-a210-e337fcc60470/environmental-permitting-regulations-industrial-sites
+source: Environmental Permitting Regulations - Industrial Sites.zip!Environmental Permitting Regulations - Industrial Sites.accdb
+source_url: https://environment.data.gov.uk/api/file/download?fileDataSetId=ed666abb-5613-4a0f-8ff4-8722f05756f2&fileName=Environmental%20Permitting%20Regulations%20-%20Industrial%20Sites.zip
+citation: Environmental Permitting Regulations - Industrial Sites, Environment Agency
+table: All_EPR_Ind
+join:
+- {table: All_EPR_Ind_ASR, key: Permit_Number, column: Activity_Description, into: primary_activity, where: {Primary_Activity_Y_N: 'Y'}, first: true}
+- {table: All_EPR_Ind_ASR, key: Permit_Number, column: Activity_Description, into: activities}
+easting: Eastings
+northing: Northings
+source_crs: 27700
+exclude:
+  Status: '^(?:Superseded|Consolidated|Regulatory Change|REFUSED)$'
+exclude_reason: administrative duplicates (superseded, consolidated or regulatory-change versions of a permit) and refused applications
+columns: [Permit_Number, EPR_Ref, Installation_Name, Status, primary_activity, activities, Issue_Date, Permit_Effective_From_Date, Local_Authority, Area]
+tile_deg: 1
+data_date: download
+endpoint_info:
+  name_field: Installation_Name
+  code_field: Permit_Number
+  status_field: Status
+  class_field: primary_activity
+  date_field: Permit_Effective_From_Date
+  nation: England
+  completeness: complete
+  completeness_note: all of England; every installation permit in the EA's register, in force or ended (surrendered, revoked, expired), not only current ones
+  terms: >-
+    Operator names and street addresses are left out of this copy because some operators are private individuals; look a
+    permit up on the EA's public register by its number if the operator is needed. Re-read the licence by Nov 2027.
+concepts_hint: [pollution-source]
+abstract: >-
+  Installations in England permitted by the Environment Agency under the Environmental Permitting Regulations (the
+  industrial emissions regime): power stations, refineries, chemical works, cement, metals, food and drink, landfills and
+  large waste treatment, and intensive pig and poultry farms. One point per permit. Status is Effective for permits in
+  force, or Surrendered, Revoked, Expired (Inactive), Closure & Aftercare and similar for ended ones; primary_activity is
+  the main activity (e.g. "Intensive Farming; > 40,000 Poultry", "Recovery Of Waste; Hazardous Waste >10T") and
+  activities lists all of them. Operator names and addresses are not in this copy.

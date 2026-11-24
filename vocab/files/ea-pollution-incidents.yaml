@@ -1,0 +1,44 @@
+# Written 24 Nov 2026 with ea-epr-industrial-sites.yaml (same licence and conditions). No names in this dataset; the
+# special condition about personal data still applies to sites operated by individuals, so nothing beyond the point,
+# date, place names and impact categories is kept.
+id: ea-pollution-incidents
+title: Serious environmental pollution incidents (Category 1 and 2), England, 2001 to date (Environment Agency)
+publisher: Environment Agency
+publisher_type: public-body
+country: GB
+licence: "Environment Agency Conditional Licence (https://www.gov.uk/government/publications/environment-agency-conditional-licence/environment-agency-conditional-licence): copy, publish, distribute, adapt and use commercially, with attribution. Special conditions on this dataset: the licence lasts one year and ends without notice, and the data includes personal data (individuals and sites operated by individuals), for which whoever passes it on is responsible under data protection law."
+attribution: Contains Environment Agency information © Environment Agency and/or database right.
+landing_page: https://www.data.gov.uk/dataset/c8625e18-c329-4032-b4c7-444b33af6780/environmental-pollution-incidents-category-1-and-2
+source: Environmental_Pollution_Incidents.zip!Environmental_Pollution_Incidents.accdb
+source_url: https://environment.data.gov.uk/api/file/download?fileDataSetId=a5a11813-517a-478b-be89-4acdf2c1f105&fileName=Environmental_Pollution_Incidents.zip
+citation: Environmental Pollution Incidents (Category 1 and 2), Environment Agency
+table: EP_Incidents_Nirs2
+join:
+- {table: EP_Pollutants_Nirs2, key: NOT_ID, column: POLLUTANT, into: pollutants}
+- {table: EP_Pollutants_Nirs2, key: NOT_ID, column: POLL_TYPE, into: pollutant_types}
+easting: X_CONF
+northing: Y_CONF
+source_crs: 27700
+columns: [NOT_ID, NOT_DATE, EIL_WATER, EIL_LAND, EIL_AIR, pollutant_types, pollutants, DISTRICT, UNITARY, COUNTY]
+tile_deg: 1
+data_date: download
+endpoint_info:
+  code_field: NOT_ID
+  date_field: NOT_DATE
+  class_field: EIL_WATER
+  class_values: [Category 1 (Major), Category 2 (Significant), Category 3 (Minor), Category 4 (No Impact)]
+  nation: England
+  completeness: complete
+  completeness_note: >-
+    all of England from 2001; only substantiated incidents with a Category 1 or 2 impact on water, land or air.
+    Minor incidents aren't in it
+  terms: >-
+    An incident at or near a site does not mean the site's owner or operator caused it. Re-read the licence by Nov 2027.
+concepts_hint: [pollution-source, water-quality]
+abstract: >-
+  Substantiated environmental pollution incidents in England that the Environment Agency rated Category 1 (major) or
+  Category 2 (significant) for their impact on water, land or air, from 2001 to the latest quarter. One point per
+  incident at its confirmed location. EIL_WATER, EIL_LAND and EIL_AIR give the impact category on each (an incident is
+  in the set if any of them is 1 or 2); pollutant_types and pollutants list what was released (e.g. "Sewage Materials",
+  "Crude Sewage", "Chemical Odour"); NOT_DATE is when it was reported. An incident near a site does not mean the site's
+  owner was responsible.
