@@ -209,8 +209,13 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
 - **England is the gap:** EA permits, incidents and the Pollution Inventory are ZIP downloads only (Conditional Licence;
   the Pollution Inventory is internal use only). Hosting them is Rob's call. SEPA's SPRI and Defra's national AQMA layer
   aren't available as services.
-- **Next:** the US (EPA's national layers are already crawled: curate the FRS layers with fixed ids), then the EU
-  industrial emissions register.
+
+## US contamination (24 Nov, afternoon)
+
+- `vocab/seeds/us-contamination.yaml`: 10 EPA records (keyword `us-contamination-pack`): Superfund (NPL boundaries,
+  NPL points, all SEMS), ACRES brownfields, RCRA corrective action boundaries, TRI, ICIS-Air, NPDES (major, all), RCRA TSD.
+  Public domain. Completeness is per federal programme; state lists aren't in them.
+- **Next:** the EU's industrial emissions register (EEA), then England's EA downloads if Rob agrees to host them.
 
 ## Known gaps and next steps (rough priority)
 

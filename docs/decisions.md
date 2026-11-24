@@ -589,3 +589,15 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
 - **No wider re-tag needed:** step 1's vocabulary already covers step 2 (`pollution-source`). The 2 CANZ datasets whose
   sweep re-tags are shadowed (above) were left: fixing them means rewriting a results branch by hand, for two records.
 
+## 2026-11-24 (afternoon): US contamination screening (EPA's national layers)
+- **10 curated records** (`vocab/seeds/us-contamination.yaml`, wave `spike-uscontamination`, tags $0.00): Superfund NPL
+  boundaries and status points, all SEMS sites (NPL and non-NPL), ACRES brownfields, RCRA corrective action boundaries,
+  TRI facilities, ICIS-Air sources, NPDES major and all NPDES permits, RCRA TSD facilities. All from EPA's own ArcGIS
+  Online items, all public domain. Publisher type central-gov.
+- **Completeness is per programme.** "Complete" means complete for EPA's federal programme; state cleanup lists are
+  separate, so Tobler should say "none in EPA's national records". Partial: ACRES (only EPA-funded brownfields), ICIS-Air
+  (many minor sources are state-only), RCRA corrective action boundaries (only Regions 1, 3, 4, 7 and 10 have loaded any:
+  found when Houston came back empty and the layer had no Texas features).
+- **Left out:** RCRA hazardous waste handlers (900k, mostly small generators), Cleanups in My Community (overlaps the
+  others, with coded categories), EPA radon zones and sole source aquifers (only third-party copies found).
+
