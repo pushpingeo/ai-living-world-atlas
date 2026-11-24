@@ -261,7 +261,12 @@ def main():
 
     # D1's free tier allows 100k row writes a day (index updates count too), so a full reload of 40k rows
     # is expensive. With the previous load's hashes we write only what changed.
-    prev = json.loads(Path(args.previous).read_text()) if args.previous and Path(args.previous).exists() else None
+    prev = None
+    if args.previous and Path(args.previous).exists():
+        try:
+            prev = json.loads(Path(args.previous).read_text())
+        except ValueError:
+            print("previous row hashes unreadable (empty?): full reload")
     # A changed table layout (new columns, 17 Nov: gtypes, home) can't be loaded row by row: reload in full.
     hashes["__schema__"] = hashlib.sha1((SCHEMA + CELLS_VERSION).encode()).hexdigest()[:12]
     if prev is not None and prev.get("__schema__") != hashes["__schema__"]:

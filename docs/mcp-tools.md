@@ -33,6 +33,58 @@ Renaming or removing one of these breaks a Tobler search.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (24 Nov, Tobler reply `claude/contamination-tobler-reply.md`, **step 1 done**) **UK contamination screening:
+  old sources and receptors.** Additive. Step 2 (current pollution: permits, release inventories, incidents, AQMAs)
+  comes next.
+  - **17 new records** (wave `spike-ukground`, `vocab/seeds/uk-ground.yaml`), ids fixed; keyword `uk-ground-pack` lists
+    them all.
+
+    | Topic | England | Wales | Scotland | Northern Ireland |
+    |---|---|---|---|---|
+    | Historic landfill | `3a4c49302d01deb3` EA | `69871d2785dc1d1b` NRW | (no national layer) | (none found) |
+    | Authorised landfill | `7c9fa9e8c48a162a` EA | `98ddbba3cb0b50f8` NRW | (SEPA permits: step 2) | (none found) |
+    | Coal mining risk | `ec38ddbef814026b` high risk, `73e7225df3f929e7` low risk (Mining Remediation Authority, GB-wide) | same | same | (not covered) |
+    | Closed mining waste | `7719defbb5b780ef` EA | `4f4d8e01d0678a76` NRW | – | – |
+    | Source protection zones | `6c3e0babf56f294e` EA | `5d4037034edc4d37` NRW | (none in this form) | (none in this form) |
+    | Radon | `3f1f871836efd2da` UKHSA, whole UK and Isle of Man | | | |
+    | Council records (**partial**) | Derby `5ef41092de2010de`, Lambeth `164c454dced356b7` and landfill `ac1475ee668c32b4`, York register `0dcca8046d00b762`, Sheffield register `8d25d1f7b39def53` | – | Clackmannanshire `e310e4158da08197` | – |
+
+  - **New field on every curated UK record (86: these 17 plus the 69 of 22-23 Nov):** `get_dataset`
+    `endpoints[].details.nation` (England, Scotland, Wales, Northern Ireland, "England, Scotland, Wales", UK),
+    `details.completeness` (`complete` or `partial`) and `details.completeness_note`. **This is what Tobler's reply called
+    "coverage".** It's named completeness because dataset details already have `coverage`, which means extent size
+    (local, regional, national...). `complete`: an empty answer means none in that nation. `partial`: silence never means
+    none. Partial today: the 6 council layers, and England's post-1988 ALC (surveyed sites only).
+  - **Class values, read live 24 Nov** (also in `details.class_values` where listed):
+    - EA SPZ `number`: 1 (2,478), 1c (217), 2 (1,370), 2c (200), 3 (403), 3c (2), 4 (16). "c" = confined aquifer
+      (subsurface activity only); 4 = zone of special interest. NRW SPZ `NUMBER`: 1, 2, 3 (integers).
+    - Radon `CLASS_MAX` 1-6 per 1 km square: 1 under 1% of homes at or above the Action Level; 2 = 1-3%; 3 = 3-5%;
+      4 = 5-10%; 5 = 10-30%; 6 = over 30%. `Advice` says "Radon measurement is advised" from class 2. Not for basements.
+    - Coal mining `FEATURE_TY`: one value per layer ("Development High Risk Area - Subject to Change"); presence is the
+      answer. Outside both layers: no recorded coal mining risk (coal only; metal mines and other workings aren't in it).
+    - EA authorised landfill `status`: Effective, Issued, Closure, Expired, Expired (Inactive), Part Suspended.
+      EA historic landfill `inert`: Yes (11,107), Y (2), blank (8,697).
+  - **Licences, verbatim with where they were read.** Open: coal high risk area (OGL), both SPZ layers (OGL), NRW closed
+    mining waste (OGL). **Not open, each for a reason:**
+    - **EA landfill (both):** Environment Agency Conditional Licence. It allows commercial use, but this dataset's terms limit
+      it to one year at a time and the data holds personal data (licence holders' names and addresses: `lic_hold`,
+      `licholdadd`, `lic_name`). Show site names and dates; leave the personal fields out (`terms` says so).
+    - **NRW landfill (both):** NRW says on data.gov.uk that it doesn't grant re-use of the full dataset (a redacted version
+      under an NRW licence). NRW's ArcGIS item says OGL for historic landfill; they disagree, so not open.
+    - **Radon:** unsettled. UKHSA's current item states no licence, its 2015 copy says OGL, and the underlying BGS data is
+      under BGS's own licence. Not open until UKHSA confirms (a question for Rob).
+    - **Coal low risk area, EA closed mining waste:** no licence stated.
+    - **Council layers:** no licence stated; Sheffield's is the OS INSPIRE end user licence.
+  - **Speed:** see the live check in decisions.md (24 Nov). Clackmannanshire's server takes ~20 s; radon has 254k squares
+    (keep boxes small).
+  - **Gaps (report as "not checked"):** no national historic landfill or contaminated-land layer for Scotland or Northern
+    Ireland; no source protection zones in Scotland or NI in this form; NI has no coal mining risk layer; Carlisle publishes
+    a layer but refuses the atlas's checks; most councils publish nothing. Historic land use (old maps) is not open data.
+  - **New concepts** (all datasets re-tagged where relevant, 24 Nov): `contaminated-land`, `landfill`, `mining-legacy`,
+    `groundwater-protection`, `pollution-source`, `air-quality-area`. `brownfield` now means land registers only; `waste`,
+    `water-quality` and `air-quality` are narrower. `find_datasets` with `concept: "contaminated-land"` is the way to find
+    council and state records anywhere.
+
 - (23 Nov, Tobler request, **done**, live 23 Nov 23:55 UTC) **The UK pack, broadened: landscape, heritage, peat, farmland
   quality, flood zones and the SSSI Impact Risk Zones.** All additive (one additive field, `type_name`, below).
   - **45 new records** (wave `spike-ukpack`, `vocab/seeds/uk-pack.yaml`), each on the designating or publishing body's own
