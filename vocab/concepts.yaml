@@ -38,7 +38,7 @@ shipping: {theme: oceans, def: "Shipping lanes, vessel density, navigation featu
 river: {theme: inlandWaters, def: "Rivers, streams, canals, lakes, catchments, water body status"}
 flood-risk: {theme: inlandWaters, def: "Flood zones, flood risk, flood defences, historic flooding"}
 water-quality: {theme: environment, def: "Water quality status and monitoring, bathing waters, water body classification"}
-groundwater-protection: {theme: inlandWaters, def: "Groundwater source protection zones, drinking water protected areas, aquifer designations, wellhead protection"}
+groundwater-protection: {theme: inlandWaters, def: "Protection of groundwater used for drinking water: source protection zones, groundwater drinking water protected areas, wellhead and well-field protection areas, groundwater vulnerability maps (not aquifer geology or rock units, and not subsurface storage reservoirs for CO2 or hydrogen: those are geology)"}
 pollution-source: {theme: environment, def: "Pollution sources and events: permitted and industrial installations, pollutant release inventories (PRTR, TRI), discharge consents, pollution incidents"}
 coastline: {theme: oceans, def: "Coastline, coastal change, erosion, shoreline management"}
 bathymetry: {theme: elevation, def: "Seabed depth and seabed morphology"}
