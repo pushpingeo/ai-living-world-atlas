@@ -3,6 +3,51 @@ defaults:
   publisher_type: civil-society
 sources:
 - kind: record
+  id: au-npi-facilities
+  title: National Pollutant Inventory reporting facilities, Australia (DCCEEW)
+  publisher: Department of Climate Change, Energy, the Environment and Water (National Pollutant Inventory)
+  publisher_type: central-gov
+  country: AU
+  abstract: 'Facilities that report emissions to Australia''s National Pollutant Inventory: industrial sites, mines, power
+    stations, intensive farms, sewage works and others that use or emit any of 93 substances above set thresholds. One point
+    per facility. primary_anzsic_class_name and main_activities give the industry; first_report_year and latest_report_year
+    the years it reported (a facility whose latest year is old may have closed); latest_report_url opens its latest NPI report,
+    with emissions by substance to air, land and water. Updated by 31 March each year. 8,140 features. Hosted by the atlas
+    as a copy of the publisher''s download; cite as: National Pollutant Inventory, facilities, DCCEEW (data.gov.au).'
+  licence: Creative Commons Attribution 4.0 International (http://creativecommons.org/licenses/by/4.0), as stated on data.gov.au
+    for the National Pollutant Inventory
+  landing_page: https://data.gov.au/data/dataset/npi
+  bbox:
+  - 96.8167
+  - -43.1677
+  - 167.9612
+  - -9.2325
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - au-pollution-pack
+  endpoints:
+  - protocol: geojson
+    url: https://pushpingeo.github.io/ai-living-world-atlas/data/f/au-npi-facilities/index.json
+    format: GeoJSON tiles
+    info:
+      name_field: facility_name
+      code_field: facility_id
+      class_field: primary_anzsic_class_name
+      activity_field: main_activities
+      date_field: latest_report_year
+      link_field: latest_report_url
+      nation: Australia
+      completeness: complete
+      completeness_note: every facility that has reported to the NPI (above the reporting thresholds for its substances),
+        in all states and territories, including facilities that have since stopped reporting (see latest_report_year)
+      terms: The business name, ABN, street address and website are left out because some facilities are family businesses
+        or farms. A facility's emissions per substance are in the NPI's own reports (latest_report_url).
+      data_date: '2026-11-25'
+      data_date_source: the day the atlas downloaded the publisher's file
+  - protocol: landing
+    url: https://data.gov.au/data/dataset/npi
+- kind: record
   id: ea-epr-industrial-sites
   title: Environmental permits for industrial installations, England (Environment Agency)
   publisher: Environment Agency
