@@ -1,0 +1,396 @@
+# Australia pollution screening (25 Nov 2026; gap review in the project, claude/pollution-sources-gap-review-2026-11-25.md).
+# Same shape as the UK packs (nation, completeness, completeness_note). Written by a one-off script from probe rounds 45-48.
+# Open: EPA Victoria (CC BY 4.0), NSW EPA notified sites and record of notices (CC BY), Queensland (CC BY 4.0), Geoscience
+# Australia (CC BY 4.0). Not open: NSW licences (not stated), Tasmania (not specified).
+# Not here, and why: WA's Contaminated Sites Database (DWER-059) is under a custom "active acceptance" / SLIP personal-use
+# licence; Queensland's EMR/CLR isn't published as a map; Defence's PFAS areas are PDF maps only; the National Pollutant
+# Inventory's WFS publishes no layers, so it is hosted from its CC BY download (vocab/files/au-npi-facilities.yaml).
+defaults:
+  publisher_type: regional-gov
+  country: AU
+sources:
+- kind: record
+  id: au-vic-epa-priority-sites
+  title: Priority Sites Register, Victoria (EPA Victoria)
+  publisher: Environment Protection Authority Victoria
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Sites EPA Victoria has issued a clean-up or management notice for because of pollution or contamination: former
+    landfills, petroleum storage, gasworks, industrial sites. psr_description is the kind of site; psr_management says what
+    is required (e.g. "Requires ongoing management", "Requires assessment and/or clean up"); notice_number the notice. Refreshed
+    daily (data_extracted_on). The register lists sites under a current notice, not every contaminated site in Victoria. Fields:
+    name field psr_description, code field notice_number, class field psr_management, date field data_extracted_on. 141 features.
+    Completeness: complete (every site on EPA Victoria''s Priority Sites Register (sites under a current clean-up or management
+    notice); not every contaminated site in Victoria). A curated record for Australia pollution screening (Tobler, 25 Nov
+    2026): the publisher''s own service, checked to return lon/lat features for a bounding box.'
+  licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), stated on DataVic; publisher Environment Protection Authority
+    Victoria
+  landing_page: https://discover.data.vic.gov.au/dataset/epa-victoria-priority-sites-register-psr-location-points
+  bbox:
+  - 140.96
+  - -39.2
+  - 150.0
+  - -33.98
+  geometry_type: point
+  concepts_hint:
+  - contaminated-land
+  - au-pollution-pack
+  endpoints:
+  - protocol: wfs
+    url: https://opendata.maps.vic.gov.au/geoserver/wfs#open-data-platform:psr_point
+    service_url: https://opendata.maps.vic.gov.au/geoserver/wfs
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: open-data-platform:psr_point
+      output_formats:
+      - application/json
+      name_field: psr_description
+      code_field: notice_number
+      class_field: psr_management
+      date_field: data_extracted_on
+      nation: Victoria
+      completeness: complete
+      completeness_note: every site on EPA Victoria's Priority Sites Register (sites under a current clean-up or management
+        notice); not every contaminated site in Victoria
+    check_url: https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=open-data-platform:psr_point&resultType=hits
+  - protocol: landing
+    url: https://discover.data.vic.gov.au/dataset/epa-victoria-priority-sites-register-psr-location-points
+- kind: record
+  id: au-vic-epa-priority-sites-areas
+  title: Priority Sites Register areas, Victoria (EPA Victoria)
+  publisher: Environment Protection Authority Victoria
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Outlines of Priority Sites Register sites where EPA Victoria has mapped the area under notice. Same fields as
+    the points; use the points for the complete list. Fields: name field psr_description, code field notice_number, class
+    field psr_management, date field data_extracted_on. 67 features. Completeness: partial (about half the register''s sites
+    have a mapped area; the points layer lists them all). A curated record for Australia pollution screening (Tobler, 25 Nov
+    2026): the publisher''s own service, checked to return lon/lat features for a bounding box.'
+  licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), stated on DataVic; publisher Environment Protection Authority
+    Victoria
+  landing_page: https://discover.data.vic.gov.au/dataset/epa-victoria-priority-sites-register-psr-location-points
+  bbox:
+  - 140.96
+  - -39.2
+  - 150.0
+  - -33.98
+  geometry_type: polygon
+  concepts_hint:
+  - contaminated-land
+  - au-pollution-pack
+  endpoints:
+  - protocol: wfs
+    url: https://opendata.maps.vic.gov.au/geoserver/wfs#open-data-platform:psr_polygon
+    service_url: https://opendata.maps.vic.gov.au/geoserver/wfs
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: open-data-platform:psr_polygon
+      output_formats:
+      - application/json
+      name_field: psr_description
+      code_field: notice_number
+      class_field: psr_management
+      date_field: data_extracted_on
+      nation: Victoria
+      completeness: partial
+      completeness_note: about half the register's sites have a mapped area; the points layer lists them all
+    check_url: https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=open-data-platform:psr_polygon&resultType=hits
+  - protocol: landing
+    url: https://discover.data.vic.gov.au/dataset/epa-victoria-priority-sites-register-psr-location-points
+- kind: record
+  id: au-nsw-epa-contaminated-notified
+  title: Contaminated land notified to the EPA, New South Wales (NSW EPA)
+  publisher: NSW Environment Protection Authority
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Land notified to the NSW EPA as potentially contaminated under section 60 of the Contaminated Land Management
+    Act 1997. ManagementClass says whether the EPA regulates it (e.g. "Regulation under CLM Act not required", "Contamination
+    currently regulated under CLM Act", "Under assessment"); ContaminationActivityType the activity behind it (e.g. Service
+    Station, Gasworks, Landfill). Fields: name field SiteName, class field ManagementClass, activity field ContaminationActivityType,
+    date field VerDate. 2,012 features. Completeness: complete (every site notified to the NSW EPA under s60 of the CLM Act;
+    land that was never notified (most of it) isn''t in it, and councils hold their own records). A curated record for Australia
+    pollution screening (Tobler, 25 Nov 2026): the publisher''s own service, checked to return lon/lat features for a bounding
+    box.'
+  licence: Creative Commons Attribution (CC BY), stated on Data.NSW for "NSW Contaminated Sites notified to the EPA"; publisher
+    NSW EPA
+  landing_page: https://data.nsw.gov.au/data/dataset/nsw-contaminated-sites-notified-to-the-epa
+  bbox: &id001
+  - 140.99
+  - -37.51
+  - 153.64
+  - -28.15
+  geometry_type: point
+  concepts_hint:
+  - contaminated-land
+  - au-pollution-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/EPA/Contaminated_land_notified_sites/FeatureServer/0
+    service_url: https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/EPA/Contaminated_land_notified_sites/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: SiteName
+      class_field: ManagementClass
+      activity_field: ContaminationActivityType
+      date_field: VerDate
+      nation: New South Wales
+      completeness: complete
+      completeness_note: every site notified to the NSW EPA under s60 of the CLM Act; land that was never notified (most of
+        it) isn't in it, and councils hold their own records
+    check_url: https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/EPA/Contaminated_land_notified_sites/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://data.nsw.gov.au/data/dataset/nsw-contaminated-sites-notified-to-the-epa
+- kind: record
+  id: au-nsw-epa-clm-record-of-notices
+  title: Contaminated land record of notices, New South Wales (NSW EPA)
+  publisher: NSW Environment Protection Authority
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Sites with a notice under the Contaminated Land Management Act 1997 on the EPA''s public register (section 58):
+    land declared significantly contaminated, management orders, voluntary management proposals. StatusName gives the current
+    status; First_Reg and Last_Reg the notice dates; Area_ha the area. Fields: name field Site_Name, code field Area_No, class
+    field StatusName, date field Last_Reg. 340 features. Completeness: complete (every site with a notice on the NSW EPA''s
+    CLM Act public register). A curated record for Australia pollution screening (Tobler, 25 Nov 2026): the publisher''s own
+    service, checked to return lon/lat features for a bounding box.'
+  licence: Creative Commons Attribution (CC BY), stated on Data.NSW for "Contaminated Land - Record of Notices"; publisher
+    NSW EPA
+  landing_page: https://data.nsw.gov.au/data/dataset/contaminated-land-record-of-notices
+  bbox: *id001
+  geometry_type: polygon
+  concepts_hint:
+  - contaminated-land
+  - au-pollution-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://mapprod1.environment.nsw.gov.au/arcgis/rest/services/PropertyNSW/ContamintedLandMgmt_PublicRegister/MapServer/0
+    service_url: https://mapprod1.environment.nsw.gov.au/arcgis/rest/services/PropertyNSW/ContamintedLandMgmt_PublicRegister/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: Site_Name
+      code_field: Area_No
+      class_field: StatusName
+      date_field: Last_Reg
+      nation: New South Wales
+      completeness: complete
+      completeness_note: every site with a notice on the NSW EPA's CLM Act public register
+    check_url: https://mapprod1.environment.nsw.gov.au/arcgis/rest/services/PropertyNSW/ContamintedLandMgmt_PublicRegister/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://data.nsw.gov.au/data/dataset/contaminated-land-record-of-notices
+- kind: record
+  id: au-nsw-epa-licensed-premises
+  title: Environment protection licences, New South Wales (NSW EPA)
+  publisher: NSW Environment Protection Authority
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Premises holding an environment protection licence under the Protection of the Environment Operations Act 1997
+    (scheduled activities: industry, waste, extraction, sewage treatment...). EPL is the licence number; Status current or
+    surrendered; PrimaryScheduledActivity the activity; RiskLevel the EPA''s environmental risk level. Fields: name field
+    LocationName, code field EPL, class field Status, level field RiskLevel, activity field PrimaryScheduledActivity, date
+    field StatusDate. 2,121 features. Completeness: complete (every premises with an environment protection licence in NSW,
+    current and surrendered). A curated record for Australia pollution screening (Tobler, 25 Nov 2026): the publisher''s own
+    service, checked to return lon/lat features for a bounding box.'
+  licence: 'Not stated: the service gives none and this register wasn''t found on Data.NSW (the EPA''s contaminated land registers
+    there carry an attribution licence)'
+  landing_page: https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3
+  bbox: *id001
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - au-pollution-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3
+    service_url: https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: LocationName
+      code_field: EPL
+      class_field: Status
+      level_field: RiskLevel
+      activity_field: PrimaryScheduledActivity
+      date_field: StatusDate
+      nation: New South Wales
+      completeness: complete
+      completeness_note: every premises with an environment protection licence in NSW, current and surrendered
+    check_url: https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3
+- kind: record
+  id: au-qld-environmental-authorities
+  title: Environmental authority locations, Queensland (Department of Environment)
+  publisher: Queensland Department of Environment, Tourism, Science and Innovation
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Locations of environmental authorities (permits for environmentally relevant activities: mining, petroleum and
+    gas, intensive animal industry, waste, chemical and metal works) from Queensland''s environmental authorities register.
+    era and era_category give the activity; permit_type and status the permit; permit_link opens it. Fields: name field site,
+    code field permit_ref_no, class field status, activity field era, date field effective_date, link field permit_link. 33,589
+    features. Completeness: complete (every environmental authority on Queensland''s register). A curated record for Australia
+    pollution screening (Tobler, 25 Nov 2026): the publisher''s own service, checked to return lon/lat features for a bounding
+    box.'
+  licence: 'CC BY 4.0, stated on the Queensland Government data portal: "© State of Queensland (Department of Environment,
+    Tourism, Science and Innovation), 2026"'
+  landing_page: https://www.data.qld.gov.au/dataset/environmental-authority-locations-queensland
+  bbox:
+  - 137.99
+  - -29.18
+  - 153.55
+  - -9.14
+  geometry_type: polygon
+  concepts_hint:
+  - pollution-source
+  - au-pollution-pack
+  endpoints:
+  - protocol: arcgis-featureserver
+    url: https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer/140
+    service_url: https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer
+    capabilities:
+    - query
+    info:
+      name_field: site
+      code_field: permit_ref_no
+      class_field: status
+      activity_field: era
+      date_field: effective_date
+      link_field: permit_link
+      nation: Queensland
+      completeness: complete
+      completeness_note: every environmental authority on Queensland's register
+    check_url: https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer/140/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.data.qld.gov.au/dataset/environmental-authority-locations-queensland
+- kind: record
+  id: au-tas-epa-regulated-sites
+  title: EPA regulated sites, Tasmania (EPA Tasmania, the LIST)
+  publisher: Environment Protection Authority Tasmania
+  publisher_type: regional-gov
+  country: AU
+  abstract: 'Sites regulated by the Tasmanian EPA (permits and environment protection notices for level 2 activities: industry,
+    waste, extraction, fish processing), with links to their legal documents. ACTIVITY_CATEGORY gives the activity. Fields:
+    name field PREMISES_NAME, code field SITEID, class field ACTIVITY_CATEGORY. 726 features. Completeness: complete (every
+    site the Tasmanian EPA regulates directly; councils regulate smaller activities). A curated record for Australia pollution
+    screening (Tobler, 25 Nov 2026): the publisher''s own service, checked to return lon/lat features for a bounding box.'
+  licence: Not specified (data.gov.au lists it as "notspecified"); the LIST's general terms apply
+  landing_page: https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74
+  bbox:
+  - 143.8
+  - -43.7
+  - 148.5
+  - -39.5
+  geometry_type: point
+  concepts_hint:
+  - pollution-source
+  - au-pollution-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74
+    service_url: https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: PREMISES_NAME
+      code_field: SITEID
+      class_field: ACTIVITY_CATEGORY
+      nation: Tasmania
+      completeness: complete
+      completeness_note: every site the Tasmanian EPA regulates directly; councils regulate smaller activities
+    check_url: https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74
+- kind: record
+  id: au-ga-waste-management-facilities
+  title: Waste management facilities, Australia (Geoscience Australia)
+  publisher: Geoscience Australia
+  publisher_type: central-gov
+  country: AU
+  abstract: 'All known waste management, recycling and reprocessing facilities in Australia and its territories: landfills,
+    transfer stations, resource recovery, liquid and hazardous waste. facility_management_type and facility_infrastructure_type
+    give the kind (e.g. Landfill); operational_status whether it operates; spatial_confidence how well it is located. Fields:
+    name field facility_name, code field unique_record_id, class field facility_infrastructure_type, level field operational_status.
+    6,453 features. Completeness: complete (every waste facility Geoscience Australia knows of, nationally; closed historic
+    tips are mostly not in it). A curated record for Australia pollution screening (Tobler, 25 Nov 2026): the publisher''s
+    own service, checked to return lon/lat features for a bounding box.'
+  licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), © Commonwealth of Australia (Geoscience Australia)
+  landing_page: https://digital.atlas.gov.au/datasets/digitalatlas::waste-management-facilities-1
+  bbox:
+  - 96.82
+  - -43.33
+  - 159.11
+  - -9.23
+  geometry_type: point
+  concepts_hint:
+  - landfill
+  - waste
+  - au-pollution-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://services.ga.gov.au/gis/rest/services/Waste_Management_Facilities/MapServer/0
+    service_url: https://services.ga.gov.au/gis/rest/services/Waste_Management_Facilities/MapServer
+    capabilities:
+    - query
+    info:
+      name_field: facility_name
+      code_field: unique_record_id
+      class_field: facility_infrastructure_type
+      level_field: operational_status
+      nation: Australia
+      completeness: complete
+      completeness_note: every waste facility Geoscience Australia knows of, nationally; closed historic tips are mostly not
+        in it
+    check_url: https://services.ga.gov.au/gis/rest/services/Waste_Management_Facilities/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://digital.atlas.gov.au/datasets/digitalatlas::waste-management-facilities-1
+- kind: record
+  id: au-ga-mine-waste
+  title: Mine waste (tailings, waste rock), Australia (Geoscience Australia)
+  publisher: Geoscience Australia
+  publisher_type: central-gov
+  country: AU
+  abstract: 'Mine waste stores in Australia (tailings storage facilities, waste rock dumps, heap leach pads) from Geoscience
+    Australia''s Australian Mines Atlas. WASTE_TYPE tailings, waste rock...; WASTE_STATUS currently used, inactive...; REHABILITATED
+    yes/no; CURRENT_VOLUME in VOLUME_UNITS. Fields: name field MINE_WASTE_NAME, code field ENO, class field WASTE_TYPE, level
+    field WASTE_STATUS. 588 features. Completeness: partial (mine waste stores Geoscience Australia has compiled, mostly at
+    operating and recent mines; historic mine waste is largely not in it). A curated record for Australia pollution screening
+    (Tobler, 25 Nov 2026): the publisher''s own service, checked to return lon/lat features for a bounding box.'
+  licence: 'CC BY 4.0: "Copyright Commonwealth of Australia (Geoscience Australia) 2022. This material is released free under
+    the Creative Commons Attribution 4.0 International Licence."'
+  landing_page: https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&request=GetCapabilities
+  bbox:
+  - 113.0
+  - -44.0
+  - 154.0
+  - -10.0
+  geometry_type: point
+  concepts_hint:
+  - mining-legacy
+  - waste
+  - au-pollution-pack
+  endpoints:
+  - protocol: wfs
+    url: https://services.ga.gov.au/gis/earthresource/wfs#ama:MineWaste
+    service_url: https://services.ga.gov.au/gis/earthresource/wfs
+    capabilities:
+    - query
+    - download
+    info:
+      type_name: ama:MineWaste
+      output_formats:
+      - application/json
+      name_field: MINE_WASTE_NAME
+      code_field: ENO
+      class_field: WASTE_TYPE
+      level_field: WASTE_STATUS
+      nation: Australia
+      completeness: partial
+      completeness_note: mine waste stores Geoscience Australia has compiled, mostly at operating and recent mines; historic
+        mine waste is largely not in it
+    check_url: https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ama:MineWaste&resultType=hits
+  - protocol: landing
+    url: https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&request=GetCapabilities

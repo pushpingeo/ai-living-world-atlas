@@ -48,7 +48,7 @@ FIRST_PASS_SLOTS = 256                     # services in progress at once in the
 FIRST_PASS_GRACE = 120                     # seconds a service already started may run past the first pass's end before it is cut
 HOST_GIVE_UP = 10                          # stop knocking on a host after this many network failures in a row
 OGC = {"wms": "WMS", "wfs": "WFS", "wmts": "WMTS", "wcs": "WCS"}
-PLAIN = {"download", "cloud", "api", "landing", "geojson", "opendap"}  # geojson: atlas-hosted tiles, checked via index.json; opendap: GET of its .dds
+PLAIN = {"download", "cloud", "api", "landing", "geojson", "opendap", "ogc-api-features"}  # geojson: atlas-hosted tiles, checked via index.json; opendap: GET of its .dds; ogc-api-features: GET of the collection
 RESOLVING = {"ok", "unmatched"}
 FAILING = {"fail", "missing", "host-down"}
 

@@ -1197,3 +1197,112 @@ rules:
     open: true
     attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
     source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  # Netherlands and Australia pollution screening (vocab/seeds/nl-pollution.yaml, au-pollution.yaml), 25 Nov 2026.
+  - host: api.pdok.nl
+    layers: '^nl-wkpb-wbb-serious-contamination:'
+    licence: "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), stated on the PDOK OGC API and its Nationaal Georegister record"
+    open: true
+    attribution: "Kadaster"
+    terms: "A decision names the authority, not the owner. It records that serious contamination was found, not its state today (the site may since have been cleaned up)."
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: data.rivm.nl
+    layers: '^nl-rivm-industrial-releases:'
+    licence: "Public Domain Mark 1.0 (http://creativecommons.org/publicdomain/mark/1.0/), as stated in the Nationaal Georegister record"
+    open: true
+    attribution: "RIVM"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: data.rivm.nl
+    layers: '^nl-rivm-groundwater-protection-areas:'
+    licence: "Public Domain Mark 1.0 (http://creativecommons.org/publicdomain/mark/1.0/), as stated in the Nationaal Georegister record"
+    open: true
+    attribution: "RIVM"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: data.rivm.nl
+    layers: '^nl-rivm-drinking-water-abstraction-areas:'
+    licence: "Public Domain Mark 1.0 (http://creativecommons.org/publicdomain/mark/1.0/), as stated in the Nationaal Georegister record"
+    open: true
+    attribution: "RIVM"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: data.rivm.nl
+    layers: '^nl-rivm-bore-free-zones:'
+    licence: "Public Domain Mark 1.0 (http://creativecommons.org/publicdomain/mark/1.0/), as stated in the Nationaal Georegister record"
+    open: true
+    attribution: "RIVM"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: opengeodata.zeeland.nl
+    layers: '^nl-zeeland-former-landfills:'
+    licence: "CC0 1.0 (http://creativecommons.org/publicdomain/zero/1.0/), as stated in the Nationaal Georegister record"
+    open: true
+    attribution: "Provincie Zeeland"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: geoservices.noord-holland.nl
+    layers: '^nl-noord-holland-former-landfills:'
+    licence: "Public Domain Mark 1.0 (http://creativecommons.org/publicdomain/mark/1.0/), as stated in the Nationaal Georegister record"
+    open: true
+    attribution: "Provincie Noord-Holland"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: opendata.maps.vic.gov.au
+    layers: '^au-vic-epa-priority-sites:'
+    licence: "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), stated on DataVic; publisher Environment Protection Authority Victoria"
+    open: true
+    attribution: "© State of Victoria (Environment Protection Authority Victoria)"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: opendata.maps.vic.gov.au
+    layers: '^au-vic-epa-priority-sites-areas:'
+    licence: "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), stated on DataVic; publisher Environment Protection Authority Victoria"
+    open: true
+    attribution: "© State of Victoria (Environment Protection Authority Victoria)"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: mapprod2.environment.nsw.gov.au
+    layers: '^au-nsw-epa-contaminated-notified:'
+    licence: "Creative Commons Attribution (CC BY), stated on Data.NSW for \"NSW Contaminated Sites notified to the EPA\"; publisher NSW EPA"
+    open: true
+    attribution: "© State of New South Wales (NSW Environment Protection Authority)"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: mapprod1.environment.nsw.gov.au
+    layers: '^au-nsw-epa-clm-record-of-notices:'
+    licence: "Creative Commons Attribution (CC BY), stated on Data.NSW for \"Contaminated Land - Record of Notices\"; publisher NSW EPA"
+    open: true
+    attribution: "© State of New South Wales (NSW Environment Protection Authority)"
+    terms: "Owner and Occupier can name private individuals: leave them out."
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: mapprod.environment.nsw.gov.au
+    layers: '^au-nsw-epa-licensed-premises:'
+    licence: "Not stated: the service gives none and this register wasn't found on Data.NSW (the EPA's contaminated land registers there carry an attribution licence)"
+    open: false
+    attribution: "© State of New South Wales (NSW Environment Protection Authority)"
+    terms: "AcountablePartyName can name a private individual (sole traders, farms): leave it out. Licence not stated: confirm before commercial use."
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: spatial-gis.information.qld.gov.au
+    layers: '^au-qld-environmental-authorities:'
+    licence: "CC BY 4.0, stated on the Queensland Government data portal: \"© State of Queensland (Department of Environment, Tourism, Science and Innovation), 2026\""
+    open: true
+    attribution: "© State of Queensland (Department of Environment, Tourism, Science and Innovation)"
+    terms: "primary_holder can name a private individual: leave it out."
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: services.thelist.tas.gov.au
+    layers: '^au-tas-epa-regulated-sites:'
+    licence: "Not specified (data.gov.au lists it as \"notspecified\"); the LIST's general terms apply"
+    open: false
+    attribution: "Environment Protection Authority Tasmania; the LIST, © State of Tasmania"
+    terms: "CLIENT_NAME can name a private individual: leave it out. Licence not specified: confirm before commercial use."
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: services.ga.gov.au
+    layers: '^au-ga-waste-management-facilities:'
+    licence: "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), © Commonwealth of Australia (Geoscience Australia)"
+    open: true
+    attribution: "© Commonwealth of Australia (Geoscience Australia)"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: services.ga.gov.au
+    layers: '^au-ga-mine-waste:'
+    licence: "CC BY 4.0: \"Copyright Commonwealth of Australia (Geoscience Australia) 2022. This material is released free under the Creative Commons Attribution 4.0 International Licence.\""
+    open: true
+    attribution: "© Commonwealth of Australia (Geoscience Australia)"
+    source: read 25 Nov 2026 from the publisher's catalogue record (probe rounds 45-50)
+  - host: pushpingeo.github.io
+    url: /data/f/au-npi-facilities/
+    licence: "Creative Commons Attribution 4.0 International (http://creativecommons.org/licenses/by/4.0), as stated on data.gov.au for the National Pollutant Inventory"
+    open: true
+    attribution: "National Pollutant Inventory, Australian Government Department of Climate Change, Energy, the Environment and Water"
+    terms: "The business name, ABN, street address and website are left out of the atlas copy (some facilities are family businesses or farms)."
+    source: data.gov.au package npi, licence field, read 25 Nov 2026 (probe round 45)

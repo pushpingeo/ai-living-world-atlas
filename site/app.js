@@ -13,6 +13,7 @@ const LABEL = {
   protocols: {
     "arcgis-featureserver": "ArcGIS feature", "arcgis-mapserver": "ArcGIS map", "arcgis-imageserver": "ArcGIS image",
     "arcgis-vectortileserver": "ArcGIS vector tiles", wms: "WMS", wfs: "WFS", wmts: "WMTS", wcs: "WCS",
+    "ogc-api-features": "OGC API Features",
   },
   themes: {
     farming: "Farming", biota: "Biota", boundaries: "Boundaries", climatologyMeteorologyAtmosphere: "Climate",

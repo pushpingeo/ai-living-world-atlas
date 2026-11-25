@@ -16,7 +16,7 @@ from collections import defaultdict
 
 import pandas as pd
 
-PROTOCOL_PREF = ["arcgis-featureserver", "wfs", "geojson", "arcgis-imageserver", "wcs", "arcgis-mapserver", "wms",
+PROTOCOL_PREF = ["arcgis-featureserver", "ogc-api-features", "wfs", "geojson", "arcgis-imageserver", "wcs", "arcgis-mapserver", "wms",
                  "arcgis-vectortileserver", "wmts"]
 ROLE_PREF = ["imagery", "elevation", "basemap", "data"]
 

@@ -9,7 +9,7 @@ const PROTOCOLS = ["2025-06-18", "2025-03-26", "2024-11-05"];
 const WFS_WAIT_MS = 15000;    // one wait per WFS endpoint
 const ARCGIS_WAIT_MS = 25000; // and per ArcGIS request (as before: Natural England's priority habitats can take 20 s)
 const MAX_PAGES = 25;         // pages read for layers with a small page size
-const FEATURE_PREF = ["arcgis-featureserver", "wfs", "arcgis-mapserver", "geojson"];
+const FEATURE_PREF = ["arcgis-featureserver", "ogc-api-features", "wfs", "arcgis-mapserver", "geojson"];
 
 /* ---------------- tool definitions ---------------- */
 const TOOLS = [
@@ -177,6 +177,8 @@ function usage(e) {
     out.query_url = `${e.service_url}${sep(e.service_url)}service=WFS&request=GetFeature&version=1.1.0&typeName=${encodeURIComponent(wfsType(e))}&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox={west},{south},{east},{north},urn:ogc:def:crs:OGC:1.3:CRS84` + (fmt ? `&outputFormat=${encodeURIComponent(fmt)}` : "");
     if (!fmt) out.note = "This WFS only offers GML.";
   }
+  if (e.protocol === "ogc-api-features")
+    out.query_url = `${e.url.split("#")[0].replace(/\/$/, "")}/items?bbox={west},{south},{east},{north}&limit=100&f=json${inf.query ? `&${inf.query}` : ""}`;
   if (e.protocol === "wmts" && inf.tile_template) out.tile_template = inf.tile_template;
   // capability "sample": a value at a point. {lon},{lat} in WGS84; feature-info takes a small box round the point
   // ({west},{south},{east},{north}, e.g. +-0.001 degrees) and reads the centre pixel.
@@ -528,6 +530,12 @@ async function fetchFeatures(env, a) {
       const crs84 = "urn:ogc:def:crs:OGC:1.3:CRS84";
       url = `${head}&version=1.1.0&srsName=${crs84}&bbox=${x0},${y0},${x1},${y1},${crs84}`;
       alts = [`${head}&version=1.0.0&srsName=EPSG:4326&bbox=${x0},${y0},${x1},${y1},EPSG:4326`];
+    } else if (e.protocol === "ogc-api-features") {
+      // OGC API Features (e.g. PDOK's api.pdok.nl): the url is the collection; bbox and geometry are in CRS84 by default,
+      // so there is no axis-order or projection question. Text is filtered here, after the fetch.
+      // info.query: a fixed filter the record needs (e.g. PDOK WKPB grondslag_code=WBA: one law's decisions out of many)
+      const q = info(e).query ? `&${info(e).query}` : "";
+      url = `${e.url.split("#")[0].replace(/\/$/, "")}/items?bbox=${x0},${y0},${x1},${y1}&limit=${limit}&f=json${q}`;
     } else {
       const tol = ((v[2] - v[0]) / 1000).toPrecision(2);
       let where = a.where || "1=1";
@@ -554,6 +562,12 @@ async function fetchFeatures(env, a) {
         if (!r.ok) continue;
         const t = await r.text();
         try { gj = JSON.parse(t); } catch { gj = { error: { message: t.trimStart().startsWith("<") ? "the server answered in XML (an exception report)" : "not JSON" } }; }
+        if (Array.isArray(gj.features) && notDegrees(gj.features)) {
+          // Some WFS servers (MapServer, e.g. PDOK) ignore the requested CRS and answer in their own projected CRS
+          // (Dutch RD metres). Passing those on would put features in the wrong place: treat it as a failed attempt.
+          gj = { error: { message: "the server answered in a projected CRS, not lon/lat degrees (it ignored the requested CRS)" } };
+          continue;
+        }
         if (Array.isArray(gj.features)) break;
       }
       // ArcGIS layers whose page is smaller than the limit (Natural England's Marine Conservation Zones: 3 a page)
@@ -586,7 +600,7 @@ async function fetchFeatures(env, a) {
       }
       if (!Array.isArray(gj.features)) { errors.push(`${e.protocol}: ${gj.error?.message || "not GeoJSON"}`); continue; }
       let raw = gj.features;
-      if (a.text && (e.protocol === "wfs" || e._filterAfter)) {
+      if (a.text && (e.protocol === "wfs" || e.protocol === "ogc-api-features" || e._filterAfter)) {
         const t = String(a.text).toLowerCase();
         raw = raw.filter((f) => Object.values(f.properties || {}).some((x) => typeof x === "string" && x.toLowerCase().includes(t)));
       }
@@ -608,6 +622,14 @@ async function fetchFeatures(env, a) {
     }
   }
   throw new Error("Couldn't fetch features: " + errors.join("; "));
+}
+
+// True if any of the first features has a coordinate outside lon/lat degree range (a projected CRS such as RD or BNG).
+function notDegrees(features) {
+  let bad = false;
+  const walk = (c) => { if (bad || !Array.isArray(c)) return; if (typeof c[0] === "number") { if (Math.abs(c[0]) > 180.0001 || Math.abs(c[1]) > 90.0001) bad = true; } else c.forEach(walk); };
+  for (const f of features.slice(0, 20)) walk(f?.geometry?.coordinates);
+  return bad;
 }
 
 function featBbox(g) {
