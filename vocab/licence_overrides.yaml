@@ -1100,3 +1100,16 @@ rules:
     attribution: © Natural England 2026. Contains peat restoration data from a variety of national sources © Environment Agency
       copyright and/or database rights 2025. All rights reserved. © Rural Payments Agency.
     source: ArcGIS Online item f471cf7868d44acc8a730ef6dee0c156 (Opendata_NE), licence and credits fields, read 24 Nov 2026
+
+  # The atlas's hosted OpenStreetMap copies (osm/, vocab/seeds/osm.yaml; R2 bucket atlas-data at data.asktobler.com),
+  # 25 Nov 2026. The copy is a derived database of OpenStreetMap, so it is shared under the ODbL itself.
+  - host: data.asktobler.com
+    layers: '^osm-copy-'
+    licence: OpenStreetMap is open data, licensed under the Open Data Commons Open Database License (ODbL) by the
+      OpenStreetMap Foundation (OSMF). This copy is a derived database and is shared under the ODbL 1.0 too.
+    open: true
+    attribution: © OpenStreetMap contributors
+    terms: Credit "© OpenStreetMap contributors" wherever the data is used or shown. A database made from this copy and
+      shared publicly must be shared under the ODbL as well; maps and other produced works need only the credit.
+    source: https://www.openstreetmap.org/copyright (licence and credit wording as OSMF publishes it; not re-read by the
+      atlas's checks on 25 Nov 2026, as the workspace can't reach the page; re-read once in a browser)

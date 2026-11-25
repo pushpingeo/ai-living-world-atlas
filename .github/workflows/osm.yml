@@ -1,0 +1,267 @@
+name: osm
+# The atlas's hosted copy of OpenStreetMap, per market (moved from Tobler's osm-extracts workflow, 25 Nov 2026).
+# Downloads the market's Geofabrik extracts (the smallest under each root in osm/spec.json), keeps only the kinds Tobler
+# asks for (osmium tags-filter, then osm/build.py), writes FlatGeobuf and GeoParquet per extract and group, uploads them
+# to the public R2 bucket atlas-data (data.asktobler.com) under osm/<release>/<extract>/, then the manifest
+# osm/<market>.json LAST, so a reader never sees half a release. Layout and manifest format: docs/mcp-tools.md
+# ("Hosted OpenStreetMap copy"). The report goes to results/osm; the market's atlas record to vocab/seeds/osm.yaml.
+#
+# Runs: edit runs/osm.env and push (PUBLISH=no builds and reports only), or by hand. Weekly per market once the market
+# is listed in runs/osm-weekly.env (the crons below, one market each, spaced so they don't queue on each other).
+# Jobs: up to MAX_PARALLEL (default 6) build jobs at once, inside the free plan's 20; the crawl waves share that limit.
+on:
+  push:
+    branches: [main]
+    paths: ['runs/osm.env']
+  workflow_dispatch:
+    inputs:
+      market: { description: "uk, nl, au or us", default: "uk" }
+      publish: { description: "upload to atlas-data (yes/no)", default: "no" }
+  schedule:
+    - cron: '41 5 * * 6'   # Saturday: uk
+    - cron: '11 7 * * 6'   # Saturday: nl
+    - cron: '41 8 * * 6'   # Saturday: au
+    - cron: '41 5 * * 0'   # Sunday: us (the big one; nothing else scheduled near it but the sweep's single job)
+permissions:
+  contents: write
+  actions: write   # to start spike-osm, pages and deploy-mcp after a record change
+concurrency:
+  group: osm
+  cancel-in-progress: false
+env:
+  UA: "AI Living World Atlas OSM copy builder (github.com/pushpingeo/ai-living-world-atlas)"
+  BUCKET: atlas-data
+  PUBLIC_BASE: https://data.asktobler.com/osm/
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      go: ${{ steps.p.outputs.go }}
+      shards: ${{ steps.plan.outputs.shards }}
+      market: ${{ steps.p.outputs.market }}
+      parquet: ${{ steps.p.outputs.parquet }}
+      publish: ${{ steps.p.outputs.publish }}
+      release: ${{ steps.p.outputs.release }}
+      max_parallel: ${{ steps.p.outputs.max_parallel }}
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - id: p
+        run: |
+          set -euo pipefail
+          val() { grep -E "^$1=" "$2" 2>/dev/null | tail -1 | cut -d= -f2- | sed 's/[[:space:]]*#.*//' || true; }
+          case "${{ github.event_name }}" in
+            schedule)
+              case "${{ github.event.schedule }}" in
+                '41 5 * * 6') MARKET=uk;; '11 7 * * 6') MARKET=nl;; '41 8 * * 6') MARKET=au;; '41 5 * * 0') MARKET=us;; *) MARKET=;;
+              esac
+              PUBLISH=yes; PARQUET=yes; SHARDS=6; MAXP=6
+              if ! echo " $(val MARKETS runs/osm-weekly.env) " | grep -q " $MARKET "; then
+                echo "$MARKET isn't in runs/osm-weekly.env MARKETS: nothing to do"; echo "go=no" >> $GITHUB_OUTPUT; exit 0
+              fi ;;
+            workflow_dispatch)
+              MARKET="${{ github.event.inputs.market }}"; PUBLISH="${{ github.event.inputs.publish }}"; PARQUET=yes; SHARDS=6; MAXP=6 ;;
+            *)
+              MARKET=$(val MARKET runs/osm.env); PUBLISH=$(val PUBLISH runs/osm.env); PARQUET=$(val PARQUET runs/osm.env)
+              SHARDS=$(val SHARDS runs/osm.env); MAXP=$(val MAX_PARALLEL runs/osm.env) ;;
+          esac
+          MARKET=${MARKET:-uk}; PUBLISH=${PUBLISH:-no}; PARQUET=${PARQUET:-yes}; SHARDS=${SHARDS:-6}; MAXP=${MAXP:-6}
+          echo "market=$MARKET publish=$PUBLISH parquet=$PARQUET shards=$SHARDS max_parallel=$MAXP"
+          {
+            echo "go=yes"; echo "market=$MARKET"; echo "publish=$PUBLISH"; echo "parquet=$PARQUET"; echo "max_parallel=$MAXP"
+            echo "release=$(date -u +%Y-%m-%d)"
+          } >> $GITHUB_OUTPUT
+          echo "SHARDS=$SHARDS" >> $GITHUB_ENV; echo "MARKET=$MARKET" >> $GITHUB_ENV; echo "PUBLISH=$PUBLISH" >> $GITHUB_ENV
+      - name: Same kinds and tags as Tobler's catalogue/osm-snapshot.json?
+        if: steps.p.outputs.go == 'yes'
+        run: python3 osm/check_spec.py
+      - uses: actions/setup-node@v4
+        if: steps.p.outputs.go == 'yes' && env.PUBLISH == 'yes'
+        with: { node-version: 22 }
+      - name: Can the token write to the bucket? (fail in a minute, not after the build)
+        if: steps.p.outputs.go == 'yes' && env.PUBLISH == 'yes'
+        run: |
+          echo "probe $(date -u +%FT%TZ) atlas run ${GITHUB_RUN_ID}" > probe.txt
+          npx -y wrangler@4 r2 object put "$BUCKET/osm/_probe-atlas.txt" --file probe.txt --remote --content-type text/plain \
+            || { echo "::error::The Cloudflare token can't write to R2 bucket $BUCKET"; exit 1; }
+          S3ENV=$(osm/r2-s3-env.sh) || exit 1; eval "$S3ENV"; echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
+          aws s3 cp probe.txt "s3://$BUCKET/osm/_probe-atlas-s3.txt" --endpoint-url "$R2_ENDPOINT" --only-show-errors \
+            || { echo "::error::R2's S3 API refused the token's derived credentials for bucket $BUCKET"; exit 1; }
+      - name: Plan the extracts
+        id: plan
+        if: steps.p.outputs.go == 'yes'
+        run: |
+          set -euo pipefail
+          pip install -q shapely
+          curl -sfL -A "$UA" --retry 3 -o osm/index-v1.json https://download.geofabrik.de/index-v1.json
+          cd osm && python3 plan.py --market "$MARKET" --index index-v1.json --out regions.json --shards "$SHARDS"
+          echo "shards=$(python3 -c "import json;print(json.dumps(sorted({r['shard'] for r in json.load(open('regions.json'))['regions']})))")" >> $GITHUB_OUTPUT
+      - uses: actions/upload-artifact@v4
+        if: steps.p.outputs.go == 'yes'
+        with:
+          name: plan
+          path: osm/regions.json
+          retention-days: 3
+
+  build:
+    needs: plan
+    if: needs.plan.outputs.go == 'yes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJson(needs.plan.outputs.max_parallel) }}
+      matrix:
+        shard: ${{ fromJson(needs.plan.outputs.shards) }}
+    env:
+      PUBLISH: ${{ needs.plan.outputs.publish }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+          pip install -q osmium shapely geopandas pyogrio pyarrow
+          df -h . | tail -1; free -g | head -2
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: plan }
+      - name: Build this shard's extracts
+        working-directory: osm
+        run: |
+          FILTER=$(python3 build.py --print-filter)
+          python3 -c "import json;[print(r['id']+'|'+r['pbf']) for r in json.load(open('../plan/regions.json'))['regions'] if r['shard']==${{ matrix.shard }}]" > ../my-regions.txt
+          while IFS='|' read -r id url; do
+            echo "::group::$id"
+            # Geofabrik: retry with pauses (it slows or refuses heavy users), and say what it answered if it fails.
+            code=$(curl -sL -A "$UA" --retry 4 --retry-delay 30 --retry-all-errors -o in.osm.pbf -w '%{http_code}' "$url" || true)
+            if [ "$code" != "200" ]; then echo "::warning::$id: download failed (HTTP $code)"; rm -f in.osm.pbf; echo "::endgroup::"; continue; fi
+            osmium tags-filter --overwrite -o filtered.osm.pbf in.osm.pbf $FILTER \
+              || { echo "::warning::$id: osmium tags-filter failed"; rm -f in.osm.pbf filtered.osm.pbf; echo "::endgroup::"; continue; }
+            python3 build.py --pbf filtered.osm.pbf --region "$id" --out "../out/$id" --source-bytes $(stat -c %s in.osm.pbf) \
+              ${{ needs.plan.outputs.parquet == 'yes' && '--parquet' || '' }} || { echo "::warning::$id: build failed"; rm -f "../out/$id/stats.json"; }
+            rm -f in.osm.pbf filtered.osm.pbf
+            echo "::endgroup::"
+          done < ../my-regions.txt
+      - name: Upload to R2 (S3 API, multipart for big files)
+        if: env.PUBLISH == 'yes'
+        run: |
+          S3ENV=$(osm/r2-s3-env.sh) || exit 1; eval "$S3ENV"; echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
+          failed=0
+          # One extract per stats.json (ids can hold a slash, e.g. us/texas).
+          for st in $(find out -name stats.json); do d=$(dirname "$st"); id=${d#out/}
+            # An extract whose files didn't all go up is left out of the manifest (its stats.json is removed).
+            if ! aws s3 cp "$d" "s3://$BUCKET/osm/${{ needs.plan.outputs.release }}/$id/" --recursive --exclude "*" --include "*.fgb" --include "*.parquet" \
+                 --endpoint-url "$R2_ENDPOINT" --content-type application/octet-stream --cache-control "public, max-age=31536000, immutable" --only-show-errors; then
+              echo "::warning::$id: upload failed; left out of this release"; rm -f "$st"; failed=1
+            fi
+          done
+          [ "$failed" = 0 ] || echo "::warning::some extracts weren't uploaded"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stats-${{ matrix.shard }}
+          path: out/**/stats.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  publish:
+    needs: [plan, build]
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.go == 'yes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      PUBLISH: ${{ needs.plan.outputs.publish }}
+      M: ${{ needs.plan.outputs.market }}
+      R: ${{ needs.plan.outputs.release }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: pip install -q -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with: { path: art }
+      - name: Manifest and report
+        run: |
+          python3 osm/publish.py --regions art/plan/regions.json --stats-dir art --release "$R" \
+            --out /tmp/manifest.json --report "/tmp/report-$M.json" || echo "::warning::some extracts didn't build (see missing in the report)"
+          python3 - <<'PY' >> $GITHUB_STEP_SUMMARY
+          import json, os
+          r = json.load(open(f"/tmp/report-{os.environ['M']}.json"))
+          print(f"## OpenStreetMap copy: {r['market']}, release {r['release']}\n")
+          print(f"- extracts built: {r['built']} of {r['extracts']}" + (f"; missing: {', '.join(r['missing'])}" if r['missing'] else ""))
+          print(f"- features: {r['features']:,}; FlatGeobuf {r['fgb_bytes']/1e9:.2f} GB; GeoParquet {r['parquet_bytes']/1e9:.2f} GB; manifest {r['manifest_bytes']/1e3:.0f} kB")
+          big = sorted(r["regions"], key=lambda x: -(x.get("max_rss_mb") or 0))[:5]
+          print("- most memory: " + ", ".join(f"{x['region']} {x.get('max_rss_mb')} MB ({x['source_bytes']/1e6:.0f} MB extract, {x['total_s']:.0f} s)" for x in big))
+          PY
+      - name: Publish the manifest last (so readers never see half a release)
+        id: man
+        if: env.PUBLISH == 'yes'
+        run: |
+          python3 -c "import json,sys; m=json.load(open('/tmp/manifest.json')); sys.exit(0 if m['regions'] else 1)" \
+            || { echo "::error::no extract built; the previous manifest stays"; exit 1; }
+          npx -y wrangler@4 r2 object put "$BUCKET/osm/$M.json" --file /tmp/manifest.json --remote \
+            --content-type application/json --cache-control "public, max-age=300"
+          echo "published=1" >> $GITHUB_OUTPUT
+      - name: Report to results/osm
+        if: always()
+        run: |
+          [ -s "/tmp/report-$M.json" ] || exit 0
+          # the record as it would be written (a dry run shows it too)
+          python3 osm/record.py --market "$M" --manifest /tmp/manifest.json --report "/tmp/report-$M.json" \
+            --url "${PUBLIC_BASE}$M.json" --seeds "/tmp/record-$M.yaml" || true
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          if git fetch -q --depth 1 origin results/osm 2>/dev/null; then git worktree add -q /tmp/rb FETCH_HEAD
+          else git worktree add -q --detach /tmp/rb && git -C /tmp/rb checkout -q --orphan results/osm && git -C /tmp/rb rm -rfq . ; fi
+          cp "/tmp/report-$M.json" /tmp/rb/ && cp /tmp/manifest.json "/tmp/rb/manifest-$M.json"
+          [ -s "/tmp/record-$M.yaml" ] && cp "/tmp/record-$M.yaml" /tmp/rb/ || true
+          cd /tmp/rb
+          echo "$M release $R, run ${GITHUB_RUN_ID}, publish=$PUBLISH, $(date -u +%FT%TZ)" >> RUNS.txt
+          git add -A && git commit -qm "osm: $M release $R (run ${GITHUB_RUN_ID}, publish=$PUBLISH)" && git push -q origin HEAD:refs/heads/results/osm
+      - name: Atlas record (vocab/seeds/osm.yaml)
+        id: rec
+        if: steps.man.outputs.published == '1'
+        run: |
+          python3 osm/record.py --market "$M" --manifest /tmp/manifest.json --report "/tmp/report-$M.json" --url "${PUBLIC_BASE}$M.json"
+          git config user.name atlas-bot; git config user.email atlas-bot@users.noreply.github.com
+          git add vocab/seeds/osm.yaml
+          git commit -qm "osm: record for $M, release $R" || { echo "record unchanged"; exit 0; }
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep 5; done
+          echo "changed=1" >> $GITHUB_OUTPUT
+      - name: Publish the record (spike-osm, then pages, then deploy-mcp)
+        # As in the files workflow: runs started with the workflow token don't fire workflow_run, so start each and wait.
+        # Only once spike-osm is in runs/published.txt (its first run and tag run are started by hand).
+        if: steps.rec.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git pull -q origin main
+          grep -qx 'spike-osm' runs/published.txt || { echo "spike-osm isn't published yet: record committed, not published"; exit 0; }
+          run_and_wait() {
+            local wf=$1; shift
+            local since; since=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            gh api repos/${{ github.repository }}/actions/workflows/$wf/dispatches -f ref=main "$@"
+            local id=""
+            for i in $(seq 1 30); do
+              sleep 10
+              id=$(gh run list -R ${{ github.repository }} --workflow "$wf" --event workflow_dispatch -L 5 --json databaseId,createdAt \
+                   -q "[.[] | select(.createdAt >= \"$since\")][0].databaseId // empty")
+              [ -n "$id" ] && break
+            done
+            [ -z "$id" ] && { echo "::error::$wf didn't start"; exit 1; }
+            gh run watch -R ${{ github.repository }} "$id" --exit-status --interval 30 > /dev/null
+            echo "$wf: run $id done"
+          }
+          run_and_wait spike.yml -f 'inputs[run_file]=runs/spike-osm.env'
+          run_and_wait pages.yml
+          run_and_wait deploy-mcp.yml
