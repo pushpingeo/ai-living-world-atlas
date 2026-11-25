@@ -86,6 +86,83 @@ its details. Rewritten after every published build.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (25 Nov night, **pollution screening for the US, Netherlands and Australia; two Worker changes**; gap review in the
+  project, `claude/pollution-sources-gap-review-2026-11-25.md`) Additive. Same fields as the UK and US packs
+  (`details.nation`, `completeness`, `completeness_note` on every endpoint). Record ids are fixed.
+  - **`nation` is the jurisdiction a record covers.** For Australia that is the state ("New South Wales", "Victoria",
+    "Queensland", "Tasmania"), or "Australia" for the two national records, so a state record that is `complete`
+    means "none in that state", never "none in Australia".
+  - **US, 11 more** (keyword `us-contamination-pack`, wave `spike-uscontamination`):
+
+    | Record | Id | Completeness |
+    |---|---|---|
+    | Leaking underground storage tank releases (EPA UST Finder) | `053f4bf868642493` | **partial**: state data is a 2018-2021 snapshot; **licence not stated** (`open_licence` false) |
+    | FUDS properties, points (USACE) | `625da70c6d8bd535` | complete (FY2024 inventory) |
+    | FUDS property boundaries | `ff1c69bfd453b771` | **partial** (about 3,000 of 10,150 drawn) |
+    | FUDS munitions response sites | `445cd4ff6a722354` | complete |
+    | Nonattainment areas: ozone 2015 `a83dc70f27dfe083`, ozone 2008 `da21bdced2a4095c`, PM2.5 annual 2012 `b0894c21ad432656`, PM2.5 24-hour 2006 `77e43826a4a096cb`, PM10 1987 `9189980baa488a83`, SO2 2010 `aa58c8923bb7c7ef`, lead 2008 `dc8913dbf8ce35ba` | | complete (areas not listed are attainment) |
+
+    Fields: UST `Status` (Open, No Further Action, Unknown), `Substance`, `Closed_With_Residual_Contaminat`,
+    `Within_SPA`/`Within_WHPA`; filter `where: "Status='Open'"` for live cases. FUDS `STATUS`, `ELIGIBILITY`;
+    munitions `PROJECTSTATUS`, `RELATIVEPRIORITY`. Nonattainment `current_status` (Nonattainment or Maintenance),
+    `classification` (severity), `area_name`. **Personal data:** UST `Name`/`Address` can be a private home, FUDS
+    `CURRENTOWNER` can name a private owner: `terms` says leave them out. Live 25 Nov: all 11 returned features for a
+    small box (Houston, Hattiesburg, San Diego, Los Angeles) in 0.2-0.6 s.
+  - **Netherlands, 7** (keyword `nl-pollution-pack`, wave `spike-nlpollution`); all open:
+
+    | Record | Id | Protocol | Completeness |
+    |---|---|---|---|
+    | Soil Protection Act decisions on serious contamination (Kadaster WKPB, `grondslag_code` WBA) | `231d99a8a7586e28` | **ogc-api-features** | **partial** (the Wbb ended 1 Jan 2024; many sites never had a decision) |
+    | Industrial releases to air and water (RIVM, E-PRTR) | `73963d5137969e18` | wfs | complete above E-PRTR thresholds |
+    | Groundwater protection areas (RIVM) | `3405c2be84260997` | wfs | complete |
+    | Drinking water abstraction areas, waterwingebieden (RIVM) | `b668c500d2cd403f` | wfs | complete |
+    | Bore-free zones (RIVM) | `5f87eb3c3010bb00` | wfs | complete |
+    | Former landfills, Zeeland | `b822efc24a0a7512` | wfs | **partial** (one province) |
+    | Former landfills closed before 1996, Noord-Holland (NAVOS) | `56b77c065cb619e9` | arcgis-mapserver | **partial** (one province) |
+
+    The RIVM water zones are the Dutch counterpart of source protection zones: waterwingebied about SPZ 1,
+    grondwaterbeschermingsgebied SPZ 2/3; the bore-free zones restrict drilling below a depth (piling, ground source
+    heat). RIVM releases: one row per site, pollutant and medium (`mediumcode` AIR or WATER), so count sites by
+    `nationalid`. WKPB: a decision says serious contamination was found, not its state today.
+  - **Australia, 9 services and 1 hosted file** (keyword `au-pollution-pack`, wave `spike-aupollution`; NPI in
+    `spike-files`):
+
+    | Record | Id | nation | Completeness | Licence |
+    |---|---|---|---|---|
+    | Priority Sites Register, points (EPA Victoria) | `ecfa7155cd9c6baf` | Victoria | complete (sites under a current notice) | CC BY 4.0 |
+    | Priority Sites Register, areas | `ef7d25de438c6e16` | Victoria | **partial** | CC BY 4.0 |
+    | Contaminated land notified to the EPA (s60) | `72bdef1614fc2fda` | New South Wales | complete (notified sites only) | CC BY |
+    | Contaminated land record of notices (CLM Act register) | `7c8ed69c4821d0ef` | New South Wales | complete | CC BY |
+    | Environment protection licences | `dda78b96ce8f48f7` | New South Wales | complete | **not stated** |
+    | Environmental authority locations | `0ae1001313dcb65a` | Queensland | complete | CC BY 4.0 |
+    | EPA regulated sites (the LIST) | `36077cbc2b19b3af` | Tasmania | complete (EPA-regulated) | **not specified** |
+    | Waste management facilities (Geoscience Australia) | `3e2cf0ee7b684466` | Australia | complete | CC BY 4.0 |
+    | Mine waste (Geoscience Australia) | `7d565ad35e8e82b5` | Australia | **partial** | CC BY 4.0 |
+    | National Pollutant Inventory facilities (hosted copy, 8,140) | `22b2d6f7fc349934` | Australia | complete | CC BY 4.0 |
+
+    **Personal data:** NSW `Owner`/`Occupier` and `AcountablePartyName`, Queensland `primary_holder`, Tasmania
+    `CLIENT_NAME` can name private individuals (`terms` says leave them out). The NPI copy leaves out business names,
+    ABN, street address and website.
+  - **Live check (mcp-ask, 25 Nov 22:48 UTC, after the deploy):** all 17 NL and AU records returned features for a small
+    box at a known place in 0.2-3.5 s (Utrecht, Rotterdam, Overijssel, Zeeland, IJmuiden; Melbourne, Sydney, Brisbane,
+    Hobart, Perth, the Pilbara, Newcastle NSW), through the protocol listed. The WKPB record (OGC API, `grondslag_code=WBA`)
+    returned 17 decisions near Utrecht. Regressions: US UST and SEPA unchanged. `find_datasets` finds the new records by
+    concept (Rotterdam `pollution-source`, Sydney `contaminated-land`). mcp-check after the deploy: passed.
+  - **Worker change 1: `ogc-api-features` endpoints.** `fetch_features` reads OGC API Features collections
+    (`<collection>/items?bbox=...&limit=...`, CRS84 by default). `endpoints[].info.query` is a fixed filter the
+    Worker always adds (the WKPB record: `grondslag_code=WBA`). `text` is filtered after the fetch, as for WFS; `where`
+    doesn't apply. `get_dataset` gives a `query_url` template.
+  - **Worker change 2: WFS answers in a projected CRS now fail instead of returning.** PDOK's MapServer WFS ignores
+    the requested CRS and answers in Dutch RD metres; before 25 Nov such features came back with metre coordinates. Now
+    the attempt fails with "the server answered in a projected CRS" (and the next endpoint, if any, is tried). This
+    can only turn wrong answers into errors.
+  - **Open licences given as URLs (publish-time fix).** `open_licence` now reads `creativecommons.org/...` URLs and
+    similar (14,432 more datasets open, mostly AU, NZ, NL), and NC or ND licences no longer count as open (296).
+  - **Gaps (report as "not checked"):** EU industrial emissions register (EEA's servers didn't answer GitHub on
+    25 Nov); NL Bodemloket (no open service), BRO soil decisions and investigations (WMS only), REV hazardous
+    installations (PDOK's copy has latitude and longitude swapped); WA contaminated sites (custom licence, personal use),
+    Queensland's EMR/CLR (not published), Defence PFAS areas (PDF maps); US state cleanup lists; UK past land use (BGS
+    artificial ground: licence statements conflict) and EA aquifer designations (no official service found).
 - (25 Nov, **hosted OpenStreetMap copy: the atlas takes over**; Tobler's `docs/atlas-requests.md`, 25 Nov) New section
   above, "Hosted OpenStreetMap copy": the layout and manifest format as Tobler's own build made them, unchanged, plus
   one optional field (`files.<group>.parquet`). The build now lives in the atlas (`osm/`, workflow `osm`), with the same

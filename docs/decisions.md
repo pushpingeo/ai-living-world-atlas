@@ -724,3 +724,36 @@ on a real site. Rob agreed the split (design: project doc `claude/osm-copy-desig
   CC BY-NC-ND while the data is dl-de/by; they read as not open (wrong in the safe direction).
 - **Not changed:** `q_pass` in the wave files. The crawl gave these datasets 5 licence points instead of 10, so a few
   near the bar still fail; they'll pass on their next crawl.
+
+## 2026-11-25 (night): pollution screening for the US, Netherlands and Australia; Worker reads OGC API Features
+Rob's go after the gap review (project doc `claude/pollution-sources-gap-review-2026-11-25.md`). Contract note in
+docs/mcp-tools.md (25 Nov night) lists every record id.
+- **Order changed from the handover.** The EU industrial emissions register was next, but for the four focus markets it
+  only adds the Netherlands, and EEA's servers (sdi.eea.europa.eu, air.discomap, industry.eea) didn't answer GitHub's
+  runners on 25 Nov (probe rounds 45-46; discodata answered 502). The Netherlands, Australia and the US gave more for less.
+- **US (11):** EPA UST Finder releases (licence not stated: state-sourced, credits name ASTSWMO, so the federal-work
+  inference isn't applied), USACE Formerly Used Defense Sites (points, boundaries, munitions response sites), EPA
+  nonattainment areas for the 7 standards still in force with a nonattainment area (revoked 1979/1997 ozone and 1997
+  PM2.5, and CO and NO2, which are maintenance only, left out).
+- **Netherlands (7, all open):** Kadaster WKPB Wbb decisions (WBA only, through a fixed filter), RIVM E-PRTR releases,
+  RIVM groundwater protection areas, waterwingebieden and bore-free zones, Zeeland and Noord-Holland former landfills.
+  Not used: BRO SLD/SAD (WMS only, CC0: could be hosted from PDOK's download later), REV production installations
+  (PDOK's OGC API copy has lat and lon swapped: [51.77, 4.18]; no names either), Bodemloket (no open service).
+- **Australia (9 + NPI hosted):** EPA Victoria Priority Sites Register, NSW EPA notified sites, CLM record of notices and
+  licences, Queensland environmental authorities, Tasmania EPA regulated sites, Geoscience Australia waste facilities
+  and mine waste. NPI's WFS publishes no feature types, so the facilities GeoJSON (CC BY 4.0) is hosted (files
+  workflow) with business names, ABN/ACN, street address and website left out (some facilities are family farms).
+  Not used: WA DWER-059 ("Custom (Active Acceptance)", SLIP personal-use licence), Queensland EMR/CLR (not published).
+- **`nation` is the jurisdiction a record covers**, so Australian state records carry the state name; a complete state
+  record must not read as "none in Australia".
+- **Worker: OGC API Features (`ogc-api-features`).** CRS84 by default, so no axis-order or projection question.
+  `info.query` adds a fixed filter (PDOK's queryables, e.g. `grondslag_code=WBA`). The sweep checks it with a plain GET
+  of the collection; the viewer labels it. Alternative considered: a WFS 2.0 request with lat/lon axis swapping in the
+  Worker; OGC API is simpler and PDOK's main API now.
+- **Worker: WFS answers in a projected CRS fail.** Found on PDOK's MapServer WFS: it refuses CRS84 and, on the 1.0.0
+  fallback with EPSG:4326, answers in RD metres. fetch_features used to return those as features. Now any WFS/ArcGIS
+  answer whose first 20 features have a coordinate outside degree range counts as a failed attempt. Lat/lon swaps
+  inside the degree range (the REV case) can't be caught this way.
+- Probe rounds 45-51. UK past land use (Tobler's 24 Nov request) is not built: BGS 50k artificial ground's licence
+  statements conflict (OGL on one BGS record for the WMS, "personal, non-commercial" on data.gov.uk, BGS licence for the
+  vector) and no official EA aquifer designation service was found (council and consultant copies only). Rob's call.

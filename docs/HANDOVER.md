@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (25 Nov 2026)
+# AI Living World Atlas: handover (25 Nov 2026, night)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -79,7 +79,9 @@ Workspace notes:
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
 | Best-in-class fill (`spike-fill`) | 5.1k | 463 | 24 Nov night: NASA, USGS National Map and earthquakes, Met Office, EFFIS, FIRMS, SoilGrids, GVP, WRI, World Bank. Last in publish order. See below |
 | UK water and peat (`spike-ukwaterpeat`) | 13 | 13 | Storm overflows (8 companies live, 2025 annual returns, Scottish Water) and the England Peat Map (24 Nov) |
-| US contamination (`spike-uscontamination`) | 10 | 10 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD |
+| US contamination (`spike-uscontamination`) | 21 | 21 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD; 25 Nov: leaking tanks (UST Finder), Formerly Used Defense Sites, nonattainment areas (7 standards) |
+| NL pollution (`spike-nlpollution`) | 7 | 7 | 25 Nov: Wbb decisions (Kadaster WKPB, OGC API), RIVM E-PRTR releases and drinking water zones, Zeeland and Noord-Holland former landfills |
+| AU pollution (`spike-aupollution`) | 9 | 9 | 25 Nov: EPA Victoria, NSW EPA (3), Queensland, Tasmania, Geoscience Australia (2); the NPI is hosted in `spike-files` |
 | UK pollution (`spike-ukpollution`) | 6 | 6 | Contamination step 2 (24 Nov, Tobler): SEPA authorisations, NRW permits, DAERA incidents and consents, NI historical land use |
 | UK ground (`spike-ukground`) | 16 | 16 | Contamination step 1 (24 Nov, Tobler): landfill, coal mining risk, closed mining waste, source protection zones, radon, council records |
 | UK pack (`spike-ukpack`) | 45 | 45 | Curated records for landscape, heritage, peat, farmland quality, flood zones, SSSI IRZs, per nation (23 Nov, Tobler) |
@@ -269,8 +271,7 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
 ## US contamination (24 Nov, afternoon)
 
 - `vocab/seeds/us-contamination.yaml`: 10 EPA records (keyword `us-contamination-pack`). Public domain. Completeness is per
-  federal programme; state lists aren't in them.
-- **Next:** the EU's industrial emissions register (EEA).
+  federal programme; state lists aren't in them. 25 Nov: 11 more (see below).
 
 ## EA downloads, storm overflows, England Peat Map (24 Nov, evening)
 
@@ -281,6 +282,30 @@ Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the pro
   annual returns (England and Wales), Scottish Water (not open), England Peat Map extent, observations, restoration.
 - Still open: NRW incidents (manual quarterly download) and Scotland's Local Landscape Areas (Spatial Hub account),
   both Rob's call. Probe: a `FULL ` line keeps a small download whole; never use it on files with personal data.
+
+## Pollution screening: US additions, Netherlands, Australia (25 Nov, night)
+
+Gap review: project doc `claude/pollution-sources-gap-review-2026-11-25.md`. Contract note with every id in
+docs/mcp-tools.md (25 Nov night); reasons in decisions.md.
+- **US** (`us-contamination.yaml`, 21 now): + UST Finder releases (licence not stated), USACE FUDS (3), nonattainment (7).
+- **Netherlands** (`vocab/seeds/nl-pollution.yaml`, keyword `nl-pollution-pack`, 7, all open): WKPB Wbb decisions (WBA)
+  through **OGC API Features**, RIVM releases and drinking water zones (WFS), Zeeland and Noord-Holland landfills.
+- **Australia** (`vocab/seeds/au-pollution.yaml`, keyword `au-pollution-pack`, 9): `nation` is the state. NSW licences and
+  Tasmania aren't open (licence not stated / not specified). **NPI** hosted from its download
+  (`vocab/files/au-npi-facilities.yaml`, keep-list drops names, ABN, addresses); it isn't in `files-monthly.env` yet:
+  NPI updates once a year (by 31 March), so a refresh each April is enough (add it to the monthly list if that's easier).
+- **Worker (atlas-mcp):** protocol `ogc-api-features` (with `info.query`, a fixed filter), and WFS/ArcGIS answers in a
+  projected CRS now fail instead of returning metre coordinates (PDOK's MapServer WFS does this).
+- **Licences:** `licences.recognise` (combine.py) re-reads `open_licence` with the fixed rule: licences given as URLs count,
+  NC/ND don't. Upgrade-only except where NC/ND is named.
+- **Still open, in order:**
+  1. EU industrial emissions register: EEA's hosts didn't answer GitHub on 25 Nov. Try a probe again; if the download
+     answers (`sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v15_r00/`), host it like the
+     EA files (files.py would need a `layer` key for a multi-layer GeoPackage).
+  2. NL: host PDOK's BRO soil decisions (SLD, CC0, WMS only as a service) from PDOK's download; Bodemloket has no service.
+  3. Rob's calls: WA contaminated sites (custom licence), UK past land use (BGS 50k artificial ground: licence statements
+     conflict), EA aquifer designations (no official service found), NSW licences and Tasmania (licence unread/unstated).
+  4. Not found: Queensland EMR/CLR (not public), Defence PFAS areas (PDFs), US state cleanup lists (crawl copies only).
 
 ## Best in class and the fill wave (24 Nov, night)
 
@@ -312,6 +337,7 @@ Details in decisions.md (24 Nov, night).
 ## Known gaps and next steps (rough priority)
 
 1. **The OpenStreetMap copy:** Rob's go for the first publish, then the steps in its section above.
+   **Pollution screening:** next steps in its section above (EU register, BRO soil decisions, Rob's licence calls).
 2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly. Expected real retirements:
    oceandata.rad.rutgers.edu, gis1.mgipu.hr, gis12.cookcountyil.gov. Watch the EEA discomap hosts (all down on 24 Nov).
 3. **Best in class:** GIBS descriptions via CMR, then the ranking boost and flag (with the publisher registry stage 2
