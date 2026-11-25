@@ -664,3 +664,32 @@ register, new concepts and a re-tag, radon only if OGL, old maps as a link only,
   - Not found or refused before the crawl: Bureau of Meteorology (403 to GitHub), KNMI (data platform needs a key),
     TNO/NLOG (no public service found), SEDAC's geoserver (timed out), NEO, World Bank map services (none).
     volcano.si.edu's website answers bots with a verification page; its GeoServer is open.
+
+## 2026-11-25: The hosted OpenStreetMap copy moves to the atlas
+
+Tobler built a copy of the OpenStreetMap kinds its site checks use, because all three public Overpass servers timed out
+on a real site. Rob agreed the split (design: project doc `claude/osm-copy-design.md`; request: Tobler's
+`docs/atlas-requests.md`, 25 Nov): hosting and publishing is the atlas's job, asking for it and reading it is Tobler's.
+
+- **The atlas owns** the public R2 bucket `atlas-data` (custom domain `data.asktobler.com`, CORS for range requests),
+  the build, the refresh, the licence and the records. `atlas-backup` stays private and separate, so a public bucket
+  can never expose a backup.
+- **Tobler owns** the kinds and tags (`catalogue/osm-snapshot.json`), the reader and the Overpass fallback.
+- **The build is Tobler's, moved unchanged** (`osm/build.py`, `plan.py`, `publish.py`, `r2-s3-env.sh`): same Geofabrik
+  extracts (the smallest under each market's roots), `osmium tags-filter`, FlatGeobuf with a packed Hilbert R-tree and
+  GeoParquet 1.1 per extract and group, manifest uploaded last. Only additions: `max_rss_mb` in each extract's stats
+  (to size the US build) and an optional `files.<group>.parquet` path in the manifest. Checked by rebuilding Tobler's
+  test fixtures with the atlas scripts: output identical feature for feature, and Tobler's 17 reader tests pass on it.
+- **A copy of the spec, with a check, rather than reading Tobler's file at build time.** `osm/spec.json` is what gets
+  built; `osm/check_spec.py` fetches Tobler's file from main and stops the build if kinds, groups, keep_tags or version
+  differ. A failed build leaves the last release live, which is better than silently building kinds nobody reviewed.
+  Markets live only in the atlas's copy.
+- **Run like the rest of the atlas:** `runs/osm.env` (push to run; `PUBLISH=no` builds and reports only), weekly crons per
+  market gated by `runs/osm-weekly.env`, reports on `results/osm` (report, manifest and the record as it would be written).
+- **One record per market** (`osm-copy-<market>`, `vocab/seeds/osm.yaml`, wave `spike-osm`), written by `osm/record.py`
+  after each published build. Its abstract carries no counts or dates, so a weekly refresh doesn't need re-tagging; the
+  release, data date, feature counts and a coarse outline go in the endpoint details. Licence via
+  `vocab/licence_overrides.yaml` (host `data.asktobler.com`, layers `^osm-copy-`): ODbL 1.0, open, credit
+  "© OpenStreetMap contributors", share-alike for derived databases. The record id follows the manifest URL: moving the
+  domain changes it (a contract note first).
+- **The first publish waits for Rob**, so the two workflows never both write to the bucket (same release folders).

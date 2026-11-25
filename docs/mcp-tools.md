@@ -29,9 +29,67 @@ settlement, school, health-facility, greenspace, tourism-recreation, road, rail,
 protected-area, heritage-site, admin-boundary, maritime-boundary, offshore-wind-site, renewable-potential.
 Renaming or removing one of these breaks a Tobler search.
 
+## Hosted OpenStreetMap copy (files Tobler reads directly)
+
+Not an MCP tool: Tobler's page reads these files itself (`js/osmsnapshot.js` in pushpingeo/tobler), with HTTP range
+requests. The atlas builds and publishes them (`osm/`, `.github/workflows/osm.yml`); Tobler owns the kinds and tags
+(`catalogue/osm-snapshot.json` in its repo). The same rule applies as for the tools: no change to anything below
+without a note under "Requests and changes" first. New, optional fields can be added.
+
+**Where.** Public R2 bucket `atlas-data`, folder `osm/`, served at `https://data.asktobler.com/osm/` (CORS allows
+GET and HEAD with a `Range` header from asktobler.com, www.asktobler.com, pushpingeo.github.io and localhost:8000).
+Tobler stores only that folder URL; every path in a manifest is relative to the manifest, so the domain can move.
+
+**Layout.**
+
+| Path | What | Caching |
+|---|---|---|
+| `osm/<market>.json` | The manifest for a market: `uk`, `nl`, `au`, `us` | 5 minutes |
+| `osm/<release>/<extract id>/<group>.fgb` | FlatGeobuf with a packed Hilbert R-tree; one per extract and group | immutable |
+| `osm/<release>/<extract id>/<group>.parquet` | GeoParquet 1.1 (bbox covering column, zstd), same features | immutable |
+
+- `<release>` is the build day, `YYYY-MM-DD` (UTC). `<extract id>` is Geofabrik's id and may contain a slash
+  (`us/texas`). Groups: `transport`, `utilities`, `water`, `landuse`, `community`, `buildings`.
+- The manifest is uploaded **last**, after every file of the release, so a reader never sees half a release. A
+  release's files are never overwritten once its manifest is out; older releases are kept at least two weeks.
+- Features in both formats: `osm_type` (`node` | `way` | `relation`), `osm_id`, `tags` (JSON text holding only the spec's
+  `keep_tags`), geometry in WGS84 (points, lines, polygons and multipolygons mixed; FlatGeobuf geometry type Unknown).
+  Closed ways and multipolygon relations of area kinds are whole polygons; line kinds stay lines.
+
+**Manifest fields** (`version` 1). Tobler reads the ones in bold.
+
+| Field | Meaning |
+|---|---|
+| `about` | One line of text: what this is, licence and credit |
+| **`version`** | Manifest format version (1). Raised only with a contract note |
+| `spec_version` | `version` of the kinds spec the release was built from |
+| `market` | `uk`, `nl`, `au` or `us` |
+| **`kind_groups`** | `{kind name: group}` for every kind in the release (e.g. `"railway": "transport"`) |
+| **`release`** | The release folder, `YYYY-MM-DD` |
+| `built_at` | When the manifest was made (ISO 8601, UTC) |
+| **`base`** | Prefix for file paths, relative to the manifest URL; empty means beside the manifest |
+| `data_as_of` | `{oldest, newest}`: OpenStreetMap replication times of the extracts (ISO 8601, UTC) |
+| **`outline`** | GeoJSON Polygon or MultiPolygon the copy covers: the union of the built extracts, simplified and drawn about 1 km inside, so it never claims ground it doesn't hold. A search box must be inside it to use the copy |
+| **`regions[]`** | One per built extract: `id`, `name`, **`data_as_of`**, **`bbox`** [w, s, e, n], **`files`** |
+| **`regions[].files.<group>`** | **`path`** (to the `.fgb`), **`features`** (0 means skip), `bytes`, and `parquet` (path to the `.parquet`, when built; added 25 Nov) |
+| `missing` | Extract ids planned but not built or not uploaded in this release (they're outside `outline`) |
+
+**Atlas records.** One per market copy, `osm-copy-<market>` in `vocab/seeds/osm.yaml` (wave `spike-osm`): publisher
+"OpenStreetMap contributors", ODbL 1.0 with the credit "© OpenStreetMap contributors", endpoint `cloud` at the
+manifest URL with `data_date`, `release`, `groups`, `features`, a coarse `coverage_outline` and the share-alike terms in
+its details. Rewritten after every published build.
+
 ## Requests and changes
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
+
+- (25 Nov, **hosted OpenStreetMap copy: the atlas takes over**; Tobler's `docs/atlas-requests.md`, 25 Nov) New section
+  above, "Hosted OpenStreetMap copy": the layout and manifest format as Tobler's own build made them, unchanged, plus
+  one optional field (`files.<group>.parquet`). The build now lives in the atlas (`osm/`, workflow `osm`), with the same
+  Geofabrik extracts and tags; `osm/check_spec.py` stops a build if Tobler's `catalogue/osm-snapshot.json` kinds, groups,
+  keep_tags or version no longer match the atlas's copy (`osm/spec.json`), so ask for new kinds here first. Tested:
+  Tobler's 17 `osmsnapshot` tests pass on fixtures rebuilt with the atlas's scripts. **Status:** dry builds only until Rob
+  agrees the switch; Tobler's workflow is still the one publishing. Then the Tobler chat retires `osm-extracts.yml`.
 
 - (24 Nov evening, **England's current pollution, storm overflows, England Peat Map**) Additive. Same fields as the UK
   packs (`nation`, `completeness`, `completeness_note` in endpoint details).
