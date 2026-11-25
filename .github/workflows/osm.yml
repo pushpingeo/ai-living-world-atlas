@@ -98,7 +98,7 @@ jobs:
         run: |
           set -euo pipefail
           pip install -q shapely
-          curl -sfL -A "$UA" --retry 3 -o osm/index-v1.json https://download.geofabrik.de/index-v1.json
+          curl -sfL -A "$UA" --retry 5 --retry-delay 20 --retry-all-errors -o osm/index-v1.json https://download.geofabrik.de/index-v1.json
           cd osm && python3 plan.py --market "$MARKET" --index index-v1.json --out regions.json --shards "$SHARDS"
           echo "shards=$(python3 -c "import json;print(json.dumps(sorted({r['shard'] for r in json.load(open('regions.json'))['regions']})))")" >> $GITHUB_OUTPUT
       - uses: actions/upload-artifact@v4
