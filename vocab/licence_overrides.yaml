@@ -1113,3 +1113,87 @@ rules:
       shared publicly must be shared under the ODbL as well; maps and other produced works need only the credit.
     source: https://www.openstreetmap.org/copyright (licence and credit wording as OSMF publishes it; not re-read by the
       atlas's checks on 25 Nov 2026, as the workspace can't reach the page; re-read once in a browser)
+  # US contamination screening additions (25 Nov 2026): leaking tanks, FUDS, nonattainment areas.
+  - host: services.arcgis.com
+    layers: '^us-epa-ust-releases:'
+    licence: 'Not stated. The item has no licence text; credits: "EPA''s Office of Underground Storage Tanks, EPA''s Office of
+      Research and Development, The Association of State and Territorial Solid Waste Management Officials". EPA compiled it
+      from state UST programmes'' public records, so the US federal-work inference isn''t applied.'
+    open: false
+    attribution: EPA Office of Underground Storage Tanks, EPA Office of Research and Development, ASTSWMO
+    terms: 'Name and Address can be a private home (heating-oil tanks): show counts, status and substance, not the address.
+      Likely public domain as an EPA compilation of public records, but state-sourced: confirm before commercial use.'
+    source: ArcGIS Online item 62eb19dca5134cf0acf78ee29a4173a9 (EPA), licence and credits fields, read 25 Nov 2026
+  - host: services7.arcgis.com
+    layers: '^us-usace-fuds-properties:'
+    licence: 'Public domain (US federal work). The item says: "There are no usage constraints"; USACE''s disclaimer: "in no way
+      to be considered comprehensive or to be used in any legal or official capacity".'
+    open: true
+    attribution: US Army Corps of Engineers
+    terms: 'CURRENTOWNER can name private landowners: leave it out.'
+    source: ArcGIS Online item 3f8354667d5b4b1b8ad7a6e00c3cf3b1 (usace_crrel_als), licence and credits fields, read 25 Nov 2026
+  - host: services7.arcgis.com
+    layers: '^us-usace-fuds-property-boundaries:'
+    licence: 'Public domain (US federal work). The item says: "There are no usage constraints"; USACE''s disclaimer: "in no way
+      to be considered comprehensive or to be used in any legal or official capacity".'
+    open: true
+    attribution: US Army Corps of Engineers
+    terms: 'CURRENTOWNER can name private landowners: leave it out.'
+    source: ArcGIS Online item 3f8354667d5b4b1b8ad7a6e00c3cf3b1 (usace_crrel_als), licence and credits fields, read 25 Nov 2026
+  - host: services7.arcgis.com
+    layers: '^us-usace-fuds-munitions-response-sites:'
+    licence: 'Public domain (US federal work). The item says: "There are no usage constraints"; USACE''s disclaimer: "in no way
+      to be considered comprehensive or to be used in any legal or official capacity".'
+    open: true
+    attribution: US Army Corps of Engineers
+    terms: 'CURRENTOWNER can name private landowners: leave it out.'
+    source: ArcGIS Online item 3f8354667d5b4b1b8ad7a6e00c3cf3b1 (usace_crrel_als), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-ozone-2015:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-ozone-2008:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-pm25-annual-2012:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-pm25-24hr-2006:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-pm10-1987:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-so2-2010:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
+  - host: services.arcgis.com
+    layers: '^us-epa-nonattainment-lead-2008:'
+    licence: 'Public domain (US federal work). The item says: "Access constraints: None. Use constraints: None."
+      "Acknowledgement of the EPA would be appreciated."'
+    open: true
+    attribution: U.S. EPA Office of Air and Radiation, Office of State Air Partnership
+    source: ArcGIS Online item 2a487fb6c56e492e8e2e66608d9b93d6 (OAR_OSAP_EPA), licence and credits fields, read 25 Nov 2026
