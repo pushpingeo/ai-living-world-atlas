@@ -137,18 +137,28 @@ jobs:
         run: |
           FILTER=$(python3 build.py --print-filter)
           python3 -c "import json;[print(r['id']+'|'+r['pbf']) for r in json.load(open('../plan/regions.json'))['regions'] if r['shard']==${{ matrix.shard }}]" > ../my-regions.txt
-          while IFS='|' read -r id url; do
-            echo "::group::$id"
+          one() {  # id url: download, filter, build; returns 2 when the download failed
+            local id=$1 url=$2 code
             # Geofabrik: retry with pauses (it slows or refuses heavy users), and say what it answered if it fails.
             code=$(curl -sL -A "$UA" --retry 4 --retry-delay 30 --retry-all-errors -o in.osm.pbf -w '%{http_code}' "$url" || true)
-            if [ "$code" != "200" ]; then echo "::warning::$id: download failed (HTTP $code)"; rm -f in.osm.pbf; echo "::endgroup::"; continue; fi
+            if [ "$code" != "200" ]; then echo "$id: download failed (HTTP $code)"; rm -f in.osm.pbf; return 2; fi
             osmium tags-filter --overwrite -o filtered.osm.pbf in.osm.pbf $FILTER \
-              || { echo "::warning::$id: osmium tags-filter failed"; rm -f in.osm.pbf filtered.osm.pbf; echo "::endgroup::"; continue; }
+              || { echo "::warning::$id: osmium tags-filter failed"; rm -f in.osm.pbf filtered.osm.pbf; return 1; }
             python3 build.py --pbf filtered.osm.pbf --region "$id" --out "../out/$id" --source-bytes $(stat -c %s in.osm.pbf) \
               ${{ needs.plan.outputs.parquet == 'yes' && '--parquet' || '' }} || { echo "::warning::$id: build failed"; rm -f "../out/$id/stats.json"; }
             rm -f in.osm.pbf filtered.osm.pbf
-            echo "::endgroup::"
+          }
+          : > ../retry.txt
+          while IFS='|' read -r id url; do
+            echo "::group::$id"; one "$id" "$url" || { [ $? = 2 ] && echo "$id|$url" >> ../retry.txt; }; echo "::endgroup::"
           done < ../my-regions.txt
+          # Downloads Geofabrik refused: one more go each, after a pause (25 Nov: it refused 4 of NL's 12 for a while).
+          if [ -s ../retry.txt ]; then
+            sleep 180
+            while IFS='|' read -r id url; do
+              echo "::group::$id (second try)"; one "$id" "$url" || echo "::warning::$id: download failed twice; left out of this release"; echo "::endgroup::"
+            done < ../retry.txt
+          fi
       - name: Upload to R2 (S3 API, multipart for big files)
         if: env.PUBLISH == 'yes'
         run: |
