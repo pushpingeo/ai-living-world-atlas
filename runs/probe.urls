@@ -1,12 +1,21 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 44 (24 Nov): official descriptions for GIBS and Smithsonian GVP layers; GloFAS again
-https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/MODIS_Terra_CorrectedReflectance_TrueColor.json
-https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/VIIRS_Black_Marble.json
-https://worldview.earthdata.nasa.gov/config/metadata/layers/MODIS_Terra_CorrectedReflectance_TrueColor.md
-https://worldview.earthdata.nasa.gov/config/wv.json
-https://volcano.si.edu/gvp_votw.cfm
-https://volcano.si.edu/database/webservices.cfm
-https://webservices.volcano.si.edu/geoserver/GVP-VOTW/wfs?SERVICE=WFS&REQUEST=DescribeFeatureType&TYPENAME=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes
-https://ows.globalfloods.eu/glofas-ows/ows.py?SERVICE=WMS&REQUEST=GetCapabilities
+# round 45 (25 Nov): pollution screening for NL, AU and the EU register (gap review, project doc pollution-sources-gap-review)
+https://service.pdok.nl/tno/bro-overheidsbesluit-bodemverontreiniging/wfs/v1_0?request=GetCapabilities&service=WFS
+https://service.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/wfs/v2_0?request=GetCapabilities&service=WFS
+https://service.pdok.nl/tno/bro-milieuhygienisch-bodemonderzoek/wfs/v1_0?request=GetCapabilities&service=WFS
+https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?request=GetCapabilities&service=WFS
+https://api.pdok.nl/rws/productie-en-industrie-productie-installaties/ogc/v1/collections?f=json
+https://data.rivm.nl/geo/inspire/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=inspire:facility_pollutant_release&outputFormat=application/json&maxFeatures=2
+https://data.rivm.nl/geo/inspire/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=inspire:facility_pollutant_release&resultType=hits
+https://data.rivm.nl/geo/ank/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ank:rivm_r78_rg_boringsvrijezonesdrinkwater&outputFormat=application/json&maxFeatures=1
+https://data.rivm.nl/geo/wfs?service=WFS&request=GetCapabilities
+https://opengeodata.zeeland.nl/geoserver/bodem/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=bodem:geonam_strpltvrmvvl&outputFormat=application/json&maxFeatures=2
+https://data.overheid.nl/dataset/79169-wet-bodembescherming-punten
+https://sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v15_r00/
+https://sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v16_r00/
+https://sdi.eea.europa.eu/catalogue/srv/api/records/9f373400-35b7-4978-9a34-a3cf839e053f/formatters/xml
+https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer?f=json
+https://data.gov.au/geoserver/npi/wfs?request=GetCapabilities&service=WFS
+https://data.gov.au/data/api/3/action/package_show?id=npi
