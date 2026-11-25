@@ -1,21 +1,25 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 45 (25 Nov): pollution screening for NL, AU and the EU register (gap review, project doc pollution-sources-gap-review)
-https://service.pdok.nl/tno/bro-overheidsbesluit-bodemverontreiniging/wfs/v1_0?request=GetCapabilities&service=WFS
-https://service.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/wfs/v2_0?request=GetCapabilities&service=WFS
-https://service.pdok.nl/tno/bro-milieuhygienisch-bodemonderzoek/wfs/v1_0?request=GetCapabilities&service=WFS
-https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?request=GetCapabilities&service=WFS
-https://api.pdok.nl/rws/productie-en-industrie-productie-installaties/ogc/v1/collections?f=json
-https://data.rivm.nl/geo/inspire/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=inspire:facility_pollutant_release&outputFormat=application/json&maxFeatures=2
-https://data.rivm.nl/geo/inspire/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=inspire:facility_pollutant_release&resultType=hits
-https://data.rivm.nl/geo/ank/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ank:rivm_r78_rg_boringsvrijezonesdrinkwater&outputFormat=application/json&maxFeatures=1
-https://data.rivm.nl/geo/wfs?service=WFS&request=GetCapabilities
-https://opengeodata.zeeland.nl/geoserver/bodem/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=bodem:geonam_strpltvrmvvl&outputFormat=application/json&maxFeatures=2
-https://data.overheid.nl/dataset/79169-wet-bodembescherming-punten
-https://sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v15_r00/
-https://sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v16_r00/
-https://sdi.eea.europa.eu/catalogue/srv/api/records/9f373400-35b7-4978-9a34-a3cf839e053f/formatters/xml
-https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer?f=json
-https://data.gov.au/geoserver/npi/wfs?request=GetCapabilities&service=WFS
-https://data.gov.au/data/api/3/action/package_show?id=npi
+# round 46 (25 Nov): samples for the NL pack; BRO soil via OGC API; NPI fields; AU state licences; other EEA hosts
+https://service.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/wfs/v2_0?service=WFS&version=1.1.0&request=GetFeature&typeName=brk-publiekrechtelijke-beperkingen-wkpb-v2-0:pb_multipolygon&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=4.85,52.33,4.95,52.40,urn:ogc:def:crs:OGC:1.3:CRS84
+https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?service=WFS&version=1.1.0&request=GetFeature&typeName=faciliteiten-voor-productie-en-industrie:production_installation_point&outputFormat=application/json&maxFeatures=3&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=4.0,51.85,4.5,52.0,urn:ogc:def:crs:OGC:1.3:CRS84
+https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?service=WFS&version=1.1.0&request=GetFeature&typeName=faciliteiten-voor-productie-en-industrie:production_installation_point&resultType=hits
+https://api.pdok.nl/tno/bro-overheidsbesluit-bodemverontreiniging/ogc/v1/collections?f=json
+https://api.pdok.nl/tno/bro-milieuhygienisch-bodemonderzoek/ogc/v1/collections?f=json
+https://service.pdok.nl/tno/bro-overheidsbesluit-bodemverontreiniging/wms/v1_0?request=GetCapabilities&service=WMS
+https://data.gov.au/geoserver/npi/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ckan_043f58e0_a188_4458_b61c_04e5b540aea4&outputFormat=application/json&maxFeatures=2
+https://data.gov.au/geoserver/npi/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ckan_043f58e0_a188_4458_b61c_04e5b540aea4&resultType=hits
+https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/EPA/Contaminated_land_notified_sites/FeatureServer/0?f=json
+https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3?f=json
+https://mapprod1.environment.nsw.gov.au/arcgis/rest/services/PropertyNSW/ContamintedLandMgmt_PublicRegister/MapServer/0?f=json
+https://datasets.seed.nsw.gov.au/api/3/action/package_search?q=contaminated%20land&rows=5
+https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer/140?f=json
+https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74?f=json
+https://catalogue.data.wa.gov.au/api/3/action/package_search?q=DWER-059&rows=3
+https://discover.data.vic.gov.au/api/3/action/package_search?q=%22priority%20sites%22%20epa&rows=5
+https://services.ga.gov.au/gis/rest/services/Waste_Management_Facilities/MapServer/0?f=json
+https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ama:MineWaste&outputFormat=application/json&maxFeatures=1
+https://industry.eea.europa.eu/download
+https://discodata.eea.europa.eu/sql?query=SELECT%20TOP%202%20*%20FROM%20%5BIED%5D.%5Blatest%5D.%5BProductionInstallation%5D&p=1&nrOfHits=2
+https://www.eea.europa.eu/en/datahub/datahubitem-view/9405f714-8015-4b5b-a63c-280b82861b3d
