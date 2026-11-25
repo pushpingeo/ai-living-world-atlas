@@ -1,0 +1,106 @@
+{
+ "minutes": 0.0,
+ "http": {
+  "requests": 30,
+  "errors": 0,
+  "robots_blocked": 0
+ },
+ "portals": {
+  "total": 0,
+  "ok": 0,
+  "records_with_service_links": 0
+ },
+ "arcgis_roots": {
+  "total": 0,
+  "reachable": 0
+ },
+ "services": {
+  "attempted": 0,
+  "ok": 0,
+  "skipped_time": 0,
+  "by_type": {},
+  "top_errors": []
+ },
+ "layers": {
+  "total": 42,
+  "by_service_type": {
+   "arcgis-featureserver": 21,
+   "landing": 21
+  },
+  "with_bbox": 42,
+  "with_abstract_50": 42,
+  "with_licence_text": 42,
+  "with_open_licence": 40,
+  "with_keywords": 42,
+  "joined_to_catalogue": 0,
+  "codelike_titles": 0,
+  "junk_flagged": 0,
+  "declared_iso_theme": 0,
+  "declared_theme_how": {
+   "none": 42
+  },
+  "publisher_type": {
+   "central-gov": 42
+  },
+  "detail_source": {
+   "none": 42
+  },
+  "extent_source": {
+   "curated": 42
+  },
+  "extent_flags": {},
+  "cors_ok": 0,
+  "detail_level": {
+   "unknown": 42
+  },
+  "coverage_level": {
+   "global": 34,
+   "continental": 8
+  },
+  "detail_level_passing": {
+   "unknown": 42
+  }
+ },
+ "checks": {
+  "by_status": {
+   "ok": 30,
+   "unchecked": 12
+  },
+  "live_rate_of_checked": 1.0,
+  "returns_data_or_empty_rate": 1.0
+ },
+ "quality": {
+  "pass": 42,
+  "pass_rate": 1.0,
+  "score_median": 100.0,
+  "score_bands": {
+   "[80, 101)": 42
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 21,
+  "distinct_among_passing": 21
+ },
+ "file_mb": 0.07,
+ "datasets": {
+  "total": 21,
+  "passing": 21,
+  "endpoints_per_dataset": {
+   "2": 21
+  },
+  "multi_protocol": 21,
+  "match_rules": {
+   "catalogue": 21
+  },
+  "role": {
+   "data": 21
+  },
+  "role_passing": {
+   "data": 21
+  },
+  "capabilities": {
+   "query": 21
+  },
+  "detail_known_passing": 0
+ }
+}
