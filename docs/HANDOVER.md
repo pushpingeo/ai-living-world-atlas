@@ -156,9 +156,14 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
    `spike-osm` to `runs/published.txt`, run the tag (cents), check `find_datasets` and `get_dataset` find it (mcp-ask).
 3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
-4. **Old releases:** nothing deletes them yet (the contract promises at least two weeks). Add a cleanup step that deletes
-   `osm/<date>/` folders no manifest points to and older than 14 days, or Rob sets an R2 lifecycle rule.
-5. Cost at four weekly markets is about $2 a month of R2 storage with two releases kept (design doc), plus about 17 GB of
+4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
+   30 days after upload. The prefix catches only the dated release folders, never the manifests (`osm/<market>.json`).
+   30, not 14: a live manifest can point into a release up to 14 days old (`carried`) and then wait 7 days for the next
+   run. `osm/health.py` reads the rule back from the Cloudflare API and checks each manifest's age; it runs in the
+   nightly sweep (section "Hosted OpenStreetMap copy" in results/liveness REPORT.md) and on its own via `osm-health`
+   (push `runs/osm-health.env`). It warns if a manifest is over 10 days old or points to files over 23 days old: the one
+   way the rule could delete live files is weekly publishing stopping.
+5. Cost at four weekly markets is about $4-5 a month of R2 storage with about four releases kept (30-day rule), plus about 17 GB of
    Geofabrik downloads a week.
 
 ## Liveness sweep (built 17 Nov)

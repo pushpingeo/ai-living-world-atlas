@@ -52,7 +52,8 @@ Tobler stores only that folder URL; every path in a manifest is relative to the 
   (`us/texas`). Groups: `transport`, `utilities`, `water`, `landuse`, `community`, `buildings`.
 - The manifest is uploaded **last**, after every file of the release, so a reader never sees half a release. A
   release folder is never written into once it exists (the build refuses), and older releases are kept at least two
-  weeks, because a manifest may still point into them (see `carried`).
+  weeks, because a manifest may still point into them (see `carried`). In practice the bucket's lifecycle rule deletes
+  release folders (`osm/20…`) 30 days after upload; manifests are outside the rule (25 Nov).
 - Features in both formats: `osm_type` (`node` | `way` | `relation`), `osm_id`, `tags` (JSON text holding only the spec's
   `keep_tags`), geometry in WGS84 (points, lines, polygons and multipolygons mixed; FlatGeobuf geometry type Unknown).
   Closed ways and multipolygon relations of area kinds are whole polygons; line kinds stay lines.

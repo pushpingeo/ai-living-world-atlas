@@ -79,6 +79,11 @@ jobs:
           if [ -s tagout/STATUS.txt ]; then cp tagout/BATCH_ID out/PENDING_BATCH; fi
           [ -s tagout/COST.md ] && { echo; echo "## Re-tagging"; echo; sed 1d tagout/COST.md; } >> out/REPORT.md || true
           cp -r tagout /tmp/tagout   # the publish steps below switch branches, which clears the work tree
+      - name: Hosted OpenStreetMap copy (lifecycle rule, manifest ages)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: mkdir -p out && python3 osm/health.py >> out/REPORT.md || true
       - name: Publish results/liveness
         if: always()
         run: |

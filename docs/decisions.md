@@ -693,3 +693,17 @@ on a real site. Rob agreed the split (design: project doc `claude/osm-copy-desig
   "© OpenStreetMap contributors", share-alike for derived databases. The record id follows the manifest URL: moving the
   domain changes it (a contract note first).
 - **The first publish waits for Rob**, so the two workflows never both write to the bucket (same release folders).
+
+## 2026-11-25 (evening): old OpenStreetMap releases expire by an R2 lifecycle rule
+
+- **Decision (Rob set the rule):** objects under `osm/20` in `atlas-data` are deleted 30 days after upload. Chosen over a
+  cleanup step in the workflow: nothing to maintain, and it can't go wrong in code we write.
+- **Prefix `osm/20`, not `osm/`:** only the dated release folders match. The manifests sit at `osm/<market>.json`, so even
+  if publishing stopped for months the manifests would stay.
+- **30 days, not 14:** a manifest can point into a release up to 14 days old (`carried`), and the next weekly run is up
+  to 7 days away, so live files can be about 21 days old. 30 leaves a week's margin and keeps the contract's two weeks.
+  Cost: about four releases kept per market instead of two, roughly $4-5 a month at four markets.
+- **Risk and guard:** if weekly publishing stops for a month, the rule deletes files the live manifest still names
+  (Tobler would fall back to Overpass). `osm/health.py`, run nightly in the sweep, warns at a manifest over 10 days old or
+  files over 23 days old, and reads the rule back from the Cloudflare API so a changed rule shows up too.
+

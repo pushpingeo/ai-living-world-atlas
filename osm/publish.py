@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build import load_spec
 from shapely.geometry import shape, mapping
 
-CARRY_DAYS = 14  # an older release folder may be removed by the bucket's lifecycle rule (three weeks)
+CARRY_DAYS = 14  # release folders are deleted by the bucket's lifecycle rule 30 days after upload (osm/20, 25 Nov)
 TOL = 0.01  # degrees, about 1 km: simplify, then shrink by as much (0.002 made a 580 kB UK manifest)
 
 
