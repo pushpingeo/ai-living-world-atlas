@@ -149,7 +149,7 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
 1. **First publish: Rob agreed 25 Nov 16:41** (US on hold). Tobler's live manifest points into `osm/2026-11-25/` and the
    build refuses to write into an existing release folder, so the UK goes on 26 Nov (a reminder in this chat fires at
    06:30): `PUBLISH=yes` in `runs/osm.env`, then check the manifest and a range read through `probe`, add `uk` to
-   `runs/osm-weekly.env`. The Tobler chat must retire `osm-extracts.yml` before its Monday 03:17 UTC cron.
+   `runs/osm-weekly.env`. Tobler retired its own `osm-extracts.yml` on 25 Nov (17:29), so nothing else publishes.
    Since 25 Nov evening `publish.py` has Tobler's `--previous`: an extract a run can't build keeps its last entry
    (`carried`) if under 14 days old.
 2. **First record:** add `runs/spike-osm.env` (`SEEDS=vocab/seeds/osm.yaml`, `SHARDS=1`) and `runs/tag-osm.env`, add
