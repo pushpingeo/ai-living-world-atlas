@@ -1,0 +1,96 @@
+# Written by osm/record.py after each OpenStreetMap copy build (.github/workflows/osm.yml): one record per market
+# copy the atlas hosts in the R2 bucket atlas-data. Don't edit by hand; change osm/record.py instead.
+defaults:
+  publisher_type: civil-society
+sources:
+- kind: record
+  id: osm-copy-uk
+  title: 'OpenStreetMap copy for site checks: United Kingdom, with Ireland (roads, rail, utilities, water, land use, community,
+    buildings)'
+  publisher: OpenStreetMap contributors
+  publisher_type: civil-society
+  country: GB
+  abstract: 'A copy of the OpenStreetMap features that site screening asks about, for United Kingdom, with Ireland, hosted
+    by the atlas so checks don''t depend on the public Overpass servers. Six files per Geofabrik extract, one per group: transport:
+    main roads (motorway, trunk, primary), railways and aerodromes; utilities: power lines, substations, pipelines and wind
+    turbines; water: water bodies (lakes, reservoirs, basins) and watercourses (rivers, streams, canals, ditches, drains);
+    landuse: residential land; community: schools, colleges and nurseries, and hospitals, clinics and care homes; buildings:
+    every building. The tags are the same ones Tobler''s Overpass queries use, so a lookup in the copy gives the same answer
+    as a live query, as of the copy''s data date. Areas are whole polygons, including multipolygon relations. Each file is
+    FlatGeobuf with a packed Hilbert R-tree, so a reader fetches only the parts near a site with HTTP range requests, and
+    GeoParquet 1.1 with a bbox column for DuckDB or QGIS. Start from the manifest (this endpoint): it lists every extract
+    with its bounding box, data date and file paths (relative to the manifest), and the outline the copy covers, drawn about
+    1 km inside the extracts so it never claims ground it doesn''t hold. Rebuilt weekly from Geofabrik. OpenStreetMap is mapped
+    by volunteers: coverage is good for roads, railways and power lines, and uneven for buildings and land use. A feature
+    missing here may exist on the ground.'
+  licence: Open Database License (ODbL) 1.0. © OpenStreetMap contributors (https://www.openstreetmap.org/copyright).
+  landing_page: https://www.openstreetmap.org/copyright
+  bbox:
+  - -14.8228
+  - 49.5882
+  - 1.974
+  - 61.1256
+  concepts_hint:
+  - road
+  - rail
+  - port-airport
+  - power-line
+  - pipeline
+  - power-plant
+  - river
+  - settlement
+  - school
+  - health-facility
+  - building
+  endpoints:
+  - protocol: cloud
+    url: https://data.asktobler.com/osm/uk.json
+    format: FlatGeobuf and GeoParquet, with a JSON manifest
+    info:
+      manifest: https://data.asktobler.com/osm/uk.json
+      layout: '<market>.json is the manifest; files at <release>/<extract id>/<group>.fgb (and .parquet), relative to it.
+        Contract: docs/mcp-tools.md, Hosted OpenStreetMap copy.'
+      groups:
+        transport:
+        - main road
+        - railway
+        - aerodrome
+        utilities:
+        - power line
+        - substation
+        - pipeline
+        - wind turbine
+        water:
+        - water body
+        - watercourse
+        landuse:
+        - homes
+        community:
+        - school
+        - health care
+        buildings:
+        - building
+      release: '2026-11-25'
+      data_date: '2026-11-24'
+      data_date_source: OpenStreetMap replication time of the oldest Geofabrik extract in this release
+      data_as_of:
+        oldest: '2026-11-24T21:21:23Z'
+        newest: '2026-11-24T21:21:23Z'
+      extracts: 50
+      extracts_missing: []
+      features:
+        buildings: 21300150
+        community: 51806
+        landuse: 523248
+        transport: 412575
+        utilities: 114009
+        water: 1107605
+      completeness: partial
+      completeness_note: complete for the extracts listed (every feature with these tags); OpenStreetMap itself is volunteer-mapped
+        and uneven, especially for buildings and land use. Extracts missing from a release are left out of its outline.
+      attribution: © OpenStreetMap contributors
+      terms: 'Open Database License 1.0: attribute OpenStreetMap contributors; a database made from it and shared must be
+        shared under the ODbL too. Maps and other produced works need only the attribution.'
+      refresh: weekly
+  - protocol: landing
+    url: https://www.openstreetmap.org/copyright
