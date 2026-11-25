@@ -146,12 +146,15 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
   publishes but not re-read on 25 Nov (the workspace can't reach it): read it once in a browser.
 
 **Still to do, in order:**
-1. **Rob's go for the first publish** (so Tobler's `osm-extracts.yml` and this workflow never both write to the bucket;
-   both use `osm/<date>/` folders). Then: `PUBLISH=yes` for the UK, check the manifest and a range read through `probe`,
-   the Tobler chat retires its workflow, and add `uk` to `runs/osm-weekly.env`.
+1. **First publish: Rob agreed 25 Nov 16:41** (US on hold). Tobler's live manifest points into `osm/2026-11-25/` and the
+   build refuses to write into an existing release folder, so the UK goes on 26 Nov (a reminder in this chat fires at
+   06:30): `PUBLISH=yes` in `runs/osm.env`, then check the manifest and a range read through `probe`, add `uk` to
+   `runs/osm-weekly.env`. The Tobler chat must retire `osm-extracts.yml` before its Monday 03:17 UTC cron.
+   Since 25 Nov evening `publish.py` has Tobler's `--previous`: an extract a run can't build keeps its last entry
+   (`carried`) if under 14 days old.
 2. **First record:** add `runs/spike-osm.env` (`SEEDS=vocab/seeds/osm.yaml`, `SHARDS=1`) and `runs/tag-osm.env`, add
    `spike-osm` to `runs/published.txt`, run the tag (cents), check `find_datasets` and `get_dataset` find it (mcp-ask).
-3. **NL, AU, US dry builds, then publish each** (a day apart, for Geofabrik). US: 54 extracts once the five regional
+3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases:** nothing deletes them yet (the contract promises at least two weeks). Add a cleanup step that deletes
    `osm/<date>/` folders no manifest points to and older than 14 days, or Rob sets an R2 lifecycle rule.
