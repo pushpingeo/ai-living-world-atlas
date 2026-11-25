@@ -147,7 +147,7 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
     box at a known place in 0.2-3.5 s (Utrecht, Rotterdam, Overijssel, Zeeland, IJmuiden; Melbourne, Sydney, Brisbane,
     Hobart, Perth, the Pilbara, Newcastle NSW), through the protocol listed. The WKPB record (OGC API, `grondslag_code=WBA`)
     returned 17 decisions near Utrecht. Regressions: US UST and SEPA unchanged. `find_datasets` finds the new records by
-    concept (Rotterdam `pollution-source`, Sydney `contaminated-land`). mcp-check after the deploy: passed.
+    concept (Rotterdam `pollution-source`, Sydney `contaminated-land`). The deploy's smoke test passed; mcp-check wasn't run separately.
   - **Worker change 1: `ogc-api-features` endpoints.** `fetch_features` reads OGC API Features collections
     (`<collection>/items?bbox=...&limit=...`, CRS84 by default). `endpoints[].info.query` is a fixed filter the
     Worker always adds (the WKPB record: `grondslag_code=WBA`). `text` is filtered after the fetch, as for WFS; `where`
