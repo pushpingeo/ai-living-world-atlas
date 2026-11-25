@@ -1,0 +1,16 @@
+skipping 10 already tagged; tagging 0 again
+submitted batch msgbatch_01Jg4w9AgfozPg9rPnB3b8tg with 11 requests
+[0s] B3b8tg in_progress {'processing': 11, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[60s] B3b8tg in_progress {'processing': 11, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[120s] B3b8tg in_progress {'processing': 11, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[180s] B3b8tg in_progress {'processing': 11, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[241s] B3b8tg in_progress {'processing': 11, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[301s] B3b8tg in_progress {'processing': 11, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[361s] B3b8tg ended {'processing': 0, 'succeeded': 11, 'errored': 0, 'canceled': 0, 'expired': 0}
+# Tagging batch(es) msgbatch_01Jg4w9AgfozPg9rPnB3b8tg
+
+- Requests: 11; succeeded: 11
+- Model: claude-haiku-5-5 (batch rates)
+- Tokens: {"input_tokens": 6927, "output_tokens": 2264, "cache_read_input_tokens": 35370, "cache_creation_input_tokens": 3537}
+- **Cost: $0.00** (estimated from token counts and published batch prices)
+
