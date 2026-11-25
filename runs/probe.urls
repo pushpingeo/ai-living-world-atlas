@@ -1,16 +1,16 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 48 (25 Nov): the exact requests the Worker sends (WFS 1.1.0 + CRS84; OGC API items) for the NL and AU records
+# round 48b (25 Nov): the exact requests the Worker sends (WFS 1.1.0 + CRS84; OGC API items) for the NL and AU records
 https://api.pdok.nl/rws/productie-en-industrie-productie-installaties/ogc/v1/collections/production_installation_point/items?bbox=4.0,51.85,4.5,52.0&limit=3&f=json
 https://api.pdok.nl/rws/productie-en-industrie-productie-installaties/ogc/v1/collections/production_instalation_polygon/items?bbox=4.0,51.85,4.5,52.0&limit=2&f=json
 https://api.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen/ogc/v1/collections?f=json
 https://api.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/ogc/v1/collections?f=json
-https://data.rivm.nl/geo/inspire/wfs?https://data.rivm.nl/geo/inspire/wfs?service=WFS&request=GetFeature&typeName=inspire:facility_pollutant_release&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=4.0,51.85,4.5,52.0,urn:ogc:def:crs:OGC:1.3:CRS84
-https://data.rivm.nl/geo/ank/wfs?https://data.rivm.nl/geo/ank/wfs?service=WFS&request=GetFeature&typeName=ank:rivm_r79_rg_grondwaterbeschermingsgebiedendrinkwater&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=6.0,52.5,6.5,52.9,urn:ogc:def:crs:OGC:1.3:CRS84
-https://opengeodata.zeeland.nl/geoserver/bodem/wfs?https://opengeodata.zeeland.nl/geoserver/bodem/wfs?service=WFS&request=GetFeature&typeName=bodem:geonam_strpltvrmvvl&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=3.5,51.3,4.2,51.6,urn:ogc:def:crs:OGC:1.3:CRS84
-https://opendata.maps.vic.gov.au/geoserver/wfs?https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&request=GetFeature&typeName=open-data-platform:psr_polygon&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=144.9,-37.85,145.0,-37.78,urn:ogc:def:crs:OGC:1.3:CRS84
-https://services.ga.gov.au/gis/earthresource/wfs?https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&request=GetFeature&typeName=ama:MineWaste&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=115,-33,123,-20,urn:ogc:def:crs:OGC:1.3:CRS84
+https://data.rivm.nl/geo/inspire/wfs?service=WFS&request=GetFeature&typeName=inspire:facility_pollutant_release&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=4.0,51.85,4.5,52.0,urn:ogc:def:crs:OGC:1.3:CRS84
+https://data.rivm.nl/geo/ank/wfs?service=WFS&request=GetFeature&typeName=ank:rivm_r79_rg_grondwaterbeschermingsgebiedendrinkwater&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=6.0,52.5,6.5,52.9,urn:ogc:def:crs:OGC:1.3:CRS84
+https://opengeodata.zeeland.nl/geoserver/bodem/wfs?service=WFS&request=GetFeature&typeName=bodem:geonam_strpltvrmvvl&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=3.5,51.3,4.2,51.6,urn:ogc:def:crs:OGC:1.3:CRS84
+https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&request=GetFeature&typeName=open-data-platform:psr_polygon&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=144.9,-37.85,145.0,-37.78,urn:ogc:def:crs:OGC:1.3:CRS84
+https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&request=GetFeature&typeName=ama:MineWaste&outputFormat=application/json&maxFeatures=3&version=1.1.0&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=115,-33,123,-20,urn:ogc:def:crs:OGC:1.3:CRS84
 https://services.ga.gov.au/gis/rest/services/Waste_Management_Facilities/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
 https://geoservices.noord-holland.nl/ags/rest/services/thematische_services/pnh_thema_natuur_milieu/MapServer/54/query?where=1%3D1&returnCountOnly=true&f=json
 RANGE https://data.gov.au/data/dataset/043f58e0-a188-4458-b61c-04e5b540aea4/resource/6561305a-509b-4861-b5f7-f159cc4b7b4f/download/npi-facilities.geojson
