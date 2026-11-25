@@ -1,11 +1,11 @@
-# AI Living World Atlas: handover (24 Nov 2026)
+# AI Living World Atlas: handover (25 Nov 2026)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
 ## How we work (decided 17 Nov)
 
-- **The atlas has its own chat.** Tobler has a separate one. Neither edits the other's repo.
-- **`docs/mcp-tools.md` is the contract** between them: the tools, fields and concept ids Tobler relies on. Keep them working; announce any change there first. Tobler's requests for new atlas features are listed there too.
+- **The atlas has its own chat.** Tobler has a separate one. Neither edits the other's repo. Both share the Claude project "Tobler"; an atlas chat may attach `pushpingeo/ai-living-world-atlas` with push access (Rob, 24 Nov). Tobler's repo is read-only from here (public, so a plain clone works).
+- **`docs/mcp-tools.md` is the contract** between them: the tools, fields and concept ids Tobler relies on, and since 25 Nov the hosted OpenStreetMap copy's file layout and manifest format. Keep them working; announce any change there first. Tobler's requests for new atlas features are listed there too.
 - A Tobler change should never wait on an atlas deploy, and an atlas deploy should never break Tobler without a note in that file.
 
 ## What it is
@@ -15,7 +15,8 @@ OGC API and download/cloud sources. Think of it as an open alternative to Esri's
 
 - good metadata, standard tags and an honest quality score;
 - automated, rolling checks, so Rob stays hands-off;
-- a data source for Tobler (asktobler.com), Rob's chat-driven GeoAI workspace, through a key-protected MCP server.
+- a data source for Tobler (asktobler.com), Rob's chat-driven GeoAI workspace, through a key-protected MCP server;
+- since 25 Nov, a host for data the atlas publishes itself (first: the OpenStreetMap copy Tobler's site checks read).
 
 ## Where things live
 
@@ -27,14 +28,16 @@ OGC API and download/cloud sources. Think of it as an open alternative to Esri's
 | Crawl results | orphan branches `results/spike-<wave>` (large parquet files split into `-000`, `-001` parts) |
 | Tags | `results/tags-<wave>`; re-tags from the liveness sweep in `results/tags-sweep` |
 | Liveness | `results/liveness`: state.parquet (one row per published endpoint), REPORT.md, history.csv |
-| Tag backups | GitHub release `tags-backup` (dated, never overwritten) and Cloudflare R2 bucket `atlas-backup/tags/` |
+| Tag backups | GitHub release `tags-backup` (dated, never overwritten) and Cloudflare R2 bucket `atlas-backup/tags/` (private) |
+| Hosted data | Cloudflare R2 bucket `atlas-data` (public to read), `https://data.asktobler.com/`, CORS set for range requests. `osm/` holds the OpenStreetMap copy |
+| OSM copy reports | `results/osm`: per market the last report, manifest and the record as it would be written; `RUNS.txt` logs every run |
 | Decisions log | `docs/decisions.md` |
 
 GitHub secrets (Rob set them; never print or handle the values):
 
 - `ANTHROPIC_API_KEY`
 - `ATLAS_MCP_KEY`: the MCP access key. The server stays private until Rob says otherwise.
-- `CLOUDFLARE_API_TOKEN`: D1 edit, Workers and R2 edit.
+- `CLOUDFLARE_API_TOKEN`: D1 edit, Workers and R2 edit (both buckets). The osm workflow derives R2 S3 credentials from it (`osm/r2-s3-env.sh`) for multipart uploads over 300 MiB.
 - `CLOUDFLARE_ACCOUNT_ID`
 
 Cloudflare is on Workers Paid ($5/month); Rob may switch it off after the main build. **Since the spatial index (18 Nov)
@@ -53,15 +56,16 @@ Results come back on the `results/*` branches.
 | `tag` | `runs/tag-<wave>.env` | Haiku 5.5 tagging through the Batch API. Splits into several batches, skips datasets already tagged, and writes `COST.md`. To resume, set `BATCH_ID=id1,id2,...`. Refuses more than `MAX_DATASETS` (default 200k, about $18). Always started by hand. |
 | `sweep` | `runs/sweep.env` (also nightly, 03:23 UTC) | Rolling liveness sweep, see below. Edit the run file and push to run it now. |
 | `backup` | automatic | Runs after every tag run and every sweep (only saves tag sets that changed). |
-| `pages` | automatic | Rebuilds the viewer from the waves listed in `runs/published.txt`, with the liveness sweep applied. Passing datasets only. Runs after spike, tag and sweep. |
+| `pages` | automatic | Rebuilds the viewer from the waves listed in `runs/published.txt`, with the liveness sweep applied. Passing datasets only. Runs after spike, tag and sweep, and on a push of `runs/published.txt` (so a new wave shows untagged for a few minutes if its tag run is pushed at the same time). |
 | `deploy-mcp` | automatic | Incremental D1 load using row hashes on `results/mcp-deploy`, loaded in roughly 4 MB pieces, then a smoke test. |
+| `osm` | `runs/osm.env`; weekly per market listed in `runs/osm-weekly.env` | The hosted OpenStreetMap copy, see below. Can also be started by REST dispatch with `market` and `publish` inputs. |
 | `eval-tags`, `check-key`, `probe` | their own run files | Tag-quality check, secret check, and fetching URLs the workspace itself can't reach. |
 
 Workspace notes:
 
-- The Claude workspace can only reach GitHub, the package registries and `*.arcgis.com`.
+- The Claude workspace can only reach GitHub, the package registries and `*.arcgis.com` (including the ArcGIS Online search API, useful for finding a body's own organisation and owners). Not Geofabrik, not data.asktobler.com.
 - Anything else, such as data.europa.eu or github.io, goes through an Actions workflow (`probe` is the quick one).
-- `gh api` with REST works for Actions runs and logs; GraphQL is blocked.
+- `gh api` with REST works for Actions runs and logs; GraphQL is blocked (so `gh issue list` and `gh workflow run` fail; use `gh api repos/.../issues` and `gh api repos/.../actions/workflows/<file>/dispatches`).
 - For local testing, use Playwright with google-chrome for the viewer, and `wrangler dev` with a local D1 for the MCP server.
 
 ## Current state
@@ -73,6 +77,7 @@ Workspace notes:
 | Canada/Australia/NZ (`spike-canz`) | 143k | 52.2k | 96% live |
 | US (`spike-us`) | 453k | 70.8k | 97% live; descriptions are sparse |
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
+| Best-in-class fill (`spike-fill`) | 5.1k | 463 | 24 Nov night: NASA, USGS National Map and earthquakes, Met Office, EFFIS, FIRMS, SoilGrids, GVP, WRI, World Bank. Last in publish order. See below |
 | UK water and peat (`spike-ukwaterpeat`) | 13 | 13 | Storm overflows (8 companies live, 2025 annual returns, Scottish Water) and the England Peat Map (24 Nov) |
 | US contamination (`spike-uscontamination`) | 10 | 10 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD |
 | UK pollution (`spike-ukpollution`) | 6 | 6 | Contamination step 2 (24 Nov, Tobler): SEPA authorisations, NRW permits, DAERA incidents and consents, NI historical land use |
@@ -83,8 +88,8 @@ Workspace notes:
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **264k passing datasets**, all tagged (18 Nov).
-- Tagging spend is **$30.25** in total (24 Nov: $1.79 contamination re-tags; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
+- The viewer and the MCP server hold about **267k passing datasets**, all tagged.
+- Tagging spend is **$30.28** in total (24 Nov: $1.79 contamination re-tags, $0.03 fill wave; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
@@ -94,6 +99,14 @@ Workspace notes:
   Changing the viewer's data layout changes the MCP server: treat it as a contract change (`docs/mcp-tools.md`).
   This broke `get_dataset`/`fetch_features` for an hour on 17 Nov. `mcp-check` (push `runs/mcp-check.env`) tests the
   three tools Tobler uses live; the deploy smoke test now opens a dataset too.
+- **ArcGIS Online search seeds:** the crawler now brackets the query (`(query) type:... access:public`). Before 24 Nov an
+  unbracketed `owner:A OR owner:B` matched most of ArcGIS Online (119,745 items in one run).
+- **The OSM copy's files are read by Tobler's page directly**, not through the MCP: the layout and manifest format in
+  `docs/mcp-tools.md` are as binding as the tool fields. The manifest goes up last; never overwrite a release's files.
+- **Geofabrik throttles heavy downloaders.** On 25 Nov, after about four UK builds in a day between the two repos, it
+  refused connections (HTTP 000) for 4 of NL's 12 extracts and 8 of the UK's 50. The build now gives each refused
+  extract a second try after 3 minutes; an extract that fails twice is left out of the release and its outline.
+  Don't run several builds back to back.
 
 ## Rules Rob set
 
@@ -104,11 +117,51 @@ Workspace notes:
 - Anything public must read as if a person wrote it.
 - Keep Rob's involvement minimal.
 
+## Hosted OpenStreetMap copy (25 Nov)
+
+Taken over from Tobler (design: project doc `claude/osm-copy-design.md`; request: Tobler's `docs/atlas-requests.md`,
+25 Nov; decisions.md 25 Nov). The atlas owns the bucket `atlas-data`, the build, refresh, licence and records; Tobler owns
+the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.js`) and the Overpass fallback.
+
+- **Code:** `osm/` (`plan.py` picks the smallest Geofabrik extracts under a market's roots; `build.py` turns one filtered
+  extract into one FlatGeobuf and one GeoParquet per group; `publish.py` writes the manifest and report; `record.py`
+  writes the atlas record; `check_spec.py` compares `osm/spec.json` with Tobler's file; `r2-s3-env.sh` makes R2 S3
+  credentials). Workflow `.github/workflows/osm.yml`: plan, up to `MAX_PARALLEL` build jobs, publish.
+- **Spec:** `osm/spec.json` is a copy of Tobler's file; the build stops if Tobler's kinds, groups, keep_tags or version
+  differ (the last release stays live). To take a Tobler change: copy those four keys across, keep `markets`, push.
+- **Streaming build (atlas change, 25 Nov):** features go to lz4 Arrow files per group in 200k chunks, GDAL writes the
+  FlatGeobuf from them (its spatial index does the Hilbert sort), and the GeoParquet is written batch by batch from the
+  FlatGeobuf. Same features as Tobler's version (checked on a 1.5M-building test file and on the real UK: 42 extracts,
+  identical counts per group and identical FlatGeobuf bytes). Peak memory for Ireland's 418 MB extract went from 7.4 GB to
+  1.3 GB, so Texas (729 MB) and California (norcal and socal, about 670 MB each) should need about 2.2 GB on a normal runner.
+- **Runs so far (all `PUBLISH=no`, nothing written to the bucket):** UK 25 Nov 12:10, 50 of 50 extracts, 23.5M features,
+  7.6 GB FlatGeobuf, 3.1 GB GeoParquet, manifest 447 kB, data as of 24 Nov 21:21 UTC (matches Tobler's own measurement);
+  NL 8 of 12 (Geofabrik refused 4); UK again with the streaming build, 42 of 50 (Geofabrik refused 8).
+- **Publishing:** `PUBLISH=yes` (or dispatch `publish=yes`) checks the token can write, uploads files to
+  `osm/<release>/<extract>/`, then the manifest `osm/<market>.json`, then writes `vocab/seeds/osm.yaml` and commits it.
+  Once `spike-osm` is in `runs/published.txt`, it also runs spike-osm, pages and deploy-mcp itself.
+- **Records:** `osm-copy-<market>` (wave `spike-osm`), publisher OpenStreetMap contributors, licence via
+  `vocab/licence_overrides.yaml` (host `data.asktobler.com`, layers `^osm-copy-`: ODbL 1.0, open, "© OpenStreetMap
+  contributors"). The record id follows the manifest URL. The OSM copyright page's wording was written from what OSMF
+  publishes but not re-read on 25 Nov (the workspace can't reach it): read it once in a browser.
+
+**Still to do, in order:**
+1. **Rob's go for the first publish** (so Tobler's `osm-extracts.yml` and this workflow never both write to the bucket;
+   both use `osm/<date>/` folders). Then: `PUBLISH=yes` for the UK, check the manifest and a range read through `probe`,
+   the Tobler chat retires its workflow, and add `uk` to `runs/osm-weekly.env`.
+2. **First record:** add `runs/spike-osm.env` (`SEEDS=vocab/seeds/osm.yaml`, `SHARDS=1`) and `runs/tag-osm.env`, add
+   `spike-osm` to `runs/published.txt`, run the tag (cents), check `find_datasets` and `get_dataset` find it (mcp-ask).
+3. **NL, AU, US dry builds, then publish each** (a day apart, for Geofabrik). US: 54 extracts once the five regional
+   bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
+4. **Old releases:** nothing deletes them yet (the contract promises at least two weeks). Add a cleanup step that deletes
+   `osm/<date>/` folders no manifest points to and older than 14 days, or Rob sets an R2 lifecycle rule.
+5. Cost at four weekly markets is about $2 a month of R2 storage with two releases kept (design doc), plus about 17 GB of
+   Geofabrik downloads a week.
+
 ## Liveness sweep (built 17 Nov)
 
 `atlas/sweep.py`, nightly via the `sweep` workflow. Details and reasoning in `docs/decisions.md` (17 Nov).
 - Rechecks published services: resolving every 7 days, failing every 3, retired every 28; up to 45k services a night.
-  The published index is 508k endpoints on 181k services, so the first full pass takes about four nights.
 - One visit per service: metadata (service JSON + /layers, or GetCapabilities) plus one small data request on one
   layer, rotating weekly. Tells us: resolves, layer still listed, text changed, returns data.
 - Retires an endpoint after 3 failed checks over 14+ days (30 if the whole host was down). Retired endpoints come
@@ -118,12 +171,11 @@ Workspace notes:
 - combine.py applies it at publish time: retired endpoints out, `"status":"failing"` on failing ones, latest data
   check in `check`, refused ArcGIS Query removed from capabilities. The viewer shows "not answering" or
   "sample request failed" against an endpoint.
-- First full night (17 Nov, 45k services, 197 min, 107k requests): **99.6% of checked endpoints resolve**; 142k of
-  508k endpoints checked so far; 539 failing, none retired yet. Hosts down that night: geoportal.kreis-lup.de,
-  gis.dot.nv.gov, vogis.cnv.at. Data checks on record: 41.3k ok, 1.7k fail, 1.2k unchecked, 159 empty.
-- Earlier test runs (3k and 4k services) gave 99.8%. Fixing our own WFS
-  check (2.0.0 first; advertised GetMap/GetFeature address; upper-case parameters) took WFS sample failures from
-  86% to under 2%.
+- **Time limit fixed 24 Nov evening, and it held on 25 Nov:** 168.5 minutes, all 45,000 due services checked (24 Nov had
+  run 307 minutes). Now a service checks the clock only once it has a slot (256 first pass, 16 second look), and anything
+  still running past the deadline is cancelled and stays due. REPORT.md says how many were cut.
+- First full pass done 23 Nov: 577k published endpoints, 100% checked at least once; resolving 99.4% on 24 Nov, 99.1% on
+  25 Nov. 24 Nov hosts down: all EEA discomap hosts (bio, climate, image, land, water), services.bgr.de, www.ine.es.
 
 ## Spatial index (18 Nov, evening)
 
@@ -145,7 +197,7 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
   the kept 100 only. `matches` is exact (up to 20,000).
 - Large areas without a concept: the Worker counts the area's keys (up to 20k). Few: cells. Many: the 60k best-scored
   datasets world-wide from the rank index (which now covers extent and home), as a sample (`matches_capped`).
-- Text (FTS) and `include_other_countries` use the old paths.
+- Text (FTS) and `include_other_countries` use the old paths. A text search still needs an area (lon/lat or bbox).
 - `datasets` is WITHOUT ROWID. Full reload: 338 MB of SQL, 84 pieces, ~8 minutes, tables swapped at the end.
 - Testing: rebuild the published data with `bash .github/actions-fetch.sh` (2.5 min), `python -m atlas.api_data`,
   load the SQL into SQLite and copy the file over the local D1 file under `worker/.wrangler/state/v3/d1/`, then
@@ -158,7 +210,7 @@ Live rows read per search (mcp-check, `debug: true` shows `rows_read` and `index
 - It also leaves out national publishers' datasets whose country doesn't touch the area (`home` column; country areas with 3° of waters in `vocab/country_areas.geojson`; any European country admits "EUROPE" datasets; international publishers and `vocab/extent_overrides.yaml` entries are always kept). `include_other_countries` widens it. This stopped Kentucky wells and US census blocks coming up for Nigeria.
 - New D1 columns `gtypes` and `home`: a change in table layout now forces a full reload (`__schema__` in rows.json). Every SQL statement is on one line, because the deploy cuts load files at lines ending in ";".
 - `parts get` streams part by part and takes a column list, so a small machine can read Europe's layers.
-- Tobler now uses the MCP server live, through a service binding from a Worker (today `north-sea-geo-demo`, route `/atlas`; moving to Tobler's own Worker in the Tobler chat). Keep the Worker name `atlas-mcp`: the binding points at it.
+- Tobler uses the MCP server live, through a service binding from its Worker. Keep the Worker name `atlas-mcp`: the binding points at it.
 
 ## UK protected sites and Tobler fixes (22 Nov)
 
@@ -166,12 +218,11 @@ Details in decisions.md (22 Nov) and the contract note in mcp-tools.md.
 - `vocab/seeds/uk-protected.yaml`: 24 records, one per designation and nation, on each designating body's own feature
   service. Written by a one-off script from live metadata; to refresh counts and dates, re-read the layers and edit.
   Licences and attribution statements: `vocab/licence_overrides.yaml` (rules `^uk-...:`).
-- Hosted from open downloads by the new `files` workflow (`runs/files.env`, spec key `source_url`): JNCC offshore MPAs
+- Hosted from open downloads by the `files` workflow (`runs/files.env`, spec key `source_url`): JNCC offshore MPAs
   (`jncc-offshore-mpas`, version 20251203) and England's NSIP boundaries (`pins-nsip-england`, planning.data.gov.uk,
   refreshed daily at source: rerun `files` then bump `runs/spike-files.env` to refresh).
-- **Record ids are now fixed** (`record_id` in atlas/datasets.py): a hosted file takes its landing endpoint's uid, any
-  other record its first endpoint's. Before, the id followed whichever endpoint passed its check, and a rerun changed
-  all 18 GEM ids for up to 15 minutes on 22 Nov.
+- **Record ids are fixed** (`record_id` in atlas/datasets.py): a hosted file takes its landing endpoint's uid, any
+  other record its first endpoint's.
 - Publish-time hand fixes (`atlas/hand_fixes.py`): concepts (`vocab/concept_overrides.yaml`) and publisher types by name
   (`vocab/publisher_type_overrides.yaml`).
 - `mcp-ask` workflow: push `runs/mcp-ask.jsonl` (one call per line) for quick live MCP calls; results on `results/mcp-ask`.
@@ -181,9 +232,7 @@ Details in decisions.md (22 Nov) and the contract note in mcp-tools.md.
 
 Details in decisions.md (23 Nov) and the contract note in mcp-tools.md (with every record id).
 - `vocab/seeds/uk-pack.yaml`: 45 records for landscape, heritage, peat, farmland quality, flood zones and the SSSI Impact
-  Risk Zones, per nation, on each publisher's own service (wave `spike-ukpack`, published after `spike-ukprotected`).
-  Keyword `uk-screening-pack` lists them all. Written by a one-off script; to refresh counts or dates, re-read the layers
-  and edit (hosts the workspace can't reach need `probe`).
+  Risk Zones, per nation, on each publisher's own service (wave `spike-ukpack`). Keyword `uk-screening-pack` lists them all.
 - Two are not open on purpose: Carbon and Peatland 2016 (non-commercial licence) and Hutton's LCA (JHI licence unread).
 - SSSI IRZ `irzcode` decoding: `vocab/sssi_irz_codes.json`, `docs/sssi-irz-codes.md`.
 - Curated WFS records name their feature type in `info.type_name` (Worker and viewer use it).
@@ -196,158 +245,108 @@ Details in decisions.md (23 Nov) and the contract note in mcp-tools.md (with eve
 
 Details in decisions.md (24 Nov), the contract note in mcp-tools.md, and the project docs
 `claude/contamination-and-pollution-screening.md` and `claude/contamination-tobler-reply.md`.
-- `vocab/seeds/uk-ground.yaml`: 16 records (keyword `uk-ground-pack`). Written by a one-off
-  script from live metadata; to refresh, re-read the layers and edit.
+- `vocab/seeds/uk-ground.yaml`: 16 records (keyword `uk-ground-pack`).
 - Every curated UK record carries `nation`, `completeness` (complete | partial) and `completeness_note` in its endpoint
-  info. Tobler called it "coverage"; dataset details already use `coverage` for extent size.
-- Most of these licences are not open, each with its reason (decisions.md). Radon accepted as OGL by Rob (24 Nov afternoon).
-- New concepts and a full re-tag ($1.79 with the groundwater-protection fix). The tag workflow takes `RETAG_CONCEPTS` and `RETAG_TITLE`. **Clear `BATCH_ID`
-  in a run file before reusing it** (it resumes that batch instead of tagging).
-- Radon now open (Rob accepted OGL, 24 Nov); EA landfill's Conditional Licence accepted for screening (still not open).
+  info.
+- Most of these licences are not open, each with its reason (decisions.md). Radon accepted as OGL by Rob (24 Nov);
+  EA landfill's Conditional Licence accepted for screening (still not open).
+- The tag workflow takes `RETAG_CONCEPTS` and `RETAG_TITLE`. **Clear `BATCH_ID` in a run file before reusing it**.
 
 ## UK contamination, step 2 (24 Nov, afternoon)
 
 - `vocab/seeds/uk-pollution.yaml`: 6 records (keyword `uk-pollution-pack`): SEPA authorisations, NRW installation and
   waste permits, DAERA pollution incidents (1 km) and trade discharge consents, NIEA historical land use.
-- **England is the gap:** EA permits, incidents and the Pollution Inventory are ZIP downloads only (Conditional Licence;
-  the Pollution Inventory is internal use only). Hosting them is Rob's call. SEPA's SPRI and Defra's national AQMA layer
-  aren't available as services.
+- SEPA's SPRI and Defra's national AQMA layer aren't available as services.
 
 ## US contamination (24 Nov, afternoon)
 
-- `vocab/seeds/us-contamination.yaml`: 10 EPA records (keyword `us-contamination-pack`): Superfund (NPL boundaries,
-  NPL points, all SEMS), ACRES brownfields, RCRA corrective action boundaries, TRI, ICIS-Air, NPDES (major, all), RCRA TSD.
-  Public domain. Completeness is per federal programme; state lists aren't in them.
-- **Next:** the EU's industrial emissions register (EEA), then England's EA downloads if Rob agrees to host them.
-  Scope (24 Nov, evening): project doc `claude/hosting-uk-downloads-scope.md`. Host EPR industrial, EPR waste and
-  pollution incidents (MS Access and CSV in zips; `access-parser` reads them), drop personal fields, refresh monthly.
-  Probe: a `FULL ` line keeps a small download whole; never use it on files with personal data (public branch).
+- `vocab/seeds/us-contamination.yaml`: 10 EPA records (keyword `us-contamination-pack`). Public domain. Completeness is per
+  federal programme; state lists aren't in them.
+- **Next:** the EU's industrial emissions register (EEA).
 
 ## EA downloads, storm overflows, England Peat Map (24 Nov, evening)
 
 - Hosted (`vocab/files/ea-*.yaml`, wave `spike-files`): EA industrial permits, waste permits, serious pollution incidents.
   Personal fields dropped by keep-list. **Monthly refresh on the 3rd** (`runs/files-monthly.env`, which also refreshes
-  NSIP); the files job publishes its own refreshes (spike-files, pages, deploy-mcp in turn). Check the first one on 3 Dec.
+  NSIP); the files job publishes its own refreshes. Check the first one on 3 Dec.
 - Curated (`vocab/seeds/uk-water-peat.yaml`, wave `spike-ukwaterpeat`): 8 water companies' live storm overflows, the 2025
   annual returns (England and Wales), Scottish Water (not open), England Peat Map extent, observations, restoration.
-- Still open from the scope: NRW incidents (manual quarterly download) and Scotland's Local Landscape Areas (Spatial Hub
-  account), both Rob's call. Southern Water and Welsh Water publish no live overflow layer that we found.
+- Still open: NRW incidents (manual quarterly download) and Scotland's Local Landscape Areas (Spatial Hub account),
+  both Rob's call. Probe: a `FULL ` line keeps a small download whole; never use it on files with personal data.
+
+## Best in class and the fill wave (24 Nov, night)
+
+Details in decisions.md (24 Nov, night).
+- **Purpose (Rob):** the standout global and national sources (NASA, USGS, Copernicus, GEBCO, Geoscience Australia,
+  BGS...) should lead broad searches. The registry's weekly list, sorted by number of services, surfaced volume
+  (Brisbane City Council) instead. Agreed split:
+  - **Trusted** (authoritative for its own data): to become mostly automatic (government or international body on its
+    own domain or ArcGIS Online organisation); Rob reviews only odd cases. Not built yet.
+  - **Best in class**: `vocab/best_in_class.yaml`, Rob's list. Not used by the pipeline yet; the plan is a ranking boost
+    in broad searches and a `best_in_class` flag (contract note first), matched by host or organisation, never by name.
+- Publisher issues #2-#13 stay **open** on purpose: closing one declines everything unticked, and open issues hold back
+  the weekly lists. Rob has ticked 3 in #2 (Geoscience Australia, ONS, Institut Cartogràfic Valencià). Retire them when
+  the automatic trusted rule is built.
+- **Fill wave** (`vocab/seeds/fill.yaml`, `spike-fill`, last in publish order): 5,100 datasets, 463 passing, $0.03 to tag.
+  Live checks: Met Office climate layers (its own organisation, credited "Met Office"), USGS National Map hydrography,
+  NASA ARIA layers all come back through `find_datasets`; mcp-check passed.
+- **Still thin, and the next steps:**
+  - NASA GIBS: 2,884 layers, 1 with a description, so they fail the quality bar. Fix: join each layer to NASA's own text
+    (`gibs.earthdata.nasa.gov/layer-metadata/v1.0/<layer>.json` lists its CMR `conceptIds`; CMR's collection `summary`
+    is NASA's description). Reachable from GitHub (probe round 44).
+  - Smithsonian GVP (399 WFS types, no descriptions; website blocks bots), SoilGrids depth layers, WRI: curated records
+    for the few that matter, or leave.
+  - Copernicus Marine: 84 MB capabilities, over the client's 30 MB cap (`max_bytes` in atlas/net.py).
+  - GloFAS: 502 during the crawl only; rerun. USGS mineral resources (mrdata): robots.txt disallows.
+  - Not found or refused: Bureau of Meteorology (403 to GitHub), KNMI (key), TNO/NLOG (no public service found),
+    SEDAC geoserver (timeout), NASA NEO, World Bank map services. Copernicus Land comes via EEA; Terrascope blocks GitHub.
 
 ## Known gaps and next steps (rough priority)
 
-1. **Watch the sweep's first week.** history.csv on `results/liveness` now has one line per run, with `trigger`
-   and `started` (UTC). Check the resolving rate, which hosts go "down", the second-look count, and that nothing
-   retires wrongly once the 14-day window opens (around 1 Dec).
-   - 17 Nov had two full runs (00:22 push, 12:07 scheduled; GitHub started the 03:23 schedule nearly 9 hours late).
-     After both: 562k published endpoints on 195k services, 231k endpoints checked (41%), 99.3% resolving, 1,540
-     failing. 111k services are still unchecked, so the first full pass finishes around 20 Nov; after that a night
-     is ~28k services plus failing ones, well inside 45k and 240 minutes.
-   - 18 Nov: GitHub never started the 03:23 run; started by hand at 09:02. The sweep now has four daily slots
-     and skips once today's run is in history.csv (works: the 09:23 slot skipped). Results: 99.5% resolving, second
-     look answered 24 of 106, 64% of endpoints checked once. Fixed: GEM `geojson` endpoints weren't checked
-     (showed failing). Still to confirm: Overture S3 (rechecked 20 Nov), GEM back to ok (by 21 Nov), first
-     retirements from ~1 Dec.
-   - Fixed 17 Nov evening (decisions.md): failed services get a slow second look at the end of a run (some live
-     servers take 40-60 s), S3 folder URLs are listed rather than fetched, and history no longer overwrites a
-     same-day run. The first real test of the second look is the 18 Nov night run: check REPORT.md says how many
-     answered and that the run still finishes inside its time.
-   - Known real failures to expect retired from ~1 Dec: oceandata.rad.rutgers.edu (timeouts), gis1.mgipu.hr (502,
-     300 endpoints on one WMS), gis12.cookcountyil.gov (404).
-2. **US quality.**
-   - Licences (17 Nov): the gap was missing licence statements, not wording. Rob approved inferring public domain
-     for US federal works: `atlas/licences.py`, applied at publish time, labelled "inferred" in the licence text.
-     3,228 published datasets marked open, 347 skipped where the credit names a non-federal party (5,420 on the US wave alone; the rest of those also appear in an earlier wave, which wins and carries its own publisher type). See `docs/us-licences.md`.
+1. **The OpenStreetMap copy:** Rob's go for the first publish, then the steps in its section above.
+2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly. Expected real retirements:
+   oceandata.rad.rutgers.edu, gis1.mgipu.hr, gis12.cookcountyil.gov. Watch the EEA discomap hosts (all down on 24 Nov).
+3. **Best in class:** GIBS descriptions via CMR, then the ranking boost and flag (with the publisher registry stage 2
+   release: `publisher_id`, `trusted`, `hosted_by`, `publisher_credit`, `trusted_only`, licence classes, one full reload;
+   design in `docs/publisher-registry-design.md` and `docs/trusted-services-design.md`).
+4. **US quality.**
+   - Licences (17 Nov): Rob approved inferring public domain for US federal works (`atlas/licences.py`, labelled
+     "inferred"). See `docs/us-licences.md`.
    - Still open: almost no US layers are joined to data.gov or Hub catalogue records (158 of 2,076 catalogues gave
      records). That join is the way to real licences for state and local data, and better US descriptions.
-3. **Global source failures** (probed 17 Nov; all on their side, nothing to fix in our code):
-   - Terrascope: resets the connection within half a second, from GitHub's runners. Looks like a block on cloud
-     addresses. Only fixable by asking VITO.
-   - FAO io.apps GeoServer: 502 on every path, down at their end.
-   - UNEP-WCMC proxied ImageServers: their proxy's stored credentials fail ("Unable to generate token").
-   - GFW tiles: blocked by robots.txt.
-4. **Smaller items.**
-   - From 22 Nov: the data's own date per record (`details.data_date`) is only on the curated UK records and hosted
-     files; for crawled ArcGIS layers the sweep could read `editingInfo.lastEditDate` on its nightly visit. Offshore
-     points still rank England-wide land layers above the offshore records (bounding boxes; footprints would fix it).
-     No GIS layer found for Scottish Section 36 applications or Welsh DNS. Natural England's priority habitats layer is
-     slow (1-20 s).
-   - 19 Nov: ArcGIS layers that can't page (Historic Environment Scotland) refused `resultRecordCount`; `fetch_features`
-     and the viewer now retry without it (decisions.md). The viewer side still needs a look in a real browser.
-   - Trim long credit strings used as publisher names.
-   - Add WMTS/WCS data checks (the sweep checks they resolve, not that they return tiles/coverages).
-   - Work out true footprints for false extents (they are flagged and ranked down; national ones are now also filtered by home country, see above).
-   - Add an admin-area hierarchy.
-   - Proposed new concepts: landscape-character-area, habitat-network, great-crested-newt-risk-zones.
+5. **Global source failures** (on their side): Terrascope (blocks cloud addresses), FAO io.apps GeoServer (502),
+   UNEP-WCMC proxied ImageServers (token error), GFW tiles (robots.txt).
+6. **Smaller items.**
+   - The data's own date per record (`details.data_date`) is only on the curated UK records and hosted files; the sweep
+     could read `editingInfo.lastEditDate` for crawled ArcGIS layers.
+   - Offshore points still rank England-wide land layers above offshore records (bounding boxes; footprints would fix it).
+   - ArcGIS layers that can't page (HES): `fetch_features` and the viewer retry without `resultRecordCount`; the viewer
+     side still needs a look in a real browser.
+   - Trim long credit strings used as publisher names (the fill wave adds more: "Contains Met Office data licensed...").
+   - Add WMTS/WCS data checks. True footprints for false extents. An admin-area hierarchy.
+   - Proposed new concepts: landscape-character-area, habitat-network, great-crested-newt-risk-zones. There is no
+     wildfire, earthquake or volcano concept; the fill wave uses natural-hazard.
    - The viewer's header still says "Public map services from UK government and agencies" (public text: Rob's call).
-5. **Tobler integration.** Done 17 Nov (see above). Tobler's requests live in `docs/mcp-tools.md`; the name index there is parked by Rob.
-6. **Size limits.** GitHub Pages is capped at 1 GB. Since 17 Nov the detail shards are gzipped and keyed by 3
-   characters (`data/dz/`), so the site is **203 MB** (was 702 MB). A separate `size-limit` job fails at 800 MB, so
-   GitHub emails a failure; the deploy still runs. R2 is the next step if it ever grows that far
-   (`docs/viewer-data-size.md`). Not yet tested in Safari or Firefox.
-7. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
-   sweep) until shards finish.
-8. **Africa.** Published 18 Nov: 8,688 passing datasets (tagged for $0.76), after Rob's national-authority rule.
-   Includes ONHYM (Morocco), the Petroleum Authority of Uganda (slow server, ~30 s fetches) and ANPG's own server.
-   GNPC (Ghana), Kenya's petroleum department and ANPG's ArcGIS Online services need a login token, so they're out.
-   Nigeria and Tanzania still need domain discovery (`docs/spikes/africa-scoping.md`). FNDS (Mozambique) brings some
-   untidy work layers ("xtemp") under the new rule. The rule is **a trial for Africa only** (Rob, 18 Nov): judge
-   whether it helps or adds noise before extending it (`AUTHORITY_PASS_COUNTRIES` in quality.py).
-9. **Tobler requests** (`docs/mcp-tools.md` has the log). EMODnet wave published 17 Nov (first in
-   `runs/published.txt`, tagged for $0.14). NSTA status words done. Text search done 18 Nov (FTS5). Spatial index
-   done 18 Nov (above). Name index: waiting on Rob's licence call; names only, no outlines.
-   - **Trusted services / publisher registry** (`docs/publisher-registry-design.md`, Rob's decisions 18 Nov):
-     stage 1 built: `vocab/publishers.yaml` (seeded: BGS, NSTA, Ordnance Survey hosted by Esri UK, Esri UK as a
-     platform), `atlas/publishers.py`, and the `publishers` workflow (weekly candidate issue, Rob ticks and closes,
-     `apply` writes the registry). First list: 250 candidates in issues #2-#13, 25 each, ranked by services; Rob
-     approves an issue with one comment (`add all`, `add all except <codes>`). **Stage 2 waits for those**: registry
-     applied at publish time and in D1 (`publisher_id`, `trusted`, `hosted_by`, `publisher_credit`,
-     `trusted_only`), with the licence classes in the same full reload. No licence defaults from the registry.
-10. **Hosted download datasets** (18 Nov). `atlas/files.py` turns a publisher's download into gzipped GeoJSON tiles
-    in `files/<id>/` (10° cells plus `index.json`, published at `data/f/<id>/`) and a catalogue record in
-    `vocab/seeds/files.yaml`; the `spike-files` wave (first in `runs/published.txt`) lists them, and `fetch_features`
-    reads only the tiles near the area (all tiles, 12 at a time, for a text search). Specs: `vocab/files/*.yaml`.
-    - **Live: 18 GEM trackers** from Rob's `gem-data.zip` (~192k features, 26 MB gzipped, all CC BY 4.0 per each
-      About sheet): extraction fields, gas and oil/NGL pipelines (routes), LNG terminals, oil and gas plants, coal
-      plants, mines and terminals, wind, solar, hydro, geothermal, bioenergy, nuclear, steel, cement, chemicals,
-      iron ore mines. Live checks 0.1-1.0 s each.
-    - **Left out on licence grounds:** TransitionZero-sourced solar rows (CC BY-NC, 18,732), the integrated power
-      tracker, the methane tracker (plumes CC BY-NC-SA), coal mine boundaries (no licence stated). Ownership,
-      finance and LNG-carrier tables aren't maps; they could become a "who owns this" lookup later.
-    - **To refresh** when GEM releases: put the new file in a folder, update `source`/`release`/`citation` in the
-      spec, run `python -m atlas.files --source-dir DIR vocab/files/<id>.yaml`, bump `runs/spike-files.env`, push.
-      Raw downloads stay out of git (size).
-
-11. **Values at a point** (19 Nov, Tobler request; `docs/decisions.md` has the table of checked values). Capability
-    `sample` = the endpoint returns a number at a point. Added at publish time (`atlas/sampling.py`, rules in
-    `vocab/sample_rules.yaml`): one-band ImageServers (identify), WCS, and hand-checked WMS feature-info; never
-    exaggerated relief, hillshades or colour ramps. Curated value sources are records in `vocab/seeds/values.yaml`
-    (wave `spike-values`) that carry their own `info.sample`. Hand-recorded licences, attribution lines and terms live
-    in `vocab/licence_overrides.yaml` (also publish time), shown by `get_dataset` as `attribution` and `terms`.
-    `mcp-check` reads a value through each sampled endpoint at the North Sea and Niger Delta points.
-    - Open: shipping density comes from Esri's tiles-only copy (LERC decoding). Hosting the World Bank GeoTIFFs as a
-      COG on R2 would make it a plain range read; Rob's call (storage).
-    - Open: GEBCO's OPeNDAP at CEDA is slow (6-8 s a cell). The UNH CCOM image service is the fast route.
-    - **Land elevation (20 Nov):** curated records for Scotland (50 cm national lidar COGs, 18 lidar surveys via WMS),
-      France, Japan, Switzerland (point APIs), Spain, Norway, North Rhine-Westphalia, Canada (WCS), Netherlands (AHN
-      feature-info), Australia (GA MapServer identify, checked by hand: GA's CDN refuses GitHub) and Copernicus GLO-30
-      (COGs on AWS, no CORS). England's EA lidar WMS and the US 3DEP ImageServer were already in and now sample.
-      New methods `api` and `cog`; `atlas/sample_check.py` reads values the way an agent would, and mcp-check runs it
-      at 15 points. Table of values in decisions.md (20 Nov).
-    - Next for elevation: New Zealand from LINZ's own 1 m COGs (STAC, CC BY 4.0; the Eagle-hosted NZ service in the
-      atlas is "for use with ArcGIS software"); Germany's other states (Hessen refused GitHub); Flanders' WCS axis
-      names; Denmark, Finland, Sweden need keys or accounts.
-    - CEDA's OPeNDAP answered 403 to one run and 200 to the next: watch it in mcp-check.
-    - CEDA and Esri's tiled image services refuse crawlers in robots.txt. We respect that: a curated record there
-      shows `unchecked` ("checked by hand"), and the sweep will report it as robots, not failing.
-    - The generic rule trusts identify on one-band ImageServers. mcp-check is how false positives show up (Esri's
-      WorldElevation3D answered 0 everywhere and is now excluded); add any others to `never` in sample_rules.yaml.
-
-12. **UK pack follow-ups** (23 Nov; contract note in mcp-tools.md).
-    - Read the James Hutton Institute Open Data Licence (it comes in the LCA download) and decide whether Hutton's LCA
-      can be marked open. Historic England's Open Data Hub terms page refuses bots: read it in a browser once.
-    - Gaps Tobler will report as "not checked": Dark Sky Parks (no national layer), Scotland's Local Landscape Areas
-      (Spatial Hub), Cadw battlefields, NI flood maps and farmland classification. England Peat Map and the Wales unified
-      peat map exist and could be added if Tobler wants peat beyond Scotland.
-    - Curated records rank below older crawled copies in plain concept searches; Tobler uses the ids. Footprints or the
-      publisher registry (stage 2) would fix the ranking.
-    - Add a few pack records to mcp-check (a WFS one, HES, SEPA surface water, the IRZ) so a break shows up nightly.
+   - Add a few UK pack records to mcp-check (a WFS one, HES, SEPA surface water, the IRZ).
+   - Actions still run on Node 20 actions (checkout@v4 and friends), now forced onto Node 24 with a warning: bump them.
+7. **Size limits.** GitHub Pages is capped at 1 GB; the site is ~203 MB (gzipped detail shards in `data/dz/`). A
+   `size-limit` job fails at 800 MB. R2 (`atlas-data`, now in place) is the next step (`docs/viewer-data-size.md`). Not
+   yet tested in Safari or Firefox.
+8. **Actions concurrency.** The free plan runs 20 jobs at once; a 20-shard wave queues everything else (including the
+   sweep) until shards finish. The osm workflow uses up to 6 build jobs (`MAX_PARALLEL`); its weekly crons are on
+   Saturday and Sunday mornings, away from the crawl waves, which are started by hand.
+9. **Africa.** 8,688 passing datasets under Rob's national-authority rule (a trial for Africa only; judge before
+   extending it, `AUTHORITY_PASS_COUNTRIES` in quality.py). GNPC, Kenya's petroleum department and ANPG's ArcGIS Online
+   need a token. Nigeria and Tanzania still need domain discovery (`docs/spikes/africa-scoping.md`).
+10. **Tobler requests** (`docs/mcp-tools.md` has the log). Name index: waiting on Rob's licence call.
+11. **Hosted download datasets** (`atlas/files.py`, specs `vocab/files/*.yaml`, wave `spike-files`): 18 GEM trackers
+    (CC BY 4.0; some left out on licence grounds), JNCC offshore MPAs, NSIP, EA files. To refresh GEM: put the new file in
+    a folder, update `source`/`release`/`citation`, run `python -m atlas.files --source-dir DIR vocab/files/<id>.yaml`,
+    bump `runs/spike-files.env`, push. These could move to `atlas-data` too, when Pages fills up.
+12. **Values at a point** (capability `sample`; `atlas/sampling.py`, `vocab/sample_rules.yaml`, wave `spike-values`).
+    Open: shipping density from Esri's tiles-only copy (hosting the World Bank GeoTIFFs as a COG on R2 is Rob's call);
+    GEBCO's OPeNDAP at CEDA is slow and sometimes 403; next elevation sources: LINZ 1 m COGs, other German states,
+    Flanders WCS; Denmark, Finland, Sweden need keys. Add false-positive image services to `never` in sample_rules.yaml.
+13. **UK pack follow-ups.** Read the James Hutton Institute Open Data Licence; read Historic England's Open Data Hub terms
+    in a browser once. Gaps Tobler reports as "not checked": Dark Sky Parks, Scotland's Local Landscape Areas, Cadw
+    battlefields, NI flood maps and farmland classification.
