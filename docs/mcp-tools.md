@@ -51,7 +51,8 @@ Tobler stores only that folder URL; every path in a manifest is relative to the 
 - `<release>` is the build day, `YYYY-MM-DD` (UTC). `<extract id>` is Geofabrik's id and may contain a slash
   (`us/texas`). Groups: `transport`, `utilities`, `water`, `landuse`, `community`, `buildings`.
 - The manifest is uploaded **last**, after every file of the release, so a reader never sees half a release. A
-  release's files are never overwritten once its manifest is out; older releases are kept at least two weeks.
+  release folder is never written into once it exists (the build refuses), and older releases are kept at least two
+  weeks, because a manifest may still point into them (see `carried`).
 - Features in both formats: `osm_type` (`node` | `way` | `relation`), `osm_id`, `tags` (JSON text holding only the spec's
   `keep_tags`), geometry in WGS84 (points, lines, polygons and multipolygons mixed; FlatGeobuf geometry type Unknown).
   Closed ways and multipolygon relations of area kinds are whole polygons; line kinds stay lines.
@@ -72,7 +73,8 @@ Tobler stores only that folder URL; every path in a manifest is relative to the 
 | **`outline`** | GeoJSON Polygon or MultiPolygon the copy covers: the union of the built extracts, simplified and drawn about 1 km inside, so it never claims ground it doesn't hold. A search box must be inside it to use the copy |
 | **`regions[]`** | One per built extract: `id`, `name`, **`data_as_of`**, **`bbox`** [w, s, e, n], **`files`** |
 | **`regions[].files.<group>`** | **`path`** (to the `.fgb`), **`features`** (0 means skip), `bytes`, and `parquet` (path to the `.parquet`, when built; added 25 Nov) |
-| `missing` | Extract ids planned but not built or not uploaded in this release (they're outside `outline`) |
+| `carried` | Extract ids this run couldn't build that kept their entry from the previous manifest (release under 14 days old). Their `files` paths point into that older release folder, and their own `data_as_of` stays. Added by Tobler's workflow on 25 Nov, kept |
+| `missing` | Extract ids planned but neither built nor carried (they're outside `outline`) |
 
 **Atlas records.** One per market copy, `osm-copy-<market>` in `vocab/seeds/osm.yaml` (wave `spike-osm`): publisher
 "OpenStreetMap contributors", ODbL 1.0 with the credit "© OpenStreetMap contributors", endpoint `cloud` at the

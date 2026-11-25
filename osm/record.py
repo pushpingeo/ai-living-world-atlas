@@ -81,6 +81,7 @@ def entry(market, spec, manifest, report, url):
         "data_as_of": manifest.get("data_as_of"),
         "extracts": len(manifest.get("regions") or []),
         "extracts_missing": manifest.get("missing") or [],
+        "extracts_carried": manifest.get("carried") or [],
         "features": {g: v.get("features") for g, v in by_group.items()},
         "completeness": "partial",
         "completeness_note": "complete for the extracts listed (every feature with these tags); OpenStreetMap itself is volunteer-mapped and uneven, especially for buildings and land use. Extracts missing from a release are left out of its outline.",

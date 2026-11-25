@@ -92,6 +92,12 @@ jobs:
           S3ENV=$(osm/r2-s3-env.sh) || exit 1; eval "$S3ENV"; echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
           aws s3 cp probe.txt "s3://$BUCKET/osm/_probe-atlas-s3.txt" --endpoint-url "$R2_ENDPOINT" --only-show-errors \
             || { echo "::error::R2's S3 API refused the token's derived credentials for bucket $BUCKET"; exit 1; }
+          # Never write into a release folder that already exists (a live manifest may point at it; 25 Nov the
+          # Tobler workflow's release used today's date too). Run again tomorrow instead.
+          REL=${{ steps.p.outputs.release }}
+          if aws s3 ls "s3://$BUCKET/osm/$REL/" --endpoint-url "$R2_ENDPOINT" | grep -q .; then
+            echo "::error::osm/$REL/ already exists in $BUCKET; a release folder is never overwritten. Run on another day."; exit 1
+          fi
       - name: Plan the extracts
         id: plan
         if: steps.p.outputs.go == 'yes'
@@ -202,13 +208,15 @@ jobs:
         with: { path: art }
       - name: Manifest and report
         run: |
-          python3 osm/publish.py --regions art/plan/regions.json --stats-dir art --release "$R" \
+          # The live manifest, so an extract this run couldn't build keeps its last release (up to 14 days old).
+          curl -sfL --retry 3 -o /tmp/live.json "${PUBLIC_BASE}$M.json" || { echo "no live manifest for $M yet"; rm -f /tmp/live.json; }
+          python3 osm/publish.py --regions art/plan/regions.json --stats-dir art --release "$R" --previous /tmp/live.json \
             --out /tmp/manifest.json --report "/tmp/report-$M.json" || echo "::warning::some extracts didn't build (see missing in the report)"
           python3 - <<'PY' >> $GITHUB_STEP_SUMMARY
           import json, os
           r = json.load(open(f"/tmp/report-{os.environ['M']}.json"))
           print(f"## OpenStreetMap copy: {r['market']}, release {r['release']}\n")
-          print(f"- extracts built: {r['built']} of {r['extracts']}" + (f"; missing: {', '.join(r['missing'])}" if r['missing'] else ""))
+          print(f"- extracts built: {r['built']} of {r['extracts']}" + (f"; carried from the live release: {', '.join(r['carried'])}" if r.get('carried') else "") + (f"; missing: {', '.join(r['missing'])}" if r['missing'] else ""))
           print(f"- features: {r['features']:,}; FlatGeobuf {r['fgb_bytes']/1e9:.2f} GB; GeoParquet {r['parquet_bytes']/1e9:.2f} GB; manifest {r['manifest_bytes']/1e3:.0f} kB")
           big = sorted(r["regions"], key=lambda x: -(x.get("max_rss_mb") or 0))[:5]
           print("- most memory: " + ", ".join(f"{x['region']} {x.get('max_rss_mb')} MB ({x['source_bytes']/1e6:.0f} MB extract, {x['total_s']:.0f} s)" for x in big))
