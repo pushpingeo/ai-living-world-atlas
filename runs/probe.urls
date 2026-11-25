@@ -1,25 +1,22 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 46 (25 Nov): samples for the NL pack; BRO soil via OGC API; NPI fields; AU state licences; other EEA hosts
-https://service.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/wfs/v2_0?service=WFS&version=1.1.0&request=GetFeature&typeName=brk-publiekrechtelijke-beperkingen-wkpb-v2-0:pb_multipolygon&outputFormat=application/json&maxFeatures=5&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=4.85,52.33,4.95,52.40,urn:ogc:def:crs:OGC:1.3:CRS84
-https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?service=WFS&version=1.1.0&request=GetFeature&typeName=faciliteiten-voor-productie-en-industrie:production_installation_point&outputFormat=application/json&maxFeatures=3&srsName=urn:ogc:def:crs:OGC:1.3:CRS84&bbox=4.0,51.85,4.5,52.0,urn:ogc:def:crs:OGC:1.3:CRS84
-https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?service=WFS&version=1.1.0&request=GetFeature&typeName=faciliteiten-voor-productie-en-industrie:production_installation_point&resultType=hits
-https://api.pdok.nl/tno/bro-overheidsbesluit-bodemverontreiniging/ogc/v1/collections?f=json
-https://api.pdok.nl/tno/bro-milieuhygienisch-bodemonderzoek/ogc/v1/collections?f=json
-https://service.pdok.nl/tno/bro-overheidsbesluit-bodemverontreiniging/wms/v1_0?request=GetCapabilities&service=WMS
-https://data.gov.au/geoserver/npi/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ckan_043f58e0_a188_4458_b61c_04e5b540aea4&outputFormat=application/json&maxFeatures=2
-https://data.gov.au/geoserver/npi/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ckan_043f58e0_a188_4458_b61c_04e5b540aea4&resultType=hits
-https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/EPA/Contaminated_land_notified_sites/FeatureServer/0?f=json
-https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3?f=json
-https://mapprod1.environment.nsw.gov.au/arcgis/rest/services/PropertyNSW/ContamintedLandMgmt_PublicRegister/MapServer/0?f=json
-https://datasets.seed.nsw.gov.au/api/3/action/package_search?q=contaminated%20land&rows=5
-https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer/140?f=json
-https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74?f=json
-https://catalogue.data.wa.gov.au/api/3/action/package_search?q=DWER-059&rows=3
-https://discover.data.vic.gov.au/api/3/action/package_search?q=%22priority%20sites%22%20epa&rows=5
-https://services.ga.gov.au/gis/rest/services/Waste_Management_Facilities/MapServer/0?f=json
-https://services.ga.gov.au/gis/earthresource/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ama:MineWaste&outputFormat=application/json&maxFeatures=1
-https://industry.eea.europa.eu/download
-https://discodata.eea.europa.eu/sql?query=SELECT%20TOP%202%20*%20FROM%20%5BIED%5D.%5Blatest%5D.%5BProductionInstallation%5D&p=1&nrOfHits=2
-https://www.eea.europa.eu/en/datahub/datahubitem-view/9405f714-8015-4b5b-a63c-280b82861b3d
+# round 47 (25 Nov): the Worker's WFS fallback (1.0.0, EPSG:4326) on PDOK; NPI; Victoria PSR; RIVM drinking water zones; licences
+https://service.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/wfs/v2_0?service=WFS&request=GetFeature&typeName=brk-publiekrechtelijke-beperkingen-wkpb-v2-0:pb_multipolygon&outputFormat=application/json&maxFeatures=5&version=1.0.0&srsName=EPSG:4326&bbox=4.85,52.33,4.95,52.40,EPSG:4326
+https://service.pdok.nl/rws/productie-en-industrie-productie-installaties/wfs/v1_0?service=WFS&request=GetFeature&typeName=faciliteiten-voor-productie-en-industrie:production_installation_point&outputFormat=application/json&maxFeatures=3&version=1.0.0&srsName=EPSG:4326&bbox=4.0,51.85,4.5,52.0,EPSG:4326
+https://service.pdok.nl/kadaster/brk-publiekrechtelijke-beperkingen-wkpb/wfs/v2_0?service=WFS&request=GetFeature&typeName=brk-publiekrechtelijke-beperkingen-wkpb-v2-0:pb_multipolygon&resultType=hits
+https://data.gov.au/geoserver/npi/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=npi:ckan_043f58e0_a188_4458_b61c_04e5b540aea4&outputFormat=application/json&maxFeatures=2
+https://data.gov.au/geoserver/npi/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=npi:ckan_043f58e0_a188_4458_b61c_04e5b540aea4&resultType=hits
+https://data.gov.au/geoserver/npi/wfs?request=GetCapabilities&service=WFS&version=1.1.0
+https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=open-data-platform:psr_point&outputFormat=application/json&maxFeatures=2
+https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=open-data-platform:psr_point&resultType=hits
+https://opendata.maps.vic.gov.au/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=open-data-platform:psr_polygon&resultType=hits
+https://discover.data.vic.gov.au/api/3/action/package_search?q=%22priority%20sites%20register%22&rows=2
+https://data.rivm.nl/geo/ank/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ank:rivm_r79_rg_grondwaterbeschermingsgebiedendrinkwater&outputFormat=application/json&maxFeatures=1&propertyName=
+https://data.rivm.nl/geo/ank/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=ank:rivm_r79_rg_grondwaterbeschermingsgebiedendrinkwater&resultType=hits
+https://data.rivm.nl/geo/ank/wfs?service=WFS&request=GetCapabilities&version=1.1.0
+https://www.nationaalgeoregister.nl/geonetwork/srv/api/search/records/_search?q=boringsvrije
+https://geoservices.noord-holland.nl/ags/rest/services/thematische_services/pnh_thema_natuur_milieu/MapServer/54?f=json
+https://data.nsw.gov.au/data/api/3/action/package_search?q=%22contaminated%20land%22%20EPA&rows=5
+https://www.data.qld.gov.au/api/3/action/package_search?q=%22environmental%20authority%22&rows=3
+https://data.gov.au/data/api/3/action/package_search?q=%22EPA%20regulated%20sites%22%20Tasmania&rows=3
