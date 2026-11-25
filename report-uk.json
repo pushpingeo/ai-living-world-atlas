@@ -1,46 +1,55 @@
 {
  "market": "uk",
  "release": "2026-11-25",
- "built_at": "2026-11-25T12:21:58Z",
+ "built_at": "2026-11-25T12:55:08Z",
  "extracts": 50,
- "built": 50,
- "missing": [],
- "source_bytes": 2621552371,
- "filtered_bytes": 1141376430,
- "fgb_bytes": 7619623768,
- "parquet_bytes": 3094296404,
- "features": 23509393,
- "manifest_bytes": 447017,
+ "built": 42,
+ "missing": [
+  "bristol",
+  "derbyshire",
+  "essex",
+  "hertfordshire",
+  "merseyside",
+  "oxfordshire",
+  "suffolk",
+  "west-yorkshire"
+ ],
+ "source_bytes": 2331792167,
+ "filtered_bytes": 1005096265,
+ "fgb_bytes": 6688493696,
+ "parquet_bytes": 2729395145,
+ "features": 20582693,
+ "manifest_bytes": 327874,
  "by_group": {
   "buildings": {
-   "features": 21300150,
-   "fgb_bytes": 6523266800,
-   "parquet_bytes": 2430004542
+   "features": 18567263,
+   "fgb_bytes": 5687819896,
+   "parquet_bytes": 2124578513
   },
   "community": {
-   "features": 51806,
-   "fgb_bytes": 27090096,
-   "parquet_bytes": 15478911
+   "features": 44998,
+   "fgb_bytes": 23425192,
+   "parquet_bytes": 13062725
   },
   "landuse": {
-   "features": 523248,
-   "fgb_bytes": 274173848,
-   "parquet_bytes": 164512621
+   "features": 473771,
+   "fgb_bytes": 243750704,
+   "parquet_bytes": 144478229
   },
   "transport": {
-   "features": 412575,
-   "fgb_bytes": 138798328,
-   "parquet_bytes": 61301894
+   "features": 361757,
+   "fgb_bytes": 122305712,
+   "parquet_bytes": 53930604
   },
   "utilities": {
-   "features": 114009,
-   "fgb_bytes": 36400792,
-   "parquet_bytes": 15447687
+   "features": 102690,
+   "fgb_bytes": 32801768,
+   "parquet_bytes": 13526681
   },
   "water": {
-   "features": 1107605,
-   "fgb_bytes": 619893904,
-   "parquet_bytes": 407550749
+   "features": 1032214,
+   "fgb_bytes": 578390424,
+   "parquet_bytes": 379818393
   }
  },
  "regions": [
@@ -49,9 +58,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 22840091,
    "filtered_bytes": 8335782,
-   "read_s": 12.3,
-   "total_s": 15.5,
-   "max_rss_mb": 565,
+   "read_s": 8.5,
+   "total_s": 9.2,
+   "max_rss_mb": 441,
    "skipped": {
     "bad_geometry": 0
    }
@@ -61,9 +70,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 1956986,
    "filtered_bytes": 555248,
-   "read_s": 0.6,
-   "total_s": 0.8,
-   "max_rss_mb": 270,
+   "read_s": 0.4,
+   "total_s": 0.5,
+   "max_rss_mb": 237,
    "skipped": {
     "bad_geometry": 0
    }
@@ -73,9 +82,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 41813073,
    "filtered_bytes": 19466790,
-   "read_s": 32.9,
-   "total_s": 40.8,
-   "max_rss_mb": 1056,
+   "read_s": 22.5,
+   "total_s": 24.2,
+   "max_rss_mb": 562,
    "skipped": {
     "bad_geometry": 0
    }
@@ -85,9 +94,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 9105641,
    "filtered_bytes": 4022546,
-   "read_s": 6.4,
-   "total_s": 7.9,
-   "max_rss_mb": 392,
+   "read_s": 4.3,
+   "total_s": 4.7,
+   "max_rss_mb": 305,
    "skipped": {
     "bad_geometry": 0
    }
@@ -97,9 +106,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 34754755,
    "filtered_bytes": 14723557,
-   "read_s": 25.9,
-   "total_s": 32.3,
-   "max_rss_mb": 908,
+   "read_s": 17.5,
+   "total_s": 18.8,
+   "max_rss_mb": 522,
    "skipped": {
     "bad_geometry": 0
    }
@@ -109,9 +118,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 58657420,
    "filtered_bytes": 22035792,
-   "read_s": 34.4,
-   "total_s": 42.8,
-   "max_rss_mb": 1070,
+   "read_s": 23.2,
+   "total_s": 24.9,
+   "max_rss_mb": 581,
    "skipped": {
     "bad_geometry": 2
    }
@@ -121,9 +130,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 43496663,
    "filtered_bytes": 18595464,
-   "read_s": 26.9,
-   "total_s": 33.8,
-   "max_rss_mb": 946,
+   "read_s": 18.2,
+   "total_s": 19.6,
+   "max_rss_mb": 528,
    "skipped": {
     "bad_geometry": 0
    }
@@ -133,105 +142,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 47326399,
    "filtered_bytes": 22197687,
-   "read_s": 33.5,
-   "total_s": 41.6,
-   "max_rss_mb": 1057,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "derbyshire",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 44264593,
-   "filtered_bytes": 18973755,
-   "read_s": 28.7,
-   "total_s": 35.7,
-   "max_rss_mb": 945,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "hertfordshire",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 39598550,
-   "filtered_bytes": 20168363,
-   "read_s": 38.3,
-   "total_s": 47.3,
-   "max_rss_mb": 1181,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "merseyside",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 25595548,
-   "filtered_bytes": 14082811,
-   "read_s": 28.9,
-   "total_s": 35.8,
-   "max_rss_mb": 974,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "west-yorkshire",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 54620548,
-   "filtered_bytes": 28241057,
-   "read_s": 53.4,
-   "total_s": 65.6,
-   "max_rss_mb": 1433,
-   "skipped": {
-    "bad_geometry": 1
-   }
-  },
-  {
-   "region": "oxfordshire",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 28294119,
-   "filtered_bytes": 12112673,
-   "read_s": 18.0,
-   "total_s": 22.5,
-   "max_rss_mb": 735,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "bristol",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 13404138,
-   "filtered_bytes": 8768736,
-   "read_s": 16.4,
-   "total_s": 20.1,
-   "max_rss_mb": 637,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "suffolk",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 33717488,
-   "filtered_bytes": 13652659,
-   "read_s": 21.6,
-   "total_s": 27.0,
-   "max_rss_mb": 799,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "essex",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 50265220,
-   "filtered_bytes": 20280111,
-   "read_s": 29.9,
-   "total_s": 37.3,
-   "max_rss_mb": 1001,
+   "read_s": 23.1,
+   "total_s": 24.9,
+   "max_rss_mb": 580,
    "skipped": {
     "bad_geometry": 0
    }
@@ -241,9 +154,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 330729990,
    "filtered_bytes": 141052725,
-   "read_s": 162.1,
-   "total_s": 216.4,
-   "max_rss_mb": 4400,
+   "read_s": 88.1,
+   "total_s": 96.6,
+   "max_rss_mb": 1170,
    "skipped": {
     "bad_geometry": 0
    }
@@ -253,9 +166,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 23260472,
    "filtered_bytes": 9757665,
-   "read_s": 14.8,
-   "total_s": 19.0,
-   "max_rss_mb": 694,
+   "read_s": 8.0,
+   "total_s": 8.7,
+   "max_rss_mb": 468,
    "skipped": {
     "bad_geometry": 0
    }
@@ -265,9 +178,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 42716861,
    "filtered_bytes": 19117834,
-   "read_s": 28.2,
-   "total_s": 36.0,
-   "max_rss_mb": 1018,
+   "read_s": 15.3,
+   "total_s": 16.7,
+   "max_rss_mb": 572,
    "skipped": {
     "bad_geometry": 0
    }
@@ -277,9 +190,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 52087147,
    "filtered_bytes": 23802668,
-   "read_s": 39.2,
-   "total_s": 50.2,
-   "max_rss_mb": 1311,
+   "read_s": 21.0,
+   "total_s": 22.9,
+   "max_rss_mb": 577,
    "skipped": {
     "bad_geometry": 0
    }
@@ -289,9 +202,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 24506330,
    "filtered_bytes": 11448193,
-   "read_s": 16.2,
-   "total_s": 20.8,
-   "max_rss_mb": 732,
+   "read_s": 8.6,
+   "total_s": 9.3,
+   "max_rss_mb": 471,
    "skipped": {
     "bad_geometry": 0
    }
@@ -301,9 +214,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 38840433,
    "filtered_bytes": 19064383,
-   "read_s": 28.9,
-   "total_s": 37.0,
-   "max_rss_mb": 1045,
+   "read_s": 15.9,
+   "total_s": 17.3,
+   "max_rss_mb": 560,
    "skipped": {
     "bad_geometry": 0
    }
@@ -313,9 +226,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 23909207,
    "filtered_bytes": 8921822,
-   "read_s": 13.3,
-   "total_s": 16.9,
-   "max_rss_mb": 582,
+   "read_s": 7.1,
+   "total_s": 7.7,
+   "max_rss_mb": 414,
    "skipped": {
     "bad_geometry": 0
    }
@@ -325,9 +238,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 50338816,
    "filtered_bytes": 21074709,
-   "read_s": 27.8,
-   "total_s": 36.0,
-   "max_rss_mb": 1037,
+   "read_s": 15.0,
+   "total_s": 16.4,
+   "max_rss_mb": 570,
    "skipped": {
     "bad_geometry": 1
    }
@@ -337,9 +250,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 130604349,
    "filtered_bytes": 65543712,
-   "read_s": 108.4,
-   "total_s": 133.4,
-   "max_rss_mb": 2550,
+   "read_s": 93.7,
+   "total_s": 100.6,
+   "max_rss_mb": 725,
    "skipped": {
     "bad_geometry": 1
    }
@@ -349,9 +262,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 20444510,
    "filtered_bytes": 9320615,
-   "read_s": 15.5,
-   "total_s": 19.2,
-   "max_rss_mb": 648,
+   "read_s": 13.3,
+   "total_s": 14.3,
+   "max_rss_mb": 467,
    "skipped": {
     "bad_geometry": 0
    }
@@ -361,9 +274,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 19639371,
    "filtered_bytes": 9806086,
-   "read_s": 21.9,
-   "total_s": 26.8,
-   "max_rss_mb": 786,
+   "read_s": 19.3,
+   "total_s": 20.7,
+   "max_rss_mb": 459,
    "skipped": {
     "bad_geometry": 0
    }
@@ -373,9 +286,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 62026547,
    "filtered_bytes": 23098835,
-   "read_s": 30.7,
-   "total_s": 38.8,
-   "max_rss_mb": 1002,
+   "read_s": 27.0,
+   "total_s": 29.2,
+   "max_rss_mb": 586,
    "skipped": {
     "bad_geometry": 0
    }
@@ -385,9 +298,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 30355048,
    "filtered_bytes": 13547843,
-   "read_s": 21.5,
-   "total_s": 26.7,
-   "max_rss_mb": 786,
+   "read_s": 18.4,
+   "total_s": 19.9,
+   "max_rss_mb": 470,
    "skipped": {
     "bad_geometry": 0
    }
@@ -397,9 +310,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 35111643,
    "filtered_bytes": 16526511,
-   "read_s": 27.6,
-   "total_s": 34.2,
-   "max_rss_mb": 890,
+   "read_s": 24.1,
+   "total_s": 26.0,
+   "max_rss_mb": 533,
    "skipped": {
     "bad_geometry": 1
    }
@@ -409,9 +322,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 25353755,
    "filtered_bytes": 9294692,
-   "read_s": 11.2,
-   "total_s": 14.3,
-   "max_rss_mb": 540,
+   "read_s": 9.9,
+   "total_s": 10.8,
+   "max_rss_mb": 438,
    "skipped": {
     "bad_geometry": 0
    }
@@ -421,9 +334,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 54519558,
    "filtered_bytes": 23377230,
-   "read_s": 37.8,
-   "total_s": 46.8,
-   "max_rss_mb": 1140,
+   "read_s": 32.5,
+   "total_s": 35.0,
+   "max_rss_mb": 565,
    "skipped": {
     "bad_geometry": 0
    }
@@ -433,9 +346,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 35193813,
    "filtered_bytes": 9599942,
-   "read_s": 14.5,
-   "total_s": 18.1,
-   "max_rss_mb": 624,
+   "read_s": 11.5,
+   "total_s": 12.4,
+   "max_rss_mb": 461,
    "skipped": {
     "bad_geometry": 0
    }
@@ -445,9 +358,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 22404928,
    "filtered_bytes": 10283388,
-   "read_s": 17.0,
-   "total_s": 21.0,
-   "max_rss_mb": 680,
+   "read_s": 13.3,
+   "total_s": 14.2,
+   "max_rss_mb": 485,
    "skipped": {
     "bad_geometry": 1
    }
@@ -457,9 +370,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 59982924,
    "filtered_bytes": 36500734,
-   "read_s": 65.8,
-   "total_s": 80.9,
-   "max_rss_mb": 1660,
+   "read_s": 52.2,
+   "total_s": 55.8,
+   "max_rss_mb": 628,
    "skipped": {
     "bad_geometry": 0
    }
@@ -469,9 +382,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 26312245,
    "filtered_bytes": 10271505,
-   "read_s": 15.0,
-   "total_s": 18.8,
-   "max_rss_mb": 645,
+   "read_s": 12.3,
+   "total_s": 13.2,
+   "max_rss_mb": 465,
    "skipped": {
     "bad_geometry": 0
    }
@@ -481,9 +394,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 15242442,
    "filtered_bytes": 6383959,
-   "read_s": 10.6,
-   "total_s": 13.3,
-   "max_rss_mb": 518,
+   "read_s": 8.8,
+   "total_s": 9.8,
+   "max_rss_mb": 403,
    "skipped": {
     "bad_geometry": 0
    }
@@ -493,9 +406,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 151742205,
    "filtered_bytes": 56905861,
-   "read_s": 83.6,
-   "total_s": 105.2,
-   "max_rss_mb": 2038,
+   "read_s": 65.5,
+   "total_s": 70.5,
+   "max_rss_mb": 693,
    "skipped": {
     "bad_geometry": 0
    }
@@ -505,9 +418,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 20749658,
    "filtered_bytes": 8450488,
-   "read_s": 13.0,
-   "total_s": 16.3,
-   "max_rss_mb": 591,
+   "read_s": 10.4,
+   "total_s": 11.1,
+   "max_rss_mb": 439,
    "skipped": {
     "bad_geometry": 0
    }
@@ -517,9 +430,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 62640778,
    "filtered_bytes": 26967133,
-   "read_s": 45.6,
-   "total_s": 56.7,
-   "max_rss_mb": 1304,
+   "read_s": 35.7,
+   "total_s": 38.4,
+   "max_rss_mb": 621,
    "skipped": {
     "bad_geometry": 0
    }
@@ -529,9 +442,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 31256823,
    "filtered_bytes": 15496781,
-   "read_s": 25.7,
-   "total_s": 31.4,
-   "max_rss_mb": 871,
+   "read_s": 20.3,
+   "total_s": 21.8,
+   "max_rss_mb": 503,
    "skipped": {
     "bad_geometry": 1
    }
@@ -541,9 +454,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 45936519,
    "filtered_bytes": 12239991,
-   "read_s": 8.8,
-   "total_s": 11.6,
-   "max_rss_mb": 638,
+   "read_s": 10.2,
+   "total_s": 11.0,
+   "max_rss_mb": 467,
    "skipped": {
     "bad_geometry": 0
    }
@@ -553,9 +466,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 31131776,
    "filtered_bytes": 13362819,
-   "read_s": 12.8,
-   "total_s": 16.3,
-   "max_rss_mb": 769,
+   "read_s": 14.5,
+   "total_s": 15.6,
+   "max_rss_mb": 461,
    "skipped": {
     "bad_geometry": 0
    }
@@ -565,9 +478,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 22699463,
    "filtered_bytes": 11222066,
-   "read_s": 11.4,
-   "total_s": 14.5,
-   "max_rss_mb": 717,
+   "read_s": 13.4,
+   "total_s": 14.4,
+   "max_rss_mb": 428,
    "skipped": {
     "bad_geometry": 0
    }
@@ -577,9 +490,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 43399137,
    "filtered_bytes": 19353526,
-   "read_s": 19.3,
-   "total_s": 24.5,
-   "max_rss_mb": 997,
+   "read_s": 22.0,
+   "total_s": 23.6,
+   "max_rss_mb": 580,
    "skipped": {
     "bad_geometry": 1
    }
@@ -589,9 +502,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 11292993,
    "filtered_bytes": 3785074,
-   "read_s": 3.0,
-   "total_s": 3.9,
-   "max_rss_mb": 385,
+   "read_s": 3.4,
+   "total_s": 3.7,
+   "max_rss_mb": 322,
    "skipped": {
     "bad_geometry": 0
    }
@@ -601,9 +514,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 19474023,
    "filtered_bytes": 10769456,
-   "read_s": 11.9,
-   "total_s": 15.1,
-   "max_rss_mb": 734,
+   "read_s": 13.7,
+   "total_s": 14.7,
+   "max_rss_mb": 436,
    "skipped": {
     "bad_geometry": 1
    }
@@ -613,9 +526,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 50173441,
    "filtered_bytes": 22914771,
-   "read_s": 22.3,
-   "total_s": 28.5,
-   "max_rss_mb": 1158,
+   "read_s": 25.2,
+   "total_s": 27.1,
+   "max_rss_mb": 558,
    "skipped": {
     "bad_geometry": 0
    }
@@ -625,9 +538,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 38861030,
    "filtered_bytes": 20503872,
-   "read_s": 22.0,
-   "total_s": 27.6,
-   "max_rss_mb": 1109,
+   "read_s": 24.8,
+   "total_s": 26.6,
+   "max_rss_mb": 505,
    "skipped": {
     "bad_geometry": 0
    }
@@ -637,9 +550,9 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 418902904,
    "filtered_bytes": 175396510,
-   "read_s": 198.4,
-   "total_s": 261.4,
-   "max_rss_mb": 7441,
+   "read_s": 225.5,
+   "total_s": 245.0,
+   "max_rss_mb": 1265,
    "skipped": {
     "bad_geometry": 2
    }
