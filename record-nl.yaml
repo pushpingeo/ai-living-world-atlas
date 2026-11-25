@@ -1,0 +1,408 @@
+# Written by osm/record.py after each OpenStreetMap copy build (.github/workflows/osm.yml): one record per market
+# copy the atlas hosts in the R2 bucket atlas-data. Don't edit by hand; change osm/record.py instead.
+defaults:
+  publisher_type: civil-society
+sources:
+- kind: record
+  id: osm-copy-nl
+  title: 'OpenStreetMap copy for site checks: Netherlands (roads, rail, utilities, water, land use, community, buildings)'
+  publisher: OpenStreetMap contributors
+  publisher_type: civil-society
+  country: NL
+  abstract: 'A copy of the OpenStreetMap features that site screening asks about, for Netherlands, hosted by the atlas so
+    checks don''t depend on the public Overpass servers. Six files per Geofabrik extract, one per group: transport: main roads
+    (motorway, trunk, primary), railways and aerodromes; utilities: power lines, substations, pipelines and wind turbines;
+    water: water bodies (lakes, reservoirs, basins) and watercourses (rivers, streams, canals, ditches, drains); landuse:
+    residential land; community: schools, colleges and nurseries, and hospitals, clinics and care homes; buildings: every
+    building. The tags are the same ones Tobler''s Overpass queries use, so a lookup in the copy gives the same answer as
+    a live query, as of the copy''s data date. Areas are whole polygons, including multipolygon relations. Each file is FlatGeobuf
+    with a packed Hilbert R-tree, so a reader fetches only the parts near a site with HTTP range requests, and GeoParquet
+    1.1 with a bbox column for DuckDB or QGIS. Start from the manifest (this endpoint): it lists every extract with its bounding
+    box, data date and file paths (relative to the manifest), and the outline the copy covers, drawn about 1 km inside the
+    extracts so it never claims ground it doesn''t hold. Rebuilt weekly from Geofabrik. OpenStreetMap is mapped by volunteers:
+    coverage is good for roads, railways and power lines, and uneven for buildings and land use. A feature missing here may
+    exist on the ground.'
+  licence: Open Database License (ODbL) 1.0. © OpenStreetMap contributors (https://www.openstreetmap.org/copyright).
+  landing_page: https://www.openstreetmap.org/copyright
+  bbox:
+  - 3.2452
+  - 50.7586
+  - 7.2101
+  - 53.6473
+  concepts_hint:
+  - road
+  - rail
+  - port-airport
+  - power-line
+  - pipeline
+  - power-plant
+  - river
+  - settlement
+  - school
+  - health-facility
+  - building
+  endpoints:
+  - protocol: cloud
+    url: https://data.asktobler.com/osm/nl.json
+    format: FlatGeobuf and GeoParquet, with a JSON manifest
+    info:
+      manifest: https://data.asktobler.com/osm/nl.json
+      layout: '<market>.json is the manifest; files at <release>/<extract id>/<group>.fgb (and .parquet), relative to it.
+        Contract: docs/mcp-tools.md, Hosted OpenStreetMap copy.'
+      groups:
+        transport:
+        - main road
+        - railway
+        - aerodrome
+        utilities:
+        - power line
+        - substation
+        - pipeline
+        - wind turbine
+        water:
+        - water body
+        - watercourse
+        landuse:
+        - homes
+        community:
+        - school
+        - health care
+        buildings:
+        - building
+      release: '2026-11-25'
+      data_date: '2026-11-24'
+      data_date_source: OpenStreetMap replication time of the oldest Geofabrik extract in this release
+      data_as_of:
+        oldest: '2026-11-24T21:21:23Z'
+        newest: '2026-11-24T21:21:23Z'
+      extracts: 8
+      extracts_missing:
+      - friesland
+      - gelderland
+      - overijssel
+      - utrecht
+      features:
+        buildings: 7851381
+        community: 8838
+        landuse: 15423
+        transport: 64894
+        utilities: 13895
+        water: 378496
+      completeness: partial
+      completeness_note: complete for the extracts listed (every feature with these tags); OpenStreetMap itself is volunteer-mapped
+        and uneven, especially for buildings and land use. Extracts missing from a release are left out of its outline.
+      attribution: © OpenStreetMap contributors
+      terms: 'Open Database License 1.0: attribute OpenStreetMap contributors; a database made from it and shared must be
+        shared under the ODbL too. Maps and other produced works need only the attribution.'
+      refresh: weekly
+      coverage_outline:
+        type: MultiPolygon
+        coordinates:
+        - - - - 6.71
+              - 52.641
+            - - 6.613
+              - 52.683
+            - - 6.512
+              - 52.655
+            - - 6.508
+              - 52.624
+            - - 6.386
+              - 52.622
+            - - 6.325
+              - 52.679
+            - - 6.168
+              - 52.689
+            - - 6.133
+              - 52.748
+            - - 6.208
+              - 52.792
+            - - 6.137
+              - 52.853
+            - - 6.257
+              - 52.918
+            - - 6.337
+              - 52.899
+            - - 6.433
+              - 52.967
+            - - 6.37
+              - 53.075
+            - - 6.185
+              - 53.142
+            - - 6.295
+              - 53.338
+            - - 6.179
+              - 53.388
+            - - 6.353
+              - 53.439
+            - - 6.36
+              - 53.489
+            - - 6.405
+              - 53.503
+            - - 6.36
+              - 53.529
+            - - 6.33
+              - 53.647
+            - - 6.517
+              - 53.647
+            - - 6.922
+              - 53.449
+            - - 7.003
+              - 53.32
+            - - 7.182
+              - 53.324
+            - - 7.21
+              - 53.215
+            - - 7.172
+              - 53.135
+            - - 7.21
+              - 53.009
+            - - 7.082
+              - 52.853
+            - - 7.048
+              - 52.647
+            - - 6.71
+              - 52.641
+        - - - - 4.834
+              - 51.422
+            - - 4.846
+              - 51.484
+            - - 4.78
+              - 51.511
+            - - 4.641
+              - 51.429
+            - - 4.542
+              - 51.432
+            - - 4.55
+              - 51.481
+            - - 4.475
+              - 51.485
+            - - 4.384
+              - 51.453
+            - - 4.379
+              - 51.416
+            - - 4.423
+              - 51.369
+            - - 4.219
+              - 51.381
+            - - 4.229
+              - 51.353
+            - - 4.162
+              - 51.299
+            - - 3.886
+              - 51.207
+            - - 3.799
+              - 51.22
+            - - 3.796
+              - 51.26
+            - - 3.757
+              - 51.276
+            - - 3.591
+              - 51.312
+            - - 3.519
+              - 51.287
+            - - 3.519
+              - 51.255
+            - - 3.429
+              - 51.252
+            - - 3.368
+              - 51.312
+            - - 3.38
+              - 51.364
+            - - 3.245
+              - 51.483
+            - - 3.581
+              - 51.855
+            - - 3.365
+              - 51.946
+            - - 3.961
+              - 52.424
+            - - 3.915
+              - 52.449
+            - - 4.607
+              - 53.278
+            - - 5.046
+              - 53.136
+            - - 5.233
+              - 52.868
+            - - 5.373
+              - 52.757
+            - - 5.747
+              - 52.83
+            - - 5.917
+              - 52.743
+            - - 5.953
+              - 52.699
+            - - 5.932
+              - 52.667
+            - - 5.989
+              - 52.644
+            - - 5.774
+              - 52.613
+            - - 5.773
+              - 52.576
+            - - 5.848
+              - 52.544
+            - - 5.838
+              - 52.482
+            - - 5.736
+              - 52.407
+            - - 5.584
+              - 52.369
+            - - 5.528
+              - 52.281
+            - - 5.405
+              - 52.259
+            - - 5.337
+              - 52.299
+            - - 5.264
+              - 52.289
+            - - 5.188
+              - 52.186
+            - - 5.05
+              - 52.175
+            - - 5.033
+              - 52.201
+            - - 5.06
+              - 52.24
+            - - 5.02
+              - 52.311
+            - - 4.791
+              - 52.234
+            - - 4.797
+              - 52.196
+            - - 4.878
+              - 52.159
+            - - 4.802
+              - 52.142
+            - - 4.82
+              - 52.072
+            - - 4.849
+              - 52.064
+            - - 4.795
+              - 52.013
+            - - 4.838
+              - 52.009
+            - - 4.818
+              - 51.99
+            - - 4.875
+              - 51.931
+            - - 4.926
+              - 51.939
+            - - 4.985
+              - 51.896
+            - - 5.005
+              - 51.806
+            - - 5.127
+              - 51.768
+            - - 5.133
+              - 51.731
+            - - 5.301
+              - 51.729
+            - - 5.361
+              - 51.749
+            - - 5.408
+              - 51.812
+            - - 5.591
+              - 51.821
+            - - 5.752
+              - 51.747
+            - - 5.891
+              - 51.768
+            - - 6.024
+              - 51.717
+            - - 6.027
+              - 51.671
+            - - 6.105
+              - 51.652
+            - - 6.088
+              - 51.601
+            - - 6.193
+              - 51.524
+            - - 6.217
+              - 51.365
+            - - 6.068
+              - 51.244
+            - - 6.077
+              - 51.167
+            - - 6.141
+              - 51.18
+            - - 6.155
+              - 51.158
+            - - 5.994
+              - 51.09
+            - - 5.954
+              - 51.042
+            - - 5.914
+              - 51.073
+            - - 5.86
+              - 51.051
+            - - 5.894
+              - 50.969
+            - - 6.01
+              - 50.975
+            - - 6.014
+              - 50.93
+            - - 6.08
+              - 50.915
+            - - 6.07
+              - 50.854
+            - - 6.016
+              - 50.852
+            - - 6.015
+              - 50.82
+            - - 5.969
+              - 50.805
+            - - 6.016
+              - 50.762
+            - - 5.81
+              - 50.764
+            - - 5.774
+              - 50.79
+            - - 5.695
+              - 50.765
+            - - 5.706
+              - 50.809
+            - - 5.659
+              - 50.826
+            - - 5.651
+              - 50.866
+            - - 5.765
+              - 50.948
+            - - 5.739
+              - 50.967
+            - - 5.778
+              - 51.054
+            - - 5.839
+              - 51.095
+            - - 5.823
+              - 51.114
+            - - 5.857
+              - 51.146
+            - - 5.836
+              - 51.169
+            - - 5.568
+              - 51.228
+            - - 5.515
+              - 51.302
+            - - 5.416
+              - 51.27
+            - - 5.24
+              - 51.269
+            - - 5.243
+              - 51.312
+            - - 5.141
+              - 51.324
+            - - 5.083
+              - 51.394
+            - - 5.109
+              - 51.437
+            - - 5.039
+              - 51.494
+            - - 4.921
+              - 51.403
+            - - 4.834
+              - 51.422
+      coverage_outline_note: simplified (0.02 degrees) from the manifest's outline; test coverage against the manifest's
+      status_note: 4 extracts didn't build in release 2026-11-25; the copy's outline leaves them out
+  - protocol: landing
+    url: https://www.openstreetmap.org/copyright
