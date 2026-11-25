@@ -23,6 +23,24 @@ FEDERAL_LABS = re.compile(r"national (?:renewable energy|energy technology) lab|
                           r"\blanl\b|\bsandia\b|argonne|\bnoaa\b.*lab", re.I)
 
 
+def recognise(ds: pd.DataFrame) -> pd.DataFrame:
+    """Re-read the dataset's licence text with the current rule, so a rule fix reaches every wave without a recrawl.
+    Before 25 Nov 2026 the crawl missed licences given as URLs (creativecommons.org/licenses/by/4.0/,
+    .../publicdomain/zero/1.0/, dcat-ap.de dl-by-de) and counted CC BY-NC and BY-ND as open.
+    Upgrade-only, except where the text names an NC or ND term: a crawled `open_licence` can come from a layer's own
+    licence text, which the dataset row doesn't carry, so a dataset text that names nothing open doesn't undo it."""
+    from .quality import is_open_licence, names_nc_or_nd
+    if not {"licence", "open_licence"} <= set(ds.columns):
+        return ds
+    lic = ds["licence"].fillna("").astype(str)
+    old = ds["open_licence"].fillna(False).astype(bool)
+    up = lic.map(is_open_licence) & ~old
+    down = old & lic.map(names_nc_or_nd)
+    print(f"licences: rule re-read: {int(up.sum()):,} now open; {int(down.sum()):,} no longer open (NC or ND named)",
+          flush=True)
+    return ds.assign(open_licence=(old | up) & ~down)
+
+
 def infer(ds: pd.DataFrame) -> pd.DataFrame:
     if not {"publisher_type", "country", "licence", "open_licence"} <= set(ds.columns):
         return ds

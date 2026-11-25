@@ -20,8 +20,29 @@ AUTHORITY = {
 }
 
 OPEN_LICENCES = re.compile(
-    r"open government licen[cs]e|\bOGL\b|creative commons|\bCC[- ]?BY\b|\bCC0\b|cc-by|odbl|open database licen|"
-    r"\bPDDL\b|public domain|licence ouverte|datenlizenz deutschland|dl-de", re.I)
+    r"open government licen[cs]e|\bOGL\b|creative ?commons|\bCC[- ]?BY\b|\bCC[- ]?0\b|cc-by|odbl|open database licen|"
+    r"\bPDDL\b|public ?domain|publiek ?domein|licence ouverte|datenlizenz deutschland|dl-de|"
+    r"opendatacommons\.org/licenses/(odbl|by|pddl)|\bODC[- ]BY\b|etalab|dl-(by|zero)-de|data licen[cs]e germany|"
+    r"opendefinition\.org/licenses/(cc-zero|cc-by|odc)|namensnennung", re.I)
+# Non-commercial and no-derivatives terms make a licence not open, even when it is a Creative Commons one
+# (CC BY-NC, CC BY-ND, Datenlizenz "nutzungsbeschränkt"). Checked on the same text, after OPEN_LICENCES.
+NOT_OPEN = re.compile(
+    r"\bby-nc|\bby-nd|\bnc-nd|\bnc-sa|non-?commercial|noncommercial|no ?deriv|noderivs|\bNC\b(?=[ -]?(?:\d|SA|ND|licen))|"
+    r"nutzungsbeschr[aä]nkt|personal,? non-commercial", re.I)
+
+
+# "for commercial and non-commercial use" grants both: not an NC term
+BOTH_USES = re.compile(r"(?:commercial|kommerziell\w*)\s+(?:and|or|und|oder)\s+(?:non|nicht)[- ]?(?:commercial|kommerziell\w*)", re.I)
+
+
+def names_nc_or_nd(text: str) -> bool:
+    return bool(NOT_OPEN.search(BOTH_USES.sub(" ", str(text or ""))))
+
+
+def is_open_licence(text: str) -> bool:
+    """Open per the Open Definition: open licence named (as words or as its URL), and no NC or ND term."""
+    t = str(text or "")
+    return bool(OPEN_LICENCES.search(t)) and not names_nc_or_nd(t)
 
 JUNK_TITLE = [
     (re.compile(r"\b(test|testing|untitled|temp|tmp|draft|demo|sample|backup|copy of|do not use)\b", re.I), "test-or-draft"),
@@ -161,7 +182,7 @@ def score(row: dict) -> dict:
     chk = row.get("check_status") or "unchecked"
     liveness = 10 + {"ok": 10, "empty": 5, "unchecked": 5, "fail": 0}.get(chk, 0)
 
-    licence = 10 if OPEN_LICENCES.search(lic) else 5 if lic.strip() else 0
+    licence = 10 if is_open_licence(lic) else 5 if lic.strip() else 0
 
     flags = [name for rx, name in JUNK_TITLE if rx.search(title)]
     if re.match(r"^(topp|sf|tiger|nurc|cite|it\.geosolutions):", str(row.get("layer_name") or ""), re.I) and "demo-data" not in flags:
@@ -171,6 +192,6 @@ def score(row: dict) -> dict:
     return authority_pass({
         "q_authority": authority, "q_metadata": metadata, "q_liveness": liveness, "q_licence": licence,
         "q_total": total, "q_flags": flags, "q_pass": passes, "publisher_type_resolved": ptype,
-        "display_title": title, "q_open_licence": bool(OPEN_LICENCES.search(lic)), "q_abstract_len": len(abstract), "q_title_codelike": codelike(title),
+        "display_title": title, "q_open_licence": is_open_licence(lic), "q_abstract_len": len(abstract), "q_title_codelike": codelike(title),
         "q_pass_rule": "bar" if passes else "", "check_status": chk,
     })

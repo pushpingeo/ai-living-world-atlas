@@ -707,3 +707,20 @@ on a real site. Rob agreed the split (design: project doc `claude/osm-copy-desig
   (Tobler would fall back to Overpass). `osm/health.py`, run nightly in the sweep, warns at a manifest over 10 days old or
   files over 23 days old, and reads the rule back from the Cloudflare API so a changed rule shows up too.
 
+
+## 2026-11-25 (night): open licences given as URLs
+- **Bug:** `OPEN_LICENCES` matched "creative commons" and "public domain" only with spaces, so licences given as URLs
+  (`https://creativecommons.org/licenses/by/4.0/`, `.../publicdomain/zero/1.0/deed.nl`, dcat-ap.de `dl-by-de`) weren't
+  open. Most of PDOK, Australian state portals and NZ councils give licences this way. It also counted CC BY-NC and
+  BY-ND as open.
+- **Fix:** `quality.is_open_licence`: open licence named (words or URL; adds ODC, Etalab, Datenlizenz URLs, "publiek
+  domein", "Namensnennung") and no NC or ND term ("commercial and non-commercial" doesn't count as NC). Used by the
+  crawl's score, and at publish time by `licences.recognise` in combine.py, so every wave gets it without a recrawl.
+- **Upgrade-only at publish,** except where the text names NC or ND: a crawled `open_licence` can come from a layer's
+  own licence text, which the dataset row doesn't carry (e.g. "© State of Queensland" rows), so a dataset text that names
+  nothing open doesn't undo it.
+- **Effect on the published set (local build):** 14,432 datasets now open, 296 no longer open (NC or ND named). Mostly
+  AU, NZ and NL. Curated records unchanged. Known small miss: 29 Brandenburg datasets credit a colour scheme as
+  CC BY-NC-ND while the data is dl-de/by; they read as not open (wrong in the safe direction).
+- **Not changed:** `q_pass` in the wave files. The crawl gave these datasets 5 licence points instead of 10, so a few
+  near the bar still fail; they'll pass on their next crawl.

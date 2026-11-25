@@ -15,6 +15,7 @@ import pyarrow.parquet as pq
 from .hand_fixes import apply as fix_concepts
 from .hand_fixes import publisher_types
 from .licences import infer as infer_licences
+from .licences import recognise as recognise_licences
 from .licences import overrides as licence_overrides
 from .sampling import add_sample
 from .titles import fix_titles
@@ -132,6 +133,7 @@ def main():
     if a.liveness and (Path(a.liveness) / "state.parquet").exists():
         ds = apply_liveness(ds, Path(a.liveness))
     ds, splits = fix_titles(ds)  # status words from service names; live and removed services split apart
+    ds = recognise_licences(ds)  # current open-licence rule over every wave's licence text
     ds = infer_licences(ds)  # e.g. US federal works; the wave files keep what was crawled
     ds = licence_overrides(ds)  # hand-recorded licences, attribution lines and terms (vocab/licence_overrides.yaml)
     ds = add_sample(ds)  # capability "sample": endpoints that return a value at a point (vocab/sample_rules.yaml)
