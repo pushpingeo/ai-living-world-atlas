@@ -36,7 +36,9 @@ from urllib.parse import urlsplit
 import pandas as pd
 
 from . import crawl_arcgis, crawl_ogc
+from .datasets import CURATED_LAYER
 from .net import Client
+from .record import norm_url
 
 DUE_OK, DUE_FAIL, DUE_RETIRED = 7, 3, 28
 RETIRE_CHECKS, RETIRE_DAYS, RETIRE_DAYS_HOST = 3, 14, 30
@@ -62,6 +64,16 @@ def _norm(s) -> str:
     return " ".join(str(s or "").split())
 
 
+def match_key(e: dict) -> str:
+    """How an endpoint is found among the layers a visit returns. A crawled endpoint by its uid. A curated record's
+    endpoint has layer name "<record id>:<n>" (atlas/datasets.py), so its uid never matches a crawled layer's: before
+    26 Nov every curated ArcGIS/OGC endpoint came back "missing" or "unmatched" on its first visit and would have been
+    retired. It is found by its layer address instead."""
+    if CURATED_LAYER.match(str(e.get("layer_name") or "")):
+        return "url:" + norm_url(e["url"])
+    return e["uid"]
+
+
 def population(datasets: str, layers: str) -> pd.DataFrame:
     """Every published endpoint with the title/description it was published with."""
     ds = pd.read_parquet(datasets, columns=["dataset_id", "endpoints"])
@@ -70,8 +82,8 @@ def population(datasets: str, layers: str) -> pd.DataFrame:
         for e in json.loads(eps):
             if "manual_check" in (e.get("info") or ""):
                 continue  # a curated record whose host refuses GitHub's runners; checked by hand (atlas/records.py)
-            rows.append((e["uid"], did, e.get("service_url") or e["url"], e["protocol"]))
-    pop = pd.DataFrame(rows, columns=["uid", "dataset_id", "service_url", "protocol"]).drop_duplicates("uid")
+            rows.append((e["uid"], did, e.get("service_url") or e["url"], e["protocol"], match_key(e)))
+    pop = pd.DataFrame(rows, columns=["uid", "dataset_id", "service_url", "protocol", "match_key"]).drop_duplicates("uid")
     cols = ["uid", "title", "abstract"]
     ly = pd.read_parquet(layers, columns=cols).drop_duplicates("uid")
     pop = pop.merge(ly.rename(columns={"title": "orig_title", "abstract": "orig_abstract"}), on="uid", how="left")
@@ -230,7 +242,9 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
 def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
     """Fold today's results into the per-endpoint state. Returns (state, today's per-endpoint outcomes, retag ids)."""
     t = today.isoformat()
-    st = pop[["uid", "dataset_id", "service_url", "protocol", "orig_title", "orig_abstract"]].merge(
+    if "match_key" not in pop.columns:
+        pop = pop.assign(match_key=pop["uid"])
+    st = pop[["uid", "dataset_id", "service_url", "protocol", "match_key", "orig_title", "orig_abstract"]].merge(
         st.drop(columns=["dataset_id", "service_url", "protocol"]), on="uid", how="left")
     for col in ("status", "detail", "last_checked", "last_ok", "first_fail", "retired_at", "data_check", "data_detail",
                 "data_checked", "cur_title", "cur_abstract", "text_changed", "orig_title", "orig_abstract", "text_seen",
@@ -256,9 +270,10 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
         svc_returned[(svc, proto)] = len(layers)
         for L in layers:
             found[L.uid] = L
+            found["url:" + norm_url(L.layer_url)] = L
         if data:
             data_by_uid[data[0]] = (data[1], data[2])
-    known = st.groupby(["service_url", "protocol"])["uid"].apply(list).to_dict()
+    known = st.groupby(["service_url", "protocol"])["match_key"].apply(list).to_dict()
     for k, uids in known.items():
         svc_matched[k] = sum(u in found for u in uids)
 
@@ -276,7 +291,7 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
         if status == "ok":
             if r["protocol"] in PLAIN:
                 s = "ok"
-            elif r["uid"] in found:
+            elif r["match_key"] in found:
                 s = "ok"
             elif svc_matched[k] > 0 or svc_returned[k] == 0:
                 s, detail = "missing", "layer no longer listed in the service"
@@ -298,14 +313,18 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
             need = RETIRE_DAYS_HOST if s == "host-down" else RETIRE_DAYS
             if not r["retired"] and r["fails_in_row"] >= RETIRE_CHECKS and span >= need:
                 r["retired"], r["retired_at"] = True, t
-        if r["uid"] in data_by_uid:
-            r["data_check"], r["data_detail"], r["data_checked"] = data_by_uid[r["uid"]][0], str(data_by_uid[r["uid"]][1])[:120], t
+        L = found.get(r["match_key"])
+        du = L.uid if L is not None else r["uid"]
+        if du in data_by_uid:
+            r["data_check"], r["data_detail"], r["data_checked"] = data_by_uid[du][0], str(data_by_uid[du][1])[:120], t
+        if r["match_key"] != r["uid"]:
+            outcomes.append((r["uid"], r["status"]))
+            continue  # a curated record's text is ours, not the service's: no publisher-edit tracking
         # publisher edits to the title or description. The first visit records a baseline of what the service
         # says (the crawl's stored text can differ for reasons that aren't edits: a catalogue title used in its
         # place, accents stripped by a server, parser changes). Later visits compare against that baseline.
         # A change is carried only for the parts whose stored text came from the service, because those are the
         # only ones it makes sense to replace.
-        L = found.get(r["uid"])
         if L is not None:
             nt, na = _norm(L.title), _norm(L.abstract)
             h = hashlib.sha1(f"{nt}\x1f{na}".encode()).hexdigest()[:16]

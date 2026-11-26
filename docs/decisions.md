@@ -757,3 +757,19 @@ docs/mcp-tools.md (25 Nov night) lists every record id.
 - Probe rounds 45-51. UK past land use (Tobler's 24 Nov request) is not built: BGS 50k artificial ground's licence
   statements conflict (OGL on one BGS record for the WMS, "personal, non-commercial" on data.gov.uk, BGS licence for the
   vector) and no official EA aquifer designation service was found (council and consultant copies only). Rob's call.
+
+## 2026-11-26 (evening): the sweep finds curated endpoints by their layer address
+
+**Bug, found while answering Tobler's flood zones request.** A crawled endpoint's uid is a hash of its layer URL and
+real layer name; a curated record's endpoint is named `<record id>:<n>` (so its record id stays fixed), which gives it
+a uid no crawled layer can have. The sweep looked endpoints up by uid, so every curated ArcGIS and OGC endpoint came
+back "missing" (when the service also had a crawled copy that matched) or "unmatched" (otherwise) on its first visit.
+On 26 Nov that was 51 missing and 60 unmatched of 341 curated endpoints, including the England flood zones, the
+protected sites, the heritage layers, SEPA flooding and the storm overflows. "Missing" counts as a failure: the first
+retirements (NI Ramsar, failing since 23 Nov) would have come about 7 Dec, and Tobler would have lost them from its checks.
+
+**Fix:** `match_key` in atlas/sweep.py. A curated endpoint is found by `norm_url` of its layer URL, a crawled one by
+uid as before. Curated endpoints now also get the weekly data check credited, and are left out of publisher-text
+tracking, since their title and description are ours. Tested by checking 33 curated ArcGIS Online endpoints live: before,
+33 unmatched and no data checks; after, 33 ok, 33 data checks ok, no retags; applied over the 26 Nov state, the failing
+ones reset to 0. The next visit (failing ones are due every 3 days) clears them.
