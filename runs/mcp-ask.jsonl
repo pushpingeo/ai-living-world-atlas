@@ -1,23 +1,4 @@
-# 25 Nov night: NL and AU pollution records, the Worker's ogc-api-features and projected-CRS guard; regressions
-{"label": "NL WKPB Wbb (OGC API), Utrecht", "tool": "fetch_features", "args": {"id": "231d99a8a7586e28", "bbox": [4.9, 51.95, 5.3, 52.15], "limit": 20, "include_geometry": true}}
-{"label": "NL RIVM releases, Rotterdam port", "tool": "fetch_features", "args": {"id": "73963d5137969e18", "bbox": [4.0, 51.85, 4.5, 52.0], "limit": 20, "include_geometry": true}}
-{"label": "NL groundwater protection, Overijssel", "tool": "fetch_features", "args": {"id": "3405c2be84260997", "bbox": [6.0, 52.5, 6.5, 52.9], "limit": 20, "include_geometry": true}}
-{"label": "NL waterwingebied", "tool": "fetch_features", "args": {"id": "b668c500d2cd403f", "bbox": [6.0, 52.5, 6.5, 52.9], "limit": 20, "include_geometry": true}}
-{"label": "NL bore-free zones", "tool": "fetch_features", "args": {"id": "5f87eb3c3010bb00", "bbox": [5.0, 51.4, 6.0, 52.0], "limit": 20, "include_geometry": true}}
-{"label": "NL Zeeland landfills", "tool": "fetch_features", "args": {"id": "b822efc24a0a7512", "bbox": [3.5, 51.3, 4.2, 51.6], "limit": 20, "include_geometry": true}}
-{"label": "NL Noord-Holland landfills", "tool": "fetch_features", "args": {"id": "56b77c065cb619e9", "bbox": [4.5, 52.3, 4.9, 52.5], "limit": 20, "include_geometry": true}}
-{"label": "AU VIC PSR points, Melbourne", "tool": "fetch_features", "args": {"id": "ecfa7155cd9c6baf", "bbox": [144.85, -37.9, 145.1, -37.7], "limit": 20, "include_geometry": true}}
-{"label": "AU VIC PSR areas, Melbourne", "tool": "fetch_features", "args": {"id": "ef7d25de438c6e16", "bbox": [144.85, -37.9, 145.1, -37.7], "limit": 20, "include_geometry": true}}
-{"label": "AU NSW notified, Sydney", "tool": "fetch_features", "args": {"id": "72bdef1614fc2fda", "bbox": [151.1, -33.95, 151.25, -33.8], "limit": 20, "include_geometry": true}}
-{"label": "AU NSW CLM notices, Sydney", "tool": "fetch_features", "args": {"id": "7c8ed69c4821d0ef", "bbox": [151.0, -34.0, 151.3, -33.7], "limit": 20, "include_geometry": true}}
-{"label": "AU NSW licences, Sydney", "tool": "fetch_features", "args": {"id": "dda78b96ce8f48f7", "bbox": [151.1, -33.95, 151.25, -33.8], "limit": 20, "include_geometry": true}}
-{"label": "AU QLD EAs, Brisbane", "tool": "fetch_features", "args": {"id": "0ae1001313dcb65a", "bbox": [152.9, -27.6, 153.2, -27.3], "limit": 20, "include_geometry": true}}
-{"label": "AU TAS EPA sites, Hobart", "tool": "fetch_features", "args": {"id": "36077cbc2b19b3af", "bbox": [147.1, -43.0, 147.5, -42.7], "limit": 20, "include_geometry": true}}
-{"label": "AU GA waste, Perth", "tool": "fetch_features", "args": {"id": "3e2cf0ee7b684466", "bbox": [115.7, -32.1, 116.1, -31.8], "limit": 20, "include_geometry": true}}
-{"label": "AU GA mine waste, Pilbara", "tool": "fetch_features", "args": {"id": "7d565ad35e8e82b5", "bbox": [118, -23, 120, -21], "limit": 20, "include_geometry": true}}
-{"label": "AU NPI hosted, Newcastle NSW", "tool": "fetch_features", "args": {"id": "22b2d6f7fc349934", "bbox": [151.6, -33.0, 151.9, -32.8], "limit": 20, "include_geometry": true}}
-{"label": "US UST releases, Houston (regression)", "tool": "fetch_features", "args": {"id": "053f4bf868642493", "bbox": [-95.45, 29.7, -95.3, 29.8], "limit": 20, "include_geometry": true}}
-{"label": "UK SEPA (regression, existing record)", "tool": "fetch_features", "args": {"id": "b32daeca2c368112", "bbox": [-3.8, 55.95, -3.6, 56.05], "limit": 20, "include_geometry": true}}
-{"label": "get_dataset WKPB (query_url, info.query)", "tool": "get_dataset", "args": {"id": "231d99a8a7586e28"}}
-{"label": "find pollution NL, Rotterdam", "tool": "find_datasets", "args": {"concept": "pollution-source", "lon": 4.3, "lat": 51.9, "radius_km": 10, "limit": 10}}
-{"label": "find contaminated-land, Sydney", "tool": "find_datasets", "args": {"concept": "contaminated-land", "lon": 151.2, "lat": -33.87, "radius_km": 5, "limit": 10}}
+# 26 Nov morning: the OpenStreetMap copy record (osm-copy-uk) after its first atlas publish
+{"label": "OSM copy by id", "tool": "get_dataset", "args": {"id": "0e3b9e398d081f86"}}
+{"label": "OSM copy by text, Linlithgow", "tool": "find_datasets", "args": {"text": "OpenStreetMap copy", "lon": -3.6, "lat": 55.97, "radius_km": 5, "limit": 5}}
+{"label": "road near Linlithgow (does the copy show up)", "tool": "find_datasets", "args": {"concept": "road", "lon": -3.6, "lat": 55.97, "radius_km": 5, "limit": 20}}
