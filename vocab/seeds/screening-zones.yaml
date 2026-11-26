@@ -19,6 +19,10 @@
 # - Not yet: RIVM's Netkaart (overhead power lines with the distance within which to calculate the magnetic field zone,
 #   Public Domain Mark, WFS layer nl:netkaart_actuele_versie_atlas_rivm on data.rivm.nl/geo/nl): that workspace didn't answer
 #   GitHub in probe rounds 54-55 (60 s timeouts) although data.rivm.nl/geo/inspire did on 25 Nov. Try again.
+#
+# FEMA: hazards.fema.gov's robots.txt disallows automated checks, so the crawl and sweep don't fetch its data (the record says
+# "checked by hand"). Checked by probe round 54: a box query over Houston returned zones X (0.2%) and AE in 0.09 s. A whole-
+# layer count times out, so never count it. Same footing as the EA flood zones, whose host also disallows data checks.
 defaults:
   country: GB
 sources:
