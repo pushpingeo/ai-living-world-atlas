@@ -106,8 +106,9 @@ Workspace notes:
 - **The OSM copy's files are read by Tobler's page directly**, not through the MCP: the layout and manifest format in
   `docs/mcp-tools.md` are as binding as the tool fields. The manifest goes up last; never overwrite a release's files.
 - **Geofabrik throttles heavy downloaders.** On 25 Nov, after about four UK builds in a day between the two repos, it
-  refused connections (HTTP 000) for 4 of NL's 12 extracts and 8 of the UK's 50. The build now gives each refused
-  extract a second try after 3 minutes; an extract that fails twice is left out of the release and its outline.
+  refused connections (HTTP 000) for 4 of NL's 12 extracts and 8 of the UK's 50. Since 26 Nov the build backs off: a
+  refused extract is tried again after about 15 minutes, then 30 (plus up to a minute of jitter; `RETRY_WAITS` in the
+  build step), and one that fails three times is left out of the release and its outline. Worst case adds ~47 minutes.
   Don't run several builds back to back. **26 Nov:** the NL dry build (the day's second build, after the UK publish)
   still lost Flevoland and Noord-Holland on both tries, so the throttle seems to last longer than 3 minutes or to count
   over more than a day.
@@ -164,7 +165,8 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
 3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **NL dry build, 26 Nov 07:23-07:36** (run
    45774894317): 10 of 12 extracts, Flevoland and Noord-Holland refused twice (HTTP 000); 10.4M features (9.8M
    buildings), 3.5 GB FlatGeobuf, 1.4 GB GeoParquet, peak memory under 1 GB per extract. Don't publish NL without
-   Noord-Holland (Amsterdam): rerun the dry build on a quiet day first. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
+   Noord-Holland (Amsterdam): rerun the dry build on a quiet day first (27 Nov
+   morning, with the new backoff). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
    30 days after upload. The prefix catches only the dated release folders, never the manifests (`osm/<market>.json`).

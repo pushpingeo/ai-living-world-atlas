@@ -158,13 +158,20 @@ jobs:
           while IFS='|' read -r id url; do
             echo "::group::$id"; one "$id" "$url" || { [ $? = 2 ] && echo "$id|$url" >> ../retry.txt; }; echo "::endgroup::"
           done < ../my-regions.txt
-          # Downloads Geofabrik refused: one more go each, after a pause (25 Nov: it refused 4 of NL's 12 for a while).
-          if [ -s ../retry.txt ]; then
-            sleep 180
+          # Downloads Geofabrik refused: two more goes each, after longer pauses (backoff). 25 Nov it refused 4 of NL's 12
+          # for a while; 26 Nov a 3-minute pause wasn't enough for 2 of NL's 12. A little jitter so the shards, which all
+          # finish their first pass at about the same time, don't come back to Geofabrik in the same second.
+          for wait in ${RETRY_WAITS:-900 1800}; do
+            [ -s ../retry.txt ] || break
+            sleep $(( wait + RANDOM % 60 ))
+            mv ../retry.txt ../retry-prev.txt; : > ../retry.txt
             while IFS='|' read -r id url; do
-              echo "::group::$id (second try)"; one "$id" "$url" || echo "::warning::$id: download failed twice; left out of this release"; echo "::endgroup::"
-            done < ../retry.txt
-          fi
+              echo "::group::$id (after ${wait}s)"; one "$id" "$url" || { [ $? = 2 ] && echo "$id|$url" >> ../retry.txt; }; echo "::endgroup::"
+            done < ../retry-prev.txt
+          done
+          while IFS='|' read -r id url; do
+            echo "::warning::$id: download failed three times; left out of this release"
+          done < ../retry.txt
       - name: Upload to R2 (S3 API, multipart for big files)
         if: env.PUBLISH == 'yes'
         run: |
