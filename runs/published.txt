@@ -9,6 +9,7 @@ spike-uscontamination
 spike-nlpollution
 spike-aupollution
 spike-ukwaterpeat
+spike-zones
 spike-emodnet
 spike-gb
 spike-global

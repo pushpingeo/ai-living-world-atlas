@@ -1306,3 +1306,28 @@ rules:
     attribution: "National Pollutant Inventory, Australian Government Department of Climate Change, Energy, the Environment and Water"
     terms: "The business name, ABN, street address and website are left out of the atlas copy (some facilities are family businesses or farms)."
     source: data.gov.au package npi, licence field, read 25 Nov 2026 (probe round 45)
+  # Screening zones (vocab/seeds/screening-zones.yaml), Tobler's requests of 26 Nov 2026.
+  - host: www.hse.gov.uk
+    layers: '^uk-hse-consultation-zones:'
+    licence: "Not available for re-use: HSE makes the zones available to planning authorities through its Planning Advice Web App, not as a published dataset."
+    open: false
+    terms: "A record of a dataset that isn't published. A check should report it as not available, never as none."
+    source: HSE Planning Advice Web App page (answers GitHub, probe round 54) and the HSE Land Use Planning Data record on data.gov.uk, 26 Nov 2026
+  - host: api.pdok.nl
+    layers: '^nl-rvo-natura2000:'
+    licence: "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), stated on the PDOK OGC API"
+    open: true
+    attribution: "RVO"
+    source: PDOK OGC API collections document (license link), probe round 54, 26 Nov 2026
+  - host: hazards.fema.gov
+    layers: '^us-fema-nfhl-flood-hazard-zones:'
+    licence: "US federal government work: public domain in the US (inferred, 17 U.S.C. §105; not stated by the publisher)"
+    open: true
+    attribution: "FEMA National Flood Hazard Layer"
+    source: the service states no licence (copyrightText empty, probe round 54); inferred under docs/us-licences.md
+  - host: geopub.epa.gov
+    layers: '^us-epa-sole-source-aquifers:'
+    licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+    open: true
+    attribution: "U.S. EPA"
+    source: EPA's public domain statement as used for the 24 Nov EPA records; the layer credits "Data.gov" (probe round 54)

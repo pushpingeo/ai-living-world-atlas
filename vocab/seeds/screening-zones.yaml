@@ -1,0 +1,204 @@
+# Screening zones (Tobler's requests of 26 Nov 2026, from the project doc claude/research-asset-reaches.md, section 3):
+# published zones a site check asks "is the site inside?" of. Same shape as the other curated packs: every endpoint's info
+# carries nation, completeness and completeness_note. Written from probe rounds 54-55 (the workspace can't reach these hosts).
+#
+# info.access: "restricted" (new, 26 Nov) marks a record for data that exists but isn't published for re-use, so a check can
+# say "not available" instead of reading silence as "none". Such a record has a landing endpoint only and is never crawled.
+#
+# Not here, and why (docs/mcp-tools.md has the note for Tobler):
+# - Already curated: England's Flood Map for Planning (uk-ea-flood-zones, the current combined Flood Zones 2 and 3 dataset; the
+#   retired separate FZ2/FZ3 datasets were never in the atlas), England's merged SPZs (uk-ea-source-protection-zones), the
+#   SSSI IRZ decoding (vocab/sssi_irz_codes.json).
+# - Already crawled and passing: Victoria's Special Water Supply Catchment Areas (a404a7c53842294a) and Extractive Industry
+#   Interest Areas (6240e2d57c2d6319), both Victorian Government on Mapshare; US state wellhead protection layers (MN, MA, OK,
+#   MI, DE, ND and several counties), waiting on which states Tobler wants first.
+# - No service found: Dutch radar disturbance areas (a map in the Omgevingsregeling and RVO's Luchtvaartbeperkingenkaart viewer);
+#   Basisnet attention areas (IPLO, 26 Nov: the Basisnet "is not yet geometrically bounded", so they stay a computed 30 m / 200 m
+#   along the routes); Victoria's wind energy facility exclusion areas (planning-scheme rules, clause 52.32, no single layer);
+#   a national UK aerodrome safeguarding layer (maps sit with councils, per aerodrome).
+# - Not yet: RIVM's Netkaart (overhead power lines with the distance within which to calculate the magnetic field zone,
+#   Public Domain Mark, WFS layer nl:netkaart_actuele_versie_atlas_rivm on data.rivm.nl/geo/nl): that workspace didn't answer
+#   GitHub in probe rounds 54-55 (60 s timeouts) although data.rivm.nl/geo/inspire did on 25 Nov. Try again.
+defaults:
+  country: GB
+sources:
+- kind: record
+  id: uk-hse-consultation-zones
+  title: HSE consultation zones round major hazard sites and pipelines, Great Britain (restricted, not available as data)
+  publisher: Health and Safety Executive (HSE)
+  publisher_type: central-gov
+  country: GB
+  abstract: 'HSE draws consultation zones (inner, middle and outer) round major hazard sites and major accident hazard
+    pipelines, and councils consult HSE on developments inside them that would bring more people near the hazard. The zones
+    are not published as open data: HSE gives them to planning authorities through its Planning Advice Web App, and developers
+    can use the same app to check whether a site is inside a zone (HSE says this check is free; HSE''s advice on a proposal
+    is charged). This record has no data endpoint on purpose. A check that needs these zones should say they are not available
+    from open data, and never that there are none. A curated record for site screening (Tobler, 26 Nov 2026).'
+  licence: 'Not available for re-use: HSE makes the zones available to planning authorities through its Planning Advice Web
+    App, not as a published dataset.'
+  landing_page: https://www.hse.gov.uk/landuseplanning/planning-advice-web-app.htm
+  bbox:
+  - -8.65
+  - 49.86
+  - 1.77
+  - 60.86
+  geometry_type: polygon
+  concepts_hint:
+  - pipeline
+  - screening-zones-pack
+  endpoints:
+  - protocol: landing
+    url: https://www.hse.gov.uk/landuseplanning/planning-advice-web-app.htm
+    info:
+      access: restricted
+      access_note: HSE gives the zones to planning authorities through its Planning Advice Web App; developers can check a
+        site there themselves. Not published as data.
+      how_to_check: https://www.hse.gov.uk/landuseplanning/planning-advice-web-app.htm
+      nation: Great Britain
+      completeness: none
+      completeness_note: the zones exist for every major hazard site and pipeline, but none of them is published as data
+- kind: record
+  id: nl-rvo-natura2000
+  title: Natura 2000 sites, Netherlands (RVO)
+  publisher: Rijksdienst voor Ondernemend Nederland (RVO)
+  publisher_type: central-gov
+  country: NL
+  abstract: 'The Dutch Natura 2000 network: sites designated under the Habitats Directive (HR), the Birds Directive (VR) or
+    both (VR+HR), on land and at sea out to the North Sea EEZ (Doggerbank, Noordzeekustzone, Voordelta). One area can have more than
+    one feature where parts fall under different directives, so count areas by nr. naam_n2k is the site name; beschermin
+    the directive; sitecode_h and sitecode_v the EU site codes; status the designation decision. Fields: name field naam_n2k,
+    code field nr, class field beschermin (HR, VR, VR+HR, "HR groeve" for the four quarry sites). 209 features for 162 areas. Completeness: complete (every Dutch Natura 2000 site). Served by PDOK
+    through OGC API Features. A curated record for Netherlands site screening (Tobler, 26 Nov 2026): the publisher''s own
+    service, checked to return lon/lat features for a bounding box.'
+  licence: Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated on the PDOK OGC API
+  landing_page: https://api.pdok.nl/rvo/natura2000/ogc/v1
+  bbox:
+  - 2.5
+  - 50.7
+  - 7.3
+  - 55.8
+  geometry_type: polygon
+  concepts_hint:
+  - protected-area
+  - screening-zones-pack
+  endpoints:
+  - protocol: ogc-api-features
+    url: https://api.pdok.nl/rvo/natura2000/ogc/v1/collections/natura2000
+    service_url: https://api.pdok.nl/rvo/natura2000/ogc/v1
+    capabilities:
+    - query
+    info:
+      name_field: naam_n2k
+      code_field: nr
+      class_field: beschermin
+      class_values:
+      - HR
+      - VR
+      - VR+HR
+      - HR groeve
+      nation: Netherlands
+      completeness: complete
+      completeness_note: every Dutch Natura 2000 site, on land and at sea. Most boundaries are the final designation; a few
+        follow a draft decision or what was reported to the European Commission (the status field says which)
+      data_date: '2026-11-12'
+      data_date_source: OGC API collection "updated"
+    check_url: https://api.pdok.nl/rvo/natura2000/ogc/v1/collections/natura2000/items?limit=1&f=json&bbox=5.5,52.0,6.0,52.4
+  - protocol: landing
+    url: https://www.pdok.nl/introductie/-/article/natura-2000
+- kind: record
+  id: us-fema-nfhl-flood-hazard-zones
+  title: Flood hazard zones, National Flood Hazard Layer (FEMA)
+  publisher: Federal Emergency Management Agency (FEMA)
+  publisher_type: central-gov
+  country: US
+  abstract: 'FEMA''s effective flood hazard zones from the National Flood Hazard Layer, the digital Flood Insurance Rate
+    Maps. FLD_ZONE is the zone (A, AE, AH, AO, VE and others are the Special Flood Hazard Area, the 1% annual chance flood;
+    X with ZONE_SUBTY "0.2 PCT ANNUAL CHANCE FLOOD HAZARD" is the 0.2% annual chance; X alone is minimal hazard; D is
+    undetermined). SFHA_TF is T inside the Special Flood Hazard Area. Fields: class field FLD_ZONE, subtype field ZONE_SUBTY,
+    flag field SFHA_TF. Completeness: partial (the NFHL covers the communities with digital maps, most of the population but
+    not every county; the service''s layer 0, NFHL Availability, shows where). Very large: query small boxes; a count of the
+    whole layer times out. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked
+    to return features for a bounding box (Houston).'
+  licence: 'US federal government work: public domain in the US (inferred, 17 U.S.C. §105; not stated by the publisher)'
+  landing_page: https://hazards.fema.gov/femaportal/resources/flood_map_svc.htm
+  bbox:
+  - -179.2
+  - -14.6
+  - 179.8
+  - 71.4
+  geometry_type: polygon
+  concepts_hint:
+  - flood-risk
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28
+    service_url: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      class_field: FLD_ZONE
+      subtype_field: ZONE_SUBTY
+      flag_field: SFHA_TF
+      class_values:
+      - A
+      - AE
+      - AH
+      - AO
+      - AR
+      - A99
+      - V
+      - VE
+      - X
+      - D
+      - OPEN WATER
+      - AREA NOT INCLUDED
+      nation: United States
+      completeness: partial
+      completeness_note: communities with digital flood maps (NFHL); layer 0 of the service, NFHL Availability, shows where
+        the NFHL has data. Elsewhere older paper maps may apply
+    check_url: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-95.4,29.7,-95.3,29.8&geometryType=esriGeometryEnvelope&inSR=4326&outFields=FLD_ZONE&returnGeometry=false&resultRecordCount=1&f=json
+  - protocol: landing
+    url: https://hazards.fema.gov/femaportal/resources/flood_map_svc.htm
+- kind: record
+  id: us-epa-sole-source-aquifers
+  title: Sole Source Aquifers (EPA)
+  publisher: U.S. Environmental Protection Agency
+  publisher_type: central-gov
+  country: US
+  abstract: 'Aquifers EPA has designated as the sole or principal source of drinking water for the area above them (at least
+    50% of the drinking water used there), with their recharge and streamflow source areas where EPA regions have mapped
+    them. Federally funded projects inside one are reviewed by EPA (Safe Drinking Water Act, section 1424(e)). SSA_NAME is the
+    aquifer; SSA_ID its id; FR_ID the Federal Register notice of the designation. Fields: name field SSA_NAME, code field
+    SSA_ID. 93 features. Completeness: complete (every designated Sole Source Aquifer). From EPA''s NEPAssist service. A
+    curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked to return features for
+    a bounding box.'
+  licence: 'Public domain: "Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain
+    and is not subject to domestic copyright protection under 17 U.S.C. § 105." (https://www.usa.gov/publicdomain/label/1.0/)'
+  landing_page: https://www.epa.gov/dwssa/map-sole-source-aquifer-locations
+  bbox:
+  - -158.15
+  - 13.41
+  - 144.96
+  - 48.59
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer/6
+    service_url: https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      name_field: SSA_NAME
+      code_field: SSA_ID
+      nation: United States
+      completeness: complete
+      completeness_note: every designated Sole Source Aquifer
+    check_url: https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.epa.gov/dwssa/map-sole-source-aquifer-locations
