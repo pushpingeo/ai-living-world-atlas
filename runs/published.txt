@@ -1,4 +1,5 @@
 spike-files
+spike-osm
 spike-values
 spike-ukprotected
 spike-ukpack
