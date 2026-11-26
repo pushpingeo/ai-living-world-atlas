@@ -1,98 +1,61 @@
 {
  "market": "nl",
- "release": "2026-11-25",
- "built_at": "2026-11-25T12:33:12Z",
+ "release": "2026-11-26",
+ "built_at": "2026-11-26T07:35:52Z",
  "extracts": 12,
- "built": 8,
+ "built": 10,
+ "carried": [],
  "missing": [
-  "friesland",
-  "gelderland",
-  "overijssel",
-  "utrecht"
+  "flevoland",
+  "noord-holland"
  ],
- "source_bytes": 914122945,
- "filtered_bytes": 480883041,
- "fgb_bytes": 2800135936,
- "parquet_bytes": 1115567114,
- "features": 8332927,
- "manifest_bytes": 41057,
+ "source_bytes": 1186550714,
+ "filtered_bytes": 611575188,
+ "fgb_bytes": 3515315648,
+ "parquet_bytes": 1417360933,
+ "features": 10433146,
+ "manifest_bytes": 41464,
  "by_group": {
   "buildings": {
-   "features": 7851381,
-   "fgb_bytes": 2544870784,
-   "parquet_bytes": 960318900
+   "features": 9807321,
+   "fgb_bytes": 3182034064,
+   "parquet_bytes": 1214283348
   },
   "community": {
-   "features": 8838,
-   "fgb_bytes": 3624816,
-   "parquet_bytes": 1897710
+   "features": 10591,
+   "fgb_bytes": 4411640,
+   "parquet_bytes": 2297814
   },
   "landuse": {
-   "features": 15423,
-   "fgb_bytes": 11703584,
-   "parquet_bytes": 8035255
+   "features": 29919,
+   "fgb_bytes": 20092192,
+   "parquet_bytes": 13208227
   },
   "transport": {
-   "features": 64894,
-   "fgb_bytes": 21016888,
-   "parquet_bytes": 7857185
+   "features": 81775,
+   "fgb_bytes": 26752688,
+   "parquet_bytes": 10196724
   },
   "utilities": {
-   "features": 13895,
-   "fgb_bytes": 4251528,
-   "parquet_bytes": 1788342
+   "features": 14195,
+   "fgb_bytes": 4446496,
+   "parquet_bytes": 1871608
   },
   "water": {
-   "features": 378496,
-   "fgb_bytes": 214668336,
-   "parquet_bytes": 135669722
+   "features": 489345,
+   "fgb_bytes": 277578568,
+   "parquet_bytes": 175503212
   }
  },
  "regions": [
   {
-   "region": "zuid-holland",
+   "region": "drenthe",
    "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 212988156,
-   "filtered_bytes": 116271763,
-   "read_s": 117.5,
-   "total_s": 154.0,
-   "max_rss_mb": 3962,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "limburg",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 100982669,
-   "filtered_bytes": 52680213,
-   "read_s": 51.0,
-   "total_s": 67.0,
-   "max_rss_mb": 1982,
-   "skipped": {
-    "bad_geometry": 0
-   }
-  },
-  {
-   "region": "zeeland",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 44363488,
-   "filtered_bytes": 23047317,
-   "read_s": 23.5,
-   "total_s": 30.6,
-   "max_rss_mb": 1107,
-   "skipped": {
-    "bad_geometry": 1
-   }
-  },
-  {
-   "region": "groningen",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 56826005,
-   "filtered_bytes": 28473112,
-   "read_s": 26.7,
-   "total_s": 34.6,
-   "max_rss_mb": 1198,
+   "source_bytes": 63970138,
+   "filtered_bytes": 28088750,
+   "read_s": 26.1,
+   "total_s": 28.1,
+   "max_rss_mb": 586,
    "skipped": {
     "bad_geometry": 0
    }
@@ -102,47 +65,107 @@
    "data_as_of": "2026-11-24T21:21:23Z",
    "source_bytes": 207732541,
    "filtered_bytes": 116496078,
-   "read_s": 85.4,
-   "total_s": 115.0,
-   "max_rss_mb": 4225,
+   "read_s": 114.9,
+   "total_s": 124.0,
+   "max_rss_mb": 898,
    "skipped": {
     "bad_geometry": 2
    }
   },
   {
-   "region": "drenthe",
+   "region": "friesland",
    "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 63970138,
-   "filtered_bytes": 28088750,
-   "read_s": 18.2,
-   "total_s": 24.4,
-   "max_rss_mb": 1160,
+   "source_bytes": 89251446,
+   "filtered_bytes": 44605710,
+   "read_s": 37.4,
+   "total_s": 40.3,
+   "max_rss_mb": 605,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
-   "region": "flevoland",
+   "region": "overijssel",
    "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 36524194,
-   "filtered_bytes": 16454307,
-   "read_s": 18.1,
-   "total_s": 23.5,
-   "max_rss_mb": 921,
+   "source_bytes": 114631597,
+   "filtered_bytes": 54257521,
+   "read_s": 51.3,
+   "total_s": 55.4,
+   "max_rss_mb": 611,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
-   "region": "noord-holland",
+   "region": "gelderland",
    "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 190735754,
-   "filtered_bytes": 99371501,
-   "read_s": 96.1,
-   "total_s": 125.7,
-   "max_rss_mb": 3357,
+   "source_bytes": 195991508,
+   "filtered_bytes": 94520851,
+   "read_s": 140.6,
+   "total_s": 149.7,
+   "max_rss_mb": 828,
    "skipped": {
-    "bad_geometry": 3
+    "bad_geometry": 0
+   }
+  },
+  {
+   "region": "utrecht",
+   "data_as_of": "2026-11-24T21:21:23Z",
+   "source_bytes": 99813166,
+   "filtered_bytes": 53133873,
+   "read_s": 75.7,
+   "total_s": 80.5,
+   "max_rss_mb": 644,
+   "skipped": {
+    "bad_geometry": 0
+   }
+  },
+  {
+   "region": "groningen",
+   "data_as_of": "2026-11-24T21:21:23Z",
+   "source_bytes": 56826005,
+   "filtered_bytes": 28473112,
+   "read_s": 27.2,
+   "total_s": 29.2,
+   "max_rss_mb": 638,
+   "skipped": {
+    "bad_geometry": 0
+   }
+  },
+  {
+   "region": "zeeland",
+   "data_as_of": "2026-11-24T21:21:23Z",
+   "source_bytes": 44363488,
+   "filtered_bytes": 23047317,
+   "read_s": 23.7,
+   "total_s": 25.6,
+   "max_rss_mb": 614,
+   "skipped": {
+    "bad_geometry": 1
+   }
+  },
+  {
+   "region": "limburg",
+   "data_as_of": "2026-11-24T21:21:23Z",
+   "source_bytes": 100982669,
+   "filtered_bytes": 52680213,
+   "read_s": 52.1,
+   "total_s": 56.3,
+   "max_rss_mb": 696,
+   "skipped": {
+    "bad_geometry": 0
+   }
+  },
+  {
+   "region": "zuid-holland",
+   "data_as_of": "2026-11-24T21:21:23Z",
+   "source_bytes": 212988156,
+   "filtered_bytes": 116271763,
+   "read_s": 119.4,
+   "total_s": 128.4,
+   "max_rss_mb": 831,
+   "skipped": {
+    "bad_geometry": 0
    }
   }
  ]
