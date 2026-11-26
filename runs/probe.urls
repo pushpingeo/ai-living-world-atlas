@@ -1,11 +1,10 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 55 (26 Nov): RIVM Netkaart retry (data.rivm.nl/geo/nl timed out in round 54); Natura 2000 counts and classes
-https://data.rivm.nl/geo/nl/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=nl:netkaart_actuele_versie_atlas_rivm&resultType=hits
-https://data.rivm.nl/geo/nl/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=nl:netkaart_actuele_versie_atlas_rivm&maxFeatures=2&outputFormat=application/json&srsName=EPSG:4326
-https://data.rivm.nl/geo/nl/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=nl:netkaart_actuele_versie_atlas_rivm&maxFeatures=2&outputFormat=application/json&srsName=EPSG:4326
-https://service.pdok.nl/rvo/natura2000/wfs/v1_0?service=WFS&version=2.0.0&request=GetFeature&typeNames=natura2000:natura2000&resultType=hits
-https://service.pdok.nl/rvo/natura2000/wfs/v1_0?service=WFS&version=2.0.0&request=GetPropertyValue&typeNames=natura2000:natura2000&valueReference=beschermin
-https://service.pdok.nl/rvo/natura2000/wfs/v1_0?service=WFS&version=2.0.0&request=GetPropertyValue&typeNames=natura2000:natura2000&valueReference=status
-https://api.pdok.nl/rvo/natura2000/ogc/v1?f=json
+# round 56 (26 Nov): Texas and California wellhead / source water protection (Rob picked TX and CA first)
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer?f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/layers?f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/Public/PWS/MapServer/layers?f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV?f=json
+https://datadryad.org/api/v2/datasets/doi%3A10.25338%2FB8CH02
+https://www.arcgis.com/sharing/rest/content/items/820b568473c94f6db2beb1741516be60?f=json
