@@ -70,29 +70,22 @@ sources:
         - health care
         buildings:
         - building
-      release: '2026-11-25'
+      release: '2026-11-26'
       data_date: '2026-11-24'
       data_date_source: OpenStreetMap replication time of the oldest Geofabrik extract in this release
       data_as_of:
         oldest: '2026-11-24T21:21:23Z'
         newest: '2026-11-24T21:21:23Z'
-      extracts: 42
-      extracts_missing:
-      - bristol
-      - derbyshire
-      - essex
-      - hertfordshire
-      - merseyside
-      - oxfordshire
-      - suffolk
-      - west-yorkshire
+      extracts: 50
+      extracts_missing: []
+      extracts_carried: []
       features:
-        buildings: 18567263
-        community: 44998
-        landuse: 473771
-        transport: 361757
-        utilities: 102690
-        water: 1032214
+        buildings: 21300150
+        community: 51806
+        landuse: 523248
+        transport: 412575
+        utilities: 114009
+        water: 1107605
       completeness: partial
       completeness_note: complete for the extracts listed (every feature with these tags); OpenStreetMap itself is volunteer-mapped
         and uneven, especially for buildings and land use. Extracts missing from a release are left out of its outline.
@@ -100,6 +93,5 @@ sources:
       terms: 'Open Database License 1.0: attribute OpenStreetMap contributors; a database made from it and shared must be
         shared under the ODbL too. Maps and other produced works need only the attribution.'
       refresh: weekly
-      status_note: 8 extracts didn't build in release 2026-11-25; the copy's outline leaves them out
   - protocol: landing
     url: https://www.openstreetmap.org/copyright
