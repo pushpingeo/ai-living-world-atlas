@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (25 Nov 2026, night)
+# AI Living World Atlas: handover (26 Nov 2026, morning)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
