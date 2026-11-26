@@ -1,10 +1,6 @@
-# 26 Nov evening: the screening zones records (spike-zones) after their first publish
-{"label": "HSE restricted record", "tool": "get_dataset", "args": {"id": "a15122ad188c6d23"}}
-{"label": "Natura 2000 NL record", "tool": "get_dataset", "args": {"id": "9727d665d1fefb83"}}
-{"label": "Natura 2000 NL features near Nijkerk", "tool": "fetch_features", "args": {"id": "9727d665d1fefb83", "lon": 5.45, "lat": 52.22, "radius_km": 5, "limit": 10}}
-{"label": "FEMA NFHL features, Houston", "tool": "fetch_features", "args": {"id": "043582eb571bb87f", "lon": -95.36, "lat": 29.76, "radius_km": 1, "limit": 20}}
-{"label": "EPA SSA features, Long Island", "tool": "fetch_features", "args": {"id": "00e494c4df69f701", "lon": -73.2, "lat": 40.8, "radius_km": 5, "limit": 5}}
-{"label": "EPA SSA record", "tool": "get_dataset", "args": {"id": "00e494c4df69f701"}}
-{"label": "protected areas near Nijkerk (does Natura 2000 show)", "tool": "find_datasets", "args": {"concept": "protected-area", "lon": 5.45, "lat": 52.22, "radius_km": 5, "limit": 20}}
-{"label": "flood near Houston (does NFHL show)", "tool": "find_datasets", "args": {"concept": "flood-risk", "lon": -95.36, "lat": 29.76, "radius_km": 2, "limit": 20}}
-{"label": "HSE by text, Grangemouth", "tool": "find_datasets", "args": {"text": "HSE consultation zones", "lon": -3.72, "lat": 56.01, "radius_km": 5, "limit": 5}}
+# 26 Nov late evening: Texas capture zones, California DWSAP, FEMA still there after the rerun
+{"label": "TX 5-year capture zones, Austin", "tool": "fetch_features", "args": {"id": "6687b431d240e1c5", "lon": -97.7, "lat": 30.3, "radius_km": 10, "limit": 5}}
+{"label": "TX half-mile zones record", "tool": "get_dataset", "args": {"id": "396d3904b71f7349"}}
+{"label": "CA DWSAP restricted record", "tool": "get_dataset", "args": {"id": "b2617fec04a664c5"}}
+{"label": "FEMA NFHL features, Houston", "tool": "fetch_features", "args": {"id": "043582eb571bb87f", "lon": -95.36, "lat": 29.76, "radius_km": 1, "limit": 5}}
+{"label": "groundwater protection near Austin", "tool": "find_datasets", "args": {"concept": "groundwater-protection", "lon": -97.7, "lat": 30.3, "radius_km": 10, "limit": 30}}
