@@ -1,10 +1,14 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 56 (26 Nov): Texas and California wellhead / source water protection (Rob picked TX and CA first)
-https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer?f=json
-https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/layers?f=json
-https://gisweb.tceq.texas.gov/arcgis/rest/services/Public/PWS/MapServer/layers?f=json
-https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV?f=json
-https://datadryad.org/api/v2/datasets/doi%3A10.25338%2FB8CH02
-https://www.arcgis.com/sharing/rest/content/items/820b568473c94f6db2beb1741516be60?f=json
+# round 57 (26 Nov): TCEQ capture zone counts, a sample, layer metadata, robots.txt
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/11/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/12/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/13/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/14/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/15/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/16/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/17/query?where=1%3D1&returnCountOnly=true&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/12/query?geometry=-97.8,30.2,-97.6,30.4&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&returnGeometry=false&resultRecordCount=3&f=json
+https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/17?f=json
+https://gisweb.tceq.texas.gov/robots.txt
