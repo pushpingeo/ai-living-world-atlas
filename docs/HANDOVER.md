@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (26 Nov 2026, 07:40)
+# AI Living World Atlas: handover (26 Nov 2026, 21:30)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -79,6 +79,7 @@ Workspace notes:
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
 | Best-in-class fill (`spike-fill`) | 5.1k | 463 | 24 Nov night: NASA, USGS National Map and earthquakes, Met Office, EFFIS, FIRMS, SoilGrids, GVP, WRI, World Bank. Last in publish order. See below |
 | UK water and peat (`spike-ukwaterpeat`) | 13 | 13 | Storm overflows (8 companies live, 2025 annual returns, Scottish Water) and the England Peat Map (24 Nov) |
+| Screening zones (`spike-zones`) | 4 | 4 | 26 Nov evening (Tobler): HSE consultation zones (restricted, no data), Natura 2000 NL, FEMA NFHL flood hazard zones, EPA Sole Source Aquifers |
 | US contamination (`spike-uscontamination`) | 21 | 21 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD; 25 Nov: leaking tanks (UST Finder), Formerly Used Defense Sites, nonattainment areas (7 standards) |
 | NL pollution (`spike-nlpollution`) | 7 | 7 | 25 Nov: Wbb decisions (Kadaster WKPB, OGC API), RIVM E-PRTR releases and drinking water zones, Zeeland and Noord-Holland former landfills |
 | AU pollution (`spike-aupollution`) | 9 | 9 | 25 Nov: EPA Victoria, NSW EPA (3), Queensland, Tasmania, Geoscience Australia (2); the NPI is hosted in `spike-files` |
@@ -90,8 +91,8 @@ Workspace notes:
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **267k passing datasets**, all tagged (plus the OSM copy record, 26 Nov).
-- Tagging spend is **$30.28** in total (24 Nov: $1.79 contamination re-tags, $0.03 fill wave; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
+- The viewer and the MCP server hold about **267k passing datasets**, all tagged (plus the OSM copy record and the four screening zones, 26 Nov).
+- Tagging spend is **$30.28** in total (26 Nov: screening zones, under a cent) (24 Nov: $1.79 contamination re-tags, $0.03 fill wave; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
 
@@ -179,6 +180,11 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
    Geofabrik downloads a week.
 
 ## Liveness sweep (built 17 Nov)
+
+**26 Nov evening, bug fixed:** curated endpoints (layer names `<record id>:<n>`) never matched a crawled layer's uid, so
+the sweep marked them "missing" (51) or "unmatched" (60); the first would have retired about 7 Dec. They are now found by
+layer URL (`match_key` in sweep.py; decisions.md). The failing ones clear on their next visit (every 3 days): check
+REPORT.md on 27-29 Nov that curated records read "ok".
 
 `atlas/sweep.py`, nightly via the `sweep` workflow. Details and reasoning in `docs/decisions.md` (17 Nov).
 - Rechecks published services: resolving every 7 days, failing every 3, retired every 28; up to 45k services a night.
@@ -345,11 +351,28 @@ Details in decisions.md (24 Nov, night).
   - Not found or refused: Bureau of Meteorology (403 to GitHub), KNMI (key), TNO/NLOG (no public service found),
     SEDAC geoserver (timeout), NASA NEO, World Bank map services. Copernicus Land comes via EEA; Terrascope blocks GitHub.
 
+## Screening zones (26 Nov, evening)
+
+Tobler's eight requests (project doc `claude/research-asset-reaches.md`, section 3). Contract note with ids and fields in
+docs/mcp-tools.md (26 Nov evening); handback for Tobler in the project, `claude/screening-zones-atlas-handback-2026-11-26.md`.
+- `vocab/seeds/screening-zones.yaml` (keyword `screening-zones-pack`, wave `spike-zones`): HSE consultation zones
+  `a15122ad188c6d23`, Natura 2000 NL `9727d665d1fefb83` (OGC API), FEMA NFHL flood hazard zones `043582eb571bb87f`, EPA
+  Sole Source Aquifers `00e494c4df69f701`. Tagged for under a cent. Live checks (mcp-ask, 21:24): all four open with
+  `get_dataset`, the three data records return the right features (Nijkerk, Houston, Long Island).
+- **New field `info.access: "restricted"`** (HSE): a record of data that exists but isn't published; landing only.
+- FEMA's robots.txt disallows automated checks: the crawl and sweep skip its data check ("checked by hand", probe 54).
+  Same footing as the EA flood zones. Never count the whole layer (it times out).
+- IRZ decoding, England's SPZs and flood zones were already done; Victoria's catchments and extractive areas are crawled.
+- **Still open:** US state wellhead layers (which states? Rob or Tobler); RIVM Netkaart (data.rivm.nl/geo/nl didn't answer
+  GitHub twice: retry with probe); in concept searches these records rank below local layers (Natura 2000 18th near Nijkerk,
+  NFHL not in Houston's top 20) until best-in-class ranking is built. Not found as services: NL radar areas, Basisnet attention
+  areas, Victoria wind exclusions, a UK aerodrome safeguarding layer (a few councils publish their own, licences unstated).
+
 ## Known gaps and next steps (rough priority)
 
 1. **The OpenStreetMap copy:** UK published 26 Nov, weekly, and in the atlas as a record; next NL and AU (its section above).
    **Pollution screening:** next steps in its section above (EU register, BRO soil decisions, Rob's licence calls).
-2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly. Expected real retirements:
+2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly (the curated-endpoint bug is fixed, 26 Nov). Expected real retirements:
    oceandata.rad.rutgers.edu, gis1.mgipu.hr, gis12.cookcountyil.gov. Watch the EEA discomap hosts (all down on 24 Nov).
 3. **Best in class:** GIBS descriptions via CMR, then the ranking boost and flag (with the publisher registry stage 2
    release: `publisher_id`, `trusted`, `hosted_by`, `publisher_credit`, `trusted_only`, licence classes, one full reload;
