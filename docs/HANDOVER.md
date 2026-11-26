@@ -90,7 +90,7 @@ Workspace notes:
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **267k passing datasets**, all tagged.
+- The viewer and the MCP server hold about **267k passing datasets**, all tagged (plus the OSM copy record, 26 Nov).
 - Tagging spend is **$30.28** in total (24 Nov: $1.79 contamination re-tags, $0.03 fill wave; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
@@ -154,8 +154,11 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
 1. **First publish (done 26 Nov):** UK published, see "Runs so far". `uk` is in `runs/osm-weekly.env`, so the Saturday
    05:41 UTC cron rebuilds and publishes it from 28 Nov; `runs/osm.env` is back to `PUBLISH=no`. An extract a run can't
    build keeps its last entry (`carried`) if under 14 days old.
-2. **First record:** add `runs/spike-osm.env` (`SEEDS=vocab/seeds/osm.yaml`, `SHARDS=1`) and `runs/tag-osm.env`, add
-   `spike-osm` to `runs/published.txt`, run the tag (cents), check `find_datasets` and `get_dataset` find it (mcp-ask).
+2. **First record (done 26 Nov):** `osm-copy-uk`, dataset id `0e3b9e398d081f86`, wave `spike-osm` (second in
+   `runs/published.txt`, after spike-files), tagged for under a cent (concepts road, rail, power-line, building). Live
+   checks through `mcp-ask`: `get_dataset` returns it with the manifest endpoint, release, data date and feature counts;
+   a text search near Linlithgow finds it; a `road` search there ranks it 9th of 30, below DfT statistics layers (the
+   best-in-class ranking work would fix that). Each publish now reruns spike-osm, pages and deploy-mcp itself.
 3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
@@ -336,7 +339,7 @@ Details in decisions.md (24 Nov, night).
 
 ## Known gaps and next steps (rough priority)
 
-1. **The OpenStreetMap copy:** UK published 26 Nov and weekly; next the atlas record, then NL and AU (its section above).
+1. **The OpenStreetMap copy:** UK published 26 Nov, weekly, and in the atlas as a record; next NL and AU (its section above).
    **Pollution screening:** next steps in its section above (EU register, BRO soil decisions, Rob's licence calls).
 2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly. Expected real retirements:
    oceandata.rad.rutgers.edu, gis1.mgipu.hr, gis12.cookcountyil.gov. Watch the EEA discomap hosts (all down on 24 Nov).
