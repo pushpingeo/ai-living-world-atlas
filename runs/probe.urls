@@ -1,7 +1,8 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 52 (26 Nov): first atlas publish of the UK OSM copy: live manifest, and a range read of one FlatGeobuf
-https://data.asktobler.com/osm/uk.json
-RANGE https://data.asktobler.com/osm/2026-11-26/bedfordshire/transport.fgb
-RANGE https://data.asktobler.com/osm/2026-11-26/bedfordshire/buildings.parquet
+# round 53 (26 Nov): does EEA's industrial emissions register download answer GitHub yet? (no answer on 25 Nov)
+https://sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v15_r00/
+https://sdi.eea.europa.eu/webdav/datastore/public/
+RANGE https://industry.eea.europa.eu/
+RANGE https://discodata.eea.europa.eu/
