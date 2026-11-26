@@ -11,7 +11,8 @@
 #   SSSI IRZ decoding (vocab/sssi_irz_codes.json).
 # - Already crawled and passing: Victoria's Special Water Supply Catchment Areas (a404a7c53842294a) and Extractive Industry
 #   Interest Areas (6240e2d57c2d6319), both Victorian Government on Mapshare; US state wellhead protection layers (MN, MA, OK,
-#   MI, DE, ND and several counties), waiting on which states Tobler wants first.
+#   MI, DE, ND and several counties). Rob picked Texas and California first (26 Nov): Texas is below (TCEQ capture zones);
+#   California's State Water Board publishes public water system well locations but no protection zone layer was found.
 # - No service found: Dutch radar disturbance areas (a map in the Omgevingsregeling and RVO's Luchtvaartbeperkingenkaart viewer);
 #   Basisnet attention areas (IPLO, 26 Nov: the Basisnet "is not yet geometrically bounded", so they stay a computed 30 m / 200 m
 #   along the routes); Victoria's wind energy facility exclusion areas (planning-scheme rules, clause 52.32, no single layer);
@@ -23,6 +24,8 @@
 # FEMA: hazards.fema.gov's robots.txt disallows automated checks, so the crawl and sweep don't fetch its data (the record says
 # "checked by hand"). Checked by probe round 54: a box query over Houston returned zones X (0.2%) and AE in 0.09 s. A whole-
 # layer count times out, so never count it. Same footing as the EA flood zones, whose host also disallows data checks.
+# TCEQ (gisweb.tceq.texas.gov) likewise: robots.txt is "Disallow: /". Checked by hand in probe round 57 (counts, an Austin
+# box). Rob agreed this footing on 26 Nov: no crawling or sweep sampling, but Tobler's one small query per site check is fine.
 defaults:
   country: GB
 sources:
@@ -206,3 +209,291 @@ sources:
     check_url: https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
   - protocol: landing
     url: https://www.epa.gov/dwssa/map-sole-source-aquifer-locations
+- kind: record
+  id: us-tx-tceq-capture-zone-2yr
+  title: Public water supply well capture zones, 2-year time of travel, Texas (TCEQ)
+  publisher: Texas Commission on Environmental Quality (TCEQ)
+  publisher_type: regional-gov
+  country: US
+  abstract: 'Capture zones round Texas public water supply wells, from TCEQ''s Source Water Assessment and Protection (SWAP)
+    programme: 2-year time of travel. The area from which groundwater is estimated to reach the well within 2 years (TCEQ''s modelled capture zone). PWS_ID is the public water system; SOURCE_ID the well. Fields: code field SOURCE_ID, system
+    field PWS_ID. 10,915 features. Completeness: complete (TCEQ''s delineations for Texas public water supply wells; zones
+    for surface water intakes are separate). TCEQ publishes 2, 5, 10, 20, 50 and 100 year zones and a half-mile radius
+    (the 10 year layer is empty); this record is one of them. From TCEQ''s Source Water Assessment and Protection Viewer
+    service. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked by hand
+    (probe round 57) to return features for a bounding box.'
+  licence: 'Licence not stated by the publisher. TCEQ''s map services carry a disclaimer that they are for informational
+    purposes and may not be suitable for legal, engineering or surveying purposes.'
+  landing_page: https://www.tceq.texas.gov/gis/swaview
+  bbox:
+  - -106.65
+  - 25.84
+  - -93.51
+  - 36.5
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/11
+    service_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      code_field: SOURCE_ID
+      system_field: PWS_ID
+      nation: Texas
+      completeness: complete
+      completeness_note: TCEQ's capture zones for Texas public water supply wells (2-year time of travel); wells TCEQ hasn't delineated
+        aren't in it
+    check_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/11/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.tceq.texas.gov/gis/swaview
+- kind: record
+  id: us-tx-tceq-capture-zone-5yr
+  title: Public water supply well capture zones, 5-year time of travel, Texas (TCEQ)
+  publisher: Texas Commission on Environmental Quality (TCEQ)
+  publisher_type: regional-gov
+  country: US
+  abstract: 'Capture zones round Texas public water supply wells, from TCEQ''s Source Water Assessment and Protection (SWAP)
+    programme: 5-year time of travel. The area from which groundwater is estimated to reach the well within 5 years (TCEQ''s modelled capture zone). PWS_ID is the public water system; SOURCE_ID the well. Fields: code field SOURCE_ID, system
+    field PWS_ID. 10,914 features. Completeness: complete (TCEQ''s delineations for Texas public water supply wells; zones
+    for surface water intakes are separate). TCEQ publishes 2, 5, 10, 20, 50 and 100 year zones and a half-mile radius
+    (the 10 year layer is empty); this record is one of them. From TCEQ''s Source Water Assessment and Protection Viewer
+    service. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked by hand
+    (probe round 57) to return features for a bounding box.'
+  licence: 'Licence not stated by the publisher. TCEQ''s map services carry a disclaimer that they are for informational
+    purposes and may not be suitable for legal, engineering or surveying purposes.'
+  landing_page: https://www.tceq.texas.gov/gis/swaview
+  bbox:
+  - -106.65
+  - 25.84
+  - -93.51
+  - 36.5
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/12
+    service_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      code_field: SOURCE_ID
+      system_field: PWS_ID
+      nation: Texas
+      completeness: complete
+      completeness_note: TCEQ's capture zones for Texas public water supply wells (5-year time of travel); wells TCEQ hasn't delineated
+        aren't in it
+    check_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/12/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.tceq.texas.gov/gis/swaview
+- kind: record
+  id: us-tx-tceq-capture-zone-20yr
+  title: Public water supply well capture zones, 20-year time of travel, Texas (TCEQ)
+  publisher: Texas Commission on Environmental Quality (TCEQ)
+  publisher_type: regional-gov
+  country: US
+  abstract: 'Capture zones round Texas public water supply wells, from TCEQ''s Source Water Assessment and Protection (SWAP)
+    programme: 20-year time of travel. The area from which groundwater is estimated to reach the well within 20 years (TCEQ''s modelled capture zone). PWS_ID is the public water system; SOURCE_ID the well. Fields: code field SOURCE_ID, system
+    field PWS_ID. 10,912 features. Completeness: complete (TCEQ''s delineations for Texas public water supply wells; zones
+    for surface water intakes are separate). TCEQ publishes 2, 5, 10, 20, 50 and 100 year zones and a half-mile radius
+    (the 10 year layer is empty); this record is one of them. From TCEQ''s Source Water Assessment and Protection Viewer
+    service. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked by hand
+    (probe round 57) to return features for a bounding box.'
+  licence: 'Licence not stated by the publisher. TCEQ''s map services carry a disclaimer that they are for informational
+    purposes and may not be suitable for legal, engineering or surveying purposes.'
+  landing_page: https://www.tceq.texas.gov/gis/swaview
+  bbox:
+  - -106.65
+  - 25.84
+  - -93.51
+  - 36.5
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/14
+    service_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      code_field: SOURCE_ID
+      system_field: PWS_ID
+      nation: Texas
+      completeness: complete
+      completeness_note: TCEQ's capture zones for Texas public water supply wells (20-year time of travel); wells TCEQ hasn't delineated
+        aren't in it
+    check_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/14/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.tceq.texas.gov/gis/swaview
+- kind: record
+  id: us-tx-tceq-capture-zone-50yr
+  title: Public water supply well capture zones, 50-year time of travel, Texas (TCEQ)
+  publisher: Texas Commission on Environmental Quality (TCEQ)
+  publisher_type: regional-gov
+  country: US
+  abstract: 'Capture zones round Texas public water supply wells, from TCEQ''s Source Water Assessment and Protection (SWAP)
+    programme: 50-year time of travel. The area from which groundwater is estimated to reach the well within 50 years (TCEQ''s modelled capture zone). PWS_ID is the public water system; SOURCE_ID the well. Fields: code field SOURCE_ID, system
+    field PWS_ID. 10,913 features. Completeness: complete (TCEQ''s delineations for Texas public water supply wells; zones
+    for surface water intakes are separate). TCEQ publishes 2, 5, 10, 20, 50 and 100 year zones and a half-mile radius
+    (the 10 year layer is empty); this record is one of them. From TCEQ''s Source Water Assessment and Protection Viewer
+    service. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked by hand
+    (probe round 57) to return features for a bounding box.'
+  licence: 'Licence not stated by the publisher. TCEQ''s map services carry a disclaimer that they are for informational
+    purposes and may not be suitable for legal, engineering or surveying purposes.'
+  landing_page: https://www.tceq.texas.gov/gis/swaview
+  bbox:
+  - -106.65
+  - 25.84
+  - -93.51
+  - 36.5
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/15
+    service_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      code_field: SOURCE_ID
+      system_field: PWS_ID
+      nation: Texas
+      completeness: complete
+      completeness_note: TCEQ's capture zones for Texas public water supply wells (50-year time of travel); wells TCEQ hasn't delineated
+        aren't in it
+    check_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/15/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.tceq.texas.gov/gis/swaview
+- kind: record
+  id: us-tx-tceq-capture-zone-100yr
+  title: Public water supply well capture zones, 100-year time of travel, Texas (TCEQ)
+  publisher: Texas Commission on Environmental Quality (TCEQ)
+  publisher_type: regional-gov
+  country: US
+  abstract: 'Capture zones round Texas public water supply wells, from TCEQ''s Source Water Assessment and Protection (SWAP)
+    programme: 100-year time of travel. The area from which groundwater is estimated to reach the well within 100 years (TCEQ''s modelled capture zone). PWS_ID is the public water system; SOURCE_ID the well. Fields: code field SOURCE_ID, system
+    field PWS_ID. 10,914 features. Completeness: complete (TCEQ''s delineations for Texas public water supply wells; zones
+    for surface water intakes are separate). TCEQ publishes 2, 5, 10, 20, 50 and 100 year zones and a half-mile radius
+    (the 10 year layer is empty); this record is one of them. From TCEQ''s Source Water Assessment and Protection Viewer
+    service. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked by hand
+    (probe round 57) to return features for a bounding box.'
+  licence: 'Licence not stated by the publisher. TCEQ''s map services carry a disclaimer that they are for informational
+    purposes and may not be suitable for legal, engineering or surveying purposes.'
+  landing_page: https://www.tceq.texas.gov/gis/swaview
+  bbox:
+  - -106.65
+  - 25.84
+  - -93.51
+  - 36.5
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/16
+    service_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      code_field: SOURCE_ID
+      system_field: PWS_ID
+      nation: Texas
+      completeness: complete
+      completeness_note: TCEQ's capture zones for Texas public water supply wells (100-year time of travel); wells TCEQ hasn't delineated
+        aren't in it
+    check_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/16/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.tceq.texas.gov/gis/swaview
+- kind: record
+  id: us-tx-tceq-capture-zone-half-mile
+  title: Public water supply well capture zones, half-mile fixed radius, Texas (TCEQ)
+  publisher: Texas Commission on Environmental Quality (TCEQ)
+  publisher_type: regional-gov
+  country: US
+  abstract: 'Capture zones round Texas public water supply wells, from TCEQ''s Source Water Assessment and Protection (SWAP)
+    programme: half-mile fixed radius. A fixed half-mile radius round the well, used where TCEQ had too little data to model a time of travel. PWS_ID is the public water system; SOURCE_ID the well. Fields: code field SOURCE_ID, system
+    field PWS_ID. 1,622 features. Completeness: complete (TCEQ''s delineations for Texas public water supply wells; zones
+    for surface water intakes are separate). TCEQ publishes 2, 5, 10, 20, 50 and 100 year zones and a half-mile radius
+    (the 10 year layer is empty); this record is one of them. From TCEQ''s Source Water Assessment and Protection Viewer
+    service. A curated record for US site screening (Tobler, 26 Nov 2026): the publisher''s own service, checked by hand
+    (probe round 57) to return features for a bounding box.'
+  licence: 'Licence not stated by the publisher. TCEQ''s map services carry a disclaimer that they are for informational
+    purposes and may not be suitable for legal, engineering or surveying purposes.'
+  landing_page: https://www.tceq.texas.gov/gis/swaview
+  bbox:
+  - -106.65
+  - 25.84
+  - -93.51
+  - 36.5
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: arcgis-mapserver
+    url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/17
+    service_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer
+    capabilities:
+    - query
+    - render
+    info:
+      code_field: SOURCE_ID
+      system_field: PWS_ID
+      nation: Texas
+      completeness: complete
+      completeness_note: TCEQ's capture zones for Texas public water supply wells (half-mile fixed radius); wells TCEQ hasn't delineated
+        aren't in it
+    check_url: https://gisweb.tceq.texas.gov/arcgis/rest/services/SWAPV/SourceWaterAssessment_PRD/MapServer/17/query?where=1%3D1&returnCountOnly=true&f=json
+  - protocol: landing
+    url: https://www.tceq.texas.gov/gis/swaview
+- kind: record
+  id: us-ca-dwsap-protection-areas
+  title: Drinking water source protection areas, California (State Water Board; not published as data)
+  publisher: California State Water Resources Control Board, Division of Drinking Water
+  publisher_type: regional-gov
+  country: US
+  abstract: 'California''s Drinking Water Source Assessment and Protection (DWSAP) programme, which is also the state''s
+    wellhead protection programme, delineates protection zones round public supply wells and intakes as part of each
+    source assessment. No statewide layer of those zones is published: the State Water Board''s public GIS server
+    (gispublic.waterboards.ca.gov, read 26 Nov 2026) has public water system boundaries and, since 2015, the reported
+    locations of public water system wells (GAMA), but no protection zones. This record has no data endpoint on purpose. A
+    check that needs these zones in California should say they are not available from open data, and never that there are
+    none. A curated record for US site screening (Tobler, 26 Nov 2026).'
+  licence: 'Not available for re-use as data: the protection zones are part of each water system''s source assessment,
+    held by the State Water Board''s Division of Drinking Water, not a published dataset.'
+  landing_page: https://water.waterboards.ca.gov/drinking_water/certlic/drinkingwater/DWSAP.html
+  bbox:
+  - -124.48
+  - 32.53
+  - -114.13
+  - 42.01
+  geometry_type: polygon
+  concepts_hint:
+  - groundwater-protection
+  - screening-zones-pack
+  endpoints:
+  - protocol: landing
+    url: https://water.waterboards.ca.gov/drinking_water/certlic/drinkingwater/DWSAP.html
+    info:
+      access: restricted
+      access_note: protection zones are delineated in each source assessment but not published as a statewide layer. Public
+        water system well locations are public on GAMA GIS (gispublic.waterboards.ca.gov, GAMA folder).
+      how_to_check: https://water.waterboards.ca.gov/drinking_water/certlic/drinkingwater/DWSAP.html
+      nation: California
+      completeness: none
+      completeness_note: the zones exist for California's public supply sources, but none is published as data

@@ -1331,3 +1331,15 @@ rules:
     open: true
     attribution: "U.S. EPA"
     source: EPA's public domain statement as used for the 24 Nov EPA records; the layer credits "Data.gov" (probe round 54)
+  - host: gisweb.tceq.texas.gov
+    layers: '^us-tx-tceq-capture-zone-'
+    licence: "Licence not stated by the publisher. TCEQ's map services carry a disclaimer that they are for informational purposes and may not be suitable for legal, engineering or surveying purposes."
+    open: false
+    attribution: "Texas Commission on Environmental Quality"
+    source: ArcGIS Online item 820b568473c94f6db2beb1741516be60 (licence field empty, credits "TCEQ, USGS, TWDB, RRC") and item 09074e983533475e986b8f551a442e54 (disclaimer), read 26 Nov 2026
+  - host: water.waterboards.ca.gov
+    layers: '^us-ca-dwsap-protection-areas:'
+    licence: "Not available for re-use as data: the protection zones are part of each water system's source assessment, held by the State Water Board's Division of Drinking Water, not a published dataset."
+    open: false
+    terms: "A record of a dataset that isn't published. A check should report it as not available, never as none."
+    source: State Water Board public GIS server folders read in probe round 58, 26 Nov 2026 (no DWSAP zone layer); DWSAP programme page
