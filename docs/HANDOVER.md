@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (26 Nov 2026, morning)
+# AI Living World Atlas: handover (26 Nov 2026, 07:40)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -108,7 +108,9 @@ Workspace notes:
 - **Geofabrik throttles heavy downloaders.** On 25 Nov, after about four UK builds in a day between the two repos, it
   refused connections (HTTP 000) for 4 of NL's 12 extracts and 8 of the UK's 50. The build now gives each refused
   extract a second try after 3 minutes; an extract that fails twice is left out of the release and its outline.
-  Don't run several builds back to back.
+  Don't run several builds back to back. **26 Nov:** the NL dry build (the day's second build, after the UK publish)
+  still lost Flevoland and Noord-Holland on both tries, so the throttle seems to last longer than 3 minutes or to count
+  over more than a day.
 
 ## Rules Rob set
 
@@ -159,7 +161,10 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
    checks through `mcp-ask`: `get_dataset` returns it with the manifest endpoint, release, data date and feature counts;
    a text search near Linlithgow finds it; a `road` search there ranks it 9th of 30, below DfT statistics layers (the
    best-in-class ranking work would fix that). Each publish now reruns spike-osm, pages and deploy-mcp itself.
-3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
+3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **NL dry build, 26 Nov 07:23-07:36** (run
+   45774894317): 10 of 12 extracts, Flevoland and Noord-Holland refused twice (HTTP 000); 10.4M features (9.8M
+   buildings), 3.5 GB FlatGeobuf, 1.4 GB GeoParquet, peak memory under 1 GB per extract. Don't publish NL without
+   Noord-Holland (Amsterdam): rerun the dry build on a quiet day first. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
    30 days after upload. The prefix catches only the dated release folders, never the manifests (`osm/<market>.json`).
@@ -302,7 +307,8 @@ docs/mcp-tools.md (25 Nov night); reasons in decisions.md.
 - **Licences:** `licences.recognise` (combine.py) re-reads `open_licence` with the fixed rule: licences given as URLs count,
   NC/ND don't. Upgrade-only except where NC/ND is named.
 - **Still open, in order:**
-  1. EU industrial emissions register: EEA's hosts didn't answer GitHub on 25 Nov. Try a probe again; if the download
+  1. EU industrial emissions register: EEA's hosts didn't answer GitHub on 25 Nov, nor on 26 Nov (probe round 53:
+     sdi.eea.europa.eu and industry.eea time out, discodata 502). Try a probe again; if the download
      answers (`sdi.eea.europa.eu/webdav/datastore/public/eea_v_4326_10_m_ied-eprtr_p_2007-2024_v15_r00/`), host it like the
      EA files (files.py would need a `layer` key for a multi-layer GeoPackage).
   2. NL: host PDOK's BRO soil decisions (SLD, CC0, WMS only as a service) from PDOK's download; Bodemloket has no service.
