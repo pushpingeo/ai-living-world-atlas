@@ -1,19 +1,11 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 54 (26 Nov): sources for Tobler's screening-zones requests (HSE, NL Natura 2000 and Netkaart, FEMA NFHL, EPA SSA)
-https://www.hse.gov.uk/landuseplanning/planning-advice-web-app.htm
-https://api.pdok.nl/rvo/natura2000/ogc/v1/collections/natura2000?f=json
-https://api.pdok.nl/rvo/natura2000/ogc/v1/collections/natura2000/items?limit=1&f=json
-https://api.pdok.nl/rvo/natura2000/ogc/v1/collections/natura2000/items?limit=1&f=json&bbox=5.5,52.0,6.0,52.4
-https://data.rivm.nl/geo/nl/wfs?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=nl:netkaart_actuele_versie_atlas_rivm
-https://data.rivm.nl/geo/nl/wfs?service=WFS&version=2.0.0&request=GetFeature&count=2&outputFormat=application/json&srsName=EPSG:4326&typeNames=nl:netkaart_actuele_versie_atlas_rivm
-https://data.rivm.nl/geo/nl/wfs?service=WFS&version=2.0.0&request=GetFeature&resultType=hits&typeNames=nl:netkaart_actuele_versie_atlas_rivm
-https://www.nationaalgeoregister.nl/geonetwork/srv/api/search/records/_search?q=netkaart
-https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer?f=json
-https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28?f=json
-https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?where=1%3D1&returnCountOnly=true&f=json
-https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-95.4,29.7,-95.3,29.8&geometryType=esriGeometryEnvelope&inSR=4326&outFields=FLD_ZONE,ZONE_SUBTY,SFHA_TF&returnGeometry=false&resultRecordCount=3&f=json
-https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer/6?f=json
-https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer/6/query?where=1%3D1&returnCountOnly=true&f=json
-https://geopub.epa.gov/ArcGIS/rest/services/NEPAssist/Water/MapServer/6/query?where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=2&f=json
+# round 55 (26 Nov): RIVM Netkaart retry (data.rivm.nl/geo/nl timed out in round 54); Natura 2000 counts and classes
+https://data.rivm.nl/geo/nl/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=nl:netkaart_actuele_versie_atlas_rivm&resultType=hits
+https://data.rivm.nl/geo/nl/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=nl:netkaart_actuele_versie_atlas_rivm&maxFeatures=2&outputFormat=application/json&srsName=EPSG:4326
+https://data.rivm.nl/geo/nl/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=nl:netkaart_actuele_versie_atlas_rivm&maxFeatures=2&outputFormat=application/json&srsName=EPSG:4326
+https://service.pdok.nl/rvo/natura2000/wfs/v1_0?service=WFS&version=2.0.0&request=GetFeature&typeNames=natura2000:natura2000&resultType=hits
+https://service.pdok.nl/rvo/natura2000/wfs/v1_0?service=WFS&version=2.0.0&request=GetPropertyValue&typeNames=natura2000:natura2000&valueReference=beschermin
+https://service.pdok.nl/rvo/natura2000/wfs/v1_0?service=WFS&version=2.0.0&request=GetPropertyValue&typeNames=natura2000:natura2000&valueReference=status
+https://api.pdok.nl/rvo/natura2000/ogc/v1?f=json
