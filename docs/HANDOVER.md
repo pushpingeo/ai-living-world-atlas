@@ -136,9 +136,12 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
   FlatGeobuf. Same features as Tobler's version (checked on a 1.5M-building test file and on the real UK: 42 extracts,
   identical counts per group and identical FlatGeobuf bytes). Peak memory for Ireland's 418 MB extract went from 7.4 GB to
   1.3 GB, so Texas (729 MB) and California (norcal and socal, about 670 MB each) should need about 2.2 GB on a normal runner.
-- **Runs so far (all `PUBLISH=no`, nothing written to the bucket):** UK 25 Nov 12:10, 50 of 50 extracts, 23.5M features,
-  7.6 GB FlatGeobuf, 3.1 GB GeoParquet, manifest 447 kB, data as of 24 Nov 21:21 UTC (matches Tobler's own measurement);
-  NL 8 of 12 (Geofabrik refused 4); UK again with the streaming build, 42 of 50 (Geofabrik refused 8).
+- **Runs so far:** dry builds on 25 Nov (UK 50 of 50; NL 8 of 12 and UK 42 of 50 when Geofabrik refused some).
+  **First atlas publish, UK, 26 Nov 06:38-06:50** (run 45769663315, Rob's go): 50 of 50 extracts, none carried, 7.62 GB
+  FlatGeobuf, 3.09 GB GeoParquet, manifest 447 kB, release `osm/2026-11-26/`. Data still as of 24 Nov 21:21 UTC (Geofabrik
+  had no newer UK extract that morning). Checked through `probe` round 52: manifest 200 with CORS for asktobler.com,
+  range reads of a FlatGeobuf and a GeoParquet answer 206 with the right magic bytes. The 12 minutes (not 40) was the
+  streaming build with six jobs.
 - **Publishing:** `PUBLISH=yes` (or dispatch `publish=yes`) checks the token can write, uploads files to
   `osm/<release>/<extract>/`, then the manifest `osm/<market>.json`, then writes `vocab/seeds/osm.yaml` and commits it.
   Once `spike-osm` is in `runs/published.txt`, it also runs spike-osm, pages and deploy-mcp itself.
@@ -148,12 +151,9 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
   publishes but not re-read on 25 Nov (the workspace can't reach it): read it once in a browser.
 
 **Still to do, in order:**
-1. **First publish: Rob agreed 25 Nov 16:41** (US on hold). Tobler's live manifest points into `osm/2026-11-25/` and the
-   build refuses to write into an existing release folder, so the UK goes on 26 Nov (a reminder in this chat fires at
-   06:30): `PUBLISH=yes` in `runs/osm.env`, then check the manifest and a range read through `probe`, add `uk` to
-   `runs/osm-weekly.env`. Tobler retired its own `osm-extracts.yml` on 25 Nov (17:29), so nothing else publishes.
-   Since 25 Nov evening `publish.py` has Tobler's `--previous`: an extract a run can't build keeps its last entry
-   (`carried`) if under 14 days old.
+1. **First publish (done 26 Nov):** UK published, see "Runs so far". `uk` is in `runs/osm-weekly.env`, so the Saturday
+   05:41 UTC cron rebuilds and publishes it from 28 Nov; `runs/osm.env` is back to `PUBLISH=no`. An extract a run can't
+   build keeps its last entry (`carried`) if under 14 days old.
 2. **First record:** add `runs/spike-osm.env` (`SEEDS=vocab/seeds/osm.yaml`, `SHARDS=1`) and `runs/tag-osm.env`, add
    `spike-osm` to `runs/published.txt`, run the tag (cents), check `find_datasets` and `get_dataset` find it (mcp-ask).
 3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
@@ -336,7 +336,7 @@ Details in decisions.md (24 Nov, night).
 
 ## Known gaps and next steps (rough priority)
 
-1. **The OpenStreetMap copy:** Rob's go for the first publish, then the steps in its section above.
+1. **The OpenStreetMap copy:** UK published 26 Nov and weekly; next the atlas record, then NL and AU (its section above).
    **Pollution screening:** next steps in its section above (EU register, BRO soil decisions, Rob's licence calls).
 2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly. Expected real retirements:
    oceandata.rad.rutgers.edu, gis1.mgipu.hr, gis12.cookcountyil.gov. Watch the EEA discomap hosts (all down on 24 Nov).
