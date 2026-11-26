@@ -86,6 +86,44 @@ its details. Rewritten after every published build.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (26 Nov evening, **screening zones**: Tobler's eight requests from `claude/research-asset-reaches.md` section 3) Additive.
+  New wave `spike-zones`, keyword `screening-zones-pack`, seed `vocab/seeds/screening-zones.yaml`. Same endpoint fields as
+  the other packs (`nation`, `completeness`, `completeness_note`). Record ids are fixed.
+  - **New field, `info.access: "restricted"`** (with `access_note` and `how_to_check`): a record of data that exists but
+    isn't published for re-use. It has a landing endpoint only, so `fetch_features` has nothing to fetch. A check that
+    meets it should say "not available from open data", never "none". `completeness` is `none` on such a record.
+
+    | Record | Id | Notes |
+    |---|---|---|
+    | HSE consultation zones, Great Britain | `a15122ad188c6d23` | **restricted**: given to councils through HSE's Planning Advice Web App, where developers can check a site themselves (free; HSE's advice is charged) |
+    | Natura 2000 sites, Netherlands (RVO, PDOK) | `9727d665d1fefb83` | OGC API Features, Public Domain Mark. Name `naam_n2k`, code `nr`, class `beschermin`: `HR` (110), `VR+HR` (57), `VR` (38), `HR groeve` (4). 209 features for 162 areas, so count areas by `nr`. Complete; a few boundaries are drafts (`status`) |
+    | Flood hazard zones, NFHL (FEMA) | `043582eb571bb87f` | MapServer layer 28. Class `FLD_ZONE` (A, AE, AH, AO, AR, A99, V, VE = Special Flood Hazard Area; X with `ZONE_SUBTY` "0.2 PCT ANNUAL CHANCE FLOOD HAZARD" = 0.2%; X alone = minimal; D = undetermined), flag `SFHA_TF` (T inside the SFHA). **partial** (digital maps only; layer 0 shows where). Small boxes only: a whole-layer count times out. robots.txt disallows automated checks, so the sweep doesn't sample its data; licence inferred (US federal) |
+    | Sole Source Aquifers (EPA, NEPAssist) | `00e494c4df69f701` | MapServer layer 6. Name `SSA_NAME`, code `SSA_ID`. 93 features, complete |
+
+  - **Already in the atlas (no change):**
+    - IRZ decoding: done 23 Nov (`details.irzcode`, `vocab/sssi_irz_codes.json`); Tobler already has it.
+    - England's merged SPZs: `uk-ea-source-protection-zones` (`6c3e0babf56f294e`), the EA's merged layer on ArcGIS Online
+      rather than its MapServer. Same zones and classes, including 1c/2c/3c.
+    - England's flood zones: `uk-ea-flood-zones` (`5ffe9c81924b8082`) is already the current combined dataset
+      (Flood_Zones_2_3_Rivers_and_Sea). The retired separate FZ2 and FZ3 datasets were never in the atlas; some councils
+      publish their own copies (Bristol, Hyndburn, York, Birmingham), which stay crawled. The EA's "Flood Zones plus
+      Climate Change" is crawled (`9c9cae8c6f9bf40d`).
+    - Victoria: Special Water Supply Catchment Areas (`a404a7c53842294a`) and Extractive Industry Interest Areas
+      (`6240e2d57c2d6319`), both crawled from the Victorian Government's Mapshare and passing.
+  - **Waiting on a choice:** US state wellhead protection layers. Crawled and passing for Minnesota (MDA), Massachusetts
+    (MassGIS, Zone II and IWPA), Oklahoma (DEQ), Michigan, Delaware, North Dakota, and several counties. Tell us which states
+    Tobler targets and we'll curate those (fields, classes, completeness).
+  - **Not found as a service:** Dutch radar disturbance areas (a map in the Omgevingsregeling and RVO's viewer); Basisnet
+    attention areas (IPLO: the Basisnet "is not yet geometrically bounded", so keep the computed 30 m / 200 m along the
+    routes); Victoria's wind energy facility exclusion areas (rules in clause 52.32, not one layer); a national UK aerodrome
+    safeguarding layer. For aerodromes, a few councils publish their own (City of London and South Ayrshire's Prestwick,
+    both crawled and passing; Gateshead for Newcastle, Fife for Dundee and Fife airports, Buckinghamshire for Denham and
+    Luton, Lambeth for RAF Kenley, an Edinburgh 30 km zone). Licences mostly unstated, so keep the computed 13 km / 30 km ring,
+    labelled as such.
+  - **Not yet:** RIVM's Netkaart (public domain, WFS on `data.rivm.nl/geo/nl`) didn't answer GitHub twice on 26 Nov. To retry.
+  - **Atlas fix found on the way (sweep):** curated endpoints were being marked "missing" by the liveness sweep and would
+    have started retiring about 7 Dec. Fixed 26 Nov (decisions.md). Nothing for Tobler to change.
+
 - (25 Nov night, **pollution screening for the US, Netherlands and Australia; two Worker changes**; gap review in the
   project, `claude/pollution-sources-gap-review-2026-11-25.md`) Additive. Same fields as the UK and US packs
   (`details.nation`, `completeness`, `completeness_note` on every endpoint). Record ids are fixed.
