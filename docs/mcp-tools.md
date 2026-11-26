@@ -86,7 +86,7 @@ its details. Rewritten after every published build.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
-- (26 Nov evening, **screening zones**: Tobler's eight requests from `claude/research-asset-reaches.md` section 3) Additive.
+- (26 Nov evening, **screening zones**, Texas and California added late evening: Tobler's eight requests from `claude/research-asset-reaches.md` section 3) Additive.
   New wave `spike-zones`, keyword `screening-zones-pack`, seed `vocab/seeds/screening-zones.yaml`. Same endpoint fields as
   the other packs (`nation`, `completeness`, `completeness_note`). Record ids are fixed.
   - **New field, `info.access: "restricted"`** (with `access_note` and `how_to_check`): a record of data that exists but
@@ -110,9 +110,24 @@ Newest first. Tobler's chat adds requests here; the atlas chat marks them done o
       Climate Change" is crawled (`9c9cae8c6f9bf40d`).
     - Victoria: Special Water Supply Catchment Areas (`a404a7c53842294a`) and Extractive Industry Interest Areas
       (`6240e2d57c2d6319`), both crawled from the Victorian Government's Mapshare and passing.
-  - **Waiting on a choice:** US state wellhead protection layers. Crawled and passing for Minnesota (MDA), Massachusetts
-    (MassGIS, Zone II and IWPA), Oklahoma (DEQ), Michigan, Delaware, North Dakota, and several counties. Tell us which states
-    Tobler targets and we'll curate those (fields, classes, completeness).
+  - **US wellhead protection, Texas and California (Rob's pick, 26 Nov late evening):**
+
+    | Record | Id | Notes |
+    |---|---|---|
+    | TX well capture zones, 2-year time of travel (TCEQ) | `70c9684b9b239e17` | 10,915 zones |
+    | TX well capture zones, 5-year | `6687b431d240e1c5` | 10,914 |
+    | TX well capture zones, 20-year | `e33f7be1786fa951` | 10,912 |
+    | TX well capture zones, 50-year | `b2ee5931a554b370` | 10,913 |
+    | TX well capture zones, 100-year | `2aa46121508c506a` | 10,914 |
+    | TX well capture zones, half-mile fixed radius | `396d3904b71f7349` | 1,622 (where TCEQ had too little data to model) |
+    | California source protection areas (DWSAP) | `b2617fec04a664c5` | **restricted**: delineated in each source assessment, no statewide layer published |
+
+    Texas: TCEQ's own SWAP service, one layer per zone; code field `SOURCE_ID` (the well), `system_field` `PWS_ID`.
+    `nation` is "Texas", completeness complete. TCEQ's 10-year layer is empty, so it isn't here. **Licence not stated**
+    (`open_licence` false; TCEQ's disclaimer only). robots.txt disallows automated checks, same footing as FEMA (Rob, 26 Nov).
+    One check would normally use one of the time-of-travel layers (5-year is a common choice), not all of them: that's
+    Tobler's call. California publishes public water system well locations (GAMA GIS) but no zones; Tobler could compute
+    a ring round those wells, labelled as computed, if that's wanted.
   - **Not found as a service:** Dutch radar disturbance areas (a map in the Omgevingsregeling and RVO's viewer); Basisnet
     attention areas (IPLO: the Basisnet "is not yet geometrically bounded", so keep the computed 30 m / 200 m along the
     routes); Victoria's wind energy facility exclusion areas (rules in clause 52.32, not one layer); a national UK aerodrome

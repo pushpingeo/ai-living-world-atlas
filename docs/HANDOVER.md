@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (26 Nov 2026, 21:30)
+# AI Living World Atlas: handover (26 Nov 2026, 22:10)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -79,7 +79,7 @@ Workspace notes:
 | Africa (`spike-africa`) | 17.6k | 8.7k | National-authority rule; petroleum layers from Morocco, Uganda, Angola |
 | Best-in-class fill (`spike-fill`) | 5.1k | 463 | 24 Nov night: NASA, USGS National Map and earthquakes, Met Office, EFFIS, FIRMS, SoilGrids, GVP, WRI, World Bank. Last in publish order. See below |
 | UK water and peat (`spike-ukwaterpeat`) | 13 | 13 | Storm overflows (8 companies live, 2025 annual returns, Scottish Water) and the England Peat Map (24 Nov) |
-| Screening zones (`spike-zones`) | 4 | 4 | 26 Nov evening (Tobler): HSE consultation zones (restricted, no data), Natura 2000 NL, FEMA NFHL flood hazard zones, EPA Sole Source Aquifers |
+| Screening zones (`spike-zones`) | 11 | 11 | 26 Nov evening (Tobler): HSE consultation zones (restricted, no data), Natura 2000 NL, FEMA NFHL flood hazard zones, EPA Sole Source Aquifers, Texas well capture zones (TCEQ, 6), California DWSAP (restricted) |
 | US contamination (`spike-uscontamination`) | 21 | 21 | EPA's national layers (24 Nov, Tobler): Superfund, brownfields, RCRA corrective action, TRI, ICIS-Air, NPDES, RCRA TSD; 25 Nov: leaking tanks (UST Finder), Formerly Used Defense Sites, nonattainment areas (7 standards) |
 | NL pollution (`spike-nlpollution`) | 7 | 7 | 25 Nov: Wbb decisions (Kadaster WKPB, OGC API), RIVM E-PRTR releases and drinking water zones, Zeeland and Noord-Holland former landfills |
 | AU pollution (`spike-aupollution`) | 9 | 9 | 25 Nov: EPA Victoria, NSW EPA (3), Queensland, Tasmania, Geoscience Australia (2); the NPI is hosted in `spike-files` |
@@ -363,7 +363,13 @@ docs/mcp-tools.md (26 Nov evening); handback for Tobler in the project, `claude/
 - FEMA's robots.txt disallows automated checks: the crawl and sweep skip its data check ("checked by hand", probe 54).
   Same footing as the EA flood zones. Never count the whole layer (it times out).
 - IRZ decoding, England's SPZs and flood zones were already done; Victoria's catchments and extractive areas are crawled.
-- **Still open:** US state wellhead layers (which states? Rob or Tobler); RIVM Netkaart (data.rivm.nl/geo/nl didn't answer
+- **Texas and California (Rob's pick, late evening):** six TCEQ capture zone records (2, 5, 20, 50, 100 year, half-mile;
+  `70c9684b9b239e17`, `6687b431d240e1c5`, `e33f7be1786fa951`, `b2ee5931a554b370`, `2aa46121508c506a`, `396d3904b71f7349`),
+  licence not stated, TCEQ's robots.txt is "Disallow: /" (same footing as FEMA, Rob agreed). California: restricted record
+  `b2617fec04a664c5` (no zone layer on the State Water Board's public server; well locations are public on GAMA).
+  Spike run 2 lost FEMA to a transient connection refusal (it would have dropped out of the publish); run 3 put it back.
+  If a curated host is down on a spike run, rerun before the publish settles.
+- **Still open:** other US states' wellhead layers (crawled for MN, MA, OK, MI, DE, ND); RIVM Netkaart (data.rivm.nl/geo/nl didn't answer
   GitHub twice: retry with probe); in concept searches these records rank below local layers (Natura 2000 18th near Nijkerk,
   NFHL not in Houston's top 20) until best-in-class ranking is built. Not found as services: NL radar areas, Basisnet attention
   areas, Victoria wind exclusions, a UK aerodrome safeguarding layer (a few councils publish their own, licences unstated).
