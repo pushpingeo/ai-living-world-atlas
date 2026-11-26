@@ -1,12 +1,7 @@
 # Probe list: one URL per line; results on results/probe (numbered from 1, comments skipped). Older rounds are in git history.
 # Prefixes: "RANGE " first 16 KB only; "FULL " keep the whole answer (up to 20 MB) as N.bin. Don't FULL files with personal
 # data: the results branch is public.
-# round 51 (25 Nov): NPI facility fields (for the keep-list); AU counts and geometry types
-RANGE https://data.gov.au/data/dataset/043f58e0-a188-4458-b61c-04e5b540aea4/resource/6561305a-509b-4861-b5f7-f159cc4e17a0/download/facilities.geojson
-https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/EPA/Contaminated_land_notified_sites/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://mapprod1.environment.nsw.gov.au/arcgis/rest/services/PropertyNSW/ContamintedLandMgmt_PublicRegister/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json
-https://mapprod.environment.nsw.gov.au/arcgis/rest/services/EPA/Environment_Protection_Licences_Pub/FeatureServer/3/query?where=1%3D1&returnCountOnly=true&f=json
-https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer/140/query?where=1%3D1&returnCountOnly=true&f=json
-https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/74/query?where=1%3D1&returnCountOnly=true&f=json
-https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Boundaries/AdminBoundariesFramework/FeatureServer/140/query?where=1%3D1&outFields=objectid&resultRecordCount=1&returnGeometry=true&outSR=4326&f=geojson
-https://geoservices.noord-holland.nl/ags/rest/services/thematische_services/pnh_thema_natuur_milieu/MapServer/54/query?where=1%3D1&geometry=4.6,52.3,4.9,52.5&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326&f=geojson&resultRecordCount=2
+# round 52 (26 Nov): first atlas publish of the UK OSM copy: live manifest, and a range read of one FlatGeobuf
+https://data.asktobler.com/osm/uk.json
+RANGE https://data.asktobler.com/osm/2026-11-26/bedfordshire/transport.fgb
+RANGE https://data.asktobler.com/osm/2026-11-26/bedfordshire/buildings.parquet
