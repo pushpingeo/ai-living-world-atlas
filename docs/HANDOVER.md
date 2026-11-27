@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (26 Nov 2026, 22:10)
+# AI Living World Atlas: handover (27 Nov 2026, 06:30)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -111,8 +111,11 @@ Workspace notes:
   refused extract is tried again after about 15 minutes, then 30 (plus up to a minute of jitter; `RETRY_WAITS` in the
   build step), and one that fails three times is left out of the release and its outline. Worst case adds ~47 minutes.
   Don't run several builds back to back. **26 Nov:** the NL dry build (the day's second build, after the UK publish)
-  still lost Flevoland and Noord-Holland on both tries, so the throttle seems to last longer than 3 minutes or to count
-  over more than a day.
+  still lost Flevoland and Noord-Holland on both tries. **27 Nov:** the plan job couldn't connect to Geofabrik at all
+  (curl exit 7), yet a probe runner a minute later fetched the index and Flevoland at once (round 54), and a rerun of the
+  failed job (fresh runner) built 12 of 12 with no refusals. So the refusals look tied to particular runner addresses,
+  not to time: if a whole job is refused, rerun it (`POST .../actions/runs/<id>/rerun-failed-jobs`) rather than wait.
+  A refused plan job publishes nothing and the last release stays live.
 
 ## Rules Rob set
 
@@ -166,8 +169,10 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
 3. **NL and AU dry builds, then publish each** (a day apart, for Geofabrik). **NL dry build, 26 Nov 07:23-07:36** (run
    45774894317): 10 of 12 extracts, Flevoland and Noord-Holland refused twice (HTTP 000); 10.4M features (9.8M
    buildings), 3.5 GB FlatGeobuf, 1.4 GB GeoParquet, peak memory under 1 GB per extract. Don't publish NL without
-   Noord-Holland (Amsterdam): rerun the dry build on a quiet day first (27 Nov
-   morning, with the new backoff). **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
+   Noord-Holland (Amsterdam): rerun the dry build on a quiet day first. **NL dry build retry, 27 Nov 06:15-06:26** (run
+   45950777779, attempt 2 after the plan job couldn't connect): **12 of 12**, none carried, no refusals (so the new
+   backoff wasn't exercised), 12.4M features, 4.19 GB FlatGeobuf, 1.69 GB GeoParquet, peak 908 MB, data as of 26 Nov
+   21:21 UTC. Ready to publish on Rob's go; then add `nl` to `runs/osm-weekly.env`. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
    30 days after upload. The prefix catches only the dated release folders, never the manifests (`osm/<market>.json`).
