@@ -179,7 +179,7 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
    21:21 UTC. **NL published 27 Nov 16:11-16:18** (run 46031400709, Rob's go): 12 of 12, release `osm/2026-11-27/`,
    12.4M features. Probe round 59: manifest 200 with CORS, Noord-Holland and Flevoland files answer range reads (206,
    right magic bytes). Record `osm-copy-nl`, id `227eacf1e3842a0f`, tagged for under a cent; `get_dataset` opens it live.
-   `nl` is in `runs/osm-weekly.env` (Saturday 07:11 UTC, first on 28 Nov). **Next: AU dry build**, not on a Saturday. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
+   `nl` is in `runs/osm-weekly.env` (Saturday 07:11 UTC, first on 28 Nov). **Next: AU dry build**, not on a Saturday: set for Mon 30 Nov 06:15 London (Rob's go, 27 Nov), after checking the weekend's UK and NL runs. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
    30 days after upload. The prefix catches only the dated release folders, never the manifests (`osm/<market>.json`).
