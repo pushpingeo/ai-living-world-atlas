@@ -1,169 +1,190 @@
 {
  "market": "nl",
- "release": "2026-11-26",
- "built_at": "2026-11-26T07:35:52Z",
+ "release": "2026-11-27",
+ "built_at": "2026-11-27T06:25:54Z",
  "extracts": 12,
- "built": 10,
+ "built": 12,
  "carried": [],
- "missing": [
-  "flevoland",
-  "noord-holland"
- ],
- "source_bytes": 1186550714,
- "filtered_bytes": 611575188,
- "fgb_bytes": 3515315648,
- "parquet_bytes": 1417360933,
- "features": 10433146,
- "manifest_bytes": 41464,
+ "missing": [],
+ "source_bytes": 1414170278,
+ "filtered_bytes": 727587424,
+ "fgb_bytes": 4189181512,
+ "parquet_bytes": 1685427323,
+ "features": 12414981,
+ "manifest_bytes": 38641,
  "by_group": {
   "buildings": {
-   "features": 9807321,
-   "fgb_bytes": 3182034064,
-   "parquet_bytes": 1214283348
+   "features": 11660083,
+   "fgb_bytes": 3780286504,
+   "parquet_bytes": 1435239218
   },
   "community": {
-   "features": 10591,
-   "fgb_bytes": 4411640,
-   "parquet_bytes": 2297814
+   "features": 13043,
+   "fgb_bytes": 5392560,
+   "parquet_bytes": 2786874
   },
   "landuse": {
-   "features": 29919,
-   "fgb_bytes": 20092192,
-   "parquet_bytes": 13208227
+   "features": 33410,
+   "fgb_bytes": 23124336,
+   "parquet_bytes": 15368698
   },
   "transport": {
-   "features": 81775,
-   "fgb_bytes": 26752688,
-   "parquet_bytes": 10196724
+   "features": 99702,
+   "fgb_bytes": 32547176,
+   "parquet_bytes": 12280662
   },
   "utilities": {
-   "features": 14195,
-   "fgb_bytes": 4446496,
-   "parquet_bytes": 1871608
+   "features": 18025,
+   "fgb_bytes": 5531976,
+   "parquet_bytes": 2256432
   },
   "water": {
-   "features": 489345,
-   "fgb_bytes": 277578568,
-   "parquet_bytes": 175503212
+   "features": 590718,
+   "fgb_bytes": 342298960,
+   "parquet_bytes": 217495439
   }
  },
  "regions": [
   {
    "region": "drenthe",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 63970138,
-   "filtered_bytes": 28088750,
-   "read_s": 26.1,
-   "total_s": 28.1,
-   "max_rss_mb": 586,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 63987115,
+   "filtered_bytes": 28092916,
+   "read_s": 38.9,
+   "total_s": 41.3,
+   "max_rss_mb": 623,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "noord-brabant",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 207732541,
-   "filtered_bytes": 116496078,
-   "read_s": 114.9,
-   "total_s": 124.0,
-   "max_rss_mb": 898,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 207741401,
+   "filtered_bytes": 116498304,
+   "read_s": 173.4,
+   "total_s": 184.0,
+   "max_rss_mb": 868,
+   "skipped": {
+    "bad_geometry": 2
+   }
+  },
+  {
+   "region": "flevoland",
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 36620136,
+   "filtered_bytes": 16537769,
+   "read_s": 12.6,
+   "total_s": 13.8,
+   "max_rss_mb": 543,
+   "skipped": {
+    "bad_geometry": 0
+   }
+  },
+  {
+   "region": "noord-holland",
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 190774735,
+   "filtered_bytes": 99379905,
+   "read_s": 69.4,
+   "total_s": 76.0,
+   "max_rss_mb": 858,
    "skipped": {
     "bad_geometry": 2
    }
   },
   {
    "region": "friesland",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 89251446,
-   "filtered_bytes": 44605710,
-   "read_s": 37.4,
-   "total_s": 40.3,
-   "max_rss_mb": 605,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 89291204,
+   "filtered_bytes": 44623415,
+   "read_s": 55.4,
+   "total_s": 59.0,
+   "max_rss_mb": 612,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "overijssel",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 114631597,
-   "filtered_bytes": 54257521,
-   "read_s": 51.3,
-   "total_s": 55.4,
-   "max_rss_mb": 611,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 114646798,
+   "filtered_bytes": 54259941,
+   "read_s": 75.7,
+   "total_s": 80.5,
+   "max_rss_mb": 645,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "gelderland",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 195991508,
-   "filtered_bytes": 94520851,
-   "read_s": 140.6,
-   "total_s": 149.7,
-   "max_rss_mb": 828,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 196003730,
+   "filtered_bytes": 94522287,
+   "read_s": 139.0,
+   "total_s": 147.8,
+   "max_rss_mb": 796,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "utrecht",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 99813166,
-   "filtered_bytes": 53133873,
-   "read_s": 75.7,
-   "total_s": 80.5,
-   "max_rss_mb": 644,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 99842420,
+   "filtered_bytes": 53148412,
+   "read_s": 74.8,
+   "total_s": 79.5,
+   "max_rss_mb": 646,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "groningen",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 56826005,
-   "filtered_bytes": 28473112,
-   "read_s": 27.2,
-   "total_s": 29.2,
-   "max_rss_mb": 638,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 56827212,
+   "filtered_bytes": 28473222,
+   "read_s": 39.4,
+   "total_s": 41.9,
+   "max_rss_mb": 610,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "zeeland",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 44363488,
-   "filtered_bytes": 23047317,
-   "read_s": 23.7,
-   "total_s": 25.6,
-   "max_rss_mb": 614,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 44365350,
+   "filtered_bytes": 23048196,
+   "read_s": 34.8,
+   "total_s": 37.0,
+   "max_rss_mb": 607,
    "skipped": {
     "bad_geometry": 1
    }
   },
   {
    "region": "limburg",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 100982669,
-   "filtered_bytes": 52680213,
-   "read_s": 52.1,
-   "total_s": 56.3,
-   "max_rss_mb": 696,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 100989325,
+   "filtered_bytes": 52681360,
+   "read_s": 77.6,
+   "total_s": 82.6,
+   "max_rss_mb": 680,
    "skipped": {
     "bad_geometry": 0
    }
   },
   {
    "region": "zuid-holland",
-   "data_as_of": "2026-11-24T21:21:23Z",
-   "source_bytes": 212988156,
-   "filtered_bytes": 116271763,
-   "read_s": 119.4,
-   "total_s": 128.4,
-   "max_rss_mb": 831,
+   "data_as_of": "2026-11-26T21:21:01Z",
+   "source_bytes": 213080852,
+   "filtered_bytes": 116321697,
+   "read_s": 173.7,
+   "total_s": 184.8,
+   "max_rss_mb": 908,
    "skipped": {
     "bad_geometry": 0
    }

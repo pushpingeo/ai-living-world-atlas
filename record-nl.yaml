@@ -69,24 +69,22 @@ sources:
         - health care
         buildings:
         - building
-      release: '2026-11-26'
-      data_date: '2026-11-24'
+      release: '2026-11-27'
+      data_date: '2026-11-26'
       data_date_source: OpenStreetMap replication time of the oldest Geofabrik extract in this release
       data_as_of:
-        oldest: '2026-11-24T21:21:23Z'
-        newest: '2026-11-24T21:21:23Z'
-      extracts: 10
-      extracts_missing:
-      - flevoland
-      - noord-holland
+        oldest: '2026-11-26T21:21:01Z'
+        newest: '2026-11-26T21:21:01Z'
+      extracts: 12
+      extracts_missing: []
       extracts_carried: []
       features:
-        buildings: 9807321
-        community: 10591
-        landuse: 29919
-        transport: 81775
-        utilities: 14195
-        water: 489345
+        buildings: 11660083
+        community: 13043
+        landuse: 33410
+        transport: 99702
+        utilities: 18025
+        water: 590718
       completeness: partial
       completeness_note: complete for the extracts listed (every feature with these tags); OpenStreetMap itself is volunteer-mapped
         and uneven, especially for buildings and land use. Extracts missing from a release are left out of its outline.
@@ -101,20 +99,18 @@ sources:
             - 51.422
           - - 4.846
             - 51.484
-          - - 4.78
+          - - 4.779
             - 51.511
           - - 4.641
             - 51.429
-          - - 4.542
-            - 51.432
-          - - 4.55
-            - 51.481
-          - - 4.475
-            - 51.485
-          - - 4.384
-            - 51.453
-          - - 4.379
-            - 51.416
+          - - 4.545
+            - 51.433
+          - - 4.538
+            - 51.489
+          - - 4.391
+            - 51.459
+          - - 4.378
+            - 51.417
           - - 4.423
             - 51.369
           - - 4.219
@@ -135,12 +131,12 @@ sources:
             - 51.312
           - - 3.519
             - 51.287
-          - - 3.519
-            - 51.255
-          - - 3.429
-            - 51.252
-          - - 3.368
-            - 51.312
+          - - 3.52
+            - 51.254
+          - - 3.45
+            - 51.249
+          - - 3.381
+            - 51.283
           - - 3.38
             - 51.364
           - - 3.245
@@ -149,56 +145,14 @@ sources:
             - 51.855
           - - 3.365
             - 51.946
-          - - 4.012
-            - 52.465
-          - - 4.589
-            - 52.303
-          - - 4.555
-            - 52.211
-          - - 4.706
-            - 52.225
-          - - 4.736
-            - 52.199
-          - - 5.01
-            - 52.293
-          - - 5.044
-            - 52.237
-          - - 5.042
-            - 52.16
-          - - 5.191
-            - 52.169
-          - - 5.271
-            - 52.274
-          - - 5.333
-            - 52.281
-          - - 5.405
-            - 52.24
-          - - 5.538
-            - 52.266
-          - - 5.593
-            - 52.353
-          - - 5.813
-            - 52.429
-          - - 5.873
-            - 52.52
-          - - 5.787
-            - 52.599
-          - - 6.022
-            - 52.638
-          - - 5.953
-            - 52.674
-          - - 5.973
-            - 52.699
-          - - 5.927
-            - 52.758
-          - - 5.751
-            - 52.848
-          - - 5.38
-            - 52.774
-          - - 5.246
-            - 52.879
-          - - 5.056
-            - 53.15
+          - - 3.961
+            - 52.424
+          - - 3.915
+            - 52.449
+          - - 4.607
+            - 53.278
+          - - 4.76
+            - 53.237
           - - 4.631
             - 53.301
           - - 6.306
@@ -249,8 +203,8 @@ sources:
             - 52.074
           - - 6.685
             - 52.035
-          - - 6.819
-            - 51.989
+          - - 6.824
+            - 51.978
           - - 6.723
             - 51.904
           - - 6.68
@@ -269,14 +223,14 @@ sources:
             - 51.85
           - - 6.064
             - 51.872
-          - - 5.942
-            - 51.829
-          - - 5.98
-            - 51.773
-          - - 5.952
-            - 51.744
-          - - 6.024
-            - 51.717
+          - - 5.941
+            - 51.828
+          - - 5.981
+            - 51.772
+          - - 5.948
+            - 51.736
+          - - 6.023
+            - 51.715
           - - 6.033
             - 51.667
           - - 6.105
@@ -337,20 +291,18 @@ sources:
             - 50.948
           - - 5.739
             - 50.967
-          - - 5.778
-            - 51.054
-          - - 5.839
-            - 51.095
-          - - 5.823
-            - 51.114
+          - - 5.774
+            - 50.997
+          - - 5.769
+            - 51.039
           - - 5.857
-            - 51.146
-          - - 5.835
-            - 51.169
-          - - 5.568
-            - 51.228
-          - - 5.515
-            - 51.302
+            - 51.143
+          - - 5.829
+            - 51.173
+          - - 5.659
+            - 51.192
+          - - 5.487
+            - 51.307
           - - 5.416
             - 51.27
           - - 5.24
@@ -370,6 +322,5 @@ sources:
           - - 4.834
             - 51.422
       coverage_outline_note: simplified (0.02 degrees) from the manifest's outline; test coverage against the manifest's
-      status_note: 2 extracts didn't build in release 2026-11-26; the copy's outline leaves them out
   - protocol: landing
     url: https://www.openstreetmap.org/copyright
