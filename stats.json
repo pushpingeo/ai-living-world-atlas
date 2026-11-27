@@ -1,0 +1,110 @@
+{
+ "minutes": 0.0,
+ "http": {
+  "requests": 8,
+  "errors": 0,
+  "robots_blocked": 2
+ },
+ "portals": {
+  "total": 0,
+  "ok": 0,
+  "records_with_service_links": 0
+ },
+ "arcgis_roots": {
+  "total": 0,
+  "reachable": 0
+ },
+ "services": {
+  "attempted": 0,
+  "ok": 0,
+  "skipped_time": 0,
+  "by_type": {},
+  "top_errors": []
+ },
+ "layers": {
+  "total": 20,
+  "by_service_type": {
+   "landing": 11,
+   "arcgis-mapserver": 8,
+   "ogc-api-features": 1
+  },
+  "with_bbox": 20,
+  "with_abstract_50": 20,
+  "with_licence_text": 20,
+  "with_open_licence": 6,
+  "with_keywords": 20,
+  "joined_to_catalogue": 0,
+  "codelike_titles": 0,
+  "junk_flagged": 0,
+  "declared_iso_theme": 0,
+  "declared_theme_how": {
+   "none": 20
+  },
+  "publisher_type": {
+   "regional-gov": 13,
+   "central-gov": 7
+  },
+  "detail_source": {
+   "none": 20
+  },
+  "extent_source": {
+   "curated": 20
+  },
+  "extent_flags": {},
+  "cors_ok": 0,
+  "detail_level": {
+   "unknown": 20
+  },
+  "coverage_level": {
+   "national": 16,
+   "global": 4
+  },
+  "detail_level_passing": {
+   "unknown": 20
+  }
+ },
+ "checks": {
+  "by_status": {
+   "unchecked": 12,
+   "ok": 8
+  },
+  "live_rate_of_checked": 1.0,
+  "returns_data_or_empty_rate": 1.0
+ },
+ "quality": {
+  "pass": 20,
+  "pass_rate": 1.0,
+  "score_median": 92.5,
+  "score_bands": {
+   "[80, 101)": 20
+  }
+ },
+ "dedupe": {
+  "distinct_title_publisher": 11,
+  "distinct_among_passing": 11
+ },
+ "file_mb": 0.06,
+ "datasets": {
+  "total": 11,
+  "passing": 11,
+  "endpoints_per_dataset": {
+   "1": 2,
+   "2": 9
+  },
+  "multi_protocol": 9,
+  "match_rules": {
+   "catalogue": 9
+  },
+  "role": {
+   "data": 11
+  },
+  "role_passing": {
+   "data": 11
+  },
+  "capabilities": {
+   "query": 9,
+   "render": 8
+  },
+  "detail_known_passing": 0
+ }
+}
