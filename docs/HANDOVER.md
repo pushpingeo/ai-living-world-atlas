@@ -1,4 +1,4 @@
-# AI Living World Atlas: handover (27 Nov 2026, 06:30)
+# AI Living World Atlas: handover (27 Nov 2026, 17:15)
 
 Start here when picking the atlas up in a new chat. The detailed history of decisions is in `docs/decisions.md`.
 
@@ -91,7 +91,7 @@ Workspace notes:
 | EMODnet (`spike-emodnet`) | 4.2k | 2.5k | First in publish order; WFS+WMS grouped, CC-BY from GeoNetwork |
 | Europe (`spike-europe`) | 2.57M | 118.7k | From data.europa.eu (rerun 17 Nov: 681k catalogue records, was 367k); 466k local plans grouped into 1,849 council collections |
 
-- The viewer and the MCP server hold about **267k passing datasets**, all tagged (plus the OSM copy record and the four screening zones, 26 Nov).
+- The viewer and the MCP server hold about **267k passing datasets**, all tagged (plus the OSM copy records for the UK and NL, and the screening zones).
 - Tagging spend is **$30.28** in total (26 Nov: screening zones, under a cent) (24 Nov: $1.79 contamination re-tags, $0.03 fill wave; under a cent each for the curated UK and US waves): UK $4.76 (including the quality check), global $1.14, CANZ $5.08, US $6.39,
   Europe $11.09 ($6.49 first run, $4.60 for the 51,981 new datasets from the 17 Nov rerun).
 - At batch rates, tagging costs about **$0.09 per 1,000 datasets**.
@@ -116,6 +116,10 @@ Workspace notes:
   failed job (fresh runner) built 12 of 12 with no refusals. So the refusals look tied to particular runner addresses,
   not to time: if a whole job is refused, rerun it (`POST .../actions/runs/<id>/rerun-failed-jobs`) rather than wait.
   A refused plan job publishes nothing and the last release stays live.
+
+- **ArcGIS Online's shared hosts** (services2.arcgis.com and friends) carry thousands of organisations. Since 27 Nov the
+  sweep's host cut-off, second look and host-down rule work per organisation there (`host_key` in sweep.py); before
+  that, one organisation's blip marked 859 other services "host down" in a night.
 
 ## Rules Rob set
 
@@ -172,7 +176,10 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
    Noord-Holland (Amsterdam): rerun the dry build on a quiet day first. **NL dry build retry, 27 Nov 06:15-06:26** (run
    45950777779, attempt 2 after the plan job couldn't connect): **12 of 12**, none carried, no refusals (so the new
    backoff wasn't exercised), 12.4M features, 4.19 GB FlatGeobuf, 1.69 GB GeoParquet, peak 908 MB, data as of 26 Nov
-   21:21 UTC. Ready to publish on Rob's go; then add `nl` to `runs/osm-weekly.env`. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
+   21:21 UTC. **NL published 27 Nov 16:11-16:18** (run 46031400709, Rob's go): 12 of 12, release `osm/2026-11-27/`,
+   12.4M features. Probe round 59: manifest 200 with CORS, Noord-Holland and Flevoland files answer range reads (206,
+   right magic bytes). Record `osm-copy-nl`, id `227eacf1e3842a0f`, tagged for under a cent; `get_dataset` opens it live.
+   `nl` is in `runs/osm-weekly.env` (Saturday 07:11 UTC, first on 28 Nov). **Next: AU dry build**, not on a Saturday. **US on hold (Rob, 25 Nov).** US: 54 extracts once the five regional
    bundles are skipped (check the plan line says 54); 6 shards is fine for disk (90 GB free per runner) and memory.
 4. **Old releases (done 25 Nov):** an R2 lifecycle rule on `atlas-data` (Rob set it) deletes objects under `osm/20`
    30 days after upload. The prefix catches only the dated release folders, never the manifests (`osm/<market>.json`).
@@ -190,6 +197,11 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
 the sweep marked them "missing" (51) or "unmatched" (60); the first would have retired about 7 Dec. They are now found by
 layer URL (`match_key` in sweep.py; decisions.md). The failing ones clear on their next visit (every 3 days): check
 REPORT.md on 27-29 Nov that curated records read "ok".
+
+**27 Nov:** resolving fell to 98.0% (99.4% on 24 Nov). The biggest part was the host cut-off counting all of
+services2.arcgis.com as one host; fixed the same afternoon (per organisation on shared ArcGIS Online hosts, decisions.md).
+A live recheck found 1,326 of 1,334 services2 services fine, so the rate should recover as those come due again (3 days).
+Curated records read "ok" on 27 Nov. FEMA NFHL is now checked by hand (`manual_check`), so the sweep leaves it out.
 
 `atlas/sweep.py`, nightly via the `sweep` workflow. Details and reasoning in `docs/decisions.md` (17 Nov).
 - Rechecks published services: resolving every 7 days, failing every 3, retired every 28; up to 45k services a night.
@@ -365,7 +377,8 @@ docs/mcp-tools.md (26 Nov evening); handback for Tobler in the project, `claude/
   Sole Source Aquifers `00e494c4df69f701`. Tagged for under a cent. Live checks (mcp-ask, 21:24): all four open with
   `get_dataset`, the three data records return the right features (Nijkerk, Houston, Long Island).
 - **New field `info.access: "restricted"`** (HSE): a record of data that exists but isn't published; landing only.
-- FEMA's robots.txt disallows automated checks: the crawl and sweep skip its data check ("checked by hand", probe 54).
+- FEMA's robots.txt disallows automated checks and it refuses GitHub's runners: since 27 Nov both endpoints carry
+  `manual_check`, so the spike and sweep don't fetch it ("checked by hand", probe 54).
   Same footing as the EA flood zones. Never count the whole layer (it times out).
 - IRZ decoding, England's SPZs and flood zones were already done; Victoria's catchments and extractive areas are crawled.
 - **Texas and California (Rob's pick, late evening):** six TCEQ capture zone records (2, 5, 20, 50, 100 year, half-mile;
@@ -381,9 +394,11 @@ docs/mcp-tools.md (26 Nov evening); handback for Tobler in the project, `claude/
 
 ## Known gaps and next steps (rough priority)
 
-1. **The OpenStreetMap copy:** UK published 26 Nov, weekly, and in the atlas as a record; next NL and AU (its section above).
+1. **The OpenStreetMap copy:** UK (26 Nov) and NL (27 Nov) published, weekly, each in the atlas as a record; next AU
+   (its section above).
    **Pollution screening:** next steps in its section above (EU register, BRO soil decisions, Rob's licence calls).
-2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly (the curated-endpoint bug is fixed, 26 Nov). Expected real retirements:
+2. **Sweep retirements** are due from ~1 Dec: check nothing retires wrongly (curated endpoints fixed 26 Nov; shared ArcGIS
+   Online hosts per organisation and FEMA checked by hand, 27 Nov). Check on 30 Nov that resolving is back near 99%. Expected real retirements:
    oceandata.rad.rutgers.edu, gis1.mgipu.hr, gis12.cookcountyil.gov. Watch the EEA discomap hosts (all down on 24 Nov).
 3. **Best in class:** GIBS descriptions via CMR, then the ranking boost and flag (with the publisher registry stage 2
    release: `publisher_id`, `trusted`, `hosted_by`, `publisher_credit`, `trusted_only`, licence classes, one full reload;

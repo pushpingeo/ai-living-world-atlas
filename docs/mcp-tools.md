@@ -86,6 +86,16 @@ its details. Rewritten after every published build.
 
 Newest first. Tobler's chat adds requests here; the atlas chat marks them done or declined.
 
+- (27 Nov afternoon, **NL OpenStreetMap copy published; FEMA NFHL checked by hand**) Additive, no format change.
+  - `https://data.asktobler.com/osm/nl.json` is live: release `2026-11-27`, 12 of 12 extracts, none carried or missing,
+    data as of 26 Nov 21:21 UTC. Atlas record `osm-copy-nl`, dataset id `227eacf1e3842a0f` (concepts road, rail,
+    port-airport, power-line). Rebuilt and published weekly from Saturday 28 Nov (07:11 UTC cron), as the UK is.
+    Tobler can switch its NL site checks from Overpass to the copy. In searches it still ranks low (not in the top 10
+    for "OpenStreetMap" near Amsterdam), as the UK record does, until best-in-class ranking is built.
+  - FEMA NFHL (`043582eb571bb87f`): both endpoints now carry `manual_check` (already used by the Geoscience Australia
+    elevation records). The sweep leaves the record out, so it no longer reads "failing" when FEMA refuses GitHub's
+    runners. `fetch_features` is unchanged (checked live: Houston, zone X 0.2%).
+
 - (26 Nov evening, **screening zones**, Texas and California added late evening: Tobler's eight requests from `claude/research-asset-reaches.md` section 3) Additive.
   New wave `spike-zones`, keyword `screening-zones-pack`, seed `vocab/seeds/screening-zones.yaml`. Same endpoint fields as
   the other packs (`nation`, `completeness`, `completeness_note`). Record ids are fixed.
