@@ -773,3 +773,31 @@ uid as before. Curated endpoints now also get the weekly data check credited, an
 tracking, since their title and description are ours. Tested by checking 33 curated ArcGIS Online endpoints live: before,
 33 unmatched and no data checks; after, 33 ok, 33 data checks ok, no retags; applied over the 26 Nov state, the failing
 ones reset to 0. The next visit (failing ones are due every 3 days) clears them.
+
+## 2026-11-27 (afternoon): first NL publish of the OpenStreetMap copy; sweep counts failures per organisation on shared hosts
+
+**NL published** on Rob's go (16:10), run 46031400709: 12 of 12 extracts, none carried, 12.4M features, 4.19 GB
+FlatGeobuf, 1.69 GB GeoParquet, release `osm/2026-11-27/`, data as of 26 Nov 21:21 UTC. Probe round 59: manifest 200
+with CORS for asktobler.com; range reads in Noord-Holland and Flevoland (the two extracts refused on 26 Nov) answer 206
+with FlatGeobuf and Parquet magic bytes, WGS 84. `nl` joins `runs/osm-weekly.env` straight away, so its Saturday 07:11
+cron rebuilds it tomorrow, about 15 hours after this one. Accepted: refusals look tied to runners, not load, and a
+refused run publishes nothing (the last release stays live).
+
+**Sweep: the host cut-off counted a whole shared host.** On 27 Nov services2.arcgis.com gave ten network failures in a
+row (most of the 896 services checked there belong to one organisation, `dEKgZETqwmDAh1rP`), and the sweep stopped
+knocking: 859 services were recorded "host down" without being tried, the second look only retries 40 per host, and
+resolving fell to 98.0%. A live recheck that afternoon found 1,326 of 1,334 services2 services fine (8 real publisher
+errors). **Fix:** `host_key()` in atlas/sweep.py: on ArcGIS Online's shared hosts (`services*`, `tiles*`,
+`features*.arcgis.com`) the unit is host plus organisation (the first path segment), for the cut-off, the second look
+and the host-down rule (so the 30-day retirement still applies when one organisation's services go down together).
+Everywhere else it is the host name, as before. The report's "hosts with most failing endpoints" still counts by host
+name. Alternative considered: recording cut-off services as not checked (left due) instead of failed; rejected because
+a dead host's endpoints would then never build up the failed checks that retire them. Tested with a simulated run (one
+organisation failing on the network beside three healthy ones on the same host, plus a dead ordinary host): only the
+failing organisation and the dead host were cut off.
+
+**FEMA NFHL is checked by hand.** hazards.fema.gov reset or timed out the sweep's connections (service and landing
+page) on 27 Nov, as it did on spike run 2 the day before; its robots.txt already disallows automated checks. Both
+endpoints of `043582eb571bb87f` now carry `manual_check`, like the Geoscience Australia elevation records, so the sweep
+leaves them out and the spike doesn't drop the record when FEMA refuses the runner. Tobler's one small query per site
+is unchanged. TCEQ's records answer "robots" and were already safe.
