@@ -1,6 +1,7 @@
-# 26 Nov late evening: Texas capture zones, California DWSAP, FEMA still there after the rerun
-{"label": "TX 5-year capture zones, Austin", "tool": "fetch_features", "args": {"id": "6687b431d240e1c5", "lon": -97.7, "lat": 30.3, "radius_km": 10, "limit": 5}}
-{"label": "TX half-mile zones record", "tool": "get_dataset", "args": {"id": "396d3904b71f7349"}}
-{"label": "CA DWSAP restricted record", "tool": "get_dataset", "args": {"id": "b2617fec04a664c5"}}
+# 27 Nov afternoon: the first NL OSM copy record, and FEMA after it became checked by hand
+{"label": "NL OSM copy record", "tool": "get_dataset", "args": {"id": "227eacf1e3842a0f"}}
+{"label": "OpenStreetMap near Amsterdam (text)", "tool": "find_datasets", "args": {"query": "OpenStreetMap", "lon": 4.9, "lat": 52.37, "radius_km": 5, "limit": 10}}
+{"label": "power lines near Amsterdam (concept)", "tool": "find_datasets", "args": {"concept": "power-line", "lon": 4.9, "lat": 52.37, "radius_km": 5, "limit": 30}}
+{"label": "FEMA NFHL record", "tool": "get_dataset", "args": {"id": "043582eb571bb87f"}}
 {"label": "FEMA NFHL features, Houston", "tool": "fetch_features", "args": {"id": "043582eb571bb87f", "lon": -95.36, "lat": 29.76, "radius_km": 1, "limit": 5}}
-{"label": "groundwater protection near Austin", "tool": "find_datasets", "args": {"concept": "groundwater-protection", "lon": -97.7, "lat": 30.3, "radius_km": 10, "limit": 30}}
+{"label": "UK OSM copy still there", "tool": "get_dataset", "args": {"id": "0e3b9e398d081f86"}}
