@@ -26,6 +26,7 @@ import hashlib
 import json
 import os
 import random
+import re
 import time
 from collections import Counter, defaultdict
 from datetime import date, timedelta
@@ -48,7 +49,7 @@ HOST_DOWN_MIN, HOST_DOWN_SHARE = 20, 0.8   # a host is "down" when 80%+ of 20+ s
 SECOND_LOOK_MAX, SECOND_LOOK_PER_HOST, SECOND_LOOK_TIMEOUT, SECOND_LOOK_RESERVE = 3000, 40, 90, 20
 FIRST_PASS_SLOTS = 256                     # services in progress at once in the first pass (see run_checks)
 FIRST_PASS_GRACE = 120                     # seconds a service already started may run past the first pass's end before it is cut
-HOST_GIVE_UP = 10                          # stop knocking on a host after this many network failures in a row
+HOST_GIVE_UP = 10                          # stop knocking on a host (host_key) after this many network failures in a row
 OGC = {"wms": "WMS", "wfs": "WFS", "wmts": "WMTS", "wcs": "WCS"}
 PLAIN = {"download", "cloud", "api", "landing", "geojson", "opendap", "ogc-api-features"}  # geojson: atlas-hosted tiles, checked via index.json; opendap: GET of its .dds; ogc-api-features: GET of the collection
 RESOLVING = {"ok", "unmatched"}
@@ -58,6 +59,23 @@ STATE_COLS = ["uid", "dataset_id", "service_url", "protocol", "status", "detail"
               "fails_in_row", "first_fail", "retired", "retired_at", "data_check", "data_checked",
               "data_detail", "cur_title", "cur_abstract", "text_changed", "text_seen", "title_from_service",
               "abstract_from_service"]
+
+
+# ArcGIS Online's shared hosts (services2.arcgis.com, tiles.arcgis.com, ...) serve thousands of organisations, each under
+# its own first path segment. On 27 Nov one organisation's slow services tripped the host cut-off and 859 services from
+# other organisations on services2 were marked "host down" without being tried. On these hosts the organisation, not the
+# host, is the unit that goes down together.
+SHARED_HOST = re.compile(r"^(services|tiles|features)\d*\.arcgis\.com$", re.I)
+
+
+def host_key(url: str) -> str:
+    """The unit the sweep treats as one host: the host name, or host/organisation on ArcGIS Online's shared hosts."""
+    u = urlsplit(url)
+    if SHARED_HOST.match(u.netloc):
+        org = u.path.strip("/").split("/", 1)[0]
+        if org:
+            return f"{u.netloc}/{org}"
+    return u.netloc
 
 
 def _norm(s) -> str:
@@ -179,7 +197,7 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
                 stats["cut_at_deadline"] += 1
 
     async def _one(c, svc, proto, until, second=False):
-            host = urlsplit(svc).netloc
+            host = host_key(svc)
             if time.monotonic() > until:
                 return
             if not second and host_net_fails[host] >= HOST_GIVE_UP:
@@ -215,7 +233,7 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
     per_host: Counter = Counter()
     again = []
     for k, v in results.items():
-        h = urlsplit(k[0]).netloc
+        h = host_key(k[0])
         if v[0] == "fail" and per_host[h] < SECOND_LOOK_PER_HOST and len(again) < SECOND_LOOK_MAX:
             per_host[h] += 1
             again.append(k)
@@ -226,7 +244,7 @@ async def run_checks(services, deadline: float, week: int, data_checks: bool = T
             # one slot per connection, hosts interleaved, so the 3-minute stop isn't overrun by retries queued on one host
             by_host = defaultdict(list)
             for k in again:
-                by_host[urlsplit(k[0]).netloc].append(k)
+                by_host[host_key(k[0])].append(k)
             order = [k for grp in zip_longest(*by_host.values()) for k in grp if k is not None]
             gate = asyncio.Semaphore(16)
             await asyncio.gather(*[one(c, gate, s, p, deadline - 180, deadline, second=True) for s, p in order])
@@ -257,7 +275,7 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
     by_host = defaultdict(lambda: [0, 0])
     for (svc, _), (status, *_r) in results.items():
         if status in ("ok", "fail"):
-            h = by_host[urlsplit(svc).netloc]
+            h = by_host[host_key(svc)]
             h[0] += 1
             h[1] += status == "fail"
     down = {h for h, (n, f) in by_host.items() if n >= HOST_DOWN_MIN and f / n >= HOST_DOWN_SHARE}
@@ -300,7 +318,7 @@ def apply(pop: pd.DataFrame, st: pd.DataFrame, results: dict, today: date):
                 # restructure we can't attribute, so don't count it against the endpoint
                 s, detail = "unmatched", "service resolves; layer ids no longer match"
         else:
-            s = "host-down" if urlsplit(r["service_url"]).netloc in down else "fail"
+            s = "host-down" if host_key(r["service_url"]) in down else "fail"
         r["status"], r["detail"], r["last_checked"] = s, detail, t
         if s in RESOLVING:
             if r["retired"]:

@@ -166,8 +166,12 @@ sources:
       completeness_note: communities with digital flood maps (NFHL); layer 0 of the service, NFHL Availability, shows where
         the NFHL has data. Elsewhere older paper maps may apply
     check_url: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?geometry=-95.4,29.7,-95.3,29.8&geometryType=esriGeometryEnvelope&inSR=4326&outFields=FLD_ZONE&returnGeometry=false&resultRecordCount=1&f=json
+    manual_check: "checked by hand: probe round 54, 26 Nov 2026, a Houston box query returned zones X and AE. hazards.fema.gov
+      disallows automated checks in robots.txt and refuses or times out GitHub's runners"
   - protocol: landing
     url: https://hazards.fema.gov/femaportal/resources/flood_map_svc.htm
+    manual_check: "checked by hand: probe round 54, 26 Nov 2026, a Houston box query returned zones X and AE. hazards.fema.gov
+      disallows automated checks in robots.txt and refuses or times out GitHub's runners"
 - kind: record
   id: us-epa-sole-source-aquifers
   title: Sole Source Aquifers (EPA)
