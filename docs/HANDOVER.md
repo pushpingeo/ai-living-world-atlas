@@ -142,6 +142,8 @@ the kinds and tags (`catalogue/osm-snapshot.json`), the reader (`js/osmsnapshot.
   credentials). Workflow `.github/workflows/osm.yml`: plan, up to `MAX_PARALLEL` build jobs, publish.
 - **Spec:** `osm/spec.json` is a copy of Tobler's file; the build stops if Tobler's kinds, groups, keep_tags or version
   differ (the last release stays live). To take a Tobler change: copy those four keys across, keep `markets`, push.
+  27 Nov: took Tobler's `b road` (`highway=secondary`, transport, lines; 14 kinds). Asked for the UK, but kinds apply
+  to every market, so NL and AU get it too (Rob's call: not worth per-market kinds). First in the 28 Nov builds.
 - **Streaming build (atlas change, 25 Nov):** features go to lz4 Arrow files per group in 200k chunks, GDAL writes the
   FlatGeobuf from them (its spatial index does the Hilbert sort), and the GeoParquet is written batch by batch from the
   FlatGeobuf. Same features as Tobler's version (checked on a 1.5M-building test file and on the real UK: 42 extracts,
