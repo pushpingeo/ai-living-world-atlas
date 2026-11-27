@@ -1,4 +1,4 @@
-# 27 Nov afternoon: the first NL OSM copy record, and FEMA after it became checked by hand
+# 27 Nov afternoon: the first NL OSM copy record, and FEMA after it became checked by hand (rerun)
 {"label": "NL OSM copy record", "tool": "get_dataset", "args": {"id": "227eacf1e3842a0f"}}
 {"label": "OpenStreetMap near Amsterdam (text)", "tool": "find_datasets", "args": {"query": "OpenStreetMap", "lon": 4.9, "lat": 52.37, "radius_km": 5, "limit": 10}}
 {"label": "power lines near Amsterdam (concept)", "tool": "find_datasets", "args": {"concept": "power-line", "lon": 4.9, "lat": 52.37, "radius_km": 5, "limit": 30}}
